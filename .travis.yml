@@ -1,8 +1,16 @@
 language: ruby
 sudo: false
 rvm:
-  - ruby-head
-  - 2.4.1
-  - 2.3.4
-  - 2.2.7
+- ruby-head
+- 2.4.1
+- 2.3.4
+- 2.2.7
 script: rake test
+deploy:
+  provider: rubygems
+  api_key:
+    secure: lnRnoak6hxpNiW9fhkviMQql0AO5k/AuCXJZGOzp9ZDG7lbbTg5xKblJWdGJcQ2K+6c1ECjbmvDFhhbL8AGm5kMv3pn/wELBs4gjnBZoW0JPahZays77Efi641V6PMC9497EdeGGtpvA7X43e1fEB6RPh+NuepMS/lMhItdRGSxMhlNaZc9wIjnBR+KDCnjcF/9SezI38VQpjMCUzMcF30zNCKZh0GroJWQIe9rYS6rmU9K46qsz3LNsu4dl5XmvuwgajTo46FeH6BTXrQt43AKb6ELaOonfcft0xt0qmQQ0QD7cTRK4aQ/IVIxXCExQheuqrnQJTQcBzyh+9NqucjbUuUt7ScALXqnXGYBJJnV/u9Ccq2iaO+HBWM4diLbXI7S0HDNF85tVihPWtWmVbHj6Ehe2rwBtCRxeoSo/JF6RagtJoFZCOXQyEmDoVvaRuqbRRbc45aOP5o5+Cp6Rg77eMOk2tI8lyXFLXVGHhxLOG2lbYavcL0qX/yF4/e0cjcjCK8trj2KD0cTYzB/LjNzwrrXYYBEwicUY4hBgFHxV0fscdu0velLonRQXNt/qSiJv13J/CHcPTcL5Cik9E/fjbIlBadIfpzm6lmMzK8hZTfsa7fH1xcLyg3PmwpLqT46jJiS5LxddhjuesZI5C09leGJjdfaLt49mkRvYxUA=
+  gem: wallee-ruby-sdk
+  on:
+    tags: true
+    repo: wallee-payment/wallee-ruby-sdk
