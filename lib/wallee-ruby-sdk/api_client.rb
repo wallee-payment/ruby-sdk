@@ -146,7 +146,8 @@ module Wallee
     # @param [String] path URL path (e.g. /account/new) 
     # @return [Hash] the authentication headers
     def get_authentication_headers(http_method, path, query)
-      completed_path = "#{@config.base_path}#{path}"+'?'+query.map{|k,v| "#{k}=#{v}"}.join('&')
+      base_url = URI(@config.base_url)
+      completed_path = "#{base_url.path}#{path}"+'?'+query.map{|k,v| "#{k}=#{v}"}.join('&')
       version = "1"
       timestamp = Time.now.to_i
       securedData = "#{version}|#{@config.user_id}|#{timestamp}|#{http_method.upcase}|#{completed_path}"

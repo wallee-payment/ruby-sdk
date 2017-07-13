@@ -1,6 +1,5 @@
 require 'test/unit'
 require 'wallee-ruby-sdk'
-require 'uri'
 
 class TestTransactionCreate < Test::Unit::TestCase
 
@@ -10,17 +9,17 @@ class TestTransactionCreate < Test::Unit::TestCase
     
     Wallee.configure do |config|
       config.user_id = ENV['APPLICATION_USER_ID']
-      config.authentication_key = ENV['APPLICATION_USER_KEY']
-      base_path = ENV['API_BASE_PATH']
-      unless base_path.empty?
-        base_url = URI(base_path)
-        config.scheme = base_url.scheme
-        config.host = base_url.host+":"+base_url.port.to_s
-        config.base_path = base_url.path  
-      end   
+      config.authentication_key = ENV['APPLICATION_AUTHENTICATION_KEY']
+      api_scheme = ENV['API_URL_SCHEME']
+      config.scheme = api_scheme unless api_scheme.nil? || api_scheme.empty?
+      api_host = ENV['API_URL_HOST']
+      config.host = api_host unless api_host.nil? || api_host.empty?
+      api_base_path = ENV['API_URL_BASE_PATH']
+      config.base_path = api_base_path  unless api_base_path.nil? || api_base_path.empty?
     end
 
     transaction_service = Wallee::TransactionService.new
+    
     transaction = Wallee::TransactionCreate.new({
       billingAddress: Wallee::AddressCreate.new({
         city: "City",
