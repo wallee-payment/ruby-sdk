@@ -117,7 +117,7 @@ module Wallee
         :'city' => :'String',
         :'commercial_register_number' => :'String',
         :'country' => :'String',
-        :'date_of_birth' => :'DateTime',
+        :'date_of_birth' => :'Date',
         :'dependent_locality' => :'String',
         :'email_address' => :'String',
         :'family_name' => :'String',

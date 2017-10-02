@@ -24,26 +24,14 @@ require 'date'
 module Wallee
   # 
   class SubscriptionPending
-    # 
-    attr_accessor :created_on
-
-    # 
-    attr_accessor :description
-
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # 
-    attr_accessor :initialized_on
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
 
     # 
-    attr_accessor :language
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    attr_accessor :description
 
     # 
     attr_accessor :planned_termination_date
@@ -52,63 +40,35 @@ module Wallee
     attr_accessor :reference
 
     # 
-    attr_accessor :state
-
-    # 
     attr_accessor :subscriber
 
     # 
-    attr_accessor :terminated_on
-
-    # 
-    attr_accessor :terminating_on
-
-    # 
     attr_accessor :token
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'created_on' => :'createdOn',
-        :'description' => :'description',
         :'id' => :'id',
-        :'initialized_on' => :'initializedOn',
-        :'language' => :'language',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
+        :'version' => :'version',
+        :'description' => :'description',
         :'planned_termination_date' => :'plannedTerminationDate',
         :'reference' => :'reference',
-        :'state' => :'state',
         :'subscriber' => :'subscriber',
-        :'terminated_on' => :'terminatedOn',
-        :'terminating_on' => :'terminatingOn',
-        :'token' => :'token',
-        :'version' => :'version'
+        :'token' => :'token'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'created_on' => :'DateTime',
-        :'description' => :'String',
         :'id' => :'Integer',
-        :'initialized_on' => :'DateTime',
-        :'language' => :'String',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
+        :'version' => :'Integer',
+        :'description' => :'String',
         :'planned_termination_date' => :'DateTime',
         :'reference' => :'String',
-        :'state' => :'SubscriptionState',
         :'subscriber' => :'Integer',
-        :'terminated_on' => :'DateTime',
-        :'terminating_on' => :'DateTime',
-        :'token' => :'Integer',
-        :'version' => :'Integer'
+        :'token' => :'Integer'
       }
     end
 
@@ -120,32 +80,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'initializedOn')
-        self.initialized_on = attributes[:'initializedOn']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.has_key?(:'plannedTerminationDate')
@@ -156,28 +100,12 @@ module Wallee
         self.reference = attributes[:'reference']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
       if attributes.has_key?(:'subscriber')
         self.subscriber = attributes[:'subscriber']
       end
 
-      if attributes.has_key?(:'terminatedOn')
-        self.terminated_on = attributes[:'terminatedOn']
-      end
-
-      if attributes.has_key?(:'terminatingOn')
-        self.terminating_on = attributes[:'terminatingOn']
-      end
-
       if attributes.has_key?(:'token')
         self.token = attributes[:'token']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -210,21 +138,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          created_on == o.created_on &&
-          description == o.description &&
           id == o.id &&
-          initialized_on == o.initialized_on &&
-          language == o.language &&
-          linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
+          version == o.version &&
+          description == o.description &&
           planned_termination_date == o.planned_termination_date &&
           reference == o.reference &&
-          state == o.state &&
           subscriber == o.subscriber &&
-          terminated_on == o.terminated_on &&
-          terminating_on == o.terminating_on &&
-          token == o.token &&
-          version == o.version
+          token == o.token
     end
 
     # @see the `==` method
@@ -236,7 +156,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_on, terminating_on, token, version].hash
+      [id, version, description, planned_termination_date, reference, subscriber, token].hash
     end
 
     # Builds the object from hash

@@ -54,6 +54,9 @@ module Wallee
     # 
     attr_accessor :state
 
+    # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+    attr_accessor :time_zone
+
     # Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
     attr_accessor :token_reference
 
@@ -74,6 +77,7 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'state' => :'state',
+        :'time_zone' => :'timeZone',
         :'token_reference' => :'tokenReference',
         :'version' => :'version'
       }
@@ -92,6 +96,7 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
         :'state' => :'CreationEntityState',
+        :'time_zone' => :'String',
         :'token_reference' => :'String',
         :'version' => :'Integer'
       }
@@ -145,6 +150,10 @@ module Wallee
         self.state = attributes[:'state']
       end
 
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'tokenReference')
         self.token_reference = attributes[:'tokenReference']
       end
@@ -183,6 +192,7 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
           state == o.state &&
+          time_zone == o.time_zone &&
           token_reference == o.token_reference &&
           version == o.version
     end
@@ -196,7 +206,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, customer_email_address, customer_id, enabled_for_one_click_payment, external_id, id, language, linked_space_id, planned_purge_date, state, token_reference, version].hash
+      [created_on, customer_email_address, customer_id, enabled_for_one_click_payment, external_id, id, language, linked_space_id, planned_purge_date, state, time_zone, token_reference, version].hash
     end
 
     # Builds the object from hash

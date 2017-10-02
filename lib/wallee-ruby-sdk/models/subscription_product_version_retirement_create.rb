@@ -24,15 +24,6 @@ require 'date'
 module Wallee
   # 
   class SubscriptionProductVersionRetirementCreate
-    # The created on date indicates the date on which the entity was stored into the database.
-    attr_accessor :created_on
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
     # 
     attr_accessor :product_version
 
@@ -42,33 +33,22 @@ module Wallee
     # 
     attr_accessor :target_product
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'created_on' => :'createdOn',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'product_version' => :'productVersion',
         :'respect_terminiation_periods_enabled' => :'respectTerminiationPeriodsEnabled',
-        :'target_product' => :'targetProduct',
-        :'version' => :'version'
+        :'target_product' => :'targetProduct'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'created_on' => :'DateTime',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'product_version' => :'Integer',
         :'respect_terminiation_periods_enabled' => :'BOOLEAN',
-        :'target_product' => :'Integer',
-        :'version' => :'Integer'
+        :'target_product' => :'Integer'
       }
     end
 
@@ -80,18 +60,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'productVersion')
         self.product_version = attributes[:'productVersion']
       end
@@ -102,10 +70,6 @@ module Wallee
 
       if attributes.has_key?(:'targetProduct')
         self.target_product = attributes[:'targetProduct']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -133,13 +97,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          created_on == o.created_on &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           product_version == o.product_version &&
           respect_terminiation_periods_enabled == o.respect_terminiation_periods_enabled &&
-          target_product == o.target_product &&
-          version == o.version
+          target_product == o.target_product
     end
 
     # @see the `==` method
@@ -151,7 +111,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, id, linked_space_id, product_version, respect_terminiation_periods_enabled, target_product, version].hash
+      [product_version, respect_terminiation_periods_enabled, target_product].hash
     end
 
     # Builds the object from hash

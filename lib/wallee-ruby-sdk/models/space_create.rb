@@ -24,35 +24,14 @@ require 'date'
 module Wallee
   # 
   class SpaceCreate
-    # The account to which the space belongs to.
-    attr_accessor :account
-
-    # Active means that this account and all accounts in the hierarchy are active.
-    attr_accessor :active
-
-    # This property is true when all accounts in the hierarchy are active or restricted active.
-    attr_accessor :active_or_restricted_active
-
-    # The database in which the space's data are stored in.
-    attr_accessor :database
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
     # The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
 
     # The address to use in communication with clients for example in email, documents etc.
     attr_accessor :postal_address
 
     # The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
     attr_accessor :request_limit
-
-    # Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
-    attr_accessor :restricted_active
 
     # 
     attr_accessor :state
@@ -63,47 +42,33 @@ module Wallee
     # The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
     attr_accessor :time_zone
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # The account to which the space belongs to.
+    attr_accessor :account
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account' => :'account',
-        :'active' => :'active',
-        :'active_or_restricted_active' => :'activeOrRestrictedActive',
-        :'database' => :'database',
-        :'id' => :'id',
         :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
         :'postal_address' => :'postalAddress',
         :'request_limit' => :'requestLimit',
-        :'restricted_active' => :'restrictedActive',
         :'state' => :'state',
         :'technical_contact_addresses' => :'technicalContactAddresses',
         :'time_zone' => :'timeZone',
-        :'version' => :'version'
+        :'account' => :'account'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'account' => :'Integer',
-        :'active' => :'BOOLEAN',
-        :'active_or_restricted_active' => :'BOOLEAN',
-        :'database' => :'TenantDatabase',
-        :'id' => :'Integer',
         :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'postal_address' => :'SpaceAddressSetter',
+        :'postal_address' => :'SpaceAddressCreate',
         :'request_limit' => :'Integer',
-        :'restricted_active' => :'BOOLEAN',
         :'state' => :'CreationEntityState',
         :'technical_contact_addresses' => :'Array<String>',
         :'time_zone' => :'String',
-        :'version' => :'Integer'
+        :'account' => :'Integer'
       }
     end
 
@@ -115,32 +80,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
-      end
-
-      if attributes.has_key?(:'active')
-        self.active = attributes[:'active']
-      end
-
-      if attributes.has_key?(:'activeOrRestrictedActive')
-        self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
-      end
-
-      if attributes.has_key?(:'database')
-        self.database = attributes[:'database']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
       if attributes.has_key?(:'postalAddress')
@@ -149,10 +90,6 @@ module Wallee
 
       if attributes.has_key?(:'requestLimit')
         self.request_limit = attributes[:'requestLimit']
-      end
-
-      if attributes.has_key?(:'restrictedActive')
-        self.restricted_active = attributes[:'restrictedActive']
       end
 
       if attributes.has_key?(:'state')
@@ -169,8 +106,8 @@ module Wallee
         self.time_zone = attributes[:'timeZone']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'account')
+        self.account = attributes[:'account']
       end
 
     end
@@ -183,18 +120,6 @@ module Wallee
         invalid_properties.push("invalid value for 'account', account cannot be nil.")
       end
 
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @state.nil?
-        invalid_properties.push("invalid value for 'state', state cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -202,9 +127,6 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @account.nil?
-      return false if @id.nil?
-      return false if @state.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -213,20 +135,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account == o.account &&
-          active == o.active &&
-          active_or_restricted_active == o.active_or_restricted_active &&
-          database == o.database &&
-          id == o.id &&
           name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
           postal_address == o.postal_address &&
           request_limit == o.request_limit &&
-          restricted_active == o.restricted_active &&
           state == o.state &&
           technical_contact_addresses == o.technical_contact_addresses &&
           time_zone == o.time_zone &&
-          version == o.version
+          account == o.account
     end
 
     # @see the `==` method
@@ -238,7 +153,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, active, active_or_restricted_active, database, id, name, planned_purge_date, postal_address, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
+      [name, postal_address, request_limit, state, technical_contact_addresses, time_zone, account].hash
     end
 
     # Builds the object from hash

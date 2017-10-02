@@ -24,17 +24,8 @@ require 'date'
 module Wallee
   # 
   class WebhookUrlCreate
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
     # The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
 
     # 
     attr_accessor :state
@@ -42,33 +33,22 @@ module Wallee
     # The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
     attr_accessor :url
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
         :'state' => :'state',
-        :'url' => :'url',
-        :'version' => :'version'
+        :'url' => :'url'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
         :'state' => :'CreationEntityState',
-        :'url' => :'String',
-        :'version' => :'Integer'
+        :'url' => :'String'
       }
     end
 
@@ -80,20 +60,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
       if attributes.has_key?(:'state')
@@ -104,37 +72,18 @@ module Wallee
         self.url = attributes[:'url']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @state.nil?
-        invalid_properties.push("invalid value for 'state', state cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @state.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -143,13 +92,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
           state == o.state &&
-          url == o.url &&
-          version == o.version
+          url == o.url
     end
 
     # @see the `==` method
@@ -161,7 +106,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, state, url, version].hash
+      [name, state, url].hash
     end
 
     # Builds the object from hash

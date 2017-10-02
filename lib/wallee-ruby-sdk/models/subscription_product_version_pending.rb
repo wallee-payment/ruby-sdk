@@ -24,6 +24,12 @@ require 'date'
 module Wallee
   # 
   class SubscriptionProductVersionPending
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
     # The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
     attr_accessor :billing_cycle
 
@@ -51,16 +57,12 @@ module Wallee
     # 
     attr_accessor :state
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'version' => :'version',
         :'billing_cycle' => :'billingCycle',
         :'comment' => :'comment',
         :'default_currency' => :'defaultCurrency',
@@ -69,15 +71,15 @@ module Wallee
         :'name' => :'name',
         :'number_of_notice_periods' => :'numberOfNoticePeriods',
         :'product' => :'product',
-        :'state' => :'state',
-        :'id' => :'id',
-        :'version' => :'version'
+        :'state' => :'state'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'version' => :'Integer',
         :'billing_cycle' => :'String',
         :'comment' => :'String',
         :'default_currency' => :'String',
@@ -86,9 +88,7 @@ module Wallee
         :'name' => :'DatabaseTranslatedStringCreate',
         :'number_of_notice_periods' => :'Integer',
         :'product' => :'Integer',
-        :'state' => :'SubscriptionProductVersionState',
-        :'id' => :'Integer',
-        :'version' => :'Integer'
+        :'state' => :'SubscriptionProductVersionState'
       }
     end
 
@@ -99,6 +99,14 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
 
       if attributes.has_key?(:'billingCycle')
         self.billing_cycle = attributes[:'billingCycle']
@@ -138,14 +146,6 @@ module Wallee
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -176,6 +176,8 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          version == o.version &&
           billing_cycle == o.billing_cycle &&
           comment == o.comment &&
           default_currency == o.default_currency &&
@@ -184,9 +186,7 @@ module Wallee
           name == o.name &&
           number_of_notice_periods == o.number_of_notice_periods &&
           product == o.product &&
-          state == o.state &&
-          id == o.id &&
-          version == o.version
+          state == o.state
     end
 
     # @see the `==` method
@@ -198,7 +198,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_cycle, comment, default_currency, enabled_currencies, minimal_number_of_periods, name, number_of_notice_periods, product, state, id, version].hash
+      [id, version, billing_cycle, comment, default_currency, enabled_currencies, minimal_number_of_periods, name, number_of_notice_periods, product, state].hash
     end
 
     # Builds the object from hash

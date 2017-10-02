@@ -24,11 +24,14 @@ require 'date'
 module Wallee
   # 
   class ProductMeteredTierFeeUpdate
-    # The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
-    attr_accessor :fee
-
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
+    # The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+    attr_accessor :fee
 
     # 
     attr_accessor :metered_fee
@@ -36,29 +39,26 @@ module Wallee
     # The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
     attr_accessor :start_range
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'fee' => :'fee',
         :'id' => :'id',
+        :'version' => :'version',
+        :'fee' => :'fee',
         :'metered_fee' => :'meteredFee',
-        :'start_range' => :'startRange',
-        :'version' => :'version'
+        :'start_range' => :'startRange'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'fee' => :'Array<PersistableCurrencyAmountUpdate>',
         :'id' => :'Integer',
+        :'version' => :'Integer',
+        :'fee' => :'Array<PersistableCurrencyAmountUpdate>',
         :'metered_fee' => :'Integer',
-        :'start_range' => :'Float',
-        :'version' => :'Integer'
+        :'start_range' => :'Float'
       }
     end
 
@@ -70,14 +70,18 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
+
       if attributes.has_key?(:'fee')
         if (value = attributes[:'fee']).is_a?(Array)
           self.fee = value
         end
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'meteredFee')
@@ -86,10 +90,6 @@ module Wallee
 
       if attributes.has_key?(:'startRange')
         self.start_range = attributes[:'startRange']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -122,11 +122,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          fee == o.fee &&
           id == o.id &&
+          version == o.version &&
+          fee == o.fee &&
           metered_fee == o.metered_fee &&
-          start_range == o.start_range &&
-          version == o.version
+          start_range == o.start_range
     end
 
     # @see the `==` method
@@ -138,7 +138,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [fee, id, metered_fee, start_range, version].hash
+      [id, version, fee, metered_fee, start_range].hash
     end
 
     # Builds the object from hash

@@ -24,17 +24,17 @@ require 'date'
 module Wallee
   # 
   class ProductSetupFeeUpdate
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
     # 
     attr_accessor :component
 
     # The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
     attr_accessor :description
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
 
     # The name of the fee should describe for the subscriber in few words for what the fee is for.
     attr_accessor :name
@@ -48,42 +48,32 @@ module Wallee
     # The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
     attr_accessor :setup_fee
 
-    # 
-    attr_accessor :type
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'version' => :'version',
         :'component' => :'component',
         :'description' => :'description',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'on_downgrade_credited_amount' => :'onDowngradeCreditedAmount',
         :'on_upgrade_credited_amount' => :'onUpgradeCreditedAmount',
-        :'setup_fee' => :'setupFee',
-        :'type' => :'type',
-        :'version' => :'version'
+        :'setup_fee' => :'setupFee'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'version' => :'Integer',
         :'component' => :'Integer',
         :'description' => :'DatabaseTranslatedStringCreate',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'name' => :'DatabaseTranslatedStringCreate',
         :'on_downgrade_credited_amount' => :'Array<PersistableCurrencyAmountUpdate>',
         :'on_upgrade_credited_amount' => :'Array<PersistableCurrencyAmountUpdate>',
-        :'setup_fee' => :'Array<PersistableCurrencyAmountUpdate>',
-        :'type' => :'ProductFeeType',
-        :'version' => :'Integer'
+        :'setup_fee' => :'Array<PersistableCurrencyAmountUpdate>'
       }
     end
 
@@ -95,20 +85,20 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
+
       if attributes.has_key?(:'component')
         self.component = attributes[:'component']
       end
 
       if attributes.has_key?(:'description')
         self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
       if attributes.has_key?(:'name')
@@ -131,14 +121,6 @@ module Wallee
         if (value = attributes[:'setupFee']).is_a?(Array)
           self.setup_fee = value
         end
-      end
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -171,16 +153,14 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          version == o.version &&
           component == o.component &&
           description == o.description &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           name == o.name &&
           on_downgrade_credited_amount == o.on_downgrade_credited_amount &&
           on_upgrade_credited_amount == o.on_upgrade_credited_amount &&
-          setup_fee == o.setup_fee &&
-          type == o.type &&
-          version == o.version
+          setup_fee == o.setup_fee
     end
 
     # @see the `==` method
@@ -192,7 +172,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [component, description, id, linked_space_id, name, on_downgrade_credited_amount, on_upgrade_credited_amount, setup_fee, type, version].hash
+      [id, version, component, description, name, on_downgrade_credited_amount, on_upgrade_credited_amount, setup_fee].hash
     end
 
     # Builds the object from hash

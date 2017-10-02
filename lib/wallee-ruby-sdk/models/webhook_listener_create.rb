@@ -24,71 +24,51 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerCreate
+    # The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+    attr_accessor :name
+
+    # 
+    attr_accessor :state
+
     # The listener listens on state changes of the entity linked with the listener.
     attr_accessor :entity
 
     # The target state identifies the state into which entities need to move into to trigger the webhook listener.
     attr_accessor :entity_states
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
     # The identity which will be used to sign messages sent by this listener.
     attr_accessor :identity
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
-    attr_accessor :name
 
     # Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
     attr_accessor :notify_every_change
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # 
-    attr_accessor :state
-
     # The URL which is invoked by the listener to notify the application about the event.
     attr_accessor :url
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'name' => :'name',
+        :'state' => :'state',
         :'entity' => :'entity',
         :'entity_states' => :'entityStates',
-        :'id' => :'id',
         :'identity' => :'identity',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'name' => :'name',
         :'notify_every_change' => :'notifyEveryChange',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'state' => :'state',
-        :'url' => :'url',
-        :'version' => :'version'
+        :'url' => :'url'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'name' => :'String',
+        :'state' => :'CreationEntityState',
         :'entity' => :'Integer',
         :'entity_states' => :'Array<String>',
-        :'id' => :'Integer',
         :'identity' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'name' => :'String',
         :'notify_every_change' => :'BOOLEAN',
-        :'planned_purge_date' => :'DateTime',
-        :'state' => :'CreationEntityState',
-        :'url' => :'Integer',
-        :'version' => :'Integer'
+        :'url' => :'Integer'
       }
     end
 
@@ -100,6 +80,14 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
       if attributes.has_key?(:'entity')
         self.entity = attributes[:'entity']
       end
@@ -110,40 +98,16 @@ module Wallee
         end
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'identity')
         self.identity = attributes[:'identity']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'notifyEveryChange')
         self.notify_every_change = attributes[:'notifyEveryChange']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
       if attributes.has_key?(:'url')
         self.url = attributes[:'url']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -160,20 +124,8 @@ module Wallee
         invalid_properties.push("invalid value for 'entity_states', entity_states cannot be nil.")
       end
 
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @state.nil?
-        invalid_properties.push("invalid value for 'state', state cannot be nil.")
-      end
-
       if @url.nil?
         invalid_properties.push("invalid value for 'url', url cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
       end
 
       return invalid_properties
@@ -184,10 +136,7 @@ module Wallee
     def valid?
       return false if @entity.nil?
       return false if @entity_states.nil?
-      return false if @id.nil?
-      return false if @state.nil?
       return false if @url.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -196,17 +145,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          name == o.name &&
+          state == o.state &&
           entity == o.entity &&
           entity_states == o.entity_states &&
-          id == o.id &&
           identity == o.identity &&
-          linked_space_id == o.linked_space_id &&
-          name == o.name &&
           notify_every_change == o.notify_every_change &&
-          planned_purge_date == o.planned_purge_date &&
-          state == o.state &&
-          url == o.url &&
-          version == o.version
+          url == o.url
     end
 
     # @see the `==` method
@@ -218,7 +163,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [entity, entity_states, id, identity, linked_space_id, name, notify_every_change, planned_purge_date, state, url, version].hash
+      [name, state, entity, entity_states, identity, notify_every_change, url].hash
     end
 
     # Builds the object from hash

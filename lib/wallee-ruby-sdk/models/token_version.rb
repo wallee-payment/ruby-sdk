@@ -36,6 +36,9 @@ module Wallee
     # 
     attr_accessor :environment
 
+    # The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+    attr_accessor :expires_on
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -72,6 +75,9 @@ module Wallee
     # 
     attr_accessor :token
 
+    # The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+    attr_accessor :type
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
@@ -83,6 +89,7 @@ module Wallee
         :'billing_address' => :'billingAddress',
         :'created_on' => :'createdOn',
         :'environment' => :'environment',
+        :'expires_on' => :'expiresOn',
         :'id' => :'id',
         :'labels' => :'labels',
         :'language' => :'language',
@@ -95,6 +102,7 @@ module Wallee
         :'shipping_address' => :'shippingAddress',
         :'state' => :'state',
         :'token' => :'token',
+        :'type' => :'type',
         :'version' => :'version'
       }
     end
@@ -106,6 +114,7 @@ module Wallee
         :'billing_address' => :'Address',
         :'created_on' => :'DateTime',
         :'environment' => :'ChargeAttemptEnvironment',
+        :'expires_on' => :'DateTime',
         :'id' => :'Integer',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
@@ -118,6 +127,7 @@ module Wallee
         :'shipping_address' => :'Address',
         :'state' => :'TokenVersionState',
         :'token' => :'Token',
+        :'type' => :'TokenVersionType',
         :'version' => :'Integer'
       }
     end
@@ -144,6 +154,10 @@ module Wallee
 
       if attributes.has_key?(:'environment')
         self.environment = attributes[:'environment']
+      end
+
+      if attributes.has_key?(:'expiresOn')
+        self.expires_on = attributes[:'expiresOn']
       end
 
       if attributes.has_key?(:'id')
@@ -196,6 +210,10 @@ module Wallee
         self.token = attributes[:'token']
       end
 
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
@@ -224,6 +242,7 @@ module Wallee
           billing_address == o.billing_address &&
           created_on == o.created_on &&
           environment == o.environment &&
+          expires_on == o.expires_on &&
           id == o.id &&
           labels == o.labels &&
           language == o.language &&
@@ -236,6 +255,7 @@ module Wallee
           shipping_address == o.shipping_address &&
           state == o.state &&
           token == o.token &&
+          type == o.type &&
           version == o.version
     end
 
@@ -248,7 +268,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_address, created_on, environment, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, planned_purge_date, processor_token, shipping_address, state, token, version].hash
+      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
     end
 
     # Builds the object from hash

@@ -94,7 +94,7 @@ module Wallee
     # @param space_id 
     # @param entity The token object with the properties which should be created.
     # @param [Hash] opts the optional parameters
-    # @return [TokenCreate]
+    # @return [Token]
     def token_service_create(space_id, entity, opts = {})
       data, _status_code, _headers = token_service_create_with_http_info(space_id, entity, opts)
       return data
@@ -105,7 +105,7 @@ module Wallee
     # @param space_id 
     # @param entity The token object with the properties which should be created.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(TokenCreate, Fixnum, Hash)>] TokenCreate data, response status code and response headers
+    # @return [Array<(Token, Fixnum, Hash)>] Token data, response status code and response headers
     def token_service_create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: TokenService.token_service_create ..."
@@ -144,7 +144,7 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'TokenCreate')
+        :return_type => 'Token')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TokenService#token_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

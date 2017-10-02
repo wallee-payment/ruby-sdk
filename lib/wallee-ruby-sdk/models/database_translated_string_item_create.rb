@@ -28,9 +28,6 @@ module Wallee
     attr_accessor :language
 
     # 
-    attr_accessor :language_code
-
-    # 
     attr_accessor :translation
 
 
@@ -38,7 +35,6 @@ module Wallee
     def self.attribute_map
       {
         :'language' => :'language',
-        :'language_code' => :'languageCode',
         :'translation' => :'translation'
       }
     end
@@ -47,7 +43,6 @@ module Wallee
     def self.swagger_types
       {
         :'language' => :'String',
-        :'language_code' => :'String',
         :'translation' => :'String'
       }
     end
@@ -62,10 +57,6 @@ module Wallee
 
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'languageCode')
-        self.language_code = attributes[:'languageCode']
       end
 
       if attributes.has_key?(:'translation')
@@ -98,7 +89,6 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           language == o.language &&
-          language_code == o.language_code &&
           translation == o.translation
     end
 
@@ -111,7 +101,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [language, language_code, translation].hash
+      [language, translation].hash
     end
 
     # Builds the object from hash

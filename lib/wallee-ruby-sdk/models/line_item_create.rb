@@ -24,12 +24,6 @@ require 'date'
 module Wallee
   # 
   class LineItemCreate
-    # The aggregated tax rate is the sum of all tax rates of the line item.
-    attr_accessor :aggregated_tax_rate
-
-    # 
-    attr_accessor :amount_excluding_tax
-
     # 
     attr_accessor :amount_including_tax
 
@@ -49,12 +43,6 @@ module Wallee
     attr_accessor :sku
 
     # 
-    attr_accessor :tax_amount
-
-    # 
-    attr_accessor :tax_amount_per_unit
-
-    # 
     attr_accessor :taxes
 
     # 
@@ -63,52 +51,34 @@ module Wallee
     # The unique id identifies the line item within the set of line items associated with the transaction.
     attr_accessor :unique_id
 
-    # 
-    attr_accessor :unit_price_excluding_tax
-
-    # 
-    attr_accessor :unit_price_including_tax
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregated_tax_rate' => :'aggregatedTaxRate',
-        :'amount_excluding_tax' => :'amountExcludingTax',
         :'amount_including_tax' => :'amountIncludingTax',
         :'attributes' => :'attributes',
         :'name' => :'name',
         :'quantity' => :'quantity',
         :'shipping_required' => :'shippingRequired',
         :'sku' => :'sku',
-        :'tax_amount' => :'taxAmount',
-        :'tax_amount_per_unit' => :'taxAmountPerUnit',
         :'taxes' => :'taxes',
         :'type' => :'type',
-        :'unique_id' => :'uniqueId',
-        :'unit_price_excluding_tax' => :'unitPriceExcludingTax',
-        :'unit_price_including_tax' => :'unitPriceIncludingTax'
+        :'unique_id' => :'uniqueId'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'aggregated_tax_rate' => :'Float',
-        :'amount_excluding_tax' => :'Float',
         :'amount_including_tax' => :'Float',
         :'attributes' => :'Hash<String, LineItemAttributeCreate>',
         :'name' => :'String',
         :'quantity' => :'Float',
         :'shipping_required' => :'BOOLEAN',
         :'sku' => :'String',
-        :'tax_amount' => :'Float',
-        :'tax_amount_per_unit' => :'Float',
         :'taxes' => :'Array<TaxCreate>',
         :'type' => :'LineItemType',
-        :'unique_id' => :'String',
-        :'unit_price_excluding_tax' => :'Float',
-        :'unit_price_including_tax' => :'Float'
+        :'unique_id' => :'String'
       }
     end
 
@@ -119,14 +89,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'aggregatedTaxRate')
-        self.aggregated_tax_rate = attributes[:'aggregatedTaxRate']
-      end
-
-      if attributes.has_key?(:'amountExcludingTax')
-        self.amount_excluding_tax = attributes[:'amountExcludingTax']
-      end
 
       if attributes.has_key?(:'amountIncludingTax')
         self.amount_including_tax = attributes[:'amountIncludingTax']
@@ -154,14 +116,6 @@ module Wallee
         self.sku = attributes[:'sku']
       end
 
-      if attributes.has_key?(:'taxAmount')
-        self.tax_amount = attributes[:'taxAmount']
-      end
-
-      if attributes.has_key?(:'taxAmountPerUnit')
-        self.tax_amount_per_unit = attributes[:'taxAmountPerUnit']
-      end
-
       if attributes.has_key?(:'taxes')
         if (value = attributes[:'taxes']).is_a?(Array)
           self.taxes = value
@@ -174,14 +128,6 @@ module Wallee
 
       if attributes.has_key?(:'uniqueId')
         self.unique_id = attributes[:'uniqueId']
-      end
-
-      if attributes.has_key?(:'unitPriceExcludingTax')
-        self.unit_price_excluding_tax = attributes[:'unitPriceExcludingTax']
-      end
-
-      if attributes.has_key?(:'unitPriceIncludingTax')
-        self.unit_price_including_tax = attributes[:'unitPriceIncludingTax']
       end
 
     end
@@ -229,21 +175,15 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregated_tax_rate == o.aggregated_tax_rate &&
-          amount_excluding_tax == o.amount_excluding_tax &&
           amount_including_tax == o.amount_including_tax &&
           attributes == o.attributes &&
           name == o.name &&
           quantity == o.quantity &&
           shipping_required == o.shipping_required &&
           sku == o.sku &&
-          tax_amount == o.tax_amount &&
-          tax_amount_per_unit == o.tax_amount_per_unit &&
           taxes == o.taxes &&
           type == o.type &&
-          unique_id == o.unique_id &&
-          unit_price_excluding_tax == o.unit_price_excluding_tax &&
-          unit_price_including_tax == o.unit_price_including_tax
+          unique_id == o.unique_id
     end
 
     # @see the `==` method
@@ -255,7 +195,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, attributes, name, quantity, shipping_required, sku, tax_amount, tax_amount_per_unit, taxes, type, unique_id, unit_price_excluding_tax, unit_price_including_tax].hash
+      [amount_including_tax, attributes, name, quantity, shipping_required, sku, taxes, type, unique_id].hash
     end
 
     # Builds the object from hash

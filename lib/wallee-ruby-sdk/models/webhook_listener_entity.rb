@@ -24,6 +24,9 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerEntity
+    # 
+    attr_accessor :display_name
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -37,6 +40,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'display_name' => :'displayName',
         :'id' => :'id',
         :'name' => :'name',
         :'technical_name' => :'technicalName'
@@ -46,6 +50,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'display_name' => :'String',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>',
         :'technical_name' => :'String'
@@ -59,6 +64,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'displayName')
+        self.display_name = attributes[:'displayName']
+      end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -94,6 +103,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          display_name == o.display_name &&
           id == o.id &&
           name == o.name &&
           technical_name == o.technical_name
@@ -108,7 +118,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, technical_name].hash
+      [display_name, id, name, technical_name].hash
     end
 
     # Builds the object from hash

@@ -60,6 +60,9 @@ module Wallee
     # 
     attr_accessor :type
 
+    # The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+    attr_accessor :user_failure_message
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
@@ -79,6 +82,7 @@ module Wallee
         :'timeout_on' => :'timeoutOn',
         :'transaction' => :'transaction',
         :'type' => :'type',
+        :'user_failure_message' => :'userFailureMessage',
         :'version' => :'version'
       }
     end
@@ -98,6 +102,7 @@ module Wallee
         :'timeout_on' => :'DateTime',
         :'transaction' => :'Transaction',
         :'type' => :'ChargeType',
+        :'user_failure_message' => :'String',
         :'version' => :'Integer'
       }
     end
@@ -158,6 +163,10 @@ module Wallee
         self.type = attributes[:'type']
       end
 
+      if attributes.has_key?(:'userFailureMessage')
+        self.user_failure_message = attributes[:'userFailureMessage']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
@@ -194,6 +203,7 @@ module Wallee
           timeout_on == o.timeout_on &&
           transaction == o.transaction &&
           type == o.type &&
+          user_failure_message == o.user_failure_message &&
           version == o.version
     end
 
@@ -206,7 +216,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, created_on, failure_reason, language, planned_purge_date, space_view_id, state, timeout_on, transaction, type, version].hash
+      [id, linked_space_id, linked_transaction, created_on, failure_reason, language, planned_purge_date, space_view_id, state, timeout_on, transaction, type, user_failure_message, version].hash
     end
 
     # Builds the object from hash

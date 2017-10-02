@@ -24,29 +24,8 @@ require 'date'
 module Wallee
   # 
   class HumanUserCreate
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # The scope to which the user belongs to.
-    attr_accessor :scope
-
-    # 
-    attr_accessor :state
-
-    # 
-    attr_accessor :user_type
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
     # The email address of the user.
     attr_accessor :email_address
-
-    # Defines whether a user is verified or not.
-    attr_accessor :email_address_verified
 
     # The first name of the user.
     attr_accessor :firstname
@@ -57,48 +36,39 @@ module Wallee
     # The last name of the user.
     attr_accessor :lastname
 
-    # The primary account links the user to a specific account.
-    attr_accessor :primary_account
+    # 
+    attr_accessor :state
 
     # The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
     attr_accessor :time_zone
+
+    # The primary account links the user to a specific account.
+    attr_accessor :primary_account
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'scope' => :'scope',
-        :'state' => :'state',
-        :'user_type' => :'userType',
-        :'version' => :'version',
         :'email_address' => :'emailAddress',
-        :'email_address_verified' => :'emailAddressVerified',
         :'firstname' => :'firstname',
         :'language' => :'language',
         :'lastname' => :'lastname',
-        :'primary_account' => :'primaryAccount',
-        :'time_zone' => :'timeZone'
+        :'state' => :'state',
+        :'time_zone' => :'timeZone',
+        :'primary_account' => :'primaryAccount'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'scope' => :'Scope',
-        :'state' => :'CreationEntityState',
-        :'user_type' => :'UserType',
-        :'version' => :'Integer',
         :'email_address' => :'String',
-        :'email_address_verified' => :'BOOLEAN',
         :'firstname' => :'String',
         :'language' => :'String',
         :'lastname' => :'String',
-        :'primary_account' => :'Account',
-        :'time_zone' => :'String'
+        :'state' => :'CreationEntityState',
+        :'time_zone' => :'String',
+        :'primary_account' => :'Integer'
       }
     end
 
@@ -110,36 +80,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'scope')
-        self.scope = attributes[:'scope']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'userType')
-        self.user_type = attributes[:'userType']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
-      end
-
       if attributes.has_key?(:'emailAddress')
         self.email_address = attributes[:'emailAddress']
-      end
-
-      if attributes.has_key?(:'emailAddressVerified')
-        self.email_address_verified = attributes[:'emailAddressVerified']
       end
 
       if attributes.has_key?(:'firstname')
@@ -154,12 +96,16 @@ module Wallee
         self.lastname = attributes[:'lastname']
       end
 
-      if attributes.has_key?(:'primaryAccount')
-        self.primary_account = attributes[:'primaryAccount']
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
       end
 
       if attributes.has_key?(:'timeZone')
         self.time_zone = attributes[:'timeZone']
+      end
+
+      if attributes.has_key?(:'primaryAccount')
+        self.primary_account = attributes[:'primaryAccount']
       end
 
     end
@@ -168,22 +114,12 @@ module Wallee
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -192,19 +128,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          planned_purge_date == o.planned_purge_date &&
-          scope == o.scope &&
-          state == o.state &&
-          user_type == o.user_type &&
-          version == o.version &&
           email_address == o.email_address &&
-          email_address_verified == o.email_address_verified &&
           firstname == o.firstname &&
           language == o.language &&
           lastname == o.lastname &&
-          primary_account == o.primary_account &&
-          time_zone == o.time_zone
+          state == o.state &&
+          time_zone == o.time_zone &&
+          primary_account == o.primary_account
     end
 
     # @see the `==` method
@@ -216,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, planned_purge_date, scope, state, user_type, version, email_address, email_address_verified, firstname, language, lastname, primary_account, time_zone].hash
+      [email_address, firstname, language, lastname, state, time_zone, primary_account].hash
     end
 
     # Builds the object from hash

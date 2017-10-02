@@ -51,6 +51,9 @@ module Wallee
     # The linked space id holds the ID of the space to which the entity belongs to.
     attr_accessor :linked_space_id
 
+    # Meta data allow to store additional data along the object.
+    attr_accessor :meta_data
+
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
@@ -79,6 +82,7 @@ module Wallee
         :'id' => :'id',
         :'language' => :'language',
         :'linked_space_id' => :'linkedSpaceId',
+        :'meta_data' => :'metaData',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'reference' => :'reference',
         :'shipping_address' => :'shippingAddress',
@@ -99,6 +103,7 @@ module Wallee
         :'id' => :'Integer',
         :'language' => :'String',
         :'linked_space_id' => :'Integer',
+        :'meta_data' => :'Hash<String, String>',
         :'planned_purge_date' => :'DateTime',
         :'reference' => :'String',
         :'shipping_address' => :'Address',
@@ -155,6 +160,12 @@ module Wallee
         self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
+      if attributes.has_key?(:'metaData')
+        if (value = attributes[:'metaData']).is_a?(Array)
+          self.meta_data = value
+        end
+      end
+
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
@@ -204,6 +215,7 @@ module Wallee
           id == o.id &&
           language == o.language &&
           linked_space_id == o.linked_space_id &&
+          meta_data == o.meta_data &&
           planned_purge_date == o.planned_purge_date &&
           reference == o.reference &&
           shipping_address == o.shipping_address &&
@@ -220,7 +232,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [additional_allowed_payment_method_configurations, billing_address, description, disallowed_payment_method_configurations, email_address, external_id, id, language, linked_space_id, planned_purge_date, reference, shipping_address, state, version].hash
+      [additional_allowed_payment_method_configurations, billing_address, description, disallowed_payment_method_configurations, email_address, external_id, id, language, linked_space_id, meta_data, planned_purge_date, reference, shipping_address, state, version].hash
     end
 
     # Builds the object from hash

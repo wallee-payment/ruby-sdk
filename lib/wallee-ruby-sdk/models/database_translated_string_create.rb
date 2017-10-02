@@ -25,20 +25,12 @@ module Wallee
   # 
   class DatabaseTranslatedStringCreate
     # 
-    attr_accessor :available_languages
-
-    # 
-    attr_accessor :display_name
-
-    # 
     attr_accessor :items
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'available_languages' => :'availableLanguages',
-        :'display_name' => :'displayName',
         :'items' => :'items'
       }
     end
@@ -46,8 +38,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'available_languages' => :'Array<String>',
-        :'display_name' => :'String',
         :'items' => :'Array<DatabaseTranslatedStringItemCreate>'
       }
     end
@@ -59,16 +49,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'availableLanguages')
-        if (value = attributes[:'availableLanguages']).is_a?(Array)
-          self.available_languages = value
-        end
-      end
-
-      if attributes.has_key?(:'displayName')
-        self.display_name = attributes[:'displayName']
-      end
 
       if attributes.has_key?(:'items')
         if (value = attributes[:'items']).is_a?(Array)
@@ -96,8 +76,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          available_languages == o.available_languages &&
-          display_name == o.display_name &&
           items == o.items
     end
 
@@ -110,7 +88,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [available_languages, display_name, items].hash
+      [items].hash
     end
 
     # Builds the object from hash

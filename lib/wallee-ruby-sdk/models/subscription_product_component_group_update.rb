@@ -27,8 +27,8 @@ module Wallee
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
 
     # The component group name will be shown when the components are selected. This can be visible to the subscriber.
     attr_accessor :name
@@ -42,20 +42,16 @@ module Wallee
     # The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
     attr_accessor :sort_order
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
+        :'version' => :'version',
         :'name' => :'name',
         :'optional' => :'optional',
         :'product_version' => :'productVersion',
-        :'sort_order' => :'sortOrder',
-        :'version' => :'version'
+        :'sort_order' => :'sortOrder'
       }
     end
 
@@ -63,12 +59,11 @@ module Wallee
     def self.swagger_types
       {
         :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
+        :'version' => :'Integer',
         :'name' => :'DatabaseTranslatedStringCreate',
         :'optional' => :'BOOLEAN',
         :'product_version' => :'Integer',
-        :'sort_order' => :'Integer',
-        :'version' => :'Integer'
+        :'sort_order' => :'Integer'
       }
     end
 
@@ -84,8 +79,8 @@ module Wallee
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
 
       if attributes.has_key?(:'name')
@@ -102,10 +97,6 @@ module Wallee
 
       if attributes.has_key?(:'sortOrder')
         self.sort_order = attributes[:'sortOrder']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -139,12 +130,11 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          linked_space_id == o.linked_space_id &&
+          version == o.version &&
           name == o.name &&
           optional == o.optional &&
           product_version == o.product_version &&
-          sort_order == o.sort_order &&
-          version == o.version
+          sort_order == o.sort_order
     end
 
     # @see the `==` method
@@ -156,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, optional, product_version, sort_order, version].hash
+      [id, version, name, optional, product_version, sort_order].hash
     end
 
     # Builds the object from hash

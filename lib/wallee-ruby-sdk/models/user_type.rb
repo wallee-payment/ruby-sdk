@@ -25,6 +25,7 @@ module Wallee
   class UserType
     
     HUMAN_USER = "HUMAN_USER".freeze
+    SINGLE_SIGNON_USER = "SINGLE_SIGNON_USER".freeze
     APPLICATION_USER = "APPLICATION_USER".freeze
     ANONYMOUS_USER = "ANONYMOUS_USER".freeze
     SERVER_USER = "SERVER_USER".freeze

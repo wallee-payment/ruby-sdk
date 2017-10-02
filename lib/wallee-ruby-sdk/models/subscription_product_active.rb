@@ -30,29 +30,17 @@ module Wallee
     # When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
     attr_accessor :failed_payment_suspension_period
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
     # The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # The product reference identifies the product for external systems. This field may contain the product's SKU.
-    attr_accessor :reference
 
     # The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
     attr_accessor :sort_order
 
     # 
-    attr_accessor :space_id
-
-    # 
     attr_accessor :state
+
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -63,14 +51,10 @@ module Wallee
       {
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'failed_payment_suspension_period' => :'failedPaymentSuspensionPeriod',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'reference' => :'reference',
         :'sort_order' => :'sortOrder',
-        :'space_id' => :'spaceId',
         :'state' => :'state',
+        :'id' => :'id',
         :'version' => :'version'
       }
     end
@@ -80,14 +64,10 @@ module Wallee
       {
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'failed_payment_suspension_period' => :'String',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'reference' => :'String',
         :'sort_order' => :'Integer',
-        :'space_id' => :'Integer',
         :'state' => :'SubscriptionProductState',
+        :'id' => :'Integer',
         :'version' => :'Integer'
       }
     end
@@ -110,36 +90,20 @@ module Wallee
         self.failed_payment_suspension_period = attributes[:'failedPaymentSuspensionPeriod']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'reference')
-        self.reference = attributes[:'reference']
       end
 
       if attributes.has_key?(:'sortOrder')
         self.sort_order = attributes[:'sortOrder']
       end
 
-      if attributes.has_key?(:'spaceId')
-        self.space_id = attributes[:'spaceId']
-      end
-
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'version')
@@ -178,14 +142,10 @@ module Wallee
       self.class == o.class &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           failed_payment_suspension_period == o.failed_payment_suspension_period &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
-          reference == o.reference &&
           sort_order == o.sort_order &&
-          space_id == o.space_id &&
           state == o.state &&
+          id == o.id &&
           version == o.version
     end
 
@@ -198,7 +158,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_configurations, failed_payment_suspension_period, id, linked_space_id, name, planned_purge_date, reference, sort_order, space_id, state, version].hash
+      [allowed_payment_method_configurations, failed_payment_suspension_period, name, sort_order, state, id, version].hash
     end
 
     # Builds the object from hash

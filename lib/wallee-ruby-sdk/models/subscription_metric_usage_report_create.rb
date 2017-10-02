@@ -27,51 +27,27 @@ module Wallee
     # The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
     attr_accessor :consumed_units
 
-    # 
-    attr_accessor :created_by_user_id
-
-    # 
-    attr_accessor :created_on
-
     # The metric usage report description describe the reported usage. This description may be shown to the end user.
     attr_accessor :description
 
     # The external id identifies the metric usage uniquely.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
     # The metric usage report is linked to the metric for which the usage should be recorded.
     attr_accessor :metric
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
     # The subscription to which the usage is added to.
     attr_accessor :subscription
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'consumed_units' => :'consumedUnits',
-        :'created_by_user_id' => :'createdByUserId',
-        :'created_on' => :'createdOn',
         :'description' => :'description',
         :'external_id' => :'externalId',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'metric' => :'metric',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'subscription' => :'subscription',
-        :'version' => :'version'
+        :'subscription' => :'subscription'
       }
     end
 
@@ -79,16 +55,10 @@ module Wallee
     def self.swagger_types
       {
         :'consumed_units' => :'Float',
-        :'created_by_user_id' => :'Integer',
-        :'created_on' => :'DateTime',
         :'description' => :'String',
         :'external_id' => :'String',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'metric' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'subscription' => :'Integer',
-        :'version' => :'Integer'
+        :'subscription' => :'Integer'
       }
     end
 
@@ -104,14 +74,6 @@ module Wallee
         self.consumed_units = attributes[:'consumedUnits']
       end
 
-      if attributes.has_key?(:'createdByUserId')
-        self.created_by_user_id = attributes[:'createdByUserId']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
       if attributes.has_key?(:'description')
         self.description = attributes[:'description']
       end
@@ -120,28 +82,12 @@ module Wallee
         self.external_id = attributes[:'externalId']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'metric')
         self.metric = attributes[:'metric']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
       if attributes.has_key?(:'subscription')
         self.subscription = attributes[:'subscription']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -185,16 +131,10 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           consumed_units == o.consumed_units &&
-          created_by_user_id == o.created_by_user_id &&
-          created_on == o.created_on &&
           description == o.description &&
           external_id == o.external_id &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           metric == o.metric &&
-          planned_purge_date == o.planned_purge_date &&
-          subscription == o.subscription &&
-          version == o.version
+          subscription == o.subscription
     end
 
     # @see the `==` method
@@ -206,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [consumed_units, created_by_user_id, created_on, description, external_id, id, linked_space_id, metric, planned_purge_date, subscription, version].hash
+      [consumed_units, description, external_id, metric, subscription].hash
     end
 
     # Builds the object from hash

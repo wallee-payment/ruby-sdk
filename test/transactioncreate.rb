@@ -5,17 +5,13 @@ class TestTransactionCreate < Test::Unit::TestCase
 
   def test_create
     
-    space_id = ENV['APPLICATION_SPACE_ID'].to_i
+    space_id = 405
+    app_user_id = 512
+    app_user_key = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ="
     
     Wallee.configure do |config|
-      config.user_id = ENV['APPLICATION_USER_ID']
-      config.authentication_key = ENV['APPLICATION_AUTHENTICATION_KEY']
-      api_scheme = ENV['API_URL_SCHEME']
-      config.scheme = api_scheme unless api_scheme.nil? || api_scheme.empty?
-      api_host = ENV['API_URL_HOST']
-      config.host = api_host unless api_host.nil? || api_host.empty?
-      api_base_path = ENV['API_URL_BASE_PATH']
-      config.base_path = api_base_path  unless api_base_path.nil? || api_base_path.empty?
+      config.user_id = app_user_id
+      config.authentication_key = app_user_key
     end
 
     transaction_service = Wallee::TransactionService.new

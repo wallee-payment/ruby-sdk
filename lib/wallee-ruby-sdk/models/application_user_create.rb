@@ -24,26 +24,11 @@ require 'date'
 module Wallee
   # 
   class ApplicationUserCreate
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # The scope to which the user belongs to.
-    attr_accessor :scope
+    # The user name is used to identify the application user in administrative interfaces.
+    attr_accessor :name
 
     # 
     attr_accessor :state
-
-    # 
-    attr_accessor :user_type
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
-    # The user name is used to identify the application user in administrative interfaces.
-    attr_accessor :name
 
     # The account that this user is associated with. The account owner will be able to manage this user.
     attr_accessor :primary_account
@@ -52,13 +37,8 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'scope' => :'scope',
-        :'state' => :'state',
-        :'user_type' => :'userType',
-        :'version' => :'version',
         :'name' => :'name',
+        :'state' => :'state',
         :'primary_account' => :'primaryAccount'
       }
     end
@@ -66,13 +46,8 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'scope' => :'Scope',
-        :'state' => :'CreationEntityState',
-        :'user_type' => :'UserType',
-        :'version' => :'Integer',
         :'name' => :'String',
+        :'state' => :'CreationEntityState',
         :'primary_account' => :'Integer'
       }
     end
@@ -85,32 +60,12 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'scope')
-        self.scope = attributes[:'scope']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'userType')
-        self.user_type = attributes[:'userType']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'primaryAccount')
@@ -123,14 +78,6 @@ module Wallee
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       if @primary_account.nil?
         invalid_properties.push("invalid value for 'primary_account', primary_account cannot be nil.")
       end
@@ -141,8 +88,6 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @version.nil?
       return false if @primary_account.nil?
       return true
     end
@@ -152,13 +97,8 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          planned_purge_date == o.planned_purge_date &&
-          scope == o.scope &&
-          state == o.state &&
-          user_type == o.user_type &&
-          version == o.version &&
           name == o.name &&
+          state == o.state &&
           primary_account == o.primary_account
     end
 
@@ -171,7 +111,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, planned_purge_date, scope, state, user_type, version, name, primary_account].hash
+      [name, state, primary_account].hash
     end
 
     # Builds the object from hash

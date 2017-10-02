@@ -51,6 +51,15 @@ module Wallee
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
+    # The resolved description uses the specified description or the default one when it is not overridden.
+    attr_accessor :resolved_description
+
+    # The resolved URL of the image to use with this payment method.
+    attr_accessor :resolved_image_url
+
+    # The resolved title uses the specified title or the default one when it is not overridden.
+    attr_accessor :resolved_title
+
     # The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
     attr_accessor :sort_order
 
@@ -79,6 +88,9 @@ module Wallee
         :'one_click_payment_mode' => :'oneClickPaymentMode',
         :'payment_method' => :'paymentMethod',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'resolved_description' => :'resolvedDescription',
+        :'resolved_image_url' => :'resolvedImageUrl',
+        :'resolved_title' => :'resolvedTitle',
         :'sort_order' => :'sortOrder',
         :'space_id' => :'spaceId',
         :'state' => :'state',
@@ -99,6 +111,9 @@ module Wallee
         :'one_click_payment_mode' => :'OneClickPaymentMode',
         :'payment_method' => :'Integer',
         :'planned_purge_date' => :'DateTime',
+        :'resolved_description' => :'Hash<String, String>',
+        :'resolved_image_url' => :'String',
+        :'resolved_title' => :'Hash<String, String>',
         :'sort_order' => :'Integer',
         :'space_id' => :'Integer',
         :'state' => :'CreationEntityState',
@@ -151,6 +166,22 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
+      if attributes.has_key?(:'resolvedDescription')
+        if (value = attributes[:'resolvedDescription']).is_a?(Array)
+          self.resolved_description = value
+        end
+      end
+
+      if attributes.has_key?(:'resolvedImageUrl')
+        self.resolved_image_url = attributes[:'resolvedImageUrl']
+      end
+
+      if attributes.has_key?(:'resolvedTitle')
+        if (value = attributes[:'resolvedTitle']).is_a?(Array)
+          self.resolved_title = value
+        end
+      end
+
       if attributes.has_key?(:'sortOrder')
         self.sort_order = attributes[:'sortOrder']
       end
@@ -200,6 +231,9 @@ module Wallee
           one_click_payment_mode == o.one_click_payment_mode &&
           payment_method == o.payment_method &&
           planned_purge_date == o.planned_purge_date &&
+          resolved_description == o.resolved_description &&
+          resolved_image_url == o.resolved_image_url &&
+          resolved_title == o.resolved_title &&
           sort_order == o.sort_order &&
           space_id == o.space_id &&
           state == o.state &&
@@ -216,7 +250,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data_collection_type, description, id, image_resource_path, linked_space_id, name, one_click_payment_mode, payment_method, planned_purge_date, sort_order, space_id, state, title, version].hash
+      [data_collection_type, description, id, image_resource_path, linked_space_id, name, one_click_payment_mode, payment_method, planned_purge_date, resolved_description, resolved_image_url, resolved_title, sort_order, space_id, state, title, version].hash
     end
 
     # Builds the object from hash

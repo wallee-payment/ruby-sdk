@@ -24,9 +24,6 @@ require 'date'
 module Wallee
   # 
   class TokenCreate
-    # The created on date indicates the date on which the entity was stored into the database.
-    attr_accessor :created_on
-
     # The customer email address is the email address of the customer.
     attr_accessor :customer_email_address
 
@@ -36,64 +33,47 @@ module Wallee
     # When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
     attr_accessor :enabled_for_one_click_payment
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-    attr_accessor :external_id
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
     # 
     attr_accessor :language
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # 
-    attr_accessor :state
+    # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+    attr_accessor :time_zone
 
     # Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
     attr_accessor :token_reference
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    attr_accessor :external_id
+
+    # 
+    attr_accessor :state
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'created_on' => :'createdOn',
         :'customer_email_address' => :'customerEmailAddress',
         :'customer_id' => :'customerId',
         :'enabled_for_one_click_payment' => :'enabledForOneClickPayment',
-        :'external_id' => :'externalId',
-        :'id' => :'id',
         :'language' => :'language',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'state' => :'state',
+        :'time_zone' => :'timeZone',
         :'token_reference' => :'tokenReference',
-        :'version' => :'version'
+        :'external_id' => :'externalId',
+        :'state' => :'state'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'created_on' => :'DateTime',
         :'customer_email_address' => :'String',
         :'customer_id' => :'String',
         :'enabled_for_one_click_payment' => :'BOOLEAN',
-        :'external_id' => :'String',
-        :'id' => :'Integer',
         :'language' => :'String',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'state' => :'CreationEntityState',
+        :'time_zone' => :'String',
         :'token_reference' => :'String',
-        :'version' => :'Integer'
+        :'external_id' => :'String',
+        :'state' => :'CreationEntityState'
       }
     end
 
@@ -104,10 +84,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
 
       if attributes.has_key?(:'customerEmailAddress')
         self.customer_email_address = attributes[:'customerEmailAddress']
@@ -121,36 +97,24 @@ module Wallee
         self.enabled_for_one_click_payment = attributes[:'enabledForOneClickPayment']
       end
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
       end
 
       if attributes.has_key?(:'tokenReference')
         self.token_reference = attributes[:'tokenReference']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
       end
 
     end
@@ -163,14 +127,6 @@ module Wallee
         invalid_properties.push("invalid value for 'external_id', external_id cannot be nil.")
       end
 
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -178,8 +134,6 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @external_id.nil?
-      return false if @id.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -188,18 +142,14 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          created_on == o.created_on &&
           customer_email_address == o.customer_email_address &&
           customer_id == o.customer_id &&
           enabled_for_one_click_payment == o.enabled_for_one_click_payment &&
-          external_id == o.external_id &&
-          id == o.id &&
           language == o.language &&
-          linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
-          state == o.state &&
+          time_zone == o.time_zone &&
           token_reference == o.token_reference &&
-          version == o.version
+          external_id == o.external_id &&
+          state == o.state
     end
 
     # @see the `==` method
@@ -211,7 +161,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, customer_email_address, customer_id, enabled_for_one_click_payment, external_id, id, language, linked_space_id, planned_purge_date, state, token_reference, version].hash
+      [customer_email_address, customer_id, enabled_for_one_click_payment, language, time_zone, token_reference, external_id, state].hash
     end
 
     # Builds the object from hash

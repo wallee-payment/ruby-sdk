@@ -24,71 +24,31 @@ require 'date'
 module Wallee
   # 
   class AccountCreate
-    # Active means that this account and all accounts in the hierarchy are active.
-    attr_accessor :active
-
-    # This property is true when all accounts in the hierarchy are active or restricted active.
-    attr_accessor :active_or_restricted_active
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
     # The name of the account identifies the account within the administrative interface.
     attr_accessor :name
-
-    # The account which is responsible for administering the account.
-    attr_accessor :parent_account
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
-
-    # Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
-    attr_accessor :restricted_active
-
-    # 
-    attr_accessor :state
 
     # This property restricts the number of subaccounts which can be created within this account.
     attr_accessor :subaccount_limit
 
-    # The account type defines which role and capabilities it has.
-    attr_accessor :type
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # The account which is responsible for administering the account.
+    attr_accessor :parent_account
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'active' => :'active',
-        :'active_or_restricted_active' => :'activeOrRestrictedActive',
-        :'id' => :'id',
         :'name' => :'name',
-        :'parent_account' => :'parentAccount',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'restricted_active' => :'restrictedActive',
-        :'state' => :'state',
         :'subaccount_limit' => :'subaccountLimit',
-        :'type' => :'type',
-        :'version' => :'version'
+        :'parent_account' => :'parentAccount'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'active' => :'BOOLEAN',
-        :'active_or_restricted_active' => :'BOOLEAN',
-        :'id' => :'Integer',
         :'name' => :'String',
-        :'parent_account' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'restricted_active' => :'BOOLEAN',
-        :'state' => :'AccountState',
         :'subaccount_limit' => :'Integer',
-        :'type' => :'AccountType',
-        :'version' => :'Integer'
+        :'parent_account' => :'Integer'
       }
     end
 
@@ -100,48 +60,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'active')
-        self.active = attributes[:'active']
-      end
-
-      if attributes.has_key?(:'activeOrRestrictedActive')
-        self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'parentAccount')
-        self.parent_account = attributes[:'parentAccount']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'restrictedActive')
-        self.restricted_active = attributes[:'restrictedActive']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
       end
 
       if attributes.has_key?(:'subaccountLimit')
         self.subaccount_limit = attributes[:'subaccountLimit']
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'parentAccount')
+        self.parent_account = attributes[:'parentAccount']
       end
 
     end
@@ -150,22 +78,12 @@ module Wallee
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @version.nil?
       return true
     end
 
@@ -174,17 +92,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          active == o.active &&
-          active_or_restricted_active == o.active_or_restricted_active &&
-          id == o.id &&
           name == o.name &&
-          parent_account == o.parent_account &&
-          planned_purge_date == o.planned_purge_date &&
-          restricted_active == o.restricted_active &&
-          state == o.state &&
           subaccount_limit == o.subaccount_limit &&
-          type == o.type &&
-          version == o.version
+          parent_account == o.parent_account
     end
 
     # @see the `==` method
@@ -196,7 +106,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [active, active_or_restricted_active, id, name, parent_account, planned_purge_date, restricted_active, state, subaccount_limit, type, version].hash
+      [name, subaccount_limit, parent_account].hash
     end
 
     # Builds the object from hash

@@ -24,6 +24,12 @@ require 'date'
 module Wallee
   # 
   class SubscriptionProductComponentUpdate
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
     # The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
     attr_accessor :component_change_weight
 
@@ -35,12 +41,6 @@ module Wallee
 
     # The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
     attr_accessor :description
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
 
     # The component name is shown to the subscriber. It should describe in few words what the component does contain.
     attr_accessor :name
@@ -54,41 +54,36 @@ module Wallee
     # The tax class of the component determines the taxes which are applicable on all fees linked with the component.
     attr_accessor :tax_class
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'version' => :'version',
         :'component_change_weight' => :'componentChangeWeight',
         :'component_group' => :'componentGroup',
         :'default_component' => :'defaultComponent',
         :'description' => :'description',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'reference' => :'reference',
         :'sort_order' => :'sortOrder',
-        :'tax_class' => :'taxClass',
-        :'version' => :'version'
+        :'tax_class' => :'taxClass'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'version' => :'Integer',
         :'component_change_weight' => :'Integer',
         :'component_group' => :'Integer',
         :'default_component' => :'BOOLEAN',
         :'description' => :'DatabaseTranslatedStringCreate',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'name' => :'DatabaseTranslatedStringCreate',
         :'reference' => :'Integer',
         :'sort_order' => :'Integer',
-        :'tax_class' => :'Integer',
-        :'version' => :'Integer'
+        :'tax_class' => :'Integer'
       }
     end
 
@@ -99,6 +94,14 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
 
       if attributes.has_key?(:'componentChangeWeight')
         self.component_change_weight = attributes[:'componentChangeWeight']
@@ -116,14 +119,6 @@ module Wallee
         self.description = attributes[:'description']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
@@ -138,10 +133,6 @@ module Wallee
 
       if attributes.has_key?(:'taxClass')
         self.tax_class = attributes[:'taxClass']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -174,17 +165,16 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          version == o.version &&
           component_change_weight == o.component_change_weight &&
           component_group == o.component_group &&
           default_component == o.default_component &&
           description == o.description &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           name == o.name &&
           reference == o.reference &&
           sort_order == o.sort_order &&
-          tax_class == o.tax_class &&
-          version == o.version
+          tax_class == o.tax_class
     end
 
     # @see the `==` method
@@ -196,7 +186,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [component_change_weight, component_group, default_component, description, id, linked_space_id, name, reference, sort_order, tax_class, version].hash
+      [id, version, component_change_weight, component_group, default_component, description, name, reference, sort_order, tax_class].hash
     end
 
     # Builds the object from hash

@@ -36,8 +36,14 @@ module Wallee
     # 
     attr_accessor :authorization_amount
 
+    # This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
+    attr_accessor :authorization_timeout_on
+
     # 
     attr_accessor :authorized_on
+
+    # When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+    attr_accessor :auto_confirmation_enabled
 
     # 
     attr_accessor :billing_address
@@ -66,13 +72,13 @@ module Wallee
     # 
     attr_accessor :currency
 
-    # The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
+    # The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
     attr_accessor :customer_email_address
 
     # 
     attr_accessor :customer_id
 
-    # 
+    # The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
     attr_accessor :customers_presence
 
     # The transaction's end of life indicates the date from which on no operation can be carried out anymore.
@@ -83,6 +89,9 @@ module Wallee
 
     # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
     attr_accessor :failed_url
+
+    # The failure reason describes why the transaction failed. This is only provided when the transaction is marked as failed.
+    attr_accessor :failure_reason
 
     # 
     attr_accessor :group
@@ -141,11 +150,17 @@ module Wallee
     # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
     attr_accessor :success_url
 
+    # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+    attr_accessor :time_zone
+
     # 
     attr_accessor :token
 
     # 
     attr_accessor :user_agent_header
+
+    # The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
+    attr_accessor :user_failure_message
 
     # The user interface type defines through which user interface the transaction has been processed resp. created.
     attr_accessor :user_interface_type
@@ -161,7 +176,9 @@ module Wallee
         :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'authorization_amount' => :'authorizationAmount',
+        :'authorization_timeout_on' => :'authorizationTimeoutOn',
         :'authorized_on' => :'authorizedOn',
+        :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
         :'billing_address' => :'billingAddress',
         :'charge_retry_enabled' => :'chargeRetryEnabled',
         :'completed_on' => :'completedOn',
@@ -177,6 +194,7 @@ module Wallee
         :'end_of_life' => :'endOfLife',
         :'failed_on' => :'failedOn',
         :'failed_url' => :'failedUrl',
+        :'failure_reason' => :'failureReason',
         :'group' => :'group',
         :'id' => :'id',
         :'internet_protocol_address' => :'internetProtocolAddress',
@@ -196,8 +214,10 @@ module Wallee
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'success_url' => :'successUrl',
+        :'time_zone' => :'timeZone',
         :'token' => :'token',
         :'user_agent_header' => :'userAgentHeader',
+        :'user_failure_message' => :'userFailureMessage',
         :'user_interface_type' => :'userInterfaceType',
         :'version' => :'version'
       }
@@ -210,7 +230,9 @@ module Wallee
         :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'authorization_amount' => :'Float',
+        :'authorization_timeout_on' => :'DateTime',
         :'authorized_on' => :'DateTime',
+        :'auto_confirmation_enabled' => :'BOOLEAN',
         :'billing_address' => :'Address',
         :'charge_retry_enabled' => :'BOOLEAN',
         :'completed_on' => :'DateTime',
@@ -226,6 +248,7 @@ module Wallee
         :'end_of_life' => :'DateTime',
         :'failed_on' => :'DateTime',
         :'failed_url' => :'String',
+        :'failure_reason' => :'FailureReason',
         :'group' => :'TransactionGroup',
         :'id' => :'Integer',
         :'internet_protocol_address' => :'String',
@@ -245,8 +268,10 @@ module Wallee
         :'space_view_id' => :'Integer',
         :'state' => :'TransactionState',
         :'success_url' => :'String',
+        :'time_zone' => :'String',
         :'token' => :'Token',
         :'user_agent_header' => :'String',
+        :'user_failure_message' => :'String',
         :'user_interface_type' => :'TransactionUserInterfaceType',
         :'version' => :'Integer'
       }
@@ -280,8 +305,16 @@ module Wallee
         self.authorization_amount = attributes[:'authorizationAmount']
       end
 
+      if attributes.has_key?(:'authorizationTimeoutOn')
+        self.authorization_timeout_on = attributes[:'authorizationTimeoutOn']
+      end
+
       if attributes.has_key?(:'authorizedOn')
         self.authorized_on = attributes[:'authorizedOn']
+      end
+
+      if attributes.has_key?(:'autoConfirmationEnabled')
+        self.auto_confirmation_enabled = attributes[:'autoConfirmationEnabled']
       end
 
       if attributes.has_key?(:'billingAddress')
@@ -342,6 +375,10 @@ module Wallee
 
       if attributes.has_key?(:'failedUrl')
         self.failed_url = attributes[:'failedUrl']
+      end
+
+      if attributes.has_key?(:'failureReason')
+        self.failure_reason = attributes[:'failureReason']
       end
 
       if attributes.has_key?(:'group')
@@ -424,12 +461,20 @@ module Wallee
         self.success_url = attributes[:'successUrl']
       end
 
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'token')
         self.token = attributes[:'token']
       end
 
       if attributes.has_key?(:'userAgentHeader')
         self.user_agent_header = attributes[:'userAgentHeader']
+      end
+
+      if attributes.has_key?(:'userFailureMessage')
+        self.user_failure_message = attributes[:'userFailureMessage']
       end
 
       if attributes.has_key?(:'userInterfaceType')
@@ -464,7 +509,9 @@ module Wallee
           allowed_payment_method_brands == o.allowed_payment_method_brands &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           authorization_amount == o.authorization_amount &&
+          authorization_timeout_on == o.authorization_timeout_on &&
           authorized_on == o.authorized_on &&
+          auto_confirmation_enabled == o.auto_confirmation_enabled &&
           billing_address == o.billing_address &&
           charge_retry_enabled == o.charge_retry_enabled &&
           completed_on == o.completed_on &&
@@ -480,6 +527,7 @@ module Wallee
           end_of_life == o.end_of_life &&
           failed_on == o.failed_on &&
           failed_url == o.failed_url &&
+          failure_reason == o.failure_reason &&
           group == o.group &&
           id == o.id &&
           internet_protocol_address == o.internet_protocol_address &&
@@ -499,8 +547,10 @@ module Wallee
           space_view_id == o.space_view_id &&
           state == o.state &&
           success_url == o.success_url &&
+          time_zone == o.time_zone &&
           token == o.token &&
           user_agent_header == o.user_agent_header &&
+          user_failure_message == o.user_failure_message &&
           user_interface_type == o.user_interface_type &&
           version == o.version
     end
@@ -514,7 +564,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorized_on, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, end_of_life, failed_on, failed_url, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, token, user_agent_header, user_interface_type, version].hash
+      [accept_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, end_of_life, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash

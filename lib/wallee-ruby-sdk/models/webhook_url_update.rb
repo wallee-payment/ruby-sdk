@@ -24,23 +24,17 @@ require 'date'
 module Wallee
   # 
   class WebhookUrlUpdate
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
     # The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
 
     # 
     attr_accessor :state
 
     # The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
     attr_accessor :url
+
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -49,12 +43,10 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
         :'state' => :'state',
         :'url' => :'url',
+        :'id' => :'id',
         :'version' => :'version'
       }
     end
@@ -62,12 +54,10 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
         :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
         :'state' => :'CreationEntityState',
         :'url' => :'String',
+        :'id' => :'Integer',
         :'version' => :'Integer'
       }
     end
@@ -80,20 +70,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
       if attributes.has_key?(:'state')
@@ -102,6 +80,10 @@ module Wallee
 
       if attributes.has_key?(:'url')
         self.url = attributes[:'url']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'version')
@@ -138,12 +120,10 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
           name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
           state == o.state &&
           url == o.url &&
+          id == o.id &&
           version == o.version
     end
 
@@ -156,7 +136,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, state, url, version].hash
+      [name, state, url, id, version].hash
     end
 
     # Builds the object from hash

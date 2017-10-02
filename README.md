@@ -40,7 +40,7 @@ require 'wallee-ruby-sdk'
 # Setup userId and authenticationKey
 Wallee.configure do |config|
   config.user_id = 'YOUR APP USER ID'
-  config.authentication_key = 'YOUR APP USER AUTHENTICATION KEY'
+  config.authentication_key = 'YOUR APP AUTHENTICATION KEY'
 end
 
 api_instance = Wallee::AccountService.new

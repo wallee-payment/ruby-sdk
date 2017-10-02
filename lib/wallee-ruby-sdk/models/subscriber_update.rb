@@ -24,6 +24,12 @@ require 'date'
 module Wallee
   # A subscriber represents everyone who is subscribed to a product.
   class SubscriberUpdate
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
     # Those payment methods which are allowed additionally will be available even when the product does not allow those methods.
     attr_accessor :additional_allowed_payment_method_configurations
 
@@ -39,20 +45,11 @@ module Wallee
     # The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
     attr_accessor :email_address
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-    attr_accessor :external_id
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
     # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
     attr_accessor :language
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # Meta data allow to store additional data along the object.
+    attr_accessor :meta_data
 
     # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
     attr_accessor :reference
@@ -60,50 +57,38 @@ module Wallee
     # 
     attr_accessor :shipping_address
 
-    # 
-    attr_accessor :state
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'version' => :'version',
         :'additional_allowed_payment_method_configurations' => :'additionalAllowedPaymentMethodConfigurations',
         :'billing_address' => :'billingAddress',
         :'description' => :'description',
         :'disallowed_payment_method_configurations' => :'disallowedPaymentMethodConfigurations',
         :'email_address' => :'emailAddress',
-        :'external_id' => :'externalId',
-        :'id' => :'id',
         :'language' => :'language',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
+        :'meta_data' => :'metaData',
         :'reference' => :'reference',
-        :'shipping_address' => :'shippingAddress',
-        :'state' => :'state',
-        :'version' => :'version'
+        :'shipping_address' => :'shippingAddress'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'version' => :'Integer',
         :'additional_allowed_payment_method_configurations' => :'Array<Integer>',
         :'billing_address' => :'AddressCreate',
         :'description' => :'String',
         :'disallowed_payment_method_configurations' => :'Array<Integer>',
         :'email_address' => :'String',
-        :'external_id' => :'String',
-        :'id' => :'Integer',
         :'language' => :'String',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
+        :'meta_data' => :'Hash<String, String>',
         :'reference' => :'String',
-        :'shipping_address' => :'AddressCreate',
-        :'state' => :'CreationEntityState',
-        :'version' => :'Integer'
+        :'shipping_address' => :'AddressCreate'
       }
     end
 
@@ -114,6 +99,14 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
 
       if attributes.has_key?(:'additionalAllowedPaymentMethodConfigurations')
         if (value = attributes[:'additionalAllowedPaymentMethodConfigurations']).is_a?(Array)
@@ -139,24 +132,14 @@ module Wallee
         self.email_address = attributes[:'emailAddress']
       end
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.has_key?(:'metaData')
+        if (value = attributes[:'metaData']).is_a?(Array)
+          self.meta_data = value
+        end
       end
 
       if attributes.has_key?(:'reference')
@@ -165,14 +148,6 @@ module Wallee
 
       if attributes.has_key?(:'shippingAddress')
         self.shipping_address = attributes[:'shippingAddress']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
 
     end
@@ -205,20 +180,17 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          version == o.version &&
           additional_allowed_payment_method_configurations == o.additional_allowed_payment_method_configurations &&
           billing_address == o.billing_address &&
           description == o.description &&
           disallowed_payment_method_configurations == o.disallowed_payment_method_configurations &&
           email_address == o.email_address &&
-          external_id == o.external_id &&
-          id == o.id &&
           language == o.language &&
-          linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
+          meta_data == o.meta_data &&
           reference == o.reference &&
-          shipping_address == o.shipping_address &&
-          state == o.state &&
-          version == o.version
+          shipping_address == o.shipping_address
     end
 
     # @see the `==` method
@@ -230,7 +202,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [additional_allowed_payment_method_configurations, billing_address, description, disallowed_payment_method_configurations, email_address, external_id, id, language, linked_space_id, planned_purge_date, reference, shipping_address, state, version].hash
+      [id, version, additional_allowed_payment_method_configurations, billing_address, description, disallowed_payment_method_configurations, email_address, language, meta_data, reference, shipping_address].hash
     end
 
     # Builds the object from hash
