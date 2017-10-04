@@ -37,26 +37,36 @@ $ gem install wallee-ruby-sdk
 # Load the gem
 require 'wallee-ruby-sdk'
 
-# Setup userId and authenticationKey
+space_id = 405
+app_user_id = 512
+app_user_key = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ="
+
+# Setup Application User Id and Application User Key
 Wallee.configure do |config|
-  config.user_id = 'YOUR APP USER ID'
-  config.authentication_key = 'YOUR APP AUTHENTICATION KEY'
+  config.user_id = app_user_id
+  config.authentication_key = app_user_key
 end
 
-api_instance = Wallee::AccountService.new
+# TransactionService
+transaction_service = Wallee::TransactionService.new
 
-opts = { 
-  filter: Wallee::EntityQueryFilter.new # EntityQueryFilter | The filter which restricts the entities which are used to calculate the count.
+# Create Filter
+opts = {
+  filter: Wallee::EntityQueryFilter.new({
+    fieldName: "state",
+    operator: Wallee::CriteriaOperator::EQUALS,
+    type: Wallee::EntityQueryFilterType::LEAF,
+    value: Wallee::TransactionCompletionState::FAILED
+  }) 
 }
 
 begin
-  #Count
-  result = api_instance.account_service_count(opts)
+  #Returns the number of transaction in the space matching the provided filter
+  result = transaction_service.transaction_service_count(space_id, opts)
   p result
 rescue Wallee::ApiError => e
-  puts "Exception when calling AccountService->account_service_count: #{e}"
+  puts "Exception when calling TransactionService->transaction_service_count: #{e}"
 end
-
 ```
 
 ## License
