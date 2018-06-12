@@ -30,6 +30,9 @@ module Wallee
     # The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
     attr_accessor :iso_code3_letter
 
+    # The address format of the country indicates how an address has to look like for the country.
+    attr_accessor :address_format
+
     # The name labels the country by a name in English.
     attr_accessor :name
 
@@ -45,6 +48,7 @@ module Wallee
       {
         :'iso_code2_letter' => :'ISOCode2Letter',
         :'iso_code3_letter' => :'ISOCode3Letter',
+        :'address_format' => :'addressFormat',
         :'name' => :'name',
         :'numeric_code' => :'numericCode',
         :'state_codes' => :'stateCodes'
@@ -56,6 +60,7 @@ module Wallee
       {
         :'iso_code2_letter' => :'String',
         :'iso_code3_letter' => :'String',
+        :'address_format' => :'RestAddressFormat',
         :'name' => :'String',
         :'numeric_code' => :'String',
         :'state_codes' => :'Array<String>'
@@ -76,6 +81,10 @@ module Wallee
 
       if attributes.has_key?(:'ISOCode3Letter')
         self.iso_code3_letter = attributes[:'ISOCode3Letter']
+      end
+
+      if attributes.has_key?(:'addressFormat')
+        self.address_format = attributes[:'addressFormat']
       end
 
       if attributes.has_key?(:'name')
@@ -114,6 +123,7 @@ module Wallee
       self.class == o.class &&
           iso_code2_letter == o.iso_code2_letter &&
           iso_code3_letter == o.iso_code3_letter &&
+          address_format == o.address_format &&
           name == o.name &&
           numeric_code == o.numeric_code &&
           state_codes == o.state_codes
@@ -128,7 +138,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [iso_code2_letter, iso_code3_letter, name, numeric_code, state_codes].hash
+      [iso_code2_letter, iso_code3_letter, address_format, name, numeric_code, state_codes].hash
     end
 
     # Builds the object from hash

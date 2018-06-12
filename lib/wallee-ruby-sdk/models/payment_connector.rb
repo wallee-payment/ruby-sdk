@@ -28,6 +28,12 @@ module Wallee
     attr_accessor :data_collection_type
 
     # 
+    attr_accessor :deprecated
+
+    # 
+    attr_accessor :deprecation_reason
+
+    # 
     attr_accessor :description
 
     # 
@@ -62,6 +68,8 @@ module Wallee
     def self.attribute_map
       {
         :'data_collection_type' => :'dataCollectionType',
+        :'deprecated' => :'deprecated',
+        :'deprecation_reason' => :'deprecationReason',
         :'description' => :'description',
         :'feature' => :'feature',
         :'id' => :'id',
@@ -79,6 +87,8 @@ module Wallee
     def self.swagger_types
       {
         :'data_collection_type' => :'DataCollectionType',
+        :'deprecated' => :'BOOLEAN',
+        :'deprecation_reason' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
         :'feature' => :'Feature',
         :'id' => :'Integer',
@@ -102,6 +112,16 @@ module Wallee
 
       if attributes.has_key?(:'dataCollectionType')
         self.data_collection_type = attributes[:'dataCollectionType']
+      end
+
+      if attributes.has_key?(:'deprecated')
+        self.deprecated = attributes[:'deprecated']
+      end
+
+      if attributes.has_key?(:'deprecationReason')
+        if (value = attributes[:'deprecationReason']).is_a?(Array)
+          self.deprecation_reason = value
+        end
       end
 
       if attributes.has_key?(:'description')
@@ -173,6 +193,8 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           data_collection_type == o.data_collection_type &&
+          deprecated == o.deprecated &&
+          deprecation_reason == o.deprecation_reason &&
           description == o.description &&
           feature == o.feature &&
           id == o.id &&
@@ -194,7 +216,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data_collection_type, description, feature, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_customers_presences, supported_features].hash
+      [data_collection_type, deprecated, deprecation_reason, description, feature, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_customers_presences, supported_features].hash
     end
 
     # Builds the object from hash

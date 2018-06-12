@@ -55,10 +55,10 @@ module Wallee
     def self.swagger_types
       {
         :'currency' => :'String',
-        :'product' => :'SubscriptionProduct',
+        :'product' => :'Integer',
         :'respect_termination_period' => :'BOOLEAN',
         :'selected_components' => :'Array<SubscriptionProductComponentReference>',
-        :'subscription' => :'Subscription'
+        :'subscription' => :'Integer'
       }
     end
 

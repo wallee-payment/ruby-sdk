@@ -75,6 +75,9 @@ module Wallee
     # 
     attr_accessor :token
 
+    # The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+    attr_accessor :tokenization_mode
+
     # When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
     attr_accessor :auto_confirmation_enabled
 
@@ -83,6 +86,15 @@ module Wallee
 
     # The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
     attr_accessor :customers_presence
+
+    # The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+    attr_accessor :device_session_identifier
+
+    # 
+    attr_accessor :environment
+
+    # The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+    attr_accessor :environment_selection_strategy
 
     # 
     attr_accessor :space_view_id
@@ -108,9 +120,13 @@ module Wallee
         :'success_url' => :'successUrl',
         :'time_zone' => :'timeZone',
         :'token' => :'token',
+        :'tokenization_mode' => :'tokenizationMode',
         :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
         :'charge_retry_enabled' => :'chargeRetryEnabled',
         :'customers_presence' => :'customersPresence',
+        :'device_session_identifier' => :'deviceSessionIdentifier',
+        :'environment' => :'environment',
+        :'environment_selection_strategy' => :'environmentSelectionStrategy',
         :'space_view_id' => :'spaceViewId'
       }
     end
@@ -135,9 +151,13 @@ module Wallee
         :'success_url' => :'String',
         :'time_zone' => :'String',
         :'token' => :'Integer',
+        :'tokenization_mode' => :'TokenizationnMode',
         :'auto_confirmation_enabled' => :'BOOLEAN',
         :'charge_retry_enabled' => :'BOOLEAN',
         :'customers_presence' => :'CustomersPresence',
+        :'device_session_identifier' => :'String',
+        :'environment' => :'Environment',
+        :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
         :'space_view_id' => :'Integer'
       }
     end
@@ -226,6 +246,10 @@ module Wallee
         self.token = attributes[:'token']
       end
 
+      if attributes.has_key?(:'tokenizationMode')
+        self.tokenization_mode = attributes[:'tokenizationMode']
+      end
+
       if attributes.has_key?(:'autoConfirmationEnabled')
         self.auto_confirmation_enabled = attributes[:'autoConfirmationEnabled']
       end
@@ -236,6 +260,18 @@ module Wallee
 
       if attributes.has_key?(:'customersPresence')
         self.customers_presence = attributes[:'customersPresence']
+      end
+
+      if attributes.has_key?(:'deviceSessionIdentifier')
+        self.device_session_identifier = attributes[:'deviceSessionIdentifier']
+      end
+
+      if attributes.has_key?(:'environment')
+        self.environment = attributes[:'environment']
+      end
+
+      if attributes.has_key?(:'environmentSelectionStrategy')
+        self.environment_selection_strategy = attributes[:'environmentSelectionStrategy']
       end
 
       if attributes.has_key?(:'spaceViewId')
@@ -284,9 +320,13 @@ module Wallee
           success_url == o.success_url &&
           time_zone == o.time_zone &&
           token == o.token &&
+          tokenization_mode == o.tokenization_mode &&
           auto_confirmation_enabled == o.auto_confirmation_enabled &&
           charge_retry_enabled == o.charge_retry_enabled &&
           customers_presence == o.customers_presence &&
+          device_session_identifier == o.device_session_identifier &&
+          environment == o.environment &&
+          environment_selection_strategy == o.environment_selection_strategy &&
           space_view_id == o.space_view_id
     end
 
@@ -299,7 +339,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, auto_confirmation_enabled, charge_retry_enabled, customers_presence, space_view_id].hash
+      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode, auto_confirmation_enabled, charge_retry_enabled, customers_presence, device_session_identifier, environment, environment_selection_strategy, space_view_id].hash
     end
 
     # Builds the object from hash

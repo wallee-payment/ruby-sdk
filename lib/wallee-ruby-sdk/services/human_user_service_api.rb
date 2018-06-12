@@ -197,6 +197,63 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Export
+    # Exports the human users into a CSV file. The file will contain the properties defined in the request.
+    # @param request The request controls the entries which are exported.
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def human_user_service_export(request, opts = {})
+      data, _status_code, _headers = human_user_service_export_with_http_info(request, opts)
+      return data
+    end
+
+    # Export
+    # Exports the human users into a CSV file. The file will contain the properties defined in the request.
+    # @param request The request controls the entries which are exported.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
+    def human_user_service_export_with_http_info(request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: HumanUserService.human_user_service_export ..."
+      end
+      # verify the required parameter 'request' is set
+      fail ArgumentError, "Missing the required parameter 'request' when calling HumanUserService.human_user_service_export" if request.nil?
+      # resource path
+      local_var_path = "/human-user/export".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8', 'text/csv']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = ['application/json;charset=utf-8']
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'String')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: HumanUserService#human_user_service_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read
     # Reads the entity with the given 'id' and returns it.
     # @param id The id of the human user which should be returned.
@@ -229,11 +286,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['*/*']
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = ['*/*']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters

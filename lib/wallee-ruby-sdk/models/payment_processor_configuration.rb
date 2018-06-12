@@ -24,6 +24,9 @@ require 'date'
 module Wallee
   # 
   class PaymentProcessorConfiguration
+    # The contract links the processor configuration with the contract that is used to process payments.
+    attr_accessor :contract_id
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -49,6 +52,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'contract_id' => :'contractId',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
@@ -62,6 +66,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'contract_id' => :'Integer',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
@@ -79,6 +84,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'contractId')
+        self.contract_id = attributes[:'contractId']
+      end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -128,6 +137,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          contract_id == o.contract_id &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
@@ -146,7 +156,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, processor, state, version].hash
+      [contract_id, id, linked_space_id, name, planned_purge_date, processor, state, version].hash
     end
 
     # Builds the object from hash

@@ -25,6 +25,9 @@ module Wallee
   # 
   class Subscription
     # 
+    attr_accessor :affiliate
+
+    # 
     attr_accessor :created_on
 
     # 
@@ -73,6 +76,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'affiliate' => :'affiliate',
         :'created_on' => :'createdOn',
         :'description' => :'description',
         :'id' => :'id',
@@ -94,6 +98,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'affiliate' => :'SubscriptionAffiliate',
         :'created_on' => :'DateTime',
         :'description' => :'String',
         :'id' => :'Integer',
@@ -119,6 +124,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'affiliate')
+        self.affiliate = attributes[:'affiliate']
+      end
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
@@ -200,6 +209,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          affiliate == o.affiliate &&
           created_on == o.created_on &&
           description == o.description &&
           id == o.id &&
@@ -226,7 +236,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_on, terminating_on, token, version].hash
+      [affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_on, terminating_on, token, version].hash
     end
 
     # Builds the object from hash

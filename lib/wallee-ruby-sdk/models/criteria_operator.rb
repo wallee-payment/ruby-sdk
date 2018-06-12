@@ -33,6 +33,7 @@ module Wallee
     NOT_EQUALS = "NOT_EQUALS".freeze
     NOT_CONTAINS = "NOT_CONTAINS".freeze
     IS_NULL = "IS_NULL".freeze
+    IS_NOT_NULL = "IS_NOT_NULL".freeze
     
     # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash

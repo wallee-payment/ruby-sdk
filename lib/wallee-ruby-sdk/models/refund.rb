@@ -36,6 +36,9 @@ module Wallee
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
+    # 
+    attr_accessor :environment
+
     # The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
     attr_accessor :external_id
 
@@ -107,6 +110,7 @@ module Wallee
         :'base_line_items' => :'baseLineItems',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'environment' => :'environment',
         :'external_id' => :'externalId',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
@@ -138,6 +142,7 @@ module Wallee
         :'base_line_items' => :'Array<LineItem>',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'environment' => :'Environment',
         :'external_id' => :'String',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
@@ -186,6 +191,10 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'environment')
+        self.environment = attributes[:'environment']
       end
 
       if attributes.has_key?(:'externalId')
@@ -306,6 +315,7 @@ module Wallee
           base_line_items == o.base_line_items &&
           created_by == o.created_by &&
           created_on == o.created_on &&
+          environment == o.environment &&
           external_id == o.external_id &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
@@ -338,7 +348,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, timeout_on, transaction, type, version].hash
+      [amount, base_line_items, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, timeout_on, transaction, type, version].hash
     end
 
     # Builds the object from hash

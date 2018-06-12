@@ -69,12 +69,22 @@ module Wallee
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @field_name.nil?
+        invalid_properties.push("invalid value for 'field_name', field_name cannot be nil.")
+      end
+
+      if @sorting.nil?
+        invalid_properties.push("invalid value for 'sorting', sorting cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @field_name.nil?
+      return false if @sorting.nil?
       return true
     end
 

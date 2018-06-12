@@ -71,11 +71,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -102,7 +102,7 @@ module Wallee
     # @param user_id The id of the user to whom the role is assigned.
     # @param space_id The space to which the role is mapped.
     # @param [Hash] opts the optional parameters
-    # @return [Array<UserAccountRole>]
+    # @return [Array<UserSpaceRole>]
     def user_space_role_service_list(user_id, space_id, opts = {})
       data, _status_code, _headers = user_space_role_service_list_with_http_info(user_id, space_id, opts)
       return data
@@ -113,7 +113,7 @@ module Wallee
     # @param user_id The id of the user to whom the role is assigned.
     # @param space_id The space to which the role is mapped.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<UserAccountRole>, Fixnum, Hash)>] Array<UserAccountRole> data, response status code and response headers
+    # @return [Array<(Array<UserSpaceRole>, Fixnum, Hash)>] Array<UserSpaceRole> data, response status code and response headers
     def user_space_role_service_list_with_http_info(user_id, space_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: UserSpaceRoleService.user_space_role_service_list ..."
@@ -134,11 +134,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -153,7 +153,7 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<UserAccountRole>')
+        :return_type => 'Array<UserSpaceRole>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: UserSpaceRoleService#user_space_role_service_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -192,11 +192,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters

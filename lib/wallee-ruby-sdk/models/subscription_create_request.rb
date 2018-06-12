@@ -51,9 +51,9 @@ module Wallee
     def self.swagger_types
       {
         :'currency' => :'String',
-        :'product' => :'SubscriptionProduct',
+        :'product' => :'Integer',
         :'selected_components' => :'Array<SubscriptionProductComponentReference>',
-        :'subscription' => :'SubscriptionPending'
+        :'subscription' => :'Integer'
       }
     end
 

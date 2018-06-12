@@ -49,6 +49,9 @@ module Wallee
     attr_accessor :due_on
 
     # 
+    attr_accessor :environment
+
+    # 
     attr_accessor :external_id
 
     # 
@@ -93,6 +96,7 @@ module Wallee
         :'created_on' => :'createdOn',
         :'derecognized_on' => :'derecognizedOn',
         :'due_on' => :'dueOn',
+        :'environment' => :'environment',
         :'external_id' => :'externalId',
         :'language' => :'language',
         :'line_items' => :'lineItems',
@@ -118,6 +122,7 @@ module Wallee
         :'created_on' => :'DateTime',
         :'derecognized_on' => :'DateTime',
         :'due_on' => :'DateTime',
+        :'environment' => :'Environment',
         :'external_id' => :'String',
         :'language' => :'String',
         :'line_items' => :'Array<LineItem>',
@@ -170,6 +175,10 @@ module Wallee
 
       if attributes.has_key?(:'dueOn')
         self.due_on = attributes[:'dueOn']
+      end
+
+      if attributes.has_key?(:'environment')
+        self.environment = attributes[:'environment']
       end
 
       if attributes.has_key?(:'externalId')
@@ -246,6 +255,7 @@ module Wallee
           created_on == o.created_on &&
           derecognized_on == o.derecognized_on &&
           due_on == o.due_on &&
+          environment == o.environment &&
           external_id == o.external_id &&
           language == o.language &&
           line_items == o.line_items &&
@@ -268,7 +278,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, completion, created_on, derecognized_on, due_on, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, version].hash
+      [id, linked_space_id, linked_transaction, amount, completion, created_on, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, version].hash
     end
 
     # Builds the object from hash

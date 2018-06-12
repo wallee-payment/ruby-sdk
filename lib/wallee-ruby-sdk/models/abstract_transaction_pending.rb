@@ -75,6 +75,9 @@ module Wallee
     # 
     attr_accessor :token
 
+    # The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+    attr_accessor :tokenization_mode
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -95,7 +98,8 @@ module Wallee
         :'shipping_method' => :'shippingMethod',
         :'success_url' => :'successUrl',
         :'time_zone' => :'timeZone',
-        :'token' => :'token'
+        :'token' => :'token',
+        :'tokenization_mode' => :'tokenizationMode'
       }
     end
 
@@ -118,7 +122,8 @@ module Wallee
         :'shipping_method' => :'String',
         :'success_url' => :'String',
         :'time_zone' => :'String',
-        :'token' => :'Integer'
+        :'token' => :'Integer',
+        :'tokenization_mode' => :'TokenizationnMode'
       }
     end
 
@@ -206,6 +211,10 @@ module Wallee
         self.token = attributes[:'token']
       end
 
+      if attributes.has_key?(:'tokenizationMode')
+        self.tokenization_mode = attributes[:'tokenizationMode']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -242,7 +251,8 @@ module Wallee
           shipping_method == o.shipping_method &&
           success_url == o.success_url &&
           time_zone == o.time_zone &&
-          token == o.token
+          token == o.token &&
+          tokenization_mode == o.tokenization_mode
     end
 
     # @see the `==` method
@@ -254,7 +264,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token].hash
+      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode].hash
     end
 
     # Builds the object from hash

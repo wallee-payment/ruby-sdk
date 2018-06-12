@@ -27,6 +27,9 @@ module Wallee
     # 
     attr_accessor :accept_header
 
+    # The accept language contains the header which indicates the language preferences of the buyer.
+    attr_accessor :accept_language_header
+
     # 
     attr_accessor :allowed_payment_method_brands
 
@@ -81,8 +84,20 @@ module Wallee
     # The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
     attr_accessor :customers_presence
 
+    # This date indicates when the decision has been made if a transaction should be delivered or not.
+    attr_accessor :delivery_decision_made_on
+
+    # The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+    attr_accessor :device_session_identifier
+
     # The transaction's end of life indicates the date from which on no operation can be carried out anymore.
     attr_accessor :end_of_life
+
+    # 
+    attr_accessor :environment
+
+    # The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+    attr_accessor :environment_selection_strategy
 
     # 
     attr_accessor :failed_on
@@ -99,7 +114,7 @@ module Wallee
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # 
+    # The Internet Protocol (IP) address identifies the device of the buyer.
     attr_accessor :internet_protocol_address
 
     # 
@@ -156,7 +171,10 @@ module Wallee
     # 
     attr_accessor :token
 
-    # 
+    # The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+    attr_accessor :tokenization_mode
+
+    # The user agent header provides the exact string which contains the user agent of the buyer.
     attr_accessor :user_agent_header
 
     # The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
@@ -173,6 +191,7 @@ module Wallee
     def self.attribute_map
       {
         :'accept_header' => :'acceptHeader',
+        :'accept_language_header' => :'acceptLanguageHeader',
         :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'authorization_amount' => :'authorizationAmount',
@@ -191,7 +210,11 @@ module Wallee
         :'customer_email_address' => :'customerEmailAddress',
         :'customer_id' => :'customerId',
         :'customers_presence' => :'customersPresence',
+        :'delivery_decision_made_on' => :'deliveryDecisionMadeOn',
+        :'device_session_identifier' => :'deviceSessionIdentifier',
         :'end_of_life' => :'endOfLife',
+        :'environment' => :'environment',
+        :'environment_selection_strategy' => :'environmentSelectionStrategy',
         :'failed_on' => :'failedOn',
         :'failed_url' => :'failedUrl',
         :'failure_reason' => :'failureReason',
@@ -216,6 +239,7 @@ module Wallee
         :'success_url' => :'successUrl',
         :'time_zone' => :'timeZone',
         :'token' => :'token',
+        :'tokenization_mode' => :'tokenizationMode',
         :'user_agent_header' => :'userAgentHeader',
         :'user_failure_message' => :'userFailureMessage',
         :'user_interface_type' => :'userInterfaceType',
@@ -227,6 +251,7 @@ module Wallee
     def self.swagger_types
       {
         :'accept_header' => :'String',
+        :'accept_language_header' => :'String',
         :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'authorization_amount' => :'Float',
@@ -245,7 +270,11 @@ module Wallee
         :'customer_email_address' => :'String',
         :'customer_id' => :'String',
         :'customers_presence' => :'CustomersPresence',
+        :'delivery_decision_made_on' => :'DateTime',
+        :'device_session_identifier' => :'String',
         :'end_of_life' => :'DateTime',
+        :'environment' => :'Environment',
+        :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
         :'failed_on' => :'DateTime',
         :'failed_url' => :'String',
         :'failure_reason' => :'FailureReason',
@@ -270,6 +299,7 @@ module Wallee
         :'success_url' => :'String',
         :'time_zone' => :'String',
         :'token' => :'Token',
+        :'tokenization_mode' => :'TokenizationnMode',
         :'user_agent_header' => :'String',
         :'user_failure_message' => :'String',
         :'user_interface_type' => :'TransactionUserInterfaceType',
@@ -287,6 +317,10 @@ module Wallee
 
       if attributes.has_key?(:'acceptHeader')
         self.accept_header = attributes[:'acceptHeader']
+      end
+
+      if attributes.has_key?(:'acceptLanguageHeader')
+        self.accept_language_header = attributes[:'acceptLanguageHeader']
       end
 
       if attributes.has_key?(:'allowedPaymentMethodBrands')
@@ -365,8 +399,24 @@ module Wallee
         self.customers_presence = attributes[:'customersPresence']
       end
 
+      if attributes.has_key?(:'deliveryDecisionMadeOn')
+        self.delivery_decision_made_on = attributes[:'deliveryDecisionMadeOn']
+      end
+
+      if attributes.has_key?(:'deviceSessionIdentifier')
+        self.device_session_identifier = attributes[:'deviceSessionIdentifier']
+      end
+
       if attributes.has_key?(:'endOfLife')
         self.end_of_life = attributes[:'endOfLife']
+      end
+
+      if attributes.has_key?(:'environment')
+        self.environment = attributes[:'environment']
+      end
+
+      if attributes.has_key?(:'environmentSelectionStrategy')
+        self.environment_selection_strategy = attributes[:'environmentSelectionStrategy']
       end
 
       if attributes.has_key?(:'failedOn')
@@ -469,6 +519,10 @@ module Wallee
         self.token = attributes[:'token']
       end
 
+      if attributes.has_key?(:'tokenizationMode')
+        self.tokenization_mode = attributes[:'tokenizationMode']
+      end
+
       if attributes.has_key?(:'userAgentHeader')
         self.user_agent_header = attributes[:'userAgentHeader']
       end
@@ -506,6 +560,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           accept_header == o.accept_header &&
+          accept_language_header == o.accept_language_header &&
           allowed_payment_method_brands == o.allowed_payment_method_brands &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           authorization_amount == o.authorization_amount &&
@@ -524,7 +579,11 @@ module Wallee
           customer_email_address == o.customer_email_address &&
           customer_id == o.customer_id &&
           customers_presence == o.customers_presence &&
+          delivery_decision_made_on == o.delivery_decision_made_on &&
+          device_session_identifier == o.device_session_identifier &&
           end_of_life == o.end_of_life &&
+          environment == o.environment &&
+          environment_selection_strategy == o.environment_selection_strategy &&
           failed_on == o.failed_on &&
           failed_url == o.failed_url &&
           failure_reason == o.failure_reason &&
@@ -549,6 +608,7 @@ module Wallee
           success_url == o.success_url &&
           time_zone == o.time_zone &&
           token == o.token &&
+          tokenization_mode == o.tokenization_mode &&
           user_agent_header == o.user_agent_header &&
           user_failure_message == o.user_failure_message &&
           user_interface_type == o.user_interface_type &&
@@ -564,7 +624,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, end_of_life, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash

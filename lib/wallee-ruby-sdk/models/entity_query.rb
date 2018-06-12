@@ -30,7 +30,7 @@ module Wallee
     # The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
     attr_accessor :language
 
-    # The number of entities defines how many entities should be returned. There is a maximum of 500 entities.
+    # The number of entities defines how many entities should be returned. There is a maximum of 100 entities.
     attr_accessor :number_of_entities
 
     # The order bys allows to define the ordering of the entities returned by the search.

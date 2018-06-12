@@ -34,9 +34,6 @@ module Wallee
     attr_accessor :id
 
     # 
-    attr_accessor :template_resource
-
-    # 
     attr_accessor :title
 
 
@@ -46,7 +43,6 @@ module Wallee
         :'description' => :'description',
         :'feature' => :'feature',
         :'id' => :'id',
-        :'template_resource' => :'templateResource',
         :'title' => :'title'
       }
     end
@@ -57,7 +53,6 @@ module Wallee
         :'description' => :'Hash<String, String>',
         :'feature' => :'Integer',
         :'id' => :'Integer',
-        :'template_resource' => :'String',
         :'title' => :'Hash<String, String>'
       }
     end
@@ -82,10 +77,6 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'templateResource')
-        self.template_resource = attributes[:'templateResource']
       end
 
       if attributes.has_key?(:'title')
@@ -117,7 +108,6 @@ module Wallee
           description == o.description &&
           feature == o.feature &&
           id == o.id &&
-          template_resource == o.template_resource &&
           title == o.title
     end
 
@@ -130,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, id, template_resource, title].hash
+      [description, feature, id, title].hash
     end
 
     # Builds the object from hash

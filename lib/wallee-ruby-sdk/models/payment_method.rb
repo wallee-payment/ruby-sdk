@@ -37,6 +37,9 @@ module Wallee
     attr_accessor :image_path
 
     # 
+    attr_accessor :merchant_description
+
+    # 
     attr_accessor :name
 
     # 
@@ -50,6 +53,7 @@ module Wallee
         :'description' => :'description',
         :'id' => :'id',
         :'image_path' => :'imagePath',
+        :'merchant_description' => :'merchantDescription',
         :'name' => :'name',
         :'supported_currencies' => :'supportedCurrencies'
       }
@@ -62,6 +66,7 @@ module Wallee
         :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'image_path' => :'String',
+        :'merchant_description' => :'Hash<String, String>',
         :'name' => :'Hash<String, String>',
         :'supported_currencies' => :'Array<String>'
       }
@@ -93,6 +98,12 @@ module Wallee
 
       if attributes.has_key?(:'imagePath')
         self.image_path = attributes[:'imagePath']
+      end
+
+      if attributes.has_key?(:'merchantDescription')
+        if (value = attributes[:'merchantDescription']).is_a?(Array)
+          self.merchant_description = value
+        end
       end
 
       if attributes.has_key?(:'name')
@@ -131,6 +142,7 @@ module Wallee
           description == o.description &&
           id == o.id &&
           image_path == o.image_path &&
+          merchant_description == o.merchant_description &&
           name == o.name &&
           supported_currencies == o.supported_currencies
     end
@@ -144,7 +156,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data_collection_types, description, id, image_path, name, supported_currencies].hash
+      [data_collection_types, description, id, image_path, merchant_description, name, supported_currencies].hash
     end
 
     # Builds the object from hash

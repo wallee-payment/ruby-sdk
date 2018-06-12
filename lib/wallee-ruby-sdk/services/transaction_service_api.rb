@@ -249,11 +249,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -522,6 +522,68 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Export
+    # Exports the transactions into a CSV file. The file will contain the properties defined in the request.
+    # @param space_id 
+    # @param request The request controls the entries which are exported.
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def transaction_service_export(space_id, request, opts = {})
+      data, _status_code, _headers = transaction_service_export_with_http_info(space_id, request, opts)
+      return data
+    end
+
+    # Export
+    # Exports the transactions into a CSV file. The file will contain the properties defined in the request.
+    # @param space_id 
+    # @param request The request controls the entries which are exported.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
+    def transaction_service_export_with_http_info(space_id, request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: TransactionService.transaction_service_export ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionService.transaction_service_export" if space_id.nil?
+      # verify the required parameter 'request' is set
+      fail ArgumentError, "Missing the required parameter 'request' when calling TransactionService.transaction_service_export" if request.nil?
+      # resource path
+      local_var_path = "/transaction/export".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8', 'text/csv']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = ['application/json;charset=utf-8']
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'String')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TransactionService#transaction_service_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Fetch One Click Tokens with Credentials
     # This operation returns the token version objects which references the tokens usable as one-click payment tokens for the provided transaction.
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
@@ -617,11 +679,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -675,11 +737,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -738,11 +800,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['*/*']
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = ['*/*']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -801,11 +863,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -864,11 +926,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['*/*']
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = ['*/*']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -953,6 +1015,69 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Process Without User Interaction
+    # This operation processes the transaction without requiring that the customer is present. Means this operation applies strategies to process the transaction without a direct interaction with the buyer. This operation is suitable for recurring transactions.
+    # @param space_id 
+    # @param id The id of the transaction which should be processed.
+    # @param [Hash] opts the optional parameters
+    # @return [Transaction]
+    def transaction_service_process_without_user_interaction(space_id, id, opts = {})
+      data, _status_code, _headers = transaction_service_process_without_user_interaction_with_http_info(space_id, id, opts)
+      return data
+    end
+
+    # Process Without User Interaction
+    # This operation processes the transaction without requiring that the customer is present. Means this operation applies strategies to process the transaction without a direct interaction with the buyer. This operation is suitable for recurring transactions.
+    # @param space_id 
+    # @param id The id of the transaction which should be processed.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Transaction, Fixnum, Hash)>] Transaction data, response status code and response headers
+    def transaction_service_process_without_user_interaction_with_http_info(space_id, id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: TransactionService.transaction_service_process_without_user_interaction ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionService.transaction_service_process_without_user_interaction" if space_id.nil?
+      # verify the required parameter 'id' is set
+      fail ArgumentError, "Missing the required parameter 'id' when calling TransactionService.transaction_service_process_without_user_interaction" if id.nil?
+      # resource path
+      local_var_path = "/transaction/processWithoutUserInteraction".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'id'] = id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = []
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Transaction')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TransactionService#transaction_service_process_without_user_interaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read
     # Reads the entity with the given 'id' and returns it.
     # @param space_id 
@@ -990,11 +1115,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['*/*']
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = ['*/*']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -1048,11 +1173,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = ['*/*']
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = ['*/*']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
@@ -1234,11 +1359,11 @@ module Wallee
       header_params = {}
 
       # HTTP header 'Accept' (if needed)
-      local_header_accept = []
+      local_header_accept = ['application/json;charset=utf-8']
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
+      local_header_content_type = []
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
