@@ -39,6 +39,9 @@ module Wallee
     # 
     attr_accessor :authorization_amount
 
+    # The environment in which this transaction was successfully authorized.
+    attr_accessor :authorization_environment
+
     # This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
     attr_accessor :authorization_timeout_on
 
@@ -195,6 +198,7 @@ module Wallee
         :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'authorization_amount' => :'authorizationAmount',
+        :'authorization_environment' => :'authorizationEnvironment',
         :'authorization_timeout_on' => :'authorizationTimeoutOn',
         :'authorized_on' => :'authorizedOn',
         :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
@@ -255,6 +259,7 @@ module Wallee
         :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'authorization_amount' => :'Float',
+        :'authorization_environment' => :'ChargeAttemptEnvironment',
         :'authorization_timeout_on' => :'DateTime',
         :'authorized_on' => :'DateTime',
         :'auto_confirmation_enabled' => :'BOOLEAN',
@@ -337,6 +342,10 @@ module Wallee
 
       if attributes.has_key?(:'authorizationAmount')
         self.authorization_amount = attributes[:'authorizationAmount']
+      end
+
+      if attributes.has_key?(:'authorizationEnvironment')
+        self.authorization_environment = attributes[:'authorizationEnvironment']
       end
 
       if attributes.has_key?(:'authorizationTimeoutOn')
@@ -564,6 +573,7 @@ module Wallee
           allowed_payment_method_brands == o.allowed_payment_method_brands &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           authorization_amount == o.authorization_amount &&
+          authorization_environment == o.authorization_environment &&
           authorization_timeout_on == o.authorization_timeout_on &&
           authorized_on == o.authorized_on &&
           auto_confirmation_enabled == o.auto_confirmation_enabled &&
@@ -624,7 +634,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash
