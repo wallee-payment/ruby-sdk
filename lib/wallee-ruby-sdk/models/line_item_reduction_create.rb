@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,7 +33,6 @@ module Wallee
     # 
     attr_accessor :unit_price_reduction
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -58,7 +57,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'lineItemUniqueId')
         self.line_item_unique_id = attributes[:'lineItemUniqueId']
@@ -71,26 +70,25 @@ module Wallee
       if attributes.has_key?(:'unitPriceReduction')
         self.unit_price_reduction = attributes[:'unitPriceReduction']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @line_item_unique_id.nil?
-        invalid_properties.push("invalid value for 'line_item_unique_id', line_item_unique_id cannot be nil.")
+        invalid_properties.push('invalid value for "line_item_unique_id", line_item_unique_id cannot be nil.')
       end
 
       if @quantity_reduction.nil?
-        invalid_properties.push("invalid value for 'quantity_reduction', quantity_reduction cannot be nil.")
+        invalid_properties.push('invalid value for "quantity_reduction", quantity_reduction cannot be nil.')
       end
 
       if @unit_price_reduction.nil?
-        invalid_properties.push("invalid value for 'unit_price_reduction', unit_price_reduction cannot be nil.")
+        invalid_properties.push('invalid value for "unit_price_reduction", unit_price_reduction cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -99,7 +97,7 @@ module Wallee
       return false if @line_item_unique_id.nil?
       return false if @quantity_reduction.nil?
       return false if @unit_price_reduction.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -229,5 +227,4 @@ module Wallee
     end
 
   end
-
 end

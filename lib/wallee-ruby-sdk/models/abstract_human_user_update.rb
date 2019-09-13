@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -22,7 +22,6 @@ limitations under the License.
 require 'date'
 
 module Wallee
-
   class AbstractHumanUserUpdate
     # The email address of the user.
     attr_accessor :email_address
@@ -37,11 +36,16 @@ module Wallee
     attr_accessor :lastname
 
     # 
+    attr_accessor :mobile_phone_number
+
+    # 
     attr_accessor :state
 
     # The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
     attr_accessor :time_zone
 
+    # Defines whether two-factor authentication is enabled for this user.
+    attr_accessor :two_factor_enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -50,8 +54,10 @@ module Wallee
         :'firstname' => :'firstname',
         :'language' => :'language',
         :'lastname' => :'lastname',
+        :'mobile_phone_number' => :'mobilePhoneNumber',
         :'state' => :'state',
-        :'time_zone' => :'timeZone'
+        :'time_zone' => :'timeZone',
+        :'two_factor_enabled' => :'twoFactorEnabled'
       }
     end
 
@@ -62,8 +68,10 @@ module Wallee
         :'firstname' => :'String',
         :'language' => :'String',
         :'lastname' => :'String',
+        :'mobile_phone_number' => :'String',
         :'state' => :'CreationEntityState',
-        :'time_zone' => :'String'
+        :'time_zone' => :'String',
+        :'two_factor_enabled' => :'BOOLEAN'
       }
     end
 
@@ -73,7 +81,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'emailAddress')
         self.email_address = attributes[:'emailAddress']
@@ -91,6 +99,10 @@ module Wallee
         self.lastname = attributes[:'lastname']
       end
 
+      if attributes.has_key?(:'mobilePhoneNumber')
+        self.mobile_phone_number = attributes[:'mobilePhoneNumber']
+      end
+
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
@@ -99,19 +111,22 @@ module Wallee
         self.time_zone = attributes[:'timeZone']
       end
 
+      if attributes.has_key?(:'twoFactorEnabled')
+        self.two_factor_enabled = attributes[:'twoFactorEnabled']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -123,8 +138,10 @@ module Wallee
           firstname == o.firstname &&
           language == o.language &&
           lastname == o.lastname &&
+          mobile_phone_number == o.mobile_phone_number &&
           state == o.state &&
-          time_zone == o.time_zone
+          time_zone == o.time_zone &&
+          two_factor_enabled == o.two_factor_enabled
     end
 
     # @see the `==` method
@@ -136,7 +153,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [email_address, firstname, language, lastname, state, time_zone].hash
+      [email_address, firstname, language, lastname, mobile_phone_number, state, time_zone, two_factor_enabled].hash
     end
 
     # Builds the object from hash
@@ -244,5 +261,4 @@ module Wallee
     end
 
   end
-
 end

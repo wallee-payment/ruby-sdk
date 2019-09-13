@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -37,6 +37,9 @@ module Wallee
     attr_accessor :amount
 
     # 
+    attr_accessor :billing_address
+
+    # 
     attr_accessor :completion
 
     # The date on which the invoice is created on.
@@ -51,7 +54,7 @@ module Wallee
     # 
     attr_accessor :environment
 
-    # 
+    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
     attr_accessor :external_id
 
     # 
@@ -81,9 +84,11 @@ module Wallee
     # 
     attr_accessor :tax_amount
 
+    # 
+    attr_accessor :time_zone
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -92,6 +97,7 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'linked_transaction' => :'linkedTransaction',
         :'amount' => :'amount',
+        :'billing_address' => :'billingAddress',
         :'completion' => :'completion',
         :'created_on' => :'createdOn',
         :'derecognized_on' => :'derecognizedOn',
@@ -107,6 +113,7 @@ module Wallee
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'tax_amount' => :'taxAmount',
+        :'time_zone' => :'timeZone',
         :'version' => :'version'
       }
     end
@@ -118,6 +125,7 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'linked_transaction' => :'Integer',
         :'amount' => :'Float',
+        :'billing_address' => :'Address',
         :'completion' => :'TransactionCompletion',
         :'created_on' => :'DateTime',
         :'derecognized_on' => :'DateTime',
@@ -133,6 +141,7 @@ module Wallee
         :'space_view_id' => :'Integer',
         :'state' => :'TransactionInvoiceState',
         :'tax_amount' => :'Float',
+        :'time_zone' => :'String',
         :'version' => :'Integer'
       }
     end
@@ -143,7 +152,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -159,6 +168,10 @@ module Wallee
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.has_key?(:'billingAddress')
+        self.billing_address = attributes[:'billingAddress']
       end
 
       if attributes.has_key?(:'completion')
@@ -223,23 +236,26 @@ module Wallee
         self.tax_amount = attributes[:'taxAmount']
       end
 
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -251,6 +267,7 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           linked_transaction == o.linked_transaction &&
           amount == o.amount &&
+          billing_address == o.billing_address &&
           completion == o.completion &&
           created_on == o.created_on &&
           derecognized_on == o.derecognized_on &&
@@ -266,6 +283,7 @@ module Wallee
           space_view_id == o.space_view_id &&
           state == o.state &&
           tax_amount == o.tax_amount &&
+          time_zone == o.time_zone &&
           version == o.version
     end
 
@@ -278,7 +296,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, completion, created_on, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, version].hash
+      [id, linked_space_id, linked_transaction, amount, billing_address, completion, created_on, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, time_zone, version].hash
     end
 
     # Builds the object from hash
@@ -386,5 +404,4 @@ module Wallee
     end
 
   end
-
 end

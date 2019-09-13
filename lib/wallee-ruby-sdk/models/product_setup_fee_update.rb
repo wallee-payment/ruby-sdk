@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -48,7 +48,6 @@ module Wallee
     # The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
     attr_accessor :setup_fee
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -83,7 +82,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -122,22 +121,21 @@ module Wallee
           self.setup_fee = value
         end
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -145,7 +143,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -280,5 +278,4 @@ module Wallee
     end
 
   end
-
 end

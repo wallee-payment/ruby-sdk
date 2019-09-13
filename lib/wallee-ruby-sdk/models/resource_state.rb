@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,21 +24,17 @@ require 'date'
 module Wallee
   class ResourceState
     
-    ACTIVE = "ACTIVE".freeze
-    DELETING = "DELETING".freeze
-    DELETED = "DELETED".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    ACTIVE = 'ACTIVE'.freeze
+    DELETING = 'DELETING'.freeze
+    DELETED = 'DELETED'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = ResourceState.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #ResourceState" if consantValues.empty?
-    
+      constantValues = ResourceState.constants.select { |c| ResourceState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ResourceState" if constantValues.empty?
       value
-    
     end
   end
-
 end

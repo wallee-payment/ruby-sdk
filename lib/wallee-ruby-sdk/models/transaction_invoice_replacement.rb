@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,10 +24,13 @@ require 'date'
 module Wallee
   # 
   class TransactionInvoiceReplacement
+    # 
+    attr_accessor :billing_address
+
     # The date on which the invoice should be paid on.
     attr_accessor :due_on
 
-    # 
+    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
     attr_accessor :external_id
 
     # 
@@ -39,10 +42,10 @@ module Wallee
     # When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
     attr_accessor :sent_to_customer
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'billing_address' => :'billingAddress',
         :'due_on' => :'dueOn',
         :'external_id' => :'externalId',
         :'line_items' => :'lineItems',
@@ -54,6 +57,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'billing_address' => :'AddressCreate',
         :'due_on' => :'DateTime',
         :'external_id' => :'String',
         :'line_items' => :'Array<LineItemCreate>',
@@ -68,7 +72,11 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'billingAddress')
+        self.billing_address = attributes[:'billingAddress']
+      end
 
       if attributes.has_key?(:'dueOn')
         self.due_on = attributes[:'dueOn']
@@ -91,22 +99,21 @@ module Wallee
       if attributes.has_key?(:'sentToCustomer')
         self.sent_to_customer = attributes[:'sentToCustomer']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @external_id.nil?
-        invalid_properties.push("invalid value for 'external_id', external_id cannot be nil.")
+        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
       if @line_items.nil?
-        invalid_properties.push("invalid value for 'line_items', line_items cannot be nil.")
+        invalid_properties.push('invalid value for "line_items", line_items cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -114,7 +121,7 @@ module Wallee
     def valid?
       return false if @external_id.nil?
       return false if @line_items.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -122,6 +129,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          billing_address == o.billing_address &&
           due_on == o.due_on &&
           external_id == o.external_id &&
           line_items == o.line_items &&
@@ -138,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [due_on, external_id, line_items, merchant_reference, sent_to_customer].hash
+      [billing_address, due_on, external_id, line_items, merchant_reference, sent_to_customer].hash
     end
 
     # Builds the object from hash
@@ -246,5 +254,4 @@ module Wallee
     end
 
   end
-
 end

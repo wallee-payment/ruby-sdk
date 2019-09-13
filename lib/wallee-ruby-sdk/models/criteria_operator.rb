@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,28 +24,26 @@ require 'date'
 module Wallee
   class CriteriaOperator
     
-    EQUALS = "EQUALS".freeze
-    GREATER_THAN = "GREATER_THAN".freeze
-    GREATER_THAN_OR_EQUAL = "GREATER_THAN_OR_EQUAL".freeze
-    LESS_THAN = "LESS_THAN".freeze
-    LESS_THAN_OR_EQUAL = "LESS_THAN_OR_EQUAL".freeze
-    CONTAINS = "CONTAINS".freeze
-    NOT_EQUALS = "NOT_EQUALS".freeze
-    NOT_CONTAINS = "NOT_CONTAINS".freeze
-    IS_NULL = "IS_NULL".freeze
-    IS_NOT_NULL = "IS_NOT_NULL".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    CONTAINS = 'CONTAINS'.freeze
+    EQUALS = 'EQUALS'.freeze
+    EQUALS_IGNORE_CASE = 'EQUALS_IGNORE_CASE'.freeze
+    GREATER_THAN = 'GREATER_THAN'.freeze
+    GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'.freeze
+    LESS_THAN = 'LESS_THAN'.freeze
+    LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'.freeze
+    NOT_EQUALS = 'NOT_EQUALS'.freeze
+    NOT_EQUALS_IGNORE_CASE = 'NOT_EQUALS_IGNORE_CASE'.freeze
+    NOT_CONTAINS = 'NOT_CONTAINS'.freeze
+    IS_NULL = 'IS_NULL'.freeze
+    IS_NOT_NULL = 'IS_NOT_NULL'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = CriteriaOperator.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #CriteriaOperator" if consantValues.empty?
-    
+      constantValues = CriteriaOperator.constants.select { |c| CriteriaOperator::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #CriteriaOperator" if constantValues.empty?
       value
-    
     end
   end
-
 end

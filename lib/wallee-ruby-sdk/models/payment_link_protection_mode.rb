@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,20 +24,16 @@ require 'date'
 module Wallee
   class PaymentLinkProtectionMode
     
-    NO_PROTECTION = "NO_PROTECTION".freeze
-    ACCESS_KEY = "ACCESS_KEY".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    NO_PROTECTION = 'NO_PROTECTION'.freeze
+    ACCESS_KEY = 'ACCESS_KEY'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = PaymentLinkProtectionMode.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #PaymentLinkProtectionMode" if consantValues.empty?
-    
+      constantValues = PaymentLinkProtectionMode.constants.select { |c| PaymentLinkProtectionMode::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #PaymentLinkProtectionMode" if constantValues.empty?
       value
-    
     end
   end
-
 end

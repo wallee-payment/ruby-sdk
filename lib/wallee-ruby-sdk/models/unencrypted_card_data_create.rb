@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -36,7 +36,6 @@ module Wallee
     # The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
     attr_accessor :primary_account_number
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -63,7 +62,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'cardHolderName')
         self.card_holder_name = attributes[:'cardHolderName']
@@ -80,25 +79,24 @@ module Wallee
       if attributes.has_key?(:'primaryAccountNumber')
         self.primary_account_number = attributes[:'primaryAccountNumber']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @primary_account_number.nil?
-        invalid_properties.push("invalid value for 'primary_account_number', primary_account_number cannot be nil.")
+        invalid_properties.push('invalid value for "primary_account_number", primary_account_number cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
       return false if @primary_account_number.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -229,5 +227,4 @@ module Wallee
     end
 
   end
-
 end

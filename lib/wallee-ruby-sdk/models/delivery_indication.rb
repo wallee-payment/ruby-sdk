@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -39,6 +39,9 @@ module Wallee
     # 
     attr_accessor :automatically_decided_on
 
+    # 
+    attr_accessor :completion
+
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
@@ -63,7 +66,6 @@ module Wallee
     # 
     attr_accessor :transaction
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -72,6 +74,7 @@ module Wallee
         :'linked_transaction' => :'linkedTransaction',
         :'automatic_decision_reason' => :'automaticDecisionReason',
         :'automatically_decided_on' => :'automaticallyDecidedOn',
+        :'completion' => :'completion',
         :'created_on' => :'createdOn',
         :'manual_decision_timeout_on' => :'manualDecisionTimeoutOn',
         :'manually_decided_by' => :'manuallyDecidedBy',
@@ -91,6 +94,7 @@ module Wallee
         :'linked_transaction' => :'Integer',
         :'automatic_decision_reason' => :'DeliveryIndicationDecisionReason',
         :'automatically_decided_on' => :'DateTime',
+        :'completion' => :'Integer',
         :'created_on' => :'DateTime',
         :'manual_decision_timeout_on' => :'DateTime',
         :'manually_decided_by' => :'Integer',
@@ -108,7 +112,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -128,6 +132,10 @@ module Wallee
 
       if attributes.has_key?(:'automaticallyDecidedOn')
         self.automatically_decided_on = attributes[:'automaticallyDecidedOn']
+      end
+
+      if attributes.has_key?(:'completion')
+        self.completion = attributes[:'completion']
       end
 
       if attributes.has_key?(:'createdOn')
@@ -161,20 +169,19 @@ module Wallee
       if attributes.has_key?(:'transaction')
         self.transaction = attributes[:'transaction']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -187,6 +194,7 @@ module Wallee
           linked_transaction == o.linked_transaction &&
           automatic_decision_reason == o.automatic_decision_reason &&
           automatically_decided_on == o.automatically_decided_on &&
+          completion == o.completion &&
           created_on == o.created_on &&
           manual_decision_timeout_on == o.manual_decision_timeout_on &&
           manually_decided_by == o.manually_decided_by &&
@@ -206,7 +214,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, automatic_decision_reason, automatically_decided_on, created_on, manual_decision_timeout_on, manually_decided_by, manually_decided_on, planned_purge_date, state, timeout_on, transaction].hash
+      [id, linked_space_id, linked_transaction, automatic_decision_reason, automatically_decided_on, completion, created_on, manual_decision_timeout_on, manually_decided_by, manually_decided_on, planned_purge_date, state, timeout_on, transaction].hash
     end
 
     # Builds the object from hash
@@ -314,5 +322,4 @@ module Wallee
     end
 
   end
-
 end

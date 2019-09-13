@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -39,7 +39,6 @@ module Wallee
     # The subscription to which the usage is added to.
     attr_accessor :subscription
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -68,7 +67,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'consumedUnits')
         self.consumed_units = attributes[:'consumedUnits']
@@ -89,30 +88,29 @@ module Wallee
       if attributes.has_key?(:'subscription')
         self.subscription = attributes[:'subscription']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @consumed_units.nil?
-        invalid_properties.push("invalid value for 'consumed_units', consumed_units cannot be nil.")
+        invalid_properties.push('invalid value for "consumed_units", consumed_units cannot be nil.')
       end
 
       if @external_id.nil?
-        invalid_properties.push("invalid value for 'external_id', external_id cannot be nil.")
+        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
       if @metric.nil?
-        invalid_properties.push("invalid value for 'metric', metric cannot be nil.")
+        invalid_properties.push('invalid value for "metric", metric cannot be nil.')
       end
 
       if @subscription.nil?
-        invalid_properties.push("invalid value for 'subscription', subscription cannot be nil.")
+        invalid_properties.push('invalid value for "subscription", subscription cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -122,7 +120,7 @@ module Wallee
       return false if @external_id.nil?
       return false if @metric.nil?
       return false if @subscription.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -254,5 +252,4 @@ module Wallee
     end
 
   end
-
 end

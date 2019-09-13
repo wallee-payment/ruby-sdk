@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -36,6 +36,9 @@ module Wallee
     # The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
     attr_accessor :description
 
+    # The ledger entry title will be used for the title in the ledger entry and in the invoice.
+    attr_accessor :ledger_entry_title
+
     # The name of the fee should describe for the subscriber in few words for what the fee is for.
     attr_accessor :name
 
@@ -45,7 +48,6 @@ module Wallee
     # The period fee is charged for every period of the subscription except for those periods which are trial periods.
     attr_accessor :period_fee
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -53,6 +55,7 @@ module Wallee
         :'version' => :'version',
         :'component' => :'component',
         :'description' => :'description',
+        :'ledger_entry_title' => :'ledgerEntryTitle',
         :'name' => :'name',
         :'number_of_free_trial_periods' => :'numberOfFreeTrialPeriods',
         :'period_fee' => :'periodFee'
@@ -66,6 +69,7 @@ module Wallee
         :'version' => :'Integer',
         :'component' => :'Integer',
         :'description' => :'DatabaseTranslatedStringCreate',
+        :'ledger_entry_title' => :'DatabaseTranslatedStringCreate',
         :'name' => :'DatabaseTranslatedStringCreate',
         :'number_of_free_trial_periods' => :'Integer',
         :'period_fee' => :'Array<PersistableCurrencyAmountUpdate>'
@@ -78,7 +82,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -96,6 +100,10 @@ module Wallee
         self.description = attributes[:'description']
       end
 
+      if attributes.has_key?(:'ledgerEntryTitle')
+        self.ledger_entry_title = attributes[:'ledgerEntryTitle']
+      end
+
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
@@ -109,22 +117,21 @@ module Wallee
           self.period_fee = value
         end
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -132,7 +139,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -144,6 +151,7 @@ module Wallee
           version == o.version &&
           component == o.component &&
           description == o.description &&
+          ledger_entry_title == o.ledger_entry_title &&
           name == o.name &&
           number_of_free_trial_periods == o.number_of_free_trial_periods &&
           period_fee == o.period_fee
@@ -158,7 +166,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, component, description, name, number_of_free_trial_periods, period_fee].hash
+      [id, version, component, description, ledger_entry_title, name, number_of_free_trial_periods, period_fee].hash
     end
 
     # Builds the object from hash
@@ -266,5 +274,4 @@ module Wallee
     end
 
   end
-
 end

@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -30,7 +30,10 @@ module Wallee
     # The address to use in communication with clients for example in email, documents etc.
     attr_accessor :postal_address
 
-    # The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
+    # This is the currency that is used to display aggregated amounts in the space.
+    attr_accessor :primary_currency
+
+    # The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
     attr_accessor :request_limit
 
     # 
@@ -48,12 +51,12 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'postal_address' => :'postalAddress',
+        :'primary_currency' => :'primaryCurrency',
         :'request_limit' => :'requestLimit',
         :'state' => :'state',
         :'technical_contact_addresses' => :'technicalContactAddresses',
@@ -68,6 +71,7 @@ module Wallee
       {
         :'name' => :'String',
         :'postal_address' => :'SpaceAddressCreate',
+        :'primary_currency' => :'String',
         :'request_limit' => :'Integer',
         :'state' => :'CreationEntityState',
         :'technical_contact_addresses' => :'Array<String>',
@@ -83,7 +87,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -91,6 +95,10 @@ module Wallee
 
       if attributes.has_key?(:'postalAddress')
         self.postal_address = attributes[:'postalAddress']
+      end
+
+      if attributes.has_key?(:'primaryCurrency')
+        self.primary_currency = attributes[:'primaryCurrency']
       end
 
       if attributes.has_key?(:'requestLimit')
@@ -118,22 +126,21 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -141,7 +148,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -151,6 +158,7 @@ module Wallee
       self.class == o.class &&
           name == o.name &&
           postal_address == o.postal_address &&
+          primary_currency == o.primary_currency &&
           request_limit == o.request_limit &&
           state == o.state &&
           technical_contact_addresses == o.technical_contact_addresses &&
@@ -168,7 +176,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, postal_address, request_limit, state, technical_contact_addresses, time_zone, id, version].hash
+      [name, postal_address, primary_currency, request_limit, state, technical_contact_addresses, time_zone, id, version].hash
     end
 
     # Builds the object from hash
@@ -276,5 +284,4 @@ module Wallee
     end
 
   end
-
 end

@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,22 +24,18 @@ require 'date'
 module Wallee
   class SubscriptionProductComponentReferenceState
     
-    CREATE = "CREATE".freeze
-    ACTIVE = "ACTIVE".freeze
-    DELETING = "DELETING".freeze
-    DELETED = "DELETED".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    CREATE = 'CREATE'.freeze
+    ACTIVE = 'ACTIVE'.freeze
+    DELETING = 'DELETING'.freeze
+    DELETED = 'DELETED'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = SubscriptionProductComponentReferenceState.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #SubscriptionProductComponentReferenceState" if consantValues.empty?
-    
+      constantValues = SubscriptionProductComponentReferenceState.constants.select { |c| SubscriptionProductComponentReferenceState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #SubscriptionProductComponentReferenceState" if constantValues.empty?
       value
-    
     end
   end
-
 end

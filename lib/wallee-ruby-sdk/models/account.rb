@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -45,6 +45,9 @@ module Wallee
     # Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
     attr_accessor :restricted_active
 
+    # This is the scope to which the account belongs to.
+    attr_accessor :scope
+
     # 
     attr_accessor :state
 
@@ -57,7 +60,6 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -68,6 +70,7 @@ module Wallee
         :'parent_account' => :'parentAccount',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'restricted_active' => :'restrictedActive',
+        :'scope' => :'scope',
         :'state' => :'state',
         :'subaccount_limit' => :'subaccountLimit',
         :'type' => :'type',
@@ -85,6 +88,7 @@ module Wallee
         :'parent_account' => :'Account',
         :'planned_purge_date' => :'DateTime',
         :'restricted_active' => :'BOOLEAN',
+        :'scope' => :'Integer',
         :'state' => :'AccountState',
         :'subaccount_limit' => :'Integer',
         :'type' => :'AccountType',
@@ -98,7 +102,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'active')
         self.active = attributes[:'active']
@@ -128,6 +132,10 @@ module Wallee
         self.restricted_active = attributes[:'restrictedActive']
       end
 
+      if attributes.has_key?(:'scope')
+        self.scope = attributes[:'scope']
+      end
+
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
@@ -143,20 +151,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -171,6 +178,7 @@ module Wallee
           parent_account == o.parent_account &&
           planned_purge_date == o.planned_purge_date &&
           restricted_active == o.restricted_active &&
+          scope == o.scope &&
           state == o.state &&
           subaccount_limit == o.subaccount_limit &&
           type == o.type &&
@@ -186,7 +194,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [active, active_or_restricted_active, id, name, parent_account, planned_purge_date, restricted_active, state, subaccount_limit, type, version].hash
+      [active, active_or_restricted_active, id, name, parent_account, planned_purge_date, restricted_active, scope, state, subaccount_limit, type, version].hash
     end
 
     # Builds the object from hash
@@ -294,5 +302,4 @@ module Wallee
     end
 
   end
-
 end

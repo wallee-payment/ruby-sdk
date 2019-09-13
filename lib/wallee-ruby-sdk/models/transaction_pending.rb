@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -75,7 +75,7 @@ module Wallee
     # 
     attr_accessor :token
 
-    # The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+    # The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
     attr_accessor :tokenization_mode
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -83,7 +83,6 @@ module Wallee
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -131,7 +130,7 @@ module Wallee
         :'success_url' => :'String',
         :'time_zone' => :'String',
         :'token' => :'Integer',
-        :'tokenization_mode' => :'TokenizationnMode',
+        :'tokenization_mode' => :'TokenizationMode',
         :'id' => :'Integer',
         :'version' => :'Integer'
       }
@@ -143,7 +142,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'allowedPaymentMethodBrands')
         if (value = attributes[:'allowedPaymentMethodBrands']).is_a?(Array)
@@ -196,7 +195,7 @@ module Wallee
       end
 
       if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Array)
+        if (value = attributes[:'metaData']).is_a?(Hash)
           self.meta_data = value
         end
       end
@@ -232,22 +231,21 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -255,7 +253,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -402,5 +400,4 @@ module Wallee
     end
 
   end
-
 end

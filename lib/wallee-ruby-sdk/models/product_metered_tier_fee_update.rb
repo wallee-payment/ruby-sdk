@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -39,7 +39,6 @@ module Wallee
     # The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
     attr_accessor :start_range
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -68,7 +67,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -91,22 +90,21 @@ module Wallee
       if attributes.has_key?(:'startRange')
         self.start_range = attributes[:'startRange']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -114,7 +112,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -246,5 +244,4 @@ module Wallee
     end
 
   end
-
 end

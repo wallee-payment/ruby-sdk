@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -37,6 +37,12 @@ module Wallee
     attr_accessor :attributes
 
     # 
+    attr_accessor :discount_excluding_tax
+
+    # 
+    attr_accessor :discount_including_tax
+
+    # 
     attr_accessor :name
 
     # 
@@ -60,6 +66,18 @@ module Wallee
     # 
     attr_accessor :type
 
+    # 
+    attr_accessor :undiscounted_amount_excluding_tax
+
+    # 
+    attr_accessor :undiscounted_amount_including_tax
+
+    # 
+    attr_accessor :undiscounted_unit_price_excluding_tax
+
+    # 
+    attr_accessor :undiscounted_unit_price_including_tax
+
     # The unique id identifies the line item within the set of line items associated with the transaction.
     attr_accessor :unique_id
 
@@ -69,7 +87,6 @@ module Wallee
     # 
     attr_accessor :unit_price_including_tax
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -77,6 +94,8 @@ module Wallee
         :'amount_excluding_tax' => :'amountExcludingTax',
         :'amount_including_tax' => :'amountIncludingTax',
         :'attributes' => :'attributes',
+        :'discount_excluding_tax' => :'discountExcludingTax',
+        :'discount_including_tax' => :'discountIncludingTax',
         :'name' => :'name',
         :'quantity' => :'quantity',
         :'shipping_required' => :'shippingRequired',
@@ -85,6 +104,10 @@ module Wallee
         :'tax_amount_per_unit' => :'taxAmountPerUnit',
         :'taxes' => :'taxes',
         :'type' => :'type',
+        :'undiscounted_amount_excluding_tax' => :'undiscountedAmountExcludingTax',
+        :'undiscounted_amount_including_tax' => :'undiscountedAmountIncludingTax',
+        :'undiscounted_unit_price_excluding_tax' => :'undiscountedUnitPriceExcludingTax',
+        :'undiscounted_unit_price_including_tax' => :'undiscountedUnitPriceIncludingTax',
         :'unique_id' => :'uniqueId',
         :'unit_price_excluding_tax' => :'unitPriceExcludingTax',
         :'unit_price_including_tax' => :'unitPriceIncludingTax'
@@ -98,6 +121,8 @@ module Wallee
         :'amount_excluding_tax' => :'Float',
         :'amount_including_tax' => :'Float',
         :'attributes' => :'Hash<String, LineItemAttribute>',
+        :'discount_excluding_tax' => :'Float',
+        :'discount_including_tax' => :'Float',
         :'name' => :'String',
         :'quantity' => :'Float',
         :'shipping_required' => :'BOOLEAN',
@@ -106,6 +131,10 @@ module Wallee
         :'tax_amount_per_unit' => :'Float',
         :'taxes' => :'Array<Tax>',
         :'type' => :'LineItemType',
+        :'undiscounted_amount_excluding_tax' => :'Float',
+        :'undiscounted_amount_including_tax' => :'Float',
+        :'undiscounted_unit_price_excluding_tax' => :'Float',
+        :'undiscounted_unit_price_including_tax' => :'Float',
         :'unique_id' => :'String',
         :'unit_price_excluding_tax' => :'Float',
         :'unit_price_including_tax' => :'Float'
@@ -118,7 +147,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'aggregatedTaxRate')
         self.aggregated_tax_rate = attributes[:'aggregatedTaxRate']
@@ -133,9 +162,17 @@ module Wallee
       end
 
       if attributes.has_key?(:'attributes')
-        if (value = attributes[:'attributes']).is_a?(Array)
+        if (value = attributes[:'attributes']).is_a?(Hash)
           self.attributes = value
         end
+      end
+
+      if attributes.has_key?(:'discountExcludingTax')
+        self.discount_excluding_tax = attributes[:'discountExcludingTax']
+      end
+
+      if attributes.has_key?(:'discountIncludingTax')
+        self.discount_including_tax = attributes[:'discountIncludingTax']
       end
 
       if attributes.has_key?(:'name')
@@ -172,6 +209,22 @@ module Wallee
         self.type = attributes[:'type']
       end
 
+      if attributes.has_key?(:'undiscountedAmountExcludingTax')
+        self.undiscounted_amount_excluding_tax = attributes[:'undiscountedAmountExcludingTax']
+      end
+
+      if attributes.has_key?(:'undiscountedAmountIncludingTax')
+        self.undiscounted_amount_including_tax = attributes[:'undiscountedAmountIncludingTax']
+      end
+
+      if attributes.has_key?(:'undiscountedUnitPriceExcludingTax')
+        self.undiscounted_unit_price_excluding_tax = attributes[:'undiscountedUnitPriceExcludingTax']
+      end
+
+      if attributes.has_key?(:'undiscountedUnitPriceIncludingTax')
+        self.undiscounted_unit_price_including_tax = attributes[:'undiscountedUnitPriceIncludingTax']
+      end
+
       if attributes.has_key?(:'uniqueId')
         self.unique_id = attributes[:'uniqueId']
       end
@@ -183,20 +236,19 @@ module Wallee
       if attributes.has_key?(:'unitPriceIncludingTax')
         self.unit_price_including_tax = attributes[:'unitPriceIncludingTax']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -208,6 +260,8 @@ module Wallee
           amount_excluding_tax == o.amount_excluding_tax &&
           amount_including_tax == o.amount_including_tax &&
           attributes == o.attributes &&
+          discount_excluding_tax == o.discount_excluding_tax &&
+          discount_including_tax == o.discount_including_tax &&
           name == o.name &&
           quantity == o.quantity &&
           shipping_required == o.shipping_required &&
@@ -216,6 +270,10 @@ module Wallee
           tax_amount_per_unit == o.tax_amount_per_unit &&
           taxes == o.taxes &&
           type == o.type &&
+          undiscounted_amount_excluding_tax == o.undiscounted_amount_excluding_tax &&
+          undiscounted_amount_including_tax == o.undiscounted_amount_including_tax &&
+          undiscounted_unit_price_excluding_tax == o.undiscounted_unit_price_excluding_tax &&
+          undiscounted_unit_price_including_tax == o.undiscounted_unit_price_including_tax &&
           unique_id == o.unique_id &&
           unit_price_excluding_tax == o.unit_price_excluding_tax &&
           unit_price_including_tax == o.unit_price_including_tax
@@ -230,7 +288,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, attributes, name, quantity, shipping_required, sku, tax_amount, tax_amount_per_unit, taxes, type, unique_id, unit_price_excluding_tax, unit_price_including_tax].hash
+      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, attributes, discount_excluding_tax, discount_including_tax, name, quantity, shipping_required, sku, tax_amount, tax_amount_per_unit, taxes, type, undiscounted_amount_excluding_tax, undiscounted_amount_including_tax, undiscounted_unit_price_excluding_tax, undiscounted_unit_price_including_tax, unique_id, unit_price_excluding_tax, unit_price_including_tax].hash
     end
 
     # Builds the object from hash
@@ -338,5 +396,4 @@ module Wallee
     end
 
   end
-
 end

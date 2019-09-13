@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,11 +33,20 @@ module Wallee
     # 
     attr_accessor :linked_transaction
 
+    # The amount which is captured. The amount represents sum of line items including taxes.
+    attr_accessor :amount
+
+    # The base line items on which the completion is applied on.
+    attr_accessor :base_line_items
+
     # 
     attr_accessor :created_by
 
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
+
+    # The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    attr_accessor :external_id
 
     # 
     attr_accessor :failed_on
@@ -51,8 +60,14 @@ module Wallee
     # 
     attr_accessor :language
 
+    # Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
+    attr_accessor :last_completion
+
     # 
     attr_accessor :line_item_version
+
+    # The line items which are captured.
+    attr_accessor :line_items
 
     # 
     attr_accessor :mode
@@ -67,7 +82,13 @@ module Wallee
     attr_accessor :planned_purge_date
 
     # 
+    attr_accessor :processing_on
+
+    # 
     attr_accessor :processor_reference
+
+    # 
+    attr_accessor :remaining_line_items
 
     # 
     attr_accessor :space_view_id
@@ -78,12 +99,17 @@ module Wallee
     # 
     attr_accessor :succeeded_on
 
+    # The total sum of all taxes of line items.
+    attr_accessor :tax_amount
+
+    # 
+    attr_accessor :time_zone
+
     # 
     attr_accessor :timeout_on
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -91,21 +117,30 @@ module Wallee
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'linked_transaction' => :'linkedTransaction',
+        :'amount' => :'amount',
+        :'base_line_items' => :'baseLineItems',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'external_id' => :'externalId',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
         :'labels' => :'labels',
         :'language' => :'language',
+        :'last_completion' => :'lastCompletion',
         :'line_item_version' => :'lineItemVersion',
+        :'line_items' => :'lineItems',
         :'mode' => :'mode',
         :'next_update_on' => :'nextUpdateOn',
         :'payment_information' => :'paymentInformation',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'processing_on' => :'processingOn',
         :'processor_reference' => :'processorReference',
+        :'remaining_line_items' => :'remainingLineItems',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'succeeded_on' => :'succeededOn',
+        :'tax_amount' => :'taxAmount',
+        :'time_zone' => :'timeZone',
         :'timeout_on' => :'timeoutOn',
         :'version' => :'version'
       }
@@ -117,21 +152,30 @@ module Wallee
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'linked_transaction' => :'Integer',
+        :'amount' => :'Float',
+        :'base_line_items' => :'Array<LineItem>',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'external_id' => :'String',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
+        :'last_completion' => :'BOOLEAN',
         :'line_item_version' => :'TransactionLineItemVersion',
+        :'line_items' => :'Array<LineItem>',
         :'mode' => :'TransactionCompletionMode',
         :'next_update_on' => :'DateTime',
         :'payment_information' => :'String',
         :'planned_purge_date' => :'DateTime',
+        :'processing_on' => :'DateTime',
         :'processor_reference' => :'String',
+        :'remaining_line_items' => :'Array<LineItem>',
         :'space_view_id' => :'Integer',
         :'state' => :'TransactionCompletionState',
         :'succeeded_on' => :'DateTime',
+        :'tax_amount' => :'Float',
+        :'time_zone' => :'String',
         :'timeout_on' => :'DateTime',
         :'version' => :'Integer'
       }
@@ -143,7 +187,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -157,12 +201,26 @@ module Wallee
         self.linked_transaction = attributes[:'linkedTransaction']
       end
 
+      if attributes.has_key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
+
+      if attributes.has_key?(:'baseLineItems')
+        if (value = attributes[:'baseLineItems']).is_a?(Array)
+          self.base_line_items = value
+        end
+      end
+
       if attributes.has_key?(:'createdBy')
         self.created_by = attributes[:'createdBy']
       end
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
       end
 
       if attributes.has_key?(:'failedOn')
@@ -183,8 +241,18 @@ module Wallee
         self.language = attributes[:'language']
       end
 
+      if attributes.has_key?(:'lastCompletion')
+        self.last_completion = attributes[:'lastCompletion']
+      end
+
       if attributes.has_key?(:'lineItemVersion')
         self.line_item_version = attributes[:'lineItemVersion']
+      end
+
+      if attributes.has_key?(:'lineItems')
+        if (value = attributes[:'lineItems']).is_a?(Array)
+          self.line_items = value
+        end
       end
 
       if attributes.has_key?(:'mode')
@@ -203,8 +271,18 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
+      if attributes.has_key?(:'processingOn')
+        self.processing_on = attributes[:'processingOn']
+      end
+
       if attributes.has_key?(:'processorReference')
         self.processor_reference = attributes[:'processorReference']
+      end
+
+      if attributes.has_key?(:'remainingLineItems')
+        if (value = attributes[:'remainingLineItems']).is_a?(Array)
+          self.remaining_line_items = value
+        end
       end
 
       if attributes.has_key?(:'spaceViewId')
@@ -219,6 +297,14 @@ module Wallee
         self.succeeded_on = attributes[:'succeededOn']
       end
 
+      if attributes.has_key?(:'taxAmount')
+        self.tax_amount = attributes[:'taxAmount']
+      end
+
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'timeoutOn')
         self.timeout_on = attributes[:'timeoutOn']
       end
@@ -226,20 +312,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -250,21 +335,30 @@ module Wallee
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           linked_transaction == o.linked_transaction &&
+          amount == o.amount &&
+          base_line_items == o.base_line_items &&
           created_by == o.created_by &&
           created_on == o.created_on &&
+          external_id == o.external_id &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
           labels == o.labels &&
           language == o.language &&
+          last_completion == o.last_completion &&
           line_item_version == o.line_item_version &&
+          line_items == o.line_items &&
           mode == o.mode &&
           next_update_on == o.next_update_on &&
           payment_information == o.payment_information &&
           planned_purge_date == o.planned_purge_date &&
+          processing_on == o.processing_on &&
           processor_reference == o.processor_reference &&
+          remaining_line_items == o.remaining_line_items &&
           space_view_id == o.space_view_id &&
           state == o.state &&
           succeeded_on == o.succeeded_on &&
+          tax_amount == o.tax_amount &&
+          time_zone == o.time_zone &&
           timeout_on == o.timeout_on &&
           version == o.version
     end
@@ -278,7 +372,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, created_by, created_on, failed_on, failure_reason, labels, language, line_item_version, mode, next_update_on, payment_information, planned_purge_date, processor_reference, space_view_id, state, succeeded_on, timeout_on, version].hash
+      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
     end
 
     # Builds the object from hash
@@ -386,5 +480,4 @@ module Wallee
     end
 
   end
-
 end

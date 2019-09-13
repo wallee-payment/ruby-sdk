@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,20 +24,17 @@ require 'date'
 module Wallee
   class TransactionEnvironmentSelectionStrategy
     
-    FORCE_TEST_ENVIRONMENT = "FORCE_TEST_ENVIRONMENT".freeze
-    USE_CONFIGURATION = "USE_CONFIGURATION".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    FORCE_TEST_ENVIRONMENT = 'FORCE_TEST_ENVIRONMENT'.freeze
+    FORCE_PRODUCTION_ENVIRONMENT = 'FORCE_PRODUCTION_ENVIRONMENT'.freeze
+    USE_CONFIGURATION = 'USE_CONFIGURATION'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = TransactionEnvironmentSelectionStrategy.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #TransactionEnvironmentSelectionStrategy" if consantValues.empty?
-    
+      constantValues = TransactionEnvironmentSelectionStrategy.constants.select { |c| TransactionEnvironmentSelectionStrategy::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #TransactionEnvironmentSelectionStrategy" if constantValues.empty?
       value
-    
     end
   end
-
 end

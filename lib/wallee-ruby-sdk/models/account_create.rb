@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,13 +33,16 @@ module Wallee
     # The account which is responsible for administering the account.
     attr_accessor :parent_account
 
+    # This is the scope to which the account belongs to.
+    attr_accessor :scope
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'subaccount_limit' => :'subaccountLimit',
-        :'parent_account' => :'parentAccount'
+        :'parent_account' => :'parentAccount',
+        :'scope' => :'scope'
       }
     end
 
@@ -48,7 +51,8 @@ module Wallee
       {
         :'name' => :'String',
         :'subaccount_limit' => :'Integer',
-        :'parent_account' => :'Integer'
+        :'parent_account' => :'Integer',
+        :'scope' => :'Integer'
       }
     end
 
@@ -58,7 +62,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -72,19 +76,27 @@ module Wallee
         self.parent_account = attributes[:'parentAccount']
       end
 
+      if attributes.has_key?(:'scope')
+        self.scope = attributes[:'scope']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      if @scope.nil?
+        invalid_properties.push('invalid value for "scope", scope cannot be nil.')
+      end
+
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      return false if @scope.nil?
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -94,7 +106,8 @@ module Wallee
       self.class == o.class &&
           name == o.name &&
           subaccount_limit == o.subaccount_limit &&
-          parent_account == o.parent_account
+          parent_account == o.parent_account &&
+          scope == o.scope
     end
 
     # @see the `==` method
@@ -106,7 +119,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, subaccount_limit, parent_account].hash
+      [name, subaccount_limit, parent_account, scope].hash
     end
 
     # Builds the object from hash
@@ -214,5 +227,4 @@ module Wallee
     end
 
   end
-
 end

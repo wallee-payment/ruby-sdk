@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,6 +24,12 @@ require 'date'
 module Wallee
   # A document template contains the customizations for a particular document template type.
   class DocumentTemplate
+    # The default document template is used whenever no specific template is specified for a particular template type.
+    attr_accessor :default_template
+
+    # 
+    attr_accessor :delivery_enabled
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -51,10 +57,11 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'default_template' => :'defaultTemplate',
+        :'delivery_enabled' => :'deliveryEnabled',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
@@ -70,6 +77,8 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'default_template' => :'BOOLEAN',
+        :'delivery_enabled' => :'BOOLEAN',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
@@ -88,7 +97,15 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'defaultTemplate')
+        self.default_template = attributes[:'defaultTemplate']
+      end
+
+      if attributes.has_key?(:'deliveryEnabled')
+        self.delivery_enabled = attributes[:'deliveryEnabled']
+      end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -125,20 +142,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -146,6 +162,8 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          default_template == o.default_template &&
+          delivery_enabled == o.delivery_enabled &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
@@ -166,7 +184,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, space_id, state, template_resource, type, version].hash
+      [default_template, delivery_enabled, id, linked_space_id, name, planned_purge_date, space_id, state, template_resource, type, version].hash
     end
 
     # Builds the object from hash
@@ -274,5 +292,4 @@ module Wallee
     end
 
   end
-
 end

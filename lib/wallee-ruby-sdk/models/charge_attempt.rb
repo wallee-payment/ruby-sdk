@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -82,6 +82,12 @@ module Wallee
     attr_accessor :succeeded_on
 
     # 
+    attr_accessor :terminal
+
+    # 
+    attr_accessor :time_zone
+
+    # 
     attr_accessor :timeout_on
 
     # 
@@ -92,7 +98,6 @@ module Wallee
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -116,6 +121,8 @@ module Wallee
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'succeeded_on' => :'succeededOn',
+        :'terminal' => :'terminal',
+        :'time_zone' => :'timeZone',
         :'timeout_on' => :'timeoutOn',
         :'token_version' => :'tokenVersion',
         :'user_failure_message' => :'userFailureMessage',
@@ -145,6 +152,8 @@ module Wallee
         :'space_view_id' => :'Integer',
         :'state' => :'ChargeAttemptState',
         :'succeeded_on' => :'DateTime',
+        :'terminal' => :'PaymentTerminal',
+        :'time_zone' => :'String',
         :'timeout_on' => :'DateTime',
         :'token_version' => :'TokenVersion',
         :'user_failure_message' => :'String',
@@ -158,7 +167,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -238,6 +247,14 @@ module Wallee
         self.succeeded_on = attributes[:'succeededOn']
       end
 
+      if attributes.has_key?(:'terminal')
+        self.terminal = attributes[:'terminal']
+      end
+
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'timeoutOn')
         self.timeout_on = attributes[:'timeoutOn']
       end
@@ -253,20 +270,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -293,6 +309,8 @@ module Wallee
           space_view_id == o.space_view_id &&
           state == o.state &&
           succeeded_on == o.succeeded_on &&
+          terminal == o.terminal &&
+          time_zone == o.time_zone &&
           timeout_on == o.timeout_on &&
           token_version == o.token_version &&
           user_failure_message == o.user_failure_message &&
@@ -308,7 +326,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, connector_configuration, created_on, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, space_view_id, state, succeeded_on, timeout_on, token_version, user_failure_message, version].hash
+      [id, linked_space_id, linked_transaction, charge, connector_configuration, created_on, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
     end
 
     # Builds the object from hash
@@ -416,5 +434,4 @@ module Wallee
     end
 
   end
-
 end

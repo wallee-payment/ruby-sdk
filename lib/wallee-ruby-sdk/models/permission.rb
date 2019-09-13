@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -51,6 +51,8 @@ module Wallee
     # 
     attr_accessor :title
 
+    # 
+    attr_accessor :two_factor_required
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -63,7 +65,8 @@ module Wallee
         :'name' => :'name',
         :'parent' => :'parent',
         :'path_to_root' => :'pathToRoot',
-        :'title' => :'title'
+        :'title' => :'title',
+        :'two_factor_required' => :'twoFactorRequired'
       }
     end
 
@@ -78,7 +81,8 @@ module Wallee
         :'name' => :'Hash<String, String>',
         :'parent' => :'Integer',
         :'path_to_root' => :'Array<Integer>',
-        :'title' => :'Hash<String, String>'
+        :'title' => :'Hash<String, String>',
+        :'two_factor_required' => :'BOOLEAN'
       }
     end
 
@@ -88,10 +92,10 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Array)
+        if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
       end
@@ -113,7 +117,7 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Array)
+        if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
       end
@@ -129,24 +133,27 @@ module Wallee
       end
 
       if attributes.has_key?(:'title')
-        if (value = attributes[:'title']).is_a?(Array)
+        if (value = attributes[:'title']).is_a?(Hash)
           self.title = value
         end
       end
 
+      if attributes.has_key?(:'twoFactorRequired')
+        self.two_factor_required = attributes[:'twoFactorRequired']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -162,7 +169,8 @@ module Wallee
           name == o.name &&
           parent == o.parent &&
           path_to_root == o.path_to_root &&
-          title == o.title
+          title == o.title &&
+          two_factor_required == o.two_factor_required
     end
 
     # @see the `==` method
@@ -174,7 +182,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, group, id, leaf, name, parent, path_to_root, title].hash
+      [description, feature, group, id, leaf, name, parent, path_to_root, title, two_factor_required].hash
     end
 
     # Builds the object from hash
@@ -282,5 +290,4 @@ module Wallee
     end
 
   end
-
 end

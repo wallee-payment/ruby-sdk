@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,8 +24,14 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerCreate
+    # The target state identifies the state into which entities need to move into to trigger the webhook listener.
+    attr_accessor :entity_states
+
     # The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
+
+    # Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+    attr_accessor :notify_every_change
 
     # 
     attr_accessor :state
@@ -33,28 +39,21 @@ module Wallee
     # The listener listens on state changes of the entity linked with the listener.
     attr_accessor :entity
 
-    # The target state identifies the state into which entities need to move into to trigger the webhook listener.
-    attr_accessor :entity_states
-
     # The identity which will be used to sign messages sent by this listener.
     attr_accessor :identity
-
-    # Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
-    attr_accessor :notify_every_change
 
     # The URL which is invoked by the listener to notify the application about the event.
     attr_accessor :url
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'entity_states' => :'entityStates',
         :'name' => :'name',
+        :'notify_every_change' => :'notifyEveryChange',
         :'state' => :'state',
         :'entity' => :'entity',
-        :'entity_states' => :'entityStates',
         :'identity' => :'identity',
-        :'notify_every_change' => :'notifyEveryChange',
         :'url' => :'url'
       }
     end
@@ -62,12 +61,12 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'entity_states' => :'Array<String>',
         :'name' => :'String',
+        :'notify_every_change' => :'BOOLEAN',
         :'state' => :'CreationEntityState',
         :'entity' => :'Integer',
-        :'entity_states' => :'Array<String>',
         :'identity' => :'Integer',
-        :'notify_every_change' => :'BOOLEAN',
         :'url' => :'Integer'
       }
     end
@@ -78,10 +77,20 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'entityStates')
+        if (value = attributes[:'entityStates']).is_a?(Array)
+          self.entity_states = value
+        end
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'notifyEveryChange')
+        self.notify_every_change = attributes[:'notifyEveryChange']
       end
 
       if attributes.has_key?(:'state')
@@ -92,52 +101,36 @@ module Wallee
         self.entity = attributes[:'entity']
       end
 
-      if attributes.has_key?(:'entityStates')
-        if (value = attributes[:'entityStates']).is_a?(Array)
-          self.entity_states = value
-        end
-      end
-
       if attributes.has_key?(:'identity')
         self.identity = attributes[:'identity']
-      end
-
-      if attributes.has_key?(:'notifyEveryChange')
-        self.notify_every_change = attributes[:'notifyEveryChange']
       end
 
       if attributes.has_key?(:'url')
         self.url = attributes[:'url']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @entity.nil?
-        invalid_properties.push("invalid value for 'entity', entity cannot be nil.")
-      end
-
-      if @entity_states.nil?
-        invalid_properties.push("invalid value for 'entity_states', entity_states cannot be nil.")
+        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
       end
 
       if @url.nil?
-        invalid_properties.push("invalid value for 'url', url cannot be nil.")
+        invalid_properties.push('invalid value for "url", url cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
       return false if @entity.nil?
-      return false if @entity_states.nil?
       return false if @url.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -145,12 +138,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          entity_states == o.entity_states &&
           name == o.name &&
+          notify_every_change == o.notify_every_change &&
           state == o.state &&
           entity == o.entity &&
-          entity_states == o.entity_states &&
           identity == o.identity &&
-          notify_every_change == o.notify_every_change &&
           url == o.url
     end
 
@@ -163,7 +156,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, state, entity, entity_states, identity, notify_every_change, url].hash
+      [entity_states, name, notify_every_change, state, entity, identity, url].hash
     end
 
     # Builds the object from hash
@@ -271,5 +264,4 @@ module Wallee
     end
 
   end
-
 end

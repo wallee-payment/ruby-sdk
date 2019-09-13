@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -27,17 +27,20 @@ module Wallee
     # The user name is used to identify the application user in administrative interfaces.
     attr_accessor :name
 
+    # The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+    attr_accessor :request_limit
+
     # 
     attr_accessor :state
 
     # The account that this user is associated with. The account owner will be able to manage this user.
     attr_accessor :primary_account
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
+        :'request_limit' => :'requestLimit',
         :'state' => :'state',
         :'primary_account' => :'primaryAccount'
       }
@@ -47,6 +50,7 @@ module Wallee
     def self.swagger_types
       {
         :'name' => :'String',
+        :'request_limit' => :'Integer',
         :'state' => :'CreationEntityState',
         :'primary_account' => :'Integer'
       }
@@ -58,10 +62,14 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'requestLimit')
+        self.request_limit = attributes[:'requestLimit']
       end
 
       if attributes.has_key?(:'state')
@@ -71,25 +79,24 @@ module Wallee
       if attributes.has_key?(:'primaryAccount')
         self.primary_account = attributes[:'primaryAccount']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @primary_account.nil?
-        invalid_properties.push("invalid value for 'primary_account', primary_account cannot be nil.")
+        invalid_properties.push('invalid value for "primary_account", primary_account cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
       return false if @primary_account.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -98,6 +105,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          request_limit == o.request_limit &&
           state == o.state &&
           primary_account == o.primary_account
     end
@@ -111,7 +119,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, state, primary_account].hash
+      [name, request_limit, state, primary_account].hash
     end
 
     # Builds the object from hash
@@ -219,5 +227,4 @@ module Wallee
     end
 
   end
-
 end

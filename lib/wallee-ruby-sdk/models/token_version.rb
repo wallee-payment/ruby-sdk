@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -60,6 +60,12 @@ module Wallee
     # 
     attr_accessor :payment_connector_configuration
 
+    # 
+    attr_accessor :payment_method
+
+    # 
+    attr_accessor :payment_method_brand
+
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
@@ -81,7 +87,6 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -97,6 +102,8 @@ module Wallee
         :'name' => :'name',
         :'obsoleted_on' => :'obsoletedOn',
         :'payment_connector_configuration' => :'paymentConnectorConfiguration',
+        :'payment_method' => :'paymentMethod',
+        :'payment_method_brand' => :'paymentMethodBrand',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'processor_token' => :'processorToken',
         :'shipping_address' => :'shippingAddress',
@@ -122,6 +129,8 @@ module Wallee
         :'name' => :'String',
         :'obsoleted_on' => :'DateTime',
         :'payment_connector_configuration' => :'PaymentConnectorConfiguration',
+        :'payment_method' => :'Integer',
+        :'payment_method_brand' => :'Integer',
         :'planned_purge_date' => :'DateTime',
         :'processor_token' => :'String',
         :'shipping_address' => :'Address',
@@ -138,7 +147,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'activatedOn')
         self.activated_on = attributes[:'activatedOn']
@@ -190,6 +199,14 @@ module Wallee
         self.payment_connector_configuration = attributes[:'paymentConnectorConfiguration']
       end
 
+      if attributes.has_key?(:'paymentMethod')
+        self.payment_method = attributes[:'paymentMethod']
+      end
+
+      if attributes.has_key?(:'paymentMethodBrand')
+        self.payment_method_brand = attributes[:'paymentMethodBrand']
+      end
+
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
@@ -217,20 +234,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -250,6 +266,8 @@ module Wallee
           name == o.name &&
           obsoleted_on == o.obsoleted_on &&
           payment_connector_configuration == o.payment_connector_configuration &&
+          payment_method == o.payment_method &&
+          payment_method_brand == o.payment_method_brand &&
           planned_purge_date == o.planned_purge_date &&
           processor_token == o.processor_token &&
           shipping_address == o.shipping_address &&
@@ -268,7 +286,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
+      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, payment_method, payment_method_brand, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
     end
 
     # Builds the object from hash
@@ -376,5 +394,4 @@ module Wallee
     end
 
   end
-
 end

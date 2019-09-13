@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,6 +33,9 @@ module Wallee
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
+    # The ledger entry title will be used for the title in the ledger entry and in the invoice.
+    attr_accessor :ledger_entry_title
+
     # The linked space id holds the ID of the space to which the entity belongs to.
     attr_accessor :linked_space_id
 
@@ -51,13 +54,13 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'component' => :'component',
         :'description' => :'description',
         :'id' => :'id',
+        :'ledger_entry_title' => :'ledgerEntryTitle',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'number_of_free_trial_periods' => :'numberOfFreeTrialPeriods',
@@ -73,6 +76,7 @@ module Wallee
         :'component' => :'SubscriptionProductComponent',
         :'description' => :'DatabaseTranslatedString',
         :'id' => :'Integer',
+        :'ledger_entry_title' => :'DatabaseTranslatedString',
         :'linked_space_id' => :'Integer',
         :'name' => :'DatabaseTranslatedString',
         :'number_of_free_trial_periods' => :'Integer',
@@ -88,7 +92,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'component')
         self.component = attributes[:'component']
@@ -100,6 +104,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'ledgerEntryTitle')
+        self.ledger_entry_title = attributes[:'ledgerEntryTitle']
       end
 
       if attributes.has_key?(:'linkedSpaceId')
@@ -127,20 +135,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -151,6 +158,7 @@ module Wallee
           component == o.component &&
           description == o.description &&
           id == o.id &&
+          ledger_entry_title == o.ledger_entry_title &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           number_of_free_trial_periods == o.number_of_free_trial_periods &&
@@ -168,7 +176,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [component, description, id, linked_space_id, name, number_of_free_trial_periods, period_fee, type, version].hash
+      [component, description, id, ledger_entry_title, linked_space_id, name, number_of_free_trial_periods, period_fee, type, version].hash
     end
 
     # Builds the object from hash
@@ -276,5 +284,4 @@ module Wallee
     end
 
   end
-
 end

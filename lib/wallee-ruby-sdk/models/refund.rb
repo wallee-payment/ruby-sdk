@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -29,6 +29,9 @@ module Wallee
 
     # 
     attr_accessor :base_line_items
+
+    # 
+    attr_accessor :completion
 
     # 
     attr_accessor :created_by
@@ -73,6 +76,9 @@ module Wallee
     attr_accessor :planned_purge_date
 
     # 
+    attr_accessor :processing_on
+
+    # 
     attr_accessor :processor_reference
 
     # 
@@ -91,6 +97,9 @@ module Wallee
     attr_accessor :taxes
 
     # 
+    attr_accessor :time_zone
+
+    # 
     attr_accessor :timeout_on
 
     # 
@@ -99,15 +108,18 @@ module Wallee
     # 
     attr_accessor :type
 
+    # 
+    attr_accessor :updated_invoice
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'amount' => :'amount',
         :'base_line_items' => :'baseLineItems',
+        :'completion' => :'completion',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
         :'environment' => :'environment',
@@ -122,15 +134,18 @@ module Wallee
         :'merchant_reference' => :'merchantReference',
         :'next_update_on' => :'nextUpdateOn',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'processing_on' => :'processingOn',
         :'processor_reference' => :'processorReference',
         :'reduced_line_items' => :'reducedLineItems',
         :'reductions' => :'reductions',
         :'state' => :'state',
         :'succeeded_on' => :'succeededOn',
         :'taxes' => :'taxes',
+        :'time_zone' => :'timeZone',
         :'timeout_on' => :'timeoutOn',
         :'transaction' => :'transaction',
         :'type' => :'type',
+        :'updated_invoice' => :'updatedInvoice',
         :'version' => :'version'
       }
     end
@@ -140,6 +155,7 @@ module Wallee
       {
         :'amount' => :'Float',
         :'base_line_items' => :'Array<LineItem>',
+        :'completion' => :'Integer',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
         :'environment' => :'Environment',
@@ -154,15 +170,18 @@ module Wallee
         :'merchant_reference' => :'String',
         :'next_update_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
+        :'processing_on' => :'DateTime',
         :'processor_reference' => :'String',
         :'reduced_line_items' => :'Array<LineItem>',
         :'reductions' => :'Array<LineItemReduction>',
         :'state' => :'RefundState',
         :'succeeded_on' => :'DateTime',
         :'taxes' => :'Array<Tax>',
+        :'time_zone' => :'String',
         :'timeout_on' => :'DateTime',
         :'transaction' => :'Transaction',
         :'type' => :'RefundType',
+        :'updated_invoice' => :'Integer',
         :'version' => :'Integer'
       }
     end
@@ -173,7 +192,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
@@ -183,6 +202,10 @@ module Wallee
         if (value = attributes[:'baseLineItems']).is_a?(Array)
           self.base_line_items = value
         end
+      end
+
+      if attributes.has_key?(:'completion')
+        self.completion = attributes[:'completion']
       end
 
       if attributes.has_key?(:'createdBy')
@@ -245,6 +268,10 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
+      if attributes.has_key?(:'processingOn')
+        self.processing_on = attributes[:'processingOn']
+      end
+
       if attributes.has_key?(:'processorReference')
         self.processor_reference = attributes[:'processorReference']
       end
@@ -275,6 +302,10 @@ module Wallee
         end
       end
 
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'timeoutOn')
         self.timeout_on = attributes[:'timeoutOn']
       end
@@ -287,23 +318,26 @@ module Wallee
         self.type = attributes[:'type']
       end
 
+      if attributes.has_key?(:'updatedInvoice')
+        self.updated_invoice = attributes[:'updatedInvoice']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -313,6 +347,7 @@ module Wallee
       self.class == o.class &&
           amount == o.amount &&
           base_line_items == o.base_line_items &&
+          completion == o.completion &&
           created_by == o.created_by &&
           created_on == o.created_on &&
           environment == o.environment &&
@@ -327,15 +362,18 @@ module Wallee
           merchant_reference == o.merchant_reference &&
           next_update_on == o.next_update_on &&
           planned_purge_date == o.planned_purge_date &&
+          processing_on == o.processing_on &&
           processor_reference == o.processor_reference &&
           reduced_line_items == o.reduced_line_items &&
           reductions == o.reductions &&
           state == o.state &&
           succeeded_on == o.succeeded_on &&
           taxes == o.taxes &&
+          time_zone == o.time_zone &&
           timeout_on == o.timeout_on &&
           transaction == o.transaction &&
           type == o.type &&
+          updated_invoice == o.updated_invoice &&
           version == o.version
     end
 
@@ -348,7 +386,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, base_line_items, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, timeout_on, transaction, type, version].hash
+      [amount, base_line_items, completion, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processing_on, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, time_zone, timeout_on, transaction, type, updated_invoice, version].hash
     end
 
     # Builds the object from hash
@@ -456,5 +494,4 @@ module Wallee
     end
 
   end
-
 end

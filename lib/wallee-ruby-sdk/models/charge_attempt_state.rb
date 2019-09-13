@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,21 +24,17 @@ require 'date'
 module Wallee
   class ChargeAttemptState
     
-    PROCESSING = "PROCESSING".freeze
-    FAILED = "FAILED".freeze
-    SUCCESSFUL = "SUCCESSFUL".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    PROCESSING = 'PROCESSING'.freeze
+    FAILED = 'FAILED'.freeze
+    SUCCESSFUL = 'SUCCESSFUL'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = ChargeAttemptState.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #ChargeAttemptState" if consantValues.empty?
-    
+      constantValues = ChargeAttemptState.constants.select { |c| ChargeAttemptState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ChargeAttemptState" if constantValues.empty?
       value
-    
     end
   end
-
 end

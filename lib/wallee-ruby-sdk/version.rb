@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -20,5 +20,5 @@ limitations under the License.
 =end
 
 module Wallee
-  VERSION = "1.0.3"
+  VERSION = '2.0.0'
 end

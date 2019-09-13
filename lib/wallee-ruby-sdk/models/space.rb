@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -48,7 +48,10 @@ module Wallee
     # The address to use in communication with clients for example in email, documents etc.
     attr_accessor :postal_address
 
-    # The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
+    # This is the currency that is used to display aggregated amounts in the space.
+    attr_accessor :primary_currency
+
+    # The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
     attr_accessor :request_limit
 
     # Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
@@ -66,7 +69,6 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -78,6 +80,7 @@ module Wallee
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'postal_address' => :'postalAddress',
+        :'primary_currency' => :'primaryCurrency',
         :'request_limit' => :'requestLimit',
         :'restricted_active' => :'restrictedActive',
         :'state' => :'state',
@@ -98,6 +101,7 @@ module Wallee
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'postal_address' => :'SpaceAddress',
+        :'primary_currency' => :'String',
         :'request_limit' => :'Integer',
         :'restricted_active' => :'BOOLEAN',
         :'state' => :'CreationEntityState',
@@ -113,7 +117,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'account')
         self.account = attributes[:'account']
@@ -147,6 +151,10 @@ module Wallee
         self.postal_address = attributes[:'postalAddress']
       end
 
+      if attributes.has_key?(:'primaryCurrency')
+        self.primary_currency = attributes[:'primaryCurrency']
+      end
+
       if attributes.has_key?(:'requestLimit')
         self.request_limit = attributes[:'requestLimit']
       end
@@ -172,20 +180,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -201,6 +208,7 @@ module Wallee
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           postal_address == o.postal_address &&
+          primary_currency == o.primary_currency &&
           request_limit == o.request_limit &&
           restricted_active == o.restricted_active &&
           state == o.state &&
@@ -218,7 +226,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, active, active_or_restricted_active, database, id, name, planned_purge_date, postal_address, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
+      [account, active, active_or_restricted_active, database, id, name, planned_purge_date, postal_address, primary_currency, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
     end
 
     # Builds the object from hash
@@ -326,5 +334,4 @@ module Wallee
     end
 
   end
-
 end

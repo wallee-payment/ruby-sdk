@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,21 +24,17 @@ require 'date'
 module Wallee
   class SubscriptionSuspensionReason
     
-    FAILED_CHARGE = "FAILED_CHARGE".freeze
-    SUBSCRIBER_INITIATED_REFUND = "SUBSCRIBER_INITIATED_REFUND".freeze
-    MANUAL = "MANUAL".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    FAILED_CHARGE = 'FAILED_CHARGE'.freeze
+    SUBSCRIBER_INITIATED_REFUND = 'SUBSCRIBER_INITIATED_REFUND'.freeze
+    MANUAL = 'MANUAL'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = SubscriptionSuspensionReason.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #SubscriptionSuspensionReason" if consantValues.empty?
-    
+      constantValues = SubscriptionSuspensionReason.constants.select { |c| SubscriptionSuspensionReason::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #SubscriptionSuspensionReason" if constantValues.empty?
       value
-    
     end
   end
-
 end

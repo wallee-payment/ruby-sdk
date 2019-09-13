@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,21 +24,17 @@ require 'date'
 module Wallee
   class ProductFeeType
     
-    METERED_FEE = "METERED_FEE".freeze
-    SETUP_FEE = "SETUP_FEE".freeze
-    PERIOD_FEE = "PERIOD_FEE".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    METERED_FEE = 'METERED_FEE'.freeze
+    SETUP_FEE = 'SETUP_FEE'.freeze
+    PERIOD_FEE = 'PERIOD_FEE'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = ProductFeeType.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #ProductFeeType" if consantValues.empty?
-    
+      constantValues = ProductFeeType.constants.select { |c| ProductFeeType::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ProductFeeType" if constantValues.empty?
       value
-    
     end
   end
-
 end

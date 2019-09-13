@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,6 +24,9 @@ require 'date'
 module Wallee
   # The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
   class RefundCreate
+    # 
+    attr_accessor :completion
+
     # The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
     attr_accessor :external_id
 
@@ -39,10 +42,10 @@ module Wallee
     # 
     attr_accessor :type
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'completion' => :'completion',
         :'external_id' => :'externalId',
         :'merchant_reference' => :'merchantReference',
         :'reductions' => :'reductions',
@@ -54,6 +57,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'completion' => :'Integer',
         :'external_id' => :'String',
         :'merchant_reference' => :'String',
         :'reductions' => :'Array<LineItemReductionCreate>',
@@ -68,7 +72,11 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'completion')
+        self.completion = attributes[:'completion']
+      end
 
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
@@ -91,30 +99,25 @@ module Wallee
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @external_id.nil?
-        invalid_properties.push("invalid value for 'external_id', external_id cannot be nil.")
+        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
       if @reductions.nil?
-        invalid_properties.push("invalid value for 'reductions', reductions cannot be nil.")
-      end
-
-      if @transaction.nil?
-        invalid_properties.push("invalid value for 'transaction', transaction cannot be nil.")
+        invalid_properties.push('invalid value for "reductions", reductions cannot be nil.')
       end
 
       if @type.nil?
-        invalid_properties.push("invalid value for 'type', type cannot be nil.")
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -122,9 +125,8 @@ module Wallee
     def valid?
       return false if @external_id.nil?
       return false if @reductions.nil?
-      return false if @transaction.nil?
       return false if @type.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -132,6 +134,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          completion == o.completion &&
           external_id == o.external_id &&
           merchant_reference == o.merchant_reference &&
           reductions == o.reductions &&
@@ -148,7 +151,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [external_id, merchant_reference, reductions, transaction, type].hash
+      [completion, external_id, merchant_reference, reductions, transaction, type].hash
     end
 
     # Builds the object from hash
@@ -256,5 +259,4 @@ module Wallee
     end
 
   end
-
 end

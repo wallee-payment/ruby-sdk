@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["customweb GmbH"]
   s.email       = ["info@customweb.com"]
-  s.homepage    = "https://wallee.com"
+  s.homepage    = "https://app-wallee.com/"
   s.summary     = "A ruby wrapper around the wallee API."
   s.description = "The wallee SDK allows an easy interaction with the wallee web service."
   s.license     = "Apache-2.0"

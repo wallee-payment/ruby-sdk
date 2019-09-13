@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,23 +24,19 @@ require 'date'
 module Wallee
   class UserType
     
-    HUMAN_USER = "HUMAN_USER".freeze
-    SINGLE_SIGNON_USER = "SINGLE_SIGNON_USER".freeze
-    APPLICATION_USER = "APPLICATION_USER".freeze
-    ANONYMOUS_USER = "ANONYMOUS_USER".freeze
-    SERVER_USER = "SERVER_USER".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    HUMAN_USER = 'HUMAN_USER'.freeze
+    SINGLE_SIGNON_USER = 'SINGLE_SIGNON_USER'.freeze
+    APPLICATION_USER = 'APPLICATION_USER'.freeze
+    ANONYMOUS_USER = 'ANONYMOUS_USER'.freeze
+    SERVER_USER = 'SERVER_USER'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = UserType.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #UserType" if consantValues.empty?
-    
+      constantValues = UserType.constants.select { |c| UserType::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #UserType" if constantValues.empty?
       value
-    
     end
   end
-
 end

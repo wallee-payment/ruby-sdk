@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,8 +24,14 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerUpdate
+    # The target state identifies the state into which entities need to move into to trigger the webhook listener.
+    attr_accessor :entity_states
+
     # The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
+
+    # Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+    attr_accessor :notify_every_change
 
     # 
     attr_accessor :state
@@ -36,11 +42,12 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'entity_states' => :'entityStates',
         :'name' => :'name',
+        :'notify_every_change' => :'notifyEveryChange',
         :'state' => :'state',
         :'id' => :'id',
         :'version' => :'version'
@@ -50,7 +57,9 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'entity_states' => :'Array<String>',
         :'name' => :'String',
+        :'notify_every_change' => :'BOOLEAN',
         :'state' => :'CreationEntityState',
         :'id' => :'Integer',
         :'version' => :'Integer'
@@ -63,10 +72,20 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'entityStates')
+        if (value = attributes[:'entityStates']).is_a?(Array)
+          self.entity_states = value
+        end
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'notifyEveryChange')
+        self.notify_every_change = attributes[:'notifyEveryChange']
       end
 
       if attributes.has_key?(:'state')
@@ -80,22 +99,21 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -103,7 +121,7 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -111,7 +129,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          entity_states == o.entity_states &&
           name == o.name &&
+          notify_every_change == o.notify_every_change &&
           state == o.state &&
           id == o.id &&
           version == o.version
@@ -126,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, state, id, version].hash
+      [entity_states, name, notify_every_change, state, id, version].hash
     end
 
     # Builds the object from hash
@@ -234,5 +254,4 @@ module Wallee
     end
 
   end
-
 end

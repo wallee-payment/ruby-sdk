@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -45,7 +45,6 @@ module Wallee
     # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
     attr_accessor :success_url
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -78,7 +77,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
@@ -107,26 +106,25 @@ module Wallee
       if attributes.has_key?(:'successUrl')
         self.success_url = attributes[:'successUrl']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @external_id.nil?
-        invalid_properties.push("invalid value for 'external_id', external_id cannot be nil.")
+        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
       if @processing_type.nil?
-        invalid_properties.push("invalid value for 'processing_type', processing_type cannot be nil.")
+        invalid_properties.push('invalid value for "processing_type", processing_type cannot be nil.')
       end
 
       if @subscription.nil?
-        invalid_properties.push("invalid value for 'subscription', subscription cannot be nil.")
+        invalid_properties.push('invalid value for "subscription", subscription cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -135,7 +133,7 @@ module Wallee
       return false if @external_id.nil?
       return false if @processing_type.nil?
       return false if @subscription.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -269,5 +267,4 @@ module Wallee
     end
 
   end
-
 end

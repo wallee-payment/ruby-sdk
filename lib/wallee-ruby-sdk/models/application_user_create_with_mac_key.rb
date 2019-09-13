@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -48,9 +48,11 @@ module Wallee
     # The account that this user is associated with. The account owner will be able to manage this user.
     attr_accessor :primary_account
 
+    # The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+    attr_accessor :request_limit
+
     # 
     attr_accessor :mac_key
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -63,6 +65,7 @@ module Wallee
         :'version' => :'version',
         :'name' => :'name',
         :'primary_account' => :'primaryAccount',
+        :'request_limit' => :'requestLimit',
         :'mac_key' => :'macKey'
       }
     end
@@ -78,6 +81,7 @@ module Wallee
         :'version' => :'Integer',
         :'name' => :'String',
         :'primary_account' => :'Account',
+        :'request_limit' => :'Integer',
         :'mac_key' => :'String'
       }
     end
@@ -88,7 +92,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -122,23 +126,26 @@ module Wallee
         self.primary_account = attributes[:'primaryAccount']
       end
 
+      if attributes.has_key?(:'requestLimit')
+        self.request_limit = attributes[:'requestLimit']
+      end
+
       if attributes.has_key?(:'macKey')
         self.mac_key = attributes[:'macKey']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -154,6 +161,7 @@ module Wallee
           version == o.version &&
           name == o.name &&
           primary_account == o.primary_account &&
+          request_limit == o.request_limit &&
           mac_key == o.mac_key
     end
 
@@ -166,7 +174,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, planned_purge_date, scope, state, user_type, version, name, primary_account, mac_key].hash
+      [id, planned_purge_date, scope, state, user_type, version, name, primary_account, request_limit, mac_key].hash
     end
 
     # Builds the object from hash
@@ -274,5 +282,4 @@ module Wallee
     end
 
   end
-
 end

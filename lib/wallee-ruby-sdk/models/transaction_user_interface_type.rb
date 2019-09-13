@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,21 +24,18 @@ require 'date'
 module Wallee
   class TransactionUserInterfaceType
     
-    IFRAME = "IFRAME".freeze
-    PAYMENT_PAGE = "PAYMENT_PAGE".freeze
-    MOBILE_SDK = "MOBILE_SDK".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    IFRAME = 'IFRAME'.freeze
+    PAYMENT_PAGE = 'PAYMENT_PAGE'.freeze
+    MOBILE_SDK = 'MOBILE_SDK'.freeze
+    TERMINAL = 'TERMINAL'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = TransactionUserInterfaceType.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #TransactionUserInterfaceType" if consantValues.empty?
-    
+      constantValues = TransactionUserInterfaceType.constants.select { |c| TransactionUserInterfaceType::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #TransactionUserInterfaceType" if constantValues.empty?
       value
-    
     end
   end
-
 end

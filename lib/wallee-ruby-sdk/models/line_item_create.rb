@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -31,6 +31,9 @@ module Wallee
     attr_accessor :attributes
 
     # 
+    attr_accessor :discount_including_tax
+
+    # 
     attr_accessor :name
 
     # 
@@ -51,12 +54,12 @@ module Wallee
     # The unique id identifies the line item within the set of line items associated with the transaction.
     attr_accessor :unique_id
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'amount_including_tax' => :'amountIncludingTax',
         :'attributes' => :'attributes',
+        :'discount_including_tax' => :'discountIncludingTax',
         :'name' => :'name',
         :'quantity' => :'quantity',
         :'shipping_required' => :'shippingRequired',
@@ -72,6 +75,7 @@ module Wallee
       {
         :'amount_including_tax' => :'Float',
         :'attributes' => :'Hash<String, LineItemAttributeCreate>',
+        :'discount_including_tax' => :'Float',
         :'name' => :'String',
         :'quantity' => :'Float',
         :'shipping_required' => :'BOOLEAN',
@@ -88,16 +92,20 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'amountIncludingTax')
         self.amount_including_tax = attributes[:'amountIncludingTax']
       end
 
       if attributes.has_key?(:'attributes')
-        if (value = attributes[:'attributes']).is_a?(Array)
+        if (value = attributes[:'attributes']).is_a?(Hash)
           self.attributes = value
         end
+      end
+
+      if attributes.has_key?(:'discountIncludingTax')
+        self.discount_including_tax = attributes[:'discountIncludingTax']
       end
 
       if attributes.has_key?(:'name')
@@ -129,34 +137,33 @@ module Wallee
       if attributes.has_key?(:'uniqueId')
         self.unique_id = attributes[:'uniqueId']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @amount_including_tax.nil?
-        invalid_properties.push("invalid value for 'amount_including_tax', amount_including_tax cannot be nil.")
+        invalid_properties.push('invalid value for "amount_including_tax", amount_including_tax cannot be nil.')
       end
 
       if @name.nil?
-        invalid_properties.push("invalid value for 'name', name cannot be nil.")
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       if @quantity.nil?
-        invalid_properties.push("invalid value for 'quantity', quantity cannot be nil.")
+        invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
       if @type.nil?
-        invalid_properties.push("invalid value for 'type', type cannot be nil.")
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
       if @unique_id.nil?
-        invalid_properties.push("invalid value for 'unique_id', unique_id cannot be nil.")
+        invalid_properties.push('invalid value for "unique_id", unique_id cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -167,7 +174,7 @@ module Wallee
       return false if @quantity.nil?
       return false if @type.nil?
       return false if @unique_id.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -177,6 +184,7 @@ module Wallee
       self.class == o.class &&
           amount_including_tax == o.amount_including_tax &&
           attributes == o.attributes &&
+          discount_including_tax == o.discount_including_tax &&
           name == o.name &&
           quantity == o.quantity &&
           shipping_required == o.shipping_required &&
@@ -195,7 +203,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_including_tax, attributes, name, quantity, shipping_required, sku, taxes, type, unique_id].hash
+      [amount_including_tax, attributes, discount_including_tax, name, quantity, shipping_required, sku, taxes, type, unique_id].hash
     end
 
     # Builds the object from hash
@@ -303,5 +311,4 @@ module Wallee
     end
 
   end
-
 end

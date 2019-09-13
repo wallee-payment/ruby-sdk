@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -52,6 +52,9 @@ module Wallee
     attr_accessor :state
 
     # 
+    attr_accessor :time_zone
+
+    # 
     attr_accessor :timeout_on
 
     # 
@@ -66,7 +69,6 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -79,6 +81,7 @@ module Wallee
         :'planned_purge_date' => :'plannedPurgeDate',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
+        :'time_zone' => :'timeZone',
         :'timeout_on' => :'timeoutOn',
         :'transaction' => :'transaction',
         :'type' => :'type',
@@ -99,6 +102,7 @@ module Wallee
         :'planned_purge_date' => :'DateTime',
         :'space_view_id' => :'Integer',
         :'state' => :'ChargeState',
+        :'time_zone' => :'String',
         :'timeout_on' => :'DateTime',
         :'transaction' => :'Transaction',
         :'type' => :'ChargeType',
@@ -113,7 +117,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -151,6 +155,10 @@ module Wallee
         self.state = attributes[:'state']
       end
 
+      if attributes.has_key?(:'timeZone')
+        self.time_zone = attributes[:'timeZone']
+      end
+
       if attributes.has_key?(:'timeoutOn')
         self.timeout_on = attributes[:'timeoutOn']
       end
@@ -170,20 +178,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -200,6 +207,7 @@ module Wallee
           planned_purge_date == o.planned_purge_date &&
           space_view_id == o.space_view_id &&
           state == o.state &&
+          time_zone == o.time_zone &&
           timeout_on == o.timeout_on &&
           transaction == o.transaction &&
           type == o.type &&
@@ -216,7 +224,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, created_on, failure_reason, language, planned_purge_date, space_view_id, state, timeout_on, transaction, type, user_failure_message, version].hash
+      [id, linked_space_id, linked_transaction, created_on, failure_reason, language, planned_purge_date, space_view_id, state, time_zone, timeout_on, transaction, type, user_failure_message, version].hash
     end
 
     # Builds the object from hash
@@ -324,5 +332,4 @@ module Wallee
     end
 
   end
-
 end

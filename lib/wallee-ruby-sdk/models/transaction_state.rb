@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,28 +24,24 @@ require 'date'
 module Wallee
   class TransactionState
     
-    CREATE = "CREATE".freeze
-    PENDING = "PENDING".freeze
-    CONFIRMED = "CONFIRMED".freeze
-    PROCESSING = "PROCESSING".freeze
-    FAILED = "FAILED".freeze
-    AUTHORIZED = "AUTHORIZED".freeze
-    VOIDED = "VOIDED".freeze
-    COMPLETED = "COMPLETED".freeze
-    FULFILL = "FULFILL".freeze
-    DECLINE = "DECLINE".freeze
-    
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
+    CREATE = 'CREATE'.freeze
+    PENDING = 'PENDING'.freeze
+    CONFIRMED = 'CONFIRMED'.freeze
+    PROCESSING = 'PROCESSING'.freeze
+    FAILED = 'FAILED'.freeze
+    AUTHORIZED = 'AUTHORIZED'.freeze
+    VOIDED = 'VOIDED'.freeze
+    COMPLETED = 'COMPLETED'.freeze
+    FULFILL = 'FULFILL'.freeze
+    DECLINE = 'DECLINE'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
     def build_from_hash(value)
-    
-      consantValues = TransactionState.constants.select{|c| c.to_s == value}
-      raise "Invalid ENUM value #{value} for class #TransactionState" if consantValues.empty?
-    
+      constantValues = TransactionState.constants.select { |c| TransactionState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #TransactionState" if constantValues.empty?
       value
-    
     end
   end
-
 end

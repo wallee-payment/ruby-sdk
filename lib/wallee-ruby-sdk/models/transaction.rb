@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -56,6 +56,9 @@ module Wallee
 
     # When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
     attr_accessor :charge_retry_enabled
+
+    # The completed amount is the total amount which has been captured so far.
+    attr_accessor :completed_amount
 
     # 
     attr_accessor :completed_on
@@ -142,6 +145,9 @@ module Wallee
     attr_accessor :meta_data
 
     # 
+    attr_accessor :parent
+
+    # 
     attr_accessor :payment_connector_configuration
 
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -174,7 +180,7 @@ module Wallee
     # 
     attr_accessor :token
 
-    # The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+    # The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
     attr_accessor :tokenization_mode
 
     # The user agent header provides the exact string which contains the user agent of the buyer.
@@ -188,7 +194,6 @@ module Wallee
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -204,6 +209,7 @@ module Wallee
         :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
         :'billing_address' => :'billingAddress',
         :'charge_retry_enabled' => :'chargeRetryEnabled',
+        :'completed_amount' => :'completedAmount',
         :'completed_on' => :'completedOn',
         :'completion_timeout_on' => :'completionTimeoutOn',
         :'confirmed_by' => :'confirmedBy',
@@ -232,6 +238,7 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'merchant_reference' => :'merchantReference',
         :'meta_data' => :'metaData',
+        :'parent' => :'parent',
         :'payment_connector_configuration' => :'paymentConnectorConfiguration',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'processing_on' => :'processingOn',
@@ -265,6 +272,7 @@ module Wallee
         :'auto_confirmation_enabled' => :'BOOLEAN',
         :'billing_address' => :'Address',
         :'charge_retry_enabled' => :'BOOLEAN',
+        :'completed_amount' => :'Float',
         :'completed_on' => :'DateTime',
         :'completion_timeout_on' => :'DateTime',
         :'confirmed_by' => :'Integer',
@@ -293,6 +301,7 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'merchant_reference' => :'String',
         :'meta_data' => :'Hash<String, String>',
+        :'parent' => :'Integer',
         :'payment_connector_configuration' => :'PaymentConnectorConfiguration',
         :'planned_purge_date' => :'DateTime',
         :'processing_on' => :'DateTime',
@@ -304,7 +313,7 @@ module Wallee
         :'success_url' => :'String',
         :'time_zone' => :'String',
         :'token' => :'Token',
-        :'tokenization_mode' => :'TokenizationnMode',
+        :'tokenization_mode' => :'TokenizationMode',
         :'user_agent_header' => :'String',
         :'user_failure_message' => :'String',
         :'user_interface_type' => :'TransactionUserInterfaceType',
@@ -318,7 +327,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'acceptHeader')
         self.accept_header = attributes[:'acceptHeader']
@@ -366,6 +375,10 @@ module Wallee
 
       if attributes.has_key?(:'chargeRetryEnabled')
         self.charge_retry_enabled = attributes[:'chargeRetryEnabled']
+      end
+
+      if attributes.has_key?(:'completedAmount')
+        self.completed_amount = attributes[:'completedAmount']
       end
 
       if attributes.has_key?(:'completedOn')
@@ -479,9 +492,13 @@ module Wallee
       end
 
       if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Array)
+        if (value = attributes[:'metaData']).is_a?(Hash)
           self.meta_data = value
         end
+      end
+
+      if attributes.has_key?(:'parent')
+        self.parent = attributes[:'parent']
       end
 
       if attributes.has_key?(:'paymentConnectorConfiguration')
@@ -547,20 +564,19 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -579,6 +595,7 @@ module Wallee
           auto_confirmation_enabled == o.auto_confirmation_enabled &&
           billing_address == o.billing_address &&
           charge_retry_enabled == o.charge_retry_enabled &&
+          completed_amount == o.completed_amount &&
           completed_on == o.completed_on &&
           completion_timeout_on == o.completion_timeout_on &&
           confirmed_by == o.confirmed_by &&
@@ -607,6 +624,7 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           merchant_reference == o.merchant_reference &&
           meta_data == o.meta_data &&
+          parent == o.parent &&
           payment_connector_configuration == o.payment_connector_configuration &&
           planned_purge_date == o.planned_purge_date &&
           processing_on == o.processing_on &&
@@ -634,7 +652,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash
@@ -742,5 +760,4 @@ module Wallee
     end
 
   end
-
 end

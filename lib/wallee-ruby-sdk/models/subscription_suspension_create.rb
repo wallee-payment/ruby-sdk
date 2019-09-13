@@ -1,5 +1,5 @@
 =begin
-Wallee API: 1.0.0
+wallee API: 2.0.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -36,7 +36,6 @@ module Wallee
     # 
     attr_accessor :subscription
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -63,7 +62,7 @@ module Wallee
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'endAction')
         self.end_action = attributes[:'endAction']
@@ -80,26 +79,25 @@ module Wallee
       if attributes.has_key?(:'subscription')
         self.subscription = attributes[:'subscription']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properies with the reasons
+    # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
       if @end_action.nil?
-        invalid_properties.push("invalid value for 'end_action', end_action cannot be nil.")
+        invalid_properties.push('invalid value for "end_action", end_action cannot be nil.')
       end
 
       if @planned_end_date.nil?
-        invalid_properties.push("invalid value for 'planned_end_date', planned_end_date cannot be nil.")
+        invalid_properties.push('invalid value for "planned_end_date", planned_end_date cannot be nil.')
       end
 
       if @subscription.nil?
-        invalid_properties.push("invalid value for 'subscription', subscription cannot be nil.")
+        invalid_properties.push('invalid value for "subscription", subscription cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -108,7 +106,7 @@ module Wallee
       return false if @end_action.nil?
       return false if @planned_end_date.nil?
       return false if @subscription.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -239,5 +237,4 @@ module Wallee
     end
 
   end
-
 end
