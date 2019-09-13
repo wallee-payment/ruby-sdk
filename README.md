@@ -134,4 +134,4 @@ payment_page_url = transaction_payment_page_service.transaction_payment_page_ser
 
 ## License
 
-Please see the [license file](https://github.com/wallee-payment/wallee-ruby-sdk/blob/master/LICENSE) for more information.
+Please see the [license file](https://github.com/wallee-payment/ruby-sdk/blob/master/LICENSE) for more information.

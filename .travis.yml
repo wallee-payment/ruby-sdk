@@ -14,4 +14,4 @@ deploy:
   on:
     tags: true
     condition: "$TRAVIS_RUBY_VERSION == 2.4.1"
-    repo: wallee-payment/wallee-ruby-sdk
+    repo: wallee-payment/ruby-sdk
