@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,10 +24,10 @@ require 'date'
 module Wallee
   class RefundType
     
-    CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC'.freeze
-    CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL'.freeze
     MERCHANT_INITIATED_ONLINE = 'MERCHANT_INITIATED_ONLINE'.freeze
     MERCHANT_INITIATED_OFFLINE = 'MERCHANT_INITIATED_OFFLINE'.freeze
+    CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC'.freeze
+    CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string

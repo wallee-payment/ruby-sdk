@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param product_version_id The product version id identifies the product version which should be activated.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionProductVersion]
-    def subscription_product_version_service_activate(space_id, product_version_id, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_activate_with_http_info(space_id, product_version_id, opts)
+    def activate(space_id, product_version_id, opts = {})
+      data, _status_code, _headers = activate_with_http_info(space_id, product_version_id, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param product_version_id The product version id identifies the product version which should be activated.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionProductVersion, Fixnum, Hash)>] SubscriptionProductVersion data, response status code and response headers
-    def subscription_product_version_service_activate_with_http_info(space_id, product_version_id, opts = {})
+    def activate_with_http_info(space_id, product_version_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_activate ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.activate ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_activate" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.activate" if space_id.nil?
       # verify the required parameter 'product_version_id' is set
-      fail ArgumentError, "Missing the required parameter 'product_version_id' when calling SubscriptionProductVersionService.subscription_product_version_service_activate" if product_version_id.nil?
+      fail ArgumentError, "Missing the required parameter 'product_version_id' when calling SubscriptionProductVersionService.activate" if product_version_id.nil?
       # resource path
       local_var_path = "/subscription-product-version/activate".sub('{format}','json')
 
@@ -87,7 +87,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductVersion')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_activate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#activate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -98,8 +98,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_product_version_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -109,12 +109,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_product_version_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-product-version/count".sub('{format}','json')
 
@@ -147,7 +147,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -158,8 +158,8 @@ module Wallee
     # @param entity The product version object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionProductVersion]
-    def subscription_product_version_service_create(space_id, entity, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_create_with_http_info(space_id, entity, opts)
+    def create(space_id, entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -169,14 +169,14 @@ module Wallee
     # @param entity The product version object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionProductVersion, Fixnum, Hash)>] SubscriptionProductVersion data, response status code and response headers
-    def subscription_product_version_service_create_with_http_info(space_id, entity, opts = {})
+    def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.create" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionProductVersionService.subscription_product_version_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionProductVersionService.create" if entity.nil?
       # resource path
       local_var_path = "/subscription-product-version/create".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductVersion')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param id The id of the product version which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionProductVersion]
-    def subscription_product_version_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param id The id of the product version which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionProductVersion, Fixnum, Hash)>] SubscriptionProductVersion data, response status code and response headers
-    def subscription_product_version_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionProductVersionService.subscription_product_version_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionProductVersionService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-product-version/read".sub('{format}','json')
 
@@ -272,7 +272,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductVersion')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -283,8 +283,8 @@ module Wallee
     # @param query The query restricts the product versions which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionProductVersion>]
-    def subscription_product_version_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -294,14 +294,14 @@ module Wallee
     # @param query The query restricts the product versions which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionProductVersion>, Fixnum, Hash)>] Array<SubscriptionProductVersion> data, response status code and response headers
-    def subscription_product_version_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionProductVersionService.subscription_product_version_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionProductVersionService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-product-version/search".sub('{format}','json')
 
@@ -334,7 +334,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionProductVersion>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -345,8 +345,8 @@ module Wallee
     # @param entity The product version object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionProductVersion]
-    def subscription_product_version_service_update(space_id, entity, opts = {})
-      data, _status_code, _headers = subscription_product_version_service_update_with_http_info(space_id, entity, opts)
+    def update(space_id, entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -356,14 +356,14 @@ module Wallee
     # @param entity The product version object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionProductVersion, Fixnum, Hash)>] SubscriptionProductVersion data, response status code and response headers
-    def subscription_product_version_service_update_with_http_info(space_id, entity, opts = {})
+    def update_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.subscription_product_version_service_update ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionProductVersionService.update ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.subscription_product_version_service_update" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionProductVersionService.update" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionProductVersionService.subscription_product_version_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionProductVersionService.update" if entity.nil?
       # resource path
       local_var_path = "/subscription-product-version/update".sub('{format}','json')
 
@@ -396,7 +396,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductVersion')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#subscription_product_version_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionProductVersionService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscriber_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscriber_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscriber_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscriber/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param entity The customer object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [SubscriberCreate]
-    def subscriber_service_create(space_id, entity, opts = {})
-      data, _status_code, _headers = subscriber_service_create_with_http_info(space_id, entity, opts)
+    def create(space_id, entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param entity The customer object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriberCreate, Fixnum, Hash)>] SubscriberCreate data, response status code and response headers
-    def subscriber_service_create_with_http_info(space_id, entity, opts = {})
+    def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.create" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriberService.subscriber_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriberService.create" if entity.nil?
       # resource path
       local_var_path = "/subscriber/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriberCreate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def subscriber_service_delete(space_id, id, opts = {})
-      subscriber_service_delete_with_http_info(space_id, id, opts)
+    def delete(space_id, id, opts = {})
+      delete_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def subscriber_service_delete_with_http_info(space_id, id, opts = {})
+    def delete_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_delete ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.delete ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_delete" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.delete" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriberService.subscriber_service_delete" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriberService.delete" if id.nil?
       # resource path
       local_var_path = "/subscriber/delete".sub('{format}','json')
 
@@ -207,7 +207,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -218,8 +218,8 @@ module Wallee
     # @param id The id of the customer which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Subscriber]
-    def subscriber_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscriber_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -229,14 +229,14 @@ module Wallee
     # @param id The id of the customer which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Subscriber, Fixnum, Hash)>] Subscriber data, response status code and response headers
-    def subscriber_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriberService.subscriber_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriberService.read" if id.nil?
       # resource path
       local_var_path = "/subscriber/read".sub('{format}','json')
 
@@ -270,7 +270,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Subscriber')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -281,8 +281,8 @@ module Wallee
     # @param query The query restricts the customer which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<Subscriber>]
-    def subscriber_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscriber_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -292,14 +292,14 @@ module Wallee
     # @param query The query restricts the customer which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Subscriber>, Fixnum, Hash)>] Array<Subscriber> data, response status code and response headers
-    def subscriber_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriberService.subscriber_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriberService.search" if query.nil?
       # resource path
       local_var_path = "/subscriber/search".sub('{format}','json')
 
@@ -332,7 +332,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<Subscriber>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -343,8 +343,8 @@ module Wallee
     # @param entity The customer with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Subscriber]
-    def subscriber_service_update(space_id, entity, opts = {})
-      data, _status_code, _headers = subscriber_service_update_with_http_info(space_id, entity, opts)
+    def update(space_id, entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -354,14 +354,14 @@ module Wallee
     # @param entity The customer with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Subscriber, Fixnum, Hash)>] Subscriber data, response status code and response headers
-    def subscriber_service_update_with_http_info(space_id, entity, opts = {})
+    def update_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriberService.subscriber_service_update ..."
+        @api_client.config.logger.debug "Calling API: SubscriberService.update ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.subscriber_service_update" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriberService.update" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriberService.subscriber_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriberService.update" if entity.nil?
       # resource path
       local_var_path = "/subscriber/update".sub('{format}','json')
 
@@ -394,7 +394,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Subscriber')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriberService#subscriber_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriberService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

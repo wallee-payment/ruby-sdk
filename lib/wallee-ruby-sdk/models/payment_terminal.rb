@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -49,9 +49,6 @@ module Wallee
     attr_accessor :state
 
     # 
-    attr_accessor :terminal_device_id
-
-    # 
     attr_accessor :type
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -68,7 +65,6 @@ module Wallee
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'state' => :'state',
-        :'terminal_device_id' => :'terminalDeviceId',
         :'type' => :'type',
         :'version' => :'version'
       }
@@ -85,7 +81,6 @@ module Wallee
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'state' => :'PaymentTerminalState',
-        :'terminal_device_id' => :'Integer',
         :'type' => :'PaymentTerminalType',
         :'version' => :'Integer'
       }
@@ -131,10 +126,6 @@ module Wallee
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'terminalDeviceId')
-        self.terminal_device_id = attributes[:'terminalDeviceId']
-      end
-
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
       end
@@ -170,7 +161,6 @@ module Wallee
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           state == o.state &&
-          terminal_device_id == o.terminal_device_id &&
           type == o.type &&
           version == o.version
     end
@@ -184,7 +174,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration_version, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, terminal_device_id, type, version].hash
+      [configuration_version, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
     end
 
     # Builds the object from hash

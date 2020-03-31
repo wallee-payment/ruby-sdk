@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -34,8 +34,8 @@ module Wallee
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param [Hash] opts the optional parameters
     # @return [String]
-    def transaction_mobile_sdk_service_payment_form_url(credentials, opts = {})
-      data, _status_code, _headers = transaction_mobile_sdk_service_payment_form_url_with_http_info(credentials, opts)
+    def payment_form_url(credentials, opts = {})
+      data, _status_code, _headers = payment_form_url_with_http_info(credentials, opts)
       return data
     end
 
@@ -44,12 +44,12 @@ module Wallee
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
-    def transaction_mobile_sdk_service_payment_form_url_with_http_info(credentials, opts = {})
+    def payment_form_url_with_http_info(credentials, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionMobileSdkService.transaction_mobile_sdk_service_payment_form_url ..."
+        @api_client.config.logger.debug "Calling API: TransactionMobileSdkService.payment_form_url ..."
       end
       # verify the required parameter 'credentials' is set
-      fail ArgumentError, "Missing the required parameter 'credentials' when calling TransactionMobileSdkService.transaction_mobile_sdk_service_payment_form_url" if credentials.nil?
+      fail ArgumentError, "Missing the required parameter 'credentials' when calling TransactionMobileSdkService.payment_form_url" if credentials.nil?
       # resource path
       local_var_path = "/transaction-mobile-sdk/payment-form-url".sub('{format}','json')
 
@@ -82,7 +82,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionMobileSdkService#transaction_mobile_sdk_service_payment_form_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TransactionMobileSdkService#payment_form_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -64,6 +64,9 @@ module Wallee
     attr_accessor :subscriber
 
     # 
+    attr_accessor :terminated_by
+
+    # 
     attr_accessor :terminated_on
 
     # 
@@ -91,6 +94,7 @@ module Wallee
         :'reference' => :'reference',
         :'state' => :'state',
         :'subscriber' => :'subscriber',
+        :'terminated_by' => :'terminatedBy',
         :'terminated_on' => :'terminatedOn',
         :'terminating_on' => :'terminatingOn',
         :'token' => :'token',
@@ -114,6 +118,7 @@ module Wallee
         :'reference' => :'String',
         :'state' => :'SubscriptionState',
         :'subscriber' => :'Subscriber',
+        :'terminated_by' => :'Integer',
         :'terminated_on' => :'DateTime',
         :'terminating_on' => :'DateTime',
         :'token' => :'Token',
@@ -181,6 +186,10 @@ module Wallee
         self.subscriber = attributes[:'subscriber']
       end
 
+      if attributes.has_key?(:'terminatedBy')
+        self.terminated_by = attributes[:'terminatedBy']
+      end
+
       if attributes.has_key?(:'terminatedOn')
         self.terminated_on = attributes[:'terminatedOn']
       end
@@ -229,6 +238,7 @@ module Wallee
           reference == o.reference &&
           state == o.state &&
           subscriber == o.subscriber &&
+          terminated_by == o.terminated_by &&
           terminated_on == o.terminated_on &&
           terminating_on == o.terminating_on &&
           token == o.token &&
@@ -244,7 +254,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_on, terminating_on, token, version].hash
+      [activated_on, affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_by, terminated_on, terminating_on, token, version].hash
     end
 
     # Builds the object from hash

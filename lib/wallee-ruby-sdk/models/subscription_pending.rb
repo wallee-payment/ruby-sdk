@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -31,13 +31,13 @@ module Wallee
     attr_accessor :version
 
     # 
+    attr_accessor :affiliate
+
+    # 
     attr_accessor :description
 
     # 
     attr_accessor :planned_termination_date
-
-    # 
-    attr_accessor :affiliate
 
     # 
     attr_accessor :reference
@@ -53,9 +53,9 @@ module Wallee
       {
         :'id' => :'id',
         :'version' => :'version',
+        :'affiliate' => :'affiliate',
         :'description' => :'description',
         :'planned_termination_date' => :'plannedTerminationDate',
-        :'affiliate' => :'affiliate',
         :'reference' => :'reference',
         :'subscriber' => :'subscriber',
         :'token' => :'token'
@@ -67,9 +67,9 @@ module Wallee
       {
         :'id' => :'Integer',
         :'version' => :'Integer',
+        :'affiliate' => :'Integer',
         :'description' => :'String',
         :'planned_termination_date' => :'DateTime',
-        :'affiliate' => :'Integer',
         :'reference' => :'String',
         :'subscriber' => :'Integer',
         :'token' => :'Integer'
@@ -92,16 +92,16 @@ module Wallee
         self.version = attributes[:'version']
       end
 
+      if attributes.has_key?(:'affiliate')
+        self.affiliate = attributes[:'affiliate']
+      end
+
       if attributes.has_key?(:'description')
         self.description = attributes[:'description']
       end
 
       if attributes.has_key?(:'plannedTerminationDate')
         self.planned_termination_date = attributes[:'plannedTerminationDate']
-      end
-
-      if attributes.has_key?(:'affiliate')
-        self.affiliate = attributes[:'affiliate']
       end
 
       if attributes.has_key?(:'reference')
@@ -147,9 +147,9 @@ module Wallee
       self.class == o.class &&
           id == o.id &&
           version == o.version &&
+          affiliate == o.affiliate &&
           description == o.description &&
           planned_termination_date == o.planned_termination_date &&
-          affiliate == o.affiliate &&
           reference == o.reference &&
           subscriber == o.subscriber &&
           token == o.token
@@ -164,7 +164,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, description, planned_termination_date, affiliate, reference, subscriber, token].hash
+      [id, version, affiliate, description, planned_termination_date, reference, subscriber, token].hash
     end
 
     # Builds the object from hash

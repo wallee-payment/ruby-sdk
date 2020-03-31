@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -60,6 +60,9 @@ module Wallee
     # 
     attr_accessor :payment_connector_configuration
 
+    # The payment information hash set contains hashes of the payment information represented by this token version.
+    attr_accessor :payment_information_hashes
+
     # 
     attr_accessor :payment_method
 
@@ -102,6 +105,7 @@ module Wallee
         :'name' => :'name',
         :'obsoleted_on' => :'obsoletedOn',
         :'payment_connector_configuration' => :'paymentConnectorConfiguration',
+        :'payment_information_hashes' => :'paymentInformationHashes',
         :'payment_method' => :'paymentMethod',
         :'payment_method_brand' => :'paymentMethodBrand',
         :'planned_purge_date' => :'plannedPurgeDate',
@@ -129,6 +133,7 @@ module Wallee
         :'name' => :'String',
         :'obsoleted_on' => :'DateTime',
         :'payment_connector_configuration' => :'PaymentConnectorConfiguration',
+        :'payment_information_hashes' => :'Array<PaymentInformationHash>',
         :'payment_method' => :'Integer',
         :'payment_method_brand' => :'Integer',
         :'planned_purge_date' => :'DateTime',
@@ -199,6 +204,12 @@ module Wallee
         self.payment_connector_configuration = attributes[:'paymentConnectorConfiguration']
       end
 
+      if attributes.has_key?(:'paymentInformationHashes')
+        if (value = attributes[:'paymentInformationHashes']).is_a?(Array)
+          self.payment_information_hashes = value
+        end
+      end
+
       if attributes.has_key?(:'paymentMethod')
         self.payment_method = attributes[:'paymentMethod']
       end
@@ -266,6 +277,7 @@ module Wallee
           name == o.name &&
           obsoleted_on == o.obsoleted_on &&
           payment_connector_configuration == o.payment_connector_configuration &&
+          payment_information_hashes == o.payment_information_hashes &&
           payment_method == o.payment_method &&
           payment_method_brand == o.payment_method_brand &&
           planned_purge_date == o.planned_purge_date &&
@@ -286,7 +298,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, payment_method, payment_method_brand, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
+      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, payment_information_hashes, payment_method, payment_method_brand, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
     end
 
     # Builds the object from hash

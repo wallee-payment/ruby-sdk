@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -23,66 +23,101 @@ require 'date'
 
 module Wallee
   # 
-  class PaymentTerminalDeviceModel
-    # 
-    attr_accessor :description
-
+  class ShopifyRecurringOrder
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # 
-    attr_accessor :image
+    # The linked space id holds the ID of the space to which the entity belongs to.
+    attr_accessor :linked_space_id
 
     # 
-    attr_accessor :image_type
+    attr_accessor :linked_transaction
 
     # 
-    attr_accessor :manufacturer
+    attr_accessor :billed_on
 
     # 
-    attr_accessor :name
+    attr_accessor :checkout_token
+
+    # 
+    attr_accessor :created_on
+
+    # 
+    attr_accessor :failure_reason
+
+    # 
+    attr_accessor :order_id
+
+    # 
+    attr_accessor :order_name
+
+    # 
+    attr_accessor :planned_execution_date
 
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
     # 
+    attr_accessor :recurrence_number
+
+    # 
+    attr_accessor :shop
+
+    # 
+    attr_accessor :started_processing_on
+
+    # 
     attr_accessor :state
 
     # 
-    attr_accessor :title
+    attr_accessor :subscription_version
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # 
+    attr_accessor :transaction
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
         :'id' => :'id',
-        :'image' => :'image',
-        :'image_type' => :'imageType',
-        :'manufacturer' => :'manufacturer',
-        :'name' => :'name',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
+        :'billed_on' => :'billedOn',
+        :'checkout_token' => :'checkoutToken',
+        :'created_on' => :'createdOn',
+        :'failure_reason' => :'failureReason',
+        :'order_id' => :'orderId',
+        :'order_name' => :'orderName',
+        :'planned_execution_date' => :'plannedExecutionDate',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'recurrence_number' => :'recurrenceNumber',
+        :'shop' => :'shop',
+        :'started_processing_on' => :'startedProcessingOn',
         :'state' => :'state',
-        :'title' => :'title',
-        :'version' => :'version'
+        :'subscription_version' => :'subscriptionVersion',
+        :'transaction' => :'transaction'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'DatabaseTranslatedString',
         :'id' => :'Integer',
-        :'image' => :'Array<String>',
-        :'image_type' => :'String',
-        :'manufacturer' => :'PaymentTerminalDeviceManufacturer',
-        :'name' => :'String',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
+        :'billed_on' => :'DateTime',
+        :'checkout_token' => :'String',
+        :'created_on' => :'DateTime',
+        :'failure_reason' => :'FailureReason',
+        :'order_id' => :'String',
+        :'order_name' => :'String',
+        :'planned_execution_date' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
-        :'state' => :'CreationEntityState',
-        :'title' => :'DatabaseTranslatedString',
-        :'version' => :'Integer'
+        :'recurrence_number' => :'Integer',
+        :'shop' => :'Integer',
+        :'started_processing_on' => :'DateTime',
+        :'state' => :'ShopifyRecurringOrderState',
+        :'subscription_version' => :'ShopifySubscriptionVersion',
+        :'transaction' => :'ShopifyTransaction'
       }
     end
 
@@ -94,46 +129,72 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'image')
-        if (value = attributes[:'image']).is_a?(Array)
-          self.image = value
-        end
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
-      if attributes.has_key?(:'imageType')
-        self.image_type = attributes[:'imageType']
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
-      if attributes.has_key?(:'manufacturer')
-        self.manufacturer = attributes[:'manufacturer']
+      if attributes.has_key?(:'billedOn')
+        self.billed_on = attributes[:'billedOn']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'checkoutToken')
+        self.checkout_token = attributes[:'checkoutToken']
+      end
+
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'failureReason')
+        self.failure_reason = attributes[:'failureReason']
+      end
+
+      if attributes.has_key?(:'orderId')
+        self.order_id = attributes[:'orderId']
+      end
+
+      if attributes.has_key?(:'orderName')
+        self.order_name = attributes[:'orderName']
+      end
+
+      if attributes.has_key?(:'plannedExecutionDate')
+        self.planned_execution_date = attributes[:'plannedExecutionDate']
       end
 
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
+      if attributes.has_key?(:'recurrenceNumber')
+        self.recurrence_number = attributes[:'recurrenceNumber']
+      end
+
+      if attributes.has_key?(:'shop')
+        self.shop = attributes[:'shop']
+      end
+
+      if attributes.has_key?(:'startedProcessingOn')
+        self.started_processing_on = attributes[:'startedProcessingOn']
+      end
+
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'subscriptionVersion')
+        self.subscription_version = attributes[:'subscriptionVersion']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'transaction')
+        self.transaction = attributes[:'transaction']
       end
     end
 
@@ -155,16 +216,23 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
           id == o.id &&
-          image == o.image &&
-          image_type == o.image_type &&
-          manufacturer == o.manufacturer &&
-          name == o.name &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
+          billed_on == o.billed_on &&
+          checkout_token == o.checkout_token &&
+          created_on == o.created_on &&
+          failure_reason == o.failure_reason &&
+          order_id == o.order_id &&
+          order_name == o.order_name &&
+          planned_execution_date == o.planned_execution_date &&
           planned_purge_date == o.planned_purge_date &&
+          recurrence_number == o.recurrence_number &&
+          shop == o.shop &&
+          started_processing_on == o.started_processing_on &&
           state == o.state &&
-          title == o.title &&
-          version == o.version
+          subscription_version == o.subscription_version &&
+          transaction == o.transaction
     end
 
     # @see the `==` method
@@ -176,7 +244,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, id, image, image_type, manufacturer, name, planned_purge_date, state, title, version].hash
+      [id, linked_space_id, linked_transaction, billed_on, checkout_token, created_on, failure_reason, order_id, order_name, planned_execution_date, planned_purge_date, recurrence_number, shop, started_processing_on, state, subscription_version, transaction].hash
     end
 
     # Builds the object from hash

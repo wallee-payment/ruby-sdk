@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -23,30 +23,33 @@ require 'date'
 
 module Wallee
   # 
-  class PaymentTerminalDevice
+  class CustomerComment
     # 
-    attr_accessor :account
+    attr_accessor :content
+
+    # 
+    attr_accessor :created_by
 
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
+    # 
+    attr_accessor :customer
+
+    # 
+    attr_accessor :edited_by
+
+    # The date on which the comment was last edited.
+    attr_accessor :edited_on
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # 
-    attr_accessor :model
+    # The linked space id holds the ID of the space to which the entity belongs to.
+    attr_accessor :linked_space_id
 
     # 
-    attr_accessor :name
-
-    # 
-    attr_accessor :serial_number
-
-    # 
-    attr_accessor :state
-
-    # 
-    attr_accessor :terminal
+    attr_accessor :pinned
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -54,14 +57,15 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account' => :'account',
+        :'content' => :'content',
+        :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'customer' => :'customer',
+        :'edited_by' => :'editedBy',
+        :'edited_on' => :'editedOn',
         :'id' => :'id',
-        :'model' => :'model',
-        :'name' => :'name',
-        :'serial_number' => :'serialNumber',
-        :'state' => :'state',
-        :'terminal' => :'terminal',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'pinned' => :'pinned',
         :'version' => :'version'
       }
     end
@@ -69,14 +73,15 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'account' => :'Account',
+        :'content' => :'String',
+        :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'customer' => :'Integer',
+        :'edited_by' => :'Integer',
+        :'edited_on' => :'DateTime',
         :'id' => :'Integer',
-        :'model' => :'PaymentTerminalDeviceModel',
-        :'name' => :'String',
-        :'serial_number' => :'String',
-        :'state' => :'PaymentTerminalDeviceState',
-        :'terminal' => :'PaymentTerminalReference',
+        :'linked_space_id' => :'Integer',
+        :'pinned' => :'BOOLEAN',
         :'version' => :'Integer'
       }
     end
@@ -89,36 +94,40 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'createdBy')
+        self.created_by = attributes[:'createdBy']
       end
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
       end
 
+      if attributes.has_key?(:'customer')
+        self.customer = attributes[:'customer']
+      end
+
+      if attributes.has_key?(:'editedBy')
+        self.edited_by = attributes[:'editedBy']
+      end
+
+      if attributes.has_key?(:'editedOn')
+        self.edited_on = attributes[:'editedOn']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'model')
-        self.model = attributes[:'model']
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'serialNumber')
-        self.serial_number = attributes[:'serialNumber']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'terminal')
-        self.terminal = attributes[:'terminal']
+      if attributes.has_key?(:'pinned')
+        self.pinned = attributes[:'pinned']
       end
 
       if attributes.has_key?(:'version')
@@ -144,14 +153,15 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account == o.account &&
+          content == o.content &&
+          created_by == o.created_by &&
           created_on == o.created_on &&
+          customer == o.customer &&
+          edited_by == o.edited_by &&
+          edited_on == o.edited_on &&
           id == o.id &&
-          model == o.model &&
-          name == o.name &&
-          serial_number == o.serial_number &&
-          state == o.state &&
-          terminal == o.terminal &&
+          linked_space_id == o.linked_space_id &&
+          pinned == o.pinned &&
           version == o.version
     end
 
@@ -164,7 +174,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, created_on, id, model, name, serial_number, state, terminal, version].hash
+      [content, created_by, created_on, customer, edited_by, edited_on, id, linked_space_id, pinned, version].hash
     end
 
     # Builds the object from hash

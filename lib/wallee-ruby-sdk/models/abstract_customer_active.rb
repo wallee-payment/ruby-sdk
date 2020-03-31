@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -22,52 +22,51 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # 
-  class PaymentTerminalDeviceManufacturer
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
+  class AbstractCustomerActive
+    # 
+    attr_accessor :customer_id
 
     # 
-    attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    attr_accessor :email_address
 
     # 
-    attr_accessor :scope
+    attr_accessor :family_name
 
     # 
-    attr_accessor :state
+    attr_accessor :given_name
 
     # 
-    attr_accessor :title
+    attr_accessor :language
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # Meta data allow to store additional data along the object.
+    attr_accessor :meta_data
+
+    # 
+    attr_accessor :preferred_currency
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'scope' => :'scope',
-        :'state' => :'state',
-        :'title' => :'title',
-        :'version' => :'version'
+        :'customer_id' => :'customerId',
+        :'email_address' => :'emailAddress',
+        :'family_name' => :'familyName',
+        :'given_name' => :'givenName',
+        :'language' => :'language',
+        :'meta_data' => :'metaData',
+        :'preferred_currency' => :'preferredCurrency'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'scope' => :'Scope',
-        :'state' => :'CreationEntityState',
-        :'title' => :'DatabaseTranslatedString',
-        :'version' => :'Integer'
+        :'customer_id' => :'String',
+        :'email_address' => :'String',
+        :'family_name' => :'String',
+        :'given_name' => :'String',
+        :'language' => :'String',
+        :'meta_data' => :'Hash<String, String>',
+        :'preferred_currency' => :'String'
       }
     end
 
@@ -79,32 +78,34 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'customerId')
+        self.customer_id = attributes[:'customerId']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'emailAddress')
+        self.email_address = attributes[:'emailAddress']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.has_key?(:'familyName')
+        self.family_name = attributes[:'familyName']
       end
 
-      if attributes.has_key?(:'scope')
-        self.scope = attributes[:'scope']
+      if attributes.has_key?(:'givenName')
+        self.given_name = attributes[:'givenName']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.has_key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'metaData')
+        if (value = attributes[:'metaData']).is_a?(Hash)
+          self.meta_data = value
+        end
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'preferredCurrency')
+        self.preferred_currency = attributes[:'preferredCurrency']
       end
     end
 
@@ -126,13 +127,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
-          scope == o.scope &&
-          state == o.state &&
-          title == o.title &&
-          version == o.version
+          customer_id == o.customer_id &&
+          email_address == o.email_address &&
+          family_name == o.family_name &&
+          given_name == o.given_name &&
+          language == o.language &&
+          meta_data == o.meta_data &&
+          preferred_currency == o.preferred_currency
     end
 
     # @see the `==` method
@@ -144,7 +145,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, planned_purge_date, scope, state, title, version].hash
+      [customer_id, email_address, family_name, given_name, language, meta_data, preferred_currency].hash
     end
 
     # Builds the object from hash

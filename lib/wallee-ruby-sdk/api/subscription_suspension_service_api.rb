@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_suspension_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_suspension_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_suspension_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.subscription_suspension_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.subscription_suspension_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-suspension/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#subscription_suspension_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param suspension 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionSuspension]
-    def subscription_suspension_service_create(space_id, suspension, opts = {})
-      data, _status_code, _headers = subscription_suspension_service_create_with_http_info(space_id, suspension, opts)
+    def create(space_id, suspension, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, suspension, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param suspension 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionSuspension, Fixnum, Hash)>] SubscriptionSuspension data, response status code and response headers
-    def subscription_suspension_service_create_with_http_info(space_id, suspension, opts = {})
+    def create_with_http_info(space_id, suspension, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.subscription_suspension_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.subscription_suspension_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.create" if space_id.nil?
       # verify the required parameter 'suspension' is set
-      fail ArgumentError, "Missing the required parameter 'suspension' when calling SubscriptionSuspensionService.subscription_suspension_service_create" if suspension.nil?
+      fail ArgumentError, "Missing the required parameter 'suspension' when calling SubscriptionSuspensionService.create" if suspension.nil?
       # resource path
       local_var_path = "/subscription-suspension/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionSuspension')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#subscription_suspension_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param id The id of the suspension which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionSuspension]
-    def subscription_suspension_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_suspension_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param id The id of the suspension which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionSuspension, Fixnum, Hash)>] SubscriptionSuspension data, response status code and response headers
-    def subscription_suspension_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.subscription_suspension_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.subscription_suspension_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionSuspensionService.subscription_suspension_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionSuspensionService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-suspension/read".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionSuspension')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#subscription_suspension_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param query The query restricts the subscription suspensions which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionSuspension>]
-    def subscription_suspension_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_suspension_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param query The query restricts the subscription suspensions which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionSuspension>, Fixnum, Hash)>] Array<SubscriptionSuspension> data, response status code and response headers
-    def subscription_suspension_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.subscription_suspension_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.subscription_suspension_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionSuspensionService.subscription_suspension_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionSuspensionService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-suspension/search".sub('{format}','json')
 
@@ -271,7 +271,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionSuspension>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#subscription_suspension_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -282,8 +282,8 @@ module Wallee
     # @param suspension_id 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionSuspension]
-    def subscription_suspension_service_terminate(space_id, suspension_id, opts = {})
-      data, _status_code, _headers = subscription_suspension_service_terminate_with_http_info(space_id, suspension_id, opts)
+    def terminate(space_id, suspension_id, opts = {})
+      data, _status_code, _headers = terminate_with_http_info(space_id, suspension_id, opts)
       return data
     end
 
@@ -293,14 +293,14 @@ module Wallee
     # @param suspension_id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionSuspension, Fixnum, Hash)>] SubscriptionSuspension data, response status code and response headers
-    def subscription_suspension_service_terminate_with_http_info(space_id, suspension_id, opts = {})
+    def terminate_with_http_info(space_id, suspension_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.subscription_suspension_service_terminate ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.terminate ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.subscription_suspension_service_terminate" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.terminate" if space_id.nil?
       # verify the required parameter 'suspension_id' is set
-      fail ArgumentError, "Missing the required parameter 'suspension_id' when calling SubscriptionSuspensionService.subscription_suspension_service_terminate" if suspension_id.nil?
+      fail ArgumentError, "Missing the required parameter 'suspension_id' when calling SubscriptionSuspensionService.terminate" if suspension_id.nil?
       # resource path
       local_var_path = "/subscription-suspension/terminate".sub('{format}','json')
 
@@ -334,7 +334,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionSuspension')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#subscription_suspension_service_terminate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionSuspensionService#terminate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

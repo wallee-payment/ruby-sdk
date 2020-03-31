@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_metric_usage_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_metric_usage_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_metric_usage_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.subscription_metric_usage_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-metric-usage/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#subscription_metric_usage_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param usage_report The usage report which should be created.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionMetricUsageReport]
-    def subscription_metric_usage_service_create(space_id, usage_report, opts = {})
-      data, _status_code, _headers = subscription_metric_usage_service_create_with_http_info(space_id, usage_report, opts)
+    def create(space_id, usage_report, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, usage_report, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param usage_report The usage report which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionMetricUsageReport, Fixnum, Hash)>] SubscriptionMetricUsageReport data, response status code and response headers
-    def subscription_metric_usage_service_create_with_http_info(space_id, usage_report, opts = {})
+    def create_with_http_info(space_id, usage_report, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.subscription_metric_usage_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.create" if space_id.nil?
       # verify the required parameter 'usage_report' is set
-      fail ArgumentError, "Missing the required parameter 'usage_report' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_create" if usage_report.nil?
+      fail ArgumentError, "Missing the required parameter 'usage_report' when calling SubscriptionMetricUsageService.create" if usage_report.nil?
       # resource path
       local_var_path = "/subscription-metric-usage/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionMetricUsageReport')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#subscription_metric_usage_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param id The id of the usage report which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionMetricUsageReport]
-    def subscription_metric_usage_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_metric_usage_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param id The id of the usage report which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionMetricUsageReport, Fixnum, Hash)>] SubscriptionMetricUsageReport data, response status code and response headers
-    def subscription_metric_usage_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.subscription_metric_usage_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionMetricUsageService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-metric-usage/read".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionMetricUsageReport')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#subscription_metric_usage_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param query The query restricts the usage reports which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionMetricUsageReport>]
-    def subscription_metric_usage_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_metric_usage_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param query The query restricts the usage reports which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionMetricUsageReport>, Fixnum, Hash)>] Array<SubscriptionMetricUsageReport> data, response status code and response headers
-    def subscription_metric_usage_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.subscription_metric_usage_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionMetricUsageService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionMetricUsageService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionMetricUsageService.subscription_metric_usage_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionMetricUsageService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-metric-usage/search".sub('{format}','json')
 
@@ -271,7 +271,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionMetricUsageReport>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#subscription_metric_usage_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionMetricUsageService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param transaction_id The transaction for which the plans should be calculated for.
     # @param [Hash] opts the optional parameters
     # @return [Array<InstallmentCalculatedPlan>]
-    def installment_plan_calculation_service_calculate_plans(space_id, transaction_id, opts = {})
-      data, _status_code, _headers = installment_plan_calculation_service_calculate_plans_with_http_info(space_id, transaction_id, opts)
+    def calculate_plans(space_id, transaction_id, opts = {})
+      data, _status_code, _headers = calculate_plans_with_http_info(space_id, transaction_id, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param transaction_id The transaction for which the plans should be calculated for.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<InstallmentCalculatedPlan>, Fixnum, Hash)>] Array<InstallmentCalculatedPlan> data, response status code and response headers
-    def installment_plan_calculation_service_calculate_plans_with_http_info(space_id, transaction_id, opts = {})
+    def calculate_plans_with_http_info(space_id, transaction_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPlanCalculationService.installment_plan_calculation_service_calculate_plans ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPlanCalculationService.calculate_plans ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanCalculationService.installment_plan_calculation_service_calculate_plans" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanCalculationService.calculate_plans" if space_id.nil?
       # verify the required parameter 'transaction_id' is set
-      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling InstallmentPlanCalculationService.installment_plan_calculation_service_calculate_plans" if transaction_id.nil?
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling InstallmentPlanCalculationService.calculate_plans" if transaction_id.nil?
       # resource path
       local_var_path = "/installment-plan-calculation/calculatePlans".sub('{format}','json')
 
@@ -87,7 +87,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<InstallmentCalculatedPlan>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPlanCalculationService#installment_plan_calculation_service_calculate_plans\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPlanCalculationService#calculate_plans\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

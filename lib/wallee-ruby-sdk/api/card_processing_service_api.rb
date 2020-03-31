@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -37,8 +37,8 @@ module Wallee
     # @param card_data The card details as JSON in plain which should be used to authorize the payment.
     # @param [Hash] opts the optional parameters
     # @return [Transaction]
-    def card_processing_service_process(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
-      data, _status_code, _headers = card_processing_service_process_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts)
+    def process(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
+      data, _status_code, _headers = process_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts)
       return data
     end
 
@@ -50,18 +50,18 @@ module Wallee
     # @param card_data The card details as JSON in plain which should be used to authorize the payment.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Fixnum, Hash)>] Transaction data, response status code and response headers
-    def card_processing_service_process_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
+    def process_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CardProcessingService.card_processing_service_process ..."
+        @api_client.config.logger.debug "Calling API: CardProcessingService.process ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling CardProcessingService.card_processing_service_process" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling CardProcessingService.process" if space_id.nil?
       # verify the required parameter 'transaction_id' is set
-      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling CardProcessingService.card_processing_service_process" if transaction_id.nil?
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling CardProcessingService.process" if transaction_id.nil?
       # verify the required parameter 'payment_method_configuration_id' is set
-      fail ArgumentError, "Missing the required parameter 'payment_method_configuration_id' when calling CardProcessingService.card_processing_service_process" if payment_method_configuration_id.nil?
+      fail ArgumentError, "Missing the required parameter 'payment_method_configuration_id' when calling CardProcessingService.process" if payment_method_configuration_id.nil?
       # verify the required parameter 'card_data' is set
-      fail ArgumentError, "Missing the required parameter 'card_data' when calling CardProcessingService.card_processing_service_process" if card_data.nil?
+      fail ArgumentError, "Missing the required parameter 'card_data' when calling CardProcessingService.process" if card_data.nil?
       # resource path
       local_var_path = "/card-processing/process".sub('{format}','json')
 
@@ -96,7 +96,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CardProcessingService#card_processing_service_process\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CardProcessingService#process\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -109,8 +109,8 @@ module Wallee
     # @param card_data The card details as JSON in plain which should be used to authorize the payment.
     # @param [Hash] opts the optional parameters
     # @return [String]
-    def card_processing_service_process_with3_d_secure(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
-      data, _status_code, _headers = card_processing_service_process_with3_d_secure_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts)
+    def process_with3_d_secure(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
+      data, _status_code, _headers = process_with3_d_secure_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts)
       return data
     end
 
@@ -122,18 +122,18 @@ module Wallee
     # @param card_data The card details as JSON in plain which should be used to authorize the payment.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
-    def card_processing_service_process_with3_d_secure_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
+    def process_with3_d_secure_with_http_info(space_id, transaction_id, payment_method_configuration_id, card_data, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CardProcessingService.card_processing_service_process_with3_d_secure ..."
+        @api_client.config.logger.debug "Calling API: CardProcessingService.process_with3_d_secure ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling CardProcessingService.card_processing_service_process_with3_d_secure" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling CardProcessingService.process_with3_d_secure" if space_id.nil?
       # verify the required parameter 'transaction_id' is set
-      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling CardProcessingService.card_processing_service_process_with3_d_secure" if transaction_id.nil?
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling CardProcessingService.process_with3_d_secure" if transaction_id.nil?
       # verify the required parameter 'payment_method_configuration_id' is set
-      fail ArgumentError, "Missing the required parameter 'payment_method_configuration_id' when calling CardProcessingService.card_processing_service_process_with3_d_secure" if payment_method_configuration_id.nil?
+      fail ArgumentError, "Missing the required parameter 'payment_method_configuration_id' when calling CardProcessingService.process_with3_d_secure" if payment_method_configuration_id.nil?
       # verify the required parameter 'card_data' is set
-      fail ArgumentError, "Missing the required parameter 'card_data' when calling CardProcessingService.card_processing_service_process_with3_d_secure" if card_data.nil?
+      fail ArgumentError, "Missing the required parameter 'card_data' when calling CardProcessingService.process_with3_d_secure" if card_data.nil?
       # resource path
       local_var_path = "/card-processing/processWith3DSecure".sub('{format}','json')
 
@@ -168,7 +168,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CardProcessingService#card_processing_service_process_with3_d_secure\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CardProcessingService#process_with3_d_secure\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

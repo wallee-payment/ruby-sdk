@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -28,6 +28,9 @@ module Wallee
     attr_accessor :beta
 
     # 
+    attr_accessor :category
+
+    # 
     attr_accessor :description
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -52,6 +55,7 @@ module Wallee
     def self.attribute_map
       {
         :'beta' => :'beta',
+        :'category' => :'category',
         :'description' => :'description',
         :'id' => :'id',
         :'logo_path' => :'logoPath',
@@ -66,6 +70,7 @@ module Wallee
     def self.swagger_types
       {
         :'beta' => :'BOOLEAN',
+        :'category' => :'FeatureCategory',
         :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'logo_path' => :'String',
@@ -86,6 +91,10 @@ module Wallee
 
       if attributes.has_key?(:'beta')
         self.beta = attributes[:'beta']
+      end
+
+      if attributes.has_key?(:'category')
+        self.category = attributes[:'category']
       end
 
       if attributes.has_key?(:'description')
@@ -142,6 +151,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           beta == o.beta &&
+          category == o.category &&
           description == o.description &&
           id == o.id &&
           logo_path == o.logo_path &&
@@ -160,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [beta, description, id, logo_path, name, required_features, sort_order, visible].hash
+      [beta, category, description, id, logo_path, name, required_features, sort_order, visible].hash
     end
 
     # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param filter The filter which restricts the installment plan configurations which are used to calculate the count.
     # @param [Hash] opts the optional parameters
     # @return [Integer]
-    def installment_plan_configuration_service_count(space_id, filter, opts = {})
-      data, _status_code, _headers = installment_plan_configuration_service_count_with_http_info(space_id, filter, opts)
+    def count(space_id, filter, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, filter, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param filter The filter which restricts the installment plan configurations which are used to calculate the count.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def installment_plan_configuration_service_count_with_http_info(space_id, filter, opts = {})
+    def count_with_http_info(space_id, filter, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.installment_plan_configuration_service_count ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.count" if space_id.nil?
       # verify the required parameter 'filter' is set
-      fail ArgumentError, "Missing the required parameter 'filter' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_count" if filter.nil?
+      fail ArgumentError, "Missing the required parameter 'filter' when calling InstallmentPlanConfigurationService.count" if filter.nil?
       # resource path
       local_var_path = "/installment-plan-configuration/count".sub('{format}','json')
 
@@ -86,7 +86,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#installment_plan_configuration_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -97,8 +97,8 @@ module Wallee
     # @param id The id of the installment plan configuration which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [InstallmentPlanConfiguration]
-    def installment_plan_configuration_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = installment_plan_configuration_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -108,14 +108,14 @@ module Wallee
     # @param id The id of the installment plan configuration which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(InstallmentPlanConfiguration, Fixnum, Hash)>] InstallmentPlanConfiguration data, response status code and response headers
-    def installment_plan_configuration_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.installment_plan_configuration_service_read ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling InstallmentPlanConfigurationService.read" if id.nil?
       # resource path
       local_var_path = "/installment-plan-configuration/read".sub('{format}','json')
 
@@ -149,7 +149,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'InstallmentPlanConfiguration')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#installment_plan_configuration_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -160,8 +160,8 @@ module Wallee
     # @param query The query restricts the installment plan configurations which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<InstallmentPlanConfiguration>]
-    def installment_plan_configuration_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = installment_plan_configuration_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -171,14 +171,14 @@ module Wallee
     # @param query The query restricts the installment plan configurations which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<InstallmentPlanConfiguration>, Fixnum, Hash)>] Array<InstallmentPlanConfiguration> data, response status code and response headers
-    def installment_plan_configuration_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.installment_plan_configuration_service_search ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPlanConfigurationService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPlanConfigurationService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling InstallmentPlanConfigurationService.installment_plan_configuration_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling InstallmentPlanConfigurationService.search" if query.nil?
       # resource path
       local_var_path = "/installment-plan-configuration/search".sub('{format}','json')
 
@@ -211,7 +211,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<InstallmentPlanConfiguration>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#installment_plan_configuration_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPlanConfigurationService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

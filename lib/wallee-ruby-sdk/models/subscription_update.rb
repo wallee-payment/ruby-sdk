@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -31,6 +31,9 @@ module Wallee
     attr_accessor :version
 
     # 
+    attr_accessor :affiliate
+
+    # 
     attr_accessor :description
 
     # 
@@ -41,6 +44,7 @@ module Wallee
       {
         :'id' => :'id',
         :'version' => :'version',
+        :'affiliate' => :'affiliate',
         :'description' => :'description',
         :'planned_termination_date' => :'plannedTerminationDate'
       }
@@ -51,6 +55,7 @@ module Wallee
       {
         :'id' => :'Integer',
         :'version' => :'Integer',
+        :'affiliate' => :'Integer',
         :'description' => :'String',
         :'planned_termination_date' => :'DateTime'
       }
@@ -70,6 +75,10 @@ module Wallee
 
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.has_key?(:'affiliate')
+        self.affiliate = attributes[:'affiliate']
       end
 
       if attributes.has_key?(:'description')
@@ -111,6 +120,7 @@ module Wallee
       self.class == o.class &&
           id == o.id &&
           version == o.version &&
+          affiliate == o.affiliate &&
           description == o.description &&
           planned_termination_date == o.planned_termination_date
     end
@@ -124,7 +134,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, description, planned_termination_date].hash
+      [id, version, affiliate, description, planned_termination_date].hash
     end
 
     # Builds the object from hash

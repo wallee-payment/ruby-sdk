@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,8 +33,8 @@ module Wallee
     # This operation returns all states of all countries.
     # @param [Hash] opts the optional parameters
     # @return [Array<RestCountryState>]
-    def country_state_service_all(opts = {})
-      data, _status_code, _headers = country_state_service_all_with_http_info(opts)
+    def all(opts = {})
+      data, _status_code, _headers = all_with_http_info(opts)
       return data
     end
 
@@ -42,9 +42,9 @@ module Wallee
     # This operation returns all states of all countries.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestCountryState>, Fixnum, Hash)>] Array<RestCountryState> data, response status code and response headers
-    def country_state_service_all_with_http_info(opts = {})
+    def all_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CountryStateService.country_state_service_all ..."
+        @api_client.config.logger.debug "Calling API: CountryStateService.all ..."
       end
       # resource path
       local_var_path = "/country-state/all".sub('{format}','json')
@@ -77,7 +77,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<RestCountryState>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CountryStateService#country_state_service_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CountryStateService#all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -87,8 +87,8 @@ module Wallee
     # @param code The country code in ISO code two letter format for which all states should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<RestCountryState>]
-    def country_state_service_country(code, opts = {})
-      data, _status_code, _headers = country_state_service_country_with_http_info(code, opts)
+    def country(code, opts = {})
+      data, _status_code, _headers = country_with_http_info(code, opts)
       return data
     end
 
@@ -97,12 +97,12 @@ module Wallee
     # @param code The country code in ISO code two letter format for which all states should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestCountryState>, Fixnum, Hash)>] Array<RestCountryState> data, response status code and response headers
-    def country_state_service_country_with_http_info(code, opts = {})
+    def country_with_http_info(code, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CountryStateService.country_state_service_country ..."
+        @api_client.config.logger.debug "Calling API: CountryStateService.country ..."
       end
       # verify the required parameter 'code' is set
-      fail ArgumentError, "Missing the required parameter 'code' when calling CountryStateService.country_state_service_country" if code.nil?
+      fail ArgumentError, "Missing the required parameter 'code' when calling CountryStateService.country" if code.nil?
       # resource path
       local_var_path = "/country-state/country".sub('{format}','json')
 
@@ -135,7 +135,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<RestCountryState>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CountryStateService#country_state_service_country\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CountryStateService#country\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

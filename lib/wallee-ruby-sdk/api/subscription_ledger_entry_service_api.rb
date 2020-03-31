@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_ledger_entry_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_ledger_entry_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_ledger_entry_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.subscription_ledger_entry_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-ledger-entry/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#subscription_ledger_entry_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param entry 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionLedgerEntry]
-    def subscription_ledger_entry_service_create(space_id, entry, opts = {})
-      data, _status_code, _headers = subscription_ledger_entry_service_create_with_http_info(space_id, entry, opts)
+    def create(space_id, entry, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entry, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param entry 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionLedgerEntry, Fixnum, Hash)>] SubscriptionLedgerEntry data, response status code and response headers
-    def subscription_ledger_entry_service_create_with_http_info(space_id, entry, opts = {})
+    def create_with_http_info(space_id, entry, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.subscription_ledger_entry_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.create" if space_id.nil?
       # verify the required parameter 'entry' is set
-      fail ArgumentError, "Missing the required parameter 'entry' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_create" if entry.nil?
+      fail ArgumentError, "Missing the required parameter 'entry' when calling SubscriptionLedgerEntryService.create" if entry.nil?
       # resource path
       local_var_path = "/subscription-ledger-entry/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionLedgerEntry')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#subscription_ledger_entry_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param id The id of the subscription charge which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionLedgerEntry]
-    def subscription_ledger_entry_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_ledger_entry_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param id The id of the subscription charge which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionLedgerEntry, Fixnum, Hash)>] SubscriptionLedgerEntry data, response status code and response headers
-    def subscription_ledger_entry_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.subscription_ledger_entry_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionLedgerEntryService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-ledger-entry/read".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionLedgerEntry')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#subscription_ledger_entry_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param query The query restricts the subscription charges which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionLedgerEntry>]
-    def subscription_ledger_entry_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_ledger_entry_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param query The query restricts the subscription charges which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionLedgerEntry>, Fixnum, Hash)>] Array<SubscriptionLedgerEntry> data, response status code and response headers
-    def subscription_ledger_entry_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.subscription_ledger_entry_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionLedgerEntryService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionLedgerEntryService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionLedgerEntryService.subscription_ledger_entry_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionLedgerEntryService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-ledger-entry/search".sub('{format}','json')
 
@@ -271,7 +271,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionLedgerEntry>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#subscription_ledger_entry_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionLedgerEntryService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

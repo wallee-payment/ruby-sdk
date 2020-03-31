@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,8 +33,8 @@ module Wallee
     # This operation returns all entities which are available.
     # @param [Hash] opts the optional parameters
     # @return [Array<PaymentMethod>]
-    def payment_method_service_all(opts = {})
-      data, _status_code, _headers = payment_method_service_all_with_http_info(opts)
+    def all(opts = {})
+      data, _status_code, _headers = all_with_http_info(opts)
       return data
     end
 
@@ -42,9 +42,9 @@ module Wallee
     # This operation returns all entities which are available.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<PaymentMethod>, Fixnum, Hash)>] Array<PaymentMethod> data, response status code and response headers
-    def payment_method_service_all_with_http_info(opts = {})
+    def all_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: PaymentMethodService.payment_method_service_all ..."
+        @api_client.config.logger.debug "Calling API: PaymentMethodService.all ..."
       end
       # resource path
       local_var_path = "/payment-method/all".sub('{format}','json')
@@ -77,7 +77,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<PaymentMethod>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PaymentMethodService#payment_method_service_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: PaymentMethodService#all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -87,8 +87,8 @@ module Wallee
     # @param id The id of the payment method which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [PaymentMethod]
-    def payment_method_service_read(id, opts = {})
-      data, _status_code, _headers = payment_method_service_read_with_http_info(id, opts)
+    def read(id, opts = {})
+      data, _status_code, _headers = read_with_http_info(id, opts)
       return data
     end
 
@@ -97,12 +97,12 @@ module Wallee
     # @param id The id of the payment method which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PaymentMethod, Fixnum, Hash)>] PaymentMethod data, response status code and response headers
-    def payment_method_service_read_with_http_info(id, opts = {})
+    def read_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: PaymentMethodService.payment_method_service_read ..."
+        @api_client.config.logger.debug "Calling API: PaymentMethodService.read ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling PaymentMethodService.payment_method_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling PaymentMethodService.read" if id.nil?
       # resource path
       local_var_path = "/payment-method/read".sub('{format}','json')
 
@@ -135,7 +135,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'PaymentMethod')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PaymentMethodService#payment_method_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: PaymentMethodService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

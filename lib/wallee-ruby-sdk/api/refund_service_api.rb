@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def refund_service_count(space_id, opts = {})
-      data, _status_code, _headers = refund_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def refund_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_count ..."
+        @api_client.config.logger.debug "Calling API: RefundService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.count" if space_id.nil?
       # resource path
       local_var_path = "/refund/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param refund_id The id of the refund which should be marked as failed.
     # @param [Hash] opts the optional parameters
     # @return [Refund]
-    def refund_service_fail(space_id, refund_id, opts = {})
-      data, _status_code, _headers = refund_service_fail_with_http_info(space_id, refund_id, opts)
+    def fail(space_id, refund_id, opts = {})
+      data, _status_code, _headers = fail_with_http_info(space_id, refund_id, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param refund_id The id of the refund which should be marked as failed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Refund, Fixnum, Hash)>] Refund data, response status code and response headers
-    def refund_service_fail_with_http_info(space_id, refund_id, opts = {})
+    def fail_with_http_info(space_id, refund_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_fail ..."
+        @api_client.config.logger.debug "Calling API: RefundService.fail ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_fail" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.fail" if space_id.nil?
       # verify the required parameter 'refund_id' is set
-      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundService.refund_service_fail" if refund_id.nil?
+      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundService.fail" if refund_id.nil?
       # resource path
       local_var_path = "/refund/fail".sub('{format}','json')
 
@@ -147,7 +147,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_fail\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#fail\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -158,8 +158,8 @@ module Wallee
     # @param id The id of the refund to get the document for.
     # @param [Hash] opts the optional parameters
     # @return [RenderedDocument]
-    def refund_service_get_refund_document(space_id, id, opts = {})
-      data, _status_code, _headers = refund_service_get_refund_document_with_http_info(space_id, id, opts)
+    def get_refund_document(space_id, id, opts = {})
+      data, _status_code, _headers = get_refund_document_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -169,14 +169,14 @@ module Wallee
     # @param id The id of the refund to get the document for.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RenderedDocument, Fixnum, Hash)>] RenderedDocument data, response status code and response headers
-    def refund_service_get_refund_document_with_http_info(space_id, id, opts = {})
+    def get_refund_document_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_get_refund_document ..."
+        @api_client.config.logger.debug "Calling API: RefundService.get_refund_document ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_get_refund_document" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.get_refund_document" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.refund_service_get_refund_document" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.get_refund_document" if id.nil?
       # resource path
       local_var_path = "/refund/getRefundDocument".sub('{format}','json')
 
@@ -210,7 +210,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_get_refund_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#get_refund_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -222,8 +222,8 @@ module Wallee
     # @param target_media_type_id The id of the target media type for which the refund should be generated for.
     # @param [Hash] opts the optional parameters
     # @return [RenderedDocument]
-    def refund_service_get_refund_document_with_target_media_type(space_id, id, target_media_type_id, opts = {})
-      data, _status_code, _headers = refund_service_get_refund_document_with_target_media_type_with_http_info(space_id, id, target_media_type_id, opts)
+    def get_refund_document_with_target_media_type(space_id, id, target_media_type_id, opts = {})
+      data, _status_code, _headers = get_refund_document_with_target_media_type_with_http_info(space_id, id, target_media_type_id, opts)
       return data
     end
 
@@ -234,16 +234,16 @@ module Wallee
     # @param target_media_type_id The id of the target media type for which the refund should be generated for.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RenderedDocument, Fixnum, Hash)>] RenderedDocument data, response status code and response headers
-    def refund_service_get_refund_document_with_target_media_type_with_http_info(space_id, id, target_media_type_id, opts = {})
+    def get_refund_document_with_target_media_type_with_http_info(space_id, id, target_media_type_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_get_refund_document_with_target_media_type ..."
+        @api_client.config.logger.debug "Calling API: RefundService.get_refund_document_with_target_media_type ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_get_refund_document_with_target_media_type" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.get_refund_document_with_target_media_type" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.refund_service_get_refund_document_with_target_media_type" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.get_refund_document_with_target_media_type" if id.nil?
       # verify the required parameter 'target_media_type_id' is set
-      fail ArgumentError, "Missing the required parameter 'target_media_type_id' when calling RefundService.refund_service_get_refund_document_with_target_media_type" if target_media_type_id.nil?
+      fail ArgumentError, "Missing the required parameter 'target_media_type_id' when calling RefundService.get_refund_document_with_target_media_type" if target_media_type_id.nil?
       # resource path
       local_var_path = "/refund/getRefundDocumentWithTargetMediaType".sub('{format}','json')
 
@@ -278,7 +278,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_get_refund_document_with_target_media_type\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#get_refund_document_with_target_media_type\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -289,8 +289,8 @@ module Wallee
     # @param id The id of the refund which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Refund]
-    def refund_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = refund_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -300,14 +300,14 @@ module Wallee
     # @param id The id of the refund which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Refund, Fixnum, Hash)>] Refund data, response status code and response headers
-    def refund_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_read ..."
+        @api_client.config.logger.debug "Calling API: RefundService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.refund_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundService.read" if id.nil?
       # resource path
       local_var_path = "/refund/read".sub('{format}','json')
 
@@ -341,7 +341,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -352,8 +352,8 @@ module Wallee
     # @param refund The refund object which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Refund]
-    def refund_service_refund(space_id, refund, opts = {})
-      data, _status_code, _headers = refund_service_refund_with_http_info(space_id, refund, opts)
+    def refund(space_id, refund, opts = {})
+      data, _status_code, _headers = refund_with_http_info(space_id, refund, opts)
       return data
     end
 
@@ -363,14 +363,14 @@ module Wallee
     # @param refund The refund object which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Refund, Fixnum, Hash)>] Refund data, response status code and response headers
-    def refund_service_refund_with_http_info(space_id, refund, opts = {})
+    def refund_with_http_info(space_id, refund, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_refund ..."
+        @api_client.config.logger.debug "Calling API: RefundService.refund ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_refund" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund" if space_id.nil?
       # verify the required parameter 'refund' is set
-      fail ArgumentError, "Missing the required parameter 'refund' when calling RefundService.refund_service_refund" if refund.nil?
+      fail ArgumentError, "Missing the required parameter 'refund' when calling RefundService.refund" if refund.nil?
       # resource path
       local_var_path = "/refund/refund".sub('{format}','json')
 
@@ -403,7 +403,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_refund\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#refund\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -414,8 +414,8 @@ module Wallee
     # @param query The query restricts the refunds which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<Refund>]
-    def refund_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = refund_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -425,14 +425,14 @@ module Wallee
     # @param query The query restricts the refunds which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Refund>, Fixnum, Hash)>] Array<Refund> data, response status code and response headers
-    def refund_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_search ..."
+        @api_client.config.logger.debug "Calling API: RefundService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling RefundService.refund_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling RefundService.search" if query.nil?
       # resource path
       local_var_path = "/refund/search".sub('{format}','json')
 
@@ -465,7 +465,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<Refund>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -476,8 +476,8 @@ module Wallee
     # @param refund_id The id of the refund which should be marked as successful.
     # @param [Hash] opts the optional parameters
     # @return [Refund]
-    def refund_service_succeed(space_id, refund_id, opts = {})
-      data, _status_code, _headers = refund_service_succeed_with_http_info(space_id, refund_id, opts)
+    def succeed(space_id, refund_id, opts = {})
+      data, _status_code, _headers = succeed_with_http_info(space_id, refund_id, opts)
       return data
     end
 
@@ -487,14 +487,14 @@ module Wallee
     # @param refund_id The id of the refund which should be marked as successful.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Refund, Fixnum, Hash)>] Refund data, response status code and response headers
-    def refund_service_succeed_with_http_info(space_id, refund_id, opts = {})
+    def succeed_with_http_info(space_id, refund_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundService.refund_service_succeed ..."
+        @api_client.config.logger.debug "Calling API: RefundService.succeed ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.refund_service_succeed" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundService.succeed" if space_id.nil?
       # verify the required parameter 'refund_id' is set
-      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundService.refund_service_succeed" if refund_id.nil?
+      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundService.succeed" if refund_id.nil?
       # resource path
       local_var_path = "/refund/succeed".sub('{format}','json')
 
@@ -528,7 +528,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundService#refund_service_succeed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundService#succeed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

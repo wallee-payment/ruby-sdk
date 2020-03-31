@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -42,8 +42,17 @@ module Wallee
     # The linked space id holds the ID of the space to which the entity belongs to.
     attr_accessor :linked_space_id
 
+    # The maximum quantity defines the maximum value which must be entered for the quantity.
+    attr_accessor :maximal_quantity
+
+    # The minimal quantity defines the minimum value which must be entered for the quantity.
+    attr_accessor :minimal_quantity
+
     # The component name is shown to the subscriber. It should describe in few words what the component does contain.
     attr_accessor :name
+
+    # The quantity step defines at which interval the quantity can be increased.
+    attr_accessor :quantity_step
 
     # The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
     attr_accessor :reference
@@ -66,7 +75,10 @@ module Wallee
         :'description' => :'description',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
+        :'maximal_quantity' => :'maximalQuantity',
+        :'minimal_quantity' => :'minimalQuantity',
         :'name' => :'name',
+        :'quantity_step' => :'quantityStep',
         :'reference' => :'reference',
         :'sort_order' => :'sortOrder',
         :'tax_class' => :'taxClass',
@@ -83,7 +95,10 @@ module Wallee
         :'description' => :'DatabaseTranslatedString',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
+        :'maximal_quantity' => :'Float',
+        :'minimal_quantity' => :'Float',
         :'name' => :'DatabaseTranslatedString',
+        :'quantity_step' => :'Float',
         :'reference' => :'SubscriptionProductComponentReference',
         :'sort_order' => :'Integer',
         :'tax_class' => :'TaxClass',
@@ -123,8 +138,20 @@ module Wallee
         self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
+      if attributes.has_key?(:'maximalQuantity')
+        self.maximal_quantity = attributes[:'maximalQuantity']
+      end
+
+      if attributes.has_key?(:'minimalQuantity')
+        self.minimal_quantity = attributes[:'minimalQuantity']
+      end
+
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'quantityStep')
+        self.quantity_step = attributes[:'quantityStep']
       end
 
       if attributes.has_key?(:'reference')
@@ -168,7 +195,10 @@ module Wallee
           description == o.description &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
+          maximal_quantity == o.maximal_quantity &&
+          minimal_quantity == o.minimal_quantity &&
           name == o.name &&
+          quantity_step == o.quantity_step &&
           reference == o.reference &&
           sort_order == o.sort_order &&
           tax_class == o.tax_class &&
@@ -184,7 +214,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [component_change_weight, component_group, default_component, description, id, linked_space_id, name, reference, sort_order, tax_class, version].hash
+      [component_change_weight, component_group, default_component, description, id, linked_space_id, maximal_quantity, minimal_quantity, name, quantity_step, reference, sort_order, tax_class, version].hash
     end
 
     # Builds the object from hash

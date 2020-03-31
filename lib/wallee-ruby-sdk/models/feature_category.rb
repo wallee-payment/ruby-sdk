@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -23,56 +23,36 @@ require 'date'
 
 module Wallee
   # 
-  class PaymentTerminalReference
-    # The created on date indicates the date on which the entity was stored into the database.
-    attr_accessor :created_on
+  class FeatureCategory
+    # 
+    attr_accessor :description
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # 
+    attr_accessor :name
 
     # 
-    attr_accessor :space
-
-    # 
-    attr_accessor :state
-
-    # 
-    attr_accessor :terminal_id
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    attr_accessor :order_weight
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'created_on' => :'createdOn',
+        :'description' => :'description',
         :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'space' => :'space',
-        :'state' => :'state',
-        :'terminal_id' => :'terminalId',
-        :'version' => :'version'
+        :'name' => :'name',
+        :'order_weight' => :'orderWeight'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'created_on' => :'DateTime',
+        :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'space' => :'Space',
-        :'state' => :'PaymentTerminalState',
-        :'terminal_id' => :'Integer',
-        :'version' => :'Integer'
+        :'name' => :'Hash<String, String>',
+        :'order_weight' => :'Integer'
       }
     end
 
@@ -84,36 +64,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      if attributes.has_key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.has_key?(:'name')
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'space')
-        self.space = attributes[:'space']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'terminalId')
-        self.terminal_id = attributes[:'terminalId']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'orderWeight')
+        self.order_weight = attributes[:'orderWeight']
       end
     end
 
@@ -135,14 +103,10 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          created_on == o.created_on &&
+          description == o.description &&
           id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
-          space == o.space &&
-          state == o.state &&
-          terminal_id == o.terminal_id &&
-          version == o.version
+          name == o.name &&
+          order_weight == o.order_weight
     end
 
     # @see the `==` method
@@ -154,7 +118,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, id, linked_space_id, planned_purge_date, space, state, terminal_id, version].hash
+      [description, id, name, order_weight].hash
     end
 
     # Builds the object from hash

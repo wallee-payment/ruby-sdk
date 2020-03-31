@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -25,6 +25,9 @@ module Wallee
   # The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
   class RefundCreate
     # 
+    attr_accessor :amount
+
+    # 
     attr_accessor :completion
 
     # The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
@@ -45,6 +48,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'amount' => :'amount',
         :'completion' => :'completion',
         :'external_id' => :'externalId',
         :'merchant_reference' => :'merchantReference',
@@ -57,6 +61,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'amount' => :'Float',
         :'completion' => :'Integer',
         :'external_id' => :'String',
         :'merchant_reference' => :'String',
@@ -73,6 +78,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
 
       if attributes.has_key?(:'completion')
         self.completion = attributes[:'completion']
@@ -109,10 +118,6 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
-      if @reductions.nil?
-        invalid_properties.push('invalid value for "reductions", reductions cannot be nil.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -124,7 +129,6 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @external_id.nil?
-      return false if @reductions.nil?
       return false if @type.nil?
       true
     end
@@ -134,6 +138,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          amount == o.amount &&
           completion == o.completion &&
           external_id == o.external_id &&
           merchant_reference == o.merchant_reference &&
@@ -151,7 +156,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [completion, external_id, merchant_reference, reductions, transaction, type].hash
+      [amount, completion, external_id, merchant_reference, reductions, transaction, type].hash
     end
 
     # Builds the object from hash

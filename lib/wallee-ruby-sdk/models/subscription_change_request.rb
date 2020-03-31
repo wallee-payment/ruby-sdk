@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -25,6 +25,9 @@ module Wallee
   # The subscription change request allows to change a subscription.
   class SubscriptionChangeRequest
     # 
+    attr_accessor :component_configurations
+
+    # 
     attr_accessor :currency
 
     # The subscription has to be linked with a product.
@@ -42,6 +45,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'component_configurations' => :'componentConfigurations',
         :'currency' => :'currency',
         :'product' => :'product',
         :'respect_termination_period' => :'respectTerminationPeriod',
@@ -53,6 +57,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'component_configurations' => :'Array<SubscriptionComponentReferenceConfiguration>',
         :'currency' => :'String',
         :'product' => :'Integer',
         :'respect_termination_period' => :'BOOLEAN',
@@ -68,6 +73,12 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'componentConfigurations')
+        if (value = attributes[:'componentConfigurations']).is_a?(Array)
+          self.component_configurations = value
+        end
+      end
 
       if attributes.has_key?(:'currency')
         self.currency = attributes[:'currency']
@@ -125,6 +136,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          component_configurations == o.component_configurations &&
           currency == o.currency &&
           product == o.product &&
           respect_termination_period == o.respect_termination_period &&
@@ -141,7 +153,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [currency, product, respect_termination_period, selected_components, subscription].hash
+      [component_configurations, currency, product, respect_termination_period, selected_components, subscription].hash
     end
 
     # Builds the object from hash

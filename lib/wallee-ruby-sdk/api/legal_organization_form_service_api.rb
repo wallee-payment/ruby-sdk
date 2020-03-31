@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,8 +33,8 @@ module Wallee
     # This operation returns all entities which are available.
     # @param [Hash] opts the optional parameters
     # @return [Array<LegalOrganizationForm>]
-    def legal_organization_form_service_all(opts = {})
-      data, _status_code, _headers = legal_organization_form_service_all_with_http_info(opts)
+    def all(opts = {})
+      data, _status_code, _headers = all_with_http_info(opts)
       return data
     end
 
@@ -42,9 +42,9 @@ module Wallee
     # This operation returns all entities which are available.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<LegalOrganizationForm>, Fixnum, Hash)>] Array<LegalOrganizationForm> data, response status code and response headers
-    def legal_organization_form_service_all_with_http_info(opts = {})
+    def all_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.legal_organization_form_service_all ..."
+        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.all ..."
       end
       # resource path
       local_var_path = "/legal-organization-form/all".sub('{format}','json')
@@ -77,7 +77,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<LegalOrganizationForm>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: LegalOrganizationFormService#legal_organization_form_service_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: LegalOrganizationFormService#all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -87,8 +87,8 @@ module Wallee
     # @param code The country in ISO 3166-1 alpha-2 format, for which all legal organization forms should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<LegalOrganizationForm>]
-    def legal_organization_form_service_country(code, opts = {})
-      data, _status_code, _headers = legal_organization_form_service_country_with_http_info(code, opts)
+    def country(code, opts = {})
+      data, _status_code, _headers = country_with_http_info(code, opts)
       return data
     end
 
@@ -97,12 +97,12 @@ module Wallee
     # @param code The country in ISO 3166-1 alpha-2 format, for which all legal organization forms should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<LegalOrganizationForm>, Fixnum, Hash)>] Array<LegalOrganizationForm> data, response status code and response headers
-    def legal_organization_form_service_country_with_http_info(code, opts = {})
+    def country_with_http_info(code, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.legal_organization_form_service_country ..."
+        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.country ..."
       end
       # verify the required parameter 'code' is set
-      fail ArgumentError, "Missing the required parameter 'code' when calling LegalOrganizationFormService.legal_organization_form_service_country" if code.nil?
+      fail ArgumentError, "Missing the required parameter 'code' when calling LegalOrganizationFormService.country" if code.nil?
       # resource path
       local_var_path = "/legal-organization-form/country".sub('{format}','json')
 
@@ -135,7 +135,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<LegalOrganizationForm>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: LegalOrganizationFormService#legal_organization_form_service_country\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: LegalOrganizationFormService#country\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -145,8 +145,8 @@ module Wallee
     # @param id The id of the legal organization form which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [LegalOrganizationForm]
-    def legal_organization_form_service_read(id, opts = {})
-      data, _status_code, _headers = legal_organization_form_service_read_with_http_info(id, opts)
+    def read(id, opts = {})
+      data, _status_code, _headers = read_with_http_info(id, opts)
       return data
     end
 
@@ -155,12 +155,12 @@ module Wallee
     # @param id The id of the legal organization form which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LegalOrganizationForm, Fixnum, Hash)>] LegalOrganizationForm data, response status code and response headers
-    def legal_organization_form_service_read_with_http_info(id, opts = {})
+    def read_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.legal_organization_form_service_read ..."
+        @api_client.config.logger.debug "Calling API: LegalOrganizationFormService.read ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling LegalOrganizationFormService.legal_organization_form_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling LegalOrganizationFormService.read" if id.nil?
       # resource path
       local_var_path = "/legal-organization-form/read".sub('{format}','json')
 
@@ -193,7 +193,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'LegalOrganizationForm')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: LegalOrganizationFormService#legal_organization_form_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: LegalOrganizationFormService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

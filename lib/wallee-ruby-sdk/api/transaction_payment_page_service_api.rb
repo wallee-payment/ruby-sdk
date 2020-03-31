@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param id The id of the transaction which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [String]
-    def transaction_payment_page_service_payment_page_url(space_id, id, opts = {})
-      data, _status_code, _headers = transaction_payment_page_service_payment_page_url_with_http_info(space_id, id, opts)
+    def payment_page_url(space_id, id, opts = {})
+      data, _status_code, _headers = payment_page_url_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param id The id of the transaction which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
-    def transaction_payment_page_service_payment_page_url_with_http_info(space_id, id, opts = {})
+    def payment_page_url_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionPaymentPageService.transaction_payment_page_service_payment_page_url ..."
+        @api_client.config.logger.debug "Calling API: TransactionPaymentPageService.payment_page_url ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionPaymentPageService.transaction_payment_page_service_payment_page_url" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionPaymentPageService.payment_page_url" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling TransactionPaymentPageService.transaction_payment_page_service_payment_page_url" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling TransactionPaymentPageService.payment_page_url" if id.nil?
       # resource path
       local_var_path = "/transaction-payment-page/payment-page-url".sub('{format}','json')
 
@@ -87,7 +87,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionPaymentPageService#transaction_payment_page_service_payment_page_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TransactionPaymentPageService#payment_page_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

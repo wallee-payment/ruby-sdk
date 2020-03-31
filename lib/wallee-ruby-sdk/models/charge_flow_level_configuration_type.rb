@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -31,6 +31,9 @@ module Wallee
     attr_accessor :id
 
     # 
+    attr_accessor :label
+
+    # 
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -38,6 +41,7 @@ module Wallee
       {
         :'description' => :'description',
         :'id' => :'id',
+        :'label' => :'label',
         :'name' => :'name'
       }
     end
@@ -47,6 +51,7 @@ module Wallee
       {
         :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
+        :'label' => :'Hash<String, String>',
         :'name' => :'Hash<String, String>'
       }
     end
@@ -67,6 +72,12 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'label')
+        if (value = attributes[:'label']).is_a?(Hash)
+          self.label = value
+        end
       end
 
       if attributes.has_key?(:'name')
@@ -96,6 +107,7 @@ module Wallee
       self.class == o.class &&
           description == o.description &&
           id == o.id &&
+          label == o.label &&
           name == o.name
     end
 
@@ -108,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, id, name].hash
+      [description, id, label, name].hash
     end
 
     # Builds the object from hash

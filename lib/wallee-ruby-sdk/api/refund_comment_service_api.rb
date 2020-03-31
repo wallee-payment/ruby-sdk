@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param refund_id 
     # @param [Hash] opts the optional parameters
     # @return [Array<RefundComment>]
-    def refund_comment_service_all(space_id, refund_id, opts = {})
-      data, _status_code, _headers = refund_comment_service_all_with_http_info(space_id, refund_id, opts)
+    def all(space_id, refund_id, opts = {})
+      data, _status_code, _headers = all_with_http_info(space_id, refund_id, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param refund_id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RefundComment>, Fixnum, Hash)>] Array<RefundComment> data, response status code and response headers
-    def refund_comment_service_all_with_http_info(space_id, refund_id, opts = {})
+    def all_with_http_info(space_id, refund_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_all ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.all ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_all" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.all" if space_id.nil?
       # verify the required parameter 'refund_id' is set
-      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundCommentService.refund_comment_service_all" if refund_id.nil?
+      fail ArgumentError, "Missing the required parameter 'refund_id' when calling RefundCommentService.all" if refund_id.nil?
       # resource path
       local_var_path = "/refund-comment/all".sub('{format}','json')
 
@@ -87,7 +87,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<RefundComment>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -98,8 +98,8 @@ module Wallee
     # @param entity 
     # @param [Hash] opts the optional parameters
     # @return [RefundComment]
-    def refund_comment_service_create(space_id, entity, opts = {})
-      data, _status_code, _headers = refund_comment_service_create_with_http_info(space_id, entity, opts)
+    def create(space_id, entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -109,14 +109,14 @@ module Wallee
     # @param entity 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RefundComment, Fixnum, Hash)>] RefundComment data, response status code and response headers
-    def refund_comment_service_create_with_http_info(space_id, entity, opts = {})
+    def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_create ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.create" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling RefundCommentService.refund_comment_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling RefundCommentService.create" if entity.nil?
       # resource path
       local_var_path = "/refund-comment/create".sub('{format}','json')
 
@@ -149,7 +149,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -160,8 +160,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def refund_comment_service_delete(space_id, id, opts = {})
-      refund_comment_service_delete_with_http_info(space_id, id, opts)
+    def delete(space_id, id, opts = {})
+      delete_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -171,14 +171,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def refund_comment_service_delete_with_http_info(space_id, id, opts = {})
+    def delete_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_delete ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.delete ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_delete" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.delete" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.refund_comment_service_delete" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.delete" if id.nil?
       # resource path
       local_var_path = "/refund-comment/delete".sub('{format}','json')
 
@@ -211,7 +211,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -222,8 +222,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def refund_comment_service_pin(space_id, id, opts = {})
-      refund_comment_service_pin_with_http_info(space_id, id, opts)
+    def pin(space_id, id, opts = {})
+      pin_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -233,14 +233,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def refund_comment_service_pin_with_http_info(space_id, id, opts = {})
+    def pin_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_pin ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.pin ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_pin" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.pin" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.refund_comment_service_pin" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.pin" if id.nil?
       # resource path
       local_var_path = "/refund-comment/pin".sub('{format}','json')
 
@@ -273,7 +273,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_pin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#pin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -284,8 +284,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [RefundComment]
-    def refund_comment_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = refund_comment_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -295,14 +295,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RefundComment, Fixnum, Hash)>] RefundComment data, response status code and response headers
-    def refund_comment_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_read ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.refund_comment_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.read" if id.nil?
       # resource path
       local_var_path = "/refund-comment/read".sub('{format}','json')
 
@@ -336,7 +336,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -347,8 +347,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def refund_comment_service_unpin(space_id, id, opts = {})
-      refund_comment_service_unpin_with_http_info(space_id, id, opts)
+    def unpin(space_id, id, opts = {})
+      unpin_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -358,14 +358,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def refund_comment_service_unpin_with_http_info(space_id, id, opts = {})
+    def unpin_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_unpin ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.unpin ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_unpin" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.unpin" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.refund_comment_service_unpin" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling RefundCommentService.unpin" if id.nil?
       # resource path
       local_var_path = "/refund-comment/unpin".sub('{format}','json')
 
@@ -398,7 +398,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_unpin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#unpin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -409,8 +409,8 @@ module Wallee
     # @param entity 
     # @param [Hash] opts the optional parameters
     # @return [RefundComment]
-    def refund_comment_service_update(space_id, entity, opts = {})
-      data, _status_code, _headers = refund_comment_service_update_with_http_info(space_id, entity, opts)
+    def update(space_id, entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -420,14 +420,14 @@ module Wallee
     # @param entity 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RefundComment, Fixnum, Hash)>] RefundComment data, response status code and response headers
-    def refund_comment_service_update_with_http_info(space_id, entity, opts = {})
+    def update_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: RefundCommentService.refund_comment_service_update ..."
+        @api_client.config.logger.debug "Calling API: RefundCommentService.update ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.refund_comment_service_update" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling RefundCommentService.update" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling RefundCommentService.refund_comment_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling RefundCommentService.update" if entity.nil?
       # resource path
       local_var_path = "/refund-comment/update".sub('{format}','json')
 
@@ -460,7 +460,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RefundCommentService#refund_comment_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: RefundCommentService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

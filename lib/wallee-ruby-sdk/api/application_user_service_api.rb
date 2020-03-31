@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -34,8 +34,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def application_user_service_count(opts = {})
-      data, _status_code, _headers = application_user_service_count_with_http_info(opts)
+    def count(opts = {})
+      data, _status_code, _headers = count_with_http_info(opts)
       return data
     end
 
@@ -44,9 +44,9 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def application_user_service_count_with_http_info(opts = {})
+    def count_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_count ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.count ..."
       end
       # resource path
       local_var_path = "/application-user/count".sub('{format}','json')
@@ -79,7 +79,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -89,8 +89,8 @@ module Wallee
     # @param entity The user object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [ApplicationUserCreateWithMacKey]
-    def application_user_service_create(entity, opts = {})
-      data, _status_code, _headers = application_user_service_create_with_http_info(entity, opts)
+    def create(entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(entity, opts)
       return data
     end
 
@@ -99,12 +99,12 @@ module Wallee
     # @param entity The user object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationUserCreateWithMacKey, Fixnum, Hash)>] ApplicationUserCreateWithMacKey data, response status code and response headers
-    def application_user_service_create_with_http_info(entity, opts = {})
+    def create_with_http_info(entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_create ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.create ..."
       end
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling ApplicationUserService.application_user_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling ApplicationUserService.create" if entity.nil?
       # resource path
       local_var_path = "/application-user/create".sub('{format}','json')
 
@@ -136,7 +136,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'ApplicationUserCreateWithMacKey')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -146,8 +146,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def application_user_service_delete(id, opts = {})
-      application_user_service_delete_with_http_info(id, opts)
+    def delete(id, opts = {})
+      delete_with_http_info(id, opts)
       return nil
     end
 
@@ -156,12 +156,12 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def application_user_service_delete_with_http_info(id, opts = {})
+    def delete_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_delete ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.delete ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling ApplicationUserService.application_user_service_delete" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling ApplicationUserService.delete" if id.nil?
       # resource path
       local_var_path = "/application-user/delete".sub('{format}','json')
 
@@ -192,7 +192,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -202,8 +202,8 @@ module Wallee
     # @param id The id of the application user which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [ApplicationUser]
-    def application_user_service_read(id, opts = {})
-      data, _status_code, _headers = application_user_service_read_with_http_info(id, opts)
+    def read(id, opts = {})
+      data, _status_code, _headers = read_with_http_info(id, opts)
       return data
     end
 
@@ -212,12 +212,12 @@ module Wallee
     # @param id The id of the application user which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationUser, Fixnum, Hash)>] ApplicationUser data, response status code and response headers
-    def application_user_service_read_with_http_info(id, opts = {})
+    def read_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_read ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.read ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling ApplicationUserService.application_user_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling ApplicationUserService.read" if id.nil?
       # resource path
       local_var_path = "/application-user/read".sub('{format}','json')
 
@@ -250,7 +250,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'ApplicationUser')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -260,8 +260,8 @@ module Wallee
     # @param query The query restricts the application users which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<ApplicationUser>]
-    def application_user_service_search(query, opts = {})
-      data, _status_code, _headers = application_user_service_search_with_http_info(query, opts)
+    def search(query, opts = {})
+      data, _status_code, _headers = search_with_http_info(query, opts)
       return data
     end
 
@@ -270,12 +270,12 @@ module Wallee
     # @param query The query restricts the application users which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<ApplicationUser>, Fixnum, Hash)>] Array<ApplicationUser> data, response status code and response headers
-    def application_user_service_search_with_http_info(query, opts = {})
+    def search_with_http_info(query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_search ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.search ..."
       end
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling ApplicationUserService.application_user_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling ApplicationUserService.search" if query.nil?
       # resource path
       local_var_path = "/application-user/search".sub('{format}','json')
 
@@ -307,7 +307,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<ApplicationUser>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -317,8 +317,8 @@ module Wallee
     # @param entity The application user entity with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [ApplicationUser]
-    def application_user_service_update(entity, opts = {})
-      data, _status_code, _headers = application_user_service_update_with_http_info(entity, opts)
+    def update(entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(entity, opts)
       return data
     end
 
@@ -327,12 +327,12 @@ module Wallee
     # @param entity The application user entity with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ApplicationUser, Fixnum, Hash)>] ApplicationUser data, response status code and response headers
-    def application_user_service_update_with_http_info(entity, opts = {})
+    def update_with_http_info(entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ApplicationUserService.application_user_service_update ..."
+        @api_client.config.logger.debug "Calling API: ApplicationUserService.update ..."
       end
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling ApplicationUserService.application_user_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling ApplicationUserService.update" if entity.nil?
       # resource path
       local_var_path = "/application-user/update".sub('{format}','json')
 
@@ -364,7 +364,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'ApplicationUser')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ApplicationUserService#application_user_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ApplicationUserService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

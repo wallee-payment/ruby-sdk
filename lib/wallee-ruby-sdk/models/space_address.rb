@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -46,10 +46,10 @@ module Wallee
     attr_accessor :organization_name
 
     # 
-    attr_accessor :post_code
+    attr_accessor :postal_state
 
     # 
-    attr_accessor :postal_state
+    attr_accessor :postcode
 
     # 
     attr_accessor :sales_tax_number
@@ -73,8 +73,8 @@ module Wallee
         :'family_name' => :'familyName',
         :'given_name' => :'givenName',
         :'organization_name' => :'organizationName',
-        :'post_code' => :'postCode',
         :'postal_state' => :'postalState',
+        :'postcode' => :'postcode',
         :'sales_tax_number' => :'salesTaxNumber',
         :'salutation' => :'salutation',
         :'sorting_code' => :'sortingCode',
@@ -92,8 +92,8 @@ module Wallee
         :'family_name' => :'String',
         :'given_name' => :'String',
         :'organization_name' => :'String',
-        :'post_code' => :'String',
         :'postal_state' => :'String',
+        :'postcode' => :'String',
         :'sales_tax_number' => :'String',
         :'salutation' => :'String',
         :'sorting_code' => :'String',
@@ -137,12 +137,12 @@ module Wallee
         self.organization_name = attributes[:'organizationName']
       end
 
-      if attributes.has_key?(:'postCode')
-        self.post_code = attributes[:'postCode']
-      end
-
       if attributes.has_key?(:'postalState')
         self.postal_state = attributes[:'postalState']
+      end
+
+      if attributes.has_key?(:'postcode')
+        self.postcode = attributes[:'postcode']
       end
 
       if attributes.has_key?(:'salesTaxNumber')
@@ -187,8 +187,8 @@ module Wallee
           family_name == o.family_name &&
           given_name == o.given_name &&
           organization_name == o.organization_name &&
-          post_code == o.post_code &&
           postal_state == o.postal_state &&
+          postcode == o.postcode &&
           sales_tax_number == o.sales_tax_number &&
           salutation == o.salutation &&
           sorting_code == o.sorting_code &&
@@ -204,7 +204,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [city, country, dependent_locality, email_address, family_name, given_name, organization_name, post_code, postal_state, sales_tax_number, salutation, sorting_code, street].hash
+      [city, country, dependent_locality, email_address, family_name, given_name, organization_name, postal_state, postcode, sales_tax_number, salutation, sorting_code, street].hash
     end
 
     # Builds the object from hash

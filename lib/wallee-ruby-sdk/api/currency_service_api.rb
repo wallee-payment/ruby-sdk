@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,8 +33,8 @@ module Wallee
     # This operation returns all currencies.
     # @param [Hash] opts the optional parameters
     # @return [Array<RestCurrency>]
-    def currency_service_all(opts = {})
-      data, _status_code, _headers = currency_service_all_with_http_info(opts)
+    def all(opts = {})
+      data, _status_code, _headers = all_with_http_info(opts)
       return data
     end
 
@@ -42,9 +42,9 @@ module Wallee
     # This operation returns all currencies.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestCurrency>, Fixnum, Hash)>] Array<RestCurrency> data, response status code and response headers
-    def currency_service_all_with_http_info(opts = {})
+    def all_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CurrencyService.currency_service_all ..."
+        @api_client.config.logger.debug "Calling API: CurrencyService.all ..."
       end
       # resource path
       local_var_path = "/currency/all".sub('{format}','json')
@@ -77,7 +77,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<RestCurrency>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CurrencyService#currency_service_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CurrencyService#all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

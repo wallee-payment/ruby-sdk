@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -37,8 +37,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :applies_on_subaccount Whether the role applies only on subaccount.
     # @return [UserAccountRole]
-    def user_account_role_service_add_role(user_id, account_id, role_id, opts = {})
-      data, _status_code, _headers = user_account_role_service_add_role_with_http_info(user_id, account_id, role_id, opts)
+    def add_role(user_id, account_id, role_id, opts = {})
+      data, _status_code, _headers = add_role_with_http_info(user_id, account_id, role_id, opts)
       return data
     end
 
@@ -50,16 +50,16 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :applies_on_subaccount Whether the role applies only on subaccount.
     # @return [Array<(UserAccountRole, Fixnum, Hash)>] UserAccountRole data, response status code and response headers
-    def user_account_role_service_add_role_with_http_info(user_id, account_id, role_id, opts = {})
+    def add_role_with_http_info(user_id, account_id, role_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserAccountRoleService.user_account_role_service_add_role ..."
+        @api_client.config.logger.debug "Calling API: UserAccountRoleService.add_role ..."
       end
       # verify the required parameter 'user_id' is set
-      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserAccountRoleService.user_account_role_service_add_role" if user_id.nil?
+      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserAccountRoleService.add_role" if user_id.nil?
       # verify the required parameter 'account_id' is set
-      fail ArgumentError, "Missing the required parameter 'account_id' when calling UserAccountRoleService.user_account_role_service_add_role" if account_id.nil?
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling UserAccountRoleService.add_role" if account_id.nil?
       # verify the required parameter 'role_id' is set
-      fail ArgumentError, "Missing the required parameter 'role_id' when calling UserAccountRoleService.user_account_role_service_add_role" if role_id.nil?
+      fail ArgumentError, "Missing the required parameter 'role_id' when calling UserAccountRoleService.add_role" if role_id.nil?
       # resource path
       local_var_path = "/user-account-role/addRole".sub('{format}','json')
 
@@ -95,7 +95,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'UserAccountRole')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserAccountRoleService#user_account_role_service_add_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserAccountRoleService#add_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -106,8 +106,8 @@ module Wallee
     # @param account_id The account to which the role is mapped.
     # @param [Hash] opts the optional parameters
     # @return [Array<UserAccountRole>]
-    def user_account_role_service_list(user_id, account_id, opts = {})
-      data, _status_code, _headers = user_account_role_service_list_with_http_info(user_id, account_id, opts)
+    def list(user_id, account_id, opts = {})
+      data, _status_code, _headers = list_with_http_info(user_id, account_id, opts)
       return data
     end
 
@@ -117,14 +117,14 @@ module Wallee
     # @param account_id The account to which the role is mapped.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<UserAccountRole>, Fixnum, Hash)>] Array<UserAccountRole> data, response status code and response headers
-    def user_account_role_service_list_with_http_info(user_id, account_id, opts = {})
+    def list_with_http_info(user_id, account_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserAccountRoleService.user_account_role_service_list ..."
+        @api_client.config.logger.debug "Calling API: UserAccountRoleService.list ..."
       end
       # verify the required parameter 'user_id' is set
-      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserAccountRoleService.user_account_role_service_list" if user_id.nil?
+      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserAccountRoleService.list" if user_id.nil?
       # verify the required parameter 'account_id' is set
-      fail ArgumentError, "Missing the required parameter 'account_id' when calling UserAccountRoleService.user_account_role_service_list" if account_id.nil?
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling UserAccountRoleService.list" if account_id.nil?
       # resource path
       local_var_path = "/user-account-role/list".sub('{format}','json')
 
@@ -158,7 +158,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<UserAccountRole>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserAccountRoleService#user_account_role_service_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserAccountRoleService#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -168,8 +168,8 @@ module Wallee
     # @param id The id of user account role which should be removed
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def user_account_role_service_remove_role(id, opts = {})
-      user_account_role_service_remove_role_with_http_info(id, opts)
+    def remove_role(id, opts = {})
+      remove_role_with_http_info(id, opts)
       return nil
     end
 
@@ -178,12 +178,12 @@ module Wallee
     # @param id The id of user account role which should be removed
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def user_account_role_service_remove_role_with_http_info(id, opts = {})
+    def remove_role_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserAccountRoleService.user_account_role_service_remove_role ..."
+        @api_client.config.logger.debug "Calling API: UserAccountRoleService.remove_role ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling UserAccountRoleService.user_account_role_service_remove_role" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling UserAccountRoleService.remove_role" if id.nil?
       # resource path
       local_var_path = "/user-account-role/removeRole".sub('{format}','json')
 
@@ -215,7 +215,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserAccountRoleService#user_account_role_service_remove_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserAccountRoleService#remove_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

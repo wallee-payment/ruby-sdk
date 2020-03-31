@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_charge_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_charge_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_charge_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.subscription_charge_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.subscription_charge_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-charge/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionChargeService#subscription_charge_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionChargeService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param charge 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionCharge]
-    def subscription_charge_service_create(space_id, charge, opts = {})
-      data, _status_code, _headers = subscription_charge_service_create_with_http_info(space_id, charge, opts)
+    def create(space_id, charge, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, charge, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param charge 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionCharge, Fixnum, Hash)>] SubscriptionCharge data, response status code and response headers
-    def subscription_charge_service_create_with_http_info(space_id, charge, opts = {})
+    def create_with_http_info(space_id, charge, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.subscription_charge_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.subscription_charge_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.create" if space_id.nil?
       # verify the required parameter 'charge' is set
-      fail ArgumentError, "Missing the required parameter 'charge' when calling SubscriptionChargeService.subscription_charge_service_create" if charge.nil?
+      fail ArgumentError, "Missing the required parameter 'charge' when calling SubscriptionChargeService.create" if charge.nil?
       # resource path
       local_var_path = "/subscription-charge/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionCharge')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionChargeService#subscription_charge_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionChargeService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param charge_id 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionCharge]
-    def subscription_charge_service_discard(space_id, charge_id, opts = {})
-      data, _status_code, _headers = subscription_charge_service_discard_with_http_info(space_id, charge_id, opts)
+    def discard(space_id, charge_id, opts = {})
+      data, _status_code, _headers = discard_with_http_info(space_id, charge_id, opts)
       return data
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param charge_id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionCharge, Fixnum, Hash)>] SubscriptionCharge data, response status code and response headers
-    def subscription_charge_service_discard_with_http_info(space_id, charge_id, opts = {})
+    def discard_with_http_info(space_id, charge_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.subscription_charge_service_discard ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.discard ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.subscription_charge_service_discard" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.discard" if space_id.nil?
       # verify the required parameter 'charge_id' is set
-      fail ArgumentError, "Missing the required parameter 'charge_id' when calling SubscriptionChargeService.subscription_charge_service_discard" if charge_id.nil?
+      fail ArgumentError, "Missing the required parameter 'charge_id' when calling SubscriptionChargeService.discard" if charge_id.nil?
       # resource path
       local_var_path = "/subscription-charge/discard".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionCharge')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionChargeService#subscription_charge_service_discard\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionChargeService#discard\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param id The id of the subscription charge which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionCharge]
-    def subscription_charge_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_charge_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param id The id of the subscription charge which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionCharge, Fixnum, Hash)>] SubscriptionCharge data, response status code and response headers
-    def subscription_charge_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.subscription_charge_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.subscription_charge_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionChargeService.subscription_charge_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionChargeService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-charge/read".sub('{format}','json')
 
@@ -272,7 +272,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionCharge')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionChargeService#subscription_charge_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionChargeService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -283,8 +283,8 @@ module Wallee
     # @param query The query restricts the subscription charges which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionCharge>]
-    def subscription_charge_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_charge_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -294,14 +294,14 @@ module Wallee
     # @param query The query restricts the subscription charges which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionCharge>, Fixnum, Hash)>] Array<SubscriptionCharge> data, response status code and response headers
-    def subscription_charge_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.subscription_charge_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionChargeService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.subscription_charge_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionChargeService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionChargeService.subscription_charge_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionChargeService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-charge/search".sub('{format}','json')
 
@@ -334,7 +334,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionCharge>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionChargeService#subscription_charge_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionChargeService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

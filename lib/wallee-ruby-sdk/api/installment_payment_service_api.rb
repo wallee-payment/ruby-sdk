@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param filter The filter which restricts the installment payment which are used to calculate the count.
     # @param [Hash] opts the optional parameters
     # @return [Integer]
-    def installment_payment_service_count(space_id, filter, opts = {})
-      data, _status_code, _headers = installment_payment_service_count_with_http_info(space_id, filter, opts)
+    def count(space_id, filter, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, filter, opts)
       return data
     end
 
@@ -46,14 +46,14 @@ module Wallee
     # @param filter The filter which restricts the installment payment which are used to calculate the count.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def installment_payment_service_count_with_http_info(space_id, filter, opts = {})
+    def count_with_http_info(space_id, filter, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.installment_payment_service_count ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.installment_payment_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.count" if space_id.nil?
       # verify the required parameter 'filter' is set
-      fail ArgumentError, "Missing the required parameter 'filter' when calling InstallmentPaymentService.installment_payment_service_count" if filter.nil?
+      fail ArgumentError, "Missing the required parameter 'filter' when calling InstallmentPaymentService.count" if filter.nil?
       # resource path
       local_var_path = "/installment-payment/count".sub('{format}','json')
 
@@ -86,7 +86,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPaymentService#installment_payment_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPaymentService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -98,8 +98,8 @@ module Wallee
     # @param installment_plan_configuration The installment plan configuration ID which should be applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [InstallmentPayment]
-    def installment_payment_service_create_installment_payment(space_id, transaction_id, installment_plan_configuration, opts = {})
-      data, _status_code, _headers = installment_payment_service_create_installment_payment_with_http_info(space_id, transaction_id, installment_plan_configuration, opts)
+    def create_installment_payment(space_id, transaction_id, installment_plan_configuration, opts = {})
+      data, _status_code, _headers = create_installment_payment_with_http_info(space_id, transaction_id, installment_plan_configuration, opts)
       return data
     end
 
@@ -110,16 +110,16 @@ module Wallee
     # @param installment_plan_configuration The installment plan configuration ID which should be applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [Array<(InstallmentPayment, Fixnum, Hash)>] InstallmentPayment data, response status code and response headers
-    def installment_payment_service_create_installment_payment_with_http_info(space_id, transaction_id, installment_plan_configuration, opts = {})
+    def create_installment_payment_with_http_info(space_id, transaction_id, installment_plan_configuration, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.installment_payment_service_create_installment_payment ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.create_installment_payment ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.installment_payment_service_create_installment_payment" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.create_installment_payment" if space_id.nil?
       # verify the required parameter 'transaction_id' is set
-      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling InstallmentPaymentService.installment_payment_service_create_installment_payment" if transaction_id.nil?
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling InstallmentPaymentService.create_installment_payment" if transaction_id.nil?
       # verify the required parameter 'installment_plan_configuration' is set
-      fail ArgumentError, "Missing the required parameter 'installment_plan_configuration' when calling InstallmentPaymentService.installment_payment_service_create_installment_payment" if installment_plan_configuration.nil?
+      fail ArgumentError, "Missing the required parameter 'installment_plan_configuration' when calling InstallmentPaymentService.create_installment_payment" if installment_plan_configuration.nil?
       # resource path
       local_var_path = "/installment-payment/createInstallmentPayment".sub('{format}','json')
 
@@ -154,7 +154,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'InstallmentPayment')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPaymentService#installment_payment_service_create_installment_payment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPaymentService#create_installment_payment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -165,8 +165,8 @@ module Wallee
     # @param id The id of the installment payment which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [InstallmentPayment]
-    def installment_payment_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = installment_payment_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -176,14 +176,14 @@ module Wallee
     # @param id The id of the installment payment which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(InstallmentPayment, Fixnum, Hash)>] InstallmentPayment data, response status code and response headers
-    def installment_payment_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.installment_payment_service_read ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.installment_payment_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling InstallmentPaymentService.installment_payment_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling InstallmentPaymentService.read" if id.nil?
       # resource path
       local_var_path = "/installment-payment/read".sub('{format}','json')
 
@@ -217,7 +217,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'InstallmentPayment')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPaymentService#installment_payment_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPaymentService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -228,8 +228,8 @@ module Wallee
     # @param query The query restricts the installment payments which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<InstallmentPayment>]
-    def installment_payment_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = installment_payment_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -239,14 +239,14 @@ module Wallee
     # @param query The query restricts the installment payments which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<InstallmentPayment>, Fixnum, Hash)>] Array<InstallmentPayment> data, response status code and response headers
-    def installment_payment_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.installment_payment_service_search ..."
+        @api_client.config.logger.debug "Calling API: InstallmentPaymentService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.installment_payment_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling InstallmentPaymentService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling InstallmentPaymentService.installment_payment_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling InstallmentPaymentService.search" if query.nil?
       # resource path
       local_var_path = "/installment-payment/search".sub('{format}','json')
 
@@ -279,7 +279,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<InstallmentPayment>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: InstallmentPaymentService#installment_payment_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: InstallmentPaymentService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

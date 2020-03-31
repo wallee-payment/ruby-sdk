@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def subscription_affiliate_service_count(space_id, opts = {})
-      data, _status_code, _headers = subscription_affiliate_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def subscription_affiliate_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_count ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.count" if space_id.nil?
       # resource path
       local_var_path = "/subscription-affiliate/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param entity The subscription affiliate object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionAffiliate]
-    def subscription_affiliate_service_create(space_id, entity, opts = {})
-      data, _status_code, _headers = subscription_affiliate_service_create_with_http_info(space_id, entity, opts)
+    def create(space_id, entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param entity The subscription affiliate object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionAffiliate, Fixnum, Hash)>] SubscriptionAffiliate data, response status code and response headers
-    def subscription_affiliate_service_create_with_http_info(space_id, entity, opts = {})
+    def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_create ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.create" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionAffiliateService.subscription_affiliate_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionAffiliateService.create" if entity.nil?
       # resource path
       local_var_path = "/subscription-affiliate/create".sub('{format}','json')
 
@@ -146,7 +146,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionAffiliate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -157,8 +157,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def subscription_affiliate_service_delete(space_id, id, opts = {})
-      subscription_affiliate_service_delete_with_http_info(space_id, id, opts)
+    def delete(space_id, id, opts = {})
+      delete_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -168,14 +168,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def subscription_affiliate_service_delete_with_http_info(space_id, id, opts = {})
+    def delete_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_delete ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.delete ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_delete" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.delete" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionAffiliateService.subscription_affiliate_service_delete" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionAffiliateService.delete" if id.nil?
       # resource path
       local_var_path = "/subscription-affiliate/delete".sub('{format}','json')
 
@@ -207,7 +207,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -218,8 +218,8 @@ module Wallee
     # @param id The id of the subscription affiliate case which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionAffiliate]
-    def subscription_affiliate_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = subscription_affiliate_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -229,14 +229,14 @@ module Wallee
     # @param id The id of the subscription affiliate case which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionAffiliate, Fixnum, Hash)>] SubscriptionAffiliate data, response status code and response headers
-    def subscription_affiliate_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_read ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionAffiliateService.subscription_affiliate_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling SubscriptionAffiliateService.read" if id.nil?
       # resource path
       local_var_path = "/subscription-affiliate/read".sub('{format}','json')
 
@@ -270,7 +270,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionAffiliate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -281,8 +281,8 @@ module Wallee
     # @param query The query restricts the affiliates which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<SubscriptionAffiliate>]
-    def subscription_affiliate_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = subscription_affiliate_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -292,14 +292,14 @@ module Wallee
     # @param query The query restricts the affiliates which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SubscriptionAffiliate>, Fixnum, Hash)>] Array<SubscriptionAffiliate> data, response status code and response headers
-    def subscription_affiliate_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_search ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionAffiliateService.subscription_affiliate_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling SubscriptionAffiliateService.search" if query.nil?
       # resource path
       local_var_path = "/subscription-affiliate/search".sub('{format}','json')
 
@@ -332,7 +332,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionAffiliate>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -343,8 +343,8 @@ module Wallee
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionAffiliate]
-    def subscription_affiliate_service_update(space_id, entity, opts = {})
-      data, _status_code, _headers = subscription_affiliate_service_update_with_http_info(space_id, entity, opts)
+    def update(space_id, entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -354,14 +354,14 @@ module Wallee
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionAffiliate, Fixnum, Hash)>] SubscriptionAffiliate data, response status code and response headers
-    def subscription_affiliate_service_update_with_http_info(space_id, entity, opts = {})
+    def update_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.subscription_affiliate_service_update ..."
+        @api_client.config.logger.debug "Calling API: SubscriptionAffiliateService.update ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.subscription_affiliate_service_update" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionAffiliateService.update" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionAffiliateService.subscription_affiliate_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling SubscriptionAffiliateService.update" if entity.nil?
       # resource path
       local_var_path = "/subscription-affiliate/update".sub('{format}','json')
 
@@ -394,7 +394,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'SubscriptionAffiliate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#subscription_affiliate_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SubscriptionAffiliateService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

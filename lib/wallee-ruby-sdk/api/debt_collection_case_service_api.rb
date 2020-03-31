@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -37,8 +37,8 @@ module Wallee
     # @param external_id The unique external id of this payment receipt.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionReceipt]
-    def debt_collection_case_service_add_collected_amount(space_id, id, collected_amount, external_id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_add_collected_amount_with_http_info(space_id, id, collected_amount, external_id, opts)
+    def add_collected_amount(space_id, id, collected_amount, external_id, opts = {})
+      data, _status_code, _headers = add_collected_amount_with_http_info(space_id, id, collected_amount, external_id, opts)
       return data
     end
 
@@ -50,18 +50,18 @@ module Wallee
     # @param external_id The unique external id of this payment receipt.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionReceipt, Fixnum, Hash)>] DebtCollectionReceipt data, response status code and response headers
-    def debt_collection_case_service_add_collected_amount_with_http_info(space_id, id, collected_amount, external_id, opts = {})
+    def add_collected_amount_with_http_info(space_id, id, collected_amount, external_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_add_collected_amount ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.add_collected_amount ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_add_collected_amount" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.add_collected_amount" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_add_collected_amount" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.add_collected_amount" if id.nil?
       # verify the required parameter 'collected_amount' is set
-      fail ArgumentError, "Missing the required parameter 'collected_amount' when calling DebtCollectionCaseService.debt_collection_case_service_add_collected_amount" if collected_amount.nil?
+      fail ArgumentError, "Missing the required parameter 'collected_amount' when calling DebtCollectionCaseService.add_collected_amount" if collected_amount.nil?
       # verify the required parameter 'external_id' is set
-      fail ArgumentError, "Missing the required parameter 'external_id' when calling DebtCollectionCaseService.debt_collection_case_service_add_collected_amount" if external_id.nil?
+      fail ArgumentError, "Missing the required parameter 'external_id' when calling DebtCollectionCaseService.add_collected_amount" if external_id.nil?
       # resource path
       local_var_path = "/debt-collection-case/addCollectedAmount".sub('{format}','json')
 
@@ -97,7 +97,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionReceipt')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_add_collected_amount\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#add_collected_amount\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -110,8 +110,8 @@ module Wallee
     # @param content_base64 The BASE64 encoded contents of the document.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCaseDocument]
-    def debt_collection_case_service_attach_document(space_id, id, file_name, content_base64, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_attach_document_with_http_info(space_id, id, file_name, content_base64, opts)
+    def attach_document(space_id, id, file_name, content_base64, opts = {})
+      data, _status_code, _headers = attach_document_with_http_info(space_id, id, file_name, content_base64, opts)
       return data
     end
 
@@ -123,18 +123,18 @@ module Wallee
     # @param content_base64 The BASE64 encoded contents of the document.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCaseDocument, Fixnum, Hash)>] DebtCollectionCaseDocument data, response status code and response headers
-    def debt_collection_case_service_attach_document_with_http_info(space_id, id, file_name, content_base64, opts = {})
+    def attach_document_with_http_info(space_id, id, file_name, content_base64, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_attach_document ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.attach_document ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_attach_document" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.attach_document" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_attach_document" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.attach_document" if id.nil?
       # verify the required parameter 'file_name' is set
-      fail ArgumentError, "Missing the required parameter 'file_name' when calling DebtCollectionCaseService.debt_collection_case_service_attach_document" if file_name.nil?
+      fail ArgumentError, "Missing the required parameter 'file_name' when calling DebtCollectionCaseService.attach_document" if file_name.nil?
       # verify the required parameter 'content_base64' is set
-      fail ArgumentError, "Missing the required parameter 'content_base64' when calling DebtCollectionCaseService.debt_collection_case_service_attach_document" if content_base64.nil?
+      fail ArgumentError, "Missing the required parameter 'content_base64' when calling DebtCollectionCaseService.attach_document" if content_base64.nil?
       # resource path
       local_var_path = "/debt-collection-case/attachDocument".sub('{format}','json')
 
@@ -170,7 +170,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCaseDocument')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_attach_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#attach_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -181,8 +181,8 @@ module Wallee
     # @param id The id of the debt collection case which should be closed.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_close(space_id, id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_close_with_http_info(space_id, id, opts)
+    def close(space_id, id, opts = {})
+      data, _status_code, _headers = close_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -192,14 +192,14 @@ module Wallee
     # @param id The id of the debt collection case which should be closed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_close_with_http_info(space_id, id, opts = {})
+    def close_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_close ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.close ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_close" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.close" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_close" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.close" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/close".sub('{format}','json')
 
@@ -233,7 +233,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_close\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#close\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -244,8 +244,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def debt_collection_case_service_count(space_id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -255,12 +255,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def debt_collection_case_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_count ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.count" if space_id.nil?
       # resource path
       local_var_path = "/debt-collection-case/count".sub('{format}','json')
 
@@ -293,7 +293,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -304,8 +304,8 @@ module Wallee
     # @param entity The debt collection case object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_create(space_id, entity, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_create_with_http_info(space_id, entity, opts)
+    def create(space_id, entity, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -315,14 +315,14 @@ module Wallee
     # @param entity The debt collection case object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_create_with_http_info(space_id, entity, opts = {})
+    def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_create ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.create ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_create" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.create" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling DebtCollectionCaseService.debt_collection_case_service_create" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling DebtCollectionCaseService.create" if entity.nil?
       # resource path
       local_var_path = "/debt-collection-case/create".sub('{format}','json')
 
@@ -355,7 +355,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -366,8 +366,8 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def debt_collection_case_service_delete(space_id, id, opts = {})
-      debt_collection_case_service_delete_with_http_info(space_id, id, opts)
+    def delete(space_id, id, opts = {})
+      delete_with_http_info(space_id, id, opts)
       return nil
     end
 
@@ -377,14 +377,14 @@ module Wallee
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def debt_collection_case_service_delete_with_http_info(space_id, id, opts = {})
+    def delete_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_delete ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.delete ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_delete" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.delete" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_delete" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.delete" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/delete".sub('{format}','json')
 
@@ -416,7 +416,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -427,8 +427,8 @@ module Wallee
     # @param id The id of the debt collection case for which the attached documents are returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<DebtCollectionCaseDocument>]
-    def debt_collection_case_service_documents(space_id, id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_documents_with_http_info(space_id, id, opts)
+    def documents(space_id, id, opts = {})
+      data, _status_code, _headers = documents_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -438,14 +438,14 @@ module Wallee
     # @param id The id of the debt collection case for which the attached documents are returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<DebtCollectionCaseDocument>, Fixnum, Hash)>] Array<DebtCollectionCaseDocument> data, response status code and response headers
-    def debt_collection_case_service_documents_with_http_info(space_id, id, opts = {})
+    def documents_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_documents ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.documents ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_documents" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.documents" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_documents" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.documents" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/documents".sub('{format}','json')
 
@@ -479,7 +479,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<DebtCollectionCaseDocument>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_documents\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#documents\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -490,8 +490,8 @@ module Wallee
     # @param id The id of the debt collection case which should be marked as prepared.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_mark_as_prepared(space_id, id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_mark_as_prepared_with_http_info(space_id, id, opts)
+    def mark_as_prepared(space_id, id, opts = {})
+      data, _status_code, _headers = mark_as_prepared_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -501,14 +501,14 @@ module Wallee
     # @param id The id of the debt collection case which should be marked as prepared.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_mark_as_prepared_with_http_info(space_id, id, opts = {})
+    def mark_as_prepared_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_mark_as_prepared ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.mark_as_prepared ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_mark_as_prepared" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.mark_as_prepared" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_mark_as_prepared" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.mark_as_prepared" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/markAsPrepared".sub('{format}','json')
 
@@ -542,7 +542,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_mark_as_prepared\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#mark_as_prepared\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -553,8 +553,8 @@ module Wallee
     # @param id The id of the debt collection case which should be reviewed.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_mark_as_reviewed(space_id, id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_mark_as_reviewed_with_http_info(space_id, id, opts)
+    def mark_as_reviewed(space_id, id, opts = {})
+      data, _status_code, _headers = mark_as_reviewed_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -564,14 +564,14 @@ module Wallee
     # @param id The id of the debt collection case which should be reviewed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_mark_as_reviewed_with_http_info(space_id, id, opts = {})
+    def mark_as_reviewed_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_mark_as_reviewed ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.mark_as_reviewed ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_mark_as_reviewed" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.mark_as_reviewed" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_mark_as_reviewed" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.mark_as_reviewed" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/markAsReviewed".sub('{format}','json')
 
@@ -605,7 +605,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_mark_as_reviewed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#mark_as_reviewed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -616,8 +616,8 @@ module Wallee
     # @param id The id of the debt collection case which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -627,14 +627,14 @@ module Wallee
     # @param id The id of the debt collection case which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_read ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.debt_collection_case_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling DebtCollectionCaseService.read" if id.nil?
       # resource path
       local_var_path = "/debt-collection-case/read".sub('{format}','json')
 
@@ -668,7 +668,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -679,8 +679,8 @@ module Wallee
     # @param query The query restricts the cases which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<DebtCollectionCase>]
-    def debt_collection_case_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -690,14 +690,14 @@ module Wallee
     # @param query The query restricts the cases which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<DebtCollectionCase>, Fixnum, Hash)>] Array<DebtCollectionCase> data, response status code and response headers
-    def debt_collection_case_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_search ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling DebtCollectionCaseService.debt_collection_case_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling DebtCollectionCaseService.search" if query.nil?
       # resource path
       local_var_path = "/debt-collection-case/search".sub('{format}','json')
 
@@ -730,7 +730,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<DebtCollectionCase>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -741,8 +741,8 @@ module Wallee
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [DebtCollectionCase]
-    def debt_collection_case_service_update(space_id, entity, opts = {})
-      data, _status_code, _headers = debt_collection_case_service_update_with_http_info(space_id, entity, opts)
+    def update(space_id, entity, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, entity, opts)
       return data
     end
 
@@ -752,14 +752,14 @@ module Wallee
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(DebtCollectionCase, Fixnum, Hash)>] DebtCollectionCase data, response status code and response headers
-    def debt_collection_case_service_update_with_http_info(space_id, entity, opts = {})
+    def update_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.debt_collection_case_service_update ..."
+        @api_client.config.logger.debug "Calling API: DebtCollectionCaseService.update ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.debt_collection_case_service_update" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling DebtCollectionCaseService.update" if space_id.nil?
       # verify the required parameter 'entity' is set
-      fail ArgumentError, "Missing the required parameter 'entity' when calling DebtCollectionCaseService.debt_collection_case_service_update" if entity.nil?
+      fail ArgumentError, "Missing the required parameter 'entity' when calling DebtCollectionCaseService.update" if entity.nil?
       # resource path
       local_var_path = "/debt-collection-case/update".sub('{format}','json')
 
@@ -792,7 +792,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: DebtCollectionCaseService#debt_collection_case_service_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DebtCollectionCaseService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

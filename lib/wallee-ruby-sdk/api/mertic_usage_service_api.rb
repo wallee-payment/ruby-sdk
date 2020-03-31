@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -36,8 +36,8 @@ module Wallee
     # @param _end The end date to which the consumed units should be returned to. The end date is not included in the result.
     # @param [Hash] opts the optional parameters
     # @return [Array<MetricUsage>]
-    def mertic_usage_service_calculate(space_id, start, _end, opts = {})
-      data, _status_code, _headers = mertic_usage_service_calculate_with_http_info(space_id, start, _end, opts)
+    def calculate(space_id, start, _end, opts = {})
+      data, _status_code, _headers = calculate_with_http_info(space_id, start, _end, opts)
       return data
     end
 
@@ -48,16 +48,16 @@ module Wallee
     # @param _end The end date to which the consumed units should be returned to. The end date is not included in the result.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<MetricUsage>, Fixnum, Hash)>] Array<MetricUsage> data, response status code and response headers
-    def mertic_usage_service_calculate_with_http_info(space_id, start, _end, opts = {})
+    def calculate_with_http_info(space_id, start, _end, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: MerticUsageService.mertic_usage_service_calculate ..."
+        @api_client.config.logger.debug "Calling API: MerticUsageService.calculate ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling MerticUsageService.mertic_usage_service_calculate" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling MerticUsageService.calculate" if space_id.nil?
       # verify the required parameter 'start' is set
-      fail ArgumentError, "Missing the required parameter 'start' when calling MerticUsageService.mertic_usage_service_calculate" if start.nil?
+      fail ArgumentError, "Missing the required parameter 'start' when calling MerticUsageService.calculate" if start.nil?
       # verify the required parameter '_end' is set
-      fail ArgumentError, "Missing the required parameter '_end' when calling MerticUsageService.mertic_usage_service_calculate" if _end.nil?
+      fail ArgumentError, "Missing the required parameter '_end' when calling MerticUsageService.calculate" if _end.nil?
       # resource path
       local_var_path = "/mertic-usage/calculate".sub('{format}','json')
 
@@ -92,7 +92,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<MetricUsage>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: MerticUsageService#mertic_usage_service_calculate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MerticUsageService#calculate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

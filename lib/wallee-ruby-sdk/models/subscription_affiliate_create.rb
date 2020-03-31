@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -109,6 +109,10 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
+      if @reference.nil?
+        invalid_properties.push('invalid value for "reference", reference cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -116,6 +120,7 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @external_id.nil?
+      return false if @reference.nil?
       true
     end
 

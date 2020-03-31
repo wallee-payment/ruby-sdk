@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -22,20 +22,17 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class PaymentTerminalDeviceState
+  class ShopifySubscriptionSuspensionState
     
-    CREATE = 'CREATE'.freeze
-    PREPARING = 'PREPARING'.freeze
-    REGISTERED = 'REGISTERED'.freeze
-    DECOMMISSIONING = 'DECOMMISSIONING'.freeze
-    DECOMMISSIONED = 'DECOMMISSIONED'.freeze
+    ACTIVE = 'ACTIVE'.freeze
+    ENDED = 'ENDED'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = PaymentTerminalDeviceState.constants.select { |c| PaymentTerminalDeviceState::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #PaymentTerminalDeviceState" if constantValues.empty?
+      constantValues = ShopifySubscriptionSuspensionState.constants.select { |c| ShopifySubscriptionSuspensionState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ShopifySubscriptionSuspensionState" if constantValues.empty?
       value
     end
   end

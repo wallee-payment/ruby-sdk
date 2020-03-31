@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -29,6 +29,9 @@ module Wallee
 
     # The subscriber is charged in the billing currency. The billing currency has to be one of the enabled currencies on the subscription product.
     attr_accessor :billing_currency
+
+    # 
+    attr_accessor :component_configurations
 
     # 
     attr_accessor :created_on
@@ -83,6 +86,7 @@ module Wallee
       {
         :'activated_on' => :'activatedOn',
         :'billing_currency' => :'billingCurrency',
+        :'component_configurations' => :'componentConfigurations',
         :'created_on' => :'createdOn',
         :'expected_last_period_end' => :'expectedLastPeriodEnd',
         :'failed_on' => :'failedOn',
@@ -107,6 +111,7 @@ module Wallee
       {
         :'activated_on' => :'DateTime',
         :'billing_currency' => :'String',
+        :'component_configurations' => :'Array<SubscriptionComponentConfiguration>',
         :'created_on' => :'DateTime',
         :'expected_last_period_end' => :'DateTime',
         :'failed_on' => :'DateTime',
@@ -140,6 +145,12 @@ module Wallee
 
       if attributes.has_key?(:'billingCurrency')
         self.billing_currency = attributes[:'billingCurrency']
+      end
+
+      if attributes.has_key?(:'componentConfigurations')
+        if (value = attributes[:'componentConfigurations']).is_a?(Array)
+          self.component_configurations = value
+        end
       end
 
       if attributes.has_key?(:'createdOn')
@@ -229,6 +240,7 @@ module Wallee
       self.class == o.class &&
           activated_on == o.activated_on &&
           billing_currency == o.billing_currency &&
+          component_configurations == o.component_configurations &&
           created_on == o.created_on &&
           expected_last_period_end == o.expected_last_period_end &&
           failed_on == o.failed_on &&
@@ -256,7 +268,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_currency, created_on, expected_last_period_end, failed_on, id, language, linked_space_id, planned_purge_date, planned_termination_date, product_version, selected_components, state, subscription, terminated_on, terminating_on, termination_issued_on, version].hash
+      [activated_on, billing_currency, component_configurations, created_on, expected_last_period_end, failed_on, id, language, linked_space_id, planned_purge_date, planned_termination_date, product_version, selected_components, state, subscription, terminated_on, terminating_on, termination_issued_on, version].hash
     end
 
     # Builds the object from hash

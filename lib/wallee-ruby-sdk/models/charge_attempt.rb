@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -73,6 +73,9 @@ module Wallee
     attr_accessor :redirection_url
 
     # 
+    attr_accessor :sales_channel
+
+    # 
     attr_accessor :space_view_id
 
     # 
@@ -118,6 +121,7 @@ module Wallee
         :'next_update_on' => :'nextUpdateOn',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'redirection_url' => :'redirectionUrl',
+        :'sales_channel' => :'salesChannel',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'succeeded_on' => :'succeededOn',
@@ -149,6 +153,7 @@ module Wallee
         :'next_update_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
         :'redirection_url' => :'String',
+        :'sales_channel' => :'Integer',
         :'space_view_id' => :'Integer',
         :'state' => :'ChargeAttemptState',
         :'succeeded_on' => :'DateTime',
@@ -235,6 +240,10 @@ module Wallee
         self.redirection_url = attributes[:'redirectionUrl']
       end
 
+      if attributes.has_key?(:'salesChannel')
+        self.sales_channel = attributes[:'salesChannel']
+      end
+
       if attributes.has_key?(:'spaceViewId')
         self.space_view_id = attributes[:'spaceViewId']
       end
@@ -306,6 +315,7 @@ module Wallee
           next_update_on == o.next_update_on &&
           planned_purge_date == o.planned_purge_date &&
           redirection_url == o.redirection_url &&
+          sales_channel == o.sales_channel &&
           space_view_id == o.space_view_id &&
           state == o.state &&
           succeeded_on == o.succeeded_on &&
@@ -326,7 +336,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, connector_configuration, created_on, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
+      [id, linked_space_id, linked_transaction, charge, connector_configuration, created_on, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
     end
 
     # Builds the object from hash

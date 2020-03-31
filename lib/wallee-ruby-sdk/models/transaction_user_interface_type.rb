@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -25,6 +25,7 @@ module Wallee
   class TransactionUserInterfaceType
     
     IFRAME = 'IFRAME'.freeze
+    LIGHTBOX = 'LIGHTBOX'.freeze
     PAYMENT_PAGE = 'PAYMENT_PAGE'.freeze
     MOBILE_SDK = 'MOBILE_SDK'.freeze
     TERMINAL = 'TERMINAL'.freeze

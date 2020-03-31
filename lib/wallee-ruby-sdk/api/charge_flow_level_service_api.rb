@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -35,8 +35,8 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Integer]
-    def charge_flow_level_service_count(space_id, opts = {})
-      data, _status_code, _headers = charge_flow_level_service_count_with_http_info(space_id, opts)
+    def count(space_id, opts = {})
+      data, _status_code, _headers = count_with_http_info(space_id, opts)
       return data
     end
 
@@ -46,12 +46,12 @@ module Wallee
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
-    def charge_flow_level_service_count_with_http_info(space_id, opts = {})
+    def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.charge_flow_level_service_count ..."
+        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.charge_flow_level_service_count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.count" if space_id.nil?
       # resource path
       local_var_path = "/charge-flow-level/count".sub('{format}','json')
 
@@ -84,7 +84,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ChargeFlowLevelService#charge_flow_level_service_count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ChargeFlowLevelService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -95,8 +95,8 @@ module Wallee
     # @param id The id of the payment flow level which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [ChargeFlowLevel]
-    def charge_flow_level_service_read(space_id, id, opts = {})
-      data, _status_code, _headers = charge_flow_level_service_read_with_http_info(space_id, id, opts)
+    def read(space_id, id, opts = {})
+      data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -106,14 +106,14 @@ module Wallee
     # @param id The id of the payment flow level which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ChargeFlowLevel, Fixnum, Hash)>] ChargeFlowLevel data, response status code and response headers
-    def charge_flow_level_service_read_with_http_info(space_id, id, opts = {})
+    def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.charge_flow_level_service_read ..."
+        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.charge_flow_level_service_read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowLevelService.charge_flow_level_service_read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowLevelService.read" if id.nil?
       # resource path
       local_var_path = "/charge-flow-level/read".sub('{format}','json')
 
@@ -147,7 +147,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'ChargeFlowLevel')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ChargeFlowLevelService#charge_flow_level_service_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ChargeFlowLevelService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -158,8 +158,8 @@ module Wallee
     # @param query The query restricts the payment flow levels which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<ChargeFlowLevel>]
-    def charge_flow_level_service_search(space_id, query, opts = {})
-      data, _status_code, _headers = charge_flow_level_service_search_with_http_info(space_id, query, opts)
+    def search(space_id, query, opts = {})
+      data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
     end
 
@@ -169,14 +169,14 @@ module Wallee
     # @param query The query restricts the payment flow levels which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<ChargeFlowLevel>, Fixnum, Hash)>] Array<ChargeFlowLevel> data, response status code and response headers
-    def charge_flow_level_service_search_with_http_info(space_id, query, opts = {})
+    def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.charge_flow_level_service_search ..."
+        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.charge_flow_level_service_search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling ChargeFlowLevelService.charge_flow_level_service_search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling ChargeFlowLevelService.search" if query.nil?
       # resource path
       local_var_path = "/charge-flow-level/search".sub('{format}','json')
 
@@ -209,7 +209,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<ChargeFlowLevel>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ChargeFlowLevelService#charge_flow_level_service_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ChargeFlowLevelService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -220,8 +220,8 @@ module Wallee
     # @param id The id of the charge flow level whose payment link should be sent.
     # @param [Hash] opts the optional parameters
     # @return [ChargeFlowLevel]
-    def charge_flow_level_service_send_message(space_id, id, opts = {})
-      data, _status_code, _headers = charge_flow_level_service_send_message_with_http_info(space_id, id, opts)
+    def send_message(space_id, id, opts = {})
+      data, _status_code, _headers = send_message_with_http_info(space_id, id, opts)
       return data
     end
 
@@ -231,14 +231,14 @@ module Wallee
     # @param id The id of the charge flow level whose payment link should be sent.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ChargeFlowLevel, Fixnum, Hash)>] ChargeFlowLevel data, response status code and response headers
-    def charge_flow_level_service_send_message_with_http_info(space_id, id, opts = {})
+    def send_message_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.charge_flow_level_service_send_message ..."
+        @api_client.config.logger.debug "Calling API: ChargeFlowLevelService.send_message ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.charge_flow_level_service_send_message" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowLevelService.send_message" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowLevelService.charge_flow_level_service_send_message" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowLevelService.send_message" if id.nil?
       # resource path
       local_var_path = "/charge-flow-level/sendMessage".sub('{format}','json')
 
@@ -272,7 +272,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'ChargeFlowLevel')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ChargeFlowLevelService#charge_flow_level_service_send_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ChargeFlowLevelService#send_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.1
+wallee API: 2.0.2
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -36,8 +36,8 @@ module Wallee
     # @param role_id The role which is mapped to the user and space.
     # @param [Hash] opts the optional parameters
     # @return [UserSpaceRole]
-    def user_space_role_service_add_role(user_id, space_id, role_id, opts = {})
-      data, _status_code, _headers = user_space_role_service_add_role_with_http_info(user_id, space_id, role_id, opts)
+    def add_role(user_id, space_id, role_id, opts = {})
+      data, _status_code, _headers = add_role_with_http_info(user_id, space_id, role_id, opts)
       return data
     end
 
@@ -48,16 +48,16 @@ module Wallee
     # @param role_id The role which is mapped to the user and space.
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserSpaceRole, Fixnum, Hash)>] UserSpaceRole data, response status code and response headers
-    def user_space_role_service_add_role_with_http_info(user_id, space_id, role_id, opts = {})
+    def add_role_with_http_info(user_id, space_id, role_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.user_space_role_service_add_role ..."
+        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.add_role ..."
       end
       # verify the required parameter 'user_id' is set
-      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserSpaceRoleService.user_space_role_service_add_role" if user_id.nil?
+      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserSpaceRoleService.add_role" if user_id.nil?
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling UserSpaceRoleService.user_space_role_service_add_role" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling UserSpaceRoleService.add_role" if space_id.nil?
       # verify the required parameter 'role_id' is set
-      fail ArgumentError, "Missing the required parameter 'role_id' when calling UserSpaceRoleService.user_space_role_service_add_role" if role_id.nil?
+      fail ArgumentError, "Missing the required parameter 'role_id' when calling UserSpaceRoleService.add_role" if role_id.nil?
       # resource path
       local_var_path = "/user-space-role/addRole".sub('{format}','json')
 
@@ -92,7 +92,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'UserSpaceRole')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserSpaceRoleService#user_space_role_service_add_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserSpaceRoleService#add_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -103,8 +103,8 @@ module Wallee
     # @param space_id The space to which the role is mapped.
     # @param [Hash] opts the optional parameters
     # @return [Array<UserSpaceRole>]
-    def user_space_role_service_list(user_id, space_id, opts = {})
-      data, _status_code, _headers = user_space_role_service_list_with_http_info(user_id, space_id, opts)
+    def list(user_id, space_id, opts = {})
+      data, _status_code, _headers = list_with_http_info(user_id, space_id, opts)
       return data
     end
 
@@ -114,14 +114,14 @@ module Wallee
     # @param space_id The space to which the role is mapped.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<UserSpaceRole>, Fixnum, Hash)>] Array<UserSpaceRole> data, response status code and response headers
-    def user_space_role_service_list_with_http_info(user_id, space_id, opts = {})
+    def list_with_http_info(user_id, space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.user_space_role_service_list ..."
+        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.list ..."
       end
       # verify the required parameter 'user_id' is set
-      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserSpaceRoleService.user_space_role_service_list" if user_id.nil?
+      fail ArgumentError, "Missing the required parameter 'user_id' when calling UserSpaceRoleService.list" if user_id.nil?
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling UserSpaceRoleService.user_space_role_service_list" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling UserSpaceRoleService.list" if space_id.nil?
       # resource path
       local_var_path = "/user-space-role/list".sub('{format}','json')
 
@@ -155,7 +155,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<UserSpaceRole>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserSpaceRoleService#user_space_role_service_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserSpaceRoleService#list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -165,8 +165,8 @@ module Wallee
     # @param id The id of user space role which should be removed
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def user_space_role_service_remove_role(id, opts = {})
-      user_space_role_service_remove_role_with_http_info(id, opts)
+    def remove_role(id, opts = {})
+      remove_role_with_http_info(id, opts)
       return nil
     end
 
@@ -175,12 +175,12 @@ module Wallee
     # @param id The id of user space role which should be removed
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def user_space_role_service_remove_role_with_http_info(id, opts = {})
+    def remove_role_with_http_info(id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.user_space_role_service_remove_role ..."
+        @api_client.config.logger.debug "Calling API: UserSpaceRoleService.remove_role ..."
       end
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling UserSpaceRoleService.user_space_role_service_remove_role" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling UserSpaceRoleService.remove_role" if id.nil?
       # resource path
       local_var_path = "/user-space-role/removeRole".sub('{format}','json')
 
@@ -212,7 +212,7 @@ module Wallee
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: UserSpaceRoleService#user_space_role_service_remove_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: UserSpaceRoleService#remove_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
