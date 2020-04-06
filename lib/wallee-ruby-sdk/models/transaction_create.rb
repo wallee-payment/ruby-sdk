@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.2
+wallee API: 2.1.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -90,6 +90,9 @@ module Wallee
     # The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
     attr_accessor :device_session_identifier
 
+    # Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+    attr_accessor :emails_disabled
+
     # 
     attr_accessor :environment
 
@@ -124,6 +127,7 @@ module Wallee
         :'charge_retry_enabled' => :'chargeRetryEnabled',
         :'customers_presence' => :'customersPresence',
         :'device_session_identifier' => :'deviceSessionIdentifier',
+        :'emails_disabled' => :'emailsDisabled',
         :'environment' => :'environment',
         :'environment_selection_strategy' => :'environmentSelectionStrategy',
         :'space_view_id' => :'spaceViewId'
@@ -155,6 +159,7 @@ module Wallee
         :'charge_retry_enabled' => :'BOOLEAN',
         :'customers_presence' => :'CustomersPresence',
         :'device_session_identifier' => :'String',
+        :'emails_disabled' => :'BOOLEAN',
         :'environment' => :'Environment',
         :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
         :'space_view_id' => :'Integer'
@@ -265,6 +270,10 @@ module Wallee
         self.device_session_identifier = attributes[:'deviceSessionIdentifier']
       end
 
+      if attributes.has_key?(:'emailsDisabled')
+        self.emails_disabled = attributes[:'emailsDisabled']
+      end
+
       if attributes.has_key?(:'environment')
         self.environment = attributes[:'environment']
       end
@@ -323,6 +332,7 @@ module Wallee
           charge_retry_enabled == o.charge_retry_enabled &&
           customers_presence == o.customers_presence &&
           device_session_identifier == o.device_session_identifier &&
+          emails_disabled == o.emails_disabled &&
           environment == o.environment &&
           environment_selection_strategy == o.environment_selection_strategy &&
           space_view_id == o.space_view_id
@@ -337,7 +347,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode, auto_confirmation_enabled, charge_retry_enabled, customers_presence, device_session_identifier, environment, environment_selection_strategy, space_view_id].hash
+      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode, auto_confirmation_enabled, charge_retry_enabled, customers_presence, device_session_identifier, emails_disabled, environment, environment_selection_strategy, space_view_id].hash
     end
 
     # Builds the object from hash

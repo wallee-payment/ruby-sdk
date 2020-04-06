@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.0.2
+wallee API: 2.1.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -98,6 +98,9 @@ module Wallee
 
     # The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
     attr_accessor :device_session_identifier
+
+    # Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+    attr_accessor :emails_disabled
 
     # The transaction's end of life indicates the date from which on no operation can be carried out anymore.
     attr_accessor :end_of_life
@@ -226,6 +229,7 @@ module Wallee
         :'customers_presence' => :'customersPresence',
         :'delivery_decision_made_on' => :'deliveryDecisionMadeOn',
         :'device_session_identifier' => :'deviceSessionIdentifier',
+        :'emails_disabled' => :'emailsDisabled',
         :'end_of_life' => :'endOfLife',
         :'environment' => :'environment',
         :'environment_selection_strategy' => :'environmentSelectionStrategy',
@@ -290,6 +294,7 @@ module Wallee
         :'customers_presence' => :'CustomersPresence',
         :'delivery_decision_made_on' => :'DateTime',
         :'device_session_identifier' => :'String',
+        :'emails_disabled' => :'BOOLEAN',
         :'end_of_life' => :'DateTime',
         :'environment' => :'Environment',
         :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
@@ -436,6 +441,10 @@ module Wallee
 
       if attributes.has_key?(:'deviceSessionIdentifier')
         self.device_session_identifier = attributes[:'deviceSessionIdentifier']
+      end
+
+      if attributes.has_key?(:'emailsDisabled')
+        self.emails_disabled = attributes[:'emailsDisabled']
       end
 
       if attributes.has_key?(:'endOfLife')
@@ -618,6 +627,7 @@ module Wallee
           customers_presence == o.customers_presence &&
           delivery_decision_made_on == o.delivery_decision_made_on &&
           device_session_identifier == o.device_session_identifier &&
+          emails_disabled == o.emails_disabled &&
           end_of_life == o.end_of_life &&
           environment == o.environment &&
           environment_selection_strategy == o.environment_selection_strategy &&
@@ -662,7 +672,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash

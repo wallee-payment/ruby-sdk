@@ -80,7 +80,7 @@ class TestTransactionCreate < Test::Unit::TestCase
       successUrl: "http://localhost/success"
     })
 
-    transaction, status_code = transaction_service.transaction_service_create_with_http_info(space_id, transaction)
+    transaction, status_code = transaction_service.create_with_http_info(space_id, transaction)
     assert_equal(200, status_code )
     assert_equal(35.2, transaction.authorization_amount)
     assert_equal(space_id, transaction.linked_space_id)

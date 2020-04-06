@@ -81,8 +81,8 @@ class TestTransactionCreate < Test::Unit::TestCase
       successUrl: "http://localhost/success"
     })
 
-    transaction = transaction_service.transaction_service_create(space_id, transaction)
-    payment_page_url, status_code = transaction_payment_page_service.transaction_payment_page_service_payment_page_url_with_http_info(space_id, transaction.id)
+    transaction = transaction_service.create(space_id, transaction)
+    payment_page_url, status_code = transaction_payment_page_service.payment_page_url_with_http_info(space_id, transaction.id)
     assert_equal(200, status_code )
     assert_send([payment_page_url, :include?, "http"])
     assert_equal(space_id, transaction.linked_space_id)
