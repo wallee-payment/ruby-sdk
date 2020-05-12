@@ -75,7 +75,7 @@ transaction = Wallee::TransactionCreate.new({
         street: "Street"
     }),
     currency: 'EUR',
-    customerEmailAddress: "test@customweb.com",
+    customerEmailAddress: "test@example.com",
     customerPresence: Wallee::CustomersPresence::VIRTUAL_PRESENT,
     failedUrl: "http://localhost/failure",
     invoiceMerchantReference: "order-1",
@@ -127,8 +127,8 @@ transaction = Wallee::TransactionCreate.new({
     successUrl: "http://localhost/success"
 })
 
-transaction = transaction_service.transaction_service_create(space_id, transaction)
-payment_page_url = transaction_payment_page_service.transaction_payment_page_service_payment_page(space_id, transaction.id)
+transaction = transaction_service.create(space_id, transaction)
+payment_page_url = transaction_payment_page_service.payment_page(space_id, transaction.id)
 # redirect to payment_page_url
 ```
 

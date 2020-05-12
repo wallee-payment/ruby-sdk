@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -124,6 +124,8 @@ module Wallee
         :sslkey => @config.key_file,
         :verbose => @config.debugging
       }
+
+      req_opts.merge!(multipart: true) if header_params['Content-Type'].start_with? "multipart/"
 
       # set custom cert, if provided
       req_opts[:cainfo] = @config.ssl_ca_cert if @config.ssl_ca_cert

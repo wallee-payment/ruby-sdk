@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -44,6 +44,9 @@ module Wallee
 
     # The date on which the invoice is created on.
     attr_accessor :created_on
+
+    # The id of the user which marked the invoice as derecognized.
+    attr_accessor :derecognized_by
 
     # The date on which the invoice is marked as derecognized.
     attr_accessor :derecognized_on
@@ -100,6 +103,7 @@ module Wallee
         :'billing_address' => :'billingAddress',
         :'completion' => :'completion',
         :'created_on' => :'createdOn',
+        :'derecognized_by' => :'derecognizedBy',
         :'derecognized_on' => :'derecognizedOn',
         :'due_on' => :'dueOn',
         :'environment' => :'environment',
@@ -128,6 +132,7 @@ module Wallee
         :'billing_address' => :'Address',
         :'completion' => :'TransactionCompletion',
         :'created_on' => :'DateTime',
+        :'derecognized_by' => :'Integer',
         :'derecognized_on' => :'DateTime',
         :'due_on' => :'DateTime',
         :'environment' => :'Environment',
@@ -180,6 +185,10 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'derecognizedBy')
+        self.derecognized_by = attributes[:'derecognizedBy']
       end
 
       if attributes.has_key?(:'derecognizedOn')
@@ -270,6 +279,7 @@ module Wallee
           billing_address == o.billing_address &&
           completion == o.completion &&
           created_on == o.created_on &&
+          derecognized_by == o.derecognized_by &&
           derecognized_on == o.derecognized_on &&
           due_on == o.due_on &&
           environment == o.environment &&
@@ -296,7 +306,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, billing_address, completion, created_on, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, time_zone, version].hash
+      [id, linked_space_id, linked_transaction, amount, billing_address, completion, created_on, derecognized_by, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, time_zone, version].hash
     end
 
     # Builds the object from hash
@@ -306,7 +316,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )

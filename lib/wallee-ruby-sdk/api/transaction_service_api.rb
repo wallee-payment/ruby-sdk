@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -462,10 +462,11 @@ module Wallee
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
     # @param space_id 
     # @param id The id of the transaction which should be returned.
+    # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [Array<PaymentMethodConfiguration>]
-    def fetch_possible_payment_methods(space_id, id, opts = {})
-      data, _status_code, _headers = fetch_possible_payment_methods_with_http_info(space_id, id, opts)
+    def fetch_payment_methods(space_id, id, integration_mode, opts = {})
+      data, _status_code, _headers = fetch_payment_methods_with_http_info(space_id, id, integration_mode, opts)
       return data
     end
 
@@ -473,23 +474,27 @@ module Wallee
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
     # @param space_id 
     # @param id The id of the transaction which should be returned.
+    # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<PaymentMethodConfiguration>, Fixnum, Hash)>] Array<PaymentMethodConfiguration> data, response status code and response headers
-    def fetch_possible_payment_methods_with_http_info(space_id, id, opts = {})
+    def fetch_payment_methods_with_http_info(space_id, id, integration_mode, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionService.fetch_possible_payment_methods ..."
+        @api_client.config.logger.debug "Calling API: TransactionService.fetch_payment_methods ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionService.fetch_possible_payment_methods" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionService.fetch_payment_methods" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling TransactionService.fetch_possible_payment_methods" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling TransactionService.fetch_payment_methods" if id.nil?
+      # verify the required parameter 'integration_mode' is set
+      fail ArgumentError, "Missing the required parameter 'integration_mode' when calling TransactionService.fetch_payment_methods" if integration_mode.nil?
       # resource path
-      local_var_path = "/transaction/fetchPossiblePaymentMethods".sub('{format}','json')
+      local_var_path = "/transaction/fetch-payment-methods".sub('{format}','json')
 
       # query parameters
       query_params = {}
       query_params[:'spaceId'] = space_id
       query_params[:'id'] = id
+      query_params[:'integrationMode'] = integration_mode
 
       # header parameters
       header_params = {}
@@ -516,7 +521,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<PaymentMethodConfiguration>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionService#fetch_possible_payment_methods\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TransactionService#fetch_payment_methods\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -524,30 +529,35 @@ module Wallee
     # Fetch Possible Payment Methods with Credentials
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
+    # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [Array<PaymentMethodConfiguration>]
-    def fetch_possible_payment_methods_with_credentials(credentials, opts = {})
-      data, _status_code, _headers = fetch_possible_payment_methods_with_credentials_with_http_info(credentials, opts)
+    def fetch_payment_methods_with_credentials(credentials, integration_mode, opts = {})
+      data, _status_code, _headers = fetch_payment_methods_with_credentials_with_http_info(credentials, integration_mode, opts)
       return data
     end
 
     # Fetch Possible Payment Methods with Credentials
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
+    # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<PaymentMethodConfiguration>, Fixnum, Hash)>] Array<PaymentMethodConfiguration> data, response status code and response headers
-    def fetch_possible_payment_methods_with_credentials_with_http_info(credentials, opts = {})
+    def fetch_payment_methods_with_credentials_with_http_info(credentials, integration_mode, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionService.fetch_possible_payment_methods_with_credentials ..."
+        @api_client.config.logger.debug "Calling API: TransactionService.fetch_payment_methods_with_credentials ..."
       end
       # verify the required parameter 'credentials' is set
-      fail ArgumentError, "Missing the required parameter 'credentials' when calling TransactionService.fetch_possible_payment_methods_with_credentials" if credentials.nil?
+      fail ArgumentError, "Missing the required parameter 'credentials' when calling TransactionService.fetch_payment_methods_with_credentials" if credentials.nil?
+      # verify the required parameter 'integration_mode' is set
+      fail ArgumentError, "Missing the required parameter 'integration_mode' when calling TransactionService.fetch_payment_methods_with_credentials" if integration_mode.nil?
       # resource path
-      local_var_path = "/transaction/fetchPossiblePaymentMethodsWithCredentials".sub('{format}','json')
+      local_var_path = "/transaction/fetch-payment-methods-with-credentials".sub('{format}','json')
 
       # query parameters
       query_params = {}
       query_params[:'credentials'] = credentials
+      query_params[:'integrationMode'] = integration_mode
 
       # header parameters
       header_params = {}
@@ -574,7 +584,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Array<PaymentMethodConfiguration>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionService#fetch_possible_payment_methods_with_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TransactionService#fetch_payment_methods_with_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

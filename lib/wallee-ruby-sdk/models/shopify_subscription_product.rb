@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -105,6 +105,9 @@ module Wallee
     # Define the number of orders the subscription will keep running for after its termination has been requested.
     attr_accessor :termination_billing_cycles
 
+    # 
+    attr_accessor :updated_at
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
@@ -138,6 +141,7 @@ module Wallee
         :'store_order_confirmation_email_enabled' => :'storeOrderConfirmationEmailEnabled',
         :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed',
         :'termination_billing_cycles' => :'terminationBillingCycles',
+        :'updated_at' => :'updatedAt',
         :'version' => :'version'
       }
     end
@@ -172,6 +176,7 @@ module Wallee
         :'store_order_confirmation_email_enabled' => :'BOOLEAN',
         :'subscriber_suspension_allowed' => :'BOOLEAN',
         :'termination_billing_cycles' => :'Integer',
+        :'updated_at' => :'DateTime',
         :'version' => :'Integer'
       }
     end
@@ -292,6 +297,10 @@ module Wallee
         self.termination_billing_cycles = attributes[:'terminationBillingCycles']
       end
 
+      if attributes.has_key?(:'updatedAt')
+        self.updated_at = attributes[:'updatedAt']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
@@ -342,6 +351,7 @@ module Wallee
           store_order_confirmation_email_enabled == o.store_order_confirmation_email_enabled &&
           subscriber_suspension_allowed == o.subscriber_suspension_allowed &&
           termination_billing_cycles == o.termination_billing_cycles &&
+          updated_at == o.updated_at &&
           version == o.version
     end
 
@@ -354,7 +364,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, id, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, planned_purge_date, pricing_option, product_id, product_name, product_price, product_sku, product_variant_id, product_variant_name, relative_price_adjustment, shipping_required, shop, state, stock_check_required, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, version].hash
+      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, id, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, planned_purge_date, pricing_option, product_id, product_name, product_price, product_sku, product_variant_id, product_variant_name, relative_price_adjustment, shipping_required, shop, state, stock_check_required, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, updated_at, version].hash
     end
 
     # Builds the object from hash
@@ -364,7 +374,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )

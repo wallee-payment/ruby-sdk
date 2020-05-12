@@ -28,7 +28,7 @@ class TestTransactionCreate < Test::Unit::TestCase
         street: "Street"
       }),
       currency: 'EUR',
-      customerEmailAddress: "test@customweb.com",
+      customerEmailAddress: "test@example.com",
       customerPresence: Wallee::CustomersPresence::VIRTUAL_PRESENT,
       failedUrl: "http://localhost/failure",
       invoiceMerchantReference: "order-1",

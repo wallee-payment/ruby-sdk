@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -33,6 +33,9 @@ module Wallee
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
+    # 
+    attr_accessor :machine_name
+
     # The name of the scope is shown to the user where the user should select a scope.
     attr_accessor :name
 
@@ -63,6 +66,7 @@ module Wallee
         :'domain_name' => :'domainName',
         :'features' => :'features',
         :'id' => :'id',
+        :'machine_name' => :'machineName',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'port' => :'port',
@@ -80,6 +84,7 @@ module Wallee
         :'domain_name' => :'String',
         :'features' => :'Array<Feature>',
         :'id' => :'Integer',
+        :'machine_name' => :'String',
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'port' => :'Integer',
@@ -111,6 +116,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'machineName')
+        self.machine_name = attributes[:'machineName']
       end
 
       if attributes.has_key?(:'name')
@@ -169,6 +178,7 @@ module Wallee
           domain_name == o.domain_name &&
           features == o.features &&
           id == o.id &&
+          machine_name == o.machine_name &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           port == o.port &&
@@ -188,7 +198,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [domain_name, features, id, name, planned_purge_date, port, ssl_active, state, themes, url, version].hash
+      [domain_name, features, id, machine_name, name, planned_purge_date, port, ssl_active, state, themes, url, version].hash
     end
 
     # Builds the object from hash
@@ -198,7 +208,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )

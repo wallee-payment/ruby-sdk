@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -29,6 +29,12 @@ module Wallee
 
     # This property is true when all accounts in the hierarchy are active or restricted active.
     attr_accessor :active_or_restricted_active
+
+    # The ID of a user that deleted this entity.
+    attr_accessor :deleted_by
+
+    # The date and time when this entity was deleted.
+    attr_accessor :deleted_on
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -65,6 +71,8 @@ module Wallee
       {
         :'active' => :'active',
         :'active_or_restricted_active' => :'activeOrRestrictedActive',
+        :'deleted_by' => :'deletedBy',
+        :'deleted_on' => :'deletedOn',
         :'id' => :'id',
         :'name' => :'name',
         :'parent_account' => :'parentAccount',
@@ -83,6 +91,8 @@ module Wallee
       {
         :'active' => :'BOOLEAN',
         :'active_or_restricted_active' => :'BOOLEAN',
+        :'deleted_by' => :'Integer',
+        :'deleted_on' => :'DateTime',
         :'id' => :'Integer',
         :'name' => :'String',
         :'parent_account' => :'Account',
@@ -110,6 +120,14 @@ module Wallee
 
       if attributes.has_key?(:'activeOrRestrictedActive')
         self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
+      end
+
+      if attributes.has_key?(:'deletedBy')
+        self.deleted_by = attributes[:'deletedBy']
+      end
+
+      if attributes.has_key?(:'deletedOn')
+        self.deleted_on = attributes[:'deletedOn']
       end
 
       if attributes.has_key?(:'id')
@@ -173,6 +191,8 @@ module Wallee
       self.class == o.class &&
           active == o.active &&
           active_or_restricted_active == o.active_or_restricted_active &&
+          deleted_by == o.deleted_by &&
+          deleted_on == o.deleted_on &&
           id == o.id &&
           name == o.name &&
           parent_account == o.parent_account &&
@@ -194,7 +214,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [active, active_or_restricted_active, id, name, parent_account, planned_purge_date, restricted_active, scope, state, subaccount_limit, type, version].hash
+      [active, active_or_restricted_active, deleted_by, deleted_on, id, name, parent_account, planned_purge_date, restricted_active, scope, state, subaccount_limit, type, version].hash
     end
 
     # Builds the object from hash
@@ -204,7 +224,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )

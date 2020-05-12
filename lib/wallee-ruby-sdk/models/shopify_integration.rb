@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -38,6 +38,9 @@ module Wallee
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
+
+    # 
+    attr_accessor :installed
 
     # Enabling the integrated payment form will embed the payment form in the Shopify shop. The app needs to be installed for this to be possible.
     attr_accessor :integrated_payment_form_enabled
@@ -89,6 +92,7 @@ module Wallee
         :'app_version' => :'appVersion',
         :'currency' => :'currency',
         :'id' => :'id',
+        :'installed' => :'installed',
         :'integrated_payment_form_enabled' => :'integratedPaymentFormEnabled',
         :'language' => :'language',
         :'login_name' => :'loginName',
@@ -114,6 +118,7 @@ module Wallee
         :'app_version' => :'ShopifyIntegrationAppVersion',
         :'currency' => :'String',
         :'id' => :'Integer',
+        :'installed' => :'BOOLEAN',
         :'integrated_payment_form_enabled' => :'BOOLEAN',
         :'language' => :'String',
         :'login_name' => :'String',
@@ -159,6 +164,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'installed')
+        self.installed = attributes[:'installed']
       end
 
       if attributes.has_key?(:'integratedPaymentFormEnabled')
@@ -241,6 +250,7 @@ module Wallee
           app_version == o.app_version &&
           currency == o.currency &&
           id == o.id &&
+          installed == o.installed &&
           integrated_payment_form_enabled == o.integrated_payment_form_enabled &&
           language == o.language &&
           login_name == o.login_name &&
@@ -266,7 +276,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allow_invoice_download, allowed_payment_method_configurations, app_version, currency, id, integrated_payment_form_enabled, language, login_name, name, planned_purge_date, proxy_path, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, version].hash
+      [allow_invoice_download, allowed_payment_method_configurations, app_version, currency, id, installed, integrated_payment_form_enabled, language, login_name, name, planned_purge_date, proxy_path, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, version].hash
     end
 
     # Builds the object from hash
@@ -276,7 +286,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )

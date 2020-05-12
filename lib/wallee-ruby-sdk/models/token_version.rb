@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.1.0
+wallee API: 2.2.0
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -38,6 +38,9 @@ module Wallee
 
     # The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
     attr_accessor :expires_on
+
+    # 
+    attr_accessor :icon_url
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -98,6 +101,7 @@ module Wallee
         :'created_on' => :'createdOn',
         :'environment' => :'environment',
         :'expires_on' => :'expiresOn',
+        :'icon_url' => :'iconUrl',
         :'id' => :'id',
         :'labels' => :'labels',
         :'language' => :'language',
@@ -126,6 +130,7 @@ module Wallee
         :'created_on' => :'DateTime',
         :'environment' => :'ChargeAttemptEnvironment',
         :'expires_on' => :'DateTime',
+        :'icon_url' => :'String',
         :'id' => :'Integer',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
@@ -172,6 +177,10 @@ module Wallee
 
       if attributes.has_key?(:'expiresOn')
         self.expires_on = attributes[:'expiresOn']
+      end
+
+      if attributes.has_key?(:'iconUrl')
+        self.icon_url = attributes[:'iconUrl']
       end
 
       if attributes.has_key?(:'id')
@@ -270,6 +279,7 @@ module Wallee
           created_on == o.created_on &&
           environment == o.environment &&
           expires_on == o.expires_on &&
+          icon_url == o.icon_url &&
           id == o.id &&
           labels == o.labels &&
           language == o.language &&
@@ -298,7 +308,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_address, created_on, environment, expires_on, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, payment_information_hashes, payment_method, payment_method_brand, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
+      [activated_on, billing_address, created_on, environment, expires_on, icon_url, id, labels, language, linked_space_id, name, obsoleted_on, payment_connector_configuration, payment_information_hashes, payment_method, payment_method_brand, planned_purge_date, processor_token, shipping_address, state, token, type, version].hash
     end
 
     # Builds the object from hash
@@ -308,7 +318,7 @@ module Wallee
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
         if type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the the attribute
+          # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
             self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
