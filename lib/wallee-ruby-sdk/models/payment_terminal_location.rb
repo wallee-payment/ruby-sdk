@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -24,6 +24,9 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminalLocation
+    # 
+    attr_accessor :contact_address
+
     # 
     attr_accessor :default_configuration
 
@@ -51,6 +54,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'contact_address' => :'contactAddress',
         :'default_configuration' => :'defaultConfiguration',
         :'delivery_address' => :'deliveryAddress',
         :'id' => :'id',
@@ -65,6 +69,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'contact_address' => :'PaymentTerminalContactAddress',
         :'default_configuration' => :'PaymentTerminalConfiguration',
         :'delivery_address' => :'PaymentTerminalAddress',
         :'id' => :'Integer',
@@ -83,6 +88,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'contactAddress')
+        self.contact_address = attributes[:'contactAddress']
+      end
 
       if attributes.has_key?(:'defaultConfiguration')
         self.default_configuration = attributes[:'defaultConfiguration']
@@ -121,13 +130,28 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@name.nil? && @name.to_s.length > 100
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@name.nil? && @name.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -135,6 +159,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          contact_address == o.contact_address &&
           default_configuration == o.default_configuration &&
           delivery_address == o.delivery_address &&
           id == o.id &&
@@ -154,7 +179,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [default_configuration, delivery_address, id, linked_space_id, name, planned_purge_date, state, version].hash
+      [contact_address, default_configuration, delivery_address, id, linked_space_id, name, planned_purge_date, state, version].hash
     end
 
     # Builds the object from hash

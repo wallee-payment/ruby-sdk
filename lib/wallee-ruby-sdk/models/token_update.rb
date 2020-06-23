@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -121,6 +121,14 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
+        invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 150.')
+      end
+
+      if !@token_reference.nil? && @token_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "token_reference", the character length must be smaller than or equal to 100.')
+      end
+
       if @id.nil?
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
@@ -135,9 +143,31 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
+      return false if !@token_reference.nil? && @token_reference.to_s.length > 100
       return false if @id.nil?
       return false if @version.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_email_address Value to be assigned
+    def customer_email_address=(customer_email_address)
+      if !customer_email_address.nil? && customer_email_address.to_s.length > 150
+        fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 150.'
+      end
+
+      @customer_email_address = customer_email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] token_reference Value to be assigned
+    def token_reference=(token_reference)
+      if !token_reference.nil? && token_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "token_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @token_reference = token_reference
     end
 
     # Checks equality by comparing each attribute.

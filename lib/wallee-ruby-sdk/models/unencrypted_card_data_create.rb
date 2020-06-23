@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -85,8 +85,28 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@card_holder_name.nil? && @card_holder_name.to_s.length > 100
+        invalid_properties.push('invalid value for "card_holder_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@card_verification_code.nil? && @card_verification_code.to_s.length > 4
+        invalid_properties.push('invalid value for "card_verification_code", the character length must be smaller than or equal to 4.')
+      end
+
+      if !@card_verification_code.nil? && @card_verification_code.to_s.length < 3
+        invalid_properties.push('invalid value for "card_verification_code", the character length must be great than or equal to 3.')
+      end
+
       if @primary_account_number.nil?
         invalid_properties.push('invalid value for "primary_account_number", primary_account_number cannot be nil.')
+      end
+
+      if @primary_account_number.to_s.length > 30
+        invalid_properties.push('invalid value for "primary_account_number", the character length must be smaller than or equal to 30.')
+      end
+
+      if @primary_account_number.to_s.length < 10
+        invalid_properties.push('invalid value for "primary_account_number", the character length must be great than or equal to 10.')
       end
 
       invalid_properties
@@ -95,8 +115,55 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@card_holder_name.nil? && @card_holder_name.to_s.length > 100
+      return false if !@card_verification_code.nil? && @card_verification_code.to_s.length > 4
+      return false if !@card_verification_code.nil? && @card_verification_code.to_s.length < 3
       return false if @primary_account_number.nil?
+      return false if @primary_account_number.to_s.length > 30
+      return false if @primary_account_number.to_s.length < 10
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] card_holder_name Value to be assigned
+    def card_holder_name=(card_holder_name)
+      if !card_holder_name.nil? && card_holder_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "card_holder_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @card_holder_name = card_holder_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] card_verification_code Value to be assigned
+    def card_verification_code=(card_verification_code)
+      if !card_verification_code.nil? && card_verification_code.to_s.length > 4
+        fail ArgumentError, 'invalid value for "card_verification_code", the character length must be smaller than or equal to 4.'
+      end
+
+      if !card_verification_code.nil? && card_verification_code.to_s.length < 3
+        fail ArgumentError, 'invalid value for "card_verification_code", the character length must be great than or equal to 3.'
+      end
+
+      @card_verification_code = card_verification_code
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] primary_account_number Value to be assigned
+    def primary_account_number=(primary_account_number)
+      if primary_account_number.nil?
+        fail ArgumentError, 'primary_account_number cannot be nil'
+      end
+
+      if primary_account_number.to_s.length > 30
+        fail ArgumentError, 'invalid value for "primary_account_number", the character length must be smaller than or equal to 30.'
+      end
+
+      if primary_account_number.to_s.length < 10
+        fail ArgumentError, 'invalid value for "primary_account_number", the character length must be great than or equal to 10.'
+      end
+
+      @primary_account_number = primary_account_number
     end
 
     # Checks equality by comparing each attribute.

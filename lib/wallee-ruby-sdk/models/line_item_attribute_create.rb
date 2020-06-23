@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -71,8 +71,16 @@ module Wallee
         invalid_properties.push('invalid value for "label", label cannot be nil.')
       end
 
+      if @label.to_s.length > 512
+        invalid_properties.push('invalid value for "label", the character length must be smaller than or equal to 512.')
+      end
+
       if @value.nil?
         invalid_properties.push('invalid value for "value", value cannot be nil.')
+      end
+
+      if @value.to_s.length > 512
+        invalid_properties.push('invalid value for "value", the character length must be smaller than or equal to 512.')
       end
 
       invalid_properties
@@ -82,8 +90,38 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @label.nil?
+      return false if @label.to_s.length > 512
       return false if @value.nil?
+      return false if @value.to_s.length > 512
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] label Value to be assigned
+    def label=(label)
+      if label.nil?
+        fail ArgumentError, 'label cannot be nil'
+      end
+
+      if label.to_s.length > 512
+        fail ArgumentError, 'invalid value for "label", the character length must be smaller than or equal to 512.'
+      end
+
+      @label = label
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] value Value to be assigned
+    def value=(value)
+      if value.nil?
+        fail ArgumentError, 'value cannot be nil'
+      end
+
+      if value.to_s.length > 512
+        fail ArgumentError, 'invalid value for "value", the character length must be smaller than or equal to 512.'
+      end
+
+      @value = value
     end
 
     # Checks equality by comparing each attribute.

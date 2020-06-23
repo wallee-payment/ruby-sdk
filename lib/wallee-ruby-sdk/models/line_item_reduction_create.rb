@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -80,6 +80,10 @@ module Wallee
         invalid_properties.push('invalid value for "line_item_unique_id", line_item_unique_id cannot be nil.')
       end
 
+      if @line_item_unique_id.to_s.length > 200
+        invalid_properties.push('invalid value for "line_item_unique_id", the character length must be smaller than or equal to 200.')
+      end
+
       if @quantity_reduction.nil?
         invalid_properties.push('invalid value for "quantity_reduction", quantity_reduction cannot be nil.')
       end
@@ -95,9 +99,24 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @line_item_unique_id.nil?
+      return false if @line_item_unique_id.to_s.length > 200
       return false if @quantity_reduction.nil?
       return false if @unit_price_reduction.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] line_item_unique_id Value to be assigned
+    def line_item_unique_id=(line_item_unique_id)
+      if line_item_unique_id.nil?
+        fail ArgumentError, 'line_item_unique_id cannot be nil'
+      end
+
+      if line_item_unique_id.to_s.length > 200
+        fail ArgumentError, 'invalid value for "line_item_unique_id", the character length must be smaller than or equal to 200.'
+      end
+
+      @line_item_unique_id = line_item_unique_id
     end
 
     # Checks equality by comparing each attribute.

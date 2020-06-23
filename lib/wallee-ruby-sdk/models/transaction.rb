@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -189,6 +189,12 @@ module Wallee
     # The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
     attr_accessor :tokenization_mode
 
+    # The total applied fees is the sum of all fees that have been applied so far.
+    attr_accessor :total_applied_fees
+
+    # The total settled amount is the total amount which has been settled so far.
+    attr_accessor :total_settled_amount
+
     # The user agent header provides the exact string which contains the user agent of the buyer.
     attr_accessor :user_agent_header
 
@@ -259,6 +265,8 @@ module Wallee
         :'time_zone' => :'timeZone',
         :'token' => :'token',
         :'tokenization_mode' => :'tokenizationMode',
+        :'total_applied_fees' => :'totalAppliedFees',
+        :'total_settled_amount' => :'totalSettledAmount',
         :'user_agent_header' => :'userAgentHeader',
         :'user_failure_message' => :'userFailureMessage',
         :'user_interface_type' => :'userInterfaceType',
@@ -324,6 +332,8 @@ module Wallee
         :'time_zone' => :'String',
         :'token' => :'Token',
         :'tokenization_mode' => :'TokenizationMode',
+        :'total_applied_fees' => :'Float',
+        :'total_settled_amount' => :'Float',
         :'user_agent_header' => :'String',
         :'user_failure_message' => :'String',
         :'user_interface_type' => :'TransactionUserInterfaceType',
@@ -567,6 +577,14 @@ module Wallee
         self.tokenization_mode = attributes[:'tokenizationMode']
       end
 
+      if attributes.has_key?(:'totalAppliedFees')
+        self.total_applied_fees = attributes[:'totalAppliedFees']
+      end
+
+      if attributes.has_key?(:'totalSettledAmount')
+        self.total_settled_amount = attributes[:'totalSettledAmount']
+      end
+
       if attributes.has_key?(:'userAgentHeader')
         self.user_agent_header = attributes[:'userAgentHeader']
       end
@@ -588,13 +606,97 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
+      end
+
+      if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
+        invalid_properties.push('invalid value for "device_session_identifier", the character length must be smaller than or equal to 40.')
+      end
+
+      if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
+        invalid_properties.push('invalid value for "device_session_identifier", the character length must be great than or equal to 10.')
+      end
+
+      if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@shipping_method.nil? && @shipping_method.to_s.length > 200
+        invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+      return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
+      return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_email_address Value to be assigned
+    def customer_email_address=(customer_email_address)
+      if !customer_email_address.nil? && customer_email_address.to_s.length > 254
+        fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 254.'
+      end
+
+      @customer_email_address = customer_email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] device_session_identifier Value to be assigned
+    def device_session_identifier=(device_session_identifier)
+      if !device_session_identifier.nil? && device_session_identifier.to_s.length > 40
+        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be smaller than or equal to 40.'
+      end
+
+      if !device_session_identifier.nil? && device_session_identifier.to_s.length < 10
+        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be great than or equal to 10.'
+      end
+
+      @device_session_identifier = device_session_identifier
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] invoice_merchant_reference Value to be assigned
+    def invoice_merchant_reference=(invoice_merchant_reference)
+      if !invoice_merchant_reference.nil? && invoice_merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @invoice_merchant_reference = invoice_merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @merchant_reference = merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] shipping_method Value to be assigned
+    def shipping_method=(shipping_method)
+      if !shipping_method.nil? && shipping_method.to_s.length > 200
+        fail ArgumentError, 'invalid value for "shipping_method", the character length must be smaller than or equal to 200.'
+      end
+
+      @shipping_method = shipping_method
     end
 
     # Checks equality by comparing each attribute.
@@ -657,6 +759,8 @@ module Wallee
           time_zone == o.time_zone &&
           token == o.token &&
           tokenization_mode == o.tokenization_mode &&
+          total_applied_fees == o.total_applied_fees &&
+          total_settled_amount == o.total_settled_amount &&
           user_agent_header == o.user_agent_header &&
           user_failure_message == o.user_failure_message &&
           user_interface_type == o.user_interface_type &&
@@ -672,7 +776,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -129,6 +129,14 @@ module Wallee
         invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
+      if !@description.nil? && @description.to_s.length > 200
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 200.')
+      end
+
+      if !@reference.nil? && @reference.to_s.length > 100
+        invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -137,7 +145,29 @@ module Wallee
     def valid?
       return false if @id.nil?
       return false if @version.nil?
+      return false if !@description.nil? && @description.to_s.length > 200
+      return false if !@reference.nil? && @reference.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.length > 200
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 200.'
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if !reference.nil? && reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @reference = reference
     end
 
     # Checks equality by comparing each attribute.

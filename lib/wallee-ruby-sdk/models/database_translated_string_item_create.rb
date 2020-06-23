@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -71,6 +71,10 @@ module Wallee
         invalid_properties.push('invalid value for "language", language cannot be nil.')
       end
 
+      if !@translation.nil? && @translation.to_s.length > 16777216
+        invalid_properties.push('invalid value for "translation", the character length must be smaller than or equal to 16777216.')
+      end
+
       invalid_properties
     end
 
@@ -78,7 +82,18 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @language.nil?
+      return false if !@translation.nil? && @translation.to_s.length > 16777216
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] translation Value to be assigned
+    def translation=(translation)
+      if !translation.nil? && translation.to_s.length > 16777216
+        fail ArgumentError, 'invalid value for "translation", the character length must be smaller than or equal to 16777216.'
+      end
+
+      @translation = translation
     end
 
     # Checks equality by comparing each attribute.

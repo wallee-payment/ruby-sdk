@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -242,13 +242,67 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@name.nil? && @name.to_s.length > 150
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 150.')
+      end
+
+      if !@name.nil? && @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
+      end
+
+      if !@sku.nil? && @sku.to_s.length > 200
+        invalid_properties.push('invalid value for "sku", the character length must be smaller than or equal to 200.')
+      end
+
+      if !@unique_id.nil? && @unique_id.to_s.length > 200
+        invalid_properties.push('invalid value for "unique_id", the character length must be smaller than or equal to 200.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@name.nil? && @name.to_s.length > 150
+      return false if !@name.nil? && @name.to_s.length < 1
+      return false if !@sku.nil? && @sku.to_s.length > 200
+      return false if !@unique_id.nil? && @unique_id.to_s.length > 200
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 150
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 150.'
+      end
+
+      if !name.nil? && name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 1.'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sku Value to be assigned
+    def sku=(sku)
+      if !sku.nil? && sku.to_s.length > 200
+        fail ArgumentError, 'invalid value for "sku", the character length must be smaller than or equal to 200.'
+      end
+
+      @sku = sku
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] unique_id Value to be assigned
+    def unique_id=(unique_id)
+      if !unique_id.nil? && unique_id.to_s.length > 200
+        fail ArgumentError, 'invalid value for "unique_id", the character length must be smaller than or equal to 200.'
+      end
+
+      @unique_id = unique_id
     end
 
     # Checks equality by comparing each attribute.

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -231,13 +231,58 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@login_name.nil? && @login_name.to_s.length > 100
+        invalid_properties.push('invalid value for "login_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@name.nil? && @name.to_s.length > 100
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@shop_name.nil? && @shop_name.to_s.length > 100
+        invalid_properties.push('invalid value for "shop_name", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@login_name.nil? && @login_name.to_s.length > 100
+      return false if !@name.nil? && @name.to_s.length > 100
+      return false if !@shop_name.nil? && @shop_name.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] login_name Value to be assigned
+    def login_name=(login_name)
+      if !login_name.nil? && login_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "login_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @login_name = login_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] shop_name Value to be assigned
+    def shop_name=(shop_name)
+      if !shop_name.nil? && shop_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "shop_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @shop_name = shop_name
     end
 
     # Checks equality by comparing each attribute.

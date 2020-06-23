@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -114,13 +114,73 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@customer_id.nil? && @customer_id.to_s.length > 100
+        invalid_properties.push('invalid value for "customer_id", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@email_address.nil? && @email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
+      end
+
+      if !@family_name.nil? && @family_name.to_s.length > 100
+        invalid_properties.push('invalid value for "family_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@given_name.nil? && @given_name.to_s.length > 100
+        invalid_properties.push('invalid value for "given_name", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@customer_id.nil? && @customer_id.to_s.length > 100
+      return false if !@email_address.nil? && @email_address.to_s.length > 254
+      return false if !@family_name.nil? && @family_name.to_s.length > 100
+      return false if !@given_name.nil? && @given_name.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_id Value to be assigned
+    def customer_id=(customer_id)
+      if !customer_id.nil? && customer_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "customer_id", the character length must be smaller than or equal to 100.'
+      end
+
+      @customer_id = customer_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email_address Value to be assigned
+    def email_address=(email_address)
+      if !email_address.nil? && email_address.to_s.length > 254
+        fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 254.'
+      end
+
+      @email_address = email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] family_name Value to be assigned
+    def family_name=(family_name)
+      if !family_name.nil? && family_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "family_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @family_name = family_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] given_name Value to be assigned
+    def given_name=(given_name)
+      if !given_name.nil? && given_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "given_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @given_name = given_name
     end
 
     # Checks equality by comparing each attribute.

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -89,6 +89,10 @@ module Wallee
         invalid_properties.push('invalid value for "end_action", end_action cannot be nil.')
       end
 
+      if !@note.nil? && @note.to_s.length > 300
+        invalid_properties.push('invalid value for "note", the character length must be smaller than or equal to 300.')
+      end
+
       if @planned_end_date.nil?
         invalid_properties.push('invalid value for "planned_end_date", planned_end_date cannot be nil.')
       end
@@ -104,9 +108,20 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @end_action.nil?
+      return false if !@note.nil? && @note.to_s.length > 300
       return false if @planned_end_date.nil?
       return false if @subscription.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] note Value to be assigned
+    def note=(note)
+      if !note.nil? && note.to_s.length > 300
+        fail ArgumentError, 'invalid value for "note", the character length must be smaller than or equal to 300.'
+      end
+
+      @note = note
     end
 
     # Checks equality by comparing each attribute.

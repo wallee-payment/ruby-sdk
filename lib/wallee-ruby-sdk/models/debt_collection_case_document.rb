@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -150,13 +150,58 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@file_name.nil? && @file_name.to_s.length > 100
+        invalid_properties.push('invalid value for "file_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@storage_id.nil? && @storage_id.to_s.length > 100
+        invalid_properties.push('invalid value for "storage_id", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@unique_id.nil? && @unique_id.to_s.length > 500
+        invalid_properties.push('invalid value for "unique_id", the character length must be smaller than or equal to 500.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@file_name.nil? && @file_name.to_s.length > 100
+      return false if !@storage_id.nil? && @storage_id.to_s.length > 100
+      return false if !@unique_id.nil? && @unique_id.to_s.length > 500
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] file_name Value to be assigned
+    def file_name=(file_name)
+      if !file_name.nil? && file_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "file_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @file_name = file_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] storage_id Value to be assigned
+    def storage_id=(storage_id)
+      if !storage_id.nil? && storage_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "storage_id", the character length must be smaller than or equal to 100.'
+      end
+
+      @storage_id = storage_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] unique_id Value to be assigned
+    def unique_id=(unique_id)
+      if !unique_id.nil? && unique_id.to_s.length > 500
+        fail ArgumentError, 'invalid value for "unique_id", the character length must be smaller than or equal to 500.'
+      end
+
+      @unique_id = unique_id
     end
 
     # Checks equality by comparing each attribute.

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -109,8 +109,20 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
+      if @external_id.to_s.length > 100
+        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
+      end
+
+      if @external_id.to_s.length < 1
+        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
+      end
+
       if @line_items.nil?
         invalid_properties.push('invalid value for "line_items", line_items cannot be nil.')
+      end
+
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
       end
 
       invalid_properties
@@ -120,8 +132,39 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if @external_id.nil?
+      return false if @external_id.to_s.length > 100
+      return false if @external_id.to_s.length < 1
       return false if @line_items.nil?
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if external_id.nil?
+        fail ArgumentError, 'external_id cannot be nil'
+      end
+
+      if external_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
+      end
+
+      if external_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
+      end
+
+      @external_id = external_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @merchant_reference = merchant_reference
     end
 
     # Checks equality by comparing each attribute.

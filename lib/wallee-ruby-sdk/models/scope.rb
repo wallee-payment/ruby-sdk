@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -161,13 +161,58 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@domain_name.nil? && @domain_name.to_s.length > 40
+        invalid_properties.push('invalid value for "domain_name", the character length must be smaller than or equal to 40.')
+      end
+
+      if !@machine_name.nil? && @machine_name.to_s.length > 50
+        invalid_properties.push('invalid value for "machine_name", the character length must be smaller than or equal to 50.')
+      end
+
+      if !@name.nil? && @name.to_s.length > 50
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@domain_name.nil? && @domain_name.to_s.length > 40
+      return false if !@machine_name.nil? && @machine_name.to_s.length > 50
+      return false if !@name.nil? && @name.to_s.length > 50
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] domain_name Value to be assigned
+    def domain_name=(domain_name)
+      if !domain_name.nil? && domain_name.to_s.length > 40
+        fail ArgumentError, 'invalid value for "domain_name", the character length must be smaller than or equal to 40.'
+      end
+
+      @domain_name = domain_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] machine_name Value to be assigned
+    def machine_name=(machine_name)
+      if !machine_name.nil? && machine_name.to_s.length > 50
+        fail ArgumentError, 'invalid value for "machine_name", the character length must be smaller than or equal to 50.'
+      end
+
+      @machine_name = machine_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 50
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 50.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.

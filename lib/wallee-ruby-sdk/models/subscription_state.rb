@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -29,6 +29,7 @@ module Wallee
     FAILED = 'FAILED'.freeze
     ACTIVE = 'ACTIVE'.freeze
     SUSPENDED = 'SUSPENDED'.freeze
+    TERMINATION_SCHEDULED = 'TERMINATION_SCHEDULED'.freeze
     TERMINATING = 'TERMINATING'.freeze
     TERMINATED = 'TERMINATED'.freeze
 

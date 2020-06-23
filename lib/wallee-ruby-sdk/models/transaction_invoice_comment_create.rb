@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -67,6 +67,10 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@content.nil? && @content.to_s.length > 262144
+        invalid_properties.push('invalid value for "content", the character length must be smaller than or equal to 262144.')
+      end
+
       if @transaction_invoice.nil?
         invalid_properties.push('invalid value for "transaction_invoice", transaction_invoice cannot be nil.')
       end
@@ -77,8 +81,19 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@content.nil? && @content.to_s.length > 262144
       return false if @transaction_invoice.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] content Value to be assigned
+    def content=(content)
+      if !content.nil? && content.to_s.length > 262144
+        fail ArgumentError, 'invalid value for "content", the character length must be smaller than or equal to 262144.'
+      end
+
+      @content = content
     end
 
     # Checks equality by comparing each attribute.

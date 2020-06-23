@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -237,6 +237,22 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
+      end
+
+      if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@shipping_method.nil? && @shipping_method.to_s.length > 200
+        invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
+      end
+
       if @id.nil?
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
@@ -251,9 +267,53 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
       return false if @id.nil?
       return false if @version.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_email_address Value to be assigned
+    def customer_email_address=(customer_email_address)
+      if !customer_email_address.nil? && customer_email_address.to_s.length > 254
+        fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 254.'
+      end
+
+      @customer_email_address = customer_email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] invoice_merchant_reference Value to be assigned
+    def invoice_merchant_reference=(invoice_merchant_reference)
+      if !invoice_merchant_reference.nil? && invoice_merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @invoice_merchant_reference = invoice_merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @merchant_reference = merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] shipping_method Value to be assigned
+    def shipping_method=(shipping_method)
+      if !shipping_method.nil? && shipping_method.to_s.length > 200
+        fail ArgumentError, 'invalid value for "shipping_method", the character length must be smaller than or equal to 200.'
+      end
+
+      @shipping_method = shipping_method
     end
 
     # Checks equality by comparing each attribute.

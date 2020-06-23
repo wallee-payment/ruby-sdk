@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -120,6 +120,10 @@ module Wallee
         invalid_properties.push('invalid value for "processing_type", processing_type cannot be nil.')
       end
 
+      if !@reference.nil? && @reference.to_s.length > 100
+        invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      end
+
       if @subscription.nil?
         invalid_properties.push('invalid value for "subscription", subscription cannot be nil.')
       end
@@ -132,8 +136,19 @@ module Wallee
     def valid?
       return false if @external_id.nil?
       return false if @processing_type.nil?
+      return false if !@reference.nil? && @reference.to_s.length > 100
       return false if @subscription.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if !reference.nil? && reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @reference = reference
     end
 
     # Checks equality by comparing each attribute.

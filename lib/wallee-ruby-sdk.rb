@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -342,6 +342,7 @@ require 'wallee-ruby-sdk/models/human_user_update'
 require 'wallee-ruby-sdk/models/installment_payment_slice'
 require 'wallee-ruby-sdk/models/payment_link_active'
 require 'wallee-ruby-sdk/models/payment_link_create'
+require 'wallee-ruby-sdk/models/payment_terminal_contact_address'
 require 'wallee-ruby-sdk/models/refund_comment_active'
 require 'wallee-ruby-sdk/models/refund_comment_create'
 require 'wallee-ruby-sdk/models/shopify_recurring_order'

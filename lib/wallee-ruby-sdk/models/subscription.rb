@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -73,6 +73,9 @@ module Wallee
     attr_accessor :terminating_on
 
     # 
+    attr_accessor :termination_scheduled_on
+
+    # 
     attr_accessor :token
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -97,6 +100,7 @@ module Wallee
         :'terminated_by' => :'terminatedBy',
         :'terminated_on' => :'terminatedOn',
         :'terminating_on' => :'terminatingOn',
+        :'termination_scheduled_on' => :'terminationScheduledOn',
         :'token' => :'token',
         :'version' => :'version'
       }
@@ -121,6 +125,7 @@ module Wallee
         :'terminated_by' => :'Integer',
         :'terminated_on' => :'DateTime',
         :'terminating_on' => :'DateTime',
+        :'termination_scheduled_on' => :'DateTime',
         :'token' => :'Token',
         :'version' => :'Integer'
       }
@@ -198,6 +203,10 @@ module Wallee
         self.terminating_on = attributes[:'terminatingOn']
       end
 
+      if attributes.has_key?(:'terminationScheduledOn')
+        self.termination_scheduled_on = attributes[:'terminationScheduledOn']
+      end
+
       if attributes.has_key?(:'token')
         self.token = attributes[:'token']
       end
@@ -211,13 +220,43 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@description.nil? && @description.to_s.length > 200
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 200.')
+      end
+
+      if !@reference.nil? && @reference.to_s.length > 100
+        invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@description.nil? && @description.to_s.length > 200
+      return false if !@reference.nil? && @reference.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.length > 200
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 200.'
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if !reference.nil? && reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @reference = reference
     end
 
     # Checks equality by comparing each attribute.
@@ -241,6 +280,7 @@ module Wallee
           terminated_by == o.terminated_by &&
           terminated_on == o.terminated_on &&
           terminating_on == o.terminating_on &&
+          termination_scheduled_on == o.termination_scheduled_on &&
           token == o.token &&
           version == o.version
     end
@@ -254,7 +294,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_by, terminated_on, terminating_on, token, version].hash
+      [activated_on, affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_by, terminated_on, terminating_on, termination_scheduled_on, token, version].hash
     end
 
     # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -166,13 +166,118 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
+        invalid_properties.push('invalid value for "dependent_locality", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@family_name.nil? && @family_name.to_s.length > 100
+        invalid_properties.push('invalid value for "family_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@given_name.nil? && @given_name.to_s.length > 100
+        invalid_properties.push('invalid value for "given_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@organization_name.nil? && @organization_name.to_s.length > 100
+        invalid_properties.push('invalid value for "organization_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@sales_tax_number.nil? && @sales_tax_number.to_s.length > 100
+        invalid_properties.push('invalid value for "sales_tax_number", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@salutation.nil? && @salutation.to_s.length > 20
+        invalid_properties.push('invalid value for "salutation", the character length must be smaller than or equal to 20.')
+      end
+
+      if !@sorting_code.nil? && @sorting_code.to_s.length > 100
+        invalid_properties.push('invalid value for "sorting_code", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
+      return false if !@family_name.nil? && @family_name.to_s.length > 100
+      return false if !@given_name.nil? && @given_name.to_s.length > 100
+      return false if !@organization_name.nil? && @organization_name.to_s.length > 100
+      return false if !@sales_tax_number.nil? && @sales_tax_number.to_s.length > 100
+      return false if !@salutation.nil? && @salutation.to_s.length > 20
+      return false if !@sorting_code.nil? && @sorting_code.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] dependent_locality Value to be assigned
+    def dependent_locality=(dependent_locality)
+      if !dependent_locality.nil? && dependent_locality.to_s.length > 100
+        fail ArgumentError, 'invalid value for "dependent_locality", the character length must be smaller than or equal to 100.'
+      end
+
+      @dependent_locality = dependent_locality
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] family_name Value to be assigned
+    def family_name=(family_name)
+      if !family_name.nil? && family_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "family_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @family_name = family_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] given_name Value to be assigned
+    def given_name=(given_name)
+      if !given_name.nil? && given_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "given_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @given_name = given_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] organization_name Value to be assigned
+    def organization_name=(organization_name)
+      if !organization_name.nil? && organization_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "organization_name", the character length must be smaller than or equal to 100.'
+      end
+
+      @organization_name = organization_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sales_tax_number Value to be assigned
+    def sales_tax_number=(sales_tax_number)
+      if !sales_tax_number.nil? && sales_tax_number.to_s.length > 100
+        fail ArgumentError, 'invalid value for "sales_tax_number", the character length must be smaller than or equal to 100.'
+      end
+
+      @sales_tax_number = sales_tax_number
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] salutation Value to be assigned
+    def salutation=(salutation)
+      if !salutation.nil? && salutation.to_s.length > 20
+        fail ArgumentError, 'invalid value for "salutation", the character length must be smaller than or equal to 20.'
+      end
+
+      @salutation = salutation
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sorting_code Value to be assigned
+    def sorting_code=(sorting_code)
+      if !sorting_code.nil? && sorting_code.to_s.length > 100
+        fail ArgumentError, 'invalid value for "sorting_code", the character length must be smaller than or equal to 100.'
+      end
+
+      @sorting_code = sorting_code
     end
 
     # Checks equality by comparing each attribute.

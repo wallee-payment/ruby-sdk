@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -102,6 +102,12 @@ module Wallee
     # 
     attr_accessor :timeout_on
 
+    # The total applied fees is the sum of all fees that have been applied so far.
+    attr_accessor :total_applied_fees
+
+    # The total settled amount is the total amount which has been settled so far.
+    attr_accessor :total_settled_amount
+
     # 
     attr_accessor :transaction
 
@@ -143,6 +149,8 @@ module Wallee
         :'taxes' => :'taxes',
         :'time_zone' => :'timeZone',
         :'timeout_on' => :'timeoutOn',
+        :'total_applied_fees' => :'totalAppliedFees',
+        :'total_settled_amount' => :'totalSettledAmount',
         :'transaction' => :'transaction',
         :'type' => :'type',
         :'updated_invoice' => :'updatedInvoice',
@@ -179,6 +187,8 @@ module Wallee
         :'taxes' => :'Array<Tax>',
         :'time_zone' => :'String',
         :'timeout_on' => :'DateTime',
+        :'total_applied_fees' => :'Float',
+        :'total_settled_amount' => :'Float',
         :'transaction' => :'Transaction',
         :'type' => :'RefundType',
         :'updated_invoice' => :'Integer',
@@ -310,6 +320,14 @@ module Wallee
         self.timeout_on = attributes[:'timeoutOn']
       end
 
+      if attributes.has_key?(:'totalAppliedFees')
+        self.total_applied_fees = attributes[:'totalAppliedFees']
+      end
+
+      if attributes.has_key?(:'totalSettledAmount')
+        self.total_settled_amount = attributes[:'totalSettledAmount']
+      end
+
       if attributes.has_key?(:'transaction')
         self.transaction = attributes[:'transaction']
       end
@@ -331,13 +349,67 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@external_id.nil? && @external_id.to_s.length > 100
+        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@external_id.nil? && @external_id.to_s.length < 1
+        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
+      end
+
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@processor_reference.nil? && @processor_reference.to_s.length > 150
+        invalid_properties.push('invalid value for "processor_reference", the character length must be smaller than or equal to 150.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@external_id.nil? && @external_id.to_s.length > 100
+      return false if !@external_id.nil? && @external_id.to_s.length < 1
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      return false if !@processor_reference.nil? && @processor_reference.to_s.length > 150
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if !external_id.nil? && external_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
+      end
+
+      if !external_id.nil? && external_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
+      end
+
+      @external_id = external_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @merchant_reference = merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] processor_reference Value to be assigned
+    def processor_reference=(processor_reference)
+      if !processor_reference.nil? && processor_reference.to_s.length > 150
+        fail ArgumentError, 'invalid value for "processor_reference", the character length must be smaller than or equal to 150.'
+      end
+
+      @processor_reference = processor_reference
     end
 
     # Checks equality by comparing each attribute.
@@ -371,6 +443,8 @@ module Wallee
           taxes == o.taxes &&
           time_zone == o.time_zone &&
           timeout_on == o.timeout_on &&
+          total_applied_fees == o.total_applied_fees &&
+          total_settled_amount == o.total_settled_amount &&
           transaction == o.transaction &&
           type == o.type &&
           updated_invoice == o.updated_invoice &&
@@ -386,7 +460,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, base_line_items, completion, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processing_on, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, time_zone, timeout_on, transaction, type, updated_invoice, version].hash
+      [amount, base_line_items, completion, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processing_on, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, time_zone, timeout_on, total_applied_fees, total_settled_amount, transaction, type, updated_invoice, version].hash
     end
 
     # Builds the object from hash

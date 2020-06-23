@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -125,6 +125,14 @@ module Wallee
         invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
+      if @title.to_s.length > 150
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 150.')
+      end
+
+      if @title.to_s.length < 1
+        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -136,7 +144,27 @@ module Wallee
       return false if @quantity.nil?
       return false if @subscription_version.nil?
       return false if @title.nil?
+      return false if @title.to_s.length > 150
+      return false if @title.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
+      end
+
+      if title.to_s.length > 150
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 150.'
+      end
+
+      if title.to_s.length < 1
+        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
+      end
+
+      @title = title
     end
 
     # Checks equality by comparing each attribute.

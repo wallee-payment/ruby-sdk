@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -260,13 +260,43 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@name.nil? && @name.to_s.length > 150
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 150.')
+      end
+
+      if !@processor_token.nil? && @processor_token.to_s.length > 150
+        invalid_properties.push('invalid value for "processor_token", the character length must be smaller than or equal to 150.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@name.nil? && @name.to_s.length > 150
+      return false if !@processor_token.nil? && @processor_token.to_s.length > 150
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 150
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 150.'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] processor_token Value to be assigned
+    def processor_token=(processor_token)
+      if !processor_token.nil? && processor_token.to_s.length > 150
+        fail ArgumentError, 'invalid value for "processor_token", the character length must be smaller than or equal to 150.'
+      end
+
+      @processor_token = processor_token
     end
 
     # Checks equality by comparing each attribute.

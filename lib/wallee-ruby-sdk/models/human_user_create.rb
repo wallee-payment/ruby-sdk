@@ -1,5 +1,5 @@
 =begin
-wallee API: 2.2.0
+wallee API: 2.2.1
 
 The wallee API allows an easy interaction with the wallee web service.
 
@@ -130,13 +130,73 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@email_address.nil? && @email_address.to_s.length > 128
+        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 128.')
+      end
+
+      if !@firstname.nil? && @firstname.to_s.length > 100
+        invalid_properties.push('invalid value for "firstname", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@lastname.nil? && @lastname.to_s.length > 100
+        invalid_properties.push('invalid value for "lastname", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
+        invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@email_address.nil? && @email_address.to_s.length > 128
+      return false if !@firstname.nil? && @firstname.to_s.length > 100
+      return false if !@lastname.nil? && @lastname.to_s.length > 100
+      return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email_address Value to be assigned
+    def email_address=(email_address)
+      if !email_address.nil? && email_address.to_s.length > 128
+        fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 128.'
+      end
+
+      @email_address = email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] firstname Value to be assigned
+    def firstname=(firstname)
+      if !firstname.nil? && firstname.to_s.length > 100
+        fail ArgumentError, 'invalid value for "firstname", the character length must be smaller than or equal to 100.'
+      end
+
+      @firstname = firstname
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] lastname Value to be assigned
+    def lastname=(lastname)
+      if !lastname.nil? && lastname.to_s.length > 100
+        fail ArgumentError, 'invalid value for "lastname", the character length must be smaller than or equal to 100.'
+      end
+
+      @lastname = lastname
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] mobile_phone_number Value to be assigned
+    def mobile_phone_number=(mobile_phone_number)
+      if !mobile_phone_number.nil? && mobile_phone_number.to_s.length > 30
+        fail ArgumentError, 'invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.'
+      end
+
+      @mobile_phone_number = mobile_phone_number
     end
 
     # Checks equality by comparing each attribute.
