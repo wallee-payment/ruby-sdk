@@ -1,9 +1,5 @@
 =begin
-wallee API: 2.2.1
-
 The wallee API allows an easy interaction with the wallee web service.
-
-
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -87,6 +83,69 @@ module Wallee
         :return_type => 'SubscriptionVersion')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SubscriptionService#apply_changes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # initialize
+    # The initialize operation initializes a subscription. This method uses charge flows to carry out the transaction.
+    # @param space_id 
+    # @param subscription_id The provided subscription id will be used to lookup the subscription which should be initialized.
+    # @param [Hash] opts the optional parameters
+    # @return [SubscriptionCharge]
+    def call_initialize(space_id, subscription_id, opts = {})
+      data, _status_code, _headers = call_initialize_with_http_info(space_id, subscription_id, opts)
+      return data
+    end
+
+    # initialize
+    # The initialize operation initializes a subscription. This method uses charge flows to carry out the transaction.
+    # @param space_id 
+    # @param subscription_id The provided subscription id will be used to lookup the subscription which should be initialized.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SubscriptionCharge, Fixnum, Hash)>] SubscriptionCharge data, response status code and response headers
+    def call_initialize_with_http_info(space_id, subscription_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SubscriptionService.call_initialize ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionService.call_initialize" if space_id.nil?
+      # verify the required parameter 'subscription_id' is set
+      fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionService.call_initialize" if subscription_id.nil?
+      # resource path
+      local_var_path = "/subscription/initialize".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'subscriptionId'] = subscription_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'SubscriptionCharge')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SubscriptionService#call_initialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -209,69 +268,6 @@ module Wallee
         :return_type => 'SubscriptionVersion')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SubscriptionService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # initialize
-    # The initialize operation initializes a subscription. This method uses charge flows to carry out the transaction.
-    # @param space_id 
-    # @param subscription_id The provided subscription id will be used to lookup the subscription which should be initialized.
-    # @param [Hash] opts the optional parameters
-    # @return [SubscriptionCharge]
-    def initialize(space_id, subscription_id, opts = {})
-      data, _status_code, _headers = initialize_with_http_info(space_id, subscription_id, opts)
-      return data
-    end
-
-    # initialize
-    # The initialize operation initializes a subscription. This method uses charge flows to carry out the transaction.
-    # @param space_id 
-    # @param subscription_id The provided subscription id will be used to lookup the subscription which should be initialized.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(SubscriptionCharge, Fixnum, Hash)>] SubscriptionCharge data, response status code and response headers
-    def initialize_with_http_info(space_id, subscription_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SubscriptionService.initialize ..."
-      end
-      # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionService.initialize" if space_id.nil?
-      # verify the required parameter 'subscription_id' is set
-      fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionService.initialize" if subscription_id.nil?
-      # resource path
-      local_var_path = "/subscription/initialize".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-      query_params[:'spaceId'] = space_id
-      query_params[:'subscriptionId'] = subscription_id
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json;charset=utf-8']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
-
-      # HTTP header 'Content-Type'
-      local_header_content_type = []
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      auth_names = []
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'SubscriptionCharge')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SubscriptionService#initialize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -1,9 +1,5 @@
 =begin
-wallee API: 2.2.1
-
 The wallee API allows an easy interaction with the wallee web service.
-
-
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,5 +16,5 @@ limitations under the License.
 =end
 
 module Wallee
-  VERSION = '2.2.1'
+  VERSION = '2.2.2'
 end
