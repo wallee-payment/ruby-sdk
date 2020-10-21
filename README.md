@@ -128,7 +128,7 @@ transaction = Wallee::TransactionCreate.new({
 })
 
 transaction = transaction_service.create(space_id, transaction)
-payment_page_url = transaction_payment_page_service.payment_page(space_id, transaction.id)
+payment_page_url = transaction_payment_page_service.payment_page_url(space_id, transaction.id)
 # redirect to payment_page_url
 ```
 
