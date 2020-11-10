@@ -20,17 +20,8 @@ require 'date'
 module Wallee
   # 
   class ShopifySubscriptionUpdateRequest
-    # Define the day of the month on which the recurring orders should be created.
-    attr_accessor :billing_day_of_month
-
     # 
-    attr_accessor :billing_interval_amount
-
-    # Define how frequently recurring orders should be created.
-    attr_accessor :billing_interval_unit
-
-    # Define the weekday on which the recurring orders should be created.
-    attr_accessor :billing_weekday
+    attr_accessor :billing_configuration
 
     # 
     attr_accessor :id
@@ -38,57 +29,31 @@ module Wallee
     # 
     attr_accessor :items
 
-    # Define the maximum number of orders the subscription will run for.
-    attr_accessor :maximal_billing_cycles
-
-    # Define the maximum number of orders the subscription can be suspended for at a time.
-    attr_accessor :maximal_suspendable_cycles
-
-    # Define the minimal number of orders the subscription will run for.
-    attr_accessor :minimal_billing_cycles
-
     # 
     attr_accessor :store_order_confirmation_email_enabled
 
     # 
     attr_accessor :subscriber_suspension_allowed
 
-    # Define the number of orders the subscription will keep running for after its termination has been requested.
-    attr_accessor :termination_billing_cycles
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'billing_day_of_month' => :'billingDayOfMonth',
-        :'billing_interval_amount' => :'billingIntervalAmount',
-        :'billing_interval_unit' => :'billingIntervalUnit',
-        :'billing_weekday' => :'billingWeekday',
+        :'billing_configuration' => :'billingConfiguration',
         :'id' => :'id',
         :'items' => :'items',
-        :'maximal_billing_cycles' => :'maximalBillingCycles',
-        :'maximal_suspendable_cycles' => :'maximalSuspendableCycles',
-        :'minimal_billing_cycles' => :'minimalBillingCycles',
         :'store_order_confirmation_email_enabled' => :'storeOrderConfirmationEmailEnabled',
-        :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed',
-        :'termination_billing_cycles' => :'terminationBillingCycles'
+        :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'billing_day_of_month' => :'Integer',
-        :'billing_interval_amount' => :'Integer',
-        :'billing_interval_unit' => :'ShopifySubscriptionBillingIntervalUnit',
-        :'billing_weekday' => :'ShopifySubscriptionWeekday',
+        :'billing_configuration' => :'ShopifySubscriptionModelBillingConfiguration',
         :'id' => :'Integer',
-        :'items' => :'Array<ShopifySubscriptionEditModelItem>',
-        :'maximal_billing_cycles' => :'Integer',
-        :'maximal_suspendable_cycles' => :'Integer',
-        :'minimal_billing_cycles' => :'Integer',
+        :'items' => :'Array<ShopifySubscriptionModelItem>',
         :'store_order_confirmation_email_enabled' => :'BOOLEAN',
-        :'subscriber_suspension_allowed' => :'BOOLEAN',
-        :'termination_billing_cycles' => :'Integer'
+        :'subscriber_suspension_allowed' => :'BOOLEAN'
       }
     end
 
@@ -100,20 +65,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'billingDayOfMonth')
-        self.billing_day_of_month = attributes[:'billingDayOfMonth']
-      end
-
-      if attributes.has_key?(:'billingIntervalAmount')
-        self.billing_interval_amount = attributes[:'billingIntervalAmount']
-      end
-
-      if attributes.has_key?(:'billingIntervalUnit')
-        self.billing_interval_unit = attributes[:'billingIntervalUnit']
-      end
-
-      if attributes.has_key?(:'billingWeekday')
-        self.billing_weekday = attributes[:'billingWeekday']
+      if attributes.has_key?(:'billingConfiguration')
+        self.billing_configuration = attributes[:'billingConfiguration']
       end
 
       if attributes.has_key?(:'id')
@@ -126,28 +79,12 @@ module Wallee
         end
       end
 
-      if attributes.has_key?(:'maximalBillingCycles')
-        self.maximal_billing_cycles = attributes[:'maximalBillingCycles']
-      end
-
-      if attributes.has_key?(:'maximalSuspendableCycles')
-        self.maximal_suspendable_cycles = attributes[:'maximalSuspendableCycles']
-      end
-
-      if attributes.has_key?(:'minimalBillingCycles')
-        self.minimal_billing_cycles = attributes[:'minimalBillingCycles']
-      end
-
       if attributes.has_key?(:'storeOrderConfirmationEmailEnabled')
         self.store_order_confirmation_email_enabled = attributes[:'storeOrderConfirmationEmailEnabled']
       end
 
       if attributes.has_key?(:'subscriberSuspensionAllowed')
         self.subscriber_suspension_allowed = attributes[:'subscriberSuspensionAllowed']
-      end
-
-      if attributes.has_key?(:'terminationBillingCycles')
-        self.termination_billing_cycles = attributes[:'terminationBillingCycles']
       end
     end
 
@@ -169,18 +106,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          billing_day_of_month == o.billing_day_of_month &&
-          billing_interval_amount == o.billing_interval_amount &&
-          billing_interval_unit == o.billing_interval_unit &&
-          billing_weekday == o.billing_weekday &&
+          billing_configuration == o.billing_configuration &&
           id == o.id &&
           items == o.items &&
-          maximal_billing_cycles == o.maximal_billing_cycles &&
-          maximal_suspendable_cycles == o.maximal_suspendable_cycles &&
-          minimal_billing_cycles == o.minimal_billing_cycles &&
           store_order_confirmation_email_enabled == o.store_order_confirmation_email_enabled &&
-          subscriber_suspension_allowed == o.subscriber_suspension_allowed &&
-          termination_billing_cycles == o.termination_billing_cycles
+          subscriber_suspension_allowed == o.subscriber_suspension_allowed
     end
 
     # @see the `==` method
@@ -192,7 +122,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, id, items, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles].hash
+      [billing_configuration, id, items, store_order_confirmation_email_enabled, subscriber_suspension_allowed].hash
     end
 
     # Builds the object from hash

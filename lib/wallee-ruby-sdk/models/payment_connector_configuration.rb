@@ -29,6 +29,9 @@ module Wallee
     # 
     attr_accessor :connector
 
+    # Defines the sales channels the connector configuration is enabled for. In case the set is empty, the connector configuration is enabled for all sales channels.
+    attr_accessor :enabled_sales_channels
+
     # The connector configuration is only enabled for the selected space views. In case the set is empty the connector configuration is enabled for all space views.
     attr_accessor :enabled_space_views
 
@@ -65,6 +68,7 @@ module Wallee
         :'applicable_for_transaction_processing' => :'applicableForTransactionProcessing',
         :'conditions' => :'conditions',
         :'connector' => :'connector',
+        :'enabled_sales_channels' => :'enabledSalesChannels',
         :'enabled_space_views' => :'enabledSpaceViews',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
@@ -84,6 +88,7 @@ module Wallee
         :'applicable_for_transaction_processing' => :'BOOLEAN',
         :'conditions' => :'Array<Integer>',
         :'connector' => :'Integer',
+        :'enabled_sales_channels' => :'Array<SalesChannel>',
         :'enabled_space_views' => :'Array<Integer>',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
@@ -117,6 +122,12 @@ module Wallee
 
       if attributes.has_key?(:'connector')
         self.connector = attributes[:'connector']
+      end
+
+      if attributes.has_key?(:'enabledSalesChannels')
+        if (value = attributes[:'enabledSalesChannels']).is_a?(Array)
+          self.enabled_sales_channels = value
+        end
       end
 
       if attributes.has_key?(:'enabledSpaceViews')
@@ -198,6 +209,7 @@ module Wallee
           applicable_for_transaction_processing == o.applicable_for_transaction_processing &&
           conditions == o.conditions &&
           connector == o.connector &&
+          enabled_sales_channels == o.enabled_sales_channels &&
           enabled_space_views == o.enabled_space_views &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
@@ -219,7 +231,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [applicable_for_transaction_processing, conditions, connector, enabled_space_views, id, linked_space_id, name, payment_method_configuration, planned_purge_date, priority, processor_configuration, state, version].hash
+      [applicable_for_transaction_processing, conditions, connector, enabled_sales_channels, enabled_space_views, id, linked_space_id, name, payment_method_configuration, planned_purge_date, priority, processor_configuration, state, version].hash
     end
 
     # Builds the object from hash

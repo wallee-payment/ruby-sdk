@@ -23,6 +23,9 @@ module Wallee
     # The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
     attr_accessor :external_id
 
+    # 
+    attr_accessor :invoice_merchant_reference
+
     # The last completion flag indicates if this is the last completion. After the last completion is created no further completions can be issued.
     attr_accessor :last_completion
 
@@ -36,6 +39,7 @@ module Wallee
     def self.attribute_map
       {
         :'external_id' => :'externalId',
+        :'invoice_merchant_reference' => :'invoiceMerchantReference',
         :'last_completion' => :'lastCompletion',
         :'line_items' => :'lineItems',
         :'transaction_id' => :'transactionId'
@@ -46,6 +50,7 @@ module Wallee
     def self.swagger_types
       {
         :'external_id' => :'String',
+        :'invoice_merchant_reference' => :'String',
         :'last_completion' => :'BOOLEAN',
         :'line_items' => :'Array<CompletionLineItemCreate>',
         :'transaction_id' => :'Integer'
@@ -62,6 +67,10 @@ module Wallee
 
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
+      end
+
+      if attributes.has_key?(:'invoiceMerchantReference')
+        self.invoice_merchant_reference = attributes[:'invoiceMerchantReference']
       end
 
       if attributes.has_key?(:'lastCompletion')
@@ -95,6 +104,10 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
       end
 
+      if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
       if @last_completion.nil?
         invalid_properties.push('invalid value for "last_completion", last_completion cannot be nil.')
       end
@@ -112,6 +125,7 @@ module Wallee
       return false if @external_id.nil?
       return false if @external_id.to_s.length > 100
       return false if @external_id.to_s.length < 1
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if @last_completion.nil?
       return false if @transaction_id.nil?
       true
@@ -135,12 +149,23 @@ module Wallee
       @external_id = external_id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] invoice_merchant_reference Value to be assigned
+    def invoice_merchant_reference=(invoice_merchant_reference)
+      if !invoice_merchant_reference.nil? && invoice_merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @invoice_merchant_reference = invoice_merchant_reference
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           external_id == o.external_id &&
+          invoice_merchant_reference == o.invoice_merchant_reference &&
           last_completion == o.last_completion &&
           line_items == o.line_items &&
           transaction_id == o.transaction_id
@@ -155,7 +180,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [external_id, last_completion, line_items, transaction_id].hash
+      [external_id, invoice_merchant_reference, last_completion, line_items, transaction_id].hash
     end
 
     # Builds the object from hash

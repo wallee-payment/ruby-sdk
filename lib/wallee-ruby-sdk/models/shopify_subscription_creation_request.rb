@@ -18,52 +18,82 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The subscription charge represents a single charge carried out for a particular subscription.
-  class SubscriptionChargeCreate
+  # 
+  class ShopifySubscriptionCreationRequest
+    # 
+    attr_accessor :billing_address
+
+    # 
+    attr_accessor :billing_configuration
+
+    # 
+    attr_accessor :currency
+
     # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
     attr_accessor :external_id
 
-    # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
-    attr_accessor :failed_url
+    # 
+    attr_accessor :integration
 
     # 
-    attr_accessor :planned_execution_date
+    attr_accessor :items
 
     # 
-    attr_accessor :processing_type
+    attr_accessor :language
 
     # 
-    attr_accessor :reference
+    attr_accessor :shipping_address
 
-    # The field subscription indicates the subscription to which the charge belongs to.
-    attr_accessor :subscription
+    # 
+    attr_accessor :shipping_method_name
 
-    # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
-    attr_accessor :success_url
+    # 
+    attr_accessor :space_view_id
+
+    # 
+    attr_accessor :store_order_confirmation_email_enabled
+
+    # 
+    attr_accessor :subscriber
+
+    # 
+    attr_accessor :subscriber_suspension_allowed
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'billing_address' => :'billingAddress',
+        :'billing_configuration' => :'billingConfiguration',
+        :'currency' => :'currency',
         :'external_id' => :'externalId',
-        :'failed_url' => :'failedUrl',
-        :'planned_execution_date' => :'plannedExecutionDate',
-        :'processing_type' => :'processingType',
-        :'reference' => :'reference',
-        :'subscription' => :'subscription',
-        :'success_url' => :'successUrl'
+        :'integration' => :'integration',
+        :'items' => :'items',
+        :'language' => :'language',
+        :'shipping_address' => :'shippingAddress',
+        :'shipping_method_name' => :'shippingMethodName',
+        :'space_view_id' => :'spaceViewId',
+        :'store_order_confirmation_email_enabled' => :'storeOrderConfirmationEmailEnabled',
+        :'subscriber' => :'subscriber',
+        :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'billing_address' => :'ShopifySubscriptionAddressCreate',
+        :'billing_configuration' => :'ShopifySubscriptionModelBillingConfiguration',
+        :'currency' => :'String',
         :'external_id' => :'String',
-        :'failed_url' => :'String',
-        :'planned_execution_date' => :'DateTime',
-        :'processing_type' => :'SubscriptionChargeProcessingType',
-        :'reference' => :'String',
-        :'subscription' => :'Integer',
-        :'success_url' => :'String'
+        :'integration' => :'Integer',
+        :'items' => :'Array<ShopifySubscriptionModelItem>',
+        :'language' => :'String',
+        :'shipping_address' => :'ShopifySubscriptionAddressCreate',
+        :'shipping_method_name' => :'String',
+        :'space_view_id' => :'Integer',
+        :'store_order_confirmation_email_enabled' => :'BOOLEAN',
+        :'subscriber' => :'ShopifySubscriberCreation',
+        :'subscriber_suspension_allowed' => :'BOOLEAN'
       }
     end
 
@@ -75,32 +105,58 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'billingAddress')
+        self.billing_address = attributes[:'billingAddress']
+      end
+
+      if attributes.has_key?(:'billingConfiguration')
+        self.billing_configuration = attributes[:'billingConfiguration']
+      end
+
+      if attributes.has_key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
       end
 
-      if attributes.has_key?(:'failedUrl')
-        self.failed_url = attributes[:'failedUrl']
+      if attributes.has_key?(:'integration')
+        self.integration = attributes[:'integration']
       end
 
-      if attributes.has_key?(:'plannedExecutionDate')
-        self.planned_execution_date = attributes[:'plannedExecutionDate']
+      if attributes.has_key?(:'items')
+        if (value = attributes[:'items']).is_a?(Array)
+          self.items = value
+        end
       end
 
-      if attributes.has_key?(:'processingType')
-        self.processing_type = attributes[:'processingType']
+      if attributes.has_key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'reference')
-        self.reference = attributes[:'reference']
+      if attributes.has_key?(:'shippingAddress')
+        self.shipping_address = attributes[:'shippingAddress']
       end
 
-      if attributes.has_key?(:'subscription')
-        self.subscription = attributes[:'subscription']
+      if attributes.has_key?(:'shippingMethodName')
+        self.shipping_method_name = attributes[:'shippingMethodName']
       end
 
-      if attributes.has_key?(:'successUrl')
-        self.success_url = attributes[:'successUrl']
+      if attributes.has_key?(:'spaceViewId')
+        self.space_view_id = attributes[:'spaceViewId']
+      end
+
+      if attributes.has_key?(:'storeOrderConfirmationEmailEnabled')
+        self.store_order_confirmation_email_enabled = attributes[:'storeOrderConfirmationEmailEnabled']
+      end
+
+      if attributes.has_key?(:'subscriber')
+        self.subscriber = attributes[:'subscriber']
+      end
+
+      if attributes.has_key?(:'subscriberSuspensionAllowed')
+        self.subscriber_suspension_allowed = attributes[:'subscriberSuspensionAllowed']
       end
     end
 
@@ -108,36 +164,36 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @billing_address.nil?
+        invalid_properties.push('invalid value for "billing_address", billing_address cannot be nil.')
+      end
+
+      if @currency.nil?
+        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      end
+
       if @external_id.nil?
         invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
-      if !@failed_url.nil? && @failed_url.to_s.length > 500
-        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 500.')
+      if @integration.nil?
+        invalid_properties.push('invalid value for "integration", integration cannot be nil.')
       end
 
-      if !@failed_url.nil? && @failed_url.to_s.length < 9
-        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
+      if @items.nil?
+        invalid_properties.push('invalid value for "items", items cannot be nil.')
       end
 
-      if @processing_type.nil?
-        invalid_properties.push('invalid value for "processing_type", processing_type cannot be nil.')
+      if @language.nil?
+        invalid_properties.push('invalid value for "language", language cannot be nil.')
       end
 
-      if !@reference.nil? && @reference.to_s.length > 100
-        invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      if @shipping_address.nil?
+        invalid_properties.push('invalid value for "shipping_address", shipping_address cannot be nil.')
       end
 
-      if @subscription.nil?
-        invalid_properties.push('invalid value for "subscription", subscription cannot be nil.')
-      end
-
-      if !@success_url.nil? && @success_url.to_s.length > 500
-        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 500.')
-      end
-
-      if !@success_url.nil? && @success_url.to_s.length < 9
-        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
+      if @subscriber.nil?
+        invalid_properties.push('invalid value for "subscriber", subscriber cannot be nil.')
       end
 
       invalid_properties
@@ -146,53 +202,15 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @billing_address.nil?
+      return false if @currency.nil?
       return false if @external_id.nil?
-      return false if !@failed_url.nil? && @failed_url.to_s.length > 500
-      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
-      return false if @processing_type.nil?
-      return false if !@reference.nil? && @reference.to_s.length > 100
-      return false if @subscription.nil?
-      return false if !@success_url.nil? && @success_url.to_s.length > 500
-      return false if !@success_url.nil? && @success_url.to_s.length < 9
+      return false if @integration.nil?
+      return false if @items.nil?
+      return false if @language.nil?
+      return false if @shipping_address.nil?
+      return false if @subscriber.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] failed_url Value to be assigned
-    def failed_url=(failed_url)
-      if !failed_url.nil? && failed_url.to_s.length > 500
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 500.'
-      end
-
-      if !failed_url.nil? && failed_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
-      end
-
-      @failed_url = failed_url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] reference Value to be assigned
-    def reference=(reference)
-      if !reference.nil? && reference.to_s.length > 100
-        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
-      end
-
-      @reference = reference
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] success_url Value to be assigned
-    def success_url=(success_url)
-      if !success_url.nil? && success_url.to_s.length > 500
-        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 500.'
-      end
-
-      if !success_url.nil? && success_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
-      end
-
-      @success_url = success_url
     end
 
     # Checks equality by comparing each attribute.
@@ -200,13 +218,19 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          billing_address == o.billing_address &&
+          billing_configuration == o.billing_configuration &&
+          currency == o.currency &&
           external_id == o.external_id &&
-          failed_url == o.failed_url &&
-          planned_execution_date == o.planned_execution_date &&
-          processing_type == o.processing_type &&
-          reference == o.reference &&
-          subscription == o.subscription &&
-          success_url == o.success_url
+          integration == o.integration &&
+          items == o.items &&
+          language == o.language &&
+          shipping_address == o.shipping_address &&
+          shipping_method_name == o.shipping_method_name &&
+          space_view_id == o.space_view_id &&
+          store_order_confirmation_email_enabled == o.store_order_confirmation_email_enabled &&
+          subscriber == o.subscriber &&
+          subscriber_suspension_allowed == o.subscriber_suspension_allowed
     end
 
     # @see the `==` method
@@ -218,7 +242,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [external_id, failed_url, planned_execution_date, processing_type, reference, subscription, success_url].hash
+      [billing_address, billing_configuration, currency, external_id, integration, items, language, shipping_address, shipping_method_name, space_view_id, store_order_confirmation_email_enabled, subscriber, subscriber_suspension_allowed].hash
     end
 
     # Builds the object from hash

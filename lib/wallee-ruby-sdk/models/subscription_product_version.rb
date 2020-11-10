@@ -77,6 +77,9 @@ module Wallee
     # 
     attr_accessor :state
 
+    # Strategy that is used for tax calculation in fees.
+    attr_accessor :tax_calculation
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
@@ -102,6 +105,7 @@ module Wallee
         :'retiring_finished_on' => :'retiringFinishedOn',
         :'retiring_started_on' => :'retiringStartedOn',
         :'state' => :'state',
+        :'tax_calculation' => :'taxCalculation',
         :'version' => :'version'
       }
     end
@@ -128,6 +132,7 @@ module Wallee
         :'retiring_finished_on' => :'DateTime',
         :'retiring_started_on' => :'DateTime',
         :'state' => :'SubscriptionProductVersionState',
+        :'tax_calculation' => :'TaxCalculation',
         :'version' => :'Integer'
       }
     end
@@ -218,6 +223,10 @@ module Wallee
         self.state = attributes[:'state']
       end
 
+      if attributes.has_key?(:'taxCalculation')
+        self.tax_calculation = attributes[:'taxCalculation']
+      end
+
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
@@ -275,6 +284,7 @@ module Wallee
           retiring_finished_on == o.retiring_finished_on &&
           retiring_started_on == o.retiring_started_on &&
           state == o.state &&
+          tax_calculation == o.tax_calculation &&
           version == o.version
     end
 
@@ -287,7 +297,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_cycle, comment, created_on, default_currency, enabled_currencies, id, increment_number, linked_space_id, minimal_number_of_periods, name, number_of_notice_periods, obsoleted_on, planned_purge_date, product, reference, retiring_finished_on, retiring_started_on, state, version].hash
+      [activated_on, billing_cycle, comment, created_on, default_currency, enabled_currencies, id, increment_number, linked_space_id, minimal_number_of_periods, name, number_of_notice_periods, obsoleted_on, planned_purge_date, product, reference, retiring_finished_on, retiring_started_on, state, tax_calculation, version].hash
     end
 
     # Builds the object from hash

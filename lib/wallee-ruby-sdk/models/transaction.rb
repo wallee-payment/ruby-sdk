@@ -62,6 +62,9 @@ module Wallee
     # 
     attr_accessor :completed_on
 
+    # The completion behavior controls when the transaction is completed.
+    attr_accessor :completion_behavior
+
     # 
     attr_accessor :completion_timeout_on
 
@@ -176,6 +179,9 @@ module Wallee
     # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
     attr_accessor :success_url
 
+    # The terminal on which the payment was processed.
+    attr_accessor :terminal
+
     # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
     attr_accessor :time_zone
 
@@ -220,6 +226,7 @@ module Wallee
         :'charge_retry_enabled' => :'chargeRetryEnabled',
         :'completed_amount' => :'completedAmount',
         :'completed_on' => :'completedOn',
+        :'completion_behavior' => :'completionBehavior',
         :'completion_timeout_on' => :'completionTimeoutOn',
         :'confirmed_by' => :'confirmedBy',
         :'confirmed_on' => :'confirmedOn',
@@ -258,6 +265,7 @@ module Wallee
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
         :'success_url' => :'successUrl',
+        :'terminal' => :'terminal',
         :'time_zone' => :'timeZone',
         :'token' => :'token',
         :'tokenization_mode' => :'tokenizationMode',
@@ -287,6 +295,7 @@ module Wallee
         :'charge_retry_enabled' => :'BOOLEAN',
         :'completed_amount' => :'Float',
         :'completed_on' => :'DateTime',
+        :'completion_behavior' => :'TransactionCompletionBehavior',
         :'completion_timeout_on' => :'DateTime',
         :'confirmed_by' => :'Integer',
         :'confirmed_on' => :'DateTime',
@@ -325,6 +334,7 @@ module Wallee
         :'space_view_id' => :'Integer',
         :'state' => :'TransactionState',
         :'success_url' => :'String',
+        :'terminal' => :'PaymentTerminal',
         :'time_zone' => :'String',
         :'token' => :'Token',
         :'tokenization_mode' => :'TokenizationMode',
@@ -403,6 +413,10 @@ module Wallee
 
       if attributes.has_key?(:'completedOn')
         self.completed_on = attributes[:'completedOn']
+      end
+
+      if attributes.has_key?(:'completionBehavior')
+        self.completion_behavior = attributes[:'completionBehavior']
       end
 
       if attributes.has_key?(:'completionTimeoutOn')
@@ -561,6 +575,10 @@ module Wallee
         self.success_url = attributes[:'successUrl']
       end
 
+      if attributes.has_key?(:'terminal')
+        self.terminal = attributes[:'terminal']
+      end
+
       if attributes.has_key?(:'timeZone')
         self.time_zone = attributes[:'timeZone']
       end
@@ -614,6 +632,14 @@ module Wallee
         invalid_properties.push('invalid value for "device_session_identifier", the character length must be great than or equal to 10.')
       end
 
+      if !@failed_url.nil? && @failed_url.to_s.length > 1000
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@failed_url.nil? && @failed_url.to_s.length < 9
+        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
+      end
+
       if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
         invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
       end
@@ -626,6 +652,14 @@ module Wallee
         invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
       end
 
+      if !@success_url.nil? && @success_url.to_s.length > 1000
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@success_url.nil? && @success_url.to_s.length < 9
+        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
+      end
+
       invalid_properties
     end
 
@@ -635,9 +669,13 @@ module Wallee
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 1000
+      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
+      return false if !@success_url.nil? && @success_url.to_s.length > 1000
+      return false if !@success_url.nil? && @success_url.to_s.length < 9
       true
     end
 
@@ -663,6 +701,20 @@ module Wallee
       end
 
       @device_session_identifier = device_session_identifier
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failed_url Value to be assigned
+    def failed_url=(failed_url)
+      if !failed_url.nil? && failed_url.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !failed_url.nil? && failed_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
+      end
+
+      @failed_url = failed_url
     end
 
     # Custom attribute writer method with validation
@@ -695,6 +747,20 @@ module Wallee
       @shipping_method = shipping_method
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if !success_url.nil? && success_url.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !success_url.nil? && success_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
+      end
+
+      @success_url = success_url
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -714,6 +780,7 @@ module Wallee
           charge_retry_enabled == o.charge_retry_enabled &&
           completed_amount == o.completed_amount &&
           completed_on == o.completed_on &&
+          completion_behavior == o.completion_behavior &&
           completion_timeout_on == o.completion_timeout_on &&
           confirmed_by == o.confirmed_by &&
           confirmed_on == o.confirmed_on &&
@@ -752,6 +819,7 @@ module Wallee
           space_view_id == o.space_view_id &&
           state == o.state &&
           success_url == o.success_url &&
+          terminal == o.terminal &&
           time_zone == o.time_zone &&
           token == o.token &&
           tokenization_mode == o.tokenization_mode &&
@@ -772,7 +840,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version].hash
     end
 
     # Builds the object from hash

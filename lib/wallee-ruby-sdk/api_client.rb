@@ -20,7 +20,7 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'typhoeus'
-require 'uri'
+require 'addressable/uri'
 require 'base64'
 require 'time'
 require 'openssl'
@@ -71,7 +71,7 @@ module Wallee
                             :message => response.return_message)
         else
           fail ApiError.new(:code => response.code,
-                            :response_headers => response.headers,
+                            :response_headers => response.headers.to_h,
                             :response_body => response.body),
                response.status_message
         end
@@ -107,6 +107,8 @@ module Wallee
       _verify_ssl_host = true
 
       header_params  = header_params.merge(get_authentication_headers(http_method, path, query_params))
+
+
 
       req_opts = {
         :method => http_method,
@@ -292,7 +294,7 @@ module Wallee
     def build_request_url(path)
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, '/')
-      URI.encode(@config.base_url + path)
+	  Addressable::URI.encode(@config.base_url + path)
     end
 
     # Builds the HTTP request body

@@ -29,6 +29,12 @@ module Wallee
     # This property is true when all accounts in the hierarchy are active or restricted active.
     attr_accessor :active_or_restricted_active
 
+    # The ID of the user who created this entity.
+    attr_accessor :created_by
+
+    # The date and time when this entity was created.
+    attr_accessor :created_on
+
     # The database in which the space's data are stored in.
     attr_accessor :database
 
@@ -40,6 +46,9 @@ module Wallee
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
+
+    # 
+    attr_accessor :last_modified_date
 
     # The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
@@ -77,10 +86,13 @@ module Wallee
         :'account' => :'account',
         :'active' => :'active',
         :'active_or_restricted_active' => :'activeOrRestrictedActive',
+        :'created_by' => :'createdBy',
+        :'created_on' => :'createdOn',
         :'database' => :'database',
         :'deleted_by' => :'deletedBy',
         :'deleted_on' => :'deletedOn',
         :'id' => :'id',
+        :'last_modified_date' => :'lastModifiedDate',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'postal_address' => :'postalAddress',
@@ -100,10 +112,13 @@ module Wallee
         :'account' => :'Account',
         :'active' => :'BOOLEAN',
         :'active_or_restricted_active' => :'BOOLEAN',
+        :'created_by' => :'Integer',
+        :'created_on' => :'DateTime',
         :'database' => :'TenantDatabase',
         :'deleted_by' => :'Integer',
         :'deleted_on' => :'DateTime',
         :'id' => :'Integer',
+        :'last_modified_date' => :'DateTime',
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'postal_address' => :'SpaceAddress',
@@ -137,6 +152,14 @@ module Wallee
         self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
       end
 
+      if attributes.has_key?(:'createdBy')
+        self.created_by = attributes[:'createdBy']
+      end
+
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
+      end
+
       if attributes.has_key?(:'database')
         self.database = attributes[:'database']
       end
@@ -151,6 +174,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'lastModifiedDate')
+        self.last_modified_date = attributes[:'lastModifiedDate']
       end
 
       if attributes.has_key?(:'name')
@@ -241,10 +268,13 @@ module Wallee
           account == o.account &&
           active == o.active &&
           active_or_restricted_active == o.active_or_restricted_active &&
+          created_by == o.created_by &&
+          created_on == o.created_on &&
           database == o.database &&
           deleted_by == o.deleted_by &&
           deleted_on == o.deleted_on &&
           id == o.id &&
+          last_modified_date == o.last_modified_date &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           postal_address == o.postal_address &&
@@ -266,7 +296,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, active, active_or_restricted_active, database, deleted_by, deleted_on, id, name, planned_purge_date, postal_address, primary_currency, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
+      [account, active, active_or_restricted_active, created_by, created_on, database, deleted_by, deleted_on, id, last_modified_date, name, planned_purge_date, postal_address, primary_currency, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
     end
 
     # Builds the object from hash

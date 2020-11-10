@@ -85,6 +85,68 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Create
+    # This operation allows to create a Shopify subscription.
+    # @param space_id 
+    # @param creation_request 
+    # @param [Hash] opts the optional parameters
+    # @return [ShopifySubscriptionVersion]
+    def create(space_id, creation_request, opts = {})
+      data, _status_code, _headers = create_with_http_info(space_id, creation_request, opts)
+      return data
+    end
+
+    # Create
+    # This operation allows to create a Shopify subscription.
+    # @param space_id 
+    # @param creation_request 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ShopifySubscriptionVersion, Fixnum, Hash)>] ShopifySubscriptionVersion data, response status code and response headers
+    def create_with_http_info(space_id, creation_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: ShopifySubscriptionService.create ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriptionService.create" if space_id.nil?
+      # verify the required parameter 'creation_request' is set
+      fail ArgumentError, "Missing the required parameter 'creation_request' when calling ShopifySubscriptionService.create" if creation_request.nil?
+      # resource path
+      local_var_path = "/shopify-subscription/create".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = ['application/json;charset=utf-8']
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(creation_request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'ShopifySubscriptionVersion')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ShopifySubscriptionService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read
     # Reads the entity with the given 'id' and returns it.
     # @param space_id 
@@ -335,6 +397,68 @@ module Wallee
         :return_type => 'ShopifySubscriptionVersion')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ShopifySubscriptionService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Addresses
+    # This operation allows to update a Shopify subscription addresses.
+    # @param space_id 
+    # @param update_request 
+    # @param [Hash] opts the optional parameters
+    # @return [ShopifySubscriptionVersion]
+    def update_addresses(space_id, update_request, opts = {})
+      data, _status_code, _headers = update_addresses_with_http_info(space_id, update_request, opts)
+      return data
+    end
+
+    # Update Addresses
+    # This operation allows to update a Shopify subscription addresses.
+    # @param space_id 
+    # @param update_request 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ShopifySubscriptionVersion, Fixnum, Hash)>] ShopifySubscriptionVersion data, response status code and response headers
+    def update_addresses_with_http_info(space_id, update_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: ShopifySubscriptionService.update_addresses ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriptionService.update_addresses" if space_id.nil?
+      # verify the required parameter 'update_request' is set
+      fail ArgumentError, "Missing the required parameter 'update_request' when calling ShopifySubscriptionService.update_addresses" if update_request.nil?
+      # resource path
+      local_var_path = "/shopify-subscription/update-addresses".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = ['application/json;charset=utf-8']
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(update_request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'ShopifySubscriptionVersion')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ShopifySubscriptionService#update_addresses\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

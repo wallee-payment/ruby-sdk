@@ -26,6 +26,12 @@ module Wallee
     # This property is true when all accounts in the hierarchy are active or restricted active.
     attr_accessor :active_or_restricted_active
 
+    # The ID of the user who created this entity.
+    attr_accessor :created_by
+
+    # The date and time when this entity was created.
+    attr_accessor :created_on
+
     # The ID of a user that deleted this entity.
     attr_accessor :deleted_by
 
@@ -34,6 +40,9 @@ module Wallee
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
+
+    # 
+    attr_accessor :last_modified_date
 
     # The name of the account identifies the account within the administrative interface.
     attr_accessor :name
@@ -67,9 +76,12 @@ module Wallee
       {
         :'active' => :'active',
         :'active_or_restricted_active' => :'activeOrRestrictedActive',
+        :'created_by' => :'createdBy',
+        :'created_on' => :'createdOn',
         :'deleted_by' => :'deletedBy',
         :'deleted_on' => :'deletedOn',
         :'id' => :'id',
+        :'last_modified_date' => :'lastModifiedDate',
         :'name' => :'name',
         :'parent_account' => :'parentAccount',
         :'planned_purge_date' => :'plannedPurgeDate',
@@ -87,9 +99,12 @@ module Wallee
       {
         :'active' => :'BOOLEAN',
         :'active_or_restricted_active' => :'BOOLEAN',
+        :'created_by' => :'Integer',
+        :'created_on' => :'DateTime',
         :'deleted_by' => :'Integer',
         :'deleted_on' => :'DateTime',
         :'id' => :'Integer',
+        :'last_modified_date' => :'DateTime',
         :'name' => :'String',
         :'parent_account' => :'Account',
         :'planned_purge_date' => :'DateTime',
@@ -118,6 +133,14 @@ module Wallee
         self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
       end
 
+      if attributes.has_key?(:'createdBy')
+        self.created_by = attributes[:'createdBy']
+      end
+
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
+      end
+
       if attributes.has_key?(:'deletedBy')
         self.deleted_by = attributes[:'deletedBy']
       end
@@ -128,6 +151,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'lastModifiedDate')
+        self.last_modified_date = attributes[:'lastModifiedDate']
       end
 
       if attributes.has_key?(:'name')
@@ -211,9 +238,12 @@ module Wallee
       self.class == o.class &&
           active == o.active &&
           active_or_restricted_active == o.active_or_restricted_active &&
+          created_by == o.created_by &&
+          created_on == o.created_on &&
           deleted_by == o.deleted_by &&
           deleted_on == o.deleted_on &&
           id == o.id &&
+          last_modified_date == o.last_modified_date &&
           name == o.name &&
           parent_account == o.parent_account &&
           planned_purge_date == o.planned_purge_date &&
@@ -234,7 +264,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [active, active_or_restricted_active, deleted_by, deleted_on, id, name, parent_account, planned_purge_date, restricted_active, scope, state, subaccount_limit, type, version].hash
+      [active, active_or_restricted_active, created_by, created_on, deleted_by, deleted_on, id, last_modified_date, name, parent_account, planned_purge_date, restricted_active, scope, state, subaccount_limit, type, version].hash
     end
 
     # Builds the object from hash

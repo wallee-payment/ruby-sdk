@@ -600,6 +600,73 @@ module Wallee
       return data, status_code, headers
     end
 
+    # update
+    # This operation allows to update the subscription.
+    # @param space_id 
+    # @param subscription_id 
+    # @param request 
+    # @param [Hash] opts the optional parameters
+    # @return [Subscription]
+    def update(space_id, subscription_id, request, opts = {})
+      data, _status_code, _headers = update_with_http_info(space_id, subscription_id, request, opts)
+      return data
+    end
+
+    # update
+    # This operation allows to update the subscription.
+    # @param space_id 
+    # @param subscription_id 
+    # @param request 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Subscription, Fixnum, Hash)>] Subscription data, response status code and response headers
+    def update_with_http_info(space_id, subscription_id, request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SubscriptionService.update ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionService.update" if space_id.nil?
+      # verify the required parameter 'subscription_id' is set
+      fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionService.update" if subscription_id.nil?
+      # verify the required parameter 'request' is set
+      fail ArgumentError, "Missing the required parameter 'request' when calling SubscriptionService.update" if request.nil?
+      # resource path
+      local_var_path = "/subscription/update".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'subscriptionId'] = subscription_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json;charset=utf-8']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = ['application/json;charset=utf-8']
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request)
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Subscription')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SubscriptionService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # update product version
     # The update product version operation updates the product version of the subscription to the latest active product version.
     # @param space_id 

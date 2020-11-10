@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class SpaceCreate
+    # 
+    attr_accessor :last_modified_date
+
     # The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
@@ -47,6 +50,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'last_modified_date' => :'lastModifiedDate',
         :'name' => :'name',
         :'postal_address' => :'postalAddress',
         :'primary_currency' => :'primaryCurrency',
@@ -61,6 +65,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'last_modified_date' => :'DateTime',
         :'name' => :'String',
         :'postal_address' => :'SpaceAddressCreate',
         :'primary_currency' => :'String',
@@ -79,6 +84,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'lastModifiedDate')
+        self.last_modified_date = attributes[:'lastModifiedDate']
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -162,6 +171,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          last_modified_date == o.last_modified_date &&
           name == o.name &&
           postal_address == o.postal_address &&
           primary_currency == o.primary_currency &&
@@ -181,7 +191,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, postal_address, primary_currency, request_limit, state, technical_contact_addresses, time_zone, account].hash
+      [last_modified_date, name, postal_address, primary_currency, request_limit, state, technical_contact_addresses, time_zone, account].hash
     end
 
     # Builds the object from hash

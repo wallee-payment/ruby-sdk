@@ -90,7 +90,7 @@ module Wallee
     # @param space_id 
     # @param entity The customer object with the properties which should be created.
     # @param [Hash] opts the optional parameters
-    # @return [SubscriberCreate]
+    # @return [Subscriber]
     def create(space_id, entity, opts = {})
       data, _status_code, _headers = create_with_http_info(space_id, entity, opts)
       return data
@@ -101,7 +101,7 @@ module Wallee
     # @param space_id 
     # @param entity The customer object with the properties which should be created.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SubscriberCreate, Fixnum, Hash)>] SubscriberCreate data, response status code and response headers
+    # @return [Array<(Subscriber, Fixnum, Hash)>] Subscriber data, response status code and response headers
     def create_with_http_info(space_id, entity, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: SubscriberService.create ..."
@@ -140,7 +140,7 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'SubscriberCreate')
+        :return_type => 'Subscriber')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SubscriberService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

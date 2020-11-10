@@ -25,6 +25,69 @@ module Wallee
       @api_client = api_client
     end
 
+    # Check If Token Creation Is Possible
+    # This operation checks if the given transaction can be used to create a token out of it.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to check if the token can be created or not.
+    # @param [Hash] opts the optional parameters
+    # @return [BOOLEAN]
+    def check_token_creation_possible(space_id, transaction_id, opts = {})
+      data, _status_code, _headers = check_token_creation_possible_with_http_info(space_id, transaction_id, opts)
+      return data
+    end
+
+    # Check If Token Creation Is Possible
+    # This operation checks if the given transaction can be used to create a token out of it.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to check if the token can be created or not.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BOOLEAN, Fixnum, Hash)>] BOOLEAN data, response status code and response headers
+    def check_token_creation_possible_with_http_info(space_id, transaction_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: TokenService.check_token_creation_possible ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TokenService.check_token_creation_possible" if space_id.nil?
+      # verify the required parameter 'transaction_id' is set
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling TokenService.check_token_creation_possible" if transaction_id.nil?
+      # resource path
+      local_var_path = "/token/check-token-creation-possible".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'transactionId'] = transaction_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = []
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'BOOLEAN')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TokenService#check_token_creation_possible\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Count
     # Counts the number of items in the database as restricted by the given filter.
     # @param space_id 
@@ -143,6 +206,69 @@ module Wallee
         :return_type => 'Token')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TokenService#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create Token Based On Transaction
+    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to create the token.
+    # @param [Hash] opts the optional parameters
+    # @return [TokenVersion]
+    def create_token_based_on_transaction(space_id, transaction_id, opts = {})
+      data, _status_code, _headers = create_token_based_on_transaction_with_http_info(space_id, transaction_id, opts)
+      return data
+    end
+
+    # Create Token Based On Transaction
+    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to create the token.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(TokenVersion, Fixnum, Hash)>] TokenVersion data, response status code and response headers
+    def create_token_based_on_transaction_with_http_info(space_id, transaction_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: TokenService.create_token_based_on_transaction ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TokenService.create_token_based_on_transaction" if space_id.nil?
+      # verify the required parameter 'transaction_id' is set
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling TokenService.create_token_based_on_transaction" if transaction_id.nil?
+      # resource path
+      local_var_path = "/token/create-token-based-on-transaction".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'transactionId'] = transaction_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = []
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'TokenVersion')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TokenService#create_token_based_on_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

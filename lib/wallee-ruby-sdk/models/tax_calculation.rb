@@ -15,6 +15,21 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '2.2.4'
+  class TaxCalculation
+    
+    INCLUDED = 'TAX_INCLUDED'.freeze
+    NOT_INCLUDED = 'TAX_NOT_INCLUDED'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = TaxCalculation.constants.select { |c| TaxCalculation::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #TaxCalculation" if constantValues.empty?
+      value
+    end
+  end
 end

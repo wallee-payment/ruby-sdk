@@ -53,6 +53,9 @@ module Wallee
     # 
     attr_accessor :state
 
+    # Strategy that is used for tax calculation in fees.
+    attr_accessor :tax_calculation
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -66,7 +69,8 @@ module Wallee
         :'name' => :'name',
         :'number_of_notice_periods' => :'numberOfNoticePeriods',
         :'product' => :'product',
-        :'state' => :'state'
+        :'state' => :'state',
+        :'tax_calculation' => :'taxCalculation'
       }
     end
 
@@ -83,7 +87,8 @@ module Wallee
         :'name' => :'DatabaseTranslatedStringCreate',
         :'number_of_notice_periods' => :'Integer',
         :'product' => :'Integer',
-        :'state' => :'SubscriptionProductVersionState'
+        :'state' => :'SubscriptionProductVersionState',
+        :'tax_calculation' => :'TaxCalculation'
       }
     end
 
@@ -140,6 +145,10 @@ module Wallee
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
+
+      if attributes.has_key?(:'taxCalculation')
+        self.tax_calculation = attributes[:'taxCalculation']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -180,7 +189,8 @@ module Wallee
           name == o.name &&
           number_of_notice_periods == o.number_of_notice_periods &&
           product == o.product &&
-          state == o.state
+          state == o.state &&
+          tax_calculation == o.tax_calculation
     end
 
     # @see the `==` method
@@ -192,7 +202,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, billing_cycle, comment, default_currency, enabled_currencies, minimal_number_of_periods, name, number_of_notice_periods, product, state].hash
+      [id, version, billing_cycle, comment, default_currency, enabled_currencies, minimal_number_of_periods, name, number_of_notice_periods, product, state, tax_calculation].hash
     end
 
     # Builds the object from hash

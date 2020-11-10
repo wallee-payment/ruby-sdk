@@ -26,11 +26,17 @@ module Wallee
     # 
     attr_accessor :created_on
 
+    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    attr_accessor :external_id
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
     # 
-    attr_accessor :initial_transaction
+    attr_accessor :initial_payment_transaction
+
+    # 
+    attr_accessor :initial_shopify_transaction
 
     # 
     attr_accessor :language
@@ -67,8 +73,10 @@ module Wallee
       {
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'external_id' => :'externalId',
         :'id' => :'id',
-        :'initial_transaction' => :'initialTransaction',
+        :'initial_payment_transaction' => :'initialPaymentTransaction',
+        :'initial_shopify_transaction' => :'initialShopifyTransaction',
         :'language' => :'language',
         :'linked_space_id' => :'linkedSpaceId',
         :'order_recurrence_number' => :'orderRecurrenceNumber',
@@ -87,8 +95,10 @@ module Wallee
       {
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'external_id' => :'String',
         :'id' => :'Integer',
-        :'initial_transaction' => :'Integer',
+        :'initial_payment_transaction' => :'Integer',
+        :'initial_shopify_transaction' => :'Integer',
         :'language' => :'String',
         :'linked_space_id' => :'Integer',
         :'order_recurrence_number' => :'Integer',
@@ -118,12 +128,20 @@ module Wallee
         self.created_on = attributes[:'createdOn']
       end
 
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'initialTransaction')
-        self.initial_transaction = attributes[:'initialTransaction']
+      if attributes.has_key?(:'initialPaymentTransaction')
+        self.initial_payment_transaction = attributes[:'initialPaymentTransaction']
+      end
+
+      if attributes.has_key?(:'initialShopifyTransaction')
+        self.initial_shopify_transaction = attributes[:'initialShopifyTransaction']
       end
 
       if attributes.has_key?(:'language')
@@ -171,13 +189,37 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@external_id.nil? && @external_id.to_s.length > 100
+        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@external_id.nil? && @external_id.to_s.length < 1
+        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@external_id.nil? && @external_id.to_s.length > 100
+      return false if !@external_id.nil? && @external_id.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if !external_id.nil? && external_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
+      end
+
+      if !external_id.nil? && external_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
+      end
+
+      @external_id = external_id
     end
 
     # Checks equality by comparing each attribute.
@@ -187,8 +229,10 @@ module Wallee
       self.class == o.class &&
           created_by == o.created_by &&
           created_on == o.created_on &&
+          external_id == o.external_id &&
           id == o.id &&
-          initial_transaction == o.initial_transaction &&
+          initial_payment_transaction == o.initial_payment_transaction &&
+          initial_shopify_transaction == o.initial_shopify_transaction &&
           language == o.language &&
           linked_space_id == o.linked_space_id &&
           order_recurrence_number == o.order_recurrence_number &&
@@ -210,7 +254,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_by, created_on, id, initial_transaction, language, linked_space_id, order_recurrence_number, shop, state, subscriber, terminated_by, terminated_on, termination_request_date, version].hash
+      [created_by, created_on, external_id, id, initial_payment_transaction, initial_shopify_transaction, language, linked_space_id, order_recurrence_number, shop, state, subscriber, terminated_by, terminated_on, termination_request_date, version].hash
     end
 
     # Builds the object from hash

@@ -236,8 +236,24 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@failed_url.nil? && @failed_url.to_s.length > 500
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 500.')
+      end
+
+      if !@failed_url.nil? && @failed_url.to_s.length < 9
+        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
+      end
+
       if !@reference.nil? && @reference.to_s.length > 100
         invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@success_url.nil? && @success_url.to_s.length > 500
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 500.')
+      end
+
+      if !@success_url.nil? && @success_url.to_s.length < 9
+        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
       end
 
       invalid_properties
@@ -246,8 +262,26 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 500
+      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       return false if !@reference.nil? && @reference.to_s.length > 100
+      return false if !@success_url.nil? && @success_url.to_s.length > 500
+      return false if !@success_url.nil? && @success_url.to_s.length < 9
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failed_url Value to be assigned
+    def failed_url=(failed_url)
+      if !failed_url.nil? && failed_url.to_s.length > 500
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 500.'
+      end
+
+      if !failed_url.nil? && failed_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
+      end
+
+      @failed_url = failed_url
     end
 
     # Custom attribute writer method with validation
@@ -258,6 +292,20 @@ module Wallee
       end
 
       @reference = reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if !success_url.nil? && success_url.to_s.length > 500
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 500.'
+      end
+
+      if !success_url.nil? && success_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
+      end
+
+      @success_url = success_url
     end
 
     # Checks equality by comparing each attribute.

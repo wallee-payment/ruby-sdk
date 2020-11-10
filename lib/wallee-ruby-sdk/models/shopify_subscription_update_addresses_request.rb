@@ -19,41 +19,31 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionEditModelItem
+  class ShopifySubscriptionUpdateAddressesRequest
     # 
-    attr_accessor :price_including_tax
+    attr_accessor :billing_address
 
     # 
-    attr_accessor :product_id
+    attr_accessor :id
 
     # 
-    attr_accessor :quantity
-
-    # 
-    attr_accessor :recalculate_price
-
-    # 
-    attr_accessor :tax_lines
+    attr_accessor :shipping_address
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'price_including_tax' => :'priceIncludingTax',
-        :'product_id' => :'productId',
-        :'quantity' => :'quantity',
-        :'recalculate_price' => :'recalculatePrice',
-        :'tax_lines' => :'taxLines'
+        :'billing_address' => :'billingAddress',
+        :'id' => :'id',
+        :'shipping_address' => :'shippingAddress'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'price_including_tax' => :'Float',
-        :'product_id' => :'Integer',
-        :'quantity' => :'Float',
-        :'recalculate_price' => :'BOOLEAN',
-        :'tax_lines' => :'Array<ShopifySubscriptionEditModelTaxLine>'
+        :'billing_address' => :'ShopifySubscriptionAddressCreate',
+        :'id' => :'Integer',
+        :'shipping_address' => :'ShopifySubscriptionAddressCreate'
       }
     end
 
@@ -65,26 +55,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'priceIncludingTax')
-        self.price_including_tax = attributes[:'priceIncludingTax']
+      if attributes.has_key?(:'billingAddress')
+        self.billing_address = attributes[:'billingAddress']
       end
 
-      if attributes.has_key?(:'productId')
-        self.product_id = attributes[:'productId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'quantity')
-        self.quantity = attributes[:'quantity']
-      end
-
-      if attributes.has_key?(:'recalculatePrice')
-        self.recalculate_price = attributes[:'recalculatePrice']
-      end
-
-      if attributes.has_key?(:'taxLines')
-        if (value = attributes[:'taxLines']).is_a?(Array)
-          self.tax_lines = value
-        end
+      if attributes.has_key?(:'shippingAddress')
+        self.shipping_address = attributes[:'shippingAddress']
       end
     end
 
@@ -106,11 +86,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          price_including_tax == o.price_including_tax &&
-          product_id == o.product_id &&
-          quantity == o.quantity &&
-          recalculate_price == o.recalculate_price &&
-          tax_lines == o.tax_lines
+          billing_address == o.billing_address &&
+          id == o.id &&
+          shipping_address == o.shipping_address
     end
 
     # @see the `==` method
@@ -122,7 +100,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [price_including_tax, product_id, quantity, recalculate_price, tax_lines].hash
+      [billing_address, id, shipping_address].hash
     end
 
     # Builds the object from hash

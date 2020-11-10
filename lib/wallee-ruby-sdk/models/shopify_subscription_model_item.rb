@@ -19,46 +19,41 @@ require 'date'
 
 module Wallee
   # 
-  class SalesChannel
+  class ShopifySubscriptionModelItem
     # 
-    attr_accessor :description
+    attr_accessor :price_including_tax
 
     # 
-    attr_accessor :icon
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
+    attr_accessor :product_id
 
     # 
-    attr_accessor :name
+    attr_accessor :quantity
 
     # 
-    attr_accessor :parent
+    attr_accessor :recalculate_price
 
     # 
-    attr_accessor :sort_order
+    attr_accessor :tax_lines
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
-        :'icon' => :'icon',
-        :'id' => :'id',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'sort_order' => :'sortOrder'
+        :'price_including_tax' => :'priceIncludingTax',
+        :'product_id' => :'productId',
+        :'quantity' => :'quantity',
+        :'recalculate_price' => :'recalculatePrice',
+        :'tax_lines' => :'taxLines'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'Hash<String, String>',
-        :'icon' => :'String',
-        :'id' => :'Integer',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'SalesChannel',
-        :'sort_order' => :'Integer'
+        :'price_including_tax' => :'Float',
+        :'product_id' => :'Integer',
+        :'quantity' => :'Float',
+        :'recalculate_price' => :'BOOLEAN',
+        :'tax_lines' => :'Array<ShopifySubscriptionModelTaxLine>'
       }
     end
 
@@ -70,32 +65,26 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
+      if attributes.has_key?(:'priceIncludingTax')
+        self.price_including_tax = attributes[:'priceIncludingTax']
+      end
+
+      if attributes.has_key?(:'productId')
+        self.product_id = attributes[:'productId']
+      end
+
+      if attributes.has_key?(:'quantity')
+        self.quantity = attributes[:'quantity']
+      end
+
+      if attributes.has_key?(:'recalculatePrice')
+        self.recalculate_price = attributes[:'recalculatePrice']
+      end
+
+      if attributes.has_key?(:'taxLines')
+        if (value = attributes[:'taxLines']).is_a?(Array)
+          self.tax_lines = value
         end
-      end
-
-      if attributes.has_key?(:'icon')
-        self.icon = attributes[:'icon']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Hash)
-          self.name = value
-        end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
-      end
-
-      if attributes.has_key?(:'sortOrder')
-        self.sort_order = attributes[:'sortOrder']
       end
     end
 
@@ -117,12 +106,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
-          icon == o.icon &&
-          id == o.id &&
-          name == o.name &&
-          parent == o.parent &&
-          sort_order == o.sort_order
+          price_including_tax == o.price_including_tax &&
+          product_id == o.product_id &&
+          quantity == o.quantity &&
+          recalculate_price == o.recalculate_price &&
+          tax_lines == o.tax_lines
     end
 
     # @see the `==` method
@@ -134,7 +122,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, icon, id, name, parent, sort_order].hash
+      [price_including_tax, product_id, quantity, recalculate_price, tax_lines].hash
     end
 
     # Builds the object from hash

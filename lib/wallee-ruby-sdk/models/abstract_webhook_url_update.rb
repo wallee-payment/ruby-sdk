@@ -75,6 +75,14 @@ module Wallee
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
       end
 
+      if !@url.nil? && @url.to_s.length > 500
+        invalid_properties.push('invalid value for "url", the character length must be smaller than or equal to 500.')
+      end
+
+      if !@url.nil? && @url.to_s.length < 9
+        invalid_properties.push('invalid value for "url", the character length must be great than or equal to 9.')
+      end
+
       invalid_properties
     end
 
@@ -82,6 +90,8 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@name.nil? && @name.to_s.length > 50
+      return false if !@url.nil? && @url.to_s.length > 500
+      return false if !@url.nil? && @url.to_s.length < 9
       true
     end
 
@@ -93,6 +103,20 @@ module Wallee
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] url Value to be assigned
+    def url=(url)
+      if !url.nil? && url.to_s.length > 500
+        fail ArgumentError, 'invalid value for "url", the character length must be smaller than or equal to 500.'
+      end
+
+      if !url.nil? && url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "url", the character length must be great than or equal to 9.'
+      end
+
+      @url = url
     end
 
     # Checks equality by comparing each attribute.

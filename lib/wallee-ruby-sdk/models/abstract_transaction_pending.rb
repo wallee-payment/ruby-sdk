@@ -28,6 +28,9 @@ module Wallee
     # 
     attr_accessor :billing_address
 
+    # The completion behavior controls when the transaction is completed.
+    attr_accessor :completion_behavior
+
     # 
     attr_accessor :currency
 
@@ -79,6 +82,7 @@ module Wallee
         :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'billing_address' => :'billingAddress',
+        :'completion_behavior' => :'completionBehavior',
         :'currency' => :'currency',
         :'customer_email_address' => :'customerEmailAddress',
         :'customer_id' => :'customerId',
@@ -103,6 +107,7 @@ module Wallee
         :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'billing_address' => :'AddressCreate',
+        :'completion_behavior' => :'TransactionCompletionBehavior',
         :'currency' => :'String',
         :'customer_email_address' => :'String',
         :'customer_id' => :'String',
@@ -143,6 +148,10 @@ module Wallee
 
       if attributes.has_key?(:'billingAddress')
         self.billing_address = attributes[:'billingAddress']
+      end
+
+      if attributes.has_key?(:'completionBehavior')
+        self.completion_behavior = attributes[:'completionBehavior']
       end
 
       if attributes.has_key?(:'currency')
@@ -218,6 +227,14 @@ module Wallee
         invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
       end
 
+      if !@failed_url.nil? && @failed_url.to_s.length > 1000
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@failed_url.nil? && @failed_url.to_s.length < 9
+        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
+      end
+
       if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
         invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
       end
@@ -230,6 +247,14 @@ module Wallee
         invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
       end
 
+      if !@success_url.nil? && @success_url.to_s.length > 1000
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 1000.')
+      end
+
+      if !@success_url.nil? && @success_url.to_s.length < 9
+        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
+      end
+
       invalid_properties
     end
 
@@ -237,9 +262,13 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 1000
+      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
+      return false if !@success_url.nil? && @success_url.to_s.length > 1000
+      return false if !@success_url.nil? && @success_url.to_s.length < 9
       true
     end
 
@@ -251,6 +280,20 @@ module Wallee
       end
 
       @customer_email_address = customer_email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failed_url Value to be assigned
+    def failed_url=(failed_url)
+      if !failed_url.nil? && failed_url.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !failed_url.nil? && failed_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
+      end
+
+      @failed_url = failed_url
     end
 
     # Custom attribute writer method with validation
@@ -283,6 +326,20 @@ module Wallee
       @shipping_method = shipping_method
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if !success_url.nil? && success_url.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 1000.'
+      end
+
+      if !success_url.nil? && success_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
+      end
+
+      @success_url = success_url
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -291,6 +348,7 @@ module Wallee
           allowed_payment_method_brands == o.allowed_payment_method_brands &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           billing_address == o.billing_address &&
+          completion_behavior == o.completion_behavior &&
           currency == o.currency &&
           customer_email_address == o.customer_email_address &&
           customer_id == o.customer_id &&
@@ -317,7 +375,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode].hash
+      [allowed_payment_method_brands, allowed_payment_method_configurations, billing_address, completion_behavior, currency, customer_email_address, customer_id, failed_url, invoice_merchant_reference, language, line_items, merchant_reference, meta_data, shipping_address, shipping_method, success_url, time_zone, token, tokenization_mode].hash
     end
 
     # Builds the object from hash

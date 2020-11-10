@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class AccountUpdate
+    # 
+    attr_accessor :last_modified_date
+
     # The name of the account identifies the account within the administrative interface.
     attr_accessor :name
 
@@ -35,6 +38,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'last_modified_date' => :'lastModifiedDate',
         :'name' => :'name',
         :'subaccount_limit' => :'subaccountLimit',
         :'id' => :'id',
@@ -45,6 +49,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'last_modified_date' => :'DateTime',
         :'name' => :'String',
         :'subaccount_limit' => :'Integer',
         :'id' => :'Integer',
@@ -59,6 +64,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'lastModifiedDate')
+        self.last_modified_date = attributes[:'lastModifiedDate']
+      end
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -129,6 +138,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          last_modified_date == o.last_modified_date &&
           name == o.name &&
           subaccount_limit == o.subaccount_limit &&
           id == o.id &&
@@ -144,7 +154,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, subaccount_limit, id, version].hash
+      [last_modified_date, name, subaccount_limit, id, version].hash
     end
 
     # Builds the object from hash

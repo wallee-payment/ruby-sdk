@@ -15,6 +15,21 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '2.2.4'
+  class ShopifyAdditionalLineItemData
+    
+    VENDOR = 'VENDOR'.freeze
+    WEIGHT = 'WEIGHT'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = ShopifyAdditionalLineItemData.constants.select { |c| ShopifyAdditionalLineItemData::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ShopifyAdditionalLineItemData" if constantValues.empty?
+      value
+    end
+  end
 end

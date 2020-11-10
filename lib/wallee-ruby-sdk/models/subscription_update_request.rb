@@ -18,47 +18,22 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # 
-  class SalesChannel
+  # The subscription update request allows to change a subscription properites.
+  class SubscriptionUpdateRequest
     # 
     attr_accessor :description
-
-    # 
-    attr_accessor :icon
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # 
-    attr_accessor :name
-
-    # 
-    attr_accessor :parent
-
-    # 
-    attr_accessor :sort_order
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
-        :'icon' => :'icon',
-        :'id' => :'id',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'sort_order' => :'sortOrder'
+        :'description' => :'description'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'Hash<String, String>',
-        :'icon' => :'String',
-        :'id' => :'Integer',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'SalesChannel',
-        :'sort_order' => :'Integer'
+        :'description' => :'String'
       }
     end
 
@@ -71,31 +46,7 @@ module Wallee
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
-      end
-
-      if attributes.has_key?(:'icon')
-        self.icon = attributes[:'icon']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Hash)
-          self.name = value
-        end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
-      end
-
-      if attributes.has_key?(:'sortOrder')
-        self.sort_order = attributes[:'sortOrder']
+        self.description = attributes[:'description']
       end
     end
 
@@ -103,13 +54,28 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@description.nil? && @description.to_s.length > 200
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 200.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@description.nil? && @description.to_s.length > 200
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if !description.nil? && description.to_s.length > 200
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 200.'
+      end
+
+      @description = description
     end
 
     # Checks equality by comparing each attribute.
@@ -117,12 +83,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
-          icon == o.icon &&
-          id == o.id &&
-          name == o.name &&
-          parent == o.parent &&
-          sort_order == o.sort_order
+          description == o.description
     end
 
     # @see the `==` method
@@ -134,7 +95,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, icon, id, name, parent, sort_order].hash
+      [description].hash
     end
 
     # Builds the object from hash

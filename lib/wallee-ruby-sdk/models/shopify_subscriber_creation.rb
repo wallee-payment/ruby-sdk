@@ -19,26 +19,31 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionEditModelTaxLine
+  class ShopifySubscriberCreation
     # 
-    attr_accessor :rate
+    attr_accessor :email_address
 
     # 
-    attr_accessor :title
+    attr_accessor :phone_number
+
+    # The customer ID has to correspond to the ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
+    attr_accessor :shopify_customer_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'rate' => :'rate',
-        :'title' => :'title'
+        :'email_address' => :'emailAddress',
+        :'phone_number' => :'phoneNumber',
+        :'shopify_customer_id' => :'shopifyCustomerId'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'rate' => :'Float',
-        :'title' => :'String'
+        :'email_address' => :'String',
+        :'phone_number' => :'String',
+        :'shopify_customer_id' => :'String'
       }
     end
 
@@ -50,12 +55,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'rate')
-        self.rate = attributes[:'rate']
+      if attributes.has_key?(:'emailAddress')
+        self.email_address = attributes[:'emailAddress']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'phoneNumber')
+        self.phone_number = attributes[:'phoneNumber']
+      end
+
+      if attributes.has_key?(:'shopifyCustomerId')
+        self.shopify_customer_id = attributes[:'shopifyCustomerId']
       end
     end
 
@@ -63,12 +72,17 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @shopify_customer_id.nil?
+        invalid_properties.push('invalid value for "shopify_customer_id", shopify_customer_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @shopify_customer_id.nil?
       true
     end
 
@@ -77,8 +91,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          rate == o.rate &&
-          title == o.title
+          email_address == o.email_address &&
+          phone_number == o.phone_number &&
+          shopify_customer_id == o.shopify_customer_id
     end
 
     # @see the `==` method
@@ -90,7 +105,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [rate, title].hash
+      [email_address, phone_number, shopify_customer_id].hash
     end
 
     # Builds the object from hash

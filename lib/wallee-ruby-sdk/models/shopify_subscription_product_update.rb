@@ -19,7 +19,7 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionProductCreate
+  class ShopifySubscriptionProductUpdate
     # 
     attr_accessor :absolute_price_adjustment
 
@@ -62,14 +62,11 @@ module Wallee
     # Define the number of orders the subscription will keep running for after its termination has been requested.
     attr_accessor :termination_billing_cycles
 
-    # The ID of the Shopify product that is enabled to be ordered as subscription.
-    attr_accessor :product_id
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
 
-    # 
-    attr_accessor :product_variant_id
-
-    # 
-    attr_accessor :shop
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -88,9 +85,8 @@ module Wallee
         :'store_order_confirmation_email_enabled' => :'storeOrderConfirmationEmailEnabled',
         :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed',
         :'termination_billing_cycles' => :'terminationBillingCycles',
-        :'product_id' => :'productId',
-        :'product_variant_id' => :'productVariantId',
-        :'shop' => :'shop'
+        :'id' => :'id',
+        :'version' => :'version'
       }
     end
 
@@ -111,9 +107,8 @@ module Wallee
         :'store_order_confirmation_email_enabled' => :'BOOLEAN',
         :'subscriber_suspension_allowed' => :'BOOLEAN',
         :'termination_billing_cycles' => :'Integer',
-        :'product_id' => :'String',
-        :'product_variant_id' => :'String',
-        :'shop' => :'Integer'
+        :'id' => :'Integer',
+        :'version' => :'Integer'
       }
     end
 
@@ -181,16 +176,12 @@ module Wallee
         self.termination_billing_cycles = attributes[:'terminationBillingCycles']
       end
 
-      if attributes.has_key?(:'productId')
-        self.product_id = attributes[:'productId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'productVariantId')
-        self.product_variant_id = attributes[:'productVariantId']
-      end
-
-      if attributes.has_key?(:'shop')
-        self.shop = attributes[:'shop']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -198,16 +189,12 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @product_id.nil?
-        invalid_properties.push('invalid value for "product_id", product_id cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @product_variant_id.nil?
-        invalid_properties.push('invalid value for "product_variant_id", product_variant_id cannot be nil.')
-      end
-
-      if @shop.nil?
-        invalid_properties.push('invalid value for "shop", shop cannot be nil.')
+      if @version.nil?
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
       invalid_properties
@@ -216,9 +203,8 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @product_id.nil?
-      return false if @product_variant_id.nil?
-      return false if @shop.nil?
+      return false if @id.nil?
+      return false if @version.nil?
       true
     end
 
@@ -241,9 +227,8 @@ module Wallee
           store_order_confirmation_email_enabled == o.store_order_confirmation_email_enabled &&
           subscriber_suspension_allowed == o.subscriber_suspension_allowed &&
           termination_billing_cycles == o.termination_billing_cycles &&
-          product_id == o.product_id &&
-          product_variant_id == o.product_variant_id &&
-          shop == o.shop
+          id == o.id &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -255,7 +240,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, product_id, product_variant_id, shop].hash
+      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, id, version].hash
     end
 
     # Builds the object from hash

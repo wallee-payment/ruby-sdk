@@ -21,22 +21,19 @@ module Wallee
   # A Shopify Integration allows to connect a Shopify shop.
   class ShopifyIntegration
     # 
+    attr_accessor :additional_line_item_data
+
+    # 
     attr_accessor :allow_invoice_download
 
     # 
     attr_accessor :allowed_payment_method_configurations
 
     # 
-    attr_accessor :app_version
-
-    # 
     attr_accessor :currency
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
-
-    # 
-    attr_accessor :installed
 
     # Enabling the integrated payment form will embed the payment form in the Shopify shop. The app needs to be installed for this to be possible.
     attr_accessor :integrated_payment_form_enabled
@@ -50,11 +47,17 @@ module Wallee
     # The integration name is used internally to identify a specific integration.For example the name is used withinsearch fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # 
+    attr_accessor :payment_app_version
+
+    # 
+    attr_accessor :payment_installed
 
     # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
-    attr_accessor :proxy_path
+    attr_accessor :payment_proxy_path
+
+    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    attr_accessor :planned_purge_date
 
     # 
     attr_accessor :replace_payment_method_image
@@ -77,24 +80,34 @@ module Wallee
     # 
     attr_accessor :state
 
+    # 
+    attr_accessor :subscription_app_version
+
+    # 
+    attr_accessor :subscription_installed
+
+    # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+    attr_accessor :subscription_proxy_path
+
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'additional_line_item_data' => :'additionalLineItemData',
         :'allow_invoice_download' => :'allowInvoiceDownload',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
-        :'app_version' => :'appVersion',
         :'currency' => :'currency',
         :'id' => :'id',
-        :'installed' => :'installed',
         :'integrated_payment_form_enabled' => :'integratedPaymentFormEnabled',
         :'language' => :'language',
         :'login_name' => :'loginName',
         :'name' => :'name',
+        :'payment_app_version' => :'paymentAppVersion',
+        :'payment_installed' => :'paymentInstalled',
+        :'payment_proxy_path' => :'paymentProxyPath',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'proxy_path' => :'proxyPath',
         :'replace_payment_method_image' => :'replacePaymentMethodImage',
         :'shop_name' => :'shopName',
         :'show_payment_information' => :'showPaymentInformation',
@@ -102,6 +115,9 @@ module Wallee
         :'space_id' => :'spaceId',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
+        :'subscription_app_version' => :'subscriptionAppVersion',
+        :'subscription_installed' => :'subscriptionInstalled',
+        :'subscription_proxy_path' => :'subscriptionProxyPath',
         :'version' => :'version'
       }
     end
@@ -109,18 +125,19 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'additional_line_item_data' => :'Array<ShopifyAdditionalLineItemData>',
         :'allow_invoice_download' => :'BOOLEAN',
         :'allowed_payment_method_configurations' => :'Array<PaymentMethodConfiguration>',
-        :'app_version' => :'ShopifyIntegrationAppVersion',
         :'currency' => :'String',
         :'id' => :'Integer',
-        :'installed' => :'BOOLEAN',
         :'integrated_payment_form_enabled' => :'BOOLEAN',
         :'language' => :'String',
         :'login_name' => :'String',
         :'name' => :'String',
+        :'payment_app_version' => :'ShopifyIntegrationPaymentAppVersion',
+        :'payment_installed' => :'BOOLEAN',
+        :'payment_proxy_path' => :'String',
         :'planned_purge_date' => :'DateTime',
-        :'proxy_path' => :'String',
         :'replace_payment_method_image' => :'BOOLEAN',
         :'shop_name' => :'String',
         :'show_payment_information' => :'BOOLEAN',
@@ -128,6 +145,9 @@ module Wallee
         :'space_id' => :'Integer',
         :'space_view_id' => :'Integer',
         :'state' => :'CreationEntityState',
+        :'subscription_app_version' => :'ShopifyIntegrationSubscriptionAppVersion',
+        :'subscription_installed' => :'BOOLEAN',
+        :'subscription_proxy_path' => :'String',
         :'version' => :'Integer'
       }
     end
@@ -140,6 +160,12 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'additionalLineItemData')
+        if (value = attributes[:'additionalLineItemData']).is_a?(Array)
+          self.additional_line_item_data = value
+        end
+      end
+
       if attributes.has_key?(:'allowInvoiceDownload')
         self.allow_invoice_download = attributes[:'allowInvoiceDownload']
       end
@@ -150,20 +176,12 @@ module Wallee
         end
       end
 
-      if attributes.has_key?(:'appVersion')
-        self.app_version = attributes[:'appVersion']
-      end
-
       if attributes.has_key?(:'currency')
         self.currency = attributes[:'currency']
       end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'installed')
-        self.installed = attributes[:'installed']
       end
 
       if attributes.has_key?(:'integratedPaymentFormEnabled')
@@ -182,12 +200,20 @@ module Wallee
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.has_key?(:'paymentAppVersion')
+        self.payment_app_version = attributes[:'paymentAppVersion']
       end
 
-      if attributes.has_key?(:'proxyPath')
-        self.proxy_path = attributes[:'proxyPath']
+      if attributes.has_key?(:'paymentInstalled')
+        self.payment_installed = attributes[:'paymentInstalled']
+      end
+
+      if attributes.has_key?(:'paymentProxyPath')
+        self.payment_proxy_path = attributes[:'paymentProxyPath']
+      end
+
+      if attributes.has_key?(:'plannedPurgeDate')
+        self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
       if attributes.has_key?(:'replacePaymentMethodImage')
@@ -216,6 +242,18 @@ module Wallee
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'subscriptionAppVersion')
+        self.subscription_app_version = attributes[:'subscriptionAppVersion']
+      end
+
+      if attributes.has_key?(:'subscriptionInstalled')
+        self.subscription_installed = attributes[:'subscriptionInstalled']
+      end
+
+      if attributes.has_key?(:'subscriptionProxyPath')
+        self.subscription_proxy_path = attributes[:'subscriptionProxyPath']
       end
 
       if attributes.has_key?(:'version')
@@ -286,18 +324,19 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          additional_line_item_data == o.additional_line_item_data &&
           allow_invoice_download == o.allow_invoice_download &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
-          app_version == o.app_version &&
           currency == o.currency &&
           id == o.id &&
-          installed == o.installed &&
           integrated_payment_form_enabled == o.integrated_payment_form_enabled &&
           language == o.language &&
           login_name == o.login_name &&
           name == o.name &&
+          payment_app_version == o.payment_app_version &&
+          payment_installed == o.payment_installed &&
+          payment_proxy_path == o.payment_proxy_path &&
           planned_purge_date == o.planned_purge_date &&
-          proxy_path == o.proxy_path &&
           replace_payment_method_image == o.replace_payment_method_image &&
           shop_name == o.shop_name &&
           show_payment_information == o.show_payment_information &&
@@ -305,6 +344,9 @@ module Wallee
           space_id == o.space_id &&
           space_view_id == o.space_view_id &&
           state == o.state &&
+          subscription_app_version == o.subscription_app_version &&
+          subscription_installed == o.subscription_installed &&
+          subscription_proxy_path == o.subscription_proxy_path &&
           version == o.version
     end
 
@@ -317,7 +359,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allow_invoice_download, allowed_payment_method_configurations, app_version, currency, id, installed, integrated_payment_form_enabled, language, login_name, name, planned_purge_date, proxy_path, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, version].hash
+      [additional_line_item_data, allow_invoice_download, allowed_payment_method_configurations, currency, id, integrated_payment_form_enabled, language, login_name, name, payment_app_version, payment_installed, payment_proxy_path, planned_purge_date, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, subscription_app_version, subscription_installed, subscription_proxy_path, version].hash
     end
 
     # Builds the object from hash

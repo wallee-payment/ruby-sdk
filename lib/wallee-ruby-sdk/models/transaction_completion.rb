@@ -51,6 +51,9 @@ module Wallee
     attr_accessor :failure_reason
 
     # 
+    attr_accessor :invoice_merchant_reference
+
+    # 
     attr_accessor :labels
 
     # 
@@ -120,6 +123,7 @@ module Wallee
         :'external_id' => :'externalId',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
+        :'invoice_merchant_reference' => :'invoiceMerchantReference',
         :'labels' => :'labels',
         :'language' => :'language',
         :'last_completion' => :'lastCompletion',
@@ -155,6 +159,7 @@ module Wallee
         :'external_id' => :'String',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
+        :'invoice_merchant_reference' => :'String',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
         :'last_completion' => :'BOOLEAN',
@@ -225,6 +230,10 @@ module Wallee
 
       if attributes.has_key?(:'failureReason')
         self.failure_reason = attributes[:'failureReason']
+      end
+
+      if attributes.has_key?(:'invoiceMerchantReference')
+        self.invoice_merchant_reference = attributes[:'invoiceMerchantReference']
       end
 
       if attributes.has_key?(:'labels')
@@ -322,6 +331,10 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
       end
 
+      if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -330,6 +343,7 @@ module Wallee
     def valid?
       return false if !@external_id.nil? && @external_id.to_s.length > 100
       return false if !@external_id.nil? && @external_id.to_s.length < 1
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       true
     end
 
@@ -347,6 +361,16 @@ module Wallee
       @external_id = external_id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] invoice_merchant_reference Value to be assigned
+    def invoice_merchant_reference=(invoice_merchant_reference)
+      if !invoice_merchant_reference.nil? && invoice_merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @invoice_merchant_reference = invoice_merchant_reference
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -362,6 +386,7 @@ module Wallee
           external_id == o.external_id &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
+          invoice_merchant_reference == o.invoice_merchant_reference &&
           labels == o.labels &&
           language == o.language &&
           last_completion == o.last_completion &&
@@ -392,7 +417,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
+      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, invoice_merchant_reference, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
     end
 
     # Builds the object from hash

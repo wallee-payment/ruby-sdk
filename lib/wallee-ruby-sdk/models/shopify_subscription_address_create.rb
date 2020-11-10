@@ -19,7 +19,7 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionAddress
+  class ShopifySubscriptionAddressCreate
     # 
     attr_accessor :city
 
@@ -118,7 +118,7 @@ module Wallee
         :'family_name' => :'String',
         :'gender' => :'Gender',
         :'given_name' => :'String',
-        :'legal_organization_form' => :'LegalOrganizationForm',
+        :'legal_organization_form' => :'Integer',
         :'mobile_phone_number' => :'String',
         :'organization_name' => :'String',
         :'phone_number' => :'String',

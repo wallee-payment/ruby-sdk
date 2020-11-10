@@ -53,7 +53,7 @@ module Wallee
         :'currency' => :'String',
         :'product' => :'Integer',
         :'selected_components' => :'Array<SubscriptionProductComponentReference>',
-        :'subscription' => :'Integer'
+        :'subscription' => :'SubscriptionPending'
       }
     end
 

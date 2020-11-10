@@ -30,6 +30,9 @@ module Wallee
     attr_accessor :created_on
 
     # 
+    attr_accessor :current_product_version
+
+    # 
     attr_accessor :description
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -83,6 +86,7 @@ module Wallee
         :'activated_on' => :'activatedOn',
         :'affiliate' => :'affiliate',
         :'created_on' => :'createdOn',
+        :'current_product_version' => :'currentProductVersion',
         :'description' => :'description',
         :'id' => :'id',
         :'initialized_on' => :'initializedOn',
@@ -108,6 +112,7 @@ module Wallee
         :'activated_on' => :'DateTime',
         :'affiliate' => :'SubscriptionAffiliate',
         :'created_on' => :'DateTime',
+        :'current_product_version' => :'SubscriptionProductVersion',
         :'description' => :'String',
         :'id' => :'Integer',
         :'initialized_on' => :'DateTime',
@@ -145,6 +150,10 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'currentProductVersion')
+        self.current_product_version = attributes[:'currentProductVersion']
       end
 
       if attributes.has_key?(:'description')
@@ -263,6 +272,7 @@ module Wallee
           activated_on == o.activated_on &&
           affiliate == o.affiliate &&
           created_on == o.created_on &&
+          current_product_version == o.current_product_version &&
           description == o.description &&
           id == o.id &&
           initialized_on == o.initialized_on &&
@@ -290,7 +300,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, affiliate, created_on, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_by, terminated_on, terminating_on, termination_scheduled_on, token, version].hash
+      [activated_on, affiliate, created_on, current_product_version, description, id, initialized_on, language, linked_space_id, planned_purge_date, planned_termination_date, reference, state, subscriber, terminated_by, terminated_on, terminating_on, termination_scheduled_on, token, version].hash
     end
 
     # Builds the object from hash

@@ -18,18 +18,16 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class ShopifyIntegrationAppVersion
+  class ShopifyIntegrationPaymentAppVersion
     
-    BASIC = 'BASIC'.freeze
-    SUBSCRIPTION = 'SUBSCRIPTION'.freeze
     API_2019_07 = 'API_2019_07'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = ShopifyIntegrationAppVersion.constants.select { |c| ShopifyIntegrationAppVersion::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #ShopifyIntegrationAppVersion" if constantValues.empty?
+      constantValues = ShopifyIntegrationPaymentAppVersion.constants.select { |c| ShopifyIntegrationPaymentAppVersion::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #ShopifyIntegrationPaymentAppVersion" if constantValues.empty?
       value
     end
   end

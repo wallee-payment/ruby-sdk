@@ -18,7 +18,7 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class AbstractShopifySubscriptionProductActive
+  class AbstractShopifySubscriptionProductUpdate
     # 
     attr_accessor :absolute_price_adjustment
 
@@ -52,9 +52,6 @@ module Wallee
     # 
     attr_accessor :relative_price_adjustment
 
-    # 
-    attr_accessor :state
-
     # Define whether the order confirmation email of the Shopify shop is sent to the customer for recurring orders.
     attr_accessor :store_order_confirmation_email_enabled
 
@@ -78,7 +75,6 @@ module Wallee
         :'minimal_billing_cycles' => :'minimalBillingCycles',
         :'pricing_option' => :'pricingOption',
         :'relative_price_adjustment' => :'relativePriceAdjustment',
-        :'state' => :'state',
         :'store_order_confirmation_email_enabled' => :'storeOrderConfirmationEmailEnabled',
         :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed',
         :'termination_billing_cycles' => :'terminationBillingCycles'
@@ -99,7 +95,6 @@ module Wallee
         :'minimal_billing_cycles' => :'Integer',
         :'pricing_option' => :'ShopifySubscriptionProductPricingOption',
         :'relative_price_adjustment' => :'Float',
-        :'state' => :'ShopifySubscriptionProductState',
         :'store_order_confirmation_email_enabled' => :'BOOLEAN',
         :'subscriber_suspension_allowed' => :'BOOLEAN',
         :'termination_billing_cycles' => :'Integer'
@@ -158,10 +153,6 @@ module Wallee
         self.relative_price_adjustment = attributes[:'relativePriceAdjustment']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
       if attributes.has_key?(:'storeOrderConfirmationEmailEnabled')
         self.store_order_confirmation_email_enabled = attributes[:'storeOrderConfirmationEmailEnabled']
       end
@@ -204,7 +195,6 @@ module Wallee
           minimal_billing_cycles == o.minimal_billing_cycles &&
           pricing_option == o.pricing_option &&
           relative_price_adjustment == o.relative_price_adjustment &&
-          state == o.state &&
           store_order_confirmation_email_enabled == o.store_order_confirmation_email_enabled &&
           subscriber_suspension_allowed == o.subscriber_suspension_allowed &&
           termination_billing_cycles == o.termination_billing_cycles
@@ -219,7 +209,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, state, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles].hash
+      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles].hash
     end
 
     # Builds the object from hash
