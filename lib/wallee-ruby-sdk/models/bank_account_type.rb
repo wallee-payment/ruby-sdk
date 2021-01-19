@@ -19,56 +19,36 @@ require 'date'
 
 module Wallee
   # 
-  class PaymentTerminalLocation
+  class BankAccountType
     # 
-    attr_accessor :contact_address
-
-    # 
-    attr_accessor :default_configuration
+    attr_accessor :description
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-    attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # 
+    attr_accessor :identifier_name
 
     # 
-    attr_accessor :state
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'contact_address' => :'contactAddress',
-        :'default_configuration' => :'defaultConfiguration',
+        :'description' => :'description',
         :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'state' => :'state',
-        :'version' => :'version'
+        :'identifier_name' => :'identifierName',
+        :'name' => :'name'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'contact_address' => :'PaymentTerminalAddress',
-        :'default_configuration' => :'PaymentTerminalConfiguration',
+        :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'state' => :'PaymentTerminalLocationState',
-        :'version' => :'Integer'
+        :'identifier_name' => :'Hash<String, String>',
+        :'name' => :'Hash<String, String>'
       }
     end
 
@@ -80,36 +60,26 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'contactAddress')
-        self.contact_address = attributes[:'contactAddress']
-      end
-
-      if attributes.has_key?(:'defaultConfiguration')
-        self.default_configuration = attributes[:'defaultConfiguration']
+      if attributes.has_key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.has_key?(:'identifierName')
+        if (value = attributes[:'identifierName']).is_a?(Hash)
+          self.identifier_name = value
+        end
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
     end
 
@@ -117,28 +87,13 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 100
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@name.nil? && @name.to_s.length > 100
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
-      end
-
-      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -146,14 +101,10 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          contact_address == o.contact_address &&
-          default_configuration == o.default_configuration &&
+          description == o.description &&
           id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
-          state == o.state &&
-          version == o.version
+          identifier_name == o.identifier_name &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -165,7 +116,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contact_address, default_configuration, id, linked_space_id, name, planned_purge_date, state, version].hash
+      [description, id, identifier_name, name].hash
     end
 
     # Builds the object from hash

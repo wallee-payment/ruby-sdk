@@ -179,24 +179,8 @@ module Wallee
         invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
       end
 
-      if !@family_name.nil? && @family_name.to_s.length > 100
-        invalid_properties.push('invalid value for "family_name", the character length must be smaller than or equal to 100.')
-      end
-
-      if !@given_name.nil? && @given_name.to_s.length > 100
-        invalid_properties.push('invalid value for "given_name", the character length must be smaller than or equal to 100.')
-      end
-
       if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 100
         invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 100.')
-      end
-
-      if !@organization_name.nil? && @organization_name.to_s.length > 100
-        invalid_properties.push('invalid value for "organization_name", the character length must be smaller than or equal to 100.')
-      end
-
-      if !@phone_number.nil? && @phone_number.to_s.length > 100
-        invalid_properties.push('invalid value for "phone_number", the character length must be smaller than or equal to 100.')
       end
 
       if !@salutation.nil? && @salutation.to_s.length > 20
@@ -215,11 +199,7 @@ module Wallee
     def valid?
       return false if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
       return false if !@email_address.nil? && @email_address.to_s.length > 254
-      return false if !@family_name.nil? && @family_name.to_s.length > 100
-      return false if !@given_name.nil? && @given_name.to_s.length > 100
       return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 100
-      return false if !@organization_name.nil? && @organization_name.to_s.length > 100
-      return false if !@phone_number.nil? && @phone_number.to_s.length > 100
       return false if !@salutation.nil? && @salutation.to_s.length > 20
       return false if !@sorting_code.nil? && @sorting_code.to_s.length > 100
       true
@@ -246,26 +226,6 @@ module Wallee
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] family_name Value to be assigned
-    def family_name=(family_name)
-      if !family_name.nil? && family_name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "family_name", the character length must be smaller than or equal to 100.'
-      end
-
-      @family_name = family_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] given_name Value to be assigned
-    def given_name=(given_name)
-      if !given_name.nil? && given_name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "given_name", the character length must be smaller than or equal to 100.'
-      end
-
-      @given_name = given_name
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] mobile_phone_number Value to be assigned
     def mobile_phone_number=(mobile_phone_number)
       if !mobile_phone_number.nil? && mobile_phone_number.to_s.length > 100
@@ -273,26 +233,6 @@ module Wallee
       end
 
       @mobile_phone_number = mobile_phone_number
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] organization_name Value to be assigned
-    def organization_name=(organization_name)
-      if !organization_name.nil? && organization_name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "organization_name", the character length must be smaller than or equal to 100.'
-      end
-
-      @organization_name = organization_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] phone_number Value to be assigned
-    def phone_number=(phone_number)
-      if !phone_number.nil? && phone_number.to_s.length > 100
-        fail ArgumentError, 'invalid value for "phone_number", the character length must be smaller than or equal to 100.'
-      end
-
-      @phone_number = phone_number
     end
 
     # Custom attribute writer method with validation

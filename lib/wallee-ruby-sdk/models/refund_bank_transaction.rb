@@ -18,55 +18,34 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The subscription ledger entry represents a single change on the subscription balance.
-  class SubscriptionLedgerEntry
-    # 
-    attr_accessor :aggregated_tax_rate
-
-    # 
-    attr_accessor :amount_excluding_tax
-
-    # 
-    attr_accessor :amount_including_tax
-
-    # 
-    attr_accessor :created_by
-
-    # The created on date indicates the date on which the entity was stored into the database.
-    attr_accessor :created_on
-
-    # 
-    attr_accessor :discount_including_tax
-
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-    attr_accessor :external_id
-
+  # 
+  class RefundBankTransaction
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
     # The linked space id holds the ID of the space to which the entity belongs to.
     attr_accessor :linked_space_id
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # 
+    attr_accessor :linked_transaction
 
     # 
-    attr_accessor :quantity
+    attr_accessor :bank_transaction
 
     # 
-    attr_accessor :state
+    attr_accessor :language
 
     # 
-    attr_accessor :subscription_version
+    attr_accessor :refund
+
+    # Specify the posting amount in the refund's currency.
+    attr_accessor :refund_currency_amount
 
     # 
-    attr_accessor :tax_amount
+    attr_accessor :refund_currency_value_amount
 
     # 
-    attr_accessor :taxes
-
-    # 
-    attr_accessor :title
+    attr_accessor :space_view_id
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -74,22 +53,15 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregated_tax_rate' => :'aggregatedTaxRate',
-        :'amount_excluding_tax' => :'amountExcludingTax',
-        :'amount_including_tax' => :'amountIncludingTax',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'discount_including_tax' => :'discountIncludingTax',
-        :'external_id' => :'externalId',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'quantity' => :'quantity',
-        :'state' => :'state',
-        :'subscription_version' => :'subscriptionVersion',
-        :'tax_amount' => :'taxAmount',
-        :'taxes' => :'taxes',
-        :'title' => :'title',
+        :'linked_transaction' => :'linkedTransaction',
+        :'bank_transaction' => :'bankTransaction',
+        :'language' => :'language',
+        :'refund' => :'refund',
+        :'refund_currency_amount' => :'refundCurrencyAmount',
+        :'refund_currency_value_amount' => :'refundCurrencyValueAmount',
+        :'space_view_id' => :'spaceViewId',
         :'version' => :'version'
       }
     end
@@ -97,22 +69,15 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'aggregated_tax_rate' => :'Float',
-        :'amount_excluding_tax' => :'Float',
-        :'amount_including_tax' => :'Float',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'discount_including_tax' => :'Float',
-        :'external_id' => :'String',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'quantity' => :'Float',
-        :'state' => :'SubscriptionLedgerEntryState',
-        :'subscription_version' => :'Integer',
-        :'tax_amount' => :'Float',
-        :'taxes' => :'Array<Tax>',
-        :'title' => :'String',
+        :'linked_transaction' => :'Integer',
+        :'bank_transaction' => :'BankTransaction',
+        :'language' => :'String',
+        :'refund' => :'Integer',
+        :'refund_currency_amount' => :'Float',
+        :'refund_currency_value_amount' => :'Float',
+        :'space_view_id' => :'Integer',
         :'version' => :'Integer'
       }
     end
@@ -125,34 +90,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'aggregatedTaxRate')
-        self.aggregated_tax_rate = attributes[:'aggregatedTaxRate']
-      end
-
-      if attributes.has_key?(:'amountExcludingTax')
-        self.amount_excluding_tax = attributes[:'amountExcludingTax']
-      end
-
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
-      end
-
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'discountIncludingTax')
-        self.discount_including_tax = attributes[:'discountIncludingTax']
-      end
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
@@ -161,34 +98,32 @@ module Wallee
         self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
-      if attributes.has_key?(:'quantity')
-        self.quantity = attributes[:'quantity']
+      if attributes.has_key?(:'bankTransaction')
+        self.bank_transaction = attributes[:'bankTransaction']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.has_key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'subscriptionVersion')
-        self.subscription_version = attributes[:'subscriptionVersion']
+      if attributes.has_key?(:'refund')
+        self.refund = attributes[:'refund']
       end
 
-      if attributes.has_key?(:'taxAmount')
-        self.tax_amount = attributes[:'taxAmount']
+      if attributes.has_key?(:'refundCurrencyAmount')
+        self.refund_currency_amount = attributes[:'refundCurrencyAmount']
       end
 
-      if attributes.has_key?(:'taxes')
-        if (value = attributes[:'taxes']).is_a?(Array)
-          self.taxes = value
-        end
+      if attributes.has_key?(:'refundCurrencyValueAmount')
+        self.refund_currency_value_amount = attributes[:'refundCurrencyValueAmount']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'spaceViewId')
+        self.space_view_id = attributes[:'spaceViewId']
       end
 
       if attributes.has_key?(:'version')
@@ -200,37 +135,13 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@title.nil? && @title.to_s.length > 150
-        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 150.')
-      end
-
-      if !@title.nil? && @title.to_s.length < 1
-        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@title.nil? && @title.to_s.length > 150
-      return false if !@title.nil? && @title.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] title Value to be assigned
-    def title=(title)
-      if !title.nil? && title.to_s.length > 150
-        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 150.'
-      end
-
-      if !title.nil? && title.to_s.length < 1
-        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
-      end
-
-      @title = title
     end
 
     # Checks equality by comparing each attribute.
@@ -238,22 +149,15 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregated_tax_rate == o.aggregated_tax_rate &&
-          amount_excluding_tax == o.amount_excluding_tax &&
-          amount_including_tax == o.amount_including_tax &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          discount_including_tax == o.discount_including_tax &&
-          external_id == o.external_id &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
-          quantity == o.quantity &&
-          state == o.state &&
-          subscription_version == o.subscription_version &&
-          tax_amount == o.tax_amount &&
-          taxes == o.taxes &&
-          title == o.title &&
+          linked_transaction == o.linked_transaction &&
+          bank_transaction == o.bank_transaction &&
+          language == o.language &&
+          refund == o.refund &&
+          refund_currency_amount == o.refund_currency_amount &&
+          refund_currency_value_amount == o.refund_currency_value_amount &&
+          space_view_id == o.space_view_id &&
           version == o.version
     end
 
@@ -266,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, created_by, created_on, discount_including_tax, external_id, id, linked_space_id, planned_purge_date, quantity, state, subscription_version, tax_amount, taxes, title, version].hash
+      [id, linked_space_id, linked_transaction, bank_transaction, language, refund, refund_currency_amount, refund_currency_value_amount, space_view_id, version].hash
     end
 
     # Builds the object from hash

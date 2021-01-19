@@ -32,8 +32,8 @@ module Wallee
     # The available from date defines the latest date on which the payment link can be used to initialize a transaction. When no date is specified there will be no restriction.
     attr_accessor :available_until
 
-    # By making the billing address required the transaction can only be created when a billing address is provided within the request.
-    attr_accessor :billing_address_required
+    # The billing address handling mode controls if the address is collected or not and how it is collected.
+    attr_accessor :billing_address_handling_mode
 
     # The currency defines in which currency the payment is executed in. If no currency is defined it has to be specified within the request parameter 'currency'.
     attr_accessor :currency
@@ -65,8 +65,8 @@ module Wallee
     # The protection mode determines if the payment link is protected against tampering and in what way.
     attr_accessor :protection_mode
 
-    # By making the shipping address required the transaction can only be created when a shipping address is provided within the request.
-    attr_accessor :shipping_address_required
+    # The shipping address handling mode controls if the address is collected or not and how it is collected.
+    attr_accessor :shipping_address_handling_mode
 
     # 
     attr_accessor :state
@@ -84,7 +84,7 @@ module Wallee
         :'applied_space_view' => :'appliedSpaceView',
         :'available_from' => :'availableFrom',
         :'available_until' => :'availableUntil',
-        :'billing_address_required' => :'billingAddressRequired',
+        :'billing_address_handling_mode' => :'billingAddressHandlingMode',
         :'currency' => :'currency',
         :'external_id' => :'externalId',
         :'id' => :'id',
@@ -95,7 +95,7 @@ module Wallee
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'protection_mode' => :'protectionMode',
-        :'shipping_address_required' => :'shippingAddressRequired',
+        :'shipping_address_handling_mode' => :'shippingAddressHandlingMode',
         :'state' => :'state',
         :'url' => :'url',
         :'version' => :'version'
@@ -109,7 +109,7 @@ module Wallee
         :'applied_space_view' => :'Integer',
         :'available_from' => :'DateTime',
         :'available_until' => :'DateTime',
-        :'billing_address_required' => :'BOOLEAN',
+        :'billing_address_handling_mode' => :'PaymentLinkAddressHandlingMode',
         :'currency' => :'String',
         :'external_id' => :'String',
         :'id' => :'Integer',
@@ -120,7 +120,7 @@ module Wallee
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'protection_mode' => :'PaymentLinkProtectionMode',
-        :'shipping_address_required' => :'BOOLEAN',
+        :'shipping_address_handling_mode' => :'PaymentLinkAddressHandlingMode',
         :'state' => :'CreationEntityState',
         :'url' => :'String',
         :'version' => :'Integer'
@@ -153,8 +153,8 @@ module Wallee
         self.available_until = attributes[:'availableUntil']
       end
 
-      if attributes.has_key?(:'billingAddressRequired')
-        self.billing_address_required = attributes[:'billingAddressRequired']
+      if attributes.has_key?(:'billingAddressHandlingMode')
+        self.billing_address_handling_mode = attributes[:'billingAddressHandlingMode']
       end
 
       if attributes.has_key?(:'currency')
@@ -199,8 +199,8 @@ module Wallee
         self.protection_mode = attributes[:'protectionMode']
       end
 
-      if attributes.has_key?(:'shippingAddressRequired')
-        self.shipping_address_required = attributes[:'shippingAddressRequired']
+      if attributes.has_key?(:'shippingAddressHandlingMode')
+        self.shipping_address_handling_mode = attributes[:'shippingAddressHandlingMode']
       end
 
       if attributes.has_key?(:'state')
@@ -277,7 +277,7 @@ module Wallee
           applied_space_view == o.applied_space_view &&
           available_from == o.available_from &&
           available_until == o.available_until &&
-          billing_address_required == o.billing_address_required &&
+          billing_address_handling_mode == o.billing_address_handling_mode &&
           currency == o.currency &&
           external_id == o.external_id &&
           id == o.id &&
@@ -288,7 +288,7 @@ module Wallee
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           protection_mode == o.protection_mode &&
-          shipping_address_required == o.shipping_address_required &&
+          shipping_address_handling_mode == o.shipping_address_handling_mode &&
           state == o.state &&
           url == o.url &&
           version == o.version
@@ -303,7 +303,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_configurations, applied_space_view, available_from, available_until, billing_address_required, currency, external_id, id, language, line_items, linked_space_id, maximal_number_of_transactions, name, planned_purge_date, protection_mode, shipping_address_required, state, url, version].hash
+      [allowed_payment_method_configurations, applied_space_view, available_from, available_until, billing_address_handling_mode, currency, external_id, id, language, line_items, linked_space_id, maximal_number_of_transactions, name, planned_purge_date, protection_mode, shipping_address_handling_mode, state, url, version].hash
     end
 
     # Builds the object from hash

@@ -18,28 +18,25 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The subscription ledger entry represents a single change on the subscription balance.
-  class SubscriptionLedgerEntry
-    # 
-    attr_accessor :aggregated_tax_rate
+  # 
+  class BankTransaction
+    # The adjustments applied on this bank transaction.
+    attr_accessor :adjustments
 
-    # 
-    attr_accessor :amount_excluding_tax
-
-    # 
-    attr_accessor :amount_including_tax
-
-    # 
+    # The created by indicates the user which has created the bank transaction.
     attr_accessor :created_by
 
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
-    # 
-    attr_accessor :discount_including_tax
+    # The currency bank account which is used to handle money flow.
+    attr_accessor :currency_bank_account
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # 
     attr_accessor :external_id
+
+    # 
+    attr_accessor :flow_direction
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -50,23 +47,29 @@ module Wallee
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
+    # The posting amount indicates the amount including adjustments.
+    attr_accessor :posting_amount
+
     # 
-    attr_accessor :quantity
+    attr_accessor :reference
+
+    # 
+    attr_accessor :source
 
     # 
     attr_accessor :state
 
     # 
-    attr_accessor :subscription_version
+    attr_accessor :total_adjustment_amount_including_tax
 
     # 
-    attr_accessor :tax_amount
+    attr_accessor :type
 
     # 
-    attr_accessor :taxes
+    attr_accessor :value_amount
 
-    # 
-    attr_accessor :title
+    # The value date describes the date the amount is effective on the account.
+    attr_accessor :value_date
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -74,22 +77,23 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregated_tax_rate' => :'aggregatedTaxRate',
-        :'amount_excluding_tax' => :'amountExcludingTax',
-        :'amount_including_tax' => :'amountIncludingTax',
+        :'adjustments' => :'adjustments',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
-        :'discount_including_tax' => :'discountIncludingTax',
+        :'currency_bank_account' => :'currencyBankAccount',
         :'external_id' => :'externalId',
+        :'flow_direction' => :'flowDirection',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'quantity' => :'quantity',
+        :'posting_amount' => :'postingAmount',
+        :'reference' => :'reference',
+        :'source' => :'source',
         :'state' => :'state',
-        :'subscription_version' => :'subscriptionVersion',
-        :'tax_amount' => :'taxAmount',
-        :'taxes' => :'taxes',
-        :'title' => :'title',
+        :'total_adjustment_amount_including_tax' => :'totalAdjustmentAmountIncludingTax',
+        :'type' => :'type',
+        :'value_amount' => :'valueAmount',
+        :'value_date' => :'valueDate',
         :'version' => :'version'
       }
     end
@@ -97,22 +101,23 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'aggregated_tax_rate' => :'Float',
-        :'amount_excluding_tax' => :'Float',
-        :'amount_including_tax' => :'Float',
+        :'adjustments' => :'Array<PaymentAdjustment>',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
-        :'discount_including_tax' => :'Float',
+        :'currency_bank_account' => :'CurrencyBankAccount',
         :'external_id' => :'String',
+        :'flow_direction' => :'BankTransactionFlowDirection',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
-        :'quantity' => :'Float',
-        :'state' => :'SubscriptionLedgerEntryState',
-        :'subscription_version' => :'Integer',
-        :'tax_amount' => :'Float',
-        :'taxes' => :'Array<Tax>',
-        :'title' => :'String',
+        :'posting_amount' => :'Float',
+        :'reference' => :'String',
+        :'source' => :'Integer',
+        :'state' => :'BankTransactionState',
+        :'total_adjustment_amount_including_tax' => :'Float',
+        :'type' => :'Integer',
+        :'value_amount' => :'Float',
+        :'value_date' => :'DateTime',
         :'version' => :'Integer'
       }
     end
@@ -125,16 +130,10 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'aggregatedTaxRate')
-        self.aggregated_tax_rate = attributes[:'aggregatedTaxRate']
-      end
-
-      if attributes.has_key?(:'amountExcludingTax')
-        self.amount_excluding_tax = attributes[:'amountExcludingTax']
-      end
-
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
+      if attributes.has_key?(:'adjustments')
+        if (value = attributes[:'adjustments']).is_a?(Array)
+          self.adjustments = value
+        end
       end
 
       if attributes.has_key?(:'createdBy')
@@ -145,12 +144,16 @@ module Wallee
         self.created_on = attributes[:'createdOn']
       end
 
-      if attributes.has_key?(:'discountIncludingTax')
-        self.discount_including_tax = attributes[:'discountIncludingTax']
+      if attributes.has_key?(:'currencyBankAccount')
+        self.currency_bank_account = attributes[:'currencyBankAccount']
       end
 
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
+      end
+
+      if attributes.has_key?(:'flowDirection')
+        self.flow_direction = attributes[:'flowDirection']
       end
 
       if attributes.has_key?(:'id')
@@ -165,30 +168,36 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
-      if attributes.has_key?(:'quantity')
-        self.quantity = attributes[:'quantity']
+      if attributes.has_key?(:'postingAmount')
+        self.posting_amount = attributes[:'postingAmount']
+      end
+
+      if attributes.has_key?(:'reference')
+        self.reference = attributes[:'reference']
+      end
+
+      if attributes.has_key?(:'source')
+        self.source = attributes[:'source']
       end
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'subscriptionVersion')
-        self.subscription_version = attributes[:'subscriptionVersion']
+      if attributes.has_key?(:'totalAdjustmentAmountIncludingTax')
+        self.total_adjustment_amount_including_tax = attributes[:'totalAdjustmentAmountIncludingTax']
       end
 
-      if attributes.has_key?(:'taxAmount')
-        self.tax_amount = attributes[:'taxAmount']
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.has_key?(:'taxes')
-        if (value = attributes[:'taxes']).is_a?(Array)
-          self.taxes = value
-        end
+      if attributes.has_key?(:'valueAmount')
+        self.value_amount = attributes[:'valueAmount']
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'valueDate')
+        self.value_date = attributes[:'valueDate']
       end
 
       if attributes.has_key?(:'version')
@@ -200,12 +209,12 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@title.nil? && @title.to_s.length > 150
-        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 150.')
+      if !@external_id.nil? && @external_id.to_s.length > 100
+        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
       end
 
-      if !@title.nil? && @title.to_s.length < 1
-        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
+      if !@external_id.nil? && @external_id.to_s.length < 1
+        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
       end
 
       invalid_properties
@@ -214,23 +223,23 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@title.nil? && @title.to_s.length > 150
-      return false if !@title.nil? && @title.to_s.length < 1
+      return false if !@external_id.nil? && @external_id.to_s.length > 100
+      return false if !@external_id.nil? && @external_id.to_s.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] title Value to be assigned
-    def title=(title)
-      if !title.nil? && title.to_s.length > 150
-        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 150.'
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if !external_id.nil? && external_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
       end
 
-      if !title.nil? && title.to_s.length < 1
-        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
+      if !external_id.nil? && external_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
       end
 
-      @title = title
+      @external_id = external_id
     end
 
     # Checks equality by comparing each attribute.
@@ -238,22 +247,23 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregated_tax_rate == o.aggregated_tax_rate &&
-          amount_excluding_tax == o.amount_excluding_tax &&
-          amount_including_tax == o.amount_including_tax &&
+          adjustments == o.adjustments &&
           created_by == o.created_by &&
           created_on == o.created_on &&
-          discount_including_tax == o.discount_including_tax &&
+          currency_bank_account == o.currency_bank_account &&
           external_id == o.external_id &&
+          flow_direction == o.flow_direction &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
-          quantity == o.quantity &&
+          posting_amount == o.posting_amount &&
+          reference == o.reference &&
+          source == o.source &&
           state == o.state &&
-          subscription_version == o.subscription_version &&
-          tax_amount == o.tax_amount &&
-          taxes == o.taxes &&
-          title == o.title &&
+          total_adjustment_amount_including_tax == o.total_adjustment_amount_including_tax &&
+          type == o.type &&
+          value_amount == o.value_amount &&
+          value_date == o.value_date &&
           version == o.version
     end
 
@@ -266,7 +276,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, created_by, created_on, discount_including_tax, external_id, id, linked_space_id, planned_purge_date, quantity, state, subscription_version, tax_amount, taxes, title, version].hash
+      [adjustments, created_by, created_on, currency_bank_account, external_id, flow_direction, id, linked_space_id, planned_purge_date, posting_amount, reference, source, state, total_adjustment_amount_including_tax, type, value_amount, value_date, version].hash
     end
 
     # Builds the object from hash

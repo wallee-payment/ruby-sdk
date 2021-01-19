@@ -135,6 +135,9 @@ module Wallee
     attr_accessor :invoice_merchant_reference
 
     # 
+    attr_accessor :java_enabled
+
+    # 
     attr_accessor :language
 
     # 
@@ -163,6 +166,15 @@ module Wallee
 
     # The refunded amount is the total amount which has been refunded so far.
     attr_accessor :refunded_amount
+
+    # 
+    attr_accessor :screen_color_depth
+
+    # 
+    attr_accessor :screen_height
+
+    # 
+    attr_accessor :screen_width
 
     # 
     attr_accessor :shipping_address
@@ -209,6 +221,12 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
+    # 
+    attr_accessor :window_height
+
+    # 
+    attr_accessor :window_width
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -250,6 +268,7 @@ module Wallee
         :'internet_protocol_address' => :'internetProtocolAddress',
         :'internet_protocol_address_country' => :'internetProtocolAddressCountry',
         :'invoice_merchant_reference' => :'invoiceMerchantReference',
+        :'java_enabled' => :'javaEnabled',
         :'language' => :'language',
         :'line_items' => :'lineItems',
         :'linked_space_id' => :'linkedSpaceId',
@@ -260,6 +279,9 @@ module Wallee
         :'planned_purge_date' => :'plannedPurgeDate',
         :'processing_on' => :'processingOn',
         :'refunded_amount' => :'refundedAmount',
+        :'screen_color_depth' => :'screenColorDepth',
+        :'screen_height' => :'screenHeight',
+        :'screen_width' => :'screenWidth',
         :'shipping_address' => :'shippingAddress',
         :'shipping_method' => :'shippingMethod',
         :'space_view_id' => :'spaceViewId',
@@ -274,7 +296,9 @@ module Wallee
         :'user_agent_header' => :'userAgentHeader',
         :'user_failure_message' => :'userFailureMessage',
         :'user_interface_type' => :'userInterfaceType',
-        :'version' => :'version'
+        :'version' => :'version',
+        :'window_height' => :'windowHeight',
+        :'window_width' => :'windowWidth'
       }
     end
 
@@ -319,6 +343,7 @@ module Wallee
         :'internet_protocol_address' => :'String',
         :'internet_protocol_address_country' => :'String',
         :'invoice_merchant_reference' => :'String',
+        :'java_enabled' => :'BOOLEAN',
         :'language' => :'String',
         :'line_items' => :'Array<LineItem>',
         :'linked_space_id' => :'Integer',
@@ -329,6 +354,9 @@ module Wallee
         :'planned_purge_date' => :'DateTime',
         :'processing_on' => :'DateTime',
         :'refunded_amount' => :'Float',
+        :'screen_color_depth' => :'String',
+        :'screen_height' => :'String',
+        :'screen_width' => :'String',
         :'shipping_address' => :'Address',
         :'shipping_method' => :'String',
         :'space_view_id' => :'Integer',
@@ -343,7 +371,9 @@ module Wallee
         :'user_agent_header' => :'String',
         :'user_failure_message' => :'String',
         :'user_interface_type' => :'TransactionUserInterfaceType',
-        :'version' => :'Integer'
+        :'version' => :'Integer',
+        :'window_height' => :'String',
+        :'window_width' => :'String'
       }
     end
 
@@ -511,6 +541,10 @@ module Wallee
         self.invoice_merchant_reference = attributes[:'invoiceMerchantReference']
       end
 
+      if attributes.has_key?(:'javaEnabled')
+        self.java_enabled = attributes[:'javaEnabled']
+      end
+
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
@@ -553,6 +587,18 @@ module Wallee
 
       if attributes.has_key?(:'refundedAmount')
         self.refunded_amount = attributes[:'refundedAmount']
+      end
+
+      if attributes.has_key?(:'screenColorDepth')
+        self.screen_color_depth = attributes[:'screenColorDepth']
+      end
+
+      if attributes.has_key?(:'screenHeight')
+        self.screen_height = attributes[:'screenHeight']
+      end
+
+      if attributes.has_key?(:'screenWidth')
+        self.screen_width = attributes[:'screenWidth']
       end
 
       if attributes.has_key?(:'shippingAddress')
@@ -613,6 +659,14 @@ module Wallee
 
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.has_key?(:'windowHeight')
+        self.window_height = attributes[:'windowHeight']
+      end
+
+      if attributes.has_key?(:'windowWidth')
+        self.window_width = attributes[:'windowWidth']
       end
     end
 
@@ -804,6 +858,7 @@ module Wallee
           internet_protocol_address == o.internet_protocol_address &&
           internet_protocol_address_country == o.internet_protocol_address_country &&
           invoice_merchant_reference == o.invoice_merchant_reference &&
+          java_enabled == o.java_enabled &&
           language == o.language &&
           line_items == o.line_items &&
           linked_space_id == o.linked_space_id &&
@@ -814,6 +869,9 @@ module Wallee
           planned_purge_date == o.planned_purge_date &&
           processing_on == o.processing_on &&
           refunded_amount == o.refunded_amount &&
+          screen_color_depth == o.screen_color_depth &&
+          screen_height == o.screen_height &&
+          screen_width == o.screen_width &&
           shipping_address == o.shipping_address &&
           shipping_method == o.shipping_method &&
           space_view_id == o.space_view_id &&
@@ -828,7 +886,9 @@ module Wallee
           user_agent_header == o.user_agent_header &&
           user_failure_message == o.user_failure_message &&
           user_interface_type == o.user_interface_type &&
-          version == o.version
+          version == o.version &&
+          window_height == o.window_height &&
+          window_width == o.window_width
     end
 
     # @see the `==` method
@@ -840,7 +900,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, java_enabled, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, screen_color_depth, screen_height, screen_width, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version, window_height, window_width].hash
     end
 
     # Builds the object from hash

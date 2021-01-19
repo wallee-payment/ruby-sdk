@@ -19,56 +19,41 @@ require 'date'
 
 module Wallee
   # 
-  class PaymentTerminalLocation
+  class PaymentAdjustment
     # 
-    attr_accessor :contact_address
+    attr_accessor :amount_excluding_tax
 
-    # 
-    attr_accessor :default_configuration
+    # The total amount of this adjustment including taxes.
+    attr_accessor :amount_including_tax
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The linked space id holds the ID of the space to which the entity belongs to.
-    attr_accessor :linked_space_id
-
-    # The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-    attr_accessor :name
-
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-    attr_accessor :planned_purge_date
+    # The rate in percentage is the rate on which the adjustment amount was calculated with.
+    attr_accessor :rate_in_percentage
 
     # 
-    attr_accessor :state
+    attr_accessor :tax
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # 
+    attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'contact_address' => :'contactAddress',
-        :'default_configuration' => :'defaultConfiguration',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'name' => :'name',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'state' => :'state',
-        :'version' => :'version'
+        :'amount_excluding_tax' => :'amountExcludingTax',
+        :'amount_including_tax' => :'amountIncludingTax',
+        :'rate_in_percentage' => :'rateInPercentage',
+        :'tax' => :'tax',
+        :'type' => :'type'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'contact_address' => :'PaymentTerminalAddress',
-        :'default_configuration' => :'PaymentTerminalConfiguration',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'state' => :'PaymentTerminalLocationState',
-        :'version' => :'Integer'
+        :'amount_excluding_tax' => :'Float',
+        :'amount_including_tax' => :'Float',
+        :'rate_in_percentage' => :'Float',
+        :'tax' => :'Tax',
+        :'type' => :'Integer'
       }
     end
 
@@ -80,36 +65,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'contactAddress')
-        self.contact_address = attributes[:'contactAddress']
+      if attributes.has_key?(:'amountExcludingTax')
+        self.amount_excluding_tax = attributes[:'amountExcludingTax']
       end
 
-      if attributes.has_key?(:'defaultConfiguration')
-        self.default_configuration = attributes[:'defaultConfiguration']
+      if attributes.has_key?(:'amountIncludingTax')
+        self.amount_including_tax = attributes[:'amountIncludingTax']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'rateInPercentage')
+        self.rate_in_percentage = attributes[:'rateInPercentage']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.has_key?(:'tax')
+        self.tax = attributes[:'tax']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -117,28 +90,13 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 100
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@name.nil? && @name.to_s.length > 100
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
-      end
-
-      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -146,14 +104,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          contact_address == o.contact_address &&
-          default_configuration == o.default_configuration &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          name == o.name &&
-          planned_purge_date == o.planned_purge_date &&
-          state == o.state &&
-          version == o.version
+          amount_excluding_tax == o.amount_excluding_tax &&
+          amount_including_tax == o.amount_including_tax &&
+          rate_in_percentage == o.rate_in_percentage &&
+          tax == o.tax &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -165,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contact_address, default_configuration, id, linked_space_id, name, planned_purge_date, state, version].hash
+      [amount_excluding_tax, amount_including_tax, rate_in_percentage, tax, type].hash
     end
 
     # Builds the object from hash

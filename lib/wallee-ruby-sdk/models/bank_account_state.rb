@@ -15,6 +15,23 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '2.2.5'
+  class BankAccountState
+    
+    CREATE = 'CREATE'.freeze
+    ACTIVE = 'ACTIVE'.freeze
+    DELETING = 'DELETING'.freeze
+    DELETED = 'DELETED'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = BankAccountState.constants.select { |c| BankAccountState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #BankAccountState" if constantValues.empty?
+      value
+    end
+  end
 end
