@@ -18,72 +18,42 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # 
-  class Permission
-    # 
-    attr_accessor :description
+  # This model holds the cardholder authentication data (e.g. 3-D Secure authentication).
+  class CardholderAuthenticationCreate
+    # The authentication identifier as assigned by authentication system (e.g. XID or DSTransactionID).
+    attr_accessor :authentication_identifier
 
     # 
-    attr_accessor :feature
+    attr_accessor :authentication_response
+
+    # The cardholder authentication value. Also known as Cardholder Authentication Verification Value (CAVV).
+    attr_accessor :authentication_value
+
+    # The Electronic Commerce Indicator (ECI) value. The ECI is returned by authentication system and indicates the outcome/status of authentication.
+    attr_accessor :electronic_commerce_indicator
 
     # 
-    attr_accessor :group
-
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # 
-    attr_accessor :leaf
-
-    # 
-    attr_accessor :name
-
-    # 
-    attr_accessor :parent
-
-    # 
-    attr_accessor :path_to_root
-
-    # 
-    attr_accessor :title
-
-    # 
-    attr_accessor :two_factor_required
-
-    # 
-    attr_accessor :web_app_enabled
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
-        :'feature' => :'feature',
-        :'group' => :'group',
-        :'id' => :'id',
-        :'leaf' => :'leaf',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'path_to_root' => :'pathToRoot',
-        :'title' => :'title',
-        :'two_factor_required' => :'twoFactorRequired',
-        :'web_app_enabled' => :'webAppEnabled'
+        :'authentication_identifier' => :'authenticationIdentifier',
+        :'authentication_response' => :'authenticationResponse',
+        :'authentication_value' => :'authenticationValue',
+        :'electronic_commerce_indicator' => :'electronicCommerceIndicator',
+        :'version' => :'version'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'Hash<String, String>',
-        :'feature' => :'Integer',
-        :'group' => :'BOOLEAN',
-        :'id' => :'Integer',
-        :'leaf' => :'BOOLEAN',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'Integer',
-        :'path_to_root' => :'Array<Integer>',
-        :'title' => :'Hash<String, String>',
-        :'two_factor_required' => :'BOOLEAN',
-        :'web_app_enabled' => :'BOOLEAN'
+        :'authentication_identifier' => :'String',
+        :'authentication_response' => :'CardAuthenticationResponse',
+        :'authentication_value' => :'String',
+        :'electronic_commerce_indicator' => :'String',
+        :'version' => :'CardAuthenticationVersion'
       }
     end
 
@@ -95,56 +65,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
+      if attributes.has_key?(:'authenticationIdentifier')
+        self.authentication_identifier = attributes[:'authenticationIdentifier']
       end
 
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
+      if attributes.has_key?(:'authenticationResponse')
+        self.authentication_response = attributes[:'authenticationResponse']
       end
 
-      if attributes.has_key?(:'group')
-        self.group = attributes[:'group']
+      if attributes.has_key?(:'authenticationValue')
+        self.authentication_value = attributes[:'authenticationValue']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'electronicCommerceIndicator')
+        self.electronic_commerce_indicator = attributes[:'electronicCommerceIndicator']
       end
 
-      if attributes.has_key?(:'leaf')
-        self.leaf = attributes[:'leaf']
-      end
-
-      if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Hash)
-          self.name = value
-        end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
-      end
-
-      if attributes.has_key?(:'pathToRoot')
-        if (value = attributes[:'pathToRoot']).is_a?(Array)
-          self.path_to_root = value
-        end
-      end
-
-      if attributes.has_key?(:'title')
-        if (value = attributes[:'title']).is_a?(Hash)
-          self.title = value
-        end
-      end
-
-      if attributes.has_key?(:'twoFactorRequired')
-        self.two_factor_required = attributes[:'twoFactorRequired']
-      end
-
-      if attributes.has_key?(:'webAppEnabled')
-        self.web_app_enabled = attributes[:'webAppEnabled']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -152,12 +90,22 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @authentication_response.nil?
+        invalid_properties.push('invalid value for "authentication_response", authentication_response cannot be nil.')
+      end
+
+      if @version.nil?
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @authentication_response.nil?
+      return false if @version.nil?
       true
     end
 
@@ -166,17 +114,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
-          feature == o.feature &&
-          group == o.group &&
-          id == o.id &&
-          leaf == o.leaf &&
-          name == o.name &&
-          parent == o.parent &&
-          path_to_root == o.path_to_root &&
-          title == o.title &&
-          two_factor_required == o.two_factor_required &&
-          web_app_enabled == o.web_app_enabled
+          authentication_identifier == o.authentication_identifier &&
+          authentication_response == o.authentication_response &&
+          authentication_value == o.authentication_value &&
+          electronic_commerce_indicator == o.electronic_commerce_indicator &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -188,7 +130,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, group, id, leaf, name, parent, path_to_root, title, two_factor_required, web_app_enabled].hash
+      [authentication_identifier, authentication_response, authentication_value, electronic_commerce_indicator, version].hash
     end
 
     # Builds the object from hash

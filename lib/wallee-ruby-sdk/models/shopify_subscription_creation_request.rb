@@ -33,6 +33,9 @@ module Wallee
     attr_accessor :external_id
 
     # 
+    attr_accessor :initial_execution_date
+
+    # 
     attr_accessor :integration
 
     # 
@@ -66,6 +69,7 @@ module Wallee
         :'billing_configuration' => :'billingConfiguration',
         :'currency' => :'currency',
         :'external_id' => :'externalId',
+        :'initial_execution_date' => :'initialExecutionDate',
         :'integration' => :'integration',
         :'items' => :'items',
         :'language' => :'language',
@@ -85,6 +89,7 @@ module Wallee
         :'billing_configuration' => :'ShopifySubscriptionModelBillingConfiguration',
         :'currency' => :'String',
         :'external_id' => :'String',
+        :'initial_execution_date' => :'DateTime',
         :'integration' => :'Integer',
         :'items' => :'Array<ShopifySubscriptionModelItem>',
         :'language' => :'String',
@@ -119,6 +124,10 @@ module Wallee
 
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
+      end
+
+      if attributes.has_key?(:'initialExecutionDate')
+        self.initial_execution_date = attributes[:'initialExecutionDate']
       end
 
       if attributes.has_key?(:'integration')
@@ -222,6 +231,7 @@ module Wallee
           billing_configuration == o.billing_configuration &&
           currency == o.currency &&
           external_id == o.external_id &&
+          initial_execution_date == o.initial_execution_date &&
           integration == o.integration &&
           items == o.items &&
           language == o.language &&
@@ -242,7 +252,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_address, billing_configuration, currency, external_id, integration, items, language, shipping_address, shipping_method_name, space_view_id, store_order_confirmation_email_enabled, subscriber, subscriber_suspension_allowed].hash
+      [billing_address, billing_configuration, currency, external_id, initial_execution_date, integration, items, language, shipping_address, shipping_method_name, space_view_id, store_order_confirmation_email_enabled, subscriber, subscriber_suspension_allowed].hash
     end
 
     # Builds the object from hash

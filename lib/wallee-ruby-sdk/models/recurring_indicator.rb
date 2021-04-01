@@ -18,17 +18,19 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class TaxCalculation
+  class RecurringIndicator
     
-    TAX_INCLUDED = 'TAX_INCLUDED'.freeze
-    TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED'.freeze
+    REGULAR_TRANSACTION = 'REGULAR_TRANSACTION'.freeze
+    INITIAL_RECURRING_TRANSACTION = 'INITIAL_RECURRING_TRANSACTION'.freeze
+    MERCHANT_INITIATED_RECURRING_TRANSACTION = 'MERCHANT_INITIATED_RECURRING_TRANSACTION'.freeze
+    CUSTOMER_INITIATED_RECURRING_TRANSACTION = 'CUSTOMER_INITIATED_RECURRING_TRANSACTION'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = TaxCalculation.constants.select { |c| TaxCalculation::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #TaxCalculation" if constantValues.empty?
+      constantValues = RecurringIndicator.constants.select { |c| RecurringIndicator::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #RecurringIndicator" if constantValues.empty?
       value
     end
   end

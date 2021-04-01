@@ -74,7 +74,7 @@ module Wallee
         :'linked_transaction' => :'Integer',
         :'bank_transaction' => :'BankTransaction',
         :'language' => :'String',
-        :'refund' => :'Integer',
+        :'refund' => :'Refund',
         :'refund_currency_amount' => :'Float',
         :'refund_currency_value_amount' => :'Float',
         :'space_view_id' => :'Integer',

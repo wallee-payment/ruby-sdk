@@ -18,17 +18,20 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class TaxCalculation
+  class CardAuthenticationResponse
     
-    TAX_INCLUDED = 'TAX_INCLUDED'.freeze
-    TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED'.freeze
+    ENROLLMENT_VERIFICATION_ERROR = 'ENROLLMENT_VERIFICATION_ERROR'.freeze
+    NOT_ENROLLED = 'NOT_ENROLLED'.freeze
+    AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR'.freeze
+    AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED'.freeze
+    FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = TaxCalculation.constants.select { |c| TaxCalculation::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #TaxCalculation" if constantValues.empty?
+      constantValues = CardAuthenticationResponse.constants.select { |c| CardAuthenticationResponse::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #CardAuthenticationResponse" if constantValues.empty?
       value
     end
   end

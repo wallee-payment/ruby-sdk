@@ -33,6 +33,9 @@ module Wallee
     attr_accessor :id
 
     # 
+    attr_accessor :initial_execution_date
+
+    # 
     attr_accessor :initial_payment_transaction
 
     # 
@@ -75,6 +78,7 @@ module Wallee
         :'created_on' => :'createdOn',
         :'external_id' => :'externalId',
         :'id' => :'id',
+        :'initial_execution_date' => :'initialExecutionDate',
         :'initial_payment_transaction' => :'initialPaymentTransaction',
         :'initial_shopify_transaction' => :'initialShopifyTransaction',
         :'language' => :'language',
@@ -97,6 +101,7 @@ module Wallee
         :'created_on' => :'DateTime',
         :'external_id' => :'String',
         :'id' => :'Integer',
+        :'initial_execution_date' => :'DateTime',
         :'initial_payment_transaction' => :'Integer',
         :'initial_shopify_transaction' => :'Integer',
         :'language' => :'String',
@@ -134,6 +139,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'initialExecutionDate')
+        self.initial_execution_date = attributes[:'initialExecutionDate']
       end
 
       if attributes.has_key?(:'initialPaymentTransaction')
@@ -231,6 +240,7 @@ module Wallee
           created_on == o.created_on &&
           external_id == o.external_id &&
           id == o.id &&
+          initial_execution_date == o.initial_execution_date &&
           initial_payment_transaction == o.initial_payment_transaction &&
           initial_shopify_transaction == o.initial_shopify_transaction &&
           language == o.language &&
@@ -254,7 +264,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_by, created_on, external_id, id, initial_payment_transaction, initial_shopify_transaction, language, linked_space_id, order_recurrence_number, shop, state, subscriber, terminated_by, terminated_on, termination_request_date, version].hash
+      [created_by, created_on, external_id, id, initial_execution_date, initial_payment_transaction, initial_shopify_transaction, language, linked_space_id, order_recurrence_number, shop, state, subscriber, terminated_by, terminated_on, termination_request_date, version].hash
     end
 
     # Builds the object from hash

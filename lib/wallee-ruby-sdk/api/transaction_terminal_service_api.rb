@@ -25,48 +25,37 @@ module Wallee
       @api_client = api_client
     end
 
-    # getTerminalReceipt
-    # Returns the PDF document for the requested terminal receipt with the given page width.
+    # Fetch Receipts
+    # Returns all receipts for the requested terminal transaction.
     # @param space_id 
-    # @param transaction_id The ID of the transaction to get the receipt for.
-    # @param type_id 
-    # @param width 
+    # @param request 
     # @param [Hash] opts the optional parameters
-    # @return [RenderedTerminalReceipt]
-    def receipt(space_id, transaction_id, type_id, width, opts = {})
-      data, _status_code, _headers = receipt_with_http_info(space_id, transaction_id, type_id, width, opts)
+    # @return [Array<RenderedTerminalReceipt>]
+    def fetch_receipts(space_id, request, opts = {})
+      data, _status_code, _headers = fetch_receipts_with_http_info(space_id, request, opts)
       return data
     end
 
-    # getTerminalReceipt
-    # Returns the PDF document for the requested terminal receipt with the given page width.
+    # Fetch Receipts
+    # Returns all receipts for the requested terminal transaction.
     # @param space_id 
-    # @param transaction_id The ID of the transaction to get the receipt for.
-    # @param type_id 
-    # @param width 
+    # @param request 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(RenderedTerminalReceipt, Fixnum, Hash)>] RenderedTerminalReceipt data, response status code and response headers
-    def receipt_with_http_info(space_id, transaction_id, type_id, width, opts = {})
+    # @return [Array<(Array<RenderedTerminalReceipt>, Fixnum, Hash)>] Array<RenderedTerminalReceipt> data, response status code and response headers
+    def fetch_receipts_with_http_info(space_id, request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionTerminalService.receipt ..."
+        @api_client.config.logger.debug "Calling API: TransactionTerminalService.fetch_receipts ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionTerminalService.receipt" if space_id.nil?
-      # verify the required parameter 'transaction_id' is set
-      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling TransactionTerminalService.receipt" if transaction_id.nil?
-      # verify the required parameter 'type_id' is set
-      fail ArgumentError, "Missing the required parameter 'type_id' when calling TransactionTerminalService.receipt" if type_id.nil?
-      # verify the required parameter 'width' is set
-      fail ArgumentError, "Missing the required parameter 'width' when calling TransactionTerminalService.receipt" if width.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionTerminalService.fetch_receipts" if space_id.nil?
+      # verify the required parameter 'request' is set
+      fail ArgumentError, "Missing the required parameter 'request' when calling TransactionTerminalService.fetch_receipts" if request.nil?
       # resource path
-      local_var_path = "/transaction-terminal/receipt".sub('{format}','json')
+      local_var_path = "/transaction-terminal/fetch-receipts".sub('{format}','json')
 
       # query parameters
       query_params = {}
       query_params[:'spaceId'] = space_id
-      query_params[:'transactionId'] = transaction_id
-      query_params[:'typeId'] = type_id
-      query_params[:'width'] = width
 
       # header parameters
       header_params = {}
@@ -76,24 +65,24 @@ module Wallee
       local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
 
       # HTTP header 'Content-Type'
-      local_header_content_type = ['*/*']
+      local_header_content_type = ['application/json;charset=utf-8']
       header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(request)
       auth_names = []
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'RenderedTerminalReceipt')
+        :return_type => 'Array<RenderedTerminalReceipt>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionTerminalService#receipt\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TransactionTerminalService#fetch_receipts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

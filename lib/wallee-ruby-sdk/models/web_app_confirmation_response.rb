@@ -18,72 +18,42 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # 
-  class Permission
-    # 
-    attr_accessor :description
+  # The confirmation response provides the details about the installation of the web app.
+  class WebAppConfirmationResponse
+    # The access code grants permissions to the web service API according to the OAuth standard.
+    attr_accessor :access_token
 
-    # 
-    attr_accessor :feature
+    # The scope contains the permissions granted to the web app within the space.
+    attr_accessor :scope
 
-    # 
-    attr_accessor :group
+    # This is the space into which the web app is installed into.
+    attr_accessor :space
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
+    # The state contains the state parameter content provided when initiating the app installation.
+    attr_accessor :state
 
-    # 
-    attr_accessor :leaf
-
-    # 
-    attr_accessor :name
-
-    # 
-    attr_accessor :parent
-
-    # 
-    attr_accessor :path_to_root
-
-    # 
-    attr_accessor :title
-
-    # 
-    attr_accessor :two_factor_required
-
-    # 
-    attr_accessor :web_app_enabled
+    # The token type indicates the type of the access token. The type determines the authentication mechanism to use for accessing the web service API.
+    attr_accessor :token_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
-        :'feature' => :'feature',
-        :'group' => :'group',
-        :'id' => :'id',
-        :'leaf' => :'leaf',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'path_to_root' => :'pathToRoot',
-        :'title' => :'title',
-        :'two_factor_required' => :'twoFactorRequired',
-        :'web_app_enabled' => :'webAppEnabled'
+        :'access_token' => :'access_token',
+        :'scope' => :'scope',
+        :'space' => :'space',
+        :'state' => :'state',
+        :'token_type' => :'token_type'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'Hash<String, String>',
-        :'feature' => :'Integer',
-        :'group' => :'BOOLEAN',
-        :'id' => :'Integer',
-        :'leaf' => :'BOOLEAN',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'Integer',
-        :'path_to_root' => :'Array<Integer>',
-        :'title' => :'Hash<String, String>',
-        :'two_factor_required' => :'BOOLEAN',
-        :'web_app_enabled' => :'BOOLEAN'
+        :'access_token' => :'String',
+        :'scope' => :'String',
+        :'space' => :'Space',
+        :'state' => :'String',
+        :'token_type' => :'String'
       }
     end
 
@@ -95,56 +65,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
+      if attributes.has_key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
 
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
+      if attributes.has_key?(:'scope')
+        self.scope = attributes[:'scope']
       end
 
-      if attributes.has_key?(:'group')
-        self.group = attributes[:'group']
+      if attributes.has_key?(:'space')
+        self.space = attributes[:'space']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'leaf')
-        self.leaf = attributes[:'leaf']
-      end
-
-      if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Hash)
-          self.name = value
-        end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
-      end
-
-      if attributes.has_key?(:'pathToRoot')
-        if (value = attributes[:'pathToRoot']).is_a?(Array)
-          self.path_to_root = value
-        end
-      end
-
-      if attributes.has_key?(:'title')
-        if (value = attributes[:'title']).is_a?(Hash)
-          self.title = value
-        end
-      end
-
-      if attributes.has_key?(:'twoFactorRequired')
-        self.two_factor_required = attributes[:'twoFactorRequired']
-      end
-
-      if attributes.has_key?(:'webAppEnabled')
-        self.web_app_enabled = attributes[:'webAppEnabled']
+      if attributes.has_key?(:'token_type')
+        self.token_type = attributes[:'token_type']
       end
     end
 
@@ -166,17 +104,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
-          feature == o.feature &&
-          group == o.group &&
-          id == o.id &&
-          leaf == o.leaf &&
-          name == o.name &&
-          parent == o.parent &&
-          path_to_root == o.path_to_root &&
-          title == o.title &&
-          two_factor_required == o.two_factor_required &&
-          web_app_enabled == o.web_app_enabled
+          access_token == o.access_token &&
+          scope == o.scope &&
+          space == o.space &&
+          state == o.state &&
+          token_type == o.token_type
     end
 
     # @see the `==` method
@@ -188,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, group, id, leaf, name, parent, path_to_root, title, two_factor_required, web_app_enabled].hash
+      [access_token, scope, space, state, token_type].hash
     end
 
     # Builds the object from hash

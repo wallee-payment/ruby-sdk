@@ -18,7 +18,7 @@ limitations under the License.
 require "uri"
 
 module Wallee
-  class ShopifySubscriberService
+  class BankAccountService
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
@@ -44,12 +44,12 @@ module Wallee
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
     def count_with_http_info(space_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ShopifySubscriberService.count ..."
+        @api_client.config.logger.debug "Calling API: BankAccountService.count ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriberService.count" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling BankAccountService.count" if space_id.nil?
       # resource path
-      local_var_path = "/shopify-subscriber/count".sub('{format}','json')
+      local_var_path = "/bank-account/count".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -80,7 +80,7 @@ module Wallee
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ShopifySubscriberService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: BankAccountService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -88,9 +88,9 @@ module Wallee
     # Read
     # Reads the entity with the given 'id' and returns it.
     # @param space_id 
-    # @param id The id of the Shopify subscriber which should be returned.
+    # @param id The ID of the bank account which should be returned.
     # @param [Hash] opts the optional parameters
-    # @return [ShopifySubscriber]
+    # @return [BankAccount]
     def read(space_id, id, opts = {})
       data, _status_code, _headers = read_with_http_info(space_id, id, opts)
       return data
@@ -99,19 +99,19 @@ module Wallee
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
     # @param space_id 
-    # @param id The id of the Shopify subscriber which should be returned.
+    # @param id The ID of the bank account which should be returned.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ShopifySubscriber, Fixnum, Hash)>] ShopifySubscriber data, response status code and response headers
+    # @return [Array<(BankAccount, Fixnum, Hash)>] BankAccount data, response status code and response headers
     def read_with_http_info(space_id, id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ShopifySubscriberService.read ..."
+        @api_client.config.logger.debug "Calling API: BankAccountService.read ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriberService.read" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling BankAccountService.read" if space_id.nil?
       # verify the required parameter 'id' is set
-      fail ArgumentError, "Missing the required parameter 'id' when calling ShopifySubscriberService.read" if id.nil?
+      fail ArgumentError, "Missing the required parameter 'id' when calling BankAccountService.read" if id.nil?
       # resource path
-      local_var_path = "/shopify-subscriber/read".sub('{format}','json')
+      local_var_path = "/bank-account/read".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -141,9 +141,9 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ShopifySubscriber')
+        :return_type => 'BankAccount')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ShopifySubscriberService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: BankAccountService#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -151,9 +151,9 @@ module Wallee
     # Search
     # Searches for the entities as specified by the given query.
     # @param space_id 
-    # @param query The query restricts the Shopify subscribers which are returned by the search.
+    # @param query The query restricts the bank accounts which are returned by the search.
     # @param [Hash] opts the optional parameters
-    # @return [Array<ShopifySubscriber>]
+    # @return [Array<BankAccount>]
     def search(space_id, query, opts = {})
       data, _status_code, _headers = search_with_http_info(space_id, query, opts)
       return data
@@ -162,19 +162,19 @@ module Wallee
     # Search
     # Searches for the entities as specified by the given query.
     # @param space_id 
-    # @param query The query restricts the Shopify subscribers which are returned by the search.
+    # @param query The query restricts the bank accounts which are returned by the search.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<ShopifySubscriber>, Fixnum, Hash)>] Array<ShopifySubscriber> data, response status code and response headers
+    # @return [Array<(Array<BankAccount>, Fixnum, Hash)>] Array<BankAccount> data, response status code and response headers
     def search_with_http_info(space_id, query, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ShopifySubscriberService.search ..."
+        @api_client.config.logger.debug "Calling API: BankAccountService.search ..."
       end
       # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriberService.search" if space_id.nil?
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling BankAccountService.search" if space_id.nil?
       # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling ShopifySubscriberService.search" if query.nil?
+      fail ArgumentError, "Missing the required parameter 'query' when calling BankAccountService.search" if query.nil?
       # resource path
-      local_var_path = "/shopify-subscriber/search".sub('{format}','json')
+      local_var_path = "/bank-account/search".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -203,71 +203,9 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<ShopifySubscriber>')
+        :return_type => 'Array<BankAccount>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ShopifySubscriberService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Update
-    # This updates the entity with the given properties. Only those properties which should be updated can be provided. The 'id' and 'version' are required to identify the entity.
-    # @param space_id 
-    # @param query The Shopify subscriber object with all the properties which should be updated. The id and the version are required properties.
-    # @param [Hash] opts the optional parameters
-    # @return [ShopifySubscriber]
-    def update(space_id, query, opts = {})
-      data, _status_code, _headers = update_with_http_info(space_id, query, opts)
-      return data
-    end
-
-    # Update
-    # This updates the entity with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the entity.
-    # @param space_id 
-    # @param query The Shopify subscriber object with all the properties which should be updated. The id and the version are required properties.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ShopifySubscriber, Fixnum, Hash)>] ShopifySubscriber data, response status code and response headers
-    def update_with_http_info(space_id, query, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ShopifySubscriberService.update ..."
-      end
-      # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling ShopifySubscriberService.update" if space_id.nil?
-      # verify the required parameter 'query' is set
-      fail ArgumentError, "Missing the required parameter 'query' when calling ShopifySubscriberService.update" if query.nil?
-      # resource path
-      local_var_path = "/shopify-subscriber/update".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-      query_params[:'spaceId'] = space_id
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json;charset=utf-8']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
-
-      # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(query)
-      auth_names = []
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'ShopifySubscriber')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ShopifySubscriberService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: BankAccountService#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

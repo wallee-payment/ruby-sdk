@@ -80,7 +80,7 @@ module Wallee
         :'completion' => :'Integer',
         :'language' => :'String',
         :'space_view_id' => :'Integer',
-        :'transaction' => :'Integer',
+        :'transaction' => :'Transaction',
         :'transaction_currency_amount' => :'Float',
         :'transaction_currency_value_amount' => :'Float',
         :'version' => :'Integer'

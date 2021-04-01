@@ -32,6 +32,9 @@ module Wallee
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
+    # The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+    attr_accessor :default_currency
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -66,6 +69,7 @@ module Wallee
         :'connector_configurations' => :'connectorConfigurations',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'default_currency' => :'defaultCurrency',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'maintenance_window_duration' => :'maintenanceWindowDuration',
@@ -85,6 +89,7 @@ module Wallee
         :'connector_configurations' => :'Array<Integer>',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'default_currency' => :'String',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'maintenance_window_duration' => :'String',
@@ -121,6 +126,10 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'defaultCurrency')
+        self.default_currency = attributes[:'defaultCurrency']
       end
 
       if attributes.has_key?(:'id')
@@ -182,6 +191,7 @@ module Wallee
           connector_configurations == o.connector_configurations &&
           created_by == o.created_by &&
           created_on == o.created_on &&
+          default_currency == o.default_currency &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           maintenance_window_duration == o.maintenance_window_duration &&
@@ -202,7 +212,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration, connector_configurations, created_by, created_on, id, linked_space_id, maintenance_window_duration, maintenance_window_start, planned_purge_date, state, time_zone, version, version_applied_immediately].hash
+      [configuration, connector_configurations, created_by, created_on, default_currency, id, linked_space_id, maintenance_window_duration, maintenance_window_start, planned_purge_date, state, time_zone, version, version_applied_immediately].hash
     end
 
     # Builds the object from hash

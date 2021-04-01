@@ -19,71 +19,41 @@ require 'date'
 
 module Wallee
   # 
-  class Permission
-    # 
-    attr_accessor :description
-
-    # 
-    attr_accessor :feature
-
-    # 
-    attr_accessor :group
-
+  class ShopifySubscriberActive
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
-    # 
-    attr_accessor :leaf
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
 
     # 
-    attr_accessor :name
+    attr_accessor :email_address
+
+    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    attr_accessor :external_id
 
     # 
-    attr_accessor :parent
-
-    # 
-    attr_accessor :path_to_root
-
-    # 
-    attr_accessor :title
-
-    # 
-    attr_accessor :two_factor_required
-
-    # 
-    attr_accessor :web_app_enabled
+    attr_accessor :phone_number
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description',
-        :'feature' => :'feature',
-        :'group' => :'group',
         :'id' => :'id',
-        :'leaf' => :'leaf',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'path_to_root' => :'pathToRoot',
-        :'title' => :'title',
-        :'two_factor_required' => :'twoFactorRequired',
-        :'web_app_enabled' => :'webAppEnabled'
+        :'version' => :'version',
+        :'email_address' => :'emailAddress',
+        :'external_id' => :'externalId',
+        :'phone_number' => :'phoneNumber'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'Hash<String, String>',
-        :'feature' => :'Integer',
-        :'group' => :'BOOLEAN',
         :'id' => :'Integer',
-        :'leaf' => :'BOOLEAN',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'Integer',
-        :'path_to_root' => :'Array<Integer>',
-        :'title' => :'Hash<String, String>',
-        :'two_factor_required' => :'BOOLEAN',
-        :'web_app_enabled' => :'BOOLEAN'
+        :'version' => :'Integer',
+        :'email_address' => :'String',
+        :'external_id' => :'String',
+        :'phone_number' => :'String'
       }
     end
 
@@ -95,56 +65,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
-      end
-
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
-      end
-
-      if attributes.has_key?(:'group')
-        self.group = attributes[:'group']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'leaf')
-        self.leaf = attributes[:'leaf']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'name')
-        if (value = attributes[:'name']).is_a?(Hash)
-          self.name = value
-        end
+      if attributes.has_key?(:'emailAddress')
+        self.email_address = attributes[:'emailAddress']
       end
 
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
       end
 
-      if attributes.has_key?(:'pathToRoot')
-        if (value = attributes[:'pathToRoot']).is_a?(Array)
-          self.path_to_root = value
-        end
-      end
-
-      if attributes.has_key?(:'title')
-        if (value = attributes[:'title']).is_a?(Hash)
-          self.title = value
-        end
-      end
-
-      if attributes.has_key?(:'twoFactorRequired')
-        self.two_factor_required = attributes[:'twoFactorRequired']
-      end
-
-      if attributes.has_key?(:'webAppEnabled')
-        self.web_app_enabled = attributes[:'webAppEnabled']
+      if attributes.has_key?(:'phoneNumber')
+        self.phone_number = attributes[:'phoneNumber']
       end
     end
 
@@ -152,12 +90,22 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @version.nil?
+        invalid_properties.push('invalid value for "version", version cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @version.nil?
       true
     end
 
@@ -166,17 +114,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description &&
-          feature == o.feature &&
-          group == o.group &&
           id == o.id &&
-          leaf == o.leaf &&
-          name == o.name &&
-          parent == o.parent &&
-          path_to_root == o.path_to_root &&
-          title == o.title &&
-          two_factor_required == o.two_factor_required &&
-          web_app_enabled == o.web_app_enabled
+          version == o.version &&
+          email_address == o.email_address &&
+          external_id == o.external_id &&
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -188,7 +130,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, group, id, leaf, name, parent, path_to_root, title, two_factor_required, web_app_enabled].hash
+      [id, version, email_address, external_id, phone_number].hash
     end
 
     # Builds the object from hash

@@ -18,13 +18,19 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # This model holds the card data in plain.
-  class UnencryptedCardDataCreate
+  # This model holds the card data and optional cardholder authentication details.
+  class AuthenticatedCardDataCreate
     # The card holder name is the name printed onto the card. It identifies the person who owns the card.
     attr_accessor :card_holder_name
 
     # The card verification code (CVC) is a 3 to 4 digit code typically printed on the back of the card. It helps to ensure that the card holder is authorizing the transaction. For card not-present transactions this field is optional.
     attr_accessor :card_verification_code
+
+    # The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+    attr_accessor :cardholder_authentication
+
+    # The additional authentication value used to secure the tokenized card transactions.
+    attr_accessor :cryptogram
 
     # The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
     attr_accessor :expiry_date
@@ -32,13 +38,27 @@ module Wallee
     # The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
     attr_accessor :primary_account_number
 
+    # 
+    attr_accessor :recurring_indicator
+
+    # 
+    attr_accessor :scheme_transaction_reference
+
+    # 
+    attr_accessor :token_requestor_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'card_holder_name' => :'cardHolderName',
         :'card_verification_code' => :'cardVerificationCode',
+        :'cardholder_authentication' => :'cardholderAuthentication',
+        :'cryptogram' => :'cryptogram',
         :'expiry_date' => :'expiryDate',
-        :'primary_account_number' => :'primaryAccountNumber'
+        :'primary_account_number' => :'primaryAccountNumber',
+        :'recurring_indicator' => :'recurringIndicator',
+        :'scheme_transaction_reference' => :'schemeTransactionReference',
+        :'token_requestor_id' => :'tokenRequestorId'
       }
     end
 
@@ -47,8 +67,13 @@ module Wallee
       {
         :'card_holder_name' => :'String',
         :'card_verification_code' => :'String',
+        :'cardholder_authentication' => :'CardholderAuthenticationCreate',
+        :'cryptogram' => :'CardCryptogramCreate',
         :'expiry_date' => :'String',
-        :'primary_account_number' => :'String'
+        :'primary_account_number' => :'String',
+        :'recurring_indicator' => :'RecurringIndicator',
+        :'scheme_transaction_reference' => :'String',
+        :'token_requestor_id' => :'String'
       }
     end
 
@@ -68,12 +93,32 @@ module Wallee
         self.card_verification_code = attributes[:'cardVerificationCode']
       end
 
+      if attributes.has_key?(:'cardholderAuthentication')
+        self.cardholder_authentication = attributes[:'cardholderAuthentication']
+      end
+
+      if attributes.has_key?(:'cryptogram')
+        self.cryptogram = attributes[:'cryptogram']
+      end
+
       if attributes.has_key?(:'expiryDate')
         self.expiry_date = attributes[:'expiryDate']
       end
 
       if attributes.has_key?(:'primaryAccountNumber')
         self.primary_account_number = attributes[:'primaryAccountNumber']
+      end
+
+      if attributes.has_key?(:'recurringIndicator')
+        self.recurring_indicator = attributes[:'recurringIndicator']
+      end
+
+      if attributes.has_key?(:'schemeTransactionReference')
+        self.scheme_transaction_reference = attributes[:'schemeTransactionReference']
+      end
+
+      if attributes.has_key?(:'tokenRequestorId')
+        self.token_requestor_id = attributes[:'tokenRequestorId']
       end
     end
 
@@ -105,6 +150,10 @@ module Wallee
         invalid_properties.push('invalid value for "primary_account_number", the character length must be great than or equal to 10.')
       end
 
+      if !@scheme_transaction_reference.nil? && @scheme_transaction_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "scheme_transaction_reference", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -117,6 +166,7 @@ module Wallee
       return false if @primary_account_number.nil?
       return false if @primary_account_number.to_s.length > 30
       return false if @primary_account_number.to_s.length < 10
+      return false if !@scheme_transaction_reference.nil? && @scheme_transaction_reference.to_s.length > 100
       true
     end
 
@@ -162,6 +212,16 @@ module Wallee
       @primary_account_number = primary_account_number
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] scheme_transaction_reference Value to be assigned
+    def scheme_transaction_reference=(scheme_transaction_reference)
+      if !scheme_transaction_reference.nil? && scheme_transaction_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "scheme_transaction_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      @scheme_transaction_reference = scheme_transaction_reference
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -169,8 +229,13 @@ module Wallee
       self.class == o.class &&
           card_holder_name == o.card_holder_name &&
           card_verification_code == o.card_verification_code &&
+          cardholder_authentication == o.cardholder_authentication &&
+          cryptogram == o.cryptogram &&
           expiry_date == o.expiry_date &&
-          primary_account_number == o.primary_account_number
+          primary_account_number == o.primary_account_number &&
+          recurring_indicator == o.recurring_indicator &&
+          scheme_transaction_reference == o.scheme_transaction_reference &&
+          token_requestor_id == o.token_requestor_id
     end
 
     # @see the `==` method
@@ -182,7 +247,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [card_holder_name, card_verification_code, expiry_date, primary_account_number].hash
+      [card_holder_name, card_verification_code, cardholder_authentication, cryptogram, expiry_date, primary_account_number, recurring_indicator, scheme_transaction_reference, token_requestor_id].hash
     end
 
     # Builds the object from hash

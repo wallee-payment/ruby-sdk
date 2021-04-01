@@ -23,6 +23,9 @@ module Wallee
     # 
     attr_accessor :configuration_version
 
+    # 
+    attr_accessor :default_currency
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -54,6 +57,7 @@ module Wallee
     def self.attribute_map
       {
         :'configuration_version' => :'configurationVersion',
+        :'default_currency' => :'defaultCurrency',
         :'id' => :'id',
         :'identifier' => :'identifier',
         :'linked_space_id' => :'linkedSpaceId',
@@ -70,6 +74,7 @@ module Wallee
     def self.swagger_types
       {
         :'configuration_version' => :'PaymentTerminalConfigurationVersion',
+        :'default_currency' => :'String',
         :'id' => :'Integer',
         :'identifier' => :'String',
         :'linked_space_id' => :'Integer',
@@ -92,6 +97,10 @@ module Wallee
 
       if attributes.has_key?(:'configurationVersion')
         self.configuration_version = attributes[:'configurationVersion']
+      end
+
+      if attributes.has_key?(:'defaultCurrency')
+        self.default_currency = attributes[:'defaultCurrency']
       end
 
       if attributes.has_key?(:'id')
@@ -165,6 +174,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           configuration_version == o.configuration_version &&
+          default_currency == o.default_currency &&
           id == o.id &&
           identifier == o.identifier &&
           linked_space_id == o.linked_space_id &&
@@ -185,7 +195,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration_version, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
+      [configuration_version, default_currency, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
     end
 
     # Builds the object from hash

@@ -20,17 +20,25 @@ require 'date'
 module Wallee
   # 
   class RenderedTerminalReceipt
-    # 
+    # The data property contains the binary data of the receipt document encoded as base 64 encoded string.
     attr_accessor :data
 
-    # 
+    # The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
     attr_accessor :mime_type
+
+    # The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+    attr_accessor :printed
+
+    # Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+    attr_accessor :receipt_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'data' => :'data',
-        :'mime_type' => :'mimeType'
+        :'mime_type' => :'mimeType',
+        :'printed' => :'printed',
+        :'receipt_type' => :'receiptType'
       }
     end
 
@@ -38,7 +46,9 @@ module Wallee
     def self.swagger_types
       {
         :'data' => :'Array<String>',
-        :'mime_type' => :'String'
+        :'mime_type' => :'String',
+        :'printed' => :'BOOLEAN',
+        :'receipt_type' => :'PaymentTerminalReceiptType'
       }
     end
 
@@ -58,6 +68,14 @@ module Wallee
 
       if attributes.has_key?(:'mimeType')
         self.mime_type = attributes[:'mimeType']
+      end
+
+      if attributes.has_key?(:'printed')
+        self.printed = attributes[:'printed']
+      end
+
+      if attributes.has_key?(:'receiptType')
+        self.receipt_type = attributes[:'receiptType']
       end
     end
 
@@ -80,7 +98,9 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           data == o.data &&
-          mime_type == o.mime_type
+          mime_type == o.mime_type &&
+          printed == o.printed &&
+          receipt_type == o.receipt_type
     end
 
     # @see the `==` method
@@ -92,7 +112,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data, mime_type].hash
+      [data, mime_type, printed, receipt_type].hash
     end
 
     # Builds the object from hash

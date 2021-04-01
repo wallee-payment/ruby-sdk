@@ -15,6 +15,21 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '3.0.0'
+  class CardAuthenticationVersion
+    
+    V1 = 'V1'.freeze
+    V2 = 'V2'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = CardAuthenticationVersion.constants.select { |c| CardAuthenticationVersion::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #CardAuthenticationVersion" if constantValues.empty?
+      value
+    end
+  end
 end

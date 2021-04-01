@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class WebhookUrl
+    # The webhook URL is managed by the application and cannot be changed via the user interface.
+    attr_accessor :application_managed
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -44,6 +47,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'application_managed' => :'applicationManaged',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
@@ -57,6 +61,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'application_managed' => :'BOOLEAN',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
@@ -74,6 +79,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'applicationManaged')
+        self.application_managed = attributes[:'applicationManaged']
+      end
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
@@ -161,6 +170,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          application_managed == o.application_managed &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
@@ -179,7 +189,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, state, url, version].hash
+      [application_managed, id, linked_space_id, name, planned_purge_date, state, url, version].hash
     end
 
     # Builds the object from hash

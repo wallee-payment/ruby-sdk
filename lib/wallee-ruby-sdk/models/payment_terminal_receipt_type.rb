@@ -19,54 +19,22 @@ require 'date'
 
 module Wallee
   # 
-  class Permission
+  class PaymentTerminalReceiptType
     # 
     attr_accessor :description
-
-    # 
-    attr_accessor :feature
-
-    # 
-    attr_accessor :group
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
     # 
-    attr_accessor :leaf
-
-    # 
     attr_accessor :name
-
-    # 
-    attr_accessor :parent
-
-    # 
-    attr_accessor :path_to_root
-
-    # 
-    attr_accessor :title
-
-    # 
-    attr_accessor :two_factor_required
-
-    # 
-    attr_accessor :web_app_enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'description' => :'description',
-        :'feature' => :'feature',
-        :'group' => :'group',
         :'id' => :'id',
-        :'leaf' => :'leaf',
-        :'name' => :'name',
-        :'parent' => :'parent',
-        :'path_to_root' => :'pathToRoot',
-        :'title' => :'title',
-        :'two_factor_required' => :'twoFactorRequired',
-        :'web_app_enabled' => :'webAppEnabled'
+        :'name' => :'name'
       }
     end
 
@@ -74,16 +42,8 @@ module Wallee
     def self.swagger_types
       {
         :'description' => :'Hash<String, String>',
-        :'feature' => :'Integer',
-        :'group' => :'BOOLEAN',
         :'id' => :'Integer',
-        :'leaf' => :'BOOLEAN',
-        :'name' => :'Hash<String, String>',
-        :'parent' => :'Integer',
-        :'path_to_root' => :'Array<Integer>',
-        :'title' => :'Hash<String, String>',
-        :'two_factor_required' => :'BOOLEAN',
-        :'web_app_enabled' => :'BOOLEAN'
+        :'name' => :'Hash<String, String>'
       }
     end
 
@@ -101,50 +61,14 @@ module Wallee
         end
       end
 
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
-      end
-
-      if attributes.has_key?(:'group')
-        self.group = attributes[:'group']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'leaf')
-        self.leaf = attributes[:'leaf']
       end
 
       if attributes.has_key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
-      end
-
-      if attributes.has_key?(:'pathToRoot')
-        if (value = attributes[:'pathToRoot']).is_a?(Array)
-          self.path_to_root = value
-        end
-      end
-
-      if attributes.has_key?(:'title')
-        if (value = attributes[:'title']).is_a?(Hash)
-          self.title = value
-        end
-      end
-
-      if attributes.has_key?(:'twoFactorRequired')
-        self.two_factor_required = attributes[:'twoFactorRequired']
-      end
-
-      if attributes.has_key?(:'webAppEnabled')
-        self.web_app_enabled = attributes[:'webAppEnabled']
       end
     end
 
@@ -167,16 +91,8 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           description == o.description &&
-          feature == o.feature &&
-          group == o.group &&
           id == o.id &&
-          leaf == o.leaf &&
-          name == o.name &&
-          parent == o.parent &&
-          path_to_root == o.path_to_root &&
-          title == o.title &&
-          two_factor_required == o.two_factor_required &&
-          web_app_enabled == o.web_app_enabled
+          name == o.name
     end
 
     # @see the `==` method
@@ -188,7 +104,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, group, id, leaf, name, parent, path_to_root, title, two_factor_required, web_app_enabled].hash
+      [description, id, name].hash
     end
 
     # Builds the object from hash

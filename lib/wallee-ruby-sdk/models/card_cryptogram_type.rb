@@ -15,6 +15,20 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '3.0.0'
+  class CardCryptogramType
+    
+    SCHEME_TOKEN = 'SCHEME_TOKEN'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = CardCryptogramType.constants.select { |c| CardCryptogramType::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #CardCryptogramType" if constantValues.empty?
+      value
+    end
+  end
 end

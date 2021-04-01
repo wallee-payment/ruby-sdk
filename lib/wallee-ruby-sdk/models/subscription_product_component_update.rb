@@ -32,7 +32,7 @@ module Wallee
     # 
     attr_accessor :component_group
 
-    # When a component is marked as a 'default' component it is used when no other component is selected by the user.
+    # When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
     attr_accessor :default_component
 
     # The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.

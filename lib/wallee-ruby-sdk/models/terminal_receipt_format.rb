@@ -15,6 +15,21 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '3.0.0'
+  class TerminalReceiptFormat
+    
+    PDF = 'PDF'.freeze
+    TXT = 'TXT'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = TerminalReceiptFormat.constants.select { |c| TerminalReceiptFormat::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #TerminalReceiptFormat" if constantValues.empty?
+      value
+    end
+  end
 end
