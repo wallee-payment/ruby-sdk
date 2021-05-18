@@ -32,7 +32,7 @@ module Wallee
     # When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
     attr_accessor :enabled_for_one_click_payment
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -166,14 +166,6 @@ module Wallee
         invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 150.')
       end
 
-      if !@external_id.nil? && @external_id.to_s.length > 100
-        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
-      end
-
-      if !@external_id.nil? && @external_id.to_s.length < 1
-        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
-      end
-
       if !@token_reference.nil? && @token_reference.to_s.length > 100
         invalid_properties.push('invalid value for "token_reference", the character length must be smaller than or equal to 100.')
       end
@@ -185,8 +177,6 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
-      return false if !@external_id.nil? && @external_id.to_s.length > 100
-      return false if !@external_id.nil? && @external_id.to_s.length < 1
       return false if !@token_reference.nil? && @token_reference.to_s.length > 100
       true
     end
@@ -199,20 +189,6 @@ module Wallee
       end
 
       @customer_email_address = customer_email_address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] external_id Value to be assigned
-    def external_id=(external_id)
-      if !external_id.nil? && external_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
-      end
-
-      if !external_id.nil? && external_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
-      end
-
-      @external_id = external_id
     end
 
     # Custom attribute writer method with validation

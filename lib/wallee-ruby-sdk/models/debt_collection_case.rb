@@ -50,7 +50,7 @@ module Wallee
     # The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
     attr_accessor :environment
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
     # The failed on date indicates when the case is failed on.

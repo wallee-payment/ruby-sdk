@@ -33,6 +33,9 @@ module Wallee
     attr_accessor :billing_interval_unit
 
     # 
+    attr_accessor :billing_reference_date
+
+    # 
     attr_accessor :billing_weekday
 
     # 
@@ -108,6 +111,7 @@ module Wallee
         :'billing_day_of_month' => :'billingDayOfMonth',
         :'billing_interval_amount' => :'billingIntervalAmount',
         :'billing_interval_unit' => :'billingIntervalUnit',
+        :'billing_reference_date' => :'billingReferenceDate',
         :'billing_weekday' => :'billingWeekday',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
@@ -141,6 +145,7 @@ module Wallee
         :'billing_day_of_month' => :'Integer',
         :'billing_interval_amount' => :'Integer',
         :'billing_interval_unit' => :'ShopifySubscriptionBillingIntervalUnit',
+        :'billing_reference_date' => :'DateTime',
         :'billing_weekday' => :'ShopifySubscriptionWeekday',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
@@ -189,6 +194,10 @@ module Wallee
 
       if attributes.has_key?(:'billingIntervalUnit')
         self.billing_interval_unit = attributes[:'billingIntervalUnit']
+      end
+
+      if attributes.has_key?(:'billingReferenceDate')
+        self.billing_reference_date = attributes[:'billingReferenceDate']
       end
 
       if attributes.has_key?(:'billingWeekday')
@@ -308,6 +317,7 @@ module Wallee
           billing_day_of_month == o.billing_day_of_month &&
           billing_interval_amount == o.billing_interval_amount &&
           billing_interval_unit == o.billing_interval_unit &&
+          billing_reference_date == o.billing_reference_date &&
           billing_weekday == o.billing_weekday &&
           created_by == o.created_by &&
           created_on == o.created_on &&
@@ -342,7 +352,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_address, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, created_by, created_on, currency, discharged_by, discharged_on, id, items, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, payment_gateway, shipping_address, shipping_rate, shop, state, store_order_confirmation_email_enabled, subscriber_suspension_allowed, subscription, termination_billing_cycles, token, version].hash
+      [billing_address, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_reference_date, billing_weekday, created_by, created_on, currency, discharged_by, discharged_on, id, items, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, payment_gateway, shipping_address, shipping_rate, shop, state, store_order_confirmation_email_enabled, subscriber_suspension_allowed, subscription, termination_billing_cycles, token, version].hash
     end
 
     # Builds the object from hash

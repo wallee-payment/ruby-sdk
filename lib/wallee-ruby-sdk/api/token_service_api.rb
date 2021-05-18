@@ -397,6 +397,69 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Process Transaction
+    # This operation processes the given transaction by using the token associated with the transaction.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to check if the token can be created or not.
+    # @param [Hash] opts the optional parameters
+    # @return [Charge]
+    def process_transaction(space_id, transaction_id, opts = {})
+      data, _status_code, _headers = process_transaction_with_http_info(space_id, transaction_id, opts)
+      return data
+    end
+
+    # Process Transaction
+    # This operation processes the given transaction by using the token associated with the transaction.
+    # @param space_id 
+    # @param transaction_id The id of the transaction for which we want to check if the token can be created or not.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Charge, Fixnum, Hash)>] Charge data, response status code and response headers
+    def process_transaction_with_http_info(space_id, transaction_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: TokenService.process_transaction ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling TokenService.process_transaction" if space_id.nil?
+      # verify the required parameter 'transaction_id' is set
+      fail ArgumentError, "Missing the required parameter 'transaction_id' when calling TokenService.process_transaction" if transaction_id.nil?
+      # resource path
+      local_var_path = "/token/process-transaction".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'transactionId'] = transaction_id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = []
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Charge')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TokenService#process_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read
     # Reads the entity with the given 'id' and returns it.
     # @param space_id 

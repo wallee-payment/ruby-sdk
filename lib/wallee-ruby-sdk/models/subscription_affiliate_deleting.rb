@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class SubscriptionAffiliateDeleting
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -137,14 +137,6 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@external_id.nil? && @external_id.to_s.length > 100
-        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
-      end
-
-      if !@external_id.nil? && @external_id.to_s.length < 1
-        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
-      end
-
       if !@name.nil? && @name.to_s.length > 255
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
@@ -167,27 +159,11 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@external_id.nil? && @external_id.to_s.length > 100
-      return false if !@external_id.nil? && @external_id.to_s.length < 1
       return false if !@name.nil? && @name.to_s.length > 255
       return false if !@name.nil? && @name.to_s.length < 3
       return false if !@reference.nil? && @reference.to_s.length > 100
       return false if !@reference.nil? && @reference.to_s.length < 3
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] external_id Value to be assigned
-    def external_id=(external_id)
-      if !external_id.nil? && external_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
-      end
-
-      if !external_id.nil? && external_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
-      end
-
-      @external_id = external_id
     end
 
     # Custom attribute writer method with validation

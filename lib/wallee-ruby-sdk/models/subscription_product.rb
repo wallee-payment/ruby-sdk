@@ -38,6 +38,9 @@ module Wallee
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
 
+    # Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+    attr_accessor :product_locked
+
     # The product reference identifies the product for external systems. This field may contain the product's SKU.
     attr_accessor :reference
 
@@ -62,6 +65,7 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'product_locked' => :'productLocked',
         :'reference' => :'reference',
         :'sort_order' => :'sortOrder',
         :'space_id' => :'spaceId',
@@ -79,6 +83,7 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
+        :'product_locked' => :'BOOLEAN',
         :'reference' => :'String',
         :'sort_order' => :'Integer',
         :'space_id' => :'Integer',
@@ -119,6 +124,10 @@ module Wallee
 
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'productLocked')
+        self.product_locked = attributes[:'productLocked']
       end
 
       if attributes.has_key?(:'reference')
@@ -196,6 +205,7 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
+          product_locked == o.product_locked &&
           reference == o.reference &&
           sort_order == o.sort_order &&
           space_id == o.space_id &&
@@ -212,7 +222,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_configurations, failed_payment_suspension_period, id, linked_space_id, name, planned_purge_date, reference, sort_order, space_id, state, version].hash
+      [allowed_payment_method_configurations, failed_payment_suspension_period, id, linked_space_id, name, planned_purge_date, product_locked, reference, sort_order, space_id, state, version].hash
     end
 
     # Builds the object from hash

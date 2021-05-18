@@ -66,7 +66,7 @@ module Wallee
         :'name' => :'DatabaseTranslatedString',
         :'permissions' => :'Array<Permission>',
         :'planned_purge_date' => :'DateTime',
-        :'state' => :'CreationEntityState',
+        :'state' => :'RoleState',
         :'two_factor_required' => :'BOOLEAN',
         :'version' => :'Integer'
       }

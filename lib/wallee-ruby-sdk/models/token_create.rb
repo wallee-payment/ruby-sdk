@@ -38,7 +38,7 @@ module Wallee
     # Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
     attr_accessor :token_reference
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
     # 
@@ -129,14 +129,6 @@ module Wallee
         invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
       end
 
-      if @external_id.to_s.length > 100
-        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
-      end
-
-      if @external_id.to_s.length < 1
-        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -146,8 +138,6 @@ module Wallee
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
       return false if !@token_reference.nil? && @token_reference.to_s.length > 100
       return false if @external_id.nil?
-      return false if @external_id.to_s.length > 100
-      return false if @external_id.to_s.length < 1
       true
     end
 
@@ -169,24 +159,6 @@ module Wallee
       end
 
       @token_reference = token_reference
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] external_id Value to be assigned
-    def external_id=(external_id)
-      if external_id.nil?
-        fail ArgumentError, 'external_id cannot be nil'
-      end
-
-      if external_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
-      end
-
-      if external_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
-      end
-
-      @external_id = external_id
     end
 
     # Checks equality by comparing each attribute.

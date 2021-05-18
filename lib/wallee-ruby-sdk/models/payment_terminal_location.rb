@@ -23,9 +23,6 @@ module Wallee
     # 
     attr_accessor :contact_address
 
-    # 
-    attr_accessor :default_configuration
-
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -48,7 +45,6 @@ module Wallee
     def self.attribute_map
       {
         :'contact_address' => :'contactAddress',
-        :'default_configuration' => :'defaultConfiguration',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
@@ -62,7 +58,6 @@ module Wallee
     def self.swagger_types
       {
         :'contact_address' => :'PaymentTerminalAddress',
-        :'default_configuration' => :'PaymentTerminalConfiguration',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
@@ -82,10 +77,6 @@ module Wallee
 
       if attributes.has_key?(:'contactAddress')
         self.contact_address = attributes[:'contactAddress']
-      end
-
-      if attributes.has_key?(:'defaultConfiguration')
-        self.default_configuration = attributes[:'defaultConfiguration']
       end
 
       if attributes.has_key?(:'id')
@@ -147,7 +138,6 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           contact_address == o.contact_address &&
-          default_configuration == o.default_configuration &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
@@ -165,7 +155,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contact_address, default_configuration, id, linked_space_id, name, planned_purge_date, state, version].hash
+      [contact_address, id, linked_space_id, name, planned_purge_date, state, version].hash
     end
 
     # Builds the object from hash

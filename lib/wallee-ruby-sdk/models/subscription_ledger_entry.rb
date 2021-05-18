@@ -38,7 +38,7 @@ module Wallee
     # 
     attr_accessor :discount_including_tax
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

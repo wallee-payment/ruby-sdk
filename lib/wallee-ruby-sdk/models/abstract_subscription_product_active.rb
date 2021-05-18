@@ -28,6 +28,9 @@ module Wallee
     # The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
+    # Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+    attr_accessor :product_locked
+
     # The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
     attr_accessor :sort_order
 
@@ -40,6 +43,7 @@ module Wallee
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'failed_payment_suspension_period' => :'failedPaymentSuspensionPeriod',
         :'name' => :'name',
+        :'product_locked' => :'productLocked',
         :'sort_order' => :'sortOrder',
         :'state' => :'state'
       }
@@ -51,6 +55,7 @@ module Wallee
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'failed_payment_suspension_period' => :'String',
         :'name' => :'String',
+        :'product_locked' => :'BOOLEAN',
         :'sort_order' => :'Integer',
         :'state' => :'SubscriptionProductState'
       }
@@ -76,6 +81,10 @@ module Wallee
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'productLocked')
+        self.product_locked = attributes[:'productLocked']
       end
 
       if attributes.has_key?(:'sortOrder')
@@ -123,6 +132,7 @@ module Wallee
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           failed_payment_suspension_period == o.failed_payment_suspension_period &&
           name == o.name &&
+          product_locked == o.product_locked &&
           sort_order == o.sort_order &&
           state == o.state
     end
@@ -136,7 +146,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [allowed_payment_method_configurations, failed_payment_suspension_period, name, sort_order, state].hash
+      [allowed_payment_method_configurations, failed_payment_suspension_period, name, product_locked, sort_order, state].hash
     end
 
     # Builds the object from hash

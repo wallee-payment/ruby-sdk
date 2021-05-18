@@ -15,6 +15,23 @@ limitations under the License.
 
 =end
 
+require 'date'
+
 module Wallee
-  VERSION = '3.0.1'
+  class RoleState
+    
+    CREATE = 'CREATE'.freeze
+    ACTIVE = 'ACTIVE'.freeze
+    DELETING = 'DELETING'.freeze
+    DELETED = 'DELETED'.freeze
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def build_from_hash(value)
+      constantValues = RoleState.constants.select { |c| RoleState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #RoleState" if constantValues.empty?
+      value
+    end
+  end
 end
