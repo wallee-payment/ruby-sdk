@@ -8,8 +8,7 @@ rvm:
 script: rake test
 deploy:
   provider: rubygems
-  api_key:
-    secure: $TRAVIS_RUBY_API_KEY
+  api_key: $TRAVIS_RUBY_API_KEY
   gem: wallee-ruby-sdk
   on:
     tags: true
