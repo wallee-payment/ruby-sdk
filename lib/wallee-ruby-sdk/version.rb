@@ -16,5 +16,5 @@ limitations under the License.
 =end
 
 module Wallee
-  VERSION = '3.0.5'
+  VERSION = '3.0.6'
 end
