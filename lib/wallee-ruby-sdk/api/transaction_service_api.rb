@@ -648,7 +648,7 @@ module Wallee
       return data, status_code, headers
     end
 
-    # getLatestTransactionLineItemVersion
+    # getLatestSuccessfulTransactionLineItemVersion
     # 
     # @param space_id 
     # @param id The id of the transaction to get the latest line item version for.
@@ -659,7 +659,7 @@ module Wallee
       return data
     end
 
-    # getLatestTransactionLineItemVersion
+    # getLatestSuccessfulTransactionLineItemVersion
     # 
     # @param space_id 
     # @param id The id of the transaction to get the latest line item version for.
@@ -1141,68 +1141,6 @@ module Wallee
         :return_type => 'Transaction')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TransactionService#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # updateTransactionLineItems
-    # 
-    # @param space_id 
-    # @param update_request 
-    # @param [Hash] opts the optional parameters
-    # @return [TransactionLineItemVersion]
-    def update_transaction_line_items(space_id, update_request, opts = {})
-      data, _status_code, _headers = update_transaction_line_items_with_http_info(space_id, update_request, opts)
-      return data
-    end
-
-    # updateTransactionLineItems
-    # 
-    # @param space_id 
-    # @param update_request 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(TransactionLineItemVersion, Fixnum, Hash)>] TransactionLineItemVersion data, response status code and response headers
-    def update_transaction_line_items_with_http_info(space_id, update_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: TransactionService.update_transaction_line_items ..."
-      end
-      # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling TransactionService.update_transaction_line_items" if space_id.nil?
-      # verify the required parameter 'update_request' is set
-      fail ArgumentError, "Missing the required parameter 'update_request' when calling TransactionService.update_transaction_line_items" if update_request.nil?
-      # resource path
-      local_var_path = "/transaction/updateTransactionLineItems".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-      query_params[:'spaceId'] = space_id
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      local_header_accept = ['application/json;charset=utf-8']
-      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
-
-      # HTTP header 'Content-Type'
-      local_header_content_type = ['application/json;charset=utf-8']
-      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(update_request)
-      auth_names = []
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => 'TransactionLineItemVersion')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TransactionService#update_transaction_line_items\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

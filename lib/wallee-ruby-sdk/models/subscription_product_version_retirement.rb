@@ -35,7 +35,7 @@ module Wallee
     # 
     attr_accessor :respect_terminiation_periods_enabled
 
-    # 
+    # When a target product is not chosen, all customers with the retired product will be terminated.
     attr_accessor :target_product
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.

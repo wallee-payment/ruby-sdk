@@ -104,7 +104,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
+        :'allowed_payment_method_brands' => :'Array<Integer>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'billing_address' => :'AddressCreate',
         :'completion_behavior' => :'TransactionCompletionBehavior',
@@ -227,8 +227,8 @@ module Wallee
         invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
       end
 
-      if !@failed_url.nil? && @failed_url.to_s.length > 1000
-        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 1000.')
+      if !@failed_url.nil? && @failed_url.to_s.length > 2000
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 2000.')
       end
 
       if !@failed_url.nil? && @failed_url.to_s.length < 9
@@ -247,8 +247,8 @@ module Wallee
         invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
       end
 
-      if !@success_url.nil? && @success_url.to_s.length > 1000
-        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 1000.')
+      if !@success_url.nil? && @success_url.to_s.length > 2000
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 2000.')
       end
 
       if !@success_url.nil? && @success_url.to_s.length < 9
@@ -262,12 +262,12 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
-      return false if !@failed_url.nil? && @failed_url.to_s.length > 1000
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 2000
       return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
-      return false if !@success_url.nil? && @success_url.to_s.length > 1000
+      return false if !@success_url.nil? && @success_url.to_s.length > 2000
       return false if !@success_url.nil? && @success_url.to_s.length < 9
       true
     end
@@ -285,8 +285,8 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] failed_url Value to be assigned
     def failed_url=(failed_url)
-      if !failed_url.nil? && failed_url.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 1000.'
+      if !failed_url.nil? && failed_url.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 2000.'
       end
 
       if !failed_url.nil? && failed_url.to_s.length < 9
@@ -329,8 +329,8 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] success_url Value to be assigned
     def success_url=(success_url)
-      if !success_url.nil? && success_url.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 1000.'
+      if !success_url.nil? && success_url.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 2000.'
       end
 
       if !success_url.nil? && success_url.to_s.length < 9

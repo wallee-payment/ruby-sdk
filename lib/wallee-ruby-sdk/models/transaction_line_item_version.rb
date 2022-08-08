@@ -38,20 +38,47 @@ module Wallee
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    attr_accessor :external_id
+
+    # 
+    attr_accessor :failed_on
+
+    # 
+    attr_accessor :failure_reason
+
+    # 
+    attr_accessor :labels
+
     # 
     attr_accessor :language
 
     # 
     attr_accessor :line_items
 
+    # 
+    attr_accessor :next_update_on
+
     # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
     attr_accessor :planned_purge_date
+
+    # 
+    attr_accessor :processing_on
 
     # 
     attr_accessor :space_view_id
 
     # 
+    attr_accessor :state
+
+    # 
+    attr_accessor :succeeded_on
+
+    # 
     attr_accessor :tax_amount
+
+    # 
+    attr_accessor :timeout_on
 
     # 
     attr_accessor :transaction
@@ -68,11 +95,20 @@ module Wallee
         :'amount' => :'amount',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
+        :'external_id' => :'externalId',
+        :'failed_on' => :'failedOn',
+        :'failure_reason' => :'failureReason',
+        :'labels' => :'labels',
         :'language' => :'language',
         :'line_items' => :'lineItems',
+        :'next_update_on' => :'nextUpdateOn',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'processing_on' => :'processingOn',
         :'space_view_id' => :'spaceViewId',
+        :'state' => :'state',
+        :'succeeded_on' => :'succeededOn',
         :'tax_amount' => :'taxAmount',
+        :'timeout_on' => :'timeoutOn',
         :'transaction' => :'transaction',
         :'version' => :'version'
       }
@@ -87,11 +123,20 @@ module Wallee
         :'amount' => :'Float',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
+        :'external_id' => :'String',
+        :'failed_on' => :'DateTime',
+        :'failure_reason' => :'FailureReason',
+        :'labels' => :'Array<Label>',
         :'language' => :'String',
         :'line_items' => :'Array<LineItem>',
+        :'next_update_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
+        :'processing_on' => :'DateTime',
         :'space_view_id' => :'Integer',
+        :'state' => :'TransactionLineItemVersionState',
+        :'succeeded_on' => :'DateTime',
         :'tax_amount' => :'Float',
+        :'timeout_on' => :'DateTime',
         :'transaction' => :'Transaction',
         :'version' => :'Integer'
       }
@@ -129,6 +174,24 @@ module Wallee
         self.created_on = attributes[:'createdOn']
       end
 
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
+      end
+
+      if attributes.has_key?(:'failedOn')
+        self.failed_on = attributes[:'failedOn']
+      end
+
+      if attributes.has_key?(:'failureReason')
+        self.failure_reason = attributes[:'failureReason']
+      end
+
+      if attributes.has_key?(:'labels')
+        if (value = attributes[:'labels']).is_a?(Array)
+          self.labels = value
+        end
+      end
+
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
@@ -139,16 +202,36 @@ module Wallee
         end
       end
 
+      if attributes.has_key?(:'nextUpdateOn')
+        self.next_update_on = attributes[:'nextUpdateOn']
+      end
+
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'processingOn')
+        self.processing_on = attributes[:'processingOn']
       end
 
       if attributes.has_key?(:'spaceViewId')
         self.space_view_id = attributes[:'spaceViewId']
       end
 
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'succeededOn')
+        self.succeeded_on = attributes[:'succeededOn']
+      end
+
       if attributes.has_key?(:'taxAmount')
         self.tax_amount = attributes[:'taxAmount']
+      end
+
+      if attributes.has_key?(:'timeoutOn')
+        self.timeout_on = attributes[:'timeoutOn']
       end
 
       if attributes.has_key?(:'transaction')
@@ -184,11 +267,20 @@ module Wallee
           amount == o.amount &&
           created_by == o.created_by &&
           created_on == o.created_on &&
+          external_id == o.external_id &&
+          failed_on == o.failed_on &&
+          failure_reason == o.failure_reason &&
+          labels == o.labels &&
           language == o.language &&
           line_items == o.line_items &&
+          next_update_on == o.next_update_on &&
           planned_purge_date == o.planned_purge_date &&
+          processing_on == o.processing_on &&
           space_view_id == o.space_view_id &&
+          state == o.state &&
+          succeeded_on == o.succeeded_on &&
           tax_amount == o.tax_amount &&
+          timeout_on == o.timeout_on &&
           transaction == o.transaction &&
           version == o.version
     end
@@ -202,7 +294,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, created_by, created_on, language, line_items, planned_purge_date, space_view_id, tax_amount, transaction, version].hash
+      [id, linked_space_id, linked_transaction, amount, created_by, created_on, external_id, failed_on, failure_reason, labels, language, line_items, next_update_on, planned_purge_date, processing_on, space_view_id, state, succeeded_on, tax_amount, timeout_on, transaction, version].hash
     end
 
     # Builds the object from hash

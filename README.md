@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/wallee-payment/ruby-sdk.svg?branch=master)](https://travis-ci.org/wallee-payment/ruby-sdk)
-
 # wallee Ruby Library
 
 The wallee Ruby library wraps around the wallee API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.

@@ -135,13 +135,43 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@email_address.nil? && @email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
+      end
+
+      if !@phone_number.nil? && @phone_number.to_s.length > 254
+        invalid_properties.push('invalid value for "phone_number", the character length must be smaller than or equal to 254.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@email_address.nil? && @email_address.to_s.length > 254
+      return false if !@phone_number.nil? && @phone_number.to_s.length > 254
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email_address Value to be assigned
+    def email_address=(email_address)
+      if !email_address.nil? && email_address.to_s.length > 254
+        fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 254.'
+      end
+
+      @email_address = email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if !phone_number.nil? && phone_number.to_s.length > 254
+        fail ArgumentError, 'invalid value for "phone_number", the character length must be smaller than or equal to 254.'
+      end
+
+      @phone_number = phone_number
     end
 
     # Checks equality by comparing each attribute.

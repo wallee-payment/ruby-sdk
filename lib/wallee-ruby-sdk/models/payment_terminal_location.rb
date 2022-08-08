@@ -20,8 +20,8 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminalLocation
-    # 
-    attr_accessor :contact_address
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    attr_accessor :external_id
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -44,7 +44,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'contact_address' => :'contactAddress',
+        :'external_id' => :'externalId',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
@@ -57,7 +57,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'contact_address' => :'PaymentTerminalAddress',
+        :'external_id' => :'String',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
@@ -75,8 +75,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'contactAddress')
-        self.contact_address = attributes[:'contactAddress']
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
       end
 
       if attributes.has_key?(:'id')
@@ -137,7 +137,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          contact_address == o.contact_address &&
+          external_id == o.external_id &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
@@ -155,7 +155,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contact_address, id, linked_space_id, name, planned_purge_date, state, version].hash
+      [external_id, id, linked_space_id, name, planned_purge_date, state, version].hash
     end
 
     # Builds the object from hash

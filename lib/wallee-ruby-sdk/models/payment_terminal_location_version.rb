@@ -24,6 +24,9 @@ module Wallee
     attr_accessor :address
 
     # 
+    attr_accessor :contact_address
+
+    # 
     attr_accessor :created_by
 
     # The created on date indicates the date on which the entity was stored into the database.
@@ -54,6 +57,7 @@ module Wallee
     def self.attribute_map
       {
         :'address' => :'address',
+        :'contact_address' => :'contactAddress',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
         :'id' => :'id',
@@ -70,6 +74,7 @@ module Wallee
     def self.swagger_types
       {
         :'address' => :'PaymentTerminalAddress',
+        :'contact_address' => :'PaymentTerminalAddress',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
         :'id' => :'Integer',
@@ -92,6 +97,10 @@ module Wallee
 
       if attributes.has_key?(:'address')
         self.address = attributes[:'address']
+      end
+
+      if attributes.has_key?(:'contactAddress')
+        self.contact_address = attributes[:'contactAddress']
       end
 
       if attributes.has_key?(:'createdBy')
@@ -150,6 +159,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           address == o.address &&
+          contact_address == o.contact_address &&
           created_by == o.created_by &&
           created_on == o.created_on &&
           id == o.id &&
@@ -170,7 +180,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [address, created_by, created_on, id, linked_space_id, location, planned_purge_date, state, version, version_applied_immediately].hash
+      [address, contact_address, created_by, created_on, id, linked_space_id, location, planned_purge_date, state, version, version_applied_immediately].hash
     end
 
     # Builds the object from hash

@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class PaymentProcessorConfiguration
+    # The configuration is managed by the application and cannot be changed via the user interface.
+    attr_accessor :application_managed
+
     # The contract links the processor configuration with the contract that is used to process payments.
     attr_accessor :contract_id
 
@@ -47,6 +50,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'application_managed' => :'applicationManaged',
         :'contract_id' => :'contractId',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
@@ -61,6 +65,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'application_managed' => :'BOOLEAN',
         :'contract_id' => :'Integer',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
@@ -79,6 +84,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'applicationManaged')
+        self.application_managed = attributes[:'applicationManaged']
+      end
 
       if attributes.has_key?(:'contractId')
         self.contract_id = attributes[:'contractId']
@@ -146,6 +155,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          application_managed == o.application_managed &&
           contract_id == o.contract_id &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
@@ -165,7 +175,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [contract_id, id, linked_space_id, name, planned_purge_date, processor, state, version].hash
+      [application_managed, contract_id, id, linked_space_id, name, planned_purge_date, processor, state, version].hash
     end
 
     # Builds the object from hash

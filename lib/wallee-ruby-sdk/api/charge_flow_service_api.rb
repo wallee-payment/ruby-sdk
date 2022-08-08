@@ -88,6 +88,69 @@ module Wallee
       return data, status_code, headers
     end
 
+    # Cancel Charge Flow
+    # This operation cancels the charge flow that is linked with the transaction indicated by the given ID.
+    # @param space_id 
+    # @param id The ID of the transaction for which the charge flow should be canceled.
+    # @param [Hash] opts the optional parameters
+    # @return [Transaction]
+    def cancel_charge_flow(space_id, id, opts = {})
+      data, _status_code, _headers = cancel_charge_flow_with_http_info(space_id, id, opts)
+      return data
+    end
+
+    # Cancel Charge Flow
+    # This operation cancels the charge flow that is linked with the transaction indicated by the given ID.
+    # @param space_id 
+    # @param id The ID of the transaction for which the charge flow should be canceled.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Transaction, Fixnum, Hash)>] Transaction data, response status code and response headers
+    def cancel_charge_flow_with_http_info(space_id, id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: ChargeFlowService.cancel_charge_flow ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowService.cancel_charge_flow" if space_id.nil?
+      # verify the required parameter 'id' is set
+      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowService.cancel_charge_flow" if id.nil?
+      # resource path
+      local_var_path = "/charge-flow/cancel-charge-flow".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'id'] = id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Transaction')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ChargeFlowService#cancel_charge_flow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Count
     # Counts the number of items in the database as restricted by the given filter.
     # @param space_id 
@@ -144,6 +207,69 @@ module Wallee
         :return_type => 'Integer')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ChargeFlowService#count\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Fetch Charge Flow Payment Page URL
+    # This operation allows to fetch the payment page URL that is been applied on the charge flow linked with the provided transaction. The operation might return an empty result when no payment page is needed or can be invoked.
+    # @param space_id 
+    # @param id The transaction id of the transaction for which the URL of the charge flow should be fetched.
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def fetch_charge_flow_payment_page_url(space_id, id, opts = {})
+      data, _status_code, _headers = fetch_charge_flow_payment_page_url_with_http_info(space_id, id, opts)
+      return data
+    end
+
+    # Fetch Charge Flow Payment Page URL
+    # This operation allows to fetch the payment page URL that is been applied on the charge flow linked with the provided transaction. The operation might return an empty result when no payment page is needed or can be invoked.
+    # @param space_id 
+    # @param id The transaction id of the transaction for which the URL of the charge flow should be fetched.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
+    def fetch_charge_flow_payment_page_url_with_http_info(space_id, id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: ChargeFlowService.fetch_charge_flow_payment_page_url ..."
+      end
+      # verify the required parameter 'space_id' is set
+      fail ArgumentError, "Missing the required parameter 'space_id' when calling ChargeFlowService.fetch_charge_flow_payment_page_url" if space_id.nil?
+      # verify the required parameter 'id' is set
+      fail ArgumentError, "Missing the required parameter 'id' when calling ChargeFlowService.fetch_charge_flow_payment_page_url" if id.nil?
+      # resource path
+      local_var_path = "/charge-flow/fetch-charge-flow-payment-page-url".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+      query_params[:'spaceId'] = space_id
+      query_params[:'id'] = id
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      local_header_accept = ['application/json', 'text/plain;charset=utf-8']
+      local_header_accept_result = @api_client.select_header_accept(local_header_accept) and header_params['Accept'] = local_header_accept_result
+
+      # HTTP header 'Content-Type'
+      local_header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(local_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = []
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'String')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ChargeFlowService#fetch_charge_flow_payment_page_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

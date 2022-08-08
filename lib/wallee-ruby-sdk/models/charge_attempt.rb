@@ -41,6 +41,9 @@ module Wallee
     # The created on date indicates the date on which the entity was stored into the database.
     attr_accessor :created_on
 
+    # The customers presence indicates which kind of customer interaction was used during the charge attempt.
+    attr_accessor :customers_presence
+
     # 
     attr_accessor :environment
 
@@ -111,6 +114,7 @@ module Wallee
         :'completion_behavior' => :'completionBehavior',
         :'connector_configuration' => :'connectorConfiguration',
         :'created_on' => :'createdOn',
+        :'customers_presence' => :'customersPresence',
         :'environment' => :'environment',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
@@ -144,6 +148,7 @@ module Wallee
         :'completion_behavior' => :'TransactionCompletionBehavior',
         :'connector_configuration' => :'PaymentConnectorConfiguration',
         :'created_on' => :'DateTime',
+        :'customers_presence' => :'CustomersPresence',
         :'environment' => :'ChargeAttemptEnvironment',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
@@ -201,6 +206,10 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'customersPresence')
+        self.customers_presence = attributes[:'customersPresence']
       end
 
       if attributes.has_key?(:'environment')
@@ -326,6 +335,7 @@ module Wallee
           completion_behavior == o.completion_behavior &&
           connector_configuration == o.connector_configuration &&
           created_on == o.created_on &&
+          customers_presence == o.customers_presence &&
           environment == o.environment &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
@@ -357,7 +367,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
+      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
     end
 
     # Builds the object from hash

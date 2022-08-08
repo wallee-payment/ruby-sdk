@@ -89,7 +89,7 @@ module Wallee
     # 
     attr_accessor :customer_id
 
-    # The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+    # The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
     attr_accessor :customers_presence
 
     # This date indicates when the decision has been made if a transaction should be delivered or not.
@@ -227,6 +227,9 @@ module Wallee
     # 
     attr_accessor :window_width
 
+    # The number of years the transaction will be stored after it has been authorized.
+    attr_accessor :years_to_keep
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -298,7 +301,8 @@ module Wallee
         :'user_interface_type' => :'userInterfaceType',
         :'version' => :'version',
         :'window_height' => :'windowHeight',
-        :'window_width' => :'windowWidth'
+        :'window_width' => :'windowWidth',
+        :'years_to_keep' => :'yearsToKeep'
       }
     end
 
@@ -307,7 +311,7 @@ module Wallee
       {
         :'accept_header' => :'String',
         :'accept_language_header' => :'String',
-        :'allowed_payment_method_brands' => :'Array<PaymentMethodBrand>',
+        :'allowed_payment_method_brands' => :'Array<Integer>',
         :'allowed_payment_method_configurations' => :'Array<Integer>',
         :'authorization_amount' => :'Float',
         :'authorization_environment' => :'ChargeAttemptEnvironment',
@@ -373,7 +377,8 @@ module Wallee
         :'user_interface_type' => :'TransactionUserInterfaceType',
         :'version' => :'Integer',
         :'window_height' => :'String',
-        :'window_width' => :'String'
+        :'window_width' => :'String',
+        :'years_to_keep' => :'Integer'
       }
     end
 
@@ -668,6 +673,10 @@ module Wallee
       if attributes.has_key?(:'windowWidth')
         self.window_width = attributes[:'windowWidth']
       end
+
+      if attributes.has_key?(:'yearsToKeep')
+        self.years_to_keep = attributes[:'yearsToKeep']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -686,8 +695,8 @@ module Wallee
         invalid_properties.push('invalid value for "device_session_identifier", the character length must be great than or equal to 10.')
       end
 
-      if !@failed_url.nil? && @failed_url.to_s.length > 1000
-        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 1000.')
+      if !@failed_url.nil? && @failed_url.to_s.length > 2000
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 2000.')
       end
 
       if !@failed_url.nil? && @failed_url.to_s.length < 9
@@ -706,8 +715,8 @@ module Wallee
         invalid_properties.push('invalid value for "shipping_method", the character length must be smaller than or equal to 200.')
       end
 
-      if !@success_url.nil? && @success_url.to_s.length > 1000
-        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 1000.')
+      if !@success_url.nil? && @success_url.to_s.length > 2000
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 2000.')
       end
 
       if !@success_url.nil? && @success_url.to_s.length < 9
@@ -723,12 +732,12 @@ module Wallee
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
-      return false if !@failed_url.nil? && @failed_url.to_s.length > 1000
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 2000
       return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
-      return false if !@success_url.nil? && @success_url.to_s.length > 1000
+      return false if !@success_url.nil? && @success_url.to_s.length > 2000
       return false if !@success_url.nil? && @success_url.to_s.length < 9
       true
     end
@@ -760,8 +769,8 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] failed_url Value to be assigned
     def failed_url=(failed_url)
-      if !failed_url.nil? && failed_url.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 1000.'
+      if !failed_url.nil? && failed_url.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 2000.'
       end
 
       if !failed_url.nil? && failed_url.to_s.length < 9
@@ -804,8 +813,8 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] success_url Value to be assigned
     def success_url=(success_url)
-      if !success_url.nil? && success_url.to_s.length > 1000
-        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 1000.'
+      if !success_url.nil? && success_url.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 2000.'
       end
 
       if !success_url.nil? && success_url.to_s.length < 9
@@ -888,7 +897,8 @@ module Wallee
           user_interface_type == o.user_interface_type &&
           version == o.version &&
           window_height == o.window_height &&
-          window_width == o.window_width
+          window_width == o.window_width &&
+          years_to_keep == o.years_to_keep
     end
 
     # @see the `==` method
@@ -900,7 +910,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, java_enabled, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, screen_color_depth, screen_height, screen_width, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version, window_height, window_width].hash
+      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, java_enabled, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, screen_color_depth, screen_height, screen_width, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version, window_height, window_width, years_to_keep].hash
     end
 
     # Builds the object from hash

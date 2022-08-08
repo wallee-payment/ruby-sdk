@@ -19,26 +19,31 @@ require 'date'
 
 module Wallee
   # 
-  class TransactionLineItemUpdateRequest
+  class InvoiceReconciliationRecordType
     # 
-    attr_accessor :new_line_items
+    attr_accessor :description
+
+    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    attr_accessor :id
 
     # 
-    attr_accessor :transaction_id
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'new_line_items' => :'newLineItems',
-        :'transaction_id' => :'transactionId'
+        :'description' => :'description',
+        :'id' => :'id',
+        :'name' => :'name'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'new_line_items' => :'Array<LineItemCreate>',
-        :'transaction_id' => :'Integer'
+        :'description' => :'Hash<String, String>',
+        :'id' => :'Integer',
+        :'name' => :'Hash<String, String>'
       }
     end
 
@@ -50,14 +55,20 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'newLineItems')
-        if (value = attributes[:'newLineItems']).is_a?(Array)
-          self.new_line_items = value
+      if attributes.has_key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
         end
       end
 
-      if attributes.has_key?(:'transactionId')
-        self.transaction_id = attributes[:'transactionId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'name')
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
     end
 
@@ -65,17 +76,12 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @transaction_id.nil?
-        invalid_properties.push('invalid value for "transaction_id", transaction_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @transaction_id.nil?
       true
     end
 
@@ -84,8 +90,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          new_line_items == o.new_line_items &&
-          transaction_id == o.transaction_id
+          description == o.description &&
+          id == o.id &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -97,7 +104,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [new_line_items, transaction_id].hash
+      [description, id, name].hash
     end
 
     # Builds the object from hash

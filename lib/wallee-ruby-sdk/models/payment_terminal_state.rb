@@ -20,6 +20,7 @@ require 'date'
 module Wallee
   class PaymentTerminalState
     
+    CREATE = 'CREATE'.freeze
     PREPARING = 'PREPARING'.freeze
     ACTIVE = 'ACTIVE'.freeze
     INACTIVE = 'INACTIVE'.freeze

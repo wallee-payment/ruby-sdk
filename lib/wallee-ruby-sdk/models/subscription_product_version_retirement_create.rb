@@ -26,7 +26,7 @@ module Wallee
     # 
     attr_accessor :respect_terminiation_periods_enabled
 
-    # 
+    # When a target product is not chosen, all customers with the retired product will be terminated.
     attr_accessor :target_product
 
     # Attribute mapping from ruby-style variable name to JSON key.

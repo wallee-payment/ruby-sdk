@@ -26,6 +26,9 @@ module Wallee
     # 
     attr_accessor :default_currency
 
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    attr_accessor :external_id
+
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
 
@@ -58,6 +61,7 @@ module Wallee
       {
         :'configuration_version' => :'configurationVersion',
         :'default_currency' => :'defaultCurrency',
+        :'external_id' => :'externalId',
         :'id' => :'id',
         :'identifier' => :'identifier',
         :'linked_space_id' => :'linkedSpaceId',
@@ -75,6 +79,7 @@ module Wallee
       {
         :'configuration_version' => :'PaymentTerminalConfigurationVersion',
         :'default_currency' => :'String',
+        :'external_id' => :'String',
         :'id' => :'Integer',
         :'identifier' => :'String',
         :'linked_space_id' => :'Integer',
@@ -101,6 +106,10 @@ module Wallee
 
       if attributes.has_key?(:'defaultCurrency')
         self.default_currency = attributes[:'defaultCurrency']
+      end
+
+      if attributes.has_key?(:'externalId')
+        self.external_id = attributes[:'externalId']
       end
 
       if attributes.has_key?(:'id')
@@ -175,6 +184,7 @@ module Wallee
       self.class == o.class &&
           configuration_version == o.configuration_version &&
           default_currency == o.default_currency &&
+          external_id == o.external_id &&
           id == o.id &&
           identifier == o.identifier &&
           linked_space_id == o.linked_space_id &&
@@ -195,7 +205,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration_version, default_currency, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
+      [configuration_version, default_currency, external_id, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
     end
 
     # Builds the object from hash

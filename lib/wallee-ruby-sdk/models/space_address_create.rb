@@ -39,7 +39,13 @@ module Wallee
     attr_accessor :given_name
 
     # 
+    attr_accessor :mobile_phone_number
+
+    # 
     attr_accessor :organization_name
+
+    # 
+    attr_accessor :phone_number
 
     # 
     attr_accessor :postal_state
@@ -68,7 +74,9 @@ module Wallee
         :'email_address' => :'emailAddress',
         :'family_name' => :'familyName',
         :'given_name' => :'givenName',
+        :'mobile_phone_number' => :'mobilePhoneNumber',
         :'organization_name' => :'organizationName',
+        :'phone_number' => :'phoneNumber',
         :'postal_state' => :'postalState',
         :'postcode' => :'postcode',
         :'sales_tax_number' => :'salesTaxNumber',
@@ -87,7 +95,9 @@ module Wallee
         :'email_address' => :'String',
         :'family_name' => :'String',
         :'given_name' => :'String',
+        :'mobile_phone_number' => :'String',
         :'organization_name' => :'String',
+        :'phone_number' => :'String',
         :'postal_state' => :'String',
         :'postcode' => :'String',
         :'sales_tax_number' => :'String',
@@ -129,8 +139,16 @@ module Wallee
         self.given_name = attributes[:'givenName']
       end
 
+      if attributes.has_key?(:'mobilePhoneNumber')
+        self.mobile_phone_number = attributes[:'mobilePhoneNumber']
+      end
+
       if attributes.has_key?(:'organizationName')
         self.organization_name = attributes[:'organizationName']
+      end
+
+      if attributes.has_key?(:'phoneNumber')
+        self.phone_number = attributes[:'phoneNumber']
       end
 
       if attributes.has_key?(:'postalState')
@@ -174,8 +192,16 @@ module Wallee
         invalid_properties.push('invalid value for "given_name", the character length must be smaller than or equal to 100.')
       end
 
+      if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 100
+        invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 100.')
+      end
+
       if !@organization_name.nil? && @organization_name.to_s.length > 100
         invalid_properties.push('invalid value for "organization_name", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@phone_number.nil? && @phone_number.to_s.length > 100
+        invalid_properties.push('invalid value for "phone_number", the character length must be smaller than or equal to 100.')
       end
 
       if !@sales_tax_number.nil? && @sales_tax_number.to_s.length > 100
@@ -199,7 +225,9 @@ module Wallee
       return false if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
       return false if !@family_name.nil? && @family_name.to_s.length > 100
       return false if !@given_name.nil? && @given_name.to_s.length > 100
+      return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 100
       return false if !@organization_name.nil? && @organization_name.to_s.length > 100
+      return false if !@phone_number.nil? && @phone_number.to_s.length > 100
       return false if !@sales_tax_number.nil? && @sales_tax_number.to_s.length > 100
       return false if !@salutation.nil? && @salutation.to_s.length > 20
       return false if !@sorting_code.nil? && @sorting_code.to_s.length > 100
@@ -237,6 +265,16 @@ module Wallee
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] mobile_phone_number Value to be assigned
+    def mobile_phone_number=(mobile_phone_number)
+      if !mobile_phone_number.nil? && mobile_phone_number.to_s.length > 100
+        fail ArgumentError, 'invalid value for "mobile_phone_number", the character length must be smaller than or equal to 100.'
+      end
+
+      @mobile_phone_number = mobile_phone_number
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] organization_name Value to be assigned
     def organization_name=(organization_name)
       if !organization_name.nil? && organization_name.to_s.length > 100
@@ -244,6 +282,16 @@ module Wallee
       end
 
       @organization_name = organization_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if !phone_number.nil? && phone_number.to_s.length > 100
+        fail ArgumentError, 'invalid value for "phone_number", the character length must be smaller than or equal to 100.'
+      end
+
+      @phone_number = phone_number
     end
 
     # Custom attribute writer method with validation
@@ -287,7 +335,9 @@ module Wallee
           email_address == o.email_address &&
           family_name == o.family_name &&
           given_name == o.given_name &&
+          mobile_phone_number == o.mobile_phone_number &&
           organization_name == o.organization_name &&
+          phone_number == o.phone_number &&
           postal_state == o.postal_state &&
           postcode == o.postcode &&
           sales_tax_number == o.sales_tax_number &&
@@ -305,7 +355,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [city, country, dependent_locality, email_address, family_name, given_name, organization_name, postal_state, postcode, sales_tax_number, salutation, sorting_code, street].hash
+      [city, country, dependent_locality, email_address, family_name, given_name, mobile_phone_number, organization_name, phone_number, postal_state, postcode, sales_tax_number, salutation, sorting_code, street].hash
     end
 
     # Builds the object from hash
