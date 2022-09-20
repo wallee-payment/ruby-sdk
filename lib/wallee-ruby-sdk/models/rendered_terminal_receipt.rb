@@ -20,7 +20,6 @@ require 'date'
 module Wallee
   # 
   class RenderedTerminalReceipt
-    # The data property contains the binary data of the receipt document encoded as base 64 encoded string.
     attr_accessor :data
 
     # The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
@@ -45,7 +44,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'data' => :'Array<String>',
+        :'data' => :'String',
         :'mime_type' => :'String',
         :'printed' => :'BOOLEAN',
         :'receipt_type' => :'PaymentTerminalReceiptType'
@@ -61,9 +60,7 @@ module Wallee
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+        self.data = attributes[:'data']
       end
 
       if attributes.has_key?(:'mimeType')
@@ -83,13 +80,28 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@data.nil? && @data !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
+        invalid_properties.push('invalid value for "data", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@data.nil? && @data !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] data Value to be assigned
+    def data=(data)
+      if !data.nil? && data !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
+        fail ArgumentError, 'invalid value for "data", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.'
+      end
+
+      @data = data
     end
 
     # Checks equality by comparing each attribute.
