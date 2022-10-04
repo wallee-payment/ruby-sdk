@@ -90,7 +90,9 @@ module Wallee
 
     attr_accessor :force_ending_format
 
-    def initialize
+    attr_accessor :default_headers
+
+    def initialize(default_headers = {})
       @scheme = 'https'
       @host = 'app-wallee.com:443'
       @base_path = '/api'
@@ -102,6 +104,7 @@ module Wallee
       @inject_format = false
       @force_ending_format = false
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
+      @default_headers = default_headers
 
       yield(self) if block_given?
     end

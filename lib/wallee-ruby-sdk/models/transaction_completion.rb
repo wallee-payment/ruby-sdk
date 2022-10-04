@@ -95,6 +95,9 @@ module Wallee
     # 
     attr_accessor :state
 
+    # The statement descriptor explain charges or payments on bank statements.
+    attr_accessor :statement_descriptor
+
     # 
     attr_accessor :succeeded_on
 
@@ -138,6 +141,7 @@ module Wallee
         :'remaining_line_items' => :'remainingLineItems',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
+        :'statement_descriptor' => :'statementDescriptor',
         :'succeeded_on' => :'succeededOn',
         :'tax_amount' => :'taxAmount',
         :'time_zone' => :'timeZone',
@@ -174,6 +178,7 @@ module Wallee
         :'remaining_line_items' => :'Array<LineItem>',
         :'space_view_id' => :'Integer',
         :'state' => :'TransactionCompletionState',
+        :'statement_descriptor' => :'String',
         :'succeeded_on' => :'DateTime',
         :'tax_amount' => :'Float',
         :'time_zone' => :'String',
@@ -298,6 +303,10 @@ module Wallee
         self.state = attributes[:'state']
       end
 
+      if attributes.has_key?(:'statementDescriptor')
+        self.statement_descriptor = attributes[:'statementDescriptor']
+      end
+
       if attributes.has_key?(:'succeededOn')
         self.succeeded_on = attributes[:'succeededOn']
       end
@@ -335,6 +344,10 @@ module Wallee
         invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
       end
 
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
+        invalid_properties.push('invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.')
+      end
+
       invalid_properties
     end
 
@@ -344,6 +357,7 @@ module Wallee
       return false if !@external_id.nil? && @external_id.to_s.length > 100
       return false if !@external_id.nil? && @external_id.to_s.length < 1
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
       true
     end
 
@@ -369,6 +383,16 @@ module Wallee
       end
 
       @invoice_merchant_reference = invoice_merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] statement_descriptor Value to be assigned
+    def statement_descriptor=(statement_descriptor)
+      if !statement_descriptor.nil? && statement_descriptor.to_s.length > 22
+        fail ArgumentError, 'invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.'
+      end
+
+      @statement_descriptor = statement_descriptor
     end
 
     # Checks equality by comparing each attribute.
@@ -401,6 +425,7 @@ module Wallee
           remaining_line_items == o.remaining_line_items &&
           space_view_id == o.space_view_id &&
           state == o.state &&
+          statement_descriptor == o.statement_descriptor &&
           succeeded_on == o.succeeded_on &&
           tax_amount == o.tax_amount &&
           time_zone == o.time_zone &&
@@ -417,7 +442,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, invoice_merchant_reference, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
+      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, invoice_merchant_reference, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, statement_descriptor, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
     end
 
     # Builds the object from hash

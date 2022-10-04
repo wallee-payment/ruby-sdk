@@ -20,7 +20,7 @@ $ gem install wallee-ruby-sdk
 
 ## Usage
 The library needs to be configured with your account's space id, user id, and secret key which are available in your [wallee
-account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values:
+account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values. You can also optionally set `default_headers` to set some headers that will be sent to all requests:
 
 ### Configuring a Service
 
@@ -31,9 +31,11 @@ space_id = 405
 app_user_id = 512
 app_user_key = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ="
 
+# default_headers is an optional param, that represents headers sent to all requests
 Wallee.configure do |config|
   config.user_id = app_user_id
   config.authentication_key = app_user_key
+  config.default_headers = {"x-meta-custom-header": 'value-1', "x-meta-custom-header-2": 'value-2'}
 end
 
 # TransactionService

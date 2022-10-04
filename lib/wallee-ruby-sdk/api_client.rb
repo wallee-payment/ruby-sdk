@@ -44,6 +44,9 @@ module Wallee
         'Content-Type' => "application/json",
         'User-Agent' => @user_agent
       }
+      config.default_headers.each do |key, value|
+        @default_headers[key] = value
+      end
     end
 
     def self.default
@@ -98,7 +101,16 @@ module Wallee
       url = build_request_url(path)
       http_method = http_method.to_sym.downcase
 
+      default_headers = {
+        'x-meta-sdk-version': "3.2.0",
+        'x-meta-sdk-language': "ruby",
+        'x-meta-sdk-provider': "wallee",
+        'x-meta-sdk-language-version': RUBY_VERSION
+      }
+
       header_params = @default_headers.merge(opts[:header_params] || {})
+      header_params = header_params.merge(default_headers)
+
       query_params = opts[:query_params] || {}
       form_params = opts[:form_params] || {}
 

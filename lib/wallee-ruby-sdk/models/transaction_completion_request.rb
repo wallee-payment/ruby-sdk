@@ -32,6 +32,9 @@ module Wallee
     # The line items which will be used to complete the transaction.
     attr_accessor :line_items
 
+    # The statement descriptor explain charges or payments on bank statements.
+    attr_accessor :statement_descriptor
+
     # The ID of the transaction which should be completed.
     attr_accessor :transaction_id
 
@@ -42,6 +45,7 @@ module Wallee
         :'invoice_merchant_reference' => :'invoiceMerchantReference',
         :'last_completion' => :'lastCompletion',
         :'line_items' => :'lineItems',
+        :'statement_descriptor' => :'statementDescriptor',
         :'transaction_id' => :'transactionId'
       }
     end
@@ -53,6 +57,7 @@ module Wallee
         :'invoice_merchant_reference' => :'String',
         :'last_completion' => :'BOOLEAN',
         :'line_items' => :'Array<CompletionLineItemCreate>',
+        :'statement_descriptor' => :'String',
         :'transaction_id' => :'Integer'
       }
     end
@@ -81,6 +86,10 @@ module Wallee
         if (value = attributes[:'lineItems']).is_a?(Array)
           self.line_items = value
         end
+      end
+
+      if attributes.has_key?(:'statementDescriptor')
+        self.statement_descriptor = attributes[:'statementDescriptor']
       end
 
       if attributes.has_key?(:'transactionId')
@@ -112,6 +121,10 @@ module Wallee
         invalid_properties.push('invalid value for "last_completion", last_completion cannot be nil.')
       end
 
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
+        invalid_properties.push('invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.')
+      end
+
       if @transaction_id.nil?
         invalid_properties.push('invalid value for "transaction_id", transaction_id cannot be nil.')
       end
@@ -127,6 +140,7 @@ module Wallee
       return false if @external_id.to_s.length < 1
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if @last_completion.nil?
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
       return false if @transaction_id.nil?
       true
     end
@@ -159,6 +173,16 @@ module Wallee
       @invoice_merchant_reference = invoice_merchant_reference
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] statement_descriptor Value to be assigned
+    def statement_descriptor=(statement_descriptor)
+      if !statement_descriptor.nil? && statement_descriptor.to_s.length > 22
+        fail ArgumentError, 'invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.'
+      end
+
+      @statement_descriptor = statement_descriptor
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -168,6 +192,7 @@ module Wallee
           invoice_merchant_reference == o.invoice_merchant_reference &&
           last_completion == o.last_completion &&
           line_items == o.line_items &&
+          statement_descriptor == o.statement_descriptor &&
           transaction_id == o.transaction_id
     end
 
@@ -180,7 +205,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [external_id, invoice_merchant_reference, last_completion, line_items, transaction_id].hash
+      [external_id, invoice_merchant_reference, last_completion, line_items, statement_descriptor, transaction_id].hash
     end
 
     # Builds the object from hash
