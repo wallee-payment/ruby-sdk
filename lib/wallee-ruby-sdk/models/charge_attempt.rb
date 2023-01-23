@@ -104,6 +104,9 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
+    # 
+    attr_accessor :wallet_type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -134,7 +137,8 @@ module Wallee
         :'timeout_on' => :'timeoutOn',
         :'token_version' => :'tokenVersion',
         :'user_failure_message' => :'userFailureMessage',
-        :'version' => :'version'
+        :'version' => :'version',
+        :'wallet_type' => :'walletType'
       }
     end
 
@@ -168,7 +172,8 @@ module Wallee
         :'timeout_on' => :'DateTime',
         :'token_version' => :'TokenVersion',
         :'user_failure_message' => :'String',
-        :'version' => :'Integer'
+        :'version' => :'Integer',
+        :'wallet_type' => :'WalletType'
       }
     end
 
@@ -293,6 +298,10 @@ module Wallee
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
       end
+
+      if attributes.has_key?(:'walletType')
+        self.wallet_type = attributes[:'walletType']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -355,7 +364,8 @@ module Wallee
           timeout_on == o.timeout_on &&
           token_version == o.token_version &&
           user_failure_message == o.user_failure_message &&
-          version == o.version
+          version == o.version &&
+          wallet_type == o.wallet_type
     end
 
     # @see the `==` method
@@ -367,7 +377,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version].hash
+      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version, wallet_type].hash
     end
 
     # Builds the object from hash

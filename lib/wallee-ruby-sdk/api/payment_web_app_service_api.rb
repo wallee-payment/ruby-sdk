@@ -38,6 +38,7 @@ module Wallee
 
     # Activate Processor for Production
     # This operation marks the processor to be usable within the production environment.
+
     # @param space_id The space ID identifies the space in which the processor is installed in.
     # @param external_id The external ID identifies the processor. The external ID corresponds to the ID provided during inserting of the processor.
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'PaymentAppProcessor')
       if @api_client.config.debugging
@@ -101,6 +106,7 @@ module Wallee
 
     # Delete Connector
     # This operation removes the web app payment connector from the given space.
+
     # @param space_id The space ID identifies the space in which the connector is installed in.
     # @param external_id The external ID identifies the connector. The external ID corresponds to the ID provided during inserting of the connector.
     # @param [Hash] opts the optional parameters
@@ -134,6 +140,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -143,6 +152,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentWebAppService#delete_connector\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -163,6 +173,7 @@ module Wallee
 
     # Delete Processor
     # This operation removes the web app payment processor and its connectors from the given space.
+
     # @param space_id The space ID identifies the space in which the processor is installed in.
     # @param external_id The external ID identifies the processor. The external ID corresponds to the ID provided during inserting of the processor.
     # @param [Hash] opts the optional parameters
@@ -196,6 +207,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -205,6 +219,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentWebAppService#delete_processor\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -225,6 +240,7 @@ module Wallee
 
     # Insert or Update Connector
     # This operation inserts or updates a web app payment connector.
+
     # @param space_id The space ID identifies the space into which the connector should be inserted into.
     # @param request The connector object contains all the details required to create or update a web app connector.
     # @param [Hash] opts the optional parameters
@@ -257,6 +273,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -266,6 +285,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'PaymentAppConnector')
       if @api_client.config.debugging
@@ -287,6 +307,7 @@ module Wallee
 
     # Insert or Update Processor
     # This operation inserts or updates a web app payment processor.
+
     # @param space_id The space ID identifies the space into which the processor should be inserted into.
     # @param request The processor object contains all the details required to create or update a web app processor.
     # @param [Hash] opts the optional parameters
@@ -319,6 +340,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -328,6 +352,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'PaymentAppProcessor')
       if @api_client.config.debugging
@@ -349,6 +374,7 @@ module Wallee
 
     # Update Charge Attempt
     # This operation updates the state of the charge attempt. This method can be invoked for transactions originally created with a processor associated with the web app that invokes this operation. The returned charge attempt corresponds to the charge attempt indicated in the request.
+
     # @param space_id This is the ID of the space in which the charge attempt is located in.
     # @param request The charge attempt update request allows to update the state of a charge attempt.
     # @param [Hash] opts the optional parameters
@@ -381,6 +407,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -390,6 +419,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'ChargeAttempt')
       if @api_client.config.debugging
@@ -411,6 +441,7 @@ module Wallee
 
     # Update Completion
     # This operation updates the state of the transaction completion. This method can be invoked for transactions originally created with a processor associated with the web app that invokes this operation. The returned completion corresponds to the completion indicated in the request.
+
     # @param space_id This is the ID of the space in which the completion is located in.
     # @param request The completion update request allows to update the state of a completion.
     # @param [Hash] opts the optional parameters
@@ -443,6 +474,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -452,6 +486,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -473,6 +508,7 @@ module Wallee
 
     # Update Refund
     # This operation updates the state of the refund. This method can be invoked for transactions originally created with a processor associated with the web app that invokes this operation. The returned refund corresponds to the refund indicated in the request.
+
     # @param space_id This is the ID of the space in which the refund is located in.
     # @param request The refund update request allows to update the state of a refund.
     # @param [Hash] opts the optional parameters
@@ -505,6 +541,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -514,6 +553,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
@@ -535,6 +575,7 @@ module Wallee
 
     # Update Void
     # This operation updates the state of the transaction void. This method can be invoked for transactions originally created with a processor associated with the web app that invokes this operation. The returned void corresponds to the void indicated in the request.
+
     # @param space_id This is the ID of the space in which the void is located in.
     # @param request The void update request allows to update the state of a void.
     # @param [Hash] opts the optional parameters
@@ -567,6 +608,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -576,6 +620,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionVoid')
       if @api_client.config.debugging

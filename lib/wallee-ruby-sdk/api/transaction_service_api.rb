@@ -38,6 +38,7 @@ module Wallee
 
     # Confirm
     # The confirm operation marks the transaction as confirmed. Once the transaction is confirmed no more changes can be applied.
+
     # @param space_id 
     # @param transaction_model The transaction JSON object to update and confirm.
     # @param [Hash] opts the optional parameters
@@ -70,6 +71,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(transaction_model)
@@ -79,6 +83,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -100,6 +105,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -130,6 +136,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -139,6 +148,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -160,6 +170,7 @@ module Wallee
 
     # Create
     # Creates the entity with the given properties.
+
     # @param space_id 
     # @param transaction The transaction object which should be created.
     # @param [Hash] opts the optional parameters
@@ -192,6 +203,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(transaction)
@@ -201,6 +215,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -222,6 +237,7 @@ module Wallee
 
     # Create Transaction Credentials
     # This operation allows to create transaction credentials to delegate temporarily the access to the web service API for this particular transaction.
+
     # @param space_id 
     # @param id The id of the transaction which should be returned.
     # @param [Hash] opts the optional parameters
@@ -255,6 +271,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -264,6 +283,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -285,6 +305,7 @@ module Wallee
 
     # Delete One-Click Token with Credentials
     # This operation removes the given token.
+
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param token_id The token ID will be used to find the token which should be removed.
     # @param [Hash] opts the optional parameters
@@ -318,6 +339,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -327,6 +351,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TransactionService#delete_one_click_token_with_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -347,6 +372,7 @@ module Wallee
 
     # Export
     # Exports the transactions into a CSV file. The file will contain the properties defined in the request.
+
     # @param space_id 
     # @param request The request controls the entries which are exported.
     # @param [Hash] opts the optional parameters
@@ -379,6 +405,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -388,6 +417,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -408,6 +438,7 @@ module Wallee
 
     # Fetch One Click Tokens with Credentials
     # This operation returns the token version objects which references the tokens usable as one-click payment tokens for the provided transaction.
+
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<TokenVersion>, Fixnum, Hash)>] Array<TokenVersion> data, response status code and response headers
@@ -437,6 +468,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -446,6 +480,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<TokenVersion>')
       if @api_client.config.debugging
@@ -468,6 +503,7 @@ module Wallee
 
     # Fetch Possible Payment Methods
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
+
     # @param space_id 
     # @param id The id of the transaction which should be returned.
     # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
@@ -505,6 +541,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -514,6 +553,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<PaymentMethodConfiguration>')
       if @api_client.config.debugging
@@ -535,6 +575,7 @@ module Wallee
 
     # Fetch Possible Payment Methods with Credentials
     # This operation allows to get the payment method configurations which can be used with the provided transaction.
+
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param integration_mode The integration mode defines the type of integration that is applied on the transaction.
     # @param [Hash] opts the optional parameters
@@ -568,6 +609,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -577,6 +621,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<PaymentMethodConfiguration>')
       if @api_client.config.debugging
@@ -598,6 +643,7 @@ module Wallee
 
     # getInvoiceDocument
     # Returns the PDF document for the transaction invoice with given id.
+
     # @param space_id 
     # @param id The id of the transaction to get the invoice document for.
     # @param [Hash] opts the optional parameters
@@ -631,6 +677,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -640,6 +689,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -661,6 +711,7 @@ module Wallee
 
     # getLatestSuccessfulTransactionLineItemVersion
     # 
+
     # @param space_id 
     # @param id The id of the transaction to get the latest line item version for.
     # @param [Hash] opts the optional parameters
@@ -694,6 +745,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -703,6 +757,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionLineItemVersion')
       if @api_client.config.debugging
@@ -724,6 +779,7 @@ module Wallee
 
     # getPackingSlip
     # Returns the packing slip for the transaction with given id.
+
     # @param space_id 
     # @param id The id of the transaction to get the packing slip for.
     # @param [Hash] opts the optional parameters
@@ -757,6 +813,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -766,6 +825,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -787,6 +847,7 @@ module Wallee
 
     # Process One-Click Token with Credentials
     # This operation assigns the given token to the transaction and process it. This method will return an URL where the customer has to be redirect to complete the transaction.
+
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param token_id The token ID is used to load the corresponding token and to process the transaction with it.
     # @param [Hash] opts the optional parameters
@@ -820,6 +881,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -829,6 +893,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -850,6 +915,7 @@ module Wallee
 
     # Process Without User Interaction
     # This operation processes the transaction without requiring that the customer is present. Means this operation applies strategies to process the transaction without a direct interaction with the buyer. This operation is suitable for recurring transactions.
+
     # @param space_id 
     # @param id The id of the transaction which should be processed.
     # @param [Hash] opts the optional parameters
@@ -883,6 +949,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -892,6 +961,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -913,6 +983,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the transaction which should be returned.
     # @param [Hash] opts the optional parameters
@@ -946,6 +1017,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -955,6 +1029,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -975,6 +1050,7 @@ module Wallee
 
     # Read With Credentials
     # Reads the transaction with the given &#39;id&#39; and returns it. This method uses the credentials to authenticate and identify the transaction.
+
     # @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Transaction, Fixnum, Hash)>] Transaction data, response status code and response headers
@@ -1004,6 +1080,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -1013,6 +1092,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -1034,6 +1114,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the transactions which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -1066,6 +1147,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -1075,6 +1159,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<Transaction>')
       if @api_client.config.debugging
@@ -1096,6 +1181,7 @@ module Wallee
 
     # Update
     # This updates the entity with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the entity.
+
     # @param space_id 
     # @param entity The transaction object with the properties which should be updated.
     # @param [Hash] opts the optional parameters
@@ -1128,6 +1214,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -1137,6 +1226,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging

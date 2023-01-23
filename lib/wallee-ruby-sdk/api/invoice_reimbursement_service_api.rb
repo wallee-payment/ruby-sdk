@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The ID of the invoice reimbursement which should be returned.
     # @param [Hash] opts the optional parameters
@@ -131,6 +137,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -140,6 +149,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'InvoiceReimbursement')
       if @api_client.config.debugging
@@ -161,6 +171,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the invoice reimbursements which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -193,6 +204,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -202,6 +216,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<InvoiceReimbursementWithRefundReference>')
       if @api_client.config.debugging
@@ -224,6 +239,7 @@ module Wallee
 
     # Update payment connector configuration
     # Updates payment connector configuration for reimbursement which is in manual review.
+
     # @param space_id 
     # @param id The ID of the invoice reimbursement of which connector should be updated.
     # @param payment_connector_configuration_id 
@@ -261,6 +277,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -270,6 +289,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: InvoiceReimbursementService#update_connector\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -292,6 +312,7 @@ module Wallee
 
     # Update IBAN
     # Updates recipient and/or sender IBAN for reimbursement which is in manual review.
+
     # @param space_id 
     # @param id The ID of the invoice reimbursement of which IBANs should be updated.
     # @param [Hash] opts the optional parameters
@@ -329,6 +350,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -338,6 +362,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: InvoiceReimbursementService#update_iban\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"

@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param filter The filter which restricts the installment payment slices which are used to calculate the count.
     # @param [Hash] opts the optional parameters
@@ -70,6 +71,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(filter)
@@ -79,6 +83,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -100,6 +105,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the installment payment slice which should be returned.
     # @param [Hash] opts the optional parameters
@@ -133,6 +139,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -142,6 +151,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'InstallmentPaymentSlice')
       if @api_client.config.debugging
@@ -163,6 +173,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the installment payment slices which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -195,6 +206,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -204,6 +218,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<InstallmentPaymentSlice>')
       if @api_client.config.debugging

@@ -38,6 +38,7 @@ module Wallee
 
     # Find by refund
     # Returns all comments of the given refund.
+
     # @param space_id 
     # @param refund_id 
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<RefundComment>')
       if @api_client.config.debugging
@@ -101,6 +106,7 @@ module Wallee
 
     # Create
     # Creates the comment with the given properties.
+
     # @param space_id 
     # @param entity 
     # @param [Hash] opts the optional parameters
@@ -133,6 +139,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -142,6 +151,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging
@@ -163,6 +173,7 @@ module Wallee
 
     # Delete
     # Deletes the comment with the given id.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -196,6 +207,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -205,6 +219,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: RefundCommentService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -225,6 +240,7 @@ module Wallee
 
     # Pin
     # Pins the comment to the top.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -258,6 +274,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -267,6 +286,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: RefundCommentService#pin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -287,6 +307,7 @@ module Wallee
 
     # Read
     # Reads the comment with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -320,6 +341,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -329,6 +353,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging
@@ -350,6 +375,7 @@ module Wallee
 
     # Unpin
     # Unpins the comment from the top.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -383,6 +409,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -392,6 +421,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: RefundCommentService#unpin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -412,6 +442,7 @@ module Wallee
 
     # Update
     # This updates the comment with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the comment.
+
     # @param space_id 
     # @param entity 
     # @param [Hash] opts the optional parameters
@@ -444,6 +475,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -453,6 +487,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RefundComment')
       if @api_client.config.debugging

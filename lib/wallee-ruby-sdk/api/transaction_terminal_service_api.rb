@@ -38,6 +38,7 @@ module Wallee
 
     # Fetch Receipts
     # Returns all receipts for the requested terminal transaction.
+
     # @param space_id 
     # @param request 
     # @param [Hash] opts the optional parameters
@@ -70,6 +71,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -79,6 +83,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<RenderedTerminalReceipt>')
       if @api_client.config.debugging
@@ -102,6 +107,7 @@ module Wallee
 
     # Create Till Connection Credentials
     # This operation creates a set of credentials to use within the WebSocket.
+
     # @param space_id 
     # @param transaction_id The ID of the transaction which is used to process with the terminal.
     # @param terminal_id The ID of the terminal which should be used to process the transaction.
@@ -141,6 +147,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -150,6 +159,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging

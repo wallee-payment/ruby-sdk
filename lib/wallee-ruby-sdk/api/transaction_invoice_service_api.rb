@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # getInvoiceDocument
     # Returns the PDF document for the transaction invoice with given id.
+
     # @param space_id 
     # @param id The id of the transaction invoice to get the document for.
     # @param [Hash] opts the optional parameters
@@ -131,6 +137,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -140,6 +149,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -162,6 +172,7 @@ module Wallee
 
     # getInvoiceDocumentWithTargetMediaType
     # Returns the PDF document for the transaction invoice with given id and target media type id.
+
     # @param space_id 
     # @param id The id of the transaction invoice to get the document for.
     # @param target_media_type_id The id of the target media type for which the invoice should be generated for.
@@ -199,6 +210,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -208,6 +222,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -229,6 +244,7 @@ module Wallee
 
     # isReplacementPossible
     # Returns whether the transaction invoice with the given id can be replaced.
+
     # @param space_id 
     # @param id The invoice which should be checked if a replacement is possible.
     # @param [Hash] opts the optional parameters
@@ -262,6 +278,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -271,6 +290,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'BOOLEAN')
       if @api_client.config.debugging
@@ -292,6 +312,7 @@ module Wallee
 
     # Mark as Derecognized
     # Marks the transaction invoice with the given id as derecognized.
+
     # @param space_id 
     # @param id The id of the transaction invoice which should be marked as derecognized.
     # @param [Hash] opts the optional parameters
@@ -325,6 +346,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -334,6 +358,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionInvoice')
       if @api_client.config.debugging
@@ -355,6 +380,7 @@ module Wallee
 
     # Mark as Paid
     # Marks the transaction invoice with the given id as paid.
+
     # @param space_id 
     # @param id The id of the transaction invoice which should be marked as paid.
     # @param [Hash] opts the optional parameters
@@ -388,6 +414,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -397,6 +426,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionInvoice')
       if @api_client.config.debugging
@@ -418,6 +448,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the transaction invoices which should be returned.
     # @param [Hash] opts the optional parameters
@@ -451,6 +482,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -460,6 +494,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionInvoice')
       if @api_client.config.debugging
@@ -482,6 +517,7 @@ module Wallee
 
     # replace
     # Replaces the transaction invoice with given id with the replacement and returns the new transaction invoice.
+
     # @param space_id 
     # @param id The id of the transaction invoices which should be replaced.
     # @param replacement 
@@ -518,6 +554,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(replacement)
@@ -527,6 +566,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionInvoice')
       if @api_client.config.debugging
@@ -548,6 +588,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the transaction invoices which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -580,6 +621,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -589,6 +633,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<TransactionInvoice>')
       if @api_client.config.debugging

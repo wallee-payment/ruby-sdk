@@ -36,6 +36,7 @@ module Wallee
 
     # All
     # This operation returns all states of all countries.
+
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestCountryState>, Fixnum, Hash)>] Array<RestCountryState> data, response status code and response headers
     def all_with_http_info(opts = {})
@@ -61,6 +62,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -70,6 +74,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<RestCountryState>')
       if @api_client.config.debugging
@@ -90,6 +95,7 @@ module Wallee
 
     # Find by Country
     # This operation returns all states for a given country.
+
     # @param code The country code in ISO code two letter format for which all states should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestCountryState>, Fixnum, Hash)>] Array<RestCountryState> data, response status code and response headers
@@ -119,6 +125,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -128,6 +137,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<RestCountryState>')
       if @api_client.config.debugging

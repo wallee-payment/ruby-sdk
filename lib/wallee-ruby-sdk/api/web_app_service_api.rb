@@ -37,6 +37,7 @@ module Wallee
 
     # Check Installation
     # This operation returns true when the app is installed in given space. The web app is implied by the client ID resp. user ID that is been used to invoke this operation.
+
     # @param space_id This parameter identifies the space which should be checked if the web app is installed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(BOOLEAN, Fixnum, Hash)>] BOOLEAN data, response status code and response headers
@@ -66,6 +67,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -75,6 +79,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'BOOLEAN')
       if @api_client.config.debugging
@@ -95,6 +100,7 @@ module Wallee
 
     # Confirm
     # This operation confirms the app installation. This method has to be invoked after the user returns to the web app. The request of the user will contain the code as a request parameter. The web app is implied by the client ID resp. user ID that is been used to invoke this operation.
+
     # @param request 
     # @param [Hash] opts the optional parameters
     # @return [Array<(WebAppConfirmationResponse, Fixnum, Hash)>] WebAppConfirmationResponse data, response status code and response headers
@@ -123,6 +129,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -132,6 +141,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'WebAppConfirmationResponse')
       if @api_client.config.debugging
@@ -152,6 +162,7 @@ module Wallee
 
     # Uninstall
     # This operation uninstalls the web app from the provided space. The web app is implied by the client ID resp. user ID that is been used to invoke this operation.
+
     # @param space_id This parameter identifies the space within which the web app should be uninstalled.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
@@ -181,6 +192,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -190,6 +204,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WebAppService#uninstall\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"

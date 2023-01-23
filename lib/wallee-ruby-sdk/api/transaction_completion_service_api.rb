@@ -38,6 +38,7 @@ module Wallee
 
     # completeOffline
     # This operation completes the transaction offline. The completion is not forwarded to the processor. This implies the processor does not do anything. This method is only here to fix manually the transaction state.
+
     # @param space_id 
     # @param id The id of the transaction which should be completed.
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -101,6 +106,7 @@ module Wallee
 
     # completeOnline
     # This operation completes the transaction online. The completion is forwarded to the processor. This implies that the processor may take some actions based on the completion.
+
     # @param space_id 
     # @param id The id of the transaction which should be completed.
     # @param [Hash] opts the optional parameters
@@ -134,6 +140,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -143,6 +152,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -164,6 +174,7 @@ module Wallee
 
     # completePartiallyOffline
     # This operation can be used to partially complete the transaction offline. The completion is not forwarded to the processor. This implies the processor does not do anything. This method is only here to fix manually the transaction state.
+
     # @param space_id 
     # @param completion 
     # @param [Hash] opts the optional parameters
@@ -196,6 +207,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(completion)
@@ -205,6 +219,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -226,6 +241,7 @@ module Wallee
 
     # completePartiallyOnline
     # This operation can be used to partially complete the transaction online. The completion is forwarded to the processor. This implies that the processor may take some actions based on the completion.
+
     # @param space_id 
     # @param completion 
     # @param [Hash] opts the optional parameters
@@ -258,6 +274,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(completion)
@@ -267,6 +286,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -288,6 +308,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -318,6 +339,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -327,6 +351,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -348,6 +373,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the transaction completions which should be returned.
     # @param [Hash] opts the optional parameters
@@ -381,6 +407,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -390,6 +419,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionCompletion')
       if @api_client.config.debugging
@@ -411,6 +441,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the transaction completions which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -443,6 +474,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -452,6 +486,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<TransactionCompletion>')
       if @api_client.config.debugging

@@ -102,7 +102,7 @@ module Wallee
       http_method = http_method.to_sym.downcase
 
       default_headers = {
-        'x-meta-sdk-version': "3.2.0",
+        'x-meta-sdk-version': "3.3.0",
         'x-meta-sdk-language': "ruby",
         'x-meta-sdk-provider': "wallee",
         'x-meta-sdk-language-version': RUBY_VERSION
@@ -119,15 +119,15 @@ module Wallee
       _verify_ssl_host = true
 
       header_params  = header_params.merge(get_authentication_headers(http_method, path, query_params))
-
-
+      
+      timeout = opts[:timeout]
 
       req_opts = {
         :method => http_method,
         :headers => header_params,
         :params => query_params,
         :params_encoding => @config.params_encoding,
-        :timeout => @config.timeout,
+        :timeout => timeout,
         :ssl_verifypeer => true,
         :ssl_verifyhost => 2,
         :sslcert => @config.cert_file,
@@ -412,6 +412,12 @@ module Wallee
       else
         fail "unknown collection format: #{collection_format.inspect}"
       end
+    end
+    
+    # Return connection timeout.
+    # @return connection timeout
+    def get_connection_timeout()
+      return @config.timeout
     end
   end
 end

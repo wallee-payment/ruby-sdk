@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the transaction voids which should be returned.
     # @param [Hash] opts the optional parameters
@@ -131,6 +137,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -140,6 +149,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionVoid')
       if @api_client.config.debugging
@@ -161,6 +171,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the transaction voids which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -193,6 +204,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -202,6 +216,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<TransactionVoid>')
       if @api_client.config.debugging
@@ -223,6 +238,7 @@ module Wallee
 
     # voidOffline
     # This operation voids the transaction offline. The void is not forwarded to the processor. This implies the processor does not do anything. This method is only here to fix manually the transaction state.
+
     # @param space_id 
     # @param id The id of the transaction which should be voided.
     # @param [Hash] opts the optional parameters
@@ -256,6 +272,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -265,6 +284,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionVoid')
       if @api_client.config.debugging
@@ -286,6 +306,7 @@ module Wallee
 
     # voidOnline
     # This operation voids the transaction online. The void is forwarded to the processor. This implies that the processor may take some actions based on the void.
+
     # @param space_id 
     # @param id The id of the transaction which should be voided.
     # @param [Hash] opts the optional parameters
@@ -319,6 +340,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -328,6 +352,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'TransactionVoid')
       if @api_client.config.debugging

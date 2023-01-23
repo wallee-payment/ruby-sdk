@@ -39,6 +39,7 @@ module Wallee
 
     # Calculate
     # Calculates the consumed resources for the given space and time range.
+
     # @param space_id 
     # @param start The start date from which on the consumed units should be returned from.
     # @param _end The end date to which the consumed units should be returned to. The end date is not included in the result.
@@ -76,6 +77,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -85,6 +89,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<MetricUsage>')
       if @api_client.config.debugging

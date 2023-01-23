@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # markAsNotSuitable
     # This operation marks the delivery indication as not suitable.
+
     # @param space_id 
     # @param delivery_indication_id The delivery indication id which should be marked as not suitable.
     # @param [Hash] opts the optional parameters
@@ -130,6 +136,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(delivery_indication_id)
@@ -139,6 +148,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DeliveryIndication')
       if @api_client.config.debugging
@@ -160,6 +170,7 @@ module Wallee
 
     # markAsSuitable
     # This operation marks the delivery indication as suitable.
+
     # @param space_id 
     # @param delivery_indication_id The delivery indication id which should be marked as suitable.
     # @param [Hash] opts the optional parameters
@@ -192,6 +203,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(delivery_indication_id)
@@ -201,6 +215,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DeliveryIndication')
       if @api_client.config.debugging
@@ -222,6 +237,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the delivery indication which should be returned.
     # @param [Hash] opts the optional parameters
@@ -255,6 +271,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -264,6 +283,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DeliveryIndication')
       if @api_client.config.debugging
@@ -285,6 +305,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the delivery indications which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -317,6 +338,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -326,6 +350,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<DeliveryIndication>')
       if @api_client.config.debugging

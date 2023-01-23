@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # Create
     # Creates the entity with the given properties.
+
     # @param space_id 
     # @param entity The product component object with the properties which should be created.
     # @param [Hash] opts the optional parameters
@@ -130,6 +136,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -139,6 +148,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductComponent')
       if @api_client.config.debugging
@@ -160,6 +170,7 @@ module Wallee
 
     # Delete
     # Deletes the entity with the given id.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -192,6 +203,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(id)
@@ -201,6 +215,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SubscriptionProductComponentService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -221,6 +236,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the product component which should be returned.
     # @param [Hash] opts the optional parameters
@@ -254,6 +270,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -263,6 +282,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductComponent')
       if @api_client.config.debugging
@@ -284,6 +304,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the product component which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -316,6 +337,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -325,6 +349,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<SubscriptionProductComponent>')
       if @api_client.config.debugging
@@ -346,6 +371,7 @@ module Wallee
 
     # Update
     # This updates the entity with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the entity.
+
     # @param space_id 
     # @param entity The product component object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
@@ -378,6 +404,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -387,6 +416,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionProductComponent')
       if @api_client.config.debugging

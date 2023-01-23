@@ -36,6 +36,7 @@ module Wallee
 
     # All
     # This operation returns all entities which are available.
+
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<LegalOrganizationForm>, Fixnum, Hash)>] Array<LegalOrganizationForm> data, response status code and response headers
     def all_with_http_info(opts = {})
@@ -61,6 +62,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -70,6 +74,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<LegalOrganizationForm>')
       if @api_client.config.debugging
@@ -90,6 +95,7 @@ module Wallee
 
     # Find by Country
     # This operation returns all legal organization forms for a given country.
+
     # @param code The country in ISO 3166-1 alpha-2 format, for which all legal organization forms should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<LegalOrganizationForm>, Fixnum, Hash)>] Array<LegalOrganizationForm> data, response status code and response headers
@@ -119,6 +125,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -128,6 +137,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<LegalOrganizationForm>')
       if @api_client.config.debugging
@@ -148,6 +158,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param id The id of the legal organization form which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LegalOrganizationForm, Fixnum, Hash)>] LegalOrganizationForm data, response status code and response headers
@@ -177,6 +188,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -186,6 +200,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'LegalOrganizationForm')
       if @api_client.config.debugging

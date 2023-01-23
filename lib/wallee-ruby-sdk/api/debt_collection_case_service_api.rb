@@ -40,6 +40,7 @@ module Wallee
 
     # Add Collected Amount
     # Adds a new collected amount to the case, creating a new payment receipt.
+
     # @param space_id 
     # @param id The id of the debt collection case for which the amount should be added.
     # @param collected_amount The amount that has been collected.
@@ -81,6 +82,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -90,6 +94,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionReceipt')
       if @api_client.config.debugging
@@ -113,6 +118,7 @@ module Wallee
 
     # Attach Document
     # Attach an additional supporting document to the case.
+
     # @param space_id 
     # @param id The id of the debt collection case.
     # @param file_name The file name of the document that is uploaded.
@@ -154,6 +160,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -163,6 +172,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCaseDocument')
       if @api_client.config.debugging
@@ -184,6 +194,7 @@ module Wallee
 
     # Close
     # Closes the debt collection case, meaning no further money can be collected.
+
     # @param space_id 
     # @param id The id of the debt collection case which should be closed.
     # @param [Hash] opts the optional parameters
@@ -217,6 +228,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -226,6 +240,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
@@ -247,6 +262,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -277,6 +293,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -286,6 +305,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -307,6 +327,7 @@ module Wallee
 
     # Create
     # Creates the entity with the given properties.
+
     # @param space_id 
     # @param entity The debt collection case object with the properties which should be created.
     # @param [Hash] opts the optional parameters
@@ -339,6 +360,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -348,6 +372,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
@@ -369,6 +394,7 @@ module Wallee
 
     # Delete
     # Deletes the entity with the given id.
+
     # @param space_id 
     # @param id 
     # @param [Hash] opts the optional parameters
@@ -401,6 +427,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(id)
@@ -410,6 +439,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DebtCollectionCaseService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -430,6 +460,7 @@ module Wallee
 
     # Documents
     # Returns all documents that are attached to a debt collection case.
+
     # @param space_id 
     # @param id The id of the debt collection case for which the attached documents are returned.
     # @param [Hash] opts the optional parameters
@@ -463,6 +494,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -472,6 +506,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<DebtCollectionCaseDocument>')
       if @api_client.config.debugging
@@ -493,6 +528,7 @@ module Wallee
 
     # Mark Case As Prepared
     # This operation will mark a debt collection case as prepared and allow the collection process to proceed.
+
     # @param space_id 
     # @param id The id of the debt collection case which should be marked as prepared.
     # @param [Hash] opts the optional parameters
@@ -526,6 +562,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -535,6 +574,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
@@ -556,6 +596,7 @@ module Wallee
 
     # Mark Case As Reviewed
     # This operation will mark a debt collection case as reviewed and allow the collection process to proceed.
+
     # @param space_id 
     # @param id The id of the debt collection case which should be reviewed.
     # @param [Hash] opts the optional parameters
@@ -589,6 +630,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -598,6 +642,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
@@ -619,6 +664,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the debt collection case which should be returned.
     # @param [Hash] opts the optional parameters
@@ -652,6 +698,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -661,6 +710,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging
@@ -682,6 +732,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the cases which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -714,6 +765,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -723,6 +777,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<DebtCollectionCase>')
       if @api_client.config.debugging
@@ -744,6 +799,7 @@ module Wallee
 
     # Update
     # This updates the entity with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the entity.
+
     # @param space_id 
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
@@ -776,6 +832,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -785,6 +844,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'DebtCollectionCase')
       if @api_client.config.debugging

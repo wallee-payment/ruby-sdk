@@ -12,6 +12,7 @@ class TestConditionTypeAll < Test::Unit::TestCase
       config.user_id = app_user_id
       config.authentication_key = app_user_key
       config.default_headers = {"x-meta-header-ruby": 'value', "x-meta-header-ruby-2": 'value2'}
+      config.timeout = 60
     end
 
     condition_type_service = Wallee::ConditionTypeService.new

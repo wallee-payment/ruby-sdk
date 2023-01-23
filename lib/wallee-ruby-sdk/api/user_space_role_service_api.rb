@@ -39,6 +39,7 @@ module Wallee
 
     # Add Role
     # This operation grants the given role to the user in the given space.
+
     # @param user_id The id of the user to whom the role is assigned.
     # @param space_id The space to which the role is mapped.
     # @param role_id The role which is mapped to the user and space.
@@ -76,6 +77,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -85,6 +89,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'UserSpaceRole')
       if @api_client.config.debugging
@@ -106,6 +111,7 @@ module Wallee
 
     # List Roles
     # List all the roles that are assigned to the given user in the given space.
+
     # @param user_id The id of the user to whom the role is assigned.
     # @param space_id The space to which the role is mapped.
     # @param [Hash] opts the optional parameters
@@ -139,6 +145,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -148,6 +157,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<UserSpaceRole>')
       if @api_client.config.debugging
@@ -168,6 +178,7 @@ module Wallee
 
     # Remove Role
     # This operation removes the specified user space role.
+
     # @param id The id of user space role which should be removed
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
@@ -197,6 +208,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -206,6 +220,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: UserSpaceRoleService#remove_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"

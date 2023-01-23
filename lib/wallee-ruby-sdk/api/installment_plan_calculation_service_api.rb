@@ -38,6 +38,7 @@ module Wallee
 
     # Calculate Plans
     # This operation allows to calculate all plans for the given transaction. The transaction will not be changed in any way.
+
     # @param space_id 
     # @param transaction_id The transaction for which the plans should be calculated for.
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<InstallmentCalculatedPlan>')
       if @api_client.config.debugging

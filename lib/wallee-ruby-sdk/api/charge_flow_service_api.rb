@@ -38,6 +38,7 @@ module Wallee
 
     # applyFlow
     # 
+
     # @param space_id 
     # @param id The transaction id of the transaction which should be process asynchronously.
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -101,6 +106,7 @@ module Wallee
 
     # Cancel Charge Flow
     # This operation cancels the charge flow that is linked with the transaction indicated by the given ID.
+
     # @param space_id 
     # @param id The ID of the transaction for which the charge flow should be canceled.
     # @param [Hash] opts the optional parameters
@@ -134,6 +140,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -143,6 +152,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -164,6 +174,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -194,6 +205,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -203,6 +217,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -224,6 +239,7 @@ module Wallee
 
     # Fetch Charge Flow Payment Page URL
     # This operation allows to fetch the payment page URL that is been applied on the charge flow linked with the provided transaction. The operation might return an empty result when no payment page is needed or can be invoked.
+
     # @param space_id 
     # @param id The transaction id of the transaction for which the URL of the charge flow should be fetched.
     # @param [Hash] opts the optional parameters
@@ -257,6 +273,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -266,6 +285,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -287,6 +307,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the charge flow which should be returned.
     # @param [Hash] opts the optional parameters
@@ -320,6 +341,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -329,6 +353,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'ChargeFlow')
       if @api_client.config.debugging
@@ -350,6 +375,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the charge flows which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -382,6 +408,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -391,6 +420,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<ChargeFlow>')
       if @api_client.config.debugging
@@ -414,6 +444,7 @@ module Wallee
 
     # updateRecipient
     # 
+
     # @param space_id 
     # @param transaction_id The transaction id of the transaction whose recipient should be updated.
     # @param type The id of the charge flow configuration type to recipient should be updated for.
@@ -455,6 +486,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -464,6 +498,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ChargeFlowService#update_recipient\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"

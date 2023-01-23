@@ -20,7 +20,12 @@ require 'date'
 module Wallee
   class PaymentInitiationAdviceFileState
     
-    PENDING = 'PENDING'.freeze
+    CREATING = 'CREATING'.freeze
+    FAILED = 'FAILED'.freeze
+    CREATED = 'CREATED'.freeze
+    OVERDUE = 'OVERDUE'.freeze
+    UPLOADED = 'UPLOADED'.freeze
+    DOWNLOADED = 'DOWNLOADED'.freeze
     PROCESSED = 'PROCESSED'.freeze
 
     # Builds the enum from string

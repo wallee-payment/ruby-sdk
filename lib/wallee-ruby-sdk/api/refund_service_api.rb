@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -98,6 +103,7 @@ module Wallee
 
     # fail
     # This operation allows to mark a refund as failed which is in state MANUAL_CHECK.
+
     # @param space_id 
     # @param refund_id The id of the refund which should be marked as failed.
     # @param [Hash] opts the optional parameters
@@ -131,6 +137,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -140,6 +149,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
@@ -161,6 +171,7 @@ module Wallee
 
     # getRefundDocument
     # Returns the PDF document for the refund with given id.
+
     # @param space_id 
     # @param id The id of the refund to get the document for.
     # @param [Hash] opts the optional parameters
@@ -194,6 +205,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -203,6 +217,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -225,6 +240,7 @@ module Wallee
 
     # getRefundDocumentWithTargetMediaType
     # Returns the PDF document for the refund with given id and the given target media type.
+
     # @param space_id 
     # @param id The id of the refund to get the document for.
     # @param target_media_type_id The id of the target media type for which the refund should be generated for.
@@ -262,6 +278,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -271,6 +290,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'RenderedDocument')
       if @api_client.config.debugging
@@ -292,6 +312,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the refund which should be returned.
     # @param [Hash] opts the optional parameters
@@ -325,6 +346,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -334,6 +358,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
@@ -355,6 +380,7 @@ module Wallee
 
     # create
     # This operation creates and executes a refund of a particular transaction.
+
     # @param space_id 
     # @param refund The refund object which should be created.
     # @param [Hash] opts the optional parameters
@@ -387,6 +413,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(refund)
@@ -396,6 +425,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging
@@ -417,6 +447,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the refunds which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -449,6 +480,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -458,6 +492,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<Refund>')
       if @api_client.config.debugging
@@ -479,6 +514,7 @@ module Wallee
 
     # succeed
     # This operation allows to mark a refund as successful which is in state MANUAL_CHECK.
+
     # @param space_id 
     # @param refund_id The id of the refund which should be marked as successful.
     # @param [Hash] opts the optional parameters
@@ -512,6 +548,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -521,6 +560,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Refund')
       if @api_client.config.debugging

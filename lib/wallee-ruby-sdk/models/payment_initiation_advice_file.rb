@@ -24,7 +24,13 @@ module Wallee
     attr_accessor :created_on
 
     # 
+    attr_accessor :failure_message
+
+    # 
     attr_accessor :file_generated_on
+
+    # The shipping date indicates the date on which the pain file was transferred to an external processing system.
+    attr_accessor :forwarded_on
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -39,17 +45,23 @@ module Wallee
     attr_accessor :processed_on
 
     # 
+    attr_accessor :processor
+
+    # 
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'created_on' => :'createdOn',
+        :'failure_message' => :'failureMessage',
         :'file_generated_on' => :'fileGeneratedOn',
+        :'forwarded_on' => :'forwardedOn',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'processed_on' => :'processedOn',
+        :'processor' => :'processor',
         :'state' => :'state'
       }
     end
@@ -58,11 +70,14 @@ module Wallee
     def self.swagger_types
       {
         :'created_on' => :'DateTime',
+        :'failure_message' => :'String',
         :'file_generated_on' => :'DateTime',
+        :'forwarded_on' => :'DateTime',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
         :'processed_on' => :'DateTime',
+        :'processor' => :'PaymentProcessor',
         :'state' => :'PaymentInitiationAdviceFileState'
       }
     end
@@ -79,8 +94,16 @@ module Wallee
         self.created_on = attributes[:'createdOn']
       end
 
+      if attributes.has_key?(:'failureMessage')
+        self.failure_message = attributes[:'failureMessage']
+      end
+
       if attributes.has_key?(:'fileGeneratedOn')
         self.file_generated_on = attributes[:'fileGeneratedOn']
+      end
+
+      if attributes.has_key?(:'forwardedOn')
+        self.forwarded_on = attributes[:'forwardedOn']
       end
 
       if attributes.has_key?(:'id')
@@ -97,6 +120,10 @@ module Wallee
 
       if attributes.has_key?(:'processedOn')
         self.processed_on = attributes[:'processedOn']
+      end
+
+      if attributes.has_key?(:'processor')
+        self.processor = attributes[:'processor']
       end
 
       if attributes.has_key?(:'state')
@@ -123,11 +150,14 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           created_on == o.created_on &&
+          failure_message == o.failure_message &&
           file_generated_on == o.file_generated_on &&
+          forwarded_on == o.forwarded_on &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           processed_on == o.processed_on &&
+          processor == o.processor &&
           state == o.state
     end
 
@@ -140,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, file_generated_on, id, linked_space_id, name, processed_on, state].hash
+      [created_on, failure_message, file_generated_on, forwarded_on, id, linked_space_id, name, processed_on, processor, state].hash
     end
 
     # Builds the object from hash

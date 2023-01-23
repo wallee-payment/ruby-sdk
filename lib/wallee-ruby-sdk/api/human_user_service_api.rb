@@ -37,6 +37,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
     # @return [Array<(Integer, Fixnum, Hash)>] Integer data, response status code and response headers
@@ -63,6 +64,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -72,6 +76,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -92,6 +97,7 @@ module Wallee
 
     # Create
     # Creates the entity with the given properties.
+
     # @param entity The human user object with the properties which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(HumanUser, Fixnum, Hash)>] HumanUser data, response status code and response headers
@@ -120,6 +126,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -129,6 +138,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'HumanUser')
       if @api_client.config.debugging
@@ -149,6 +159,7 @@ module Wallee
 
     # Delete
     # Deletes the entity with the given id.
+
     # @param id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
@@ -177,6 +188,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(id)
@@ -186,6 +200,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: HumanUserService#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -205,6 +220,7 @@ module Wallee
 
     # Export
     # Exports the human users into a CSV file. The file will contain the properties defined in the request.
+
     # @param request The request controls the entries which are exported.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
@@ -233,6 +249,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -242,6 +261,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -262,6 +282,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param id The id of the human user which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(HumanUser, Fixnum, Hash)>] HumanUser data, response status code and response headers
@@ -291,6 +312,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -300,6 +324,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'HumanUser')
       if @api_client.config.debugging
@@ -320,6 +345,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param query The query restricts the human users which are returned by the search.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<HumanUser>, Fixnum, Hash)>] Array<HumanUser> data, response status code and response headers
@@ -348,6 +374,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -357,6 +386,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<HumanUser>')
       if @api_client.config.debugging
@@ -377,6 +407,7 @@ module Wallee
 
     # Update
     # This updates the entity with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the entity.
+
     # @param entity The object with all the properties which should be updated. The id and the version are required properties.
     # @param [Hash] opts the optional parameters
     # @return [Array<(HumanUser, Fixnum, Hash)>] HumanUser data, response status code and response headers
@@ -405,6 +436,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(entity)
@@ -414,6 +448,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'HumanUser')
       if @api_client.config.debugging

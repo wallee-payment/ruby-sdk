@@ -38,6 +38,7 @@ module Wallee
 
     # Build Payment Page URL
     # This operation creates the URL to which the user should be redirected to when the payment page should be used.
+
     # @param space_id 
     # @param id The id of the transaction which should be returned.
     # @param [Hash] opts the optional parameters
@@ -71,6 +72,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -80,6 +84,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging

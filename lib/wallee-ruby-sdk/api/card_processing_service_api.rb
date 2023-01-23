@@ -40,6 +40,7 @@ module Wallee
 
     # Process
     # The process method will process the transaction with the given card details without using 3-D secure.
+
     # @param space_id 
     # @param transaction_id The ID of the transaction which should be processed.
     # @param payment_method_configuration_id The payment method configuration ID which is applied to the transaction.
@@ -80,6 +81,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(card_data)
@@ -89,6 +93,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -112,6 +117,7 @@ module Wallee
 
     # Process With 3-D Secure
     # The process method will process the transaction with the given card details by eventually using 3-D secure. The buyer has to be redirect to the URL returned by this method.
+
     # @param space_id 
     # @param transaction_id The ID of the transaction which should be processed.
     # @param payment_method_configuration_id The payment method configuration ID which is applied to the transaction.
@@ -152,6 +158,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(card_data)
@@ -161,6 +170,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging

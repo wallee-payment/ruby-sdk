@@ -32,10 +32,12 @@ app_user_id = 512
 app_user_key = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ="
 
 # default_headers is an optional param, that represents headers sent to all requests
+# timeout is an optional param, that allows to configure custom timeout (default is 25 seconds)
 Wallee.configure do |config|
   config.user_id = app_user_id
   config.authentication_key = app_user_key
   config.default_headers = {"x-meta-custom-header": 'value-1', "x-meta-custom-header-2": 'value-2'}
+  config.timeout = 60
 end
 
 # TransactionService
@@ -53,9 +55,11 @@ space_id = 405
 app_user_id = 512
 app_user_key = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ="
 
+# timeout is an optional param, that allows to configure custom timeout (default is 25 seconds)
 Wallee.configure do |config|
     config.user_id = app_user_id
     config.authentication_key = app_user_key
+    config.timeout = 60
 end
 
 # TransactionService

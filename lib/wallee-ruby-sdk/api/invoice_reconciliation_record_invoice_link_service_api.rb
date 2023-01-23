@@ -38,6 +38,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -68,6 +69,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -77,6 +81,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -100,6 +105,7 @@ module Wallee
 
     # Link Invoice
     # Links the invoice reconciliation record with the provided invoice.
+
     # @param space_id 
     # @param record_id The ID of the invoice reconciliation record which should be linked.
     # @param completion_id The ID of the completion which should be linked.
@@ -139,6 +145,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -148,6 +157,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'InvoiceReconciliationRecordInvoiceLink')
       if @api_client.config.debugging
@@ -169,6 +179,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The ID of the invoice reconciliation record invoice link which should be returned.
     # @param [Hash] opts the optional parameters
@@ -202,6 +213,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -211,6 +225,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'InvoiceReconciliationRecordInvoiceLink')
       if @api_client.config.debugging
@@ -232,6 +247,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the invoice reconciliation record invoice link which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -264,6 +280,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -273,6 +292,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<InvoiceReconciliationRecordInvoiceLink>')
       if @api_client.config.debugging
@@ -295,6 +315,7 @@ module Wallee
 
     # Unlink Invoice
     # Unlinks the invoice reconciliation record from the provided invoice.
+
     # @param space_id 
     # @param record_id The ID of the invoice reconciliation record which should be unlinked.
     # @param completion_id The ID of the completion which should be unlinked.
@@ -332,6 +353,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -341,6 +365,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: InvoiceReconciliationRecordInvoiceLinkService#unlink_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"

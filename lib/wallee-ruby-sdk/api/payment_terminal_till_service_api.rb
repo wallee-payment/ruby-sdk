@@ -40,6 +40,7 @@ module Wallee
 
     # Perform Payment Terminal Transaction
     # Starts a payment terminal transaction and waits for its completion. If the call returns with a long polling timeout status, you may try again. The processing of the transaction will be picked up where it was left off.
+    # Timeout for this request is: 90 seconds.
     # @param space_id 
     # @param transaction_id The ID of the transaction which is used to process with the terminal.
     # @param terminal_id The ID of the terminal which should be used to process the transaction.
@@ -79,6 +80,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = 90
 
       # http body (model)
       post_body = nil
@@ -88,6 +92,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging
@@ -111,6 +116,7 @@ module Wallee
 
     # Perform Payment Terminal Transaction (using TID)
     # Starts a payment terminal transaction and waits for its completion. If the call returns with a long polling timeout status, you may try again. The processing of the transaction will be picked up where it was left off.
+    # Timeout for this request is: 90 seconds.
     # @param space_id 
     # @param transaction_id The ID of the transaction which is used to process with the terminal.
     # @param terminal_identifier The identifier (aka TID) of the terminal which should be used to process the transaction.
@@ -150,6 +156,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = 90
 
       # http body (model)
       post_body = nil
@@ -159,6 +168,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Transaction')
       if @api_client.config.debugging

@@ -121,8 +121,8 @@ module Wallee
         invalid_properties.push('invalid value for "last_completion", last_completion cannot be nil.')
       end
 
-      if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
-        invalid_properties.push('invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.')
+      if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 80
+        invalid_properties.push('invalid value for "statement_descriptor", the character length must be smaller than or equal to 80.')
       end
 
       if @transaction_id.nil?
@@ -140,7 +140,7 @@ module Wallee
       return false if @external_id.to_s.length < 1
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
       return false if @last_completion.nil?
-      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 22
+      return false if !@statement_descriptor.nil? && @statement_descriptor.to_s.length > 80
       return false if @transaction_id.nil?
       true
     end
@@ -176,8 +176,8 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] statement_descriptor Value to be assigned
     def statement_descriptor=(statement_descriptor)
-      if !statement_descriptor.nil? && statement_descriptor.to_s.length > 22
-        fail ArgumentError, 'invalid value for "statement_descriptor", the character length must be smaller than or equal to 22.'
+      if !statement_descriptor.nil? && statement_descriptor.to_s.length > 80
+        fail ArgumentError, 'invalid value for "statement_descriptor", the character length must be smaller than or equal to 80.'
       end
 
       @statement_descriptor = statement_descriptor

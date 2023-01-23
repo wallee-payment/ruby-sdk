@@ -59,7 +59,7 @@ module Wallee
     attr_accessor :temp_folder_path
 
     # The time limit for HTTP request in seconds.
-    # Default to 0 (never times out).
+    # Default to 25.
     attr_accessor :timeout
 
     ### TLS/SSL setting
@@ -96,7 +96,7 @@ module Wallee
       @scheme = 'https'
       @host = 'app-wallee.com:443'
       @base_path = '/api'
-      @timeout = 0
+      @timeout = 25
       @params_encoding = nil
       @cert_file = nil
       @key_file = nil

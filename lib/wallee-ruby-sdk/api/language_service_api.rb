@@ -36,6 +36,7 @@ module Wallee
 
     # All
     # This operation returns all languages.
+
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<RestLanguage>, Fixnum, Hash)>] Array<RestLanguage> data, response status code and response headers
     def all_with_http_info(opts = {})
@@ -61,6 +62,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -70,6 +74,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<RestLanguage>')
       if @api_client.config.debugging

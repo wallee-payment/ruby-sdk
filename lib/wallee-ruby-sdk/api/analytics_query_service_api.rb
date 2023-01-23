@@ -37,6 +37,7 @@ module Wallee
 
     # Cancel Execution
     # Cancels the specified query execution.
+
     # @param id The ID of the query execution to cancel.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
@@ -66,6 +67,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -75,6 +79,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AnalyticsQueryService#cancel_execution\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -97,6 +102,7 @@ module Wallee
 
     # Fetch Result
     # Fetches one batch of the result of a query execution.
+
     # @param id The ID of the query execution for which to fetch the result.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting.
@@ -132,6 +138,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -141,6 +150,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'AnalyticsQueryResultBatch')
       if @api_client.config.debugging
@@ -162,6 +172,7 @@ module Wallee
 
     # Generate Download URL
     # Generate a URL from which the results of a query execution can be downloaded in CSV format.
+
     # @param id The ID of the query execution for which to generate the download URL.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting.
@@ -193,6 +204,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -202,6 +216,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'String')
       if @api_client.config.debugging
@@ -221,6 +236,7 @@ module Wallee
 
     # Get Schemas
     # Get the schemas describing the available tables and their columns.
+
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<AnalyticsSchemaTable>, Fixnum, Hash)>] Array<AnalyticsSchemaTable> data, response status code and response headers
     def schema_with_http_info(opts = {})
@@ -246,6 +262,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -255,6 +274,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<AnalyticsSchemaTable>')
       if @api_client.config.debugging
@@ -275,6 +295,7 @@ module Wallee
 
     # Execution Status
     # Returns the current status of a query execution.
+
     # @param id The ID of the query execution for which to get the status.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AnalyticsQueryExecution, Fixnum, Hash)>] AnalyticsQueryExecution data, response status code and response headers
@@ -304,6 +325,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -313,6 +337,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'AnalyticsQueryExecution')
       if @api_client.config.debugging
@@ -333,6 +358,7 @@ module Wallee
 
     # Submit Query
     # Submits a query for execution.
+
     # @param query The query to submit.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AnalyticsQueryExecution, Fixnum, Hash)>] AnalyticsQueryExecution data, response status code and response headers
@@ -361,6 +387,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -370,6 +399,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'AnalyticsQueryExecution')
       if @api_client.config.debugging

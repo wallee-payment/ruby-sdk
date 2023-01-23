@@ -38,6 +38,7 @@ module Wallee
 
     # apply changes
     # This operation allows to apply changes on a subscription.
+
     # @param space_id 
     # @param request 
     # @param [Hash] opts the optional parameters
@@ -70,6 +71,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -79,6 +83,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionVersion')
       if @api_client.config.debugging
@@ -100,6 +105,7 @@ module Wallee
 
     # initialize
     # The initialize operation initializes a subscription. This method uses charge flows to carry out the transaction.
+
     # @param space_id 
     # @param subscription_id The provided subscription id will be used to lookup the subscription which should be initialized.
     # @param [Hash] opts the optional parameters
@@ -133,6 +139,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -142,6 +151,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionCharge')
       if @api_client.config.debugging
@@ -163,6 +173,7 @@ module Wallee
 
     # Count
     # Counts the number of items in the database as restricted by the given filter.
+
     # @param space_id 
     # @param [Hash] opts the optional parameters
     # @option opts [EntityQueryFilter] :filter The filter which restricts the entities which are used to calculate the count.
@@ -193,6 +204,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(opts[:'filter'])
@@ -202,6 +216,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Integer')
       if @api_client.config.debugging
@@ -223,6 +238,7 @@ module Wallee
 
     # Create
     # The create operation creates a new subscription and a corresponding subscription version.
+
     # @param space_id 
     # @param create_request 
     # @param [Hash] opts the optional parameters
@@ -255,6 +271,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(create_request)
@@ -264,6 +283,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionVersion')
       if @api_client.config.debugging
@@ -287,6 +307,7 @@ module Wallee
 
     # initializeSubscriberPresent
     # The initialize operation initializes a subscription when the subscriber is present. The method will initialize a transaction which has to be completed by using the transaction service.
+
     # @param space_id 
     # @param subscription_id 
     # @param [Hash] opts the optional parameters
@@ -324,6 +345,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -333,6 +357,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionCharge')
       if @api_client.config.debugging
@@ -354,6 +379,7 @@ module Wallee
 
     # Read
     # Reads the entity with the given &#39;id&#39; and returns it.
+
     # @param space_id 
     # @param id The id of the subscription which should be returned.
     # @param [Hash] opts the optional parameters
@@ -387,6 +413,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -396,6 +425,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Subscription')
       if @api_client.config.debugging
@@ -417,6 +447,7 @@ module Wallee
 
     # Search
     # Searches for the entities as specified by the given query.
+
     # @param space_id 
     # @param query The query restricts the subscriptions which are returned by the search.
     # @param [Hash] opts the optional parameters
@@ -449,6 +480,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -458,6 +492,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<Subscription>')
       if @api_client.config.debugging
@@ -480,6 +515,7 @@ module Wallee
 
     # Search Subscription Invoices
     # This operation allows to search for subscription invoices.
+
     # @param space_id 
     # @param subscription_id The id of the subscription for which the invoices should be searched for.
     # @param query The query restricts the invoices which are returned by the search.
@@ -516,6 +552,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(query)
@@ -525,6 +564,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Array<TransactionInvoice>')
       if @api_client.config.debugging
@@ -547,6 +587,7 @@ module Wallee
 
     # terminate
     # This operation allows to terminate a subscription.
+
     # @param space_id 
     # @param subscription_id The subscription id identifies the subscription which should be terminated.
     # @param respect_termination_period The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
@@ -584,6 +625,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -593,6 +637,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SubscriptionService#terminate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
@@ -614,6 +659,7 @@ module Wallee
 
     # update
     # This operation allows to update the subscription.
+
     # @param space_id 
     # @param subscription_id 
     # @param request 
@@ -650,6 +696,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = @api_client.object_to_http_body(request)
@@ -659,6 +708,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'Subscription')
       if @api_client.config.debugging
@@ -681,6 +731,7 @@ module Wallee
 
     # update product version
     # The update product version operation updates the product version of the subscription to the latest active product version.
+
     # @param space_id 
     # @param subscription_id The subscription id identifies the subscription which should be updated to the latest version.
     # @param respect_termination_period The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
@@ -718,6 +769,9 @@ module Wallee
 
       # form parameters
       form_params = {}
+      
+      # connection timeout
+      timeout = @api_client.get_connection_timeout()
 
       # http body (model)
       post_body = nil
@@ -727,6 +781,7 @@ module Wallee
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
+        :timeout => timeout,
         :auth_names => auth_names,
         :return_type => 'SubscriptionVersion')
       if @api_client.config.debugging
