@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class ApplicationUserUpdate
-    # The user name is used to identify the application user in administrative interfaces.
+    # The name used to identify the application user.
     attr_accessor :name
 
-    # The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+    # The maximum number of API requests that are accepted every 2 minutes.
     attr_accessor :request_limit
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

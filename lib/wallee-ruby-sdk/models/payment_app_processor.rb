@@ -32,13 +32,13 @@ module Wallee
     # The external ID corresponds to the ID that was provided during creation of the processor.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The installation ID identifies the Web App installation.
     attr_accessor :installation_id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The name of the processor will be displayed within the user interfaces that the merchant is interacting with.
@@ -50,7 +50,7 @@ module Wallee
     # When the user sets the processor into the production mode the user will be forwarded to this URL to configure the production environment. When no URL is provided no redirection will happen.
     attr_accessor :production_mode_url
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -65,7 +65,7 @@ module Wallee
     # 
     attr_accessor :usable_in_production_since
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

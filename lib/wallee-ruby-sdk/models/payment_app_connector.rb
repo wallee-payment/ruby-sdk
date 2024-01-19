@@ -35,10 +35,10 @@ module Wallee
     # The external ID corresponds to the ID provided during inserting of the processor.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The name of the connector will be displayed within the user interfaces that the merchant is interacting with.
@@ -53,13 +53,13 @@ module Wallee
     # The refund configuration defines how refunds are processed. If it is not present it means that refunds are not supported by this connector.
     attr_accessor :refund_configuration
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The updated on date indicates when the last time the connector was updated on.
     attr_accessor :updated_on
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

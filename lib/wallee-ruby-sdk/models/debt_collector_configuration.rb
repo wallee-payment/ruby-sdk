@@ -29,16 +29,16 @@ module Wallee
     # The collector configuration is only enabled for the selected space views. In case the set is empty the collector configuration is enabled for all space views.
     attr_accessor :enabled_space_views
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The collector configuration name is used internally to identify a specific collector configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The priority defines the order in which the collector configuration is tried to be applied onto a debt collection case. The higher the value the less likely the configuration is applied on a case.
@@ -47,10 +47,10 @@ module Wallee
     # When the review is skipped there will be no review for cases which use this configuration.
     attr_accessor :skip_review_enabled
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -29,16 +29,16 @@ module Wallee
     # 
     attr_accessor :deprecation_reason
 
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
     # 
     attr_accessor :feature
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # 
@@ -52,6 +52,9 @@ module Wallee
 
     # 
     attr_accessor :processor
+
+    # 
+    attr_accessor :supported_currencies
 
     # 
     attr_accessor :supported_customers_presences
@@ -73,6 +76,7 @@ module Wallee
         :'payment_method_brand' => :'paymentMethodBrand',
         :'primary_risk_taker' => :'primaryRiskTaker',
         :'processor' => :'processor',
+        :'supported_currencies' => :'supportedCurrencies',
         :'supported_customers_presences' => :'supportedCustomersPresences',
         :'supported_features' => :'supportedFeatures'
       }
@@ -92,6 +96,7 @@ module Wallee
         :'payment_method_brand' => :'PaymentMethodBrand',
         :'primary_risk_taker' => :'PaymentPrimaryRiskTaker',
         :'processor' => :'Integer',
+        :'supported_currencies' => :'Array<String>',
         :'supported_customers_presences' => :'Array<CustomersPresence>',
         :'supported_features' => :'Array<Integer>'
       }
@@ -155,6 +160,12 @@ module Wallee
         self.processor = attributes[:'processor']
       end
 
+      if attributes.has_key?(:'supportedCurrencies')
+        if (value = attributes[:'supportedCurrencies']).is_a?(Array)
+          self.supported_currencies = value
+        end
+      end
+
       if attributes.has_key?(:'supportedCustomersPresences')
         if (value = attributes[:'supportedCustomersPresences']).is_a?(Array)
           self.supported_customers_presences = value
@@ -197,6 +208,7 @@ module Wallee
           payment_method_brand == o.payment_method_brand &&
           primary_risk_taker == o.primary_risk_taker &&
           processor == o.processor &&
+          supported_currencies == o.supported_currencies &&
           supported_customers_presences == o.supported_customers_presences &&
           supported_features == o.supported_features
     end
@@ -210,7 +222,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data_collection_type, deprecated, deprecation_reason, description, feature, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_customers_presences, supported_features].hash
+      [data_collection_type, deprecated, deprecation_reason, description, feature, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_currencies, supported_customers_presences, supported_features].hash
     end
 
     # Builds the object from hash

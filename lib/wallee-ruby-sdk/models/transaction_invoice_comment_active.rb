@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class TransactionInvoiceCommentActive
-    # 
+    # The comment's actual content.
     attr_accessor :content
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

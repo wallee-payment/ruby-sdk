@@ -55,7 +55,7 @@ module Wallee
       {
         :'id' => :'Integer',
         :'version' => :'Integer',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'name' => :'Hash<String, String>',
         :'optional' => :'BOOLEAN',
         :'product_version' => :'Integer',
         :'sort_order' => :'Integer'
@@ -79,7 +79,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'optional')

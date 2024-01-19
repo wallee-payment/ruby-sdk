@@ -136,6 +136,41 @@ payment_page_url = transaction_payment_page_service.payment_page_url(space_id, t
 # redirect to payment_page_url
 ```
 
+### Integrating Webhook Payload Signing Mechanism into webhook callback handler
+
+The HTTP request which is sent for a state change of an entity now includes an additional field `state`, which provides information about the update of the monitored entity's state. This enhancement is a result of the implementation of our webhook encryption mechanism.
+
+Payload field `state` provides direct information about the state update of the entity, making additional API calls to retrieve the entity state redundant.
+
+#### ⚠️ Warning: Generic Pseudocode
+
+> **The provided pseudocode is intentionally generic and serves to illustrate the process of enhancing your API to leverage webhook payload signing. It is not a complete implementation.**
+>
+> Please ensure that you adapt and extend this code to meet the specific needs of your application, including appropriate security measures and error handling.
+For a detailed webhook payload signing mechanism understanding we highly recommend referring to our comprehensive
+[Webhook Payload Signing Documentation](https://app-wallee.com/doc/webhooks#_webhook_payload_signing_mechanism).
+
+```ruby
+post '/webhook/callback' do
+    request_payload = request.body.read
+    signature = request.env['HTTP_X_SIGNATURE']
+
+    if signature.nil? || signature.empty?
+        # Make additional API call to retrieve the entity state
+        # ...
+    else
+        if webhook_encryption_service.is_content_valid(signature, request_payload)
+            # Parse request_payload to extract 'state' value
+            # Process entity's state change
+            # ...
+        end
+    end
+
+    # Process the received webhook data
+    # ...
+end
+```
+
 ## License
 
 Please see the [license file](https://github.com/wallee-payment/ruby-sdk/blob/master/LICENSE) for more information.

@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # 
   class Feature
-    # 
+    # Whether the feature is in beta stage and there may still be some issues.
     attr_accessor :beta
 
-    # 
+    # The category that the feature belongs to.
     attr_accessor :category
 
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The path to the feature's logo image.
     attr_accessor :logo_path
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The features that must be enabled for this feature to work properly.
     attr_accessor :required_features
 
-    # 
+    # When listing features, they can be sorted by this number.
     attr_accessor :sort_order
 
     # 

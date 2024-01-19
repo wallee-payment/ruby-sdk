@@ -26,7 +26,7 @@ module Wallee
     # If a transaction meets all selected conditions the installment plan will be available to the customer to be selected.
     attr_accessor :conditions
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The installment fee is a fixed amount that is charged additionally when applying this installment plan.
@@ -35,7 +35,7 @@ module Wallee
     # The interest rate is a percentage of the total amount that is charged additionally when applying this installment plan.
     attr_accessor :interest_rate
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The installment plan can only be applied if the orders total is at least the defined minimal amount.
@@ -47,7 +47,7 @@ module Wallee
     # A installment plan can be enabled only for specific payment method configurations. Other payment methods will not be selectable by the buyer.
     attr_accessor :payment_method_configurations
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The sort order controls in which order the installation plans are listed. The sort order is used to order the plans in ascending order.
@@ -56,7 +56,7 @@ module Wallee
     # 
     attr_accessor :space_reference
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The tax class determines the taxes which are applicable on all fees linked to the installment plan.
@@ -68,7 +68,7 @@ module Wallee
     # The title of the installment plan is used within the payment process. The title is visible to the buyer.
     attr_accessor :title
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -112,7 +112,7 @@ module Wallee
         :'state' => :'CreationEntityState',
         :'tax_class' => :'TaxClass',
         :'terms_and_conditions' => :'ResourcePath',
-        :'title' => :'DatabaseTranslatedString',
+        :'title' => :'Hash<String, String>',
         :'version' => :'Integer'
       }
     end
@@ -190,7 +190,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+        if (value = attributes[:'title']).is_a?(Hash)
+          self.title = value
+        end
       end
 
       if attributes.has_key?(:'version')

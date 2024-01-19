@@ -23,25 +23,25 @@ module Wallee
     # If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
     attr_accessor :conditions
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
     attr_accessor :priority
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

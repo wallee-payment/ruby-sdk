@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # The installment plan slice defines a single slice of an installment plan.
   class InstallmentPlanSliceConfiguration
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The title of this slices line items. The title is visible to the buyer.
     attr_accessor :line_item_title
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The period defines how much time passes between the last slice and this slice. The charge is triggered at the end of the period. When the slice should be charged immediately the period needs to be zero.
@@ -35,7 +35,7 @@ module Wallee
     # The installment plan this slice belongs to.
     attr_accessor :plan
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The priority controls in which order the slices are applied. The lower the value the higher the precedence.
@@ -44,10 +44,10 @@ module Wallee
     # The proportion defines how much of the total installment payment has to be paid in this slice. The value is summed up with the other slices and the ratio of all proportions compared to proportion of this slice determines how much the buyer has to pay in this slice.
     attr_accessor :proportion
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -70,7 +70,7 @@ module Wallee
     def self.swagger_types
       {
         :'id' => :'Integer',
-        :'line_item_title' => :'DatabaseTranslatedString',
+        :'line_item_title' => :'Hash<String, String>',
         :'linked_space_id' => :'Integer',
         :'period' => :'String',
         :'plan' => :'InstallmentPlanConfiguration',
@@ -95,7 +95,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'lineItemTitle')
-        self.line_item_title = attributes[:'lineItemTitle']
+        if (value = attributes[:'lineItemTitle']).is_a?(Hash)
+          self.line_item_title = value
+        end
       end
 
       if attributes.has_key?(:'linkedSpaceId')

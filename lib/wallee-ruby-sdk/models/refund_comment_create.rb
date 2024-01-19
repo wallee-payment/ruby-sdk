@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class RefundCommentCreate
-    # 
+    # The comment's actual content.
     attr_accessor :content
 
     # 

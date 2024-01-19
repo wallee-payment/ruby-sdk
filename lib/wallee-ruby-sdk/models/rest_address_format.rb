@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class RestAddressFormat
-    # The example post codes allow the user to understand what we expect here.
+    # A list of sample post codes.
     attr_accessor :post_code_examples
 
-    # The post code regex is a regular expression which can validates the input of the post code.
+    # The regular expression to validate post codes.
     attr_accessor :post_code_regex
 
-    # The required fields indicate what fields are required within an address to comply with the address format.
+    # The fields that are required in the address format.
     attr_accessor :required_fields
 
-    # The used fields indicate what fields are used within this address format.
+    # The fields that are used in the address format.
     attr_accessor :used_fields
 
     # Attribute mapping from ruby-style variable name to JSON key.

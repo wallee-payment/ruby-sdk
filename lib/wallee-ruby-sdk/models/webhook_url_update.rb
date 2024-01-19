@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class WebhookUrlUpdate
-    # The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the webhook URL.
     attr_accessor :name
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
+    # The actual URL where notifications about entity changes are sent to.
     attr_accessor :url
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

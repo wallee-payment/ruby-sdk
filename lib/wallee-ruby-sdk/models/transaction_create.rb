@@ -47,7 +47,7 @@ module Wallee
     # 
     attr_accessor :invoice_merchant_reference
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
     # 
@@ -56,7 +56,7 @@ module Wallee
     # 
     attr_accessor :merchant_reference
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # 

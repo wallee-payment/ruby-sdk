@@ -20,11 +20,11 @@ require 'date'
 module Wallee
   class CardAuthenticationResponse
     
-    ENROLLMENT_VERIFICATION_ERROR = 'ENROLLMENT_VERIFICATION_ERROR'.freeze
-    NOT_ENROLLED = 'NOT_ENROLLED'.freeze
-    AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR'.freeze
-    AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED'.freeze
     FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED'.freeze
+    AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED'.freeze
+    NOT_ENROLLED = 'NOT_ENROLLED'.freeze
+    ENROLLMENT_ERROR = 'ENROLLMENT_ERROR'.freeze
+    AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string

@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class ChargeAttempt
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
@@ -38,7 +38,7 @@ module Wallee
     # 
     attr_accessor :connector_configuration
 
-    # The created on date indicates the date on which the entity was stored into the database.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
     # The customers presence indicates which kind of customer interaction was used during the charge attempt.
@@ -62,13 +62,13 @@ module Wallee
     # 
     attr_accessor :labels
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
     # 
     attr_accessor :next_update_on
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # 
@@ -80,7 +80,7 @@ module Wallee
     # 
     attr_accessor :space_view_id
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -101,11 +101,11 @@ module Wallee
     # The user failure message contains the message for the user in case the attempt failed. The message is localized into the language specified on the transaction.
     attr_accessor :user_failure_message
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # 
-    attr_accessor :wallet_type
+    attr_accessor :wallet
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -138,7 +138,7 @@ module Wallee
         :'token_version' => :'tokenVersion',
         :'user_failure_message' => :'userFailureMessage',
         :'version' => :'version',
-        :'wallet_type' => :'walletType'
+        :'wallet' => :'wallet'
       }
     end
 
@@ -173,7 +173,7 @@ module Wallee
         :'token_version' => :'TokenVersion',
         :'user_failure_message' => :'String',
         :'version' => :'Integer',
-        :'wallet_type' => :'WalletType'
+        :'wallet' => :'WalletType'
       }
     end
 
@@ -299,8 +299,8 @@ module Wallee
         self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'walletType')
-        self.wallet_type = attributes[:'walletType']
+      if attributes.has_key?(:'wallet')
+        self.wallet = attributes[:'wallet']
       end
     end
 
@@ -365,7 +365,7 @@ module Wallee
           token_version == o.token_version &&
           user_failure_message == o.user_failure_message &&
           version == o.version &&
-          wallet_type == o.wallet_type
+          wallet == o.wallet
     end
 
     # @see the `==` method
@@ -377,7 +377,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version, wallet_type].hash
+      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version, wallet].hash
     end
 
     # Builds the object from hash

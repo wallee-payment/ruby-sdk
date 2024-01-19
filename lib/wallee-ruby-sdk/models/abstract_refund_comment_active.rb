@@ -19,7 +19,7 @@ require 'date'
 
 module Wallee
   class AbstractRefundCommentActive
-    # 
+    # The comment's actual content.
     attr_accessor :content
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -26,10 +26,10 @@ module Wallee
     # The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The name of the fee should describe for the subscriber in few words for what the fee is for.
@@ -47,7 +47,7 @@ module Wallee
     # 
     attr_accessor :type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -70,10 +70,10 @@ module Wallee
     def self.swagger_types
       {
         :'component' => :'SubscriptionProductComponent',
-        :'description' => :'DatabaseTranslatedString',
+        :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'name' => :'DatabaseTranslatedString',
+        :'name' => :'Hash<String, String>',
         :'on_downgrade_credited_amount' => :'Array<PersistableCurrencyAmount>',
         :'on_upgrade_credited_amount' => :'Array<PersistableCurrencyAmount>',
         :'setup_fee' => :'Array<PersistableCurrencyAmount>',
@@ -95,7 +95,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'id')
@@ -107,7 +109,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'onDowngradeCreditedAmount')

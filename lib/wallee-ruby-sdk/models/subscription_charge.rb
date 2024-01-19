@@ -38,22 +38,22 @@ module Wallee
     # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
     attr_accessor :failed_url
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
     # 
     attr_accessor :ledger_entries
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
     attr_accessor :planned_execution_date
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # 
@@ -62,7 +62,7 @@ module Wallee
     # 
     attr_accessor :reference
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The field subscription indicates the subscription to which the charge belongs to.
@@ -80,7 +80,7 @@ module Wallee
     # 
     attr_accessor :type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

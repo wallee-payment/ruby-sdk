@@ -23,14 +23,26 @@ module Wallee
     # 
     attr_accessor :component
 
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
     # 
     attr_accessor :quantity
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'component' => :'component',
-        :'quantity' => :'quantity'
+        :'id' => :'id',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'quantity' => :'quantity',
+        :'version' => :'version'
       }
     end
 
@@ -38,7 +50,10 @@ module Wallee
     def self.swagger_types
       {
         :'component' => :'Integer',
-        :'quantity' => :'Float'
+        :'id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'quantity' => :'Float',
+        :'version' => :'Integer'
       }
     end
 
@@ -54,8 +69,20 @@ module Wallee
         self.component = attributes[:'component']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
       if attributes.has_key?(:'quantity')
         self.quantity = attributes[:'quantity']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -78,7 +105,10 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           component == o.component &&
-          quantity == o.quantity
+          id == o.id &&
+          linked_space_id == o.linked_space_id &&
+          quantity == o.quantity &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -90,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [component, quantity].hash
+      [component, id, linked_space_id, quantity, version].hash
     end
 
     # Builds the object from hash

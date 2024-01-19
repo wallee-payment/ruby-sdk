@@ -29,7 +29,7 @@ module Wallee
     # When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
     attr_accessor :enabled_for_one_click_payment
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
     # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
@@ -41,7 +41,7 @@ module Wallee
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.

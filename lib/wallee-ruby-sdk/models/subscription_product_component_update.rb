@@ -86,10 +86,10 @@ module Wallee
         :'component_change_weight' => :'Integer',
         :'component_group' => :'Integer',
         :'default_component' => :'BOOLEAN',
-        :'description' => :'DatabaseTranslatedStringCreate',
+        :'description' => :'Hash<String, String>',
         :'maximal_quantity' => :'Float',
         :'minimal_quantity' => :'Float',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'name' => :'Hash<String, String>',
         :'quantity_step' => :'Float',
         :'reference' => :'Integer',
         :'sort_order' => :'Integer',
@@ -126,7 +126,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'maximalQuantity')
@@ -138,7 +140,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'quantityStep')

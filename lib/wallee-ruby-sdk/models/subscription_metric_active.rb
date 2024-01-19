@@ -47,8 +47,8 @@ module Wallee
       {
         :'id' => :'Integer',
         :'version' => :'Integer',
-        :'description' => :'DatabaseTranslatedStringCreate',
-        :'name' => :'DatabaseTranslatedStringCreate'
+        :'description' => :'Hash<String, String>',
+        :'name' => :'Hash<String, String>'
       }
     end
 
@@ -69,11 +69,15 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
     end
 

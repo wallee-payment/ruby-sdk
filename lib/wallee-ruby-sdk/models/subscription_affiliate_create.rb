@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class SubscriptionAffiliateCreate
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # 
     attr_accessor :name
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.

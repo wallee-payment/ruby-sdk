@@ -20,49 +20,49 @@ require 'date'
 module Wallee
   # 
   class SpaceAddressCreate
-    # 
+    # The city, town or village.
     attr_accessor :city
 
-    # 
+    # The two-letter country code (ISO 3166 format).
     attr_accessor :country
 
-    # 
+    # The dependent locality which is a sub-division of the state.
     attr_accessor :dependent_locality
 
-    # The email address is used within emails and as reply to address.
+    # The email address used for communication with clients.
     attr_accessor :email_address
 
-    # 
+    # The family or last name.
     attr_accessor :family_name
 
-    # 
+    # The given or first name.
     attr_accessor :given_name
 
-    # 
+    # The phone number of a mobile phone.
     attr_accessor :mobile_phone_number
 
-    # 
+    # The organization's name.
     attr_accessor :organization_name
 
-    # 
+    # The phone number.
     attr_accessor :phone_number
 
-    # 
+    # The name of the region, typically a state, county, province or prefecture.
     attr_accessor :postal_state
 
-    # 
+    # The postal code, also known as ZIP, postcode, etc.
     attr_accessor :postcode
 
-    # 
+    # The sales tax number of the organization.
     attr_accessor :sales_tax_number
 
-    # 
+    # The salutation e.g. Mrs, Mr, Dr.
     attr_accessor :salutation
 
-    # The sorting code identifies the post office at which the post box is located in.
+    # The sorting code identifying the post office where the PO Box is located.
     attr_accessor :sorting_code
 
-    # 
+    # The street or PO Box.
     attr_accessor :street
 
     # Attribute mapping from ruby-style variable name to JSON key.

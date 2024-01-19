@@ -20,40 +20,40 @@ require 'date'
 module Wallee
   # 
   class HumanUser
-    # The email address of the user.
+    # The user's email address.
     attr_accessor :email_address
 
-    # Defines whether a user is verified or not.
+    # Whether the user's email address has been verified.
     attr_accessor :email_address_verified
 
-    # The first name of the user.
+    # The user's first name.
     attr_accessor :firstname
 
-    # The preferred language of the user.
+    # The user's preferred language.
     attr_accessor :language
 
-    # The last name of the user.
+    # The user's last name.
     attr_accessor :lastname
 
-    # 
+    # The user's mobile phone number.
     attr_accessor :mobile_phone_number
 
-    # Defines whether a users mobile phone number is verified or not.
+    # Whether the user's mobile phone number has been verified.
     attr_accessor :mobile_phone_verified
 
-    # The primary account links the user to a specific account.
+    # The primary account that the user belongs to.
     attr_accessor :primary_account
 
-    # The scope to which the user belongs to.
+    # The scope that the user belongs to.
     attr_accessor :scope
 
-    # The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+    # The user's time zone. If none is specified, the one provided by the browser will be used.
     attr_accessor :time_zone
 
-    # Defines whether two-factor authentication is enabled for this user.
+    # Whether two-factor authentication is enabled for this user.
     attr_accessor :two_factor_enabled
 
-    # 
+    # The type of two-factor authentication that is enabled for the user.
     attr_accessor :two_factor_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -84,8 +84,8 @@ module Wallee
         :'lastname' => :'String',
         :'mobile_phone_number' => :'String',
         :'mobile_phone_verified' => :'BOOLEAN',
-        :'primary_account' => :'Account',
-        :'scope' => :'Scope',
+        :'primary_account' => :'Integer',
+        :'scope' => :'Integer',
         :'time_zone' => :'String',
         :'two_factor_enabled' => :'BOOLEAN',
         :'two_factor_type' => :'TwoFactorAuthenticationType'

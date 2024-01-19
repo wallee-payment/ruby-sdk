@@ -38,13 +38,13 @@ module Wallee
     # The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
     attr_accessor :enabled_currencies
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The increment number represents the version number incremented whenever a new version is activated.
     attr_accessor :increment_number
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
@@ -59,7 +59,7 @@ module Wallee
     # 
     attr_accessor :obsoleted_on
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # Each product version is linked to a product.
@@ -74,13 +74,13 @@ module Wallee
     # 
     attr_accessor :retiring_started_on
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Strategy that is used for tax calculation in fees.
     attr_accessor :tax_calculation
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -123,7 +123,7 @@ module Wallee
         :'increment_number' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'minimal_number_of_periods' => :'Integer',
-        :'name' => :'DatabaseTranslatedString',
+        :'name' => :'Hash<String, String>',
         :'number_of_notice_periods' => :'Integer',
         :'obsoleted_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
@@ -188,7 +188,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'numberOfNoticePeriods')

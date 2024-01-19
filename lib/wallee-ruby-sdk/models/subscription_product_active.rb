@@ -35,7 +35,7 @@ module Wallee
     # The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
     attr_accessor :sort_order
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

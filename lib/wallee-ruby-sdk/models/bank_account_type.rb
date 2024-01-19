@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class BankAccountType
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # 
     attr_accessor :identifier_name
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

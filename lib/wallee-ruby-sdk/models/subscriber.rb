@@ -38,19 +38,19 @@ module Wallee
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
     attr_accessor :language
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
@@ -59,10 +59,10 @@ module Wallee
     # 
     attr_accessor :shipping_address
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

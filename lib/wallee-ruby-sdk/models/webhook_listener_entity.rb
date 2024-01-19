@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerEntity
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The name used to identify the webhook listener entity.
     attr_accessor :name
 
-    # 
+    # The name used to programmatically identify the webhook listener entity.
     attr_accessor :technical_name
 
     # Attribute mapping from ruby-style variable name to JSON key.

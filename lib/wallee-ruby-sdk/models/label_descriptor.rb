@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # 
   class LabelDescriptor
-    # 
+    # The label's category.
     attr_accessor :category
 
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The features that this label belongs to.
     attr_accessor :features
 
-    # 
+    # The group that this label belongs to.
     attr_accessor :group
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The type of the label's value.
     attr_accessor :type
 
-    # 
+    # When listing labels, they can be sorted by this number.
     attr_accessor :weight
 
     # Attribute mapping from ruby-style variable name to JSON key.

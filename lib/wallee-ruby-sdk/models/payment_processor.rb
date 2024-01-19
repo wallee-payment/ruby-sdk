@@ -23,7 +23,7 @@ module Wallee
     # 
     attr_accessor :company_name
 
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
     # 
@@ -32,13 +32,13 @@ module Wallee
     # 
     attr_accessor :headquarters_location
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # 
     attr_accessor :logo_path
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # 

@@ -64,9 +64,9 @@ module Wallee
         :'id' => :'Integer',
         :'version' => :'Integer',
         :'component' => :'Integer',
-        :'description' => :'DatabaseTranslatedStringCreate',
-        :'ledger_entry_title' => :'DatabaseTranslatedStringCreate',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'description' => :'Hash<String, String>',
+        :'ledger_entry_title' => :'Hash<String, String>',
+        :'name' => :'Hash<String, String>',
         :'number_of_free_trial_periods' => :'Integer',
         :'period_fee' => :'Array<PersistableCurrencyAmountUpdate>'
       }
@@ -93,15 +93,21 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'ledgerEntryTitle')
-        self.ledger_entry_title = attributes[:'ledgerEntryTitle']
+        if (value = attributes[:'ledgerEntryTitle']).is_a?(Hash)
+          self.ledger_entry_title = value
+        end
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'numberOfFreeTrialPeriods')

@@ -20,31 +20,31 @@ require 'date'
 module Wallee
   # 
   class ApplicationUser
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The scope to which the user belongs to.
+    # The scope that the user belongs to.
     attr_accessor :scope
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # 
+    # The user's type which defines its role and capabilities.
     attr_accessor :user_type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
-    # The user name is used to identify the application user in administrative interfaces.
+    # The name used to identify the application user.
     attr_accessor :name
 
-    # The account that this user is associated with. The account owner will be able to manage this user.
+    # The primary account that the user belongs to.
     attr_accessor :primary_account
 
-    # The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+    # The maximum number of API requests that are accepted every 2 minutes.
     attr_accessor :request_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -67,12 +67,12 @@ module Wallee
       {
         :'id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
-        :'scope' => :'Scope',
+        :'scope' => :'Integer',
         :'state' => :'CreationEntityState',
         :'user_type' => :'UserType',
         :'version' => :'Integer',
         :'name' => :'String',
-        :'primary_account' => :'Account',
+        :'primary_account' => :'Integer',
         :'request_limit' => :'Integer'
       }
     end

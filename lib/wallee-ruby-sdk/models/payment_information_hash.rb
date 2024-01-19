@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # A payment information hash is calculated based on the information entered by the user. The same input leads to the same hash. The hash is collision free.
   class PaymentInformationHash
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # 

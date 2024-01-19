@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # 
   class Role
-    # The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
+    # The account the role belongs to. The role can only be assigned within this account.
     attr_accessor :account
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The name of this role is used to identify the role within administrative interfaces.
+    # The name used to identify the role.
     attr_accessor :name
 
-    # Set of permissions that are granted to this role.
+    # The permissions granted to users with this role.
     attr_accessor :permissions
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # Defines whether having been granted this role will force a user to use two-factor authentication.
+    # Whether users with this role are required to use two-factor authentication.
     attr_accessor :two_factor_required
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -63,7 +63,7 @@ module Wallee
       {
         :'account' => :'Account',
         :'id' => :'Integer',
-        :'name' => :'DatabaseTranslatedString',
+        :'name' => :'Hash<String, String>',
         :'permissions' => :'Array<Permission>',
         :'planned_purge_date' => :'DateTime',
         :'state' => :'RoleState',
@@ -89,7 +89,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'permissions')

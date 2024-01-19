@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class LegalOrganizationForm
-    # 
+    # The two-letter code of the country the legal organization form is used in (ISO 3166-1 alpha-2 format).
     attr_accessor :country
 
-    # 
+    # The localized descriptions of the legal organization form.
     attr_accessor :description
 
-    # 
+    # The English name of the legal organization form.
     attr_accessor :english_description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized shortcuts of the legal organization form.
     attr_accessor :shortcut
 
     # Attribute mapping from ruby-style variable name to JSON key.

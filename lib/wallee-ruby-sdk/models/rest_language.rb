@@ -20,22 +20,25 @@ require 'date'
 module Wallee
   # 
   class RestLanguage
-    # The country code represents the region of the language as a 2 letter ISO code.
+    # The two-letter code of the language's region (ISO 3166-1 alpha-2 format).
     attr_accessor :country_code
 
-    # The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
+    # The language's IETF tag consisting of the two-letter ISO code and region e.g. en-US, de-CH.
     attr_accessor :ietf_code
 
-    # The ISO 2 letter code represents the language with two letters.
+    # The language's two-letter code (ISO 639-1 format).
     attr_accessor :iso2_code
 
-    # The ISO 3 letter code represents the language with three letters.
+    # The language's three-letter code (ISO 639-2/T format).
     attr_accessor :iso3_code
 
-    # The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
+    # The name of the language.
+    attr_accessor :name
+
+    # The expression to determine the plural index for a given number of items used to find the proper plural form for translations.
     attr_accessor :plural_expression
 
-    # The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
+    # Whether this is the primary language in a group of languages.
     attr_accessor :primary_of_group
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -45,6 +48,7 @@ module Wallee
         :'ietf_code' => :'ietfCode',
         :'iso2_code' => :'iso2Code',
         :'iso3_code' => :'iso3Code',
+        :'name' => :'name',
         :'plural_expression' => :'pluralExpression',
         :'primary_of_group' => :'primaryOfGroup'
       }
@@ -57,6 +61,7 @@ module Wallee
         :'ietf_code' => :'String',
         :'iso2_code' => :'String',
         :'iso3_code' => :'String',
+        :'name' => :'String',
         :'plural_expression' => :'String',
         :'primary_of_group' => :'BOOLEAN'
       }
@@ -84,6 +89,10 @@ module Wallee
 
       if attributes.has_key?(:'iso3Code')
         self.iso3_code = attributes[:'iso3Code']
+      end
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'pluralExpression')
@@ -117,6 +126,7 @@ module Wallee
           ietf_code == o.ietf_code &&
           iso2_code == o.iso2_code &&
           iso3_code == o.iso3_code &&
+          name == o.name &&
           plural_expression == o.plural_expression &&
           primary_of_group == o.primary_of_group
     end
@@ -130,7 +140,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [country_code, ietf_code, iso2_code, iso3_code, plural_expression, primary_of_group].hash
+      [country_code, ietf_code, iso2_code, iso3_code, name, plural_expression, primary_of_group].hash
     end
 
     # Builds the object from hash

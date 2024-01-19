@@ -35,14 +35,17 @@ module Wallee
     # 
     attr_accessor :created_by
 
-    # The created on date indicates the date on which the entity was stored into the database.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
+
+    # The date and time when the object was last modified.
+    attr_accessor :last_modified_date
 
     # 
     attr_accessor :rejected_on
@@ -53,7 +56,7 @@ module Wallee
     # 
     attr_accessor :start_terminating_on
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -62,7 +65,7 @@ module Wallee
     # 
     attr_accessor :terminated_on
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -76,6 +79,7 @@ module Wallee
         :'created_on' => :'createdOn',
         :'external_id' => :'externalId',
         :'id' => :'id',
+        :'last_modified_date' => :'lastModifiedDate',
         :'rejected_on' => :'rejectedOn',
         :'rejection_reason' => :'rejectionReason',
         :'start_terminating_on' => :'startTerminatingOn',
@@ -97,6 +101,7 @@ module Wallee
         :'created_on' => :'DateTime',
         :'external_id' => :'String',
         :'id' => :'Integer',
+        :'last_modified_date' => :'DateTime',
         :'rejected_on' => :'DateTime',
         :'rejection_reason' => :'FailureReason',
         :'start_terminating_on' => :'DateTime',
@@ -145,6 +150,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'lastModifiedDate')
+        self.last_modified_date = attributes[:'lastModifiedDate']
       end
 
       if attributes.has_key?(:'rejectedOn')
@@ -202,6 +211,7 @@ module Wallee
           created_on == o.created_on &&
           external_id == o.external_id &&
           id == o.id &&
+          last_modified_date == o.last_modified_date &&
           rejected_on == o.rejected_on &&
           rejection_reason == o.rejection_reason &&
           start_terminating_on == o.start_terminating_on &&
@@ -220,7 +230,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, activated_on, contract_identifier, contract_type, created_by, created_on, external_id, id, rejected_on, rejection_reason, start_terminating_on, state, terminated_by, terminated_on, version].hash
+      [account, activated_on, contract_identifier, contract_type, created_by, created_on, external_id, id, last_modified_date, rejected_on, rejection_reason, start_terminating_on, state, terminated_by, terminated_on, version].hash
     end
 
     # Builds the object from hash

@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class SalesChannel
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
     # 
     attr_accessor :icon
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # 

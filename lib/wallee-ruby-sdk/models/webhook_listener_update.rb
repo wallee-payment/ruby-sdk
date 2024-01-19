@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class WebhookListenerUpdate
-    # The target state identifies the state into which entities need to move into to trigger the webhook listener.
+    # The entity's target states that are to be monitored.
     attr_accessor :entity_states
 
-    # The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the webhook listener.
     attr_accessor :name
 
-    # Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+    # Whether every update of the entity or only state changes are to be monitored.
     attr_accessor :notify_every_change
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # The manual task type indicates what kind of manual task is required to be executed by the human.
   class ManualTaskType
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The features that this type belongs to.
     attr_accessor :features
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

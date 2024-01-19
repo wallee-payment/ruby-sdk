@@ -20,13 +20,16 @@ require 'date'
 module Wallee
   # 
   class RestCurrency
-    # The currency code identifies the currency with the three char long ISO 4217 code (e.g. USD, CHF, EUR).
+    # The currency's three-letter code (ISO 4217 format).
     attr_accessor :currency_code
 
-    # The fraction digits indicates how many places the currency has. This also indicates with which precision we calculate internally when we do calculations with this currency.
+    # The currency's number of decimals. When calculating amounts in this currency, the fraction digits determine the accuracy.
     attr_accessor :fraction_digits
 
-    # The numeric code identifies the currency with the three digit long ISO 4217 code (e.g. 978, 756, 840).
+    # The name of the currency.
+    attr_accessor :name
+
+    # The currency's three-digit code (ISO 4217 format).
     attr_accessor :numeric_code
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -34,6 +37,7 @@ module Wallee
       {
         :'currency_code' => :'currencyCode',
         :'fraction_digits' => :'fractionDigits',
+        :'name' => :'name',
         :'numeric_code' => :'numericCode'
       }
     end
@@ -43,6 +47,7 @@ module Wallee
       {
         :'currency_code' => :'String',
         :'fraction_digits' => :'Integer',
+        :'name' => :'String',
         :'numeric_code' => :'Integer'
       }
     end
@@ -61,6 +66,10 @@ module Wallee
 
       if attributes.has_key?(:'fractionDigits')
         self.fraction_digits = attributes[:'fractionDigits']
+      end
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'numericCode')
@@ -88,6 +97,7 @@ module Wallee
       self.class == o.class &&
           currency_code == o.currency_code &&
           fraction_digits == o.fraction_digits &&
+          name == o.name &&
           numeric_code == o.numeric_code
     end
 
@@ -100,7 +110,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [currency_code, fraction_digits, numeric_code].hash
+      [currency_code, fraction_digits, name, numeric_code].hash
     end
 
     # Builds the object from hash

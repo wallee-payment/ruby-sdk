@@ -32,10 +32,10 @@ module Wallee
     # The shipping date indicates the date on which the pain file was transferred to an external processing system.
     attr_accessor :forwarded_on
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
@@ -47,7 +47,7 @@ module Wallee
     # 
     attr_accessor :processor
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -23,13 +23,16 @@ module Wallee
     # The account in which the query has been executed.
     attr_accessor :account
 
+    # The error message if and only if the query has failed, otherwise null.
+    attr_accessor :error_message
+
     # The External ID of the query if one had been specified; otherwise null.
     attr_accessor :external_id
 
     # The reason of the failure if and only if the query has failed, otherwise null.
     attr_accessor :failure_reason
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The time at which processing of the query has finished (either successfully or by failure or by cancelation). Will be null if the query execution has not finished yet.
@@ -57,6 +60,7 @@ module Wallee
     def self.attribute_map
       {
         :'account' => :'account',
+        :'error_message' => :'errorMessage',
         :'external_id' => :'externalId',
         :'failure_reason' => :'failureReason',
         :'id' => :'id',
@@ -74,6 +78,7 @@ module Wallee
     def self.swagger_types
       {
         :'account' => :'Integer',
+        :'error_message' => :'String',
         :'external_id' => :'String',
         :'failure_reason' => :'FailureReason',
         :'id' => :'Integer',
@@ -97,6 +102,10 @@ module Wallee
 
       if attributes.has_key?(:'account')
         self.account = attributes[:'account']
+      end
+
+      if attributes.has_key?(:'errorMessage')
+        self.error_message = attributes[:'errorMessage']
       end
 
       if attributes.has_key?(:'externalId')
@@ -161,6 +170,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           account == o.account &&
+          error_message == o.error_message &&
           external_id == o.external_id &&
           failure_reason == o.failure_reason &&
           id == o.id &&
@@ -182,7 +192,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, external_id, failure_reason, id, processing_end_time, processing_start_time, query_string, scanned_data_in_gb, scanned_data_limit, spaces, state].hash
+      [account, error_message, external_id, failure_reason, id, processing_end_time, processing_start_time, query_string, scanned_data_in_gb, scanned_data_limit, spaces, state].hash
     end
 
     # Builds the object from hash

@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class CustomerAddressActive
-    # 
+    # The actual postal address.
     attr_accessor :address
 
-    # 
+    # Whether the address is for billing or shipping or both.
     attr_accessor :address_type
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

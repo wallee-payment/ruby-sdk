@@ -38,7 +38,7 @@ module Wallee
     # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
     attr_accessor :language
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
@@ -47,7 +47,7 @@ module Wallee
     # 
     attr_accessor :shipping_address
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.

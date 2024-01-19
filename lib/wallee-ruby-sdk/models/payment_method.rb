@@ -23,10 +23,10 @@ module Wallee
     # 
     attr_accessor :data_collection_types
 
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # 
@@ -35,7 +35,7 @@ module Wallee
     # 
     attr_accessor :merchant_description
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # 

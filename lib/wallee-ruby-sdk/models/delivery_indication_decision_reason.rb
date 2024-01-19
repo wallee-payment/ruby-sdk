@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class DeliveryIndicationDecisionReason
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -77,7 +77,7 @@ module Wallee
     # 
     attr_accessor :created_by
 
-    # The created on date indicates the date on which the entity was stored into the database.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
     # 
@@ -122,7 +122,7 @@ module Wallee
     # 
     attr_accessor :group
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The Internet Protocol (IP) address identifies the device of the buyer.
@@ -137,19 +137,19 @@ module Wallee
     # 
     attr_accessor :java_enabled
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
     # 
     attr_accessor :line_items
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
     attr_accessor :merchant_reference
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # 
@@ -158,7 +158,7 @@ module Wallee
     # 
     attr_accessor :payment_connector_configuration
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # 
@@ -185,7 +185,7 @@ module Wallee
     # 
     attr_accessor :space_view_id
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
@@ -218,7 +218,7 @@ module Wallee
     # The user interface type defines through which user interface the transaction has been processed resp. created.
     attr_accessor :user_interface_type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # 

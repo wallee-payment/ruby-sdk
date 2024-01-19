@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class ManualTaskAction
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The action's label.
     attr_accessor :label
 
-    # 
+    # The action's style.
     attr_accessor :style
 
-    # 
+    # The type of manual tasks this action belongs to.
     attr_accessor :task_type
 
     # Attribute mapping from ruby-style variable name to JSON key.

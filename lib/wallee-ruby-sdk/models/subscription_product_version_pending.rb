@@ -50,7 +50,7 @@ module Wallee
     # Each product version is linked to a product.
     attr_accessor :product
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Strategy that is used for tax calculation in fees.
@@ -84,7 +84,7 @@ module Wallee
         :'default_currency' => :'String',
         :'enabled_currencies' => :'Array<String>',
         :'minimal_number_of_periods' => :'Integer',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'name' => :'Hash<String, String>',
         :'number_of_notice_periods' => :'Integer',
         :'product' => :'Integer',
         :'state' => :'SubscriptionProductVersionState',
@@ -131,7 +131,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'numberOfNoticePeriods')

@@ -20,22 +20,26 @@ require 'date'
 module Wallee
   # 
   class RestCountryState
-    # The code of the state identifies the state. The code is typically used within addresses. Some countries may not provide a code. For those the field is null.
+    # The state's code used within addresses.
     attr_accessor :code
 
-    # The country code in ISO two letter format (e.g. UK, DE, CH, US).
+    # 
+    attr_accessor :country
+
+    # The two-letter code of the state's country (ISO 3166-1 alpha-2 format).
     attr_accessor :country_code
 
-    # The ID of the state corresponds to the subdivision identifier defined in ISO 3166-2. The format consists of the country code followed by a dash and a subdivision identifier.
+    # The state's code in ISO 3166-2 format.
     attr_accessor :id
 
-    # The name is a human readable label of the state in the language of the region.
+    # The name of the state.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'code' => :'code',
+        :'country' => :'country',
         :'country_code' => :'countryCode',
         :'id' => :'id',
         :'name' => :'name'
@@ -46,6 +50,7 @@ module Wallee
     def self.swagger_types
       {
         :'code' => :'String',
+        :'country' => :'String',
         :'country_code' => :'String',
         :'id' => :'String',
         :'name' => :'String'
@@ -62,6 +67,10 @@ module Wallee
 
       if attributes.has_key?(:'code')
         self.code = attributes[:'code']
+      end
+
+      if attributes.has_key?(:'country')
+        self.country = attributes[:'country']
       end
 
       if attributes.has_key?(:'countryCode')
@@ -96,6 +105,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           code == o.code &&
+          country == o.country &&
           country_code == o.country_code &&
           id == o.id &&
           name == o.name
@@ -110,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [code, country_code, id, name].hash
+      [code, country, country_code, id, name].hash
     end
 
     # Builds the object from hash

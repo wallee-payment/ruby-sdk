@@ -26,16 +26,19 @@ module Wallee
     # 
     attr_accessor :default_currency
 
+    # 
+    attr_accessor :device_serial_number
+
     # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
     attr_accessor :identifier
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
@@ -44,16 +47,16 @@ module Wallee
     # The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
     attr_accessor :name
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
     attr_accessor :type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -61,6 +64,7 @@ module Wallee
       {
         :'configuration_version' => :'configurationVersion',
         :'default_currency' => :'defaultCurrency',
+        :'device_serial_number' => :'deviceSerialNumber',
         :'external_id' => :'externalId',
         :'id' => :'id',
         :'identifier' => :'identifier',
@@ -79,6 +83,7 @@ module Wallee
       {
         :'configuration_version' => :'PaymentTerminalConfigurationVersion',
         :'default_currency' => :'String',
+        :'device_serial_number' => :'String',
         :'external_id' => :'String',
         :'id' => :'Integer',
         :'identifier' => :'String',
@@ -106,6 +111,10 @@ module Wallee
 
       if attributes.has_key?(:'defaultCurrency')
         self.default_currency = attributes[:'defaultCurrency']
+      end
+
+      if attributes.has_key?(:'deviceSerialNumber')
+        self.device_serial_number = attributes[:'deviceSerialNumber']
       end
 
       if attributes.has_key?(:'externalId')
@@ -184,6 +193,7 @@ module Wallee
       self.class == o.class &&
           configuration_version == o.configuration_version &&
           default_currency == o.default_currency &&
+          device_serial_number == o.device_serial_number &&
           external_id == o.external_id &&
           id == o.id &&
           identifier == o.identifier &&
@@ -205,7 +215,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration_version, default_currency, external_id, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
+      [configuration_version, default_currency, device_serial_number, external_id, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
     end
 
     # Builds the object from hash

@@ -20,19 +20,15 @@ require 'date'
 module Wallee
   # 
   class LocalizedString
-    # 
-    attr_accessor :display_name
-
-    # 
+    # The term's language.
     attr_accessor :language
 
-    # 
+    # The localized term.
     attr_accessor :string
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'display_name' => :'displayName',
         :'language' => :'language',
         :'string' => :'string'
       }
@@ -41,7 +37,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'display_name' => :'String',
         :'language' => :'String',
         :'string' => :'String'
       }
@@ -54,10 +49,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'displayName')
-        self.display_name = attributes[:'displayName']
-      end
 
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
@@ -86,7 +77,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          display_name == o.display_name &&
           language == o.language &&
           string == o.string
     end
@@ -100,7 +90,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [display_name, language, string].hash
+      [language, string].hash
     end
 
     # Builds the object from hash

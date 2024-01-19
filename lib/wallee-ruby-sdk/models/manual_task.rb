@@ -18,36 +18,33 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # A manual task requires a manual intervention by a human.
+  # A manual task requires the manual intervention of a human.
   class ManualTask
-    # 
+    # The actions that can be triggered to handle the manual task.
     attr_accessor :actions
 
-    # The context entity ID links the manual task to the entity which caused its creation.
+    # The ID of the entity the manual task is linked to.
     attr_accessor :context_entity_id
 
-    # The created on date indicates the date on which the entity was stored into the database.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The expiry date indicates until when the manual task has to be executed.
+    # The date and time until when the manual task has to be handled.
     attr_accessor :expires_on
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
-    attr_accessor :space_id
-
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The type categorizes the manual task.
+    # The manual task's type.
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -60,7 +57,6 @@ module Wallee
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'space_id' => :'spaceId',
         :'state' => :'state',
         :'type' => :'type'
       }
@@ -76,7 +72,6 @@ module Wallee
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
-        :'space_id' => :'Integer',
         :'state' => :'ManualTaskState',
         :'type' => :'Integer'
       }
@@ -120,10 +115,6 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
-      if attributes.has_key?(:'spaceId')
-        self.space_id = attributes[:'spaceId']
-      end
-
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
@@ -158,7 +149,6 @@ module Wallee
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
-          space_id == o.space_id &&
           state == o.state &&
           type == o.type
     end
@@ -172,7 +162,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [actions, context_entity_id, created_on, expires_on, id, linked_space_id, planned_purge_date, space_id, state, type].hash
+      [actions, context_entity_id, created_on, expires_on, id, linked_space_id, planned_purge_date, state, type].hash
     end
 
     # Builds the object from hash

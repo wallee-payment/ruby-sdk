@@ -44,7 +44,7 @@ module Wallee
     # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
     attr_accessor :language
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
@@ -53,7 +53,7 @@ module Wallee
     # 
     attr_accessor :shipping_address
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.

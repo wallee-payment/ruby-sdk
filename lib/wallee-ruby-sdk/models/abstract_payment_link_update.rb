@@ -40,7 +40,7 @@ module Wallee
     # The language defines the language of the payment page. If no language is provided it can be provided through the request parameter.
     attr_accessor :language
 
-    # The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters.
+    # The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters. If no amount for the payment link is defined, the additional checkout page to enter the amount is shown to the consumer.
     attr_accessor :line_items
 
     # The maximal number of transactions limits the number of transactions which can be created with this payment link.

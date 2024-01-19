@@ -20,55 +20,55 @@ require 'date'
 module Wallee
   # 
   class Account
-    # Active means that this account and all accounts in the hierarchy are active.
+    # Whether this account and all its parent accounts are active.
     attr_accessor :active
 
-    # This property is true when all accounts in the hierarchy are active or restricted active.
+    # Whether this account and all its parent accounts are active or restricted active.
     attr_accessor :active_or_restricted_active
 
-    # The ID of the user who created this entity.
+    # The ID of the user the account was created by.
     attr_accessor :created_by
 
-    # The date and time when this entity was created.
+    # The date and time when the account was created.
     attr_accessor :created_on
 
-    # The ID of a user that deleted this entity.
+    # The ID of a user the account was deleted by.
     attr_accessor :deleted_by
 
-    # The date and time when this entity was deleted.
+    # The date and time when the account was deleted.
     attr_accessor :deleted_on
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The date and time when the object was last modified.
     attr_accessor :last_modified_date
 
-    # The name of the account identifies the account within the administrative interface.
+    # The name used to identify the account.
     attr_accessor :name
 
-    # The account which is responsible for administering the account.
+    # The parent account responsible for administering this account.
     attr_accessor :parent_account
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
+    # Whether this account and all its parent accounts are active or restricted active. There is at least one account that is restricted active.
     attr_accessor :restricted_active
 
-    # This is the scope to which the account belongs to.
+    # The scope that the account belongs to.
     attr_accessor :scope
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # This property restricts the number of subaccounts which can be created within this account.
+    # The number of sub-accounts that can be created within this account.
     attr_accessor :subaccount_limit
 
-    # The account type defines which role and capabilities it has.
+    # The account's type which defines its role and capabilities.
     attr_accessor :type
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

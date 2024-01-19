@@ -32,7 +32,7 @@ module Wallee
     # 
     attr_accessor :currency
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # Enabling the integrated payment form will embed the payment form in the Shopify shop. The app needs to be installed for this to be possible.
@@ -56,7 +56,7 @@ module Wallee
     # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
     attr_accessor :payment_proxy_path
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # 
@@ -77,7 +77,7 @@ module Wallee
     # 
     attr_accessor :space_view_id
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -89,7 +89,7 @@ module Wallee
     # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
     attr_accessor :subscription_proxy_path
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

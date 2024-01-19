@@ -20,34 +20,34 @@ require 'date'
 module Wallee
   # 
   class Permission
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The feature that this permission belongs to.
     attr_accessor :feature
 
-    # 
+    # Whether this is a permission group.
     attr_accessor :group
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # Whether this is a leaf in the tree of permissions, and not a group.
     attr_accessor :leaf
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The group that this permission belongs to.
     attr_accessor :parent
 
-    # 
+    # All parents of this permission up to the root of the permission tree.
     attr_accessor :path_to_root
 
-    # 
+    # The localized name of the object.
     attr_accessor :title
 
-    # 
+    # Whether users with this permission are required to enable two-factor authentication.
     attr_accessor :two_factor_required
 
     # 

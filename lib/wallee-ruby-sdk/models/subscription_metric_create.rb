@@ -41,8 +41,8 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'description' => :'DatabaseTranslatedStringCreate',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'description' => :'Hash<String, String>',
+        :'name' => :'Hash<String, String>',
         :'type' => :'Integer'
       }
     end
@@ -56,11 +56,15 @@ module Wallee
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'type')

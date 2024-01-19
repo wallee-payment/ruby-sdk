@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class TenantDatabase
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The name of the database.
+    # The name used to identify the database.
     attr_accessor :name
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

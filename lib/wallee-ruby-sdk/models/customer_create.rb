@@ -20,25 +20,25 @@ require 'date'
 module Wallee
   # 
   class CustomerCreate
-    # 
+    # The customer's ID in the merchant's system.
     attr_accessor :customer_id
 
-    # 
+    # The customer's email address.
     attr_accessor :email_address
 
-    # 
+    # The customer's family or last name.
     attr_accessor :family_name
 
-    # 
+    # The customer's given or first name.
     attr_accessor :given_name
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # 
+    # The customer's preferred currency.
     attr_accessor :preferred_currency
 
     # Attribute mapping from ruby-style variable name to JSON key.

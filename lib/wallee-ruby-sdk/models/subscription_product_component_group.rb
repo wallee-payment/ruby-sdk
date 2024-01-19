@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class SubscriptionProductComponentGroup
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The component group name will be shown when the components are selected. This can be visible to the subscriber.
@@ -38,7 +38,7 @@ module Wallee
     # The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
     attr_accessor :sort_order
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -59,7 +59,7 @@ module Wallee
       {
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'name' => :'DatabaseTranslatedString',
+        :'name' => :'Hash<String, String>',
         :'optional' => :'BOOLEAN',
         :'product_version' => :'SubscriptionProductVersion',
         :'sort_order' => :'Integer',
@@ -84,7 +84,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'optional')

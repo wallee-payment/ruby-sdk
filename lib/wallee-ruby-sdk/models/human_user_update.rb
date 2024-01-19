@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # 
   class HumanUserUpdate
-    # The email address of the user.
+    # The user's email address.
     attr_accessor :email_address
 
-    # The first name of the user.
+    # The user's first name.
     attr_accessor :firstname
 
-    # The preferred language of the user.
+    # The user's preferred language.
     attr_accessor :language
 
-    # The last name of the user.
+    # The user's last name.
     attr_accessor :lastname
 
-    # 
+    # The user's mobile phone number.
     attr_accessor :mobile_phone_number
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+    # The user's time zone. If none is specified, the one provided by the browser will be used.
     attr_accessor :time_zone
 
-    # Defines whether two-factor authentication is enabled for this user.
+    # Whether two-factor authentication is enabled for this user.
     attr_accessor :two_factor_enabled
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

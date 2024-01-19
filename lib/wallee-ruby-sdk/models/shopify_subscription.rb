@@ -29,7 +29,7 @@ module Wallee
     # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
     attr_accessor :external_id
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # 
@@ -41,10 +41,10 @@ module Wallee
     # 
     attr_accessor :initial_shopify_transaction
 
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # 
@@ -53,7 +53,7 @@ module Wallee
     # 
     attr_accessor :shop
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -68,7 +68,7 @@ module Wallee
     # 
     attr_accessor :termination_request_date
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

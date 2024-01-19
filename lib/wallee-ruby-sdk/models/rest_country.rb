@@ -20,30 +20,30 @@ require 'date'
 module Wallee
   # 
   class RestCountry
-    # The ISO code 2 letter identifies the country by two chars as defined in ISO 3166-1 (e.g. US, DE, CH).
-    attr_accessor :iso_code2_letter
-
-    # The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
-    attr_accessor :iso_code3_letter
-
-    # The address format of the country indicates how an address has to look like for the country.
+    # Specifies the country's way of formatting addresses.
     attr_accessor :address_format
 
-    # The name labels the country by a name in English.
+    # The country's two-letter code (ISO 3166-1 alpha-2 format).
+    attr_accessor :iso_code2
+
+    # The country's three-letter code (ISO 3166-1 alpha-3 format).
+    attr_accessor :iso_code3
+
+    # The name of the country.
     attr_accessor :name
 
-    # The numeric code identifies the country by a three digit number as defined in ISO 3166-1 (e.g. 840, 826, 756).
+    # The country's three-digit code (ISO 3166-1 numeric format).
     attr_accessor :numeric_code
 
-    # The state codes field is a list of all states associated with this country. The list contains the identifiers of the states. The identifiers corresponds to the ISO 3166-2 subdivision identifier.
+    # The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
     attr_accessor :state_codes
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'iso_code2_letter' => :'ISOCode2Letter',
-        :'iso_code3_letter' => :'ISOCode3Letter',
         :'address_format' => :'addressFormat',
+        :'iso_code2' => :'isoCode2',
+        :'iso_code3' => :'isoCode3',
         :'name' => :'name',
         :'numeric_code' => :'numericCode',
         :'state_codes' => :'stateCodes'
@@ -53,9 +53,9 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'iso_code2_letter' => :'String',
-        :'iso_code3_letter' => :'String',
         :'address_format' => :'RestAddressFormat',
+        :'iso_code2' => :'String',
+        :'iso_code3' => :'String',
         :'name' => :'String',
         :'numeric_code' => :'String',
         :'state_codes' => :'Array<String>'
@@ -70,16 +70,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'ISOCode2Letter')
-        self.iso_code2_letter = attributes[:'ISOCode2Letter']
-      end
-
-      if attributes.has_key?(:'ISOCode3Letter')
-        self.iso_code3_letter = attributes[:'ISOCode3Letter']
-      end
-
       if attributes.has_key?(:'addressFormat')
         self.address_format = attributes[:'addressFormat']
+      end
+
+      if attributes.has_key?(:'isoCode2')
+        self.iso_code2 = attributes[:'isoCode2']
+      end
+
+      if attributes.has_key?(:'isoCode3')
+        self.iso_code3 = attributes[:'isoCode3']
       end
 
       if attributes.has_key?(:'name')
@@ -115,9 +115,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          iso_code2_letter == o.iso_code2_letter &&
-          iso_code3_letter == o.iso_code3_letter &&
           address_format == o.address_format &&
+          iso_code2 == o.iso_code2 &&
+          iso_code3 == o.iso_code3 &&
           name == o.name &&
           numeric_code == o.numeric_code &&
           state_codes == o.state_codes
@@ -132,7 +132,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [iso_code2_letter, iso_code3_letter, address_format, name, numeric_code, state_codes].hash
+      [address_format, iso_code2, iso_code3, name, numeric_code, state_codes].hash
     end
 
     # Builds the object from hash

@@ -60,9 +60,9 @@ module Wallee
         :'id' => :'Integer',
         :'version' => :'Integer',
         :'component' => :'Integer',
-        :'description' => :'DatabaseTranslatedStringCreate',
+        :'description' => :'Hash<String, String>',
         :'metric' => :'Integer',
-        :'name' => :'DatabaseTranslatedStringCreate',
+        :'name' => :'Hash<String, String>',
         :'tier_pricing' => :'ProductMeteredTierPricing'
       }
     end
@@ -88,7 +88,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'metric')
@@ -96,7 +98,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
       end
 
       if attributes.has_key?(:'tierPricing')

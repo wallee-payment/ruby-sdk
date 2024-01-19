@@ -38,10 +38,10 @@ module Wallee
     # 
     attr_accessor :fixed_price
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # Define the maximum number of orders the subscription will run for.
@@ -53,7 +53,7 @@ module Wallee
     # Define the minimal number of orders the subscription will run for.
     attr_accessor :minimal_billing_cycles
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # 
@@ -86,7 +86,7 @@ module Wallee
     # 
     attr_accessor :shop
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # 
@@ -104,7 +104,7 @@ module Wallee
     # 
     attr_accessor :updated_at
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.

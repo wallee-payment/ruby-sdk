@@ -26,7 +26,7 @@ module Wallee
     # 
     attr_accessor :feature
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.

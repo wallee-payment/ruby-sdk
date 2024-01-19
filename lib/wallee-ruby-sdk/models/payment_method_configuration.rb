@@ -26,13 +26,13 @@ module Wallee
     # The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
     attr_accessor :description
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
     # The image of the payment method configuration overrides the default image of the payment method.
     attr_accessor :image_resource_path
 
-    # The linked space id holds the ID of the space to which the entity belongs to.
+    # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
     # The payment method configuration name is used internally to identify the payment method configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
@@ -44,7 +44,7 @@ module Wallee
     # 
     attr_accessor :payment_method
 
-    # The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
     # The resolved description uses the specified description or the default one when it is not overridden.
@@ -62,13 +62,13 @@ module Wallee
     # 
     attr_accessor :space_id
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # The title of the payment method configuration is used within the payment process. The title is visible to the customer.
     attr_accessor :title
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -98,7 +98,7 @@ module Wallee
     def self.swagger_types
       {
         :'data_collection_type' => :'DataCollectionType',
-        :'description' => :'DatabaseTranslatedString',
+        :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'image_resource_path' => :'ResourcePath',
         :'linked_space_id' => :'Integer',
@@ -112,7 +112,7 @@ module Wallee
         :'sort_order' => :'Integer',
         :'space_id' => :'Integer',
         :'state' => :'CreationEntityState',
-        :'title' => :'DatabaseTranslatedString',
+        :'title' => :'Hash<String, String>',
         :'version' => :'Integer'
       }
     end
@@ -130,7 +130,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.has_key?(:'id')
@@ -190,7 +192,9 @@ module Wallee
       end
 
       if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+        if (value = attributes[:'title']).is_a?(Hash)
+          self.title = value
+        end
       end
 
       if attributes.has_key?(:'version')

@@ -19,10 +19,10 @@ require 'date'
 
 module Wallee
   class AbstractCustomerAddressActive
-    # 
+    # The actual postal address.
     attr_accessor :address
 
-    # 
+    # Whether the address is for billing or shipping or both.
     attr_accessor :address_type
 
     # Attribute mapping from ruby-style variable name to JSON key.

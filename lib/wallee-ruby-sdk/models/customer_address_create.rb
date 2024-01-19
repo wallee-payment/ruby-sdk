@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class CustomerAddressCreate
-    # 
+    # The actual postal address.
     attr_accessor :address
 
-    # 
+    # Whether the address is for billing or shipping or both.
     attr_accessor :address_type
 
-    # 
+    # The customer that the object belongs to.
     attr_accessor :customer
 
     # Attribute mapping from ruby-style variable name to JSON key.

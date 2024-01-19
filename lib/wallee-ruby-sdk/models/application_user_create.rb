@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class ApplicationUserCreate
-    # The user name is used to identify the application user in administrative interfaces.
+    # The name used to identify the application user.
     attr_accessor :name
 
-    # The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+    # The maximum number of API requests that are accepted every 2 minutes.
     attr_accessor :request_limit
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
-    # The account that this user is associated with. The account owner will be able to manage this user.
+    # The primary account that the user belongs to.
     attr_accessor :primary_account
 
     # Attribute mapping from ruby-style variable name to JSON key.

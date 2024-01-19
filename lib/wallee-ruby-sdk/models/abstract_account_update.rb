@@ -19,13 +19,13 @@ require 'date'
 
 module Wallee
   class AbstractAccountUpdate
-    # 
+    # The date and time when the object was last modified.
     attr_accessor :last_modified_date
 
-    # The name of the account identifies the account within the administrative interface.
+    # The name used to identify the account.
     attr_accessor :name
 
-    # This property restricts the number of subaccounts which can be created within this account.
+    # The number of sub-accounts that can be created within this account.
     attr_accessor :subaccount_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.

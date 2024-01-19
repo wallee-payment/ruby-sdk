@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class TwoFactorAuthenticationType
-    # 
+    # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The feature that this type belongs to.
     attr_accessor :feature
 
-    # 
+    # The identifier of the icon representing this type.
     attr_accessor :icon
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
+    # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized name of the object.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

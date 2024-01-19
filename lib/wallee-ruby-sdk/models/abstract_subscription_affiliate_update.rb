@@ -19,16 +19,16 @@ require 'date'
 
 module Wallee
   class AbstractSubscriptionAffiliateUpdate
-    # 
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # Meta data allow to store additional data along the object.
+    # Allow to store additional information about the object.
     attr_accessor :meta_data
 
     # 
     attr_accessor :name
 
-    # 
+    # The object's current state.
     attr_accessor :state
 
     # Attribute mapping from ruby-style variable name to JSON key.
