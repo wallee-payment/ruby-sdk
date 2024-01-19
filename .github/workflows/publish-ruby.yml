@@ -37,6 +37,14 @@ jobs:
     needs: test
     runs-on: ubuntu-20.04
     steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby for release
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1.0'
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Publish to RubyGems
       run: |
         mkdir -p $HOME/.gem
@@ -48,3 +56,4 @@ jobs:
         rm $HOME/.gem/credentials
       env:
         GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+
