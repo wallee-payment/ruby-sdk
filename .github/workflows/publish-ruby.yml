@@ -20,10 +20,10 @@ jobs:
     strategy:
       matrix: 
         ruby-version: ['3.0.0', '3.1.0']
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Ruby 
+    - name: Set up Ruby ${{ matrix.ruby-version }}
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
       uses: ruby/setup-ruby@v1
@@ -33,6 +33,10 @@ jobs:
     - name: Run tests
       run: bundle exec rake
 
+  release:
+    needs: test
+    runs-on: ubuntu-20.04
+    steps:
     - name: Publish to RubyGems
       run: |
         mkdir -p $HOME/.gem

@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.summary     = "A ruby wrapper around the wallee API."
   s.description = "The wallee SDK allows an easy interaction with the wallee web service."
   s.license     = "Apache-2.0"
-  s.required_ruby_version = ">=2.2"
+  s.required_ruby_version = ">=3.0.0"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'json', '~> 2.3', '>= 2.3.0'
