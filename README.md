@@ -8,7 +8,7 @@ The wallee Ruby library wraps around the wallee API. This library facilitates yo
 
 ## Requirements
 
-- Ruby 2.2+
+- Ruby 3.0.0+
 
 ## Installation
 
