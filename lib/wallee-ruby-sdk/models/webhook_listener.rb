@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class WebhookListener
+    # Whether signature header and state property are enabled in webhook payload.
+    attr_accessor :enable_payload_signature_and_state
+
     # The entity that is to be monitored.
     attr_accessor :entity
 
@@ -56,6 +59,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'enable_payload_signature_and_state' => :'enablePayloadSignatureAndState',
         :'entity' => :'entity',
         :'entity_states' => :'entityStates',
         :'id' => :'id',
@@ -73,6 +77,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'enable_payload_signature_and_state' => :'BOOLEAN',
         :'entity' => :'Integer',
         :'entity_states' => :'Array<String>',
         :'id' => :'Integer',
@@ -94,6 +99,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'enablePayloadSignatureAndState')
+        self.enable_payload_signature_and_state = attributes[:'enablePayloadSignatureAndState']
+      end
 
       if attributes.has_key?(:'entity')
         self.entity = attributes[:'entity']
@@ -175,6 +184,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          enable_payload_signature_and_state == o.enable_payload_signature_and_state &&
           entity == o.entity &&
           entity_states == o.entity_states &&
           id == o.id &&
@@ -197,7 +207,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [entity, entity_states, id, identity, linked_space_id, name, notify_every_change, planned_purge_date, state, url, version].hash
+      [enable_payload_signature_and_state, entity, entity_states, id, identity, linked_space_id, name, notify_every_change, planned_purge_date, state, url, version].hash
     end
 
     # Builds the object from hash

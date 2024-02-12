@@ -38,6 +38,9 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
+    # 
+    attr_accessor :image_path
+
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
@@ -71,6 +74,7 @@ module Wallee
         :'enabled_sales_channels' => :'enabledSalesChannels',
         :'enabled_space_views' => :'enabledSpaceViews',
         :'id' => :'id',
+        :'image_path' => :'imagePath',
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'payment_method_configuration' => :'paymentMethodConfiguration',
@@ -91,6 +95,7 @@ module Wallee
         :'enabled_sales_channels' => :'Array<SalesChannel>',
         :'enabled_space_views' => :'Array<Integer>',
         :'id' => :'Integer',
+        :'image_path' => :'String',
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
         :'payment_method_configuration' => :'PaymentMethodConfiguration',
@@ -138,6 +143,10 @@ module Wallee
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'imagePath')
+        self.image_path = attributes[:'imagePath']
       end
 
       if attributes.has_key?(:'linkedSpaceId')
@@ -212,6 +221,7 @@ module Wallee
           enabled_sales_channels == o.enabled_sales_channels &&
           enabled_space_views == o.enabled_space_views &&
           id == o.id &&
+          image_path == o.image_path &&
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           payment_method_configuration == o.payment_method_configuration &&
@@ -231,7 +241,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [applicable_for_transaction_processing, conditions, connector, enabled_sales_channels, enabled_space_views, id, linked_space_id, name, payment_method_configuration, planned_purge_date, priority, processor_configuration, state, version].hash
+      [applicable_for_transaction_processing, conditions, connector, enabled_sales_channels, enabled_space_views, id, image_path, linked_space_id, name, payment_method_configuration, planned_purge_date, priority, processor_configuration, state, version].hash
     end
 
     # Builds the object from hash

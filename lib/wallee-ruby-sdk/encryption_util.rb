@@ -22,8 +22,7 @@ module Wallee
       public_key = OpenSSL::PKey.read(public_key_bytes)
 
       begin
-        public_key.verify(OpenSSL::Digest::SHA256.new, signature, content)
-        return true
+        return public_key.verify(OpenSSL::Digest::SHA256.new, signature, content)
       rescue OpenSSL::PKey::PKeyError, OpenSSL::PKey::ECError, OpenSSL::PKey::EC::Point::Error
         return false
       end

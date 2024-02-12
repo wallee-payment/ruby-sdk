@@ -19,6 +19,9 @@ require 'date'
 
 module Wallee
   class AbstractWebhookListenerUpdate
+    # Whether signature header and state property are enabled in webhook payload.
+    attr_accessor :enable_payload_signature_and_state
+
     # The entity's target states that are to be monitored.
     attr_accessor :entity_states
 
@@ -34,6 +37,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'enable_payload_signature_and_state' => :'enablePayloadSignatureAndState',
         :'entity_states' => :'entityStates',
         :'name' => :'name',
         :'notify_every_change' => :'notifyEveryChange',
@@ -44,6 +48,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'enable_payload_signature_and_state' => :'BOOLEAN',
         :'entity_states' => :'Array<String>',
         :'name' => :'String',
         :'notify_every_change' => :'BOOLEAN',
@@ -58,6 +63,10 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'enablePayloadSignatureAndState')
+        self.enable_payload_signature_and_state = attributes[:'enablePayloadSignatureAndState']
+      end
 
       if attributes.has_key?(:'entityStates')
         if (value = attributes[:'entityStates']).is_a?(Array)
@@ -111,6 +120,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          enable_payload_signature_and_state == o.enable_payload_signature_and_state &&
           entity_states == o.entity_states &&
           name == o.name &&
           notify_every_change == o.notify_every_change &&
@@ -126,7 +136,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [entity_states, name, notify_every_change, state].hash
+      [enable_payload_signature_and_state, entity_states, name, notify_every_change, state].hash
     end
 
     # Builds the object from hash
