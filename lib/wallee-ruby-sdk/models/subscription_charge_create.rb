@@ -20,25 +20,25 @@ require 'date'
 module Wallee
   # The subscription charge represents a single charge carried out for a particular subscription.
   class SubscriptionChargeCreate
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
     attr_accessor :failed_url
 
-    # 
+    # The date and time when the execution of the charge is planned.
     attr_accessor :planned_execution_date
 
-    # 
+    # The processing type specifies how the charge is to be processed.
     attr_accessor :processing_type
 
-    # 
+    # The merchant's reference used to identify the charge.
     attr_accessor :reference
 
-    # The field subscription indicates the subscription to which the charge belongs to.
+    # The subscription that the charge belongs to.
     attr_accessor :subscription
 
-    # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+    # The URL to redirect the customer back to after they successfully authenticated their payment.
     attr_accessor :success_url
 
     # Attribute mapping from ruby-style variable name to JSON key.

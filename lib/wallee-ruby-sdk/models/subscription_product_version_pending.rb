@@ -26,34 +26,34 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
+    # The recurring period of time, typically monthly or annually, for which a subscriber is charged.
     attr_accessor :billing_cycle
 
-    # The comment allows to provide a internal comment for the version. It helps to document why a product was changed. The comment is not disclosed to the subscriber.
+    # A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
     attr_accessor :comment
 
-    # The default currency has to be used in all fees.
+    # The three-letter code (ISO 4217 format) of the product version's default currency.
     attr_accessor :default_currency
 
-    # The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
+    # The three-letter codes (ISO 4217 format) of the currencies that the product version supports.
     attr_accessor :enabled_currencies
 
-    # The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
+    # The minimum number of periods the subscription will run before it can be terminated.
     attr_accessor :minimal_number_of_periods
 
-    # The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+    # The localized name of the product that is displayed to the customer.
     attr_accessor :name
 
-    # The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
+    # The number of periods the subscription will keep running after its termination was requested.
     attr_accessor :number_of_notice_periods
 
-    # Each product version is linked to a product.
+    # The product that the version belongs to.
     attr_accessor :product
 
     # The object's current state.
     attr_accessor :state
 
-    # Strategy that is used for tax calculation in fees.
+    # The way taxes are calculated for fees.
     attr_accessor :tax_calculation
 
     # Attribute mapping from ruby-style variable name to JSON key.

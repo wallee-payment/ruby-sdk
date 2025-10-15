@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class BankAccount
-    # The optional description is shown along the identifier. The intention of the description is to give an alternative name to the bank account.
+    # The description serves as an alternative name for the bank account.
     attr_accessor :description
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The bank account identifier is responsible to uniquely identify the bank account.
+    # The identifier is used to uniquely identify the bank account.
     attr_accessor :identifier
 
     # The ID of the space this object belongs to.
@@ -38,7 +38,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The bank account's type
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

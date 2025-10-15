@@ -23,7 +23,7 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The name that describes the hash type.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

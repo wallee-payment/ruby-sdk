@@ -18,32 +18,82 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The schema of a single table in Analytics.
-  class AnalyticsSchemaTable
-    # The schemas of all columns of this table.
-    attr_accessor :columns
+  # 
+  class DunningCase
+    # 
+    attr_accessor :canceled_on
 
-    # A human readable description of the entity type contained in this table.
-    attr_accessor :description
+    # The date and time when the object was created.
+    attr_accessor :created_on
 
-    # The name of this table.
-    attr_accessor :table_name
+    # 
+    attr_accessor :derecognized_on
+
+    # 
+    attr_accessor :failed_on
+
+    # 
+    attr_accessor :flow
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # 
+    attr_accessor :initial_invoice
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # The object's current state.
+    attr_accessor :state
+
+    # 
+    attr_accessor :succeeded_on
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'columns' => :'columns',
-        :'description' => :'description',
-        :'table_name' => :'tableName'
+        :'canceled_on' => :'canceledOn',
+        :'created_on' => :'createdOn',
+        :'derecognized_on' => :'derecognizedOn',
+        :'failed_on' => :'failedOn',
+        :'flow' => :'flow',
+        :'id' => :'id',
+        :'initial_invoice' => :'initialInvoice',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'state' => :'state',
+        :'succeeded_on' => :'succeededOn',
+        :'version' => :'version'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'columns' => :'Array<AnalyticsSchemaColumn>',
-        :'description' => :'Hash<String, String>',
-        :'table_name' => :'String'
+        :'canceled_on' => :'DateTime',
+        :'created_on' => :'DateTime',
+        :'derecognized_on' => :'DateTime',
+        :'failed_on' => :'DateTime',
+        :'flow' => :'DunningFlow',
+        :'id' => :'Integer',
+        :'initial_invoice' => :'TransactionInvoice',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
+        :'planned_purge_date' => :'DateTime',
+        :'state' => :'DunningCaseState',
+        :'succeeded_on' => :'DateTime',
+        :'version' => :'Integer'
       }
     end
 
@@ -55,20 +105,56 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'columns')
-        if (value = attributes[:'columns']).is_a?(Array)
-          self.columns = value
-        end
+      if attributes.has_key?(:'canceledOn')
+        self.canceled_on = attributes[:'canceledOn']
       end
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
       end
 
-      if attributes.has_key?(:'tableName')
-        self.table_name = attributes[:'tableName']
+      if attributes.has_key?(:'derecognizedOn')
+        self.derecognized_on = attributes[:'derecognizedOn']
+      end
+
+      if attributes.has_key?(:'failedOn')
+        self.failed_on = attributes[:'failedOn']
+      end
+
+      if attributes.has_key?(:'flow')
+        self.flow = attributes[:'flow']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'initialInvoice')
+        self.initial_invoice = attributes[:'initialInvoice']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
+      end
+
+      if attributes.has_key?(:'plannedPurgeDate')
+        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'succeededOn')
+        self.succeeded_on = attributes[:'succeededOn']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -90,9 +176,19 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          columns == o.columns &&
-          description == o.description &&
-          table_name == o.table_name
+          canceled_on == o.canceled_on &&
+          created_on == o.created_on &&
+          derecognized_on == o.derecognized_on &&
+          failed_on == o.failed_on &&
+          flow == o.flow &&
+          id == o.id &&
+          initial_invoice == o.initial_invoice &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
+          planned_purge_date == o.planned_purge_date &&
+          state == o.state &&
+          succeeded_on == o.succeeded_on &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -104,7 +200,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [columns, description, table_name].hash
+      [canceled_on, created_on, derecognized_on, failed_on, flow, id, initial_invoice, linked_space_id, linked_transaction, planned_purge_date, state, succeeded_on, version].hash
     end
 
     # Builds the object from hash

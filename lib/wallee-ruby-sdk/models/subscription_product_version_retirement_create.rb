@@ -20,20 +20,20 @@ require 'date'
 module Wallee
   # 
   class SubscriptionProductVersionRetirementCreate
-    # 
+    # The product version that is to be retired.
     attr_accessor :product_version
 
-    # 
-    attr_accessor :respect_terminiation_periods_enabled
+    # Whether the subscriptions' termination periods should be respected.
+    attr_accessor :respect_termination_periods
 
-    # When a target product is not chosen, all customers with the retired product will be terminated.
+    # The product to which the subscriptions with the retiring product version are to be migrated. If none is defined, the subscriptions are terminated.
     attr_accessor :target_product
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'product_version' => :'productVersion',
-        :'respect_terminiation_periods_enabled' => :'respectTerminiationPeriodsEnabled',
+        :'respect_termination_periods' => :'respectTerminationPeriods',
         :'target_product' => :'targetProduct'
       }
     end
@@ -42,7 +42,7 @@ module Wallee
     def self.swagger_types
       {
         :'product_version' => :'Integer',
-        :'respect_terminiation_periods_enabled' => :'BOOLEAN',
+        :'respect_termination_periods' => :'BOOLEAN',
         :'target_product' => :'Integer'
       }
     end
@@ -59,8 +59,8 @@ module Wallee
         self.product_version = attributes[:'productVersion']
       end
 
-      if attributes.has_key?(:'respectTerminiationPeriodsEnabled')
-        self.respect_terminiation_periods_enabled = attributes[:'respectTerminiationPeriodsEnabled']
+      if attributes.has_key?(:'respectTerminationPeriods')
+        self.respect_termination_periods = attributes[:'respectTerminationPeriods']
       end
 
       if attributes.has_key?(:'targetProduct')
@@ -92,7 +92,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           product_version == o.product_version &&
-          respect_terminiation_periods_enabled == o.respect_terminiation_periods_enabled &&
+          respect_termination_periods == o.respect_termination_periods &&
           target_product == o.target_product
     end
 
@@ -105,7 +105,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [product_version, respect_terminiation_periods_enabled, target_product].hash
+      [product_version, respect_termination_periods, target_product].hash
     end
 
     # Builds the object from hash

@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class PaymentMethod
-    # 
+    # The data collection types that payment method supports.
     attr_accessor :data_collection_types
 
     # The localized description of the object.
@@ -29,16 +29,16 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The path to the payment method's image.
     attr_accessor :image_path
 
-    # 
+    # A merchant-focused, localized description of the payment method, providing its purpose and details.
     attr_accessor :merchant_description
 
     # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The currencies that the payment method supports.
     attr_accessor :supported_currencies
 
     # Attribute mapping from ruby-style variable name to JSON key.

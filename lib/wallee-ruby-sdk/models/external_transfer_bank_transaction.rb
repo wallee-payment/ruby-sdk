@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class ExternalTransferBankTransaction
-    # 
+    # Provides general information about the bank transaction.
     attr_accessor :bank_transaction
 
-    # 
+    # The identifier is used to uniquely identify the external bank account.
     attr_accessor :external_account_identifier
 
-    # 
+    # The external bank account's type.
     attr_accessor :external_account_type
 
-    # 
+    # The external bank account's name.
     attr_accessor :external_bank_name
 
     # A unique identifier for the object.

@@ -26,13 +26,13 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # 
+    # The affiliate that led to the creation of the subscription.
     attr_accessor :affiliate
 
-    # 
+    # A description used to identify the subscription.
     attr_accessor :description
 
-    # 
+    # The date and time when the subscription is planned to be terminated.
     attr_accessor :planned_termination_date
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class DebtCollectionReceipt
-    # 
+    # The amount that was collected.
     attr_accessor :amount
 
-    # The created by field indicates the user which has created the receipt.
+    # The ID of the user the receipt was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The debt collection case that this document belongs to.
     attr_accessor :debt_collection_case
 
-    # The external id is a unique identifier for the receipt. The external id has to be unique in combination with the debt collection case. When a receipt is sent with an existing external id the existing one is returned rather than a new one is created.
+    # A client-generated nonce which uniquely identifies the receipt.Subsequent requests with the same external ID do not lead to the creation of another receipt, but return the original one.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -44,7 +44,7 @@ module Wallee
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The source stating where the receipt is coming from.
     attr_accessor :source
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

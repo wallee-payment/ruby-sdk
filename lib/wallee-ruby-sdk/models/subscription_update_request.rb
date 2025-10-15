@@ -18,9 +18,9 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The subscription update request allows to change a subscription properites.
+  # 
   class SubscriptionUpdateRequest
-    # 
+    # A description used to identify the subscription.
     attr_accessor :description
 
     # Attribute mapping from ruby-style variable name to JSON key.

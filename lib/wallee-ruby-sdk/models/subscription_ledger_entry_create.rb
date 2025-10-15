@@ -20,30 +20,38 @@ require 'date'
 module Wallee
   # The subscription ledger entry represents a single change on the subscription balance.
   class SubscriptionLedgerEntryCreate
-    # 
+    # The leger entry's amount with discounts applied, including taxes.
     attr_accessor :amount_including_tax
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # 
+    attr_accessor :component_reference_name
+
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The number of items that were consumed.
     attr_accessor :quantity
 
     # 
+    attr_accessor :subscription_metric_id
+
+    # The subscription version that the ledger entry belongs to.
     attr_accessor :subscription_version
 
-    # 
+    # A set of tax lines, each of which specifies a tax applied to the ledger entry.
     attr_accessor :taxes
 
-    # 
+    # The title that indicates what the ledger entry is about.
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'amount_including_tax' => :'amountIncludingTax',
+        :'component_reference_name' => :'componentReferenceName',
         :'external_id' => :'externalId',
         :'quantity' => :'quantity',
+        :'subscription_metric_id' => :'subscriptionMetricId',
         :'subscription_version' => :'subscriptionVersion',
         :'taxes' => :'taxes',
         :'title' => :'title'
@@ -54,8 +62,10 @@ module Wallee
     def self.swagger_types
       {
         :'amount_including_tax' => :'Float',
+        :'component_reference_name' => :'String',
         :'external_id' => :'String',
         :'quantity' => :'Float',
+        :'subscription_metric_id' => :'Integer',
         :'subscription_version' => :'Integer',
         :'taxes' => :'Array<TaxCreate>',
         :'title' => :'String'
@@ -74,12 +84,20 @@ module Wallee
         self.amount_including_tax = attributes[:'amountIncludingTax']
       end
 
+      if attributes.has_key?(:'componentReferenceName')
+        self.component_reference_name = attributes[:'componentReferenceName']
+      end
+
       if attributes.has_key?(:'externalId')
         self.external_id = attributes[:'externalId']
       end
 
       if attributes.has_key?(:'quantity')
         self.quantity = attributes[:'quantity']
+      end
+
+      if attributes.has_key?(:'subscriptionMetricId')
+        self.subscription_metric_id = attributes[:'subscriptionMetricId']
       end
 
       if attributes.has_key?(:'subscriptionVersion')
@@ -169,8 +187,10 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           amount_including_tax == o.amount_including_tax &&
+          component_reference_name == o.component_reference_name &&
           external_id == o.external_id &&
           quantity == o.quantity &&
+          subscription_metric_id == o.subscription_metric_id &&
           subscription_version == o.subscription_version &&
           taxes == o.taxes &&
           title == o.title
@@ -185,7 +205,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_including_tax, external_id, quantity, subscription_version, taxes, title].hash
+      [amount_including_tax, component_reference_name, external_id, quantity, subscription_metric_id, subscription_version, taxes, title].hash
     end
 
     # Builds the object from hash

@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # A subscriber represents everyone who is subscribed to a product.
   class Subscriber
-    # Those payment methods which are allowed additionally will be available even when the product does not allow those methods.
+    # Allow the subscriber to use these payment methods even if subscription products do not accept them.
     attr_accessor :additional_allowed_payment_method_configurations
 
-    # 
+    # The address associated with the subscriber for invoicing and transaction processing purposes.
     attr_accessor :billing_address
 
-    # The subscriber description can be used to add a description to the subscriber. This is used in the back office to identify the subscriber.
+    # The description used to identify the subscriber.
     attr_accessor :description
 
-    # Those payment methods which are disallowed will not be available to the subscriber even if the product allows those methods.
+    # Prevent the subscriber from using these payment methods even if subscription products do accept them.
     attr_accessor :disallowed_payment_method_configurations
 
-    # The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
+    # The email address that is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
     attr_accessor :email_address
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
+    # The language that is used when communicating with the subscriber via emails and documents.
     attr_accessor :language
 
     # The ID of the space this object belongs to.
@@ -53,10 +53,10 @@ module Wallee
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
+    # The merchant's reference used to identify the subscriber.
     attr_accessor :reference
 
-    # 
+    # The address to where orders will be shipped.
     attr_accessor :shipping_address
 
     # The object's current state.

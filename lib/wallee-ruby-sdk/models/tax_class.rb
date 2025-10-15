@@ -26,14 +26,11 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The tax class name is used internally to identify the tax class in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the tax class.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
-
-    # 
-    attr_accessor :space_id
 
     # The object's current state.
     attr_accessor :state
@@ -48,7 +45,6 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'space_id' => :'spaceId',
         :'state' => :'state',
         :'version' => :'version'
       }
@@ -61,7 +57,6 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
-        :'space_id' => :'Integer',
         :'state' => :'CreationEntityState',
         :'version' => :'Integer'
       }
@@ -89,10 +84,6 @@ module Wallee
 
       if attributes.has_key?(:'plannedPurgeDate')
         self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'spaceId')
-        self.space_id = attributes[:'spaceId']
       end
 
       if attributes.has_key?(:'state')
@@ -141,7 +132,6 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
-          space_id == o.space_id &&
           state == o.state &&
           version == o.version
     end
@@ -155,7 +145,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, space_id, state, version].hash
+      [id, linked_space_id, name, planned_purge_date, state, version].hash
     end
 
     # Builds the object from hash

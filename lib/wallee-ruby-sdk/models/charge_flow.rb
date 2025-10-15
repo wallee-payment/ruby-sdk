@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class ChargeFlow
-    # If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
+    # Conditions allow to define criteria that a transaction must fulfill in order for the charge flow to be considered for processing the payment.
     attr_accessor :conditions
 
     # A unique identifier for the object.
@@ -29,13 +29,13 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the charge flow.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
+    # The priority that determines the order in which charge flows are taken into account when processing a payment. Low values are considered first.
     attr_accessor :priority
 
     # The object's current state.

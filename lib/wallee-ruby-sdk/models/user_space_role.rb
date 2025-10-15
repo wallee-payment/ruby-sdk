@@ -23,13 +23,13 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The role that is assigned to the user.
     attr_accessor :role
 
-    # 
+    # The space in which the role is assigned to the user.
     attr_accessor :space
 
-    # 
+    # The user whose role this defines.
     attr_accessor :user
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

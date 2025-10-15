@@ -18,16 +18,20 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class CardCryptogramType
+  class DunningCaseLevelState
     
-    SCHEME_TOKEN = 'SCHEME_TOKEN'.freeze
+    INITIALIZING = 'INITIALIZING'.freeze
+    PENDING = 'PENDING'.freeze
+    FAILED = 'FAILED'.freeze
+    CANCELED = 'CANCELED'.freeze
+    SUCCEEDED = 'SUCCEEDED'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = CardCryptogramType.constants.select { |c| CardCryptogramType::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #CardCryptogramType" if constantValues.empty?
+      constantValues = DunningCaseLevelState.constants.select { |c| DunningCaseLevelState::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #DunningCaseLevelState" if constantValues.empty?
       value
     end
   end

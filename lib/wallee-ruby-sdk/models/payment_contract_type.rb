@@ -23,9 +23,6 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
-    # 
-    attr_accessor :feature
-
     # A unique identifier for the object.
     attr_accessor :id
 
@@ -36,7 +33,6 @@ module Wallee
     def self.attribute_map
       {
         :'description' => :'description',
-        :'feature' => :'feature',
         :'id' => :'id',
         :'name' => :'name'
       }
@@ -46,7 +42,6 @@ module Wallee
     def self.swagger_types
       {
         :'description' => :'Hash<String, String>',
-        :'feature' => :'Feature',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>'
       }
@@ -64,10 +59,6 @@ module Wallee
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
-      end
-
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
       end
 
       if attributes.has_key?(:'id')
@@ -100,7 +91,6 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           description == o.description &&
-          feature == o.feature &&
           id == o.id &&
           name == o.name
     end
@@ -114,7 +104,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, feature, id, name].hash
+      [description, id, name].hash
     end
 
     # Builds the object from hash

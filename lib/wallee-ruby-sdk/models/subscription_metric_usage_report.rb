@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # The metric usage is the actual usage of a metric for a particular subscription as collected by an external application.
   class SubscriptionMetricUsageReport
-    # The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+    # The number of resources consumed, will be charged in the next billing cycle.
     attr_accessor :consumed_units
 
-    # 
+    # The ID of the user the usage report was created by.
     attr_accessor :created_by_user_id
 
-    # 
+    # The date and time when the usage report was created.
     attr_accessor :created_on
 
-    # The metric usage report description describe the reported usage. This description may be shown to the end user.
+    # A description used to identify the usage report.
     attr_accessor :description
 
-    # The external id identifies the metric usage uniquely.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -41,13 +41,13 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The metric usage report is linked to the metric for which the usage should be recorded.
+    # The metric that the usage report is recorded for.
     attr_accessor :metric
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The subscription to which the usage is added to.
+    # The subscription that the usage report is recorded for.
     attr_accessor :subscription
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

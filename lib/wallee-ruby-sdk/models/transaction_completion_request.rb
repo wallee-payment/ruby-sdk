@@ -32,7 +32,7 @@ module Wallee
     # The line items which will be used to complete the transaction.
     attr_accessor :line_items
 
-    # The statement descriptor explain charges or payments on bank statements.
+    # The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
     attr_accessor :statement_descriptor
 
     # The ID of the transaction which should be completed.

@@ -46,7 +46,7 @@ module Wallee
     def self.swagger_types
       {
         :'description' => :'Hash<String, String>',
-        :'feature' => :'Feature',
+        :'feature' => :'Integer',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>'
       }

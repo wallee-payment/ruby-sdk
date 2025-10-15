@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class PaymentAppProcessor
-    # 
+    # The environment (e.g., test or production) currently configured for the processor.
     attr_accessor :configured_environment
 
-    # The created on date is the date when this processor has been added.
+    # The date and time when the processor was created.
     attr_accessor :created_on
 
-    # The documentation URL points to a web site that describes how to configure and use the processor.
+    # A URL pointing to the documentation that explains how to configure and use the processor.
     attr_accessor :documentation_url
 
-    # The external ID corresponds to the ID that was provided during creation of the processor.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -41,28 +41,28 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The name of the processor will be displayed within the user interfaces that the merchant is interacting with.
+    # The name used to identify the processor.
     attr_accessor :name
 
-    # This processor configuration is created as part of the app processor. Any transaction created with the processor is linked with this processor configuration.
+    # The processor configuration created alongside the process within its designated space. This configuration is used in transactions created using this processor.
     attr_accessor :processor_configuration
 
-    # When the user sets the processor into the production mode the user will be forwarded to this URL to configure the production environment. When no URL is provided no redirection will happen.
+    # A URL pointing to the site where merchants can set up production mode for the processor.
     attr_accessor :production_mode_url
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # An SVG icon representing the processor, displayed to the user in the interface.
     attr_accessor :svg_icon
 
-    # The updated on date indicates when the last update on the processor occurred.
+    # The date and time when the processor was last updated.
     attr_accessor :updated_on
 
-    # When the processor is ready to be used for transactions in the production environment this flag is set to true.
+    # Whether the processor is fully prepared and available for handling transactions in a production environment.
     attr_accessor :usable_in_production
 
-    # 
+    # the date and time when the processor became fully usable and available for handling transactions in a production environment.
     attr_accessor :usable_in_production_since
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

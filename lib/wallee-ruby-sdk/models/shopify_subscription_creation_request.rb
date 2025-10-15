@@ -29,7 +29,7 @@ module Wallee
     # 
     attr_accessor :currency
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # 
@@ -86,12 +86,12 @@ module Wallee
     def self.swagger_types
       {
         :'billing_address' => :'ShopifySubscriptionAddressCreate',
-        :'billing_configuration' => :'ShopifySubscriptionModelBillingConfiguration',
+        :'billing_configuration' => :'BillingConfiguration',
         :'currency' => :'String',
         :'external_id' => :'String',
         :'initial_execution_date' => :'DateTime',
         :'integration' => :'Integer',
-        :'items' => :'Array<ShopifySubscriptionModelItem>',
+        :'items' => :'Array<Item>',
         :'language' => :'String',
         :'shipping_address' => :'ShopifySubscriptionAddressCreate',
         :'shipping_method_name' => :'String',

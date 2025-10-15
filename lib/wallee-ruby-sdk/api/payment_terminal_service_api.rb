@@ -302,10 +302,10 @@ module Wallee
     # @param space_id 
     # @param terminal_id 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [PaymentTerminalTransactionSummaryReference]
     def trigger_final_balance(space_id, terminal_id, opts = {})
-      trigger_final_balance_with_http_info(space_id, terminal_id, opts)
-      return nil
+      data, _status_code, _headers = trigger_final_balance_with_http_info(space_id, terminal_id, opts)
+      return data
     end
 
     # Remotely Trigger Final Balance
@@ -314,7 +314,7 @@ module Wallee
     # @param space_id 
     # @param terminal_id 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(PaymentTerminalTransactionSummaryReference, Fixnum, Hash)>] PaymentTerminalTransactionSummaryReference data, response status code and response headers
     def trigger_final_balance_with_http_info(space_id, terminal_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: PaymentTerminalService.trigger_final_balance ..."
@@ -357,7 +357,8 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :timeout => timeout,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'PaymentTerminalTransactionSummaryReference')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalService#trigger_final_balance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -369,10 +370,10 @@ module Wallee
     # @param space_id 
     # @param terminal_identifier 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [PaymentTerminalTransactionSummaryReference]
     def trigger_final_balance_by_identifier(space_id, terminal_identifier, opts = {})
-      trigger_final_balance_by_identifier_with_http_info(space_id, terminal_identifier, opts)
-      return nil
+      data, _status_code, _headers = trigger_final_balance_by_identifier_with_http_info(space_id, terminal_identifier, opts)
+      return data
     end
 
     # Remotely Trigger Final Balance By Identifier
@@ -381,7 +382,7 @@ module Wallee
     # @param space_id 
     # @param terminal_identifier 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(PaymentTerminalTransactionSummaryReference, Fixnum, Hash)>] PaymentTerminalTransactionSummaryReference data, response status code and response headers
     def trigger_final_balance_by_identifier_with_http_info(space_id, terminal_identifier, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: PaymentTerminalService.trigger_final_balance_by_identifier ..."
@@ -424,7 +425,8 @@ module Wallee
         :form_params => form_params,
         :body => post_body,
         :timeout => timeout,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'PaymentTerminalTransactionSummaryReference')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalService#trigger_final_balance_by_identifier\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

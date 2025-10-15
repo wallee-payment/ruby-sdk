@@ -22,13 +22,13 @@ module Wallee
   class RenderedDocument
     attr_accessor :data
 
-    # 
+    # The document's template type
     attr_accessor :document_template_type
 
-    # 
+    # The document's content type
     attr_accessor :mime_type
 
-    # 
+    # The title of the rendered document
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.

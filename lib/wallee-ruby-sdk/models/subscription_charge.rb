@@ -20,22 +20,22 @@ require 'date'
 module Wallee
   # The subscription charge represents a single charge carried out for a particular subscription.
   class SubscriptionCharge
-    # 
+    # The date and time when the charge was created.
     attr_accessor :created_on
 
-    # 
+    # The ID of the user the charge was discarded by.
     attr_accessor :discarded_by
 
-    # 
+    # The date and time when the charge was discarded.
     attr_accessor :discarded_on
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The date and time when the charge failed.
     attr_accessor :failed_on
 
-    # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
     attr_accessor :failed_url
 
     # A unique identifier for the object.
@@ -44,40 +44,40 @@ module Wallee
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The ledger entries that belong to the charge.
     attr_accessor :ledger_entries
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The date and time when the execution of the charge is planned.
     attr_accessor :planned_execution_date
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The processing type specifies how the charge is to be processed.
     attr_accessor :processing_type
 
-    # 
+    # The merchant's reference used to identify the charge.
     attr_accessor :reference
 
     # The object's current state.
     attr_accessor :state
 
-    # The field subscription indicates the subscription to which the charge belongs to.
+    # The subscription that the charge belongs to.
     attr_accessor :subscription
 
-    # 
+    # The date and time when the charge succeeded.
     attr_accessor :succeed_on
 
-    # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+    # The URL to redirect the customer back to after they successfully authenticated their payment.
     attr_accessor :success_url
 
-    # 
+    # The transaction used to process the charge.
     attr_accessor :transaction
 
-    # 
+    # The type specified how the charge was initiated.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

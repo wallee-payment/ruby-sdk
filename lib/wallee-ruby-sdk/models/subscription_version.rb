@@ -20,22 +20,25 @@ require 'date'
 module Wallee
   # 
   class SubscriptionVersion
-    # 
+    # The date and time when the subscription version was activated.
     attr_accessor :activated_on
 
-    # The subscriber is charged in the billing currency. The billing currency has to be one of the enabled currencies on the subscription product.
+    # The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
     attr_accessor :billing_currency
 
     # 
+    attr_accessor :billing_cycle_model
+
+    # The configurations of the subscription's components.
     attr_accessor :component_configurations
 
-    # 
+    # The date and time when the subscription version was created.
     attr_accessor :created_on
 
-    # The expected last period end is the date on which the projected end date of the last period is. This is only a projection and as such the actual date may be different.
+    # The date and time when the last period is expected to end.
     attr_accessor :expected_last_period_end
 
-    # 
+    # The date and time when the subscription version failed.
     attr_accessor :failed_on
 
     # A unique identifier for the object.
@@ -50,28 +53,25 @@ module Wallee
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The date and time when the termination of the subscription version is planned.
     attr_accessor :planned_termination_date
 
-    # 
+    # The product version that is subscribed to.
     attr_accessor :product_version
-
-    # 
-    attr_accessor :selected_components
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The subscription that this version belongs to.
     attr_accessor :subscription
 
-    # 
+    # The date and time when the subscription version was terminated.
     attr_accessor :terminated_on
 
-    # 
+    # The date and time when the termination of the subscription version started.
     attr_accessor :terminating_on
 
-    # 
+    # The date and time when the termination of the subscription version was issued.
     attr_accessor :termination_issued_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -82,6 +82,7 @@ module Wallee
       {
         :'activated_on' => :'activatedOn',
         :'billing_currency' => :'billingCurrency',
+        :'billing_cycle_model' => :'billingCycleModel',
         :'component_configurations' => :'componentConfigurations',
         :'created_on' => :'createdOn',
         :'expected_last_period_end' => :'expectedLastPeriodEnd',
@@ -92,7 +93,6 @@ module Wallee
         :'planned_purge_date' => :'plannedPurgeDate',
         :'planned_termination_date' => :'plannedTerminationDate',
         :'product_version' => :'productVersion',
-        :'selected_components' => :'selectedComponents',
         :'state' => :'state',
         :'subscription' => :'subscription',
         :'terminated_on' => :'terminatedOn',
@@ -107,6 +107,7 @@ module Wallee
       {
         :'activated_on' => :'DateTime',
         :'billing_currency' => :'String',
+        :'billing_cycle_model' => :'BillingCycleModel',
         :'component_configurations' => :'Array<SubscriptionComponentConfiguration>',
         :'created_on' => :'DateTime',
         :'expected_last_period_end' => :'DateTime',
@@ -117,7 +118,6 @@ module Wallee
         :'planned_purge_date' => :'DateTime',
         :'planned_termination_date' => :'DateTime',
         :'product_version' => :'SubscriptionProductVersion',
-        :'selected_components' => :'Array<SubscriptionProductComponent>',
         :'state' => :'SubscriptionVersionState',
         :'subscription' => :'Subscription',
         :'terminated_on' => :'DateTime',
@@ -141,6 +141,10 @@ module Wallee
 
       if attributes.has_key?(:'billingCurrency')
         self.billing_currency = attributes[:'billingCurrency']
+      end
+
+      if attributes.has_key?(:'billingCycleModel')
+        self.billing_cycle_model = attributes[:'billingCycleModel']
       end
 
       if attributes.has_key?(:'componentConfigurations')
@@ -183,12 +187,6 @@ module Wallee
 
       if attributes.has_key?(:'productVersion')
         self.product_version = attributes[:'productVersion']
-      end
-
-      if attributes.has_key?(:'selectedComponents')
-        if (value = attributes[:'selectedComponents']).is_a?(Array)
-          self.selected_components = value
-        end
       end
 
       if attributes.has_key?(:'state')
@@ -236,6 +234,7 @@ module Wallee
       self.class == o.class &&
           activated_on == o.activated_on &&
           billing_currency == o.billing_currency &&
+          billing_cycle_model == o.billing_cycle_model &&
           component_configurations == o.component_configurations &&
           created_on == o.created_on &&
           expected_last_period_end == o.expected_last_period_end &&
@@ -246,7 +245,6 @@ module Wallee
           planned_purge_date == o.planned_purge_date &&
           planned_termination_date == o.planned_termination_date &&
           product_version == o.product_version &&
-          selected_components == o.selected_components &&
           state == o.state &&
           subscription == o.subscription &&
           terminated_on == o.terminated_on &&
@@ -264,7 +262,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [activated_on, billing_currency, component_configurations, created_on, expected_last_period_end, failed_on, id, language, linked_space_id, planned_purge_date, planned_termination_date, product_version, selected_components, state, subscription, terminated_on, terminating_on, termination_issued_on, version].hash
+      [activated_on, billing_currency, billing_cycle_model, component_configurations, created_on, expected_last_period_end, failed_on, id, language, linked_space_id, planned_purge_date, planned_termination_date, product_version, state, subscription, terminated_on, terminating_on, termination_issued_on, version].hash
     end
 
     # Builds the object from hash

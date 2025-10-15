@@ -38,7 +38,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The installment plan can only be applied if the orders total is at least the defined minimal amount.
+    # The installment plan can only be applied if the order's total is at least the defined minimal amount.
     attr_accessor :minimal_amount
 
     # The installment plan name is used internally to identify the plan in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.

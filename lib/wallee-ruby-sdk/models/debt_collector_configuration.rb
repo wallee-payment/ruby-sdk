@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # The debt collector configuration defines the behavior of the collection process for a particular collector.
   class DebtCollectorConfiguration
-    # The collector handles the debt collection case based on the settings of this configuration.
+    # The debt collector that the configuration is for.
     attr_accessor :collector
 
-    # The conditions applied to the collector configuration restricts the application of this configuration onto a particular debt collection case.
+    # Conditions allow to define criteria that a debt collection case must fulfill in order for the debt collector configuration to be considered for processing the case.
     attr_accessor :conditions
 
-    # The collector configuration is only enabled for the selected space views. In case the set is empty the collector configuration is enabled for all space views.
+    # The space views for which the debt collector configuration is enabled. If empty, it is enabled for all space views.
     attr_accessor :enabled_space_views
 
     # A unique identifier for the object.
@@ -35,16 +35,16 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The collector configuration name is used internally to identify a specific collector configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the debt collector configuration.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The priority defines the order in which the collector configuration is tried to be applied onto a debt collection case. The higher the value the less likely the configuration is applied on a case.
+    # The priority that determines the order in which debt collector configurations are taken into account when processing a case. Low values are considered first.
     attr_accessor :priority
 
-    # When the review is skipped there will be no review for cases which use this configuration.
+    # Whether the review of debt collection cases is skipped.
     attr_accessor :skip_review_enabled
 
     # The object's current state.

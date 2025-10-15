@@ -20,31 +20,34 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminal
-    # 
+    # The configuration that is assigned to the terminal and determines how it works.
     attr_accessor :configuration_version
 
-    # 
+    # The default currency of the terminal.
     attr_accessor :default_currency
 
-    # 
+    # The name of the device that is currently linked to the payment terminal.
+    attr_accessor :device_name
+
+    # The serial number of the device that is currently linked to the payment terminal.
     attr_accessor :device_serial_number
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
+    # The unique identifier of the terminal, that is displayed on the device.
     attr_accessor :identifier
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The physical location where the terminal is used.
     attr_accessor :location_version
 
-    # The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the payment terminal.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -53,7 +56,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The type of the payment terminal.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -64,6 +67,7 @@ module Wallee
       {
         :'configuration_version' => :'configurationVersion',
         :'default_currency' => :'defaultCurrency',
+        :'device_name' => :'deviceName',
         :'device_serial_number' => :'deviceSerialNumber',
         :'external_id' => :'externalId',
         :'id' => :'id',
@@ -83,6 +87,7 @@ module Wallee
       {
         :'configuration_version' => :'PaymentTerminalConfigurationVersion',
         :'default_currency' => :'String',
+        :'device_name' => :'String',
         :'device_serial_number' => :'String',
         :'external_id' => :'String',
         :'id' => :'Integer',
@@ -111,6 +116,10 @@ module Wallee
 
       if attributes.has_key?(:'defaultCurrency')
         self.default_currency = attributes[:'defaultCurrency']
+      end
+
+      if attributes.has_key?(:'deviceName')
+        self.device_name = attributes[:'deviceName']
       end
 
       if attributes.has_key?(:'deviceSerialNumber')
@@ -193,6 +202,7 @@ module Wallee
       self.class == o.class &&
           configuration_version == o.configuration_version &&
           default_currency == o.default_currency &&
+          device_name == o.device_name &&
           device_serial_number == o.device_serial_number &&
           external_id == o.external_id &&
           id == o.id &&
@@ -215,7 +225,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [configuration_version, default_currency, device_serial_number, external_id, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
+      [configuration_version, default_currency, device_name, device_serial_number, external_id, id, identifier, linked_space_id, location_version, name, planned_purge_date, state, type, version].hash
     end
 
     # Builds the object from hash

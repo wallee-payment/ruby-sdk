@@ -26,13 +26,13 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The space view name is used internally to identify the space view in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the space view.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The space to which the view belongs to.
+    # The space that the space view belongs to.
     attr_accessor :space
 
     # The object's current state.

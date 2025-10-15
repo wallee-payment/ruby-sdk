@@ -18,47 +18,27 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # Represents a query to be submitted for execution in Analytics.
-  class AnalyticsQuery
-    # The mandatory ID of an account in which the query shall be executed. Must be a valid account ID greater than 0.
-    attr_accessor :account_id
+  # 
+  class TaxLine
+    # 
+    attr_accessor :rate
 
-    # A client generated nonce which uniquely identifies the query to be executed. Subsequent submissions with the same external ID will not re-execute the query but instead return the existing execution with that ID. Either the External ID or a Maximal Cache Age greater than 0 must be specified. If both are specified the External ID will have precedence and the Maximal Cache Age will be ignored.
-    attr_accessor :external_id
-
-    # The maximal age in minutes of cached query executions to return. If an equivalent query execution with the same Query String, Account ID and Spaces parameters not older than the specified age is already available that execution will be returned instead of a newly started execution. Set to 0 or null (and set a unique, previously unused External ID) to force a new query execution irrespective of previous executions. Either the External ID or a Cache Duration greater than 0 must be specified. If both are specified, the External ID will be preferred (and the Maximal Cache Age ignored).
-    attr_accessor :max_cache_age
-
-    # The SQL statement which is being submitted for execution. Must be a valid PrestoDB/Athena SQL statement.
-    attr_accessor :query_string
-
-    # The maximal amount of scanned data that this query is allowed to scan. After this limit is reached query will be canceled by the system. 
-    attr_accessor :scanned_data_limit
-
-    # The IDs of the spaces in which the query shall be executed. At most 5 space IDs may be specified. All specified spaces must be owned by the account specified by the accountId property. The spaces property may be missing or empty to query all spaces of the specified account.
-    attr_accessor :space_ids
+    # 
+    attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'external_id' => :'externalId',
-        :'max_cache_age' => :'maxCacheAge',
-        :'query_string' => :'queryString',
-        :'scanned_data_limit' => :'scannedDataLimit',
-        :'space_ids' => :'spaceIds'
+        :'rate' => :'rate',
+        :'title' => :'title'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'account_id' => :'Integer',
-        :'external_id' => :'String',
-        :'max_cache_age' => :'Integer',
-        :'query_string' => :'String',
-        :'scanned_data_limit' => :'Float',
-        :'space_ids' => :'Array<Integer>'
+        :'rate' => :'Float',
+        :'title' => :'String'
       }
     end
 
@@ -70,30 +50,12 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'accountId')
-        self.account_id = attributes[:'accountId']
+      if attributes.has_key?(:'rate')
+        self.rate = attributes[:'rate']
       end
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'maxCacheAge')
-        self.max_cache_age = attributes[:'maxCacheAge']
-      end
-
-      if attributes.has_key?(:'queryString')
-        self.query_string = attributes[:'queryString']
-      end
-
-      if attributes.has_key?(:'scannedDataLimit')
-        self.scanned_data_limit = attributes[:'scannedDataLimit']
-      end
-
-      if attributes.has_key?(:'spaceIds')
-        if (value = attributes[:'spaceIds']).is_a?(Array)
-          self.space_ids = value
-        end
+      if attributes.has_key?(:'title')
+        self.title = attributes[:'title']
       end
     end
 
@@ -101,42 +63,13 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if !@query_string.nil? && @query_string.to_s.length > 4096
-        invalid_properties.push('invalid value for "query_string", the character length must be smaller than or equal to 4096.')
-      end
-
-      if !@query_string.nil? && @query_string.to_s.length < 1
-        invalid_properties.push('invalid value for "query_string", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_id.nil?
-      return false if !@query_string.nil? && @query_string.to_s.length > 4096
-      return false if !@query_string.nil? && @query_string.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] query_string Value to be assigned
-    def query_string=(query_string)
-      if !query_string.nil? && query_string.to_s.length > 4096
-        fail ArgumentError, 'invalid value for "query_string", the character length must be smaller than or equal to 4096.'
-      end
-
-      if !query_string.nil? && query_string.to_s.length < 1
-        fail ArgumentError, 'invalid value for "query_string", the character length must be great than or equal to 1.'
-      end
-
-      @query_string = query_string
     end
 
     # Checks equality by comparing each attribute.
@@ -144,12 +77,8 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          external_id == o.external_id &&
-          max_cache_age == o.max_cache_age &&
-          query_string == o.query_string &&
-          scanned_data_limit == o.scanned_data_limit &&
-          space_ids == o.space_ids
+          rate == o.rate &&
+          title == o.title
     end
 
     # @see the `==` method
@@ -161,7 +90,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account_id, external_id, max_cache_age, query_string, scanned_data_limit, space_ids].hash
+      [rate, title].hash
     end
 
     # Builds the object from hash

@@ -35,7 +35,7 @@ def get_transaction_create
         currency: "EUR",
         customerEmailAddress: "test@example.com",
         customerPresence: Wallee::CustomersPresence::VIRTUAL_PRESENT,
-        failedUrl: "http://localhost/failure",
+        failedUrl: 'https://www.wallee.com/failure',
         invoiceMerchantReference: "order-1",
         language: "en_US",
 

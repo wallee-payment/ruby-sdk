@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class SubscriptionPeriodBill
-    # 
+    # The date and time when the period bill was created.
     attr_accessor :created_on
 
-    # 
+    # The date and time when the period actually ended.
     attr_accessor :effective_period_end_date
 
     # A unique identifier for the object.
@@ -35,10 +35,10 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The date and time when the period started.
     attr_accessor :period_start_date
 
-    # 
+    # The date and time when the period is planned to end.
     attr_accessor :planned_period_end_date
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -47,7 +47,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The subscription version that the period bill belongs to.
     attr_accessor :subscription_version
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

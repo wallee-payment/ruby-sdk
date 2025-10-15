@@ -20,29 +20,21 @@ require 'date'
 module Wallee
   # 
   class Label
-    # 
+    # The label's actual content.
     attr_accessor :content
 
-    # 
+    # The label's content formatted as string.
     attr_accessor :content_as_string
 
-    # 
+    # The descriptor that describes what information the label provides.
     attr_accessor :descriptor
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The version is used for optimistic locking and incremented whenever the object is updated.
-    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'content' => :'content',
         :'content_as_string' => :'contentAsString',
-        :'descriptor' => :'descriptor',
-        :'id' => :'id',
-        :'version' => :'version'
+        :'descriptor' => :'descriptor'
       }
     end
 
@@ -51,9 +43,7 @@ module Wallee
       {
         :'content' => :'Object',
         :'content_as_string' => :'String',
-        :'descriptor' => :'LabelDescriptor',
-        :'id' => :'Integer',
-        :'version' => :'Integer'
+        :'descriptor' => :'LabelDescriptor'
       }
     end
 
@@ -75,14 +65,6 @@ module Wallee
 
       if attributes.has_key?(:'descriptor')
         self.descriptor = attributes[:'descriptor']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
     end
 
@@ -106,9 +88,7 @@ module Wallee
       self.class == o.class &&
           content == o.content &&
           content_as_string == o.content_as_string &&
-          descriptor == o.descriptor &&
-          id == o.id &&
-          version == o.version
+          descriptor == o.descriptor
     end
 
     # @see the `==` method
@@ -120,7 +100,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [content, content_as_string, descriptor, id, version].hash
+      [content, content_as_string, descriptor].hash
     end
 
     # Builds the object from hash

@@ -20,61 +20,61 @@ require 'date'
 module Wallee
   # 
   class TransactionPending
-    # 
+    # The payment method brands that can be used to authorize the transaction.
     attr_accessor :allowed_payment_method_brands
 
-    # 
+    # The payment method configurations that can be used to authorize the transaction.
     attr_accessor :allowed_payment_method_configurations
 
-    # 
+    # The address associated with the payment method for invoicing and transaction processing purposes.
     attr_accessor :billing_address
 
-    # The completion behavior controls when the transaction is completed.
+    # The behavior that controls when the transaction is completed.
     attr_accessor :completion_behavior
 
-    # 
+    # The three-letter code (ISO 4217 format) of the transaction's currency.
     attr_accessor :currency
 
-    # The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+    # The customer's email address.
     attr_accessor :customer_email_address
 
-    # 
+    # The unique identifier of the customer in the external system.
     attr_accessor :customer_id
 
-    # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
     attr_accessor :failed_url
 
-    # 
+    # The merchant's reference used to identify the invoice.
     attr_accessor :invoice_merchant_reference
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The line items purchased by the customer.
     attr_accessor :line_items
 
-    # 
+    # The merchant's reference used to identify the transaction.
     attr_accessor :merchant_reference
 
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # 
+    # The address to where the order will be shipped.
     attr_accessor :shipping_address
 
-    # 
+    # The name of the shipping method used to ship the products.
     attr_accessor :shipping_method
 
-    # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+    # The URL to redirect the customer back to after they successfully authenticated their payment.
     attr_accessor :success_url
 
-    # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
     attr_accessor :time_zone
 
-    # 
+    # The payment token that should be used to charge the customer.
     attr_accessor :token
 
-    # The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+    # The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
     attr_accessor :tokenization_mode
 
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.

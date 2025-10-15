@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class PaymentAppConnector
-    # 
+    # The duration within which the authorization process for a payment should complete.
     attr_accessor :authorization_timeout
 
-    # The completion configuration defines how the deferred completion is processed. If it is not present it means that deferred completion is not supported by this connector.
+    # The completion configuration controlling how deferred completion is processed. If not present, deferred completion is not supported for this connector.
     attr_accessor :completion_configuration
 
-    # The connector configuration references the configuration that was created as part of this connector within the space. The connector configuration is referenced within transactions created with this connector.
+    # The connector configuration created alongside the connector within its designated space. This configuration is used in transactions created using this connector.
     attr_accessor :connector_configuration
 
-    # The created on date indicates when the connector was added.
+    # The date and time when the connector was created.
     attr_accessor :created_on
 
-    # The external ID corresponds to the ID provided during inserting of the processor.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -41,22 +41,22 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The name of the connector will be displayed within the user interfaces that the merchant is interacting with.
+    # The name used to identify the connector.
     attr_accessor :name
 
-    # The payment page endpoint is invoked to process the transaction. The endpoint is defined by the external service provider.
+    # The URL where the user is redirected to process a payment. This endpoint is provided by the external service provider.
     attr_accessor :payment_page_endpoint
 
-    # The processor references the app processor to which this connector belongs to. The relationship is established during the creation of the connector.
+    # The payment app processor that the connector belongs to. This relationship is defined when the connector is created.
     attr_accessor :processor
 
-    # The refund configuration defines how refunds are processed. If it is not present it means that refunds are not supported by this connector.
+    # The refund configuration controlling the behavior for processing refunds. If not present, refunds are not supported for this connector.
     attr_accessor :refund_configuration
 
     # The object's current state.
     attr_accessor :state
 
-    # The updated on date indicates when the last time the connector was updated on.
+    # The date and time when the connector was last updated.
     attr_accessor :updated_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

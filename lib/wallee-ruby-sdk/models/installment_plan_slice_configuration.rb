@@ -23,7 +23,7 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The title of this slices line items. The title is visible to the buyer.
+    # The title of this slice's line items. The title is visible to the buyer.
     attr_accessor :line_item_title
 
     # The ID of the space this object belongs to.

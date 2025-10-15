@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # A metric represents the usage of a resource that can be measured.
   class SubscriptionMetric
-    # 
+    # The localized description of the metric that is displayed to the customer.
     attr_accessor :description
 
     # A unique identifier for the object.
@@ -29,7 +29,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The localized name of the metric that is displayed to the customer.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -38,7 +38,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The type of the metric.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

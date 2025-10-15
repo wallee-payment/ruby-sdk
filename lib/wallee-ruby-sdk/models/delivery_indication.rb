@@ -20,34 +20,34 @@ require 'date'
 module Wallee
   # 
   class DeliveryIndication
+    # The reason for the automatic system decision about the delivery indication.
+    attr_accessor :automatic_decision_reason
+
+    # The date and time when an automatic decision was made.
+    attr_accessor :automatically_decided_on
+
+    # The transaction completion that the delivery indication is linked to.
+    attr_accessor :completion
+
+    # The date and time when the object was created.
+    attr_accessor :created_on
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The payment transaction this object is linked to.
     attr_accessor :linked_transaction
 
-    # 
-    attr_accessor :automatic_decision_reason
-
-    # 
-    attr_accessor :automatically_decided_on
-
-    # 
-    attr_accessor :completion
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # 
+    # The date and time by which a decision must be made before the system automatically proceeds according to the connector's predefined settings.
     attr_accessor :manual_decision_timeout_on
 
-    # 
+    # The ID of the user who manually decided the delivery indication's state.
     attr_accessor :manually_decided_by
 
-    # 
+    # The date and time when a manual decision was made.
     attr_accessor :manually_decided_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -56,22 +56,22 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The date and time when the delivery indication will expire.
     attr_accessor :timeout_on
 
-    # 
+    # The payment transaction that the delivery indication is linked to.
     attr_accessor :transaction
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'automatic_decision_reason' => :'automaticDecisionReason',
         :'automatically_decided_on' => :'automaticallyDecidedOn',
         :'completion' => :'completion',
         :'created_on' => :'createdOn',
+        :'id' => :'id',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'manual_decision_timeout_on' => :'manualDecisionTimeoutOn',
         :'manually_decided_by' => :'manuallyDecidedBy',
         :'manually_decided_on' => :'manuallyDecidedOn',
@@ -85,13 +85,13 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'automatic_decision_reason' => :'DeliveryIndicationDecisionReason',
         :'automatically_decided_on' => :'DateTime',
         :'completion' => :'Integer',
         :'created_on' => :'DateTime',
+        :'id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'manual_decision_timeout_on' => :'DateTime',
         :'manually_decided_by' => :'Integer',
         :'manually_decided_on' => :'DateTime',
@@ -110,18 +110,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
       if attributes.has_key?(:'automaticDecisionReason')
         self.automatic_decision_reason = attributes[:'automaticDecisionReason']
       end
@@ -136,6 +124,18 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'manualDecisionTimeoutOn')
@@ -185,13 +185,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           automatic_decision_reason == o.automatic_decision_reason &&
           automatically_decided_on == o.automatically_decided_on &&
           completion == o.completion &&
           created_on == o.created_on &&
+          id == o.id &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           manual_decision_timeout_on == o.manual_decision_timeout_on &&
           manually_decided_by == o.manually_decided_by &&
           manually_decided_on == o.manually_decided_on &&
@@ -210,7 +210,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, automatic_decision_reason, automatically_decided_on, completion, created_on, manual_decision_timeout_on, manually_decided_by, manually_decided_on, planned_purge_date, state, timeout_on, transaction].hash
+      [automatic_decision_reason, automatically_decided_on, completion, created_on, id, linked_space_id, linked_transaction, manual_decision_timeout_on, manually_decided_by, manually_decided_on, planned_purge_date, state, timeout_on, transaction].hash
     end
 
     # Builds the object from hash

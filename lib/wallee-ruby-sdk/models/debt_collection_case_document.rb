@@ -23,31 +23,28 @@ module Wallee
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The debt collection case that this document belongs to.
     attr_accessor :debt_collection_case
 
-    # 
+    # The file name of the document.
     attr_accessor :file_name
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The MIME type of the document's content.
     attr_accessor :mime_type
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
-    attr_accessor :storage_id
-
-    # 
+    # A unique identifier of the document.
     attr_accessor :unique_id
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -64,7 +61,6 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'mime_type' => :'mimeType',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'storage_id' => :'storageId',
         :'unique_id' => :'uniqueId',
         :'version' => :'version'
       }
@@ -81,7 +77,6 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'mime_type' => :'String',
         :'planned_purge_date' => :'DateTime',
-        :'storage_id' => :'String',
         :'unique_id' => :'String',
         :'version' => :'Integer'
       }
@@ -129,10 +124,6 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
-      if attributes.has_key?(:'storageId')
-        self.storage_id = attributes[:'storageId']
-      end
-
       if attributes.has_key?(:'uniqueId')
         self.unique_id = attributes[:'uniqueId']
       end
@@ -150,10 +141,6 @@ module Wallee
         invalid_properties.push('invalid value for "file_name", the character length must be smaller than or equal to 100.')
       end
 
-      if !@storage_id.nil? && @storage_id.to_s.length > 100
-        invalid_properties.push('invalid value for "storage_id", the character length must be smaller than or equal to 100.')
-      end
-
       if !@unique_id.nil? && @unique_id.to_s.length > 500
         invalid_properties.push('invalid value for "unique_id", the character length must be smaller than or equal to 500.')
       end
@@ -165,7 +152,6 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@file_name.nil? && @file_name.to_s.length > 100
-      return false if !@storage_id.nil? && @storage_id.to_s.length > 100
       return false if !@unique_id.nil? && @unique_id.to_s.length > 500
       true
     end
@@ -178,16 +164,6 @@ module Wallee
       end
 
       @file_name = file_name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] storage_id Value to be assigned
-    def storage_id=(storage_id)
-      if !storage_id.nil? && storage_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "storage_id", the character length must be smaller than or equal to 100.'
-      end
-
-      @storage_id = storage_id
     end
 
     # Custom attribute writer method with validation
@@ -213,7 +189,6 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           mime_type == o.mime_type &&
           planned_purge_date == o.planned_purge_date &&
-          storage_id == o.storage_id &&
           unique_id == o.unique_id &&
           version == o.version
     end
@@ -227,7 +202,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, debt_collection_case, file_name, id, labels, linked_space_id, mime_type, planned_purge_date, storage_id, unique_id, version].hash
+      [created_on, debt_collection_case, file_name, id, labels, linked_space_id, mime_type, planned_purge_date, unique_id, version].hash
     end
 
     # Builds the object from hash

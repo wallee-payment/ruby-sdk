@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class PaymentProcessorConfiguration
-    # The configuration is managed by the application and cannot be changed via the user interface.
+    # Whether the processor configuration is managed by the application and therefore cannot be changed.
     attr_accessor :application_managed
 
-    # The contract links the processor configuration with the contract that is used to process payments.
+    # The ID of the payment contract the processor configuration is linked to.
     attr_accessor :contract_id
 
     # A unique identifier for the object.
@@ -32,13 +32,13 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The processor configuration name is used internally to identify a specific processor configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the payment method configuration.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # A processor handles the connection to a third part company (a Payment Service Provider) that technically manages the transaction and therefore processes the payment. For the same processor multiple processor configuration can be setup.
+    # The payment processor that the configuration is for.
     attr_accessor :processor
 
     # The object's current state.

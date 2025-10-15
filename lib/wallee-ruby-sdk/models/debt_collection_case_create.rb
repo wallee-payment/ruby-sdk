@@ -20,37 +20,37 @@ require 'date'
 module Wallee
   # The debt collection case represents a try to collect the money from the debtor.
   class DebtCollectionCaseCreate
-    # The billing address of the case identifies the debtor.
+    # The billing address that identifies the debtor.
     attr_accessor :billing_address
 
-    # The contract date is the date on which the contract with the debtor was signed on.
+    # The date and time when the contract with the debtor was signed.
     attr_accessor :contract_date
 
-    # The currency defines the billing currency of the debt collection case.
+    # The three-letter code (ISO 4217 format) of the case's currency.
     attr_accessor :currency
 
-    # The due date indicates the date on which the amount receivable was due. This date has to be always in the past.
+    # The date and time when the claim was due.
     attr_accessor :due_date
 
-    # The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
+    # The environment in which the case is processed.
     attr_accessor :environment
 
-    # The language indicates the language to be used in the communication with the debtor.
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # The line items of the debt collection case will be shown on documents sent to the debtor and the total of them makes up total amount to collect.
+    # The line items that are subject of this debt collection case.
     attr_accessor :line_items
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
-    # The collector configuration determines how the debt collection case is processed.
+    # The configuration that the case is processed with.
     attr_accessor :collector_configuration
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # The case reference is used in the communication with the debtor. It should be unique and it should be linkable with the source of the debt collection case.
+    # A unique reference to identify the debt collection case in communication with the debtor.
     attr_accessor :reference
 
     # Attribute mapping from ruby-style variable name to JSON key.

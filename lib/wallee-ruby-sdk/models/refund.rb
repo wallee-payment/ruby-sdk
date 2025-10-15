@@ -18,99 +18,99 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
+  # A refund is a credit issued to the customer, which can be initiated either by the merchant or by the customer as a reversal.
   class Refund
-    # 
+    # The total monetary amount of the refund, representing the exact credit issued to the customer.
     attr_accessor :amount
 
-    # 
+    # The original base line items from the transaction prior to the refund, serving as a reference for the refunded amounts.
     attr_accessor :base_line_items
 
-    # 
+    # The transaction completion that the refund belongs to.
     attr_accessor :completion
 
-    # 
+    # The ID of the user the refund was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The environment used when rendering resources.
     attr_accessor :environment
 
-    # The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The date and time when the refund failed.
     attr_accessor :failed_on
 
-    # 
+    # The reason for the failure of the refund.
     attr_accessor :failure_reason
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The line items included in the refund, representing the reductions.
     attr_accessor :line_items
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The merchant's reference used to identify the refund.
     attr_accessor :merchant_reference
 
-    # 
+    # The date and time when the next update of the object's state is planned.
     attr_accessor :next_update_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The date and time when the processing of the refund was started.
     attr_accessor :processing_on
 
-    # 
+    # The reference ID provided by the payment processor, used to trace the refund through the external payment system.
     attr_accessor :processor_reference
 
-    # 
+    # The line items from the original transaction, adjusted to reflect any reductions applied during the refund process.
     attr_accessor :reduced_line_items
 
-    # 
+    # The reductions applied on the original transaction items, detailing specific adjustments associated with the refund.
     attr_accessor :reductions
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The date and time when the refund succeeded.
     attr_accessor :succeeded_on
 
-    # 
+    # The tax breakdown applied to the refund amount, helping with tax calculations or reporting.
     attr_accessor :taxes
 
-    # 
+    # The time zone that this object is associated with.
     attr_accessor :time_zone
 
-    # 
+    # The date and time when the object will expire.
     attr_accessor :timeout_on
 
-    # The total applied fees is the sum of all fees that have been applied so far.
+    # The sum of fees applied to the refund transaction, such as processing or service charges.
     attr_accessor :total_applied_fees
 
-    # The total settled amount is the total amount which has been settled so far.
+    # The total amount settled for the refund, factoring in reductions, taxes, and any additional applied fees.
     attr_accessor :total_settled_amount
 
-    # 
+    # The transaction that the refund belongs to.
     attr_accessor :transaction
 
-    # 
+    # The type specifying the method and origin of the refund (e.g., initiated by the customer or merchant).
     attr_accessor :type
 
-    # 
+    # An updated invoice reflecting adjustments made by the refund.
     attr_accessor :updated_invoice
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

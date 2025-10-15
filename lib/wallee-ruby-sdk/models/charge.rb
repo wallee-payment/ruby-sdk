@@ -20,46 +20,43 @@ require 'date'
 module Wallee
   # 
   class Charge
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # The date on which the charge was created on.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The reason for the failure of the charge.
     attr_accessor :failure_reason
+
+    # A unique identifier for the object.
+    attr_accessor :id
 
     # The language that is linked to the object.
     attr_accessor :language
 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The time zone that this object is associated with.
     attr_accessor :time_zone
 
-    # 
+    # The date and time when the charge will expire.
     attr_accessor :timeout_on
 
-    # 
+    # The transaction that the charge belongs to.
     attr_accessor :transaction
 
-    # 
+    # The type specifying how the customer was charged.
     attr_accessor :type
 
-    # The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+    # The message that can be displayed to the customer explaining why the charge failed, in the customer's language.
     attr_accessor :user_failure_message
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -68,12 +65,11 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'created_on' => :'createdOn',
         :'failure_reason' => :'failureReason',
+        :'id' => :'id',
         :'language' => :'language',
+        :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'space_view_id' => :'spaceViewId',
         :'state' => :'state',
@@ -89,12 +85,11 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'created_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
+        :'id' => :'Integer',
         :'language' => :'String',
+        :'linked_space_id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
         :'space_view_id' => :'Integer',
         :'state' => :'ChargeState',
@@ -115,18 +110,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
       end
@@ -135,8 +118,16 @@ module Wallee
         self.failure_reason = attributes[:'failureReason']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
       if attributes.has_key?(:'plannedPurgeDate')
@@ -194,12 +185,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           created_on == o.created_on &&
           failure_reason == o.failure_reason &&
+          id == o.id &&
           language == o.language &&
+          linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
           space_view_id == o.space_view_id &&
           state == o.state &&
@@ -220,7 +210,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, created_on, failure_reason, language, planned_purge_date, space_view_id, state, time_zone, timeout_on, transaction, type, user_failure_message, version].hash
+      [created_on, failure_reason, id, language, linked_space_id, planned_purge_date, space_view_id, state, time_zone, timeout_on, transaction, type, user_failure_message, version].hash
     end
 
     # Builds the object from hash

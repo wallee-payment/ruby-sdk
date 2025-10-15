@@ -20,15 +20,6 @@ require 'date'
 module Wallee
   # 
   class InvoiceReconciliationRecord
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
     # 
     attr_accessor :address
 
@@ -65,8 +56,17 @@ module Wallee
     # 
     attr_accessor :iban
 
+    # A unique identifier for the object.
+    attr_accessor :id
+
     # 
     attr_accessor :last_resolution_failure
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
 
     # 
     attr_accessor :participant_number
@@ -122,9 +122,6 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'address' => :'address',
         :'amount' => :'amount',
         :'city' => :'city',
@@ -137,7 +134,10 @@ module Wallee
         :'family_name' => :'familyName',
         :'given_name' => :'givenName',
         :'iban' => :'iban',
+        :'id' => :'id',
         :'last_resolution_failure' => :'lastResolutionFailure',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'participant_number' => :'participantNumber',
         :'payment_fee_amount' => :'paymentFeeAmount',
         :'payment_fee_currency' => :'paymentFeeCurrency',
@@ -161,9 +161,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'address' => :'String',
         :'amount' => :'Float',
         :'city' => :'String',
@@ -176,7 +173,10 @@ module Wallee
         :'family_name' => :'String',
         :'given_name' => :'String',
         :'iban' => :'String',
+        :'id' => :'Integer',
         :'last_resolution_failure' => :'FailureReason',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'participant_number' => :'String',
         :'payment_fee_amount' => :'Float',
         :'payment_fee_currency' => :'String',
@@ -204,18 +204,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
 
       if attributes.has_key?(:'address')
         self.address = attributes[:'address']
@@ -265,8 +253,20 @@ module Wallee
         self.iban = attributes[:'iban']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'lastResolutionFailure')
         self.last_resolution_failure = attributes[:'lastResolutionFailure']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'participantNumber')
@@ -416,9 +416,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           address == o.address &&
           amount == o.amount &&
           city == o.city &&
@@ -431,7 +428,10 @@ module Wallee
           family_name == o.family_name &&
           given_name == o.given_name &&
           iban == o.iban &&
+          id == o.id &&
           last_resolution_failure == o.last_resolution_failure &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           participant_number == o.participant_number &&
           payment_fee_amount == o.payment_fee_amount &&
           payment_fee_currency == o.payment_fee_currency &&
@@ -460,7 +460,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, address, amount, city, country, created_on, currency, discarded_by, discarded_on, environment, family_name, given_name, iban, last_resolution_failure, participant_number, payment_fee_amount, payment_fee_currency, payment_reason, planned_purge_date, post_code, reference_number, rejection_status, resolved_by, resolved_on, sender_bank_account, state, street, type, unique_id, value_date, version].hash
+      [address, amount, city, country, created_on, currency, discarded_by, discarded_on, environment, family_name, given_name, iban, id, last_resolution_failure, linked_space_id, linked_transaction, participant_number, payment_fee_amount, payment_fee_currency, payment_reason, planned_purge_date, post_code, reference_number, rejection_status, resolved_by, resolved_on, sender_bank_account, state, street, type, unique_id, value_date, version].hash
     end
 
     # Builds the object from hash

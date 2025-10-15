@@ -22,13 +22,13 @@ module Wallee
   class RenderedTerminalReceipt
     attr_accessor :data
 
-    # The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
+    # The MIME type specifies the format of the receipt document and is determined by the requested format.
     attr_accessor :mime_type
 
-    # The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+    # Whether the terminal's configuration mandates printing and the device has receipt printing capabilities.
     attr_accessor :printed
 
-    # Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+    # The receipt type specifies the intended use and the target audience of the document.
     attr_accessor :receipt_type
 
     # Attribute mapping from ruby-style variable name to JSON key.

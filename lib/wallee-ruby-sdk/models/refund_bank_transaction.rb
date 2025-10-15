@@ -20,31 +20,31 @@ require 'date'
 module Wallee
   # 
   class RefundBankTransaction
+    # Provides general information about the bank transaction.
+    attr_accessor :bank_transaction
+
     # A unique identifier for the object.
     attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # 
-    attr_accessor :bank_transaction
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The refund this bank transaction belongs to.
     attr_accessor :refund
 
-    # Specify the posting amount in the refund's currency.
+    # The posting amount represents the monetary value of the bank transaction, recorded in the refund's currency, before applying any adjustments.
     attr_accessor :refund_currency_amount
 
-    # 
+    # The value amount represents the net monetary value of the bank transaction, recorded in the refund's currency, after applicable deductions.
     attr_accessor :refund_currency_value_amount
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -53,11 +53,11 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'bank_transaction' => :'bankTransaction',
         :'id' => :'id',
+        :'language' => :'language',
         :'linked_space_id' => :'linkedSpaceId',
         :'linked_transaction' => :'linkedTransaction',
-        :'bank_transaction' => :'bankTransaction',
-        :'language' => :'language',
         :'refund' => :'refund',
         :'refund_currency_amount' => :'refundCurrencyAmount',
         :'refund_currency_value_amount' => :'refundCurrencyValueAmount',
@@ -69,11 +69,11 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'bank_transaction' => :'BankTransaction',
         :'id' => :'Integer',
+        :'language' => :'String',
         :'linked_space_id' => :'Integer',
         :'linked_transaction' => :'Integer',
-        :'bank_transaction' => :'BankTransaction',
-        :'language' => :'String',
         :'refund' => :'Refund',
         :'refund_currency_amount' => :'Float',
         :'refund_currency_value_amount' => :'Float',
@@ -90,8 +90,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'bankTransaction')
+        self.bank_transaction = attributes[:'bankTransaction']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'language')
+        self.language = attributes[:'language']
       end
 
       if attributes.has_key?(:'linkedSpaceId')
@@ -100,14 +108,6 @@ module Wallee
 
       if attributes.has_key?(:'linkedTransaction')
         self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
-      if attributes.has_key?(:'bankTransaction')
-        self.bank_transaction = attributes[:'bankTransaction']
-      end
-
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
       end
 
       if attributes.has_key?(:'refund')
@@ -149,11 +149,11 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          bank_transaction == o.bank_transaction &&
           id == o.id &&
+          language == o.language &&
           linked_space_id == o.linked_space_id &&
           linked_transaction == o.linked_transaction &&
-          bank_transaction == o.bank_transaction &&
-          language == o.language &&
           refund == o.refund &&
           refund_currency_amount == o.refund_currency_amount &&
           refund_currency_value_amount == o.refund_currency_value_amount &&
@@ -170,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, bank_transaction, language, refund, refund_currency_amount, refund_currency_value_amount, space_view_id, version].hash
+      [bank_transaction, id, language, linked_space_id, linked_transaction, refund, refund_currency_amount, refund_currency_value_amount, space_view_id, version].hash
     end
 
     # Builds the object from hash

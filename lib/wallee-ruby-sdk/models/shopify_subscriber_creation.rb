@@ -26,6 +26,9 @@ module Wallee
     # 
     attr_accessor :phone_number
 
+    # The customer Global ID has to correspond to the Global ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
+    attr_accessor :shopify_customer_gid
+
     # The customer ID has to correspond to the ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
     attr_accessor :shopify_customer_id
 
@@ -34,6 +37,7 @@ module Wallee
       {
         :'email_address' => :'emailAddress',
         :'phone_number' => :'phoneNumber',
+        :'shopify_customer_gid' => :'shopifyCustomerGid',
         :'shopify_customer_id' => :'shopifyCustomerId'
       }
     end
@@ -43,6 +47,7 @@ module Wallee
       {
         :'email_address' => :'String',
         :'phone_number' => :'String',
+        :'shopify_customer_gid' => :'String',
         :'shopify_customer_id' => :'String'
       }
     end
@@ -61,6 +66,10 @@ module Wallee
 
       if attributes.has_key?(:'phoneNumber')
         self.phone_number = attributes[:'phoneNumber']
+      end
+
+      if attributes.has_key?(:'shopifyCustomerGid')
+        self.shopify_customer_gid = attributes[:'shopifyCustomerGid']
       end
 
       if attributes.has_key?(:'shopifyCustomerId')
@@ -93,6 +102,7 @@ module Wallee
       self.class == o.class &&
           email_address == o.email_address &&
           phone_number == o.phone_number &&
+          shopify_customer_gid == o.shopify_customer_gid &&
           shopify_customer_id == o.shopify_customer_id
     end
 
@@ -105,7 +115,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [email_address, phone_number, shopify_customer_id].hash
+      [email_address, phone_number, shopify_customer_gid, shopify_customer_id].hash
     end
 
     # Builds the object from hash

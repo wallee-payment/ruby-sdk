@@ -44,7 +44,7 @@ module Wallee
     # Whether the comment is pinned to the top.
     attr_accessor :pinned
 
-    # 
+    # The refund that the comment belongs to.
     attr_accessor :refund
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

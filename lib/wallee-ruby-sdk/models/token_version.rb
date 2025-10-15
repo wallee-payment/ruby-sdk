@@ -20,28 +20,28 @@ require 'date'
 module Wallee
   # 
   class TokenVersion
-    # 
+    # The date and time when the token version was activated.
     attr_accessor :activated_on
 
-    # 
+    # The billing address to be used for the transaction if no explicit billing address is provided during payment processing.
     attr_accessor :billing_address
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The environment in which the token version was created.
     attr_accessor :environment
 
-    # The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+    # The date and time when the token version is set to expire, after which it will be marked as obsolete.
     attr_accessor :expires_on
 
-    # 
+    # The URL to the token's icon displayed to the customer.
     attr_accessor :icon_url
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The language that is linked to the object.
@@ -50,40 +50,40 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The name used to identify the token.
     attr_accessor :name
 
-    # 
+    # The date and time when the token version was marked obsolete.
     attr_accessor :obsoleted_on
 
-    # 
+    # The payment connector configuration that initialized the token version.
     attr_accessor :payment_connector_configuration
 
-    # The payment information hash set contains hashes of the payment information represented by this token version.
+    # The hashed payment information that the token version represents.
     attr_accessor :payment_information_hashes
 
-    # 
+    # The payment method that initialized the token version.
     attr_accessor :payment_method
 
-    # 
+    # The payment method brand that initialized the token version.
     attr_accessor :payment_method_brand
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The token name as specified by the processor.
     attr_accessor :processor_token
 
-    # 
+    # The shipping address to be used for the transaction if no explicit shipping address is provided during payment processing.
     attr_accessor :shipping_address
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The token that the token version belongs to.
     attr_accessor :token
 
-    # The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+    # The type specifies the nature of the token and identifies the payment connector capable of processing it.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

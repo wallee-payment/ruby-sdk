@@ -26,37 +26,37 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # If a product component changes from one with a lower product component tier (e.g. 1) to one with a higher product component tier (e.g. 3), it is considered an upgrade and a one-time fee could be applied.
+    # If switching from a component with a lower tier to a component with a higher one, this is considered an upgrade and a fee may be applied.
     attr_accessor :component_change_weight
 
-    # 
+    # The group that the component belongs to.
     attr_accessor :component_group
 
-    # When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
+    # Whether this is the default component in its group and preselected.
     attr_accessor :default_component
 
-    # The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+    # The localized description of the component that is displayed to the customer.
     attr_accessor :description
 
-    # The maximum quantity defines the maximum value which must be entered for the quantity.
+    # A maximum of the defined quantity can be selected for this component.
     attr_accessor :maximal_quantity
 
-    # The minimal quantity defines the minimum value which must be entered for the quantity.
+    # A minimum of the defined quantity must be selected for this component.
     attr_accessor :minimal_quantity
 
-    # The component name is shown to the subscriber. It should describe in few words what the component does contain.
+    # The localized name of the component that is displayed to the customer.
     attr_accessor :name
 
-    # The quantity step defines at which interval the quantity can be increased.
+    # The quantity step determines the interval in which the quantity can be increased.
     attr_accessor :quantity_step
 
-    # The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+    # The reference is used to link components across different product versions.
     attr_accessor :reference
 
-    # The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+    # When listing components, they can be sorted by this number.
     attr_accessor :sort_order
 
-    # The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+    # The tax class to be applied to fees.
     attr_accessor :tax_class
 
     # Attribute mapping from ruby-style variable name to JSON key.

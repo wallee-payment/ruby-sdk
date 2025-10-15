@@ -20,11 +20,8 @@ require 'date'
 module Wallee
   # 
   class PaymentConnectorFeature
-    # 
+    # The localized name of the feature.
     attr_accessor :display_name
-
-    # 
-    attr_accessor :feature
 
     # A unique identifier for the object.
     attr_accessor :id
@@ -33,7 +30,6 @@ module Wallee
     def self.attribute_map
       {
         :'display_name' => :'displayName',
-        :'feature' => :'feature',
         :'id' => :'id'
       }
     end
@@ -42,7 +38,6 @@ module Wallee
     def self.swagger_types
       {
         :'display_name' => :'String',
-        :'feature' => :'Feature',
         :'id' => :'Integer'
       }
     end
@@ -57,10 +52,6 @@ module Wallee
 
       if attributes.has_key?(:'displayName')
         self.display_name = attributes[:'displayName']
-      end
-
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
       end
 
       if attributes.has_key?(:'id')
@@ -87,7 +78,6 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           display_name == o.display_name &&
-          feature == o.feature &&
           id == o.id
     end
 
@@ -100,7 +90,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [display_name, feature, id].hash
+      [display_name, id].hash
     end
 
     # Builds the object from hash

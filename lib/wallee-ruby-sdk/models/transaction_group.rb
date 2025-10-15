@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class TransactionGroup
-    # 
+    # The date and time when the initial transaction in the group was created.
     attr_accessor :begin_date
 
-    # 
+    # The unique identifier of the customer in the external system.
     attr_accessor :customer_id
 
-    # 
+    # The date and time when the final transaction in the group was last updated.
     attr_accessor :end_date
 
     # A unique identifier for the object.

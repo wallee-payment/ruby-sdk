@@ -18,9 +18,9 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # A condition configuration controls under which condition a payment connector is applied to a transaction.
+  # A connector condition defines criteria that a transaction must meet for a connector configuration to process the payment.
   class Condition
-    # The selected condition type defines how the configuration is applied to the transactions.
+    # The condition type determines the criteria that a transaction must fulfill in order for a connector configuration to be considered for processing the payment.
     attr_accessor :condition_type
 
     # A unique identifier for the object.
@@ -29,7 +29,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The condition name is used internally to identify the condition. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the condition.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.

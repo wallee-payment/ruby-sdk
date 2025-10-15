@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class CompletionLineItemCreate
-    # The total amount of the line item including any tax.
+    # The total amount of the line item to be captured, including taxes.
     attr_accessor :amount
 
-    # The quantity of the line item which should be completed.
+    # The number of items to be captured.
     attr_accessor :quantity
 
-    # The unique id identifies the line item on which the capture is applied on.
+    # The unique identifier of the line item within the set of line items.
     attr_accessor :unique_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -23,7 +23,7 @@ module Wallee
     # The comment's actual content.
     attr_accessor :content
 
-    # 
+    # The refund that the comment belongs to.
     attr_accessor :refund
 
     # Attribute mapping from ruby-style variable name to JSON key.

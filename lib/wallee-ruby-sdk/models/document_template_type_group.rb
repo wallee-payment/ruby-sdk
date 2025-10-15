@@ -23,7 +23,7 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized title of the group.
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.

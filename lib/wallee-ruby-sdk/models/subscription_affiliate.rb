@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class SubscriptionAffiliate
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -35,13 +35,13 @@ module Wallee
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # 
+    # The name used to identify the affiliate.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The reference used to identify the affiliate.
     attr_accessor :reference
 
     # The object's current state.

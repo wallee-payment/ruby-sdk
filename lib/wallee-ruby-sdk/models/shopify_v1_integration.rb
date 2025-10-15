@@ -19,12 +19,15 @@ require 'date'
 
 module Wallee
   # A Shopify Integration allows to connect a Shopify shop.
-  class ShopifyIntegration
+  class ShopifyV1Integration
     # 
     attr_accessor :additional_line_item_data
 
     # 
     attr_accessor :allow_invoice_download
+
+    # If in the merchant Shopify store is used legacy tax service, rounding discrepancies in line item tax amounts may occur. When this check is enabled, such discrepancies are tolerated, allowing the payment to proceed without raising an exception.
+    attr_accessor :allow_payment_with_tax_discrepancy
 
     # 
     attr_accessor :allowed_payment_method_configurations
@@ -41,7 +44,7 @@ module Wallee
     # The checkout language forces a specific language in the checkout. Without a checkout language the browser setting of the buyer is used to determine the language.
     attr_accessor :language
 
-    # The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shops payment gateway configuration.
+    # The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shop's payment gateway configuration.
     attr_accessor :login_name
 
     # The integration name is used internally to identify a specific integration.For example the name is used withinsearch fields and hence it should be distinct and descriptive.
@@ -53,7 +56,7 @@ module Wallee
     # 
     attr_accessor :payment_installed
 
-    # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+    # Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
     attr_accessor :payment_proxy_path
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -62,7 +65,7 @@ module Wallee
     # 
     attr_accessor :replace_payment_method_image
 
-    # The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopifys admin URL: [storeAddress].myshopify.com
+    # The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopify's admin URL: [storeAddress].myshopify.com
     attr_accessor :shop_name
 
     # 
@@ -74,7 +77,7 @@ module Wallee
     # 
     attr_accessor :space_id
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
@@ -86,7 +89,7 @@ module Wallee
     # 
     attr_accessor :subscription_installed
 
-    # Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+    # Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
     attr_accessor :subscription_proxy_path
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -97,6 +100,7 @@ module Wallee
       {
         :'additional_line_item_data' => :'additionalLineItemData',
         :'allow_invoice_download' => :'allowInvoiceDownload',
+        :'allow_payment_with_tax_discrepancy' => :'allowPaymentWithTaxDiscrepancy',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
         :'currency' => :'currency',
         :'id' => :'id',
@@ -127,6 +131,7 @@ module Wallee
       {
         :'additional_line_item_data' => :'Array<ShopifyAdditionalLineItemData>',
         :'allow_invoice_download' => :'BOOLEAN',
+        :'allow_payment_with_tax_discrepancy' => :'BOOLEAN',
         :'allowed_payment_method_configurations' => :'Array<PaymentMethodConfiguration>',
         :'currency' => :'String',
         :'id' => :'Integer',
@@ -168,6 +173,10 @@ module Wallee
 
       if attributes.has_key?(:'allowInvoiceDownload')
         self.allow_invoice_download = attributes[:'allowInvoiceDownload']
+      end
+
+      if attributes.has_key?(:'allowPaymentWithTaxDiscrepancy')
+        self.allow_payment_with_tax_discrepancy = attributes[:'allowPaymentWithTaxDiscrepancy']
       end
 
       if attributes.has_key?(:'allowedPaymentMethodConfigurations')
@@ -326,6 +335,7 @@ module Wallee
       self.class == o.class &&
           additional_line_item_data == o.additional_line_item_data &&
           allow_invoice_download == o.allow_invoice_download &&
+          allow_payment_with_tax_discrepancy == o.allow_payment_with_tax_discrepancy &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
           currency == o.currency &&
           id == o.id &&
@@ -359,7 +369,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [additional_line_item_data, allow_invoice_download, allowed_payment_method_configurations, currency, id, integrated_payment_form_enabled, language, login_name, name, payment_app_version, payment_installed, payment_proxy_path, planned_purge_date, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, subscription_app_version, subscription_installed, subscription_proxy_path, version].hash
+      [additional_line_item_data, allow_invoice_download, allow_payment_with_tax_discrepancy, allowed_payment_method_configurations, currency, id, integrated_payment_form_enabled, language, login_name, name, payment_app_version, payment_installed, payment_proxy_path, planned_purge_date, replace_payment_method_image, shop_name, show_payment_information, show_subscription_information, space_id, space_view_id, state, subscription_app_version, subscription_installed, subscription_proxy_path, version].hash
     end
 
     # Builds the object from hash

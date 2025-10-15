@@ -20,20 +20,17 @@ require 'date'
 module Wallee
   # 
   class PaymentConnector
-    # 
+    # The data collection type specifies how the payment information is collected.
     attr_accessor :data_collection_type
 
-    # 
+    # Whether the object was deprecated.
     attr_accessor :deprecated
 
-    # 
+    # The deprecation reason describes why the object was deprecated.
     attr_accessor :deprecation_reason
 
     # The localized description of the object.
     attr_accessor :description
-
-    # 
-    attr_accessor :feature
 
     # A unique identifier for the object.
     attr_accessor :id
@@ -41,25 +38,25 @@ module Wallee
     # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The payment method that the connector supports.
     attr_accessor :payment_method
 
-    # 
+    # The specific brand that this payment connector supports.
     attr_accessor :payment_method_brand
 
-    # 
+    # The entity that bears the main risk in the event that a contracting party fails to meet its obligations.
     attr_accessor :primary_risk_taker
 
-    # 
+    # The processor that the connector belongs to.
     attr_accessor :processor
 
-    # 
+    # The currencies that are supported by the connector.
     attr_accessor :supported_currencies
 
-    # 
+    # The types of customer's presence that are supported by the connector.
     attr_accessor :supported_customers_presences
 
-    # 
+    # The features that are supported by the connector.
     attr_accessor :supported_features
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -69,7 +66,6 @@ module Wallee
         :'deprecated' => :'deprecated',
         :'deprecation_reason' => :'deprecationReason',
         :'description' => :'description',
-        :'feature' => :'feature',
         :'id' => :'id',
         :'name' => :'name',
         :'payment_method' => :'paymentMethod',
@@ -89,7 +85,6 @@ module Wallee
         :'deprecated' => :'BOOLEAN',
         :'deprecation_reason' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
-        :'feature' => :'Feature',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>',
         :'payment_method' => :'Integer',
@@ -128,10 +123,6 @@ module Wallee
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
-      end
-
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
       end
 
       if attributes.has_key?(:'id')
@@ -201,7 +192,6 @@ module Wallee
           deprecated == o.deprecated &&
           deprecation_reason == o.deprecation_reason &&
           description == o.description &&
-          feature == o.feature &&
           id == o.id &&
           name == o.name &&
           payment_method == o.payment_method &&
@@ -222,7 +212,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data_collection_type, deprecated, deprecation_reason, description, feature, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_currencies, supported_customers_presences, supported_features].hash
+      [data_collection_type, deprecated, deprecation_reason, description, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_currencies, supported_customers_presences, supported_features].hash
     end
 
     # Builds the object from hash

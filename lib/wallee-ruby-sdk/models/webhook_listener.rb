@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class WebhookListener
-    # Whether signature header and state property are enabled in webhook payload.
+    # Whether signature header and 'state' property are enabled in webhook payload.
     attr_accessor :enable_payload_signature_and_state
 
     # The entity that is to be monitored.

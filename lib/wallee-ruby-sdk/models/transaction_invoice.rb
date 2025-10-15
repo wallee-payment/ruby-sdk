@@ -18,72 +18,72 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The transaction invoice represents the invoice document for a particular transaction.
+  # 
   class TransactionInvoice
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # 
+    # The total sum of all line items on the invoice, including taxes.
     attr_accessor :amount
 
-    # 
+    # The address associated with the invoice, used for billing purposes.
     attr_accessor :billing_address
 
-    # 
+    # The transaction completion this object is linked to.
     attr_accessor :completion
 
-    # The date on which the invoice is created on.
+    # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The id of the user which marked the invoice as derecognized.
+    # The ID of the user the invoice was derecognized by.
     attr_accessor :derecognized_by
 
-    # The date on which the invoice is marked as derecognized.
+    # The date and time when the invoice was derecognized, meaning it is no longer considered outstanding or valid in the system.
     attr_accessor :derecognized_on
 
-    # The date on which the invoice should be paid on.
+    # The due date for payment of the invoice.
     attr_accessor :due_on
 
-    # 
+    # The environment used when rendering resources.
     attr_accessor :environment
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
+
+    # A unique identifier for the object.
+    attr_accessor :id
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The invoiced line items that will appear on the invoice document.
     attr_accessor :line_items
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The merchant's reference used to identify the invoice.
     attr_accessor :merchant_reference
 
-    # The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
+    # The remaining amount the buyer owes to the merchant. A negative value indicates the invoice has been overpaid.
     attr_accessor :outstanding_amount
 
-    # The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
+    # The date and time when the invoice was recorded as paid. May differ from the actual payment date due to processing delays.
     attr_accessor :paid_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The portion of the invoiced amount that corresponds to taxes.
     attr_accessor :tax_amount
 
-    # 
+    # The time zone that this object is associated with.
     attr_accessor :time_zone
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -92,9 +92,6 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'amount' => :'amount',
         :'billing_address' => :'billingAddress',
         :'completion' => :'completion',
@@ -104,8 +101,11 @@ module Wallee
         :'due_on' => :'dueOn',
         :'environment' => :'environment',
         :'external_id' => :'externalId',
+        :'id' => :'id',
         :'language' => :'language',
         :'line_items' => :'lineItems',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'merchant_reference' => :'merchantReference',
         :'outstanding_amount' => :'outstandingAmount',
         :'paid_on' => :'paidOn',
@@ -121,9 +121,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'amount' => :'Float',
         :'billing_address' => :'Address',
         :'completion' => :'TransactionCompletion',
@@ -133,8 +130,11 @@ module Wallee
         :'due_on' => :'DateTime',
         :'environment' => :'Environment',
         :'external_id' => :'String',
+        :'id' => :'Integer',
         :'language' => :'String',
         :'line_items' => :'Array<LineItem>',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'merchant_reference' => :'String',
         :'outstanding_amount' => :'Float',
         :'paid_on' => :'DateTime',
@@ -154,18 +154,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
@@ -203,6 +191,10 @@ module Wallee
         self.external_id = attributes[:'externalId']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
@@ -211,6 +203,14 @@ module Wallee
         if (value = attributes[:'lineItems']).is_a?(Array)
           self.line_items = value
         end
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'merchantReference')
@@ -307,9 +307,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           amount == o.amount &&
           billing_address == o.billing_address &&
           completion == o.completion &&
@@ -319,8 +316,11 @@ module Wallee
           due_on == o.due_on &&
           environment == o.environment &&
           external_id == o.external_id &&
+          id == o.id &&
           language == o.language &&
           line_items == o.line_items &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           merchant_reference == o.merchant_reference &&
           outstanding_amount == o.outstanding_amount &&
           paid_on == o.paid_on &&
@@ -341,7 +341,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, billing_address, completion, created_on, derecognized_by, derecognized_on, due_on, environment, external_id, language, line_items, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, time_zone, version].hash
+      [amount, billing_address, completion, created_on, derecognized_by, derecognized_on, due_on, environment, external_id, id, language, line_items, linked_space_id, linked_transaction, merchant_reference, outstanding_amount, paid_on, planned_purge_date, space_view_id, state, tax_amount, time_zone, version].hash
     end
 
     # Builds the object from hash

@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # The metric usage is the actual usage of a metric for a particular subscription as collected by an external application.
   class SubscriptionMetricUsageReportCreate
-    # The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+    # The number of resources consumed, will be charged in the next billing cycle.
     attr_accessor :consumed_units
 
-    # The metric usage report description describe the reported usage. This description may be shown to the end user.
+    # A description used to identify the usage report.
     attr_accessor :description
 
-    # The external id identifies the metric usage uniquely.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # The metric usage report is linked to the metric for which the usage should be recorded.
+    # The metric that the usage report is recorded for.
     attr_accessor :metric
 
-    # The subscription to which the usage is added to.
+    # The subscription that the usage report is recorded for.
     attr_accessor :subscription
 
     # Attribute mapping from ruby-style variable name to JSON key.

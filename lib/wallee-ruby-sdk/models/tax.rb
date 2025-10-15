@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class Tax
-    # 
+    # The tax rate to be applied.
     attr_accessor :rate
 
-    # 
+    # The name of the tax.
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.

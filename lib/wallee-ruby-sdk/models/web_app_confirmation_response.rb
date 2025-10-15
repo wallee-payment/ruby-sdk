@@ -18,21 +18,21 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The confirmation response provides the details about the installation of the web app.
+  # The confirmation response provides details about the installation of the web app.
   class WebAppConfirmationResponse
-    # The access code grants permissions to the web service API according to the OAuth standard.
+    # The access code granting permissions to the web service API according to the OAuth standard.
     attr_accessor :access_token
 
-    # The scope contains the permissions granted to the web app within the space.
+    # The list of the permissions granted to the web app within the space.
     attr_accessor :scope
 
-    # This is the space into which the web app is installed into.
+    # The space that the web app was installed in.
     attr_accessor :space
 
-    # The state contains the state parameter content provided when initiating the app installation.
+    # The state parameter that was provided in the authorization request.
     attr_accessor :state
 
-    # The token type indicates the type of the access token. The type determines the authentication mechanism to use for accessing the web service API.
+    # The type of the access token that determines the authentication mechanism to use for accessing the web service API.
     attr_accessor :token_type
 
     # Attribute mapping from ruby-style variable name to JSON key.

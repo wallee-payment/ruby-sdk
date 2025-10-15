@@ -20,25 +20,25 @@ require 'date'
 module Wallee
   # 
   class Subscription
-    # 
+    # The date and time when the subscription was activate.
     attr_accessor :activated_on
 
-    # 
+    # The affiliate that led to the creation of the subscription.
     attr_accessor :affiliate
 
-    # 
+    # The date and time when the subscription was created.
     attr_accessor :created_on
 
-    # 
+    # The version of the product that the subscription is currently linked to.
     attr_accessor :current_product_version
 
-    # 
+    # A description used to identify the subscription.
     attr_accessor :description
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The date and time when the subscription was initialized.
     attr_accessor :initialized_on
 
     # The language that is linked to the object.
@@ -50,31 +50,31 @@ module Wallee
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The date and time when the subscription is planned to be terminated.
     attr_accessor :planned_termination_date
 
-    # 
+    # The merchant's reference used to identify the subscription.
     attr_accessor :reference
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The subscriber that the subscription belongs to.
     attr_accessor :subscriber
 
-    # 
+    # The ID of the user the subscription was terminated by.
     attr_accessor :terminated_by
 
-    # 
+    # The date and time when the subscription was terminated.
     attr_accessor :terminated_on
 
-    # 
+    # The date and time when the termination of the subscription started.
     attr_accessor :terminating_on
 
-    # 
+    # The date and time when the subscription was scheduled to be terminated.
     attr_accessor :termination_scheduled_on
 
-    # 
+    # The payment token that is used to charge the customer.
     attr_accessor :token
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

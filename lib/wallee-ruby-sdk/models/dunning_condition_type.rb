@@ -18,37 +18,32 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # A batch of the result of a query executed in Analytics.
-  class AnalyticsQueryResultBatch
-    # The schemas of the columns returned by the query (in order). Will be null if the results of the query are not (yet) available.
-    attr_accessor :columns
+  # 
+  class DunningConditionType
+    # The localized description of the object.
+    attr_accessor :description
 
-    # The token to be provided to fetch the next batch of results. May be null if no more result batches are available.
-    attr_accessor :next_token
+    # A unique identifier for the object.
+    attr_accessor :id
 
-    # The query execution which produced the result.
-    attr_accessor :query_execution
-
-    # The rows of the result set contained in this batch where each row is a list of column values (in order of the columns specified in the query). Will be null if the results of the query are not (yet) available.
-    attr_accessor :rows
+    # The localized name of the object.
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'columns' => :'columns',
-        :'next_token' => :'nextToken',
-        :'query_execution' => :'queryExecution',
-        :'rows' => :'rows'
+        :'description' => :'description',
+        :'id' => :'id',
+        :'name' => :'name'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'columns' => :'Array<AnalyticsSchemaColumn>',
-        :'next_token' => :'String',
-        :'query_execution' => :'AnalyticsQueryExecution',
-        :'rows' => :'Array<Array<String>>'
+        :'description' => :'Hash<String, String>',
+        :'id' => :'Integer',
+        :'name' => :'Hash<String, String>'
       }
     end
 
@@ -60,23 +55,19 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'columns')
-        if (value = attributes[:'columns']).is_a?(Array)
-          self.columns = value
+      if attributes.has_key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
         end
       end
 
-      if attributes.has_key?(:'nextToken')
-        self.next_token = attributes[:'nextToken']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'queryExecution')
-        self.query_execution = attributes[:'queryExecution']
-      end
-
-      if attributes.has_key?(:'rows')
-        if (value = attributes[:'rows']).is_a?(Array)
-          self.rows = value
+      if attributes.has_key?(:'name')
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
         end
       end
     end
@@ -99,10 +90,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          columns == o.columns &&
-          next_token == o.next_token &&
-          query_execution == o.query_execution &&
-          rows == o.rows
+          description == o.description &&
+          id == o.id &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -114,7 +104,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [columns, next_token, query_execution, rows].hash
+      [description, id, name].hash
     end
 
     # Builds the object from hash

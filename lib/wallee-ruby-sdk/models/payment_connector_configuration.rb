@@ -20,43 +20,43 @@ require 'date'
 module Wallee
   # 
   class PaymentConnectorConfiguration
-    # This property indicates if the connector is currently used for processing transactions. In case either the payment method configuration or the processor configuration is not active the connector will not be used even though the connector state is active.
+    # Whether this connector configuration is enabled for processing payments, taking into account the state of the processor and payment method configurations.
     attr_accessor :applicable_for_transaction_processing
 
-    # If a transaction meet all selected conditions the connector configuration will be used to process the transaction otherwise the next connector configuration in line will be chosen according to the priorities.
+    # Conditions allow to define criteria that a transaction must fulfill in order for the connector configuration to be considered for processing the payment.
     attr_accessor :conditions
 
-    # 
+    # The connector that the configuration is for.
     attr_accessor :connector
 
-    # Defines the sales channels the connector configuration is enabled for. In case the set is empty, the connector configuration is enabled for all sales channels.
+    # The sales channels for which the connector configuration is enabled. If empty, it is enabled for all sales channels.
     attr_accessor :enabled_sales_channels
 
-    # The connector configuration is only enabled for the selected space views. In case the set is empty the connector configuration is enabled for all space views.
+    # The space views for which the connector configuration is enabled. If empty, it is enabled for all space views.
     attr_accessor :enabled_space_views
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The URL to the connector's image.
     attr_accessor :image_path
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The connector configuration name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the connector configuration.
     attr_accessor :name
 
-    # 
+    # The payment method configuration that the connector configuration belongs to.
     attr_accessor :payment_method_configuration
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be. This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
+    # The priority that determines the order in which connector configurations are taken into account when processing a payment. Low values are considered first.
     attr_accessor :priority
 
-    # 
+    # The processor configuration that the connector configuration belongs to.
     attr_accessor :processor_configuration
 
     # The object's current state.

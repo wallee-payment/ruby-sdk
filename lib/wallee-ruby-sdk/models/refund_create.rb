@@ -18,27 +18,27 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
+  # A refund is a credit issued to the customer, which can be initiated either by the merchant or by the customer as a reversal.
   class RefundCreate
-    # 
+    # The total monetary amount of the refund, representing the exact credit issued to the customer.
     attr_accessor :amount
 
-    # 
+    # The transaction completion that the refund belongs to.
     attr_accessor :completion
 
-    # The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The merchant's reference used to identify the refund.
     attr_accessor :merchant_reference
 
-    # 
+    # The reductions applied on the original transaction items, detailing specific adjustments associated with the refund.
     attr_accessor :reductions
 
-    # 
+    # The transaction that the refund belongs to.
     attr_accessor :transaction
 
-    # 
+    # The type specifying the method and origin of the refund (e.g., initiated by the customer or merchant).
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.

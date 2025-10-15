@@ -26,7 +26,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The terminal configuration name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the payment terminal configuration.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -35,7 +35,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The type of payment terminals that this configuration can be assigned to.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

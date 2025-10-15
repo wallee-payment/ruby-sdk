@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminalLocationVersion
-    # 
+    # The postal address of the location where the payment terminals are used.
     attr_accessor :address
 
-    # 
+    # The contact details if the person responsible for the payment terminals at this location.
     attr_accessor :contact_address
 
-    # 
+    # The ID of the user the payment terminal location version was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
@@ -38,7 +38,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The payment terminal location that the version belongs to.
     attr_accessor :location
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -50,7 +50,7 @@ module Wallee
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
-    # 
+    # Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
     attr_accessor :version_applied_immediately
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -20,34 +20,34 @@ require 'date'
 module Wallee
   # 
   class ChargeBankTransaction
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # 
+    # Provides general information about the bank transaction.
     attr_accessor :bank_transaction
 
-    # 
+    # The transaction completion this bank transaction is belongs to.
     attr_accessor :completion
+
+    # A unique identifier for the object.
+    attr_accessor :id
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
-    # 
+    # The payment transaction this bank transaction belongs to.
     attr_accessor :transaction
 
-    # Specify the posting amount in the transaction's currency.
+    # The posting amount represents the monetary value of the bank transaction, recorded in the payment transaction's currency, before applying any adjustments.
     attr_accessor :transaction_currency_amount
 
-    # 
+    # The value amount represents the net monetary value of the bank transaction, recorded in the payment transaction's currency, after applicable deductions.
     attr_accessor :transaction_currency_value_amount
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -56,12 +56,12 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'bank_transaction' => :'bankTransaction',
         :'completion' => :'completion',
+        :'id' => :'id',
         :'language' => :'language',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'space_view_id' => :'spaceViewId',
         :'transaction' => :'transaction',
         :'transaction_currency_amount' => :'transactionCurrencyAmount',
@@ -73,12 +73,12 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'bank_transaction' => :'BankTransaction',
         :'completion' => :'Integer',
+        :'id' => :'Integer',
         :'language' => :'String',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'space_view_id' => :'Integer',
         :'transaction' => :'Transaction',
         :'transaction_currency_amount' => :'Float',
@@ -95,18 +95,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
       if attributes.has_key?(:'bankTransaction')
         self.bank_transaction = attributes[:'bankTransaction']
       end
@@ -115,8 +103,20 @@ module Wallee
         self.completion = attributes[:'completion']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'spaceViewId')
@@ -158,12 +158,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           bank_transaction == o.bank_transaction &&
           completion == o.completion &&
+          id == o.id &&
           language == o.language &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           space_view_id == o.space_view_id &&
           transaction == o.transaction &&
           transaction_currency_amount == o.transaction_currency_amount &&
@@ -180,7 +180,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, bank_transaction, completion, language, space_view_id, transaction, transaction_currency_amount, transaction_currency_value_amount, version].hash
+      [bank_transaction, completion, id, language, linked_space_id, linked_transaction, space_view_id, transaction, transaction_currency_amount, transaction_currency_value_amount, version].hash
     end
 
     # Builds the object from hash

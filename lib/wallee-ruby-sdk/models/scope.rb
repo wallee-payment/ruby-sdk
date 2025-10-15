@@ -41,6 +41,12 @@ module Wallee
     # The port where the scope can be accessed.
     attr_accessor :port
 
+    # The preprod domain name that belongs to the scope.
+    attr_accessor :preprod_domain_name
+
+    # The sandbox domain name that belongs to the scope.
+    attr_accessor :sandbox_domain_name
+
     # Whether the scope supports SSL.
     attr_accessor :ssl_active
 
@@ -66,6 +72,8 @@ module Wallee
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'port' => :'port',
+        :'preprod_domain_name' => :'preprodDomainName',
+        :'sandbox_domain_name' => :'sandboxDomainName',
         :'ssl_active' => :'sslActive',
         :'state' => :'state',
         :'themes' => :'themes',
@@ -84,6 +92,8 @@ module Wallee
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
         :'port' => :'Integer',
+        :'preprod_domain_name' => :'String',
+        :'sandbox_domain_name' => :'String',
         :'ssl_active' => :'BOOLEAN',
         :'state' => :'CreationEntityState',
         :'themes' => :'Array<String>',
@@ -130,6 +140,14 @@ module Wallee
         self.port = attributes[:'port']
       end
 
+      if attributes.has_key?(:'preprodDomainName')
+        self.preprod_domain_name = attributes[:'preprodDomainName']
+      end
+
+      if attributes.has_key?(:'sandboxDomainName')
+        self.sandbox_domain_name = attributes[:'sandboxDomainName']
+      end
+
       if attributes.has_key?(:'sslActive')
         self.ssl_active = attributes[:'sslActive']
       end
@@ -169,6 +187,14 @@ module Wallee
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
       end
 
+      if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 40
+        invalid_properties.push('invalid value for "preprod_domain_name", the character length must be smaller than or equal to 40.')
+      end
+
+      if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 40
+        invalid_properties.push('invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 40.')
+      end
+
       invalid_properties
     end
 
@@ -178,6 +204,8 @@ module Wallee
       return false if !@domain_name.nil? && @domain_name.to_s.length > 40
       return false if !@machine_name.nil? && @machine_name.to_s.length > 50
       return false if !@name.nil? && @name.to_s.length > 50
+      return false if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 40
+      return false if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 40
       true
     end
 
@@ -211,6 +239,26 @@ module Wallee
       @name = name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] preprod_domain_name Value to be assigned
+    def preprod_domain_name=(preprod_domain_name)
+      if !preprod_domain_name.nil? && preprod_domain_name.to_s.length > 40
+        fail ArgumentError, 'invalid value for "preprod_domain_name", the character length must be smaller than or equal to 40.'
+      end
+
+      @preprod_domain_name = preprod_domain_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sandbox_domain_name Value to be assigned
+    def sandbox_domain_name=(sandbox_domain_name)
+      if !sandbox_domain_name.nil? && sandbox_domain_name.to_s.length > 40
+        fail ArgumentError, 'invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 40.'
+      end
+
+      @sandbox_domain_name = sandbox_domain_name
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -223,6 +271,8 @@ module Wallee
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           port == o.port &&
+          preprod_domain_name == o.preprod_domain_name &&
+          sandbox_domain_name == o.sandbox_domain_name &&
           ssl_active == o.ssl_active &&
           state == o.state &&
           themes == o.themes &&
@@ -239,7 +289,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [domain_name, features, id, machine_name, name, planned_purge_date, port, ssl_active, state, themes, url, version].hash
+      [domain_name, features, id, machine_name, name, planned_purge_date, port, preprod_domain_name, sandbox_domain_name, ssl_active, state, themes, url, version].hash
     end
 
     # Builds the object from hash

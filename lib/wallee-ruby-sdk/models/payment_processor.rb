@@ -18,30 +18,27 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # 
+  # Payment processors serve as intermediaries that establish connections with third-party companies, known as payment service providers. These providers are responsible for managing the technical aspects of payment transactions, ensuring seamless and secure payment processing.
   class PaymentProcessor
-    # 
+    # The name of the company to which the processor belongs.
     attr_accessor :company_name
 
     # The localized description of the object.
     attr_accessor :description
 
-    # 
-    attr_accessor :feature
-
-    # 
+    # Where the processor's headquarters are located.
     attr_accessor :headquarters_location
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The path to the logo image of the processor.
     attr_accessor :logo_path
 
     # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The name of the processor's product.
     attr_accessor :product_name
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -49,7 +46,6 @@ module Wallee
       {
         :'company_name' => :'companyName',
         :'description' => :'description',
-        :'feature' => :'feature',
         :'headquarters_location' => :'headquartersLocation',
         :'id' => :'id',
         :'logo_path' => :'logoPath',
@@ -63,7 +59,6 @@ module Wallee
       {
         :'company_name' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
-        :'feature' => :'Integer',
         :'headquarters_location' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'logo_path' => :'String',
@@ -90,10 +85,6 @@ module Wallee
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
-      end
-
-      if attributes.has_key?(:'feature')
-        self.feature = attributes[:'feature']
       end
 
       if attributes.has_key?(:'headquartersLocation')
@@ -143,7 +134,6 @@ module Wallee
       self.class == o.class &&
           company_name == o.company_name &&
           description == o.description &&
-          feature == o.feature &&
           headquarters_location == o.headquarters_location &&
           id == o.id &&
           logo_path == o.logo_path &&
@@ -160,7 +150,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [company_name, description, feature, headquarters_location, id, logo_path, name, product_name].hash
+      [company_name, description, headquarters_location, id, logo_path, name, product_name].hash
     end
 
     # Builds the object from hash

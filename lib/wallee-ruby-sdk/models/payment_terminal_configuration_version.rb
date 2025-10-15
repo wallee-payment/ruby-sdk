@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminalConfigurationVersion
-    # 
+    # The payment terminal configuration that the version belongs to.
     attr_accessor :configuration
 
-    # 
+    # The payment connector configurations that are available on the payment terminal.
     attr_accessor :connector_configurations
 
-    # 
+    # The ID of the user the payment terminal configuration version was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+    # The default currency that is used if none is set on the payment terminal itself. If it is empty, the currency is derived from the location of the terminal.
     attr_accessor :default_currency
 
     # A unique identifier for the object.
@@ -41,10 +41,10 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The permitted duration of the terminal's maintenance window.
     attr_accessor :maintenance_window_duration
 
-    # 
+    # The start time of the terminal's maintenance window.
     attr_accessor :maintenance_window_start
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -53,13 +53,13 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The time zone of the payment terminal used to determine the maintenance window.
     attr_accessor :time_zone
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
-    # 
+    # Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
     attr_accessor :version_applied_immediately
 
     # Attribute mapping from ruby-style variable name to JSON key.

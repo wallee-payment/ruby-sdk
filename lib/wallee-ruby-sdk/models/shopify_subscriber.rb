@@ -26,7 +26,10 @@ module Wallee
     # 
     attr_accessor :email_address
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # 
+    attr_accessor :external_gid
+
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -55,6 +58,7 @@ module Wallee
       {
         :'created_on' => :'createdOn',
         :'email_address' => :'emailAddress',
+        :'external_gid' => :'externalGid',
         :'external_id' => :'externalId',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
@@ -71,6 +75,7 @@ module Wallee
       {
         :'created_on' => :'DateTime',
         :'email_address' => :'String',
+        :'external_gid' => :'String',
         :'external_id' => :'String',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
@@ -96,6 +101,10 @@ module Wallee
 
       if attributes.has_key?(:'emailAddress')
         self.email_address = attributes[:'emailAddress']
+      end
+
+      if attributes.has_key?(:'externalGid')
+        self.external_gid = attributes[:'externalGid']
       end
 
       if attributes.has_key?(:'externalId')
@@ -181,6 +190,7 @@ module Wallee
       self.class == o.class &&
           created_on == o.created_on &&
           email_address == o.email_address &&
+          external_gid == o.external_gid &&
           external_id == o.external_id &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
@@ -200,7 +210,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [created_on, email_address, external_id, id, linked_space_id, phone_number, planned_purge_date, shop, state, version].hash
+      [created_on, email_address, external_gid, external_id, id, linked_space_id, phone_number, planned_purge_date, shop, state, version].hash
     end
 
     # Builds the object from hash

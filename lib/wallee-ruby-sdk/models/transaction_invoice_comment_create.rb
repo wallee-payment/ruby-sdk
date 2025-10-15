@@ -23,7 +23,7 @@ module Wallee
     # The comment's actual content.
     attr_accessor :content
 
-    # 
+    # The transaction invoice that the comment belongs to.
     attr_accessor :transaction_invoice
 
     # Attribute mapping from ruby-style variable name to JSON key.

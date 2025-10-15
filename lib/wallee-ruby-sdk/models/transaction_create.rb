@@ -20,85 +20,85 @@ require 'date'
 module Wallee
   # 
   class TransactionCreate
-    # 
+    # The payment method brands that can be used to authorize the transaction.
     attr_accessor :allowed_payment_method_brands
 
-    # 
+    # The payment method configurations that can be used to authorize the transaction.
     attr_accessor :allowed_payment_method_configurations
 
-    # 
+    # The address associated with the payment method for invoicing and transaction processing purposes.
     attr_accessor :billing_address
 
-    # The completion behavior controls when the transaction is completed.
+    # The behavior that controls when the transaction is completed.
     attr_accessor :completion_behavior
 
-    # 
+    # The three-letter code (ISO 4217 format) of the transaction's currency.
     attr_accessor :currency
 
-    # The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+    # The customer's email address.
     attr_accessor :customer_email_address
 
-    # 
+    # The unique identifier of the customer in the external system.
     attr_accessor :customer_id
 
-    # The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
     attr_accessor :failed_url
 
-    # 
+    # The merchant's reference used to identify the invoice.
     attr_accessor :invoice_merchant_reference
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The line items purchased by the customer.
     attr_accessor :line_items
 
-    # 
+    # The merchant's reference used to identify the transaction.
     attr_accessor :merchant_reference
 
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # 
+    # The address to where the order will be shipped.
     attr_accessor :shipping_address
 
-    # 
+    # The name of the shipping method used to ship the products.
     attr_accessor :shipping_method
 
-    # The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+    # The URL to redirect the customer back to after they successfully authenticated their payment.
     attr_accessor :success_url
 
-    # The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
     attr_accessor :time_zone
 
-    # 
+    # The payment token that should be used to charge the customer.
     attr_accessor :token
 
-    # The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+    # The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
     attr_accessor :tokenization_mode
 
-    # When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+    # Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
     attr_accessor :auto_confirmation_enabled
 
-    # When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+    # Whether the customer can make further payment attempts if the first one has failed. Default is true.
     attr_accessor :charge_retry_enabled
 
-    # The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+    # The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
     attr_accessor :customers_presence
 
-    # The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+    # Allows to link the transaction to the data collected from the customer's device.
     attr_accessor :device_session_identifier
 
-    # Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+    # Whether email sending is deactivated for the transaction. Default is false.
     attr_accessor :emails_disabled
 
-    # 
+    # The environment used when rendering resources.
     attr_accessor :environment
 
-    # The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+    # The strategy for determining whether the transaction is to be processed in the test or production environment.
     attr_accessor :environment_selection_strategy
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

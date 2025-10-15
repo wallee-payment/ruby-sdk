@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class RestCountry
-    # Specifies the country's way of formatting addresses.
+    # The country's way of formatting addresses.
     attr_accessor :address_format
 
     # The country's two-letter code (ISO 3166-1 alpha-2 format).

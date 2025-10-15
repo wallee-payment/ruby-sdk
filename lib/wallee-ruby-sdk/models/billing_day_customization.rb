@@ -18,19 +18,17 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  class AnalyticsQueryExecutionState
+  class BillingDayCustomization
     
-    PROCESSING = 'PROCESSING'.freeze
-    PROCESSED = 'PROCESSED'.freeze
-    FAILED = 'FAILED'.freeze
-    CANCELED = 'CANCELED'.freeze
+    DEFAULT = 'DEFAULT'.freeze
+    SPECIFIC = 'SPECIFIC'.freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = AnalyticsQueryExecutionState.constants.select { |c| AnalyticsQueryExecutionState::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #AnalyticsQueryExecutionState" if constantValues.empty?
+      constantValues = BillingDayCustomization.constants.select { |c| BillingDayCustomization::const_get(c) == value }
+      raise "Invalid ENUM value #{value} for class #BillingDayCustomization" if constantValues.empty?
       value
     end
   end

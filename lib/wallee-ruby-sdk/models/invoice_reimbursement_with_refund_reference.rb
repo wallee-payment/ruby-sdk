@@ -69,6 +69,9 @@ module Wallee
     attr_accessor :recipient_iban
 
     # 
+    attr_accessor :recipient_organization_name
+
+    # 
     attr_accessor :recipient_postcode
 
     # 
@@ -105,6 +108,7 @@ module Wallee
         :'recipient_family_name' => :'recipientFamilyName',
         :'recipient_given_name' => :'recipientGivenName',
         :'recipient_iban' => :'recipientIban',
+        :'recipient_organization_name' => :'recipientOrganizationName',
         :'recipient_postcode' => :'recipientPostcode',
         :'recipient_street' => :'recipientStreet',
         :'sender_iban' => :'senderIban',
@@ -133,6 +137,7 @@ module Wallee
         :'recipient_family_name' => :'String',
         :'recipient_given_name' => :'String',
         :'recipient_iban' => :'String',
+        :'recipient_organization_name' => :'String',
         :'recipient_postcode' => :'String',
         :'recipient_street' => :'String',
         :'sender_iban' => :'String',
@@ -214,6 +219,10 @@ module Wallee
         self.recipient_iban = attributes[:'recipientIban']
       end
 
+      if attributes.has_key?(:'recipientOrganizationName')
+        self.recipient_organization_name = attributes[:'recipientOrganizationName']
+      end
+
       if attributes.has_key?(:'recipientPostcode')
         self.recipient_postcode = attributes[:'recipientPostcode']
       end
@@ -273,6 +282,7 @@ module Wallee
           recipient_family_name == o.recipient_family_name &&
           recipient_given_name == o.recipient_given_name &&
           recipient_iban == o.recipient_iban &&
+          recipient_organization_name == o.recipient_organization_name &&
           recipient_postcode == o.recipient_postcode &&
           recipient_street == o.recipient_street &&
           sender_iban == o.sender_iban &&
@@ -290,7 +300,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount, created_on, currency, discarded_by, discarded_on, id, linked_space_id, payment_connector_configuration, payment_initiation_advice_file, processed_by, processed_on, recipient_city, recipient_country, recipient_family_name, recipient_given_name, recipient_iban, recipient_postcode, recipient_street, sender_iban, state, version, refund_merchant_reference].hash
+      [amount, created_on, currency, discarded_by, discarded_on, id, linked_space_id, payment_connector_configuration, payment_initiation_advice_file, processed_by, processed_on, recipient_city, recipient_country, recipient_family_name, recipient_given_name, recipient_iban, recipient_organization_name, recipient_postcode, recipient_street, sender_iban, state, version, refund_merchant_reference].hash
     end
 
     # Builds the object from hash

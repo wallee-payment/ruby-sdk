@@ -25,7 +25,7 @@ module Wallee
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # 
+    # The name used to identify the affiliate.
     attr_accessor :name
 
     # The object's current state.

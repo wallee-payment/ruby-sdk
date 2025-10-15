@@ -20,28 +20,25 @@ require 'date'
 module Wallee
   # 
   class ConnectorInvocation
+    # The date and time when the object was created.
+    attr_accessor :created_on
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
-    attr_accessor :linked_transaction
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The transaction stage during which the connector invocation was performed.
     attr_accessor :stage
 
-    # 
+    # The duration, in milliseconds, taken to execute the connector invocation.
     attr_accessor :time_took_in_milliseconds
 
-    # 
+    # The transaction that the connector invocation belongs to.
     attr_accessor :transaction
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -50,10 +47,9 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'created_on' => :'createdOn',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
-        :'created_on' => :'createdOn',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'stage' => :'stage',
         :'time_took_in_milliseconds' => :'timeTookInMilliseconds',
@@ -65,10 +61,9 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'created_on' => :'DateTime',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
-        :'created_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
         :'stage' => :'ConnectorInvocationStage',
         :'time_took_in_milliseconds' => :'Integer',
@@ -85,20 +80,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'linkedSpaceId')
         self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
       end
 
       if attributes.has_key?(:'plannedPurgeDate')
@@ -140,10 +131,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          created_on == o.created_on &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
-          created_on == o.created_on &&
           planned_purge_date == o.planned_purge_date &&
           stage == o.stage &&
           time_took_in_milliseconds == o.time_took_in_milliseconds &&
@@ -160,7 +150,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, created_on, planned_purge_date, stage, time_took_in_milliseconds, transaction, version].hash
+      [created_on, id, linked_space_id, planned_purge_date, stage, time_took_in_milliseconds, transaction, version].hash
     end
 
     # Builds the object from hash

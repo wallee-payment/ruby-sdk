@@ -18,24 +18,28 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # This model holds the card data and optional cardholder authentication details.
+  # 
   class AuthenticatedCardData
-    # The additional authentication value used to secure the tokenized card transactions.
+    # An additional authentication value that enhances the security of tokenized card transactions.
     attr_accessor :cryptogram
 
-    # 
+    # Whether the transaction is an initial recurring transaction, based on the recurring indicator. This is used to identify the first transaction in a recurring payment setup.
+    attr_accessor :initial_recurring_transaction
+
+    # The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
     attr_accessor :recurring_indicator
 
-    # 
+    # The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
     attr_accessor :token_requestor_id
 
-    # The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+    # Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
     attr_accessor :cardholder_authentication
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'cryptogram' => :'cryptogram',
+        :'initial_recurring_transaction' => :'initialRecurringTransaction',
         :'recurring_indicator' => :'recurringIndicator',
         :'token_requestor_id' => :'tokenRequestorId',
         :'cardholder_authentication' => :'cardholderAuthentication'
@@ -46,6 +50,7 @@ module Wallee
     def self.swagger_types
       {
         :'cryptogram' => :'CardCryptogram',
+        :'initial_recurring_transaction' => :'BOOLEAN',
         :'recurring_indicator' => :'RecurringIndicator',
         :'token_requestor_id' => :'String',
         :'cardholder_authentication' => :'CardholderAuthentication'
@@ -62,6 +67,10 @@ module Wallee
 
       if attributes.has_key?(:'cryptogram')
         self.cryptogram = attributes[:'cryptogram']
+      end
+
+      if attributes.has_key?(:'initialRecurringTransaction')
+        self.initial_recurring_transaction = attributes[:'initialRecurringTransaction']
       end
 
       if attributes.has_key?(:'recurringIndicator')
@@ -96,6 +105,7 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           cryptogram == o.cryptogram &&
+          initial_recurring_transaction == o.initial_recurring_transaction &&
           recurring_indicator == o.recurring_indicator &&
           token_requestor_id == o.token_requestor_id &&
           cardholder_authentication == o.cardholder_authentication
@@ -110,7 +120,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [cryptogram, recurring_indicator, token_requestor_id, cardholder_authentication].hash
+      [cryptogram, initial_recurring_transaction, recurring_indicator, token_requestor_id, cardholder_authentication].hash
     end
 
     # Builds the object from hash

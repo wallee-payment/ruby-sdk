@@ -20,26 +20,35 @@ require 'date'
 module Wallee
   # The subscription ledger entry represents a single change on the subscription balance.
   class SubscriptionLedgerEntry
-    # 
+    # The total tax rate applied to the ledger entry, calculated from the rates of all tax lines.
     attr_accessor :aggregated_tax_rate
 
-    # 
+    # The leger entry's amount with discounts applied, excluding taxes.
     attr_accessor :amount_excluding_tax
 
-    # 
+    # The leger entry's amount with discounts applied, including taxes.
     attr_accessor :amount_including_tax
 
     # 
+    attr_accessor :component_reference_name
+
+    # 
+    attr_accessor :component_reference_sku
+
+    # The ID of the user the ledger entry was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The discount allocated to the ledger entry, including taxes.
     attr_accessor :discount_including_tax
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
+
+    # 
+    attr_accessor :fee_type
 
     # A unique identifier for the object.
     attr_accessor :id
@@ -51,21 +60,27 @@ module Wallee
     attr_accessor :planned_purge_date
 
     # 
+    attr_accessor :pro_rata_calculated
+
+    # The number of items that were consumed.
     attr_accessor :quantity
 
     # The object's current state.
     attr_accessor :state
 
     # 
+    attr_accessor :subscription_metric_id
+
+    # The subscription version that the ledger entry belongs to.
     attr_accessor :subscription_version
 
-    # 
+    # The sum of all taxes applied to the ledger entry.
     attr_accessor :tax_amount
 
-    # 
+    # A set of tax lines, each of which specifies a tax applied to the ledger entry.
     attr_accessor :taxes
 
-    # 
+    # The title that indicates what the ledger entry is about.
     attr_accessor :title
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -77,15 +92,20 @@ module Wallee
         :'aggregated_tax_rate' => :'aggregatedTaxRate',
         :'amount_excluding_tax' => :'amountExcludingTax',
         :'amount_including_tax' => :'amountIncludingTax',
+        :'component_reference_name' => :'componentReferenceName',
+        :'component_reference_sku' => :'componentReferenceSku',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
         :'discount_including_tax' => :'discountIncludingTax',
         :'external_id' => :'externalId',
+        :'fee_type' => :'feeType',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'pro_rata_calculated' => :'proRataCalculated',
         :'quantity' => :'quantity',
         :'state' => :'state',
+        :'subscription_metric_id' => :'subscriptionMetricId',
         :'subscription_version' => :'subscriptionVersion',
         :'tax_amount' => :'taxAmount',
         :'taxes' => :'taxes',
@@ -100,15 +120,20 @@ module Wallee
         :'aggregated_tax_rate' => :'Float',
         :'amount_excluding_tax' => :'Float',
         :'amount_including_tax' => :'Float',
+        :'component_reference_name' => :'String',
+        :'component_reference_sku' => :'String',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
         :'discount_including_tax' => :'Float',
         :'external_id' => :'String',
+        :'fee_type' => :'ProductFeeType',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
         :'planned_purge_date' => :'DateTime',
+        :'pro_rata_calculated' => :'BOOLEAN',
         :'quantity' => :'Float',
         :'state' => :'SubscriptionLedgerEntryState',
+        :'subscription_metric_id' => :'Integer',
         :'subscription_version' => :'Integer',
         :'tax_amount' => :'Float',
         :'taxes' => :'Array<Tax>',
@@ -137,6 +162,14 @@ module Wallee
         self.amount_including_tax = attributes[:'amountIncludingTax']
       end
 
+      if attributes.has_key?(:'componentReferenceName')
+        self.component_reference_name = attributes[:'componentReferenceName']
+      end
+
+      if attributes.has_key?(:'componentReferenceSku')
+        self.component_reference_sku = attributes[:'componentReferenceSku']
+      end
+
       if attributes.has_key?(:'createdBy')
         self.created_by = attributes[:'createdBy']
       end
@@ -153,6 +186,10 @@ module Wallee
         self.external_id = attributes[:'externalId']
       end
 
+      if attributes.has_key?(:'feeType')
+        self.fee_type = attributes[:'feeType']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
@@ -165,12 +202,20 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
+      if attributes.has_key?(:'proRataCalculated')
+        self.pro_rata_calculated = attributes[:'proRataCalculated']
+      end
+
       if attributes.has_key?(:'quantity')
         self.quantity = attributes[:'quantity']
       end
 
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'subscriptionMetricId')
+        self.subscription_metric_id = attributes[:'subscriptionMetricId']
       end
 
       if attributes.has_key?(:'subscriptionVersion')
@@ -200,6 +245,10 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
+        invalid_properties.push('invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.')
+      end
+
       if !@title.nil? && @title.to_s.length > 150
         invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 150.')
       end
@@ -214,9 +263,20 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
       return false if !@title.nil? && @title.to_s.length > 150
       return false if !@title.nil? && @title.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] component_reference_sku Value to be assigned
+    def component_reference_sku=(component_reference_sku)
+      if !component_reference_sku.nil? && component_reference_sku.to_s.length > 100
+        fail ArgumentError, 'invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.'
+      end
+
+      @component_reference_sku = component_reference_sku
     end
 
     # Custom attribute writer method with validation
@@ -241,15 +301,20 @@ module Wallee
           aggregated_tax_rate == o.aggregated_tax_rate &&
           amount_excluding_tax == o.amount_excluding_tax &&
           amount_including_tax == o.amount_including_tax &&
+          component_reference_name == o.component_reference_name &&
+          component_reference_sku == o.component_reference_sku &&
           created_by == o.created_by &&
           created_on == o.created_on &&
           discount_including_tax == o.discount_including_tax &&
           external_id == o.external_id &&
+          fee_type == o.fee_type &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
+          pro_rata_calculated == o.pro_rata_calculated &&
           quantity == o.quantity &&
           state == o.state &&
+          subscription_metric_id == o.subscription_metric_id &&
           subscription_version == o.subscription_version &&
           tax_amount == o.tax_amount &&
           taxes == o.taxes &&
@@ -266,7 +331,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, created_by, created_on, discount_including_tax, external_id, id, linked_space_id, planned_purge_date, quantity, state, subscription_version, tax_amount, taxes, title, version].hash
+      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, component_reference_name, component_reference_sku, created_by, created_on, discount_including_tax, external_id, fee_type, id, linked_space_id, planned_purge_date, pro_rata_calculated, quantity, state, subscription_metric_id, subscription_version, tax_amount, taxes, title, version].hash
     end
 
     # Builds the object from hash

@@ -18,7 +18,7 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The payment link defines an URL to automatically create transactions.
+  # 
   class PaymentLinkActive
     # The ID is the primary key of the entity. The ID identifies the entity uniquely.
     attr_accessor :id
@@ -26,37 +26,40 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # The allowed payment method configurations restrict the payment methods which can be used with this payment link.
+    # The payment method configurations that customers can use for making payments.
     attr_accessor :allowed_payment_method_configurations
 
-    # The payment link can be conducted in a specific space view. The space view may apply a specific design to the payment page.
+    # The domains to which the user is allowed to be redirected after the payment is completed. The following options can be configured: Exact domain: enter a full domain, e.g. (https://example.com). Wildcard domain: use to allow subdomains, e.g. (https://*.example.com). All domains: use (ALL) to allow redirection to any domain (not recommended for security reasons). No domains : use (NONE) to disallow any redirection. Only one option per line is allowed. Invalid entries will be rejected. 
+    attr_accessor :allowed_redirection_domains
+
+    # The payment link can be used within a specific space view, which may apply a customized design to the payment page.
     attr_accessor :applied_space_view
 
-    # The available from date defines the earliest date on which the payment link can be used. When no date is specified there will be no restriction.
+    # The earliest date the payment link can be used to initiate a transaction. If no date is provided, the link will be available immediately.
     attr_accessor :available_from
 
-    # The available from date defines the latest date on which the payment link can be used to initialize a transaction. When no date is specified there will be no restriction.
+    # The latest date the payment link can be used to initiate a transaction. If no date is provided, the link will remain available indefinitely.
     attr_accessor :available_until
 
-    # The billing address handling mode controls if the address is collected or not and how it is collected.
+    # The handling mode defines whether a billing address is required and specifies how it should be provided.
     attr_accessor :billing_address_handling_mode
 
-    # The currency defines in which currency the payment is executed in. If no currency is defined it has to be specified within the request parameter 'currency'.
+    # The three-letter currency code (ISO 4217). If not specified, it must be provided in the 'currency' request parameter.
     attr_accessor :currency
 
-    # The language defines the language of the payment page. If no language is provided it can be provided through the request parameter.
+    # The language for displaying the payment page. If not specified, it can be supplied via the 'language' request parameter.
     attr_accessor :language
 
-    # The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters. If no amount for the payment link is defined, the additional checkout page to enter the amount is shown to the consumer.
+    # The line items representing what is being sold. If not specified, they can be supplied via request parameters.
     attr_accessor :line_items
 
-    # The maximal number of transactions limits the number of transactions which can be created with this payment link.
+    # The maximum number of transactions that can be initiated using the payment link.
     attr_accessor :maximal_number_of_transactions
 
-    # The payment link name is used internally to identify the payment link. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the payment link.
     attr_accessor :name
 
-    # The shipping address handling mode controls if the address is collected or not and how it is collected.
+    # The handling mode defines whether a shipping address is required and specifies how it should be provided.
     attr_accessor :shipping_address_handling_mode
 
     # The object's current state.
@@ -68,6 +71,7 @@ module Wallee
         :'id' => :'id',
         :'version' => :'version',
         :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
+        :'allowed_redirection_domains' => :'allowedRedirectionDomains',
         :'applied_space_view' => :'appliedSpaceView',
         :'available_from' => :'availableFrom',
         :'available_until' => :'availableUntil',
@@ -88,6 +92,7 @@ module Wallee
         :'id' => :'Integer',
         :'version' => :'Integer',
         :'allowed_payment_method_configurations' => :'Array<PaymentMethodConfiguration>',
+        :'allowed_redirection_domains' => :'Array<String>',
         :'applied_space_view' => :'Integer',
         :'available_from' => :'DateTime',
         :'available_until' => :'DateTime',
@@ -121,6 +126,12 @@ module Wallee
       if attributes.has_key?(:'allowedPaymentMethodConfigurations')
         if (value = attributes[:'allowedPaymentMethodConfigurations']).is_a?(Array)
           self.allowed_payment_method_configurations = value
+        end
+      end
+
+      if attributes.has_key?(:'allowedRedirectionDomains')
+        if (value = attributes[:'allowedRedirectionDomains']).is_a?(Array)
+          self.allowed_redirection_domains = value
         end
       end
 
@@ -217,6 +228,7 @@ module Wallee
           id == o.id &&
           version == o.version &&
           allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
+          allowed_redirection_domains == o.allowed_redirection_domains &&
           applied_space_view == o.applied_space_view &&
           available_from == o.available_from &&
           available_until == o.available_until &&
@@ -239,7 +251,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, allowed_payment_method_configurations, applied_space_view, available_from, available_until, billing_address_handling_mode, currency, language, line_items, maximal_number_of_transactions, name, shipping_address_handling_mode, state].hash
+      [id, version, allowed_payment_method_configurations, allowed_redirection_domains, applied_space_view, available_from, available_until, billing_address_handling_mode, currency, language, line_items, maximal_number_of_transactions, name, shipping_address_handling_mode, state].hash
     end
 
     # Builds the object from hash

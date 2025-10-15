@@ -62,6 +62,9 @@ module Wallee
     # The ID of the Shopify product that is enabled to be ordered as subscription.
     attr_accessor :product_id
 
+    # The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+    attr_accessor :product_legacy_id
+
     # 
     attr_accessor :product_name
 
@@ -73,6 +76,9 @@ module Wallee
 
     # 
     attr_accessor :product_variant_id
+
+    # 
+    attr_accessor :product_variant_legacy_id
 
     # 
     attr_accessor :product_variant_name
@@ -124,10 +130,12 @@ module Wallee
         :'planned_purge_date' => :'plannedPurgeDate',
         :'pricing_option' => :'pricingOption',
         :'product_id' => :'productId',
+        :'product_legacy_id' => :'productLegacyId',
         :'product_name' => :'productName',
         :'product_price' => :'productPrice',
         :'product_sku' => :'productSku',
         :'product_variant_id' => :'productVariantId',
+        :'product_variant_legacy_id' => :'productVariantLegacyId',
         :'product_variant_name' => :'productVariantName',
         :'relative_price_adjustment' => :'relativePriceAdjustment',
         :'shipping_required' => :'shippingRequired',
@@ -159,10 +167,12 @@ module Wallee
         :'planned_purge_date' => :'DateTime',
         :'pricing_option' => :'ShopifySubscriptionProductPricingOption',
         :'product_id' => :'String',
+        :'product_legacy_id' => :'String',
         :'product_name' => :'String',
         :'product_price' => :'Float',
         :'product_sku' => :'String',
         :'product_variant_id' => :'String',
+        :'product_variant_legacy_id' => :'String',
         :'product_variant_name' => :'String',
         :'relative_price_adjustment' => :'Float',
         :'shipping_required' => :'BOOLEAN',
@@ -241,6 +251,10 @@ module Wallee
         self.product_id = attributes[:'productId']
       end
 
+      if attributes.has_key?(:'productLegacyId')
+        self.product_legacy_id = attributes[:'productLegacyId']
+      end
+
       if attributes.has_key?(:'productName')
         self.product_name = attributes[:'productName']
       end
@@ -255,6 +269,10 @@ module Wallee
 
       if attributes.has_key?(:'productVariantId')
         self.product_variant_id = attributes[:'productVariantId']
+      end
+
+      if attributes.has_key?(:'productVariantLegacyId')
+        self.product_variant_legacy_id = attributes[:'productVariantLegacyId']
       end
 
       if attributes.has_key?(:'productVariantName')
@@ -334,10 +352,12 @@ module Wallee
           planned_purge_date == o.planned_purge_date &&
           pricing_option == o.pricing_option &&
           product_id == o.product_id &&
+          product_legacy_id == o.product_legacy_id &&
           product_name == o.product_name &&
           product_price == o.product_price &&
           product_sku == o.product_sku &&
           product_variant_id == o.product_variant_id &&
+          product_variant_legacy_id == o.product_variant_legacy_id &&
           product_variant_name == o.product_variant_name &&
           relative_price_adjustment == o.relative_price_adjustment &&
           shipping_required == o.shipping_required &&
@@ -360,7 +380,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, id, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, planned_purge_date, pricing_option, product_id, product_name, product_price, product_sku, product_variant_id, product_variant_name, relative_price_adjustment, shipping_required, shop, state, stock_check_required, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, updated_at, version].hash
+      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, id, linked_space_id, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, planned_purge_date, pricing_option, product_id, product_legacy_id, product_name, product_price, product_sku, product_variant_id, product_variant_legacy_id, product_variant_name, relative_price_adjustment, shipping_required, shop, state, stock_check_required, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, updated_at, version].hash
     end
 
     # Builds the object from hash

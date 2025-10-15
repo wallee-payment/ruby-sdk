@@ -26,13 +26,13 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+    # The amount charged to the customer for each consumed unit at the end of a billing cycle.
     attr_accessor :fee
 
-    # 
+    # The metered fee that this tier belongs to.
     attr_accessor :metered_fee
 
-    # The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
+    # Starting from and including this quantity is contained in the tier.
     attr_accessor :start_range
 
     # Attribute mapping from ruby-style variable name to JSON key.

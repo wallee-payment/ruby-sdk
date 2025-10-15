@@ -23,7 +23,7 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The feature that the token version type belongs to.
     attr_accessor :feature
 
     # A unique identifier for the object.

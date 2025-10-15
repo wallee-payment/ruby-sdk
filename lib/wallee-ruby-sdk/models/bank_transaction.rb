@@ -20,22 +20,22 @@ require 'date'
 module Wallee
   # 
   class BankTransaction
-    # The adjustments applied on this bank transaction.
+    # Adjustments are changes made to the initial transaction amount, such as fees or corrections.
     attr_accessor :adjustments
 
-    # The created by indicates the user which has created the bank transaction.
+    # The ID of the user the bank transaction was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The currency bank account which is used to handle money flow.
+    # The currency bank account that sends or receives money based on the bank transaction's flow direction.
     attr_accessor :currency_bank_account
 
-    # 
+    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
     attr_accessor :external_id
 
-    # 
+    # Indicates the direction of a bank transaction, specifying whether the amount flows into or out of the bank account.
     attr_accessor :flow_direction
 
     # A unique identifier for the object.
@@ -44,31 +44,34 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
+    # The payment date specifies the date on which the payment was processed.
+    attr_accessor :payment_date
+
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The posting amount indicates the amount including adjustments.
+    # The posting amount refers to the monetary value recorded for the bank transaction prior to any adjustments.
     attr_accessor :posting_amount
 
-    # 
+    # A unique reference to identify the bank transaction.
     attr_accessor :reference
 
-    # 
+    # The source indicates how the bank transaction was created.
     attr_accessor :source
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # Represents the total value of all adjustments to the bank transaction, including tax.
     attr_accessor :total_adjustment_amount_including_tax
 
-    # 
+    # The bank transaction's type.
     attr_accessor :type
 
-    # 
+    # The value amount represents the net monetary value of the transaction after applicable deductions.
     attr_accessor :value_amount
 
-    # The value date describes the date the amount is effective on the account.
+    # The value date indicates the date on which the transaction amount becomes effective.
     attr_accessor :value_date
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -85,6 +88,7 @@ module Wallee
         :'flow_direction' => :'flowDirection',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
+        :'payment_date' => :'paymentDate',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'posting_amount' => :'postingAmount',
         :'reference' => :'reference',
@@ -109,6 +113,7 @@ module Wallee
         :'flow_direction' => :'BankTransactionFlowDirection',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
+        :'payment_date' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
         :'posting_amount' => :'Float',
         :'reference' => :'String',
@@ -162,6 +167,10 @@ module Wallee
 
       if attributes.has_key?(:'linkedSpaceId')
         self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'paymentDate')
+        self.payment_date = attributes[:'paymentDate']
       end
 
       if attributes.has_key?(:'plannedPurgeDate')
@@ -255,6 +264,7 @@ module Wallee
           flow_direction == o.flow_direction &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
+          payment_date == o.payment_date &&
           planned_purge_date == o.planned_purge_date &&
           posting_amount == o.posting_amount &&
           reference == o.reference &&
@@ -276,7 +286,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [adjustments, created_by, created_on, currency_bank_account, external_id, flow_direction, id, linked_space_id, planned_purge_date, posting_amount, reference, source, state, total_adjustment_amount_including_tax, type, value_amount, value_date, version].hash
+      [adjustments, created_by, created_on, currency_bank_account, external_id, flow_direction, id, linked_space_id, payment_date, planned_purge_date, posting_amount, reference, source, state, total_adjustment_amount_including_tax, type, value_amount, value_date, version].hash
     end
 
     # Builds the object from hash

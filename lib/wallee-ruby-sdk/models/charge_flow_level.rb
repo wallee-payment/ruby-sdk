@@ -20,23 +20,23 @@ require 'date'
 module Wallee
   # 
   class ChargeFlowLevel
+    # The charge to process the payment asynchronously.
+    attr_accessor :asynchronous_charge
+
+    # The configuration that was used for this charge flow level.
+    attr_accessor :configuration
+
+    # The date and time when the object was created.
+    attr_accessor :created_on
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The payment transaction this object is linked to.
     attr_accessor :linked_transaction
-
-    # 
-    attr_accessor :asynchronous_charge
-
-    # 
-    attr_accessor :configuration
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
@@ -44,16 +44,16 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The charge to process the payment synchronously.
     attr_accessor :synchronous_charge
 
-    # 
+    # The date and time when the charge flow level will expire.
     attr_accessor :timeout_on
 
-    # 
+    # The charge to process the payment using a token.
     attr_accessor :token_charge
 
-    # 
+    # The transaction that the charge flow level belongs to.
     attr_accessor :transaction
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -62,12 +62,12 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'asynchronous_charge' => :'asynchronousCharge',
         :'configuration' => :'configuration',
         :'created_on' => :'createdOn',
+        :'id' => :'id',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'state' => :'state',
         :'synchronous_charge' => :'synchronousCharge',
@@ -81,12 +81,12 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'asynchronous_charge' => :'Integer',
         :'configuration' => :'ChargeFlowLevelConfiguration',
         :'created_on' => :'DateTime',
+        :'id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'planned_purge_date' => :'DateTime',
         :'state' => :'ChargeFlowLevelState',
         :'synchronous_charge' => :'Integer',
@@ -105,18 +105,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
       if attributes.has_key?(:'asynchronousCharge')
         self.asynchronous_charge = attributes[:'asynchronousCharge']
       end
@@ -127,6 +115,18 @@ module Wallee
 
       if attributes.has_key?(:'createdOn')
         self.created_on = attributes[:'createdOn']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'plannedPurgeDate')
@@ -176,12 +176,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           asynchronous_charge == o.asynchronous_charge &&
           configuration == o.configuration &&
           created_on == o.created_on &&
+          id == o.id &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           planned_purge_date == o.planned_purge_date &&
           state == o.state &&
           synchronous_charge == o.synchronous_charge &&
@@ -200,7 +200,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, asynchronous_charge, configuration, created_on, planned_purge_date, state, synchronous_charge, timeout_on, token_charge, transaction, version].hash
+      [asynchronous_charge, configuration, created_on, id, linked_space_id, linked_transaction, planned_purge_date, state, synchronous_charge, timeout_on, token_charge, transaction, version].hash
     end
 
     # Builds the object from hash

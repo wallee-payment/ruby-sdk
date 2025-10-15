@@ -23,29 +23,21 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
-    # 
-    attr_accessor :icon
-
     # A unique identifier for the object.
     attr_accessor :id
 
     # The localized name of the object.
     attr_accessor :name
 
-    # 
-    attr_accessor :parent
-
-    # 
+    # When listing sales channels, they can be sorted by this number.
     attr_accessor :sort_order
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'description' => :'description',
-        :'icon' => :'icon',
         :'id' => :'id',
         :'name' => :'name',
-        :'parent' => :'parent',
         :'sort_order' => :'sortOrder'
       }
     end
@@ -54,10 +46,8 @@ module Wallee
     def self.swagger_types
       {
         :'description' => :'Hash<String, String>',
-        :'icon' => :'String',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>',
-        :'parent' => :'SalesChannel',
         :'sort_order' => :'Integer'
       }
     end
@@ -76,10 +66,6 @@ module Wallee
         end
       end
 
-      if attributes.has_key?(:'icon')
-        self.icon = attributes[:'icon']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
@@ -88,10 +74,6 @@ module Wallee
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
-      end
-
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
       end
 
       if attributes.has_key?(:'sortOrder')
@@ -118,10 +100,8 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           description == o.description &&
-          icon == o.icon &&
           id == o.id &&
           name == o.name &&
-          parent == o.parent &&
           sort_order == o.sort_order
     end
 
@@ -134,7 +114,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, icon, id, name, parent, sort_order].hash
+      [description, id, name, sort_order].hash
     end
 
     # Builds the object from hash

@@ -18,18 +18,18 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # This model holds the additional card authentication.
+  # 
   class CardCryptogramCreate
-    # 
-    attr_accessor :type
+    # The Electronic Commerce Indicator (ECI) represents the authentication level and indicates liability shift during online or card-not-present transactions.
+    attr_accessor :eci
 
-    # 
+    # The cryptogram value used for securing card transactions, format varying based on the PAN type.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
+        :'eci' => :'eci',
         :'value' => :'value'
       }
     end
@@ -37,7 +37,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'type' => :'CardCryptogramType',
+        :'eci' => :'String',
         :'value' => :'String'
       }
     end
@@ -50,8 +50,8 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'eci')
+        self.eci = attributes[:'eci']
       end
 
       if attributes.has_key?(:'value')
@@ -63,10 +63,6 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       if @value.nil?
         invalid_properties.push('invalid value for "value", value cannot be nil.')
       end
@@ -77,7 +73,6 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @type.nil?
       return false if @value.nil?
       true
     end
@@ -87,7 +82,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
+          eci == o.eci &&
           value == o.value
     end
 
@@ -100,7 +95,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, value].hash
+      [eci, value].hash
     end
 
     # Builds the object from hash

@@ -20,6 +20,9 @@ require 'date'
 module Wallee
   # 
   class PaymentTerminalTransactionSummary
+    # The transactions amount per currency.
+    attr_accessor :balance_amount_per_currency
+
     # 
     attr_accessor :dcc_transaction_sums
 
@@ -35,11 +38,14 @@ module Wallee
     # 
     attr_accessor :number_of_transactions
 
-    # 
+    # The payment terminal of the transaction summary.
     attr_accessor :payment_terminal
 
     # 
     attr_accessor :receipt
+
+    # 
+    attr_accessor :reference
 
     # 
     attr_accessor :started_on
@@ -53,6 +59,7 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'balance_amount_per_currency' => :'balanceAmountPerCurrency',
         :'dcc_transaction_sums' => :'dccTransactionSums',
         :'ended_on' => :'endedOn',
         :'id' => :'id',
@@ -60,6 +67,7 @@ module Wallee
         :'number_of_transactions' => :'numberOfTransactions',
         :'payment_terminal' => :'paymentTerminal',
         :'receipt' => :'receipt',
+        :'reference' => :'reference',
         :'started_on' => :'startedOn',
         :'transaction_sums' => :'transactionSums',
         :'version' => :'version'
@@ -69,6 +77,7 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'balance_amount_per_currency' => :'Hash<String, Float>',
         :'dcc_transaction_sums' => :'Array<PaymentTerminalDccTransactionSum>',
         :'ended_on' => :'DateTime',
         :'id' => :'Integer',
@@ -76,6 +85,7 @@ module Wallee
         :'number_of_transactions' => :'Integer',
         :'payment_terminal' => :'Integer',
         :'receipt' => :'String',
+        :'reference' => :'Integer',
         :'started_on' => :'DateTime',
         :'transaction_sums' => :'Array<PaymentTerminalTransactionSum>',
         :'version' => :'Integer'
@@ -89,6 +99,12 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'balanceAmountPerCurrency')
+        if (value = attributes[:'balanceAmountPerCurrency']).is_a?(Hash)
+          self.balance_amount_per_currency = value
+        end
+      end
 
       if attributes.has_key?(:'dccTransactionSums')
         if (value = attributes[:'dccTransactionSums']).is_a?(Array)
@@ -118,6 +134,10 @@ module Wallee
 
       if attributes.has_key?(:'receipt')
         self.receipt = attributes[:'receipt']
+      end
+
+      if attributes.has_key?(:'reference')
+        self.reference = attributes[:'reference']
       end
 
       if attributes.has_key?(:'startedOn')
@@ -153,6 +173,7 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          balance_amount_per_currency == o.balance_amount_per_currency &&
           dcc_transaction_sums == o.dcc_transaction_sums &&
           ended_on == o.ended_on &&
           id == o.id &&
@@ -160,6 +181,7 @@ module Wallee
           number_of_transactions == o.number_of_transactions &&
           payment_terminal == o.payment_terminal &&
           receipt == o.receipt &&
+          reference == o.reference &&
           started_on == o.started_on &&
           transaction_sums == o.transaction_sums &&
           version == o.version
@@ -174,7 +196,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [dcc_transaction_sums, ended_on, id, linked_space_id, number_of_transactions, payment_terminal, receipt, started_on, transaction_sums, version].hash
+      [balance_amount_per_currency, dcc_transaction_sums, ended_on, id, linked_space_id, number_of_transactions, payment_terminal, receipt, reference, started_on, transaction_sums, version].hash
     end
 
     # Builds the object from hash

@@ -19,26 +19,36 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionModelTaxLine
-    # 
-    attr_accessor :rate
+  class DunningFlowType
+    # The localized description of the object.
+    attr_accessor :description
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The localized name of the object.
+    attr_accessor :name
 
     # 
-    attr_accessor :title
+    attr_accessor :specific_country
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'rate' => :'rate',
-        :'title' => :'title'
+        :'description' => :'description',
+        :'id' => :'id',
+        :'name' => :'name',
+        :'specific_country' => :'specificCountry'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'rate' => :'Float',
-        :'title' => :'String'
+        :'description' => :'Hash<String, String>',
+        :'id' => :'Integer',
+        :'name' => :'Hash<String, String>',
+        :'specific_country' => :'String'
       }
     end
 
@@ -50,12 +60,24 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'rate')
-        self.rate = attributes[:'rate']
+      if attributes.has_key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
-      if attributes.has_key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'name')
+        if (value = attributes[:'name']).is_a?(Hash)
+          self.name = value
+        end
+      end
+
+      if attributes.has_key?(:'specificCountry')
+        self.specific_country = attributes[:'specificCountry']
       end
     end
 
@@ -77,8 +99,10 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          rate == o.rate &&
-          title == o.title
+          description == o.description &&
+          id == o.id &&
+          name == o.name &&
+          specific_country == o.specific_country
     end
 
     # @see the `==` method
@@ -90,7 +114,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [rate, title].hash
+      [description, id, name, specific_country].hash
     end
 
     # Builds the object from hash

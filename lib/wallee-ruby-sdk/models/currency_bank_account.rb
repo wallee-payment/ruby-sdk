@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class CurrencyBankAccount
-    # 
+    # The bank account this currency bank account belongs to.
     attr_accessor :bank_account
 
-    # 
+    # The currency associated with the bank account.
     attr_accessor :currency
 
-    # 
+    # Whether the bank account operates in a test or production environment.
     attr_accessor :environment
 
     # A unique identifier for the object.

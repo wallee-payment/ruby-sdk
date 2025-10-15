@@ -26,10 +26,10 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # 
+    # The localized description of the metric that is displayed to the customer.
     attr_accessor :description
 
-    # 
+    # The localized name of the metric that is displayed to the customer.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

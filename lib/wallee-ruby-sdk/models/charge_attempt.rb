@@ -20,99 +20,96 @@ require 'date'
 module Wallee
   # 
   class ChargeAttempt
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # 
+    # The charge that the charge attempt belongs to.
     attr_accessor :charge
 
-    # 
+    # The behavior that controls when the transaction is completed.
     attr_accessor :completion_behavior
 
-    # 
+    # The payment connector configuration that was used for the charge attempt.
     attr_accessor :connector_configuration
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The customers presence indicates which kind of customer interaction was used during the charge attempt.
+    # The customer's presence indicates whether and in what way the charge attempt's customer is present.
     attr_accessor :customers_presence
 
-    # 
+    # The environment in which the charge attempt is executed.
     attr_accessor :environment
 
-    # 
+    # The date and time when the charge attempt failed.
     attr_accessor :failed_on
 
-    # 
+    # The reason for the failure of the charge attempt.
     attr_accessor :failure_reason
 
-    # 
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # Whether a new token version is being initialized.
     attr_accessor :initializing_token_version
 
-    # 
+    # The connector invocation that the charge attempt belongs to.
     attr_accessor :invocation
 
-    # 
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The date and time when the next update of the object's state is planned.
     attr_accessor :next_update_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The URL to redirect the customer to after payment processing.
     attr_accessor :redirection_url
 
-    # 
+    # The sales channel through which the charge attempt was made.
     attr_accessor :sales_channel
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The date and time when the charge attempt succeeded.
     attr_accessor :succeeded_on
 
-    # 
+    # The payment terminal through which the charge attempt was made.
     attr_accessor :terminal
 
-    # 
+    # The time zone that this object is associated with.
     attr_accessor :time_zone
 
-    # 
+    # The date and time when the object will expire.
     attr_accessor :timeout_on
 
-    # 
+    # The token version used for the charge attempt.
     attr_accessor :token_version
 
-    # The user failure message contains the message for the user in case the attempt failed. The message is localized into the language specified on the transaction.
+    # The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
     attr_accessor :user_failure_message
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
-    # 
+    # The type of wallet used to make the charge attempt.
     attr_accessor :wallet
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'charge' => :'charge',
         :'completion_behavior' => :'completionBehavior',
         :'connector_configuration' => :'connectorConfiguration',
@@ -121,10 +118,13 @@ module Wallee
         :'environment' => :'environment',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
+        :'id' => :'id',
         :'initializing_token_version' => :'initializingTokenVersion',
         :'invocation' => :'invocation',
         :'labels' => :'labels',
         :'language' => :'language',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'next_update_on' => :'nextUpdateOn',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'redirection_url' => :'redirectionUrl',
@@ -145,9 +145,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'charge' => :'Charge',
         :'completion_behavior' => :'TransactionCompletionBehavior',
         :'connector_configuration' => :'PaymentConnectorConfiguration',
@@ -156,10 +153,13 @@ module Wallee
         :'environment' => :'ChargeAttemptEnvironment',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
+        :'id' => :'Integer',
         :'initializing_token_version' => :'BOOLEAN',
         :'invocation' => :'ConnectorInvocation',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'next_update_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
         :'redirection_url' => :'String',
@@ -184,18 +184,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
 
       if attributes.has_key?(:'charge')
         self.charge = attributes[:'charge']
@@ -229,6 +217,10 @@ module Wallee
         self.failure_reason = attributes[:'failureReason']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'initializingTokenVersion')
         self.initializing_token_version = attributes[:'initializingTokenVersion']
       end
@@ -245,6 +237,14 @@ module Wallee
 
       if attributes.has_key?(:'language')
         self.language = attributes[:'language']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'nextUpdateOn')
@@ -337,9 +337,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           charge == o.charge &&
           completion_behavior == o.completion_behavior &&
           connector_configuration == o.connector_configuration &&
@@ -348,10 +345,13 @@ module Wallee
           environment == o.environment &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
+          id == o.id &&
           initializing_token_version == o.initializing_token_version &&
           invocation == o.invocation &&
           labels == o.labels &&
           language == o.language &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           next_update_on == o.next_update_on &&
           planned_purge_date == o.planned_purge_date &&
           redirection_url == o.redirection_url &&
@@ -377,7 +377,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, initializing_token_version, invocation, labels, language, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version, wallet].hash
+      [charge, completion_behavior, connector_configuration, created_on, customers_presence, environment, failed_on, failure_reason, id, initializing_token_version, invocation, labels, language, linked_space_id, linked_transaction, next_update_on, planned_purge_date, redirection_url, sales_channel, space_view_id, state, succeeded_on, terminal, time_zone, timeout_on, token_version, user_failure_message, version, wallet].hash
     end
 
     # Builds the object from hash

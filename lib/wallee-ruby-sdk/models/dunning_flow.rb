@@ -19,41 +19,61 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionModelItem
-    # 
-    attr_accessor :price_including_tax
+  class DunningFlow
+    # If a dunning flow meets all selected conditions, the dunning flow will be used to process the dunning case. If the conditions are not met the next dunning flow in line will be chosen according to the priorities.
+    attr_accessor :conditions
 
-    # 
-    attr_accessor :product_id
+    # A unique identifier for the object.
+    attr_accessor :id
 
-    # 
-    attr_accessor :quantity
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
 
-    # 
-    attr_accessor :recalculate_price
+    # The dunning flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+    attr_accessor :name
 
-    # 
-    attr_accessor :tax_lines
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # The priority orders the dunning flows. As such the priority determines together with the conditions the dunning flow the selection mechanism for a particular invoice. A change of the priority affects all future selections.
+    attr_accessor :priority
+
+    # The object's current state.
+    attr_accessor :state
+
+    # The type of the flow controls the way fees and interest rates are calculated. You can choose from predefined fees for some jurisdictions.
+    attr_accessor :type
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'price_including_tax' => :'priceIncludingTax',
-        :'product_id' => :'productId',
-        :'quantity' => :'quantity',
-        :'recalculate_price' => :'recalculatePrice',
-        :'tax_lines' => :'taxLines'
+        :'conditions' => :'conditions',
+        :'id' => :'id',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'name' => :'name',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'priority' => :'priority',
+        :'state' => :'state',
+        :'type' => :'type',
+        :'version' => :'version'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'price_including_tax' => :'Float',
-        :'product_id' => :'Integer',
-        :'quantity' => :'Float',
-        :'recalculate_price' => :'BOOLEAN',
-        :'tax_lines' => :'Array<ShopifySubscriptionModelTaxLine>'
+        :'conditions' => :'Array<Integer>',
+        :'id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'name' => :'String',
+        :'planned_purge_date' => :'DateTime',
+        :'priority' => :'Integer',
+        :'state' => :'CreationEntityState',
+        :'type' => :'DunningFlowType',
+        :'version' => :'Integer'
       }
     end
 
@@ -65,26 +85,42 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'priceIncludingTax')
-        self.price_including_tax = attributes[:'priceIncludingTax']
-      end
-
-      if attributes.has_key?(:'productId')
-        self.product_id = attributes[:'productId']
-      end
-
-      if attributes.has_key?(:'quantity')
-        self.quantity = attributes[:'quantity']
-      end
-
-      if attributes.has_key?(:'recalculatePrice')
-        self.recalculate_price = attributes[:'recalculatePrice']
-      end
-
-      if attributes.has_key?(:'taxLines')
-        if (value = attributes[:'taxLines']).is_a?(Array)
-          self.tax_lines = value
+      if attributes.has_key?(:'conditions')
+        if (value = attributes[:'conditions']).is_a?(Array)
+          self.conditions = value
         end
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'plannedPurgeDate')
+        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'priority')
+        self.priority = attributes[:'priority']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -106,11 +142,15 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          price_including_tax == o.price_including_tax &&
-          product_id == o.product_id &&
-          quantity == o.quantity &&
-          recalculate_price == o.recalculate_price &&
-          tax_lines == o.tax_lines
+          conditions == o.conditions &&
+          id == o.id &&
+          linked_space_id == o.linked_space_id &&
+          name == o.name &&
+          planned_purge_date == o.planned_purge_date &&
+          priority == o.priority &&
+          state == o.state &&
+          type == o.type &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -122,7 +162,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [price_including_tax, product_id, quantity, recalculate_price, tax_lines].hash
+      [conditions, id, linked_space_id, name, planned_purge_date, priority, state, type, version].hash
     end
 
     # Builds the object from hash

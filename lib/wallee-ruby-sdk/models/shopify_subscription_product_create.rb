@@ -65,8 +65,14 @@ module Wallee
     # The ID of the Shopify product that is enabled to be ordered as subscription.
     attr_accessor :product_id
 
+    # The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+    attr_accessor :product_legacy_id
+
     # 
     attr_accessor :product_variant_id
+
+    # 
+    attr_accessor :product_variant_legacy_id
 
     # 
     attr_accessor :shop
@@ -89,7 +95,9 @@ module Wallee
         :'subscriber_suspension_allowed' => :'subscriberSuspensionAllowed',
         :'termination_billing_cycles' => :'terminationBillingCycles',
         :'product_id' => :'productId',
+        :'product_legacy_id' => :'productLegacyId',
         :'product_variant_id' => :'productVariantId',
+        :'product_variant_legacy_id' => :'productVariantLegacyId',
         :'shop' => :'shop'
       }
     end
@@ -112,7 +120,9 @@ module Wallee
         :'subscriber_suspension_allowed' => :'BOOLEAN',
         :'termination_billing_cycles' => :'Integer',
         :'product_id' => :'String',
+        :'product_legacy_id' => :'String',
         :'product_variant_id' => :'String',
+        :'product_variant_legacy_id' => :'String',
         :'shop' => :'Integer'
       }
     end
@@ -185,8 +195,16 @@ module Wallee
         self.product_id = attributes[:'productId']
       end
 
+      if attributes.has_key?(:'productLegacyId')
+        self.product_legacy_id = attributes[:'productLegacyId']
+      end
+
       if attributes.has_key?(:'productVariantId')
         self.product_variant_id = attributes[:'productVariantId']
+      end
+
+      if attributes.has_key?(:'productVariantLegacyId')
+        self.product_variant_legacy_id = attributes[:'productVariantLegacyId']
       end
 
       if attributes.has_key?(:'shop')
@@ -198,12 +216,12 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @product_id.nil?
-        invalid_properties.push('invalid value for "product_id", product_id cannot be nil.')
+      if @product_legacy_id.nil?
+        invalid_properties.push('invalid value for "product_legacy_id", product_legacy_id cannot be nil.')
       end
 
-      if @product_variant_id.nil?
-        invalid_properties.push('invalid value for "product_variant_id", product_variant_id cannot be nil.')
+      if @product_variant_legacy_id.nil?
+        invalid_properties.push('invalid value for "product_variant_legacy_id", product_variant_legacy_id cannot be nil.')
       end
 
       if @shop.nil?
@@ -216,8 +234,8 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @product_id.nil?
-      return false if @product_variant_id.nil?
+      return false if @product_legacy_id.nil?
+      return false if @product_variant_legacy_id.nil?
       return false if @shop.nil?
       true
     end
@@ -242,7 +260,9 @@ module Wallee
           subscriber_suspension_allowed == o.subscriber_suspension_allowed &&
           termination_billing_cycles == o.termination_billing_cycles &&
           product_id == o.product_id &&
+          product_legacy_id == o.product_legacy_id &&
           product_variant_id == o.product_variant_id &&
+          product_variant_legacy_id == o.product_variant_legacy_id &&
           shop == o.shop
     end
 
@@ -255,7 +275,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, product_id, product_variant_id, shop].hash
+      [absolute_price_adjustment, billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_weekday, fixed_price, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, pricing_option, relative_price_adjustment, store_order_confirmation_email_enabled, subscriber_suspension_allowed, termination_billing_cycles, product_id, product_legacy_id, product_variant_id, product_variant_legacy_id, shop].hash
     end
 
     # Builds the object from hash

@@ -26,22 +26,22 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # 
+    # The product component that the fee belongs to.
     attr_accessor :component
 
-    # The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+    # The localized description of the fee that is displayed to the customer.
     attr_accessor :description
 
-    # The ledger entry title will be used for the title in the ledger entry and in the invoice.
+    # The localized title that be used on ledger entries and invoices.
     attr_accessor :ledger_entry_title
 
-    # The name of the fee should describe for the subscriber in few words for what the fee is for.
+    # The localized name of the fee that is displayed to the customer.
     attr_accessor :name
 
-    # The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
+    # The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
     attr_accessor :number_of_free_trial_periods
 
-    # The period fee is charged for every period of the subscription except for those periods which are trial periods.
+    # The amount charged to the customer for each billing cycle during the term of a subscription.
     attr_accessor :period_fee
 
     # Attribute mapping from ruby-style variable name to JSON key.

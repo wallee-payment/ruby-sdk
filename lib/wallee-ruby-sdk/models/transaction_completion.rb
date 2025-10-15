@@ -20,94 +20,94 @@ require 'date'
 module Wallee
   # 
   class TransactionCompletion
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # The amount which is captured. The amount represents sum of line items including taxes.
+    # The total amount to be captured in this completion, including taxes.
     attr_accessor :amount
 
-    # The base line items on which the completion is applied on.
+    # The original line items from the transaction that serve as the baseline for this completion.
     attr_accessor :base_line_items
 
-    # 
+    # The ID of the user the transaction completion was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The date and time when the transaction completion failed.
     attr_accessor :failed_on
 
-    # 
+    # The reason for the failure of the transaction completion.
     attr_accessor :failure_reason
 
-    # 
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The merchant's reference used to identify the invoice.
     attr_accessor :invoice_merchant_reference
 
-    # 
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
+    # Whether this is the final completion for the transaction. After the last completion is successfully created, the transaction enters its final state, and no further completions can occur.
     attr_accessor :last_completion
 
-    # 
+    # The specific version of the line items that are being used for this completion.
     attr_accessor :line_item_version
 
-    # The line items which are captured.
+    # The line items captured in this transaction completion.
     attr_accessor :line_items
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The mode of transaction completion, such as online or offline, determining how the completion process is executed.
     attr_accessor :mode
 
-    # 
+    # The date and time when the next update of the object's state is planned.
     attr_accessor :next_update_on
 
-    # 
+    # Payment-specific details related to this transaction completion such as payment instructions or references needed for processing.
     attr_accessor :payment_information
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The date and time when the processing of the transaction completion was started.
     attr_accessor :processing_on
 
-    # 
+    # The reference ID provided by the payment processor, used to trace the completion through the external payment system.
     attr_accessor :processor_reference
 
-    # 
+    # The line items yet to be captured in the transaction.
     attr_accessor :remaining_line_items
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
     attr_accessor :state
 
-    # The statement descriptor explain charges or payments on bank statements.
+    # The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
     attr_accessor :statement_descriptor
 
-    # 
+    # The date and time when the transaction completion succeeded.
     attr_accessor :succeeded_on
 
-    # The total sum of all taxes of line items.
+    # The portion of the captured amount that corresponds to taxes.
     attr_accessor :tax_amount
 
-    # 
+    # The time zone that this object is associated with.
     attr_accessor :time_zone
 
-    # 
+    # The date and time when the object will expire.
     attr_accessor :timeout_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -116,9 +116,6 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'amount' => :'amount',
         :'base_line_items' => :'baseLineItems',
         :'created_by' => :'createdBy',
@@ -126,12 +123,15 @@ module Wallee
         :'external_id' => :'externalId',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
+        :'id' => :'id',
         :'invoice_merchant_reference' => :'invoiceMerchantReference',
         :'labels' => :'labels',
         :'language' => :'language',
         :'last_completion' => :'lastCompletion',
         :'line_item_version' => :'lineItemVersion',
         :'line_items' => :'lineItems',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'mode' => :'mode',
         :'next_update_on' => :'nextUpdateOn',
         :'payment_information' => :'paymentInformation',
@@ -153,9 +153,6 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'amount' => :'Float',
         :'base_line_items' => :'Array<LineItem>',
         :'created_by' => :'Integer',
@@ -163,12 +160,15 @@ module Wallee
         :'external_id' => :'String',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
+        :'id' => :'Integer',
         :'invoice_merchant_reference' => :'String',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
         :'last_completion' => :'BOOLEAN',
         :'line_item_version' => :'TransactionLineItemVersion',
         :'line_items' => :'Array<LineItem>',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'mode' => :'TransactionCompletionMode',
         :'next_update_on' => :'DateTime',
         :'payment_information' => :'String',
@@ -194,18 +194,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
@@ -237,6 +225,10 @@ module Wallee
         self.failure_reason = attributes[:'failureReason']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'invoiceMerchantReference')
         self.invoice_merchant_reference = attributes[:'invoiceMerchantReference']
       end
@@ -263,6 +255,14 @@ module Wallee
         if (value = attributes[:'lineItems']).is_a?(Array)
           self.line_items = value
         end
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'mode')
@@ -400,9 +400,6 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           amount == o.amount &&
           base_line_items == o.base_line_items &&
           created_by == o.created_by &&
@@ -410,12 +407,15 @@ module Wallee
           external_id == o.external_id &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
+          id == o.id &&
           invoice_merchant_reference == o.invoice_merchant_reference &&
           labels == o.labels &&
           language == o.language &&
           last_completion == o.last_completion &&
           line_item_version == o.line_item_version &&
           line_items == o.line_items &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           mode == o.mode &&
           next_update_on == o.next_update_on &&
           payment_information == o.payment_information &&
@@ -442,7 +442,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, invoice_merchant_reference, labels, language, last_completion, line_item_version, line_items, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, statement_descriptor, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
+      [amount, base_line_items, created_by, created_on, external_id, failed_on, failure_reason, id, invoice_merchant_reference, labels, language, last_completion, line_item_version, line_items, linked_space_id, linked_transaction, mode, next_update_on, payment_information, planned_purge_date, processing_on, processor_reference, remaining_line_items, space_view_id, state, statement_descriptor, succeeded_on, tax_amount, time_zone, timeout_on, version].hash
     end
 
     # Builds the object from hash

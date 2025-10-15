@@ -19,28 +19,28 @@ require 'date'
 
 module Wallee
   class AbstractDebtCollectionCaseUpdate
-    # The billing address of the case identifies the debtor.
+    # The billing address that identifies the debtor.
     attr_accessor :billing_address
 
-    # The contract date is the date on which the contract with the debtor was signed on.
+    # The date and time when the contract with the debtor was signed.
     attr_accessor :contract_date
 
-    # The currency defines the billing currency of the debt collection case.
+    # The three-letter code (ISO 4217 format) of the case's currency.
     attr_accessor :currency
 
-    # The due date indicates the date on which the amount receivable was due. This date has to be always in the past.
+    # The date and time when the claim was due.
     attr_accessor :due_date
 
-    # The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
+    # The environment in which the case is processed.
     attr_accessor :environment
 
-    # The language indicates the language to be used in the communication with the debtor.
+    # The language that is linked to the object.
     attr_accessor :language
 
-    # The line items of the debt collection case will be shown on documents sent to the debtor and the total of them makes up total amount to collect.
+    # The line items that are subject of this debt collection case.
     attr_accessor :line_items
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

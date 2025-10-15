@@ -20,19 +20,22 @@ require 'date'
 module Wallee
   # 
   class PaymentAdjustment
-    # 
+    # The adjustment's amount, excluding taxes.
     attr_accessor :amount_excluding_tax
 
-    # The total amount of this adjustment including taxes.
+    # The adjustment's amount, including taxes.
     attr_accessor :amount_including_tax
 
-    # The rate in percentage is the rate on which the adjustment amount was calculated with.
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The percentage rate used to calculate the adjustment amount.
     attr_accessor :rate_in_percentage
 
-    # 
+    # The tax applied to the adjustment.
     attr_accessor :tax
 
-    # 
+    # The type of the adjustment.
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -40,6 +43,7 @@ module Wallee
       {
         :'amount_excluding_tax' => :'amountExcludingTax',
         :'amount_including_tax' => :'amountIncludingTax',
+        :'id' => :'id',
         :'rate_in_percentage' => :'rateInPercentage',
         :'tax' => :'tax',
         :'type' => :'type'
@@ -51,6 +55,7 @@ module Wallee
       {
         :'amount_excluding_tax' => :'Float',
         :'amount_including_tax' => :'Float',
+        :'id' => :'Integer',
         :'rate_in_percentage' => :'Float',
         :'tax' => :'Tax',
         :'type' => :'Integer'
@@ -71,6 +76,10 @@ module Wallee
 
       if attributes.has_key?(:'amountIncludingTax')
         self.amount_including_tax = attributes[:'amountIncludingTax']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'rateInPercentage')
@@ -106,6 +115,7 @@ module Wallee
       self.class == o.class &&
           amount_excluding_tax == o.amount_excluding_tax &&
           amount_including_tax == o.amount_including_tax &&
+          id == o.id &&
           rate_in_percentage == o.rate_in_percentage &&
           tax == o.tax &&
           type == o.type
@@ -120,7 +130,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [amount_excluding_tax, amount_including_tax, rate_in_percentage, tax, type].hash
+      [amount_excluding_tax, amount_including_tax, id, rate_in_percentage, tax, type].hash
     end
 
     # Builds the object from hash

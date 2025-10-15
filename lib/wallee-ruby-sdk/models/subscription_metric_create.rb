@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # A metric represents the usage of a resource that can be measured.
   class SubscriptionMetricCreate
-    # 
+    # The localized description of the metric that is displayed to the customer.
     attr_accessor :description
 
-    # 
+    # The localized name of the metric that is displayed to the customer.
     attr_accessor :name
 
-    # 
+    # The type of the metric.
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.

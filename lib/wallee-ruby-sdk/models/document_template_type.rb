@@ -20,19 +20,19 @@ require 'date'
 module Wallee
   # 
   class DocumentTemplateType
-    # 
+    # The localized description of the document template type.
     attr_accessor :description
 
-    # 
+    # The feature that this document template type belongs to.
     attr_accessor :feature
 
-    # 
+    # The group that this document template type belongs to.
     attr_accessor :group
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The localized title of the document template type.
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.

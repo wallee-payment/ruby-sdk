@@ -29,7 +29,10 @@ module Wallee
     # 
     attr_accessor :email_address
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # 
+    attr_accessor :external_gid
+
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # 
@@ -41,6 +44,7 @@ module Wallee
         :'id' => :'id',
         :'version' => :'version',
         :'email_address' => :'emailAddress',
+        :'external_gid' => :'externalGid',
         :'external_id' => :'externalId',
         :'phone_number' => :'phoneNumber'
       }
@@ -52,6 +56,7 @@ module Wallee
         :'id' => :'Integer',
         :'version' => :'Integer',
         :'email_address' => :'String',
+        :'external_gid' => :'String',
         :'external_id' => :'String',
         :'phone_number' => :'String'
       }
@@ -75,6 +80,10 @@ module Wallee
 
       if attributes.has_key?(:'emailAddress')
         self.email_address = attributes[:'emailAddress']
+      end
+
+      if attributes.has_key?(:'externalGid')
+        self.external_gid = attributes[:'externalGid']
       end
 
       if attributes.has_key?(:'externalId')
@@ -147,6 +156,7 @@ module Wallee
           id == o.id &&
           version == o.version &&
           email_address == o.email_address &&
+          external_gid == o.external_gid &&
           external_id == o.external_id &&
           phone_number == o.phone_number
     end
@@ -160,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, version, email_address, external_id, phone_number].hash
+      [id, version, email_address, external_gid, external_id, phone_number].hash
     end
 
     # Builds the object from hash

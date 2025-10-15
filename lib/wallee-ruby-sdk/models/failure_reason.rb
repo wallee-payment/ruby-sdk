@@ -20,14 +20,11 @@ require 'date'
 module Wallee
   # 
   class FailureReason
-    # 
+    # The category that the failure reason belongs to.
     attr_accessor :category
 
     # The localized description of the object.
     attr_accessor :description
-
-    # 
-    attr_accessor :features
 
     # A unique identifier for the object.
     attr_accessor :id
@@ -40,7 +37,6 @@ module Wallee
       {
         :'category' => :'category',
         :'description' => :'description',
-        :'features' => :'features',
         :'id' => :'id',
         :'name' => :'name'
       }
@@ -51,7 +47,6 @@ module Wallee
       {
         :'category' => :'FailureCategory',
         :'description' => :'Hash<String, String>',
-        :'features' => :'Array<Integer>',
         :'id' => :'Integer',
         :'name' => :'Hash<String, String>'
       }
@@ -72,12 +67,6 @@ module Wallee
       if attributes.has_key?(:'description')
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
-        end
-      end
-
-      if attributes.has_key?(:'features')
-        if (value = attributes[:'features']).is_a?(Array)
-          self.features = value
         end
       end
 
@@ -112,7 +101,6 @@ module Wallee
       self.class == o.class &&
           category == o.category &&
           description == o.description &&
-          features == o.features &&
           id == o.id &&
           name == o.name
     end
@@ -126,7 +114,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [category, description, features, id, name].hash
+      [category, description, id, name].hash
     end
 
     # Builds the object from hash

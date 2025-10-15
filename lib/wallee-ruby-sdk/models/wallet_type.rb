@@ -23,18 +23,30 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
+    # 
+    attr_accessor :feature
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The localized name of the object.
     attr_accessor :name
 
+    # 
+    attr_accessor :navigation_path
+
+    # 
+    attr_accessor :sort_order
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'description' => :'description',
+        :'feature' => :'feature',
         :'id' => :'id',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'navigation_path' => :'navigationPath',
+        :'sort_order' => :'sortOrder'
       }
     end
 
@@ -42,8 +54,11 @@ module Wallee
     def self.swagger_types
       {
         :'description' => :'Hash<String, String>',
+        :'feature' => :'Feature',
         :'id' => :'Integer',
-        :'name' => :'Hash<String, String>'
+        :'name' => :'Hash<String, String>',
+        :'navigation_path' => :'String',
+        :'sort_order' => :'Integer'
       }
     end
 
@@ -61,6 +76,10 @@ module Wallee
         end
       end
 
+      if attributes.has_key?(:'feature')
+        self.feature = attributes[:'feature']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
@@ -69,6 +88,14 @@ module Wallee
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
+      end
+
+      if attributes.has_key?(:'navigationPath')
+        self.navigation_path = attributes[:'navigationPath']
+      end
+
+      if attributes.has_key?(:'sortOrder')
+        self.sort_order = attributes[:'sortOrder']
       end
     end
 
@@ -91,8 +118,11 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           description == o.description &&
+          feature == o.feature &&
           id == o.id &&
-          name == o.name
+          name == o.name &&
+          navigation_path == o.navigation_path &&
+          sort_order == o.sort_order
     end
 
     # @see the `==` method
@@ -104,7 +134,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [description, id, name].hash
+      [description, feature, id, name, navigation_path, sort_order].hash
     end
 
     # Builds the object from hash

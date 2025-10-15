@@ -23,10 +23,10 @@ module Wallee
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # 
+    # The date and time when the suspension ended.
     attr_accessor :effective_end_date
 
-    # When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
+    # Whether the subscription should be terminated or reactivated after the suspension has reached its end date.
     attr_accessor :end_action
 
     # A unique identifier for the object.
@@ -38,25 +38,25 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The note may contain some internal information for the suspension. The note will not be disclosed to the subscriber.
+    # A note that contains details about the suspension. It is not disclosed to the subscriber.
     attr_accessor :note
 
-    # 
+    # The period bill that led to the suspension of the subscription.
     attr_accessor :period_bill
 
-    # The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
+    # The date and time when the suspension is planned to end.
     attr_accessor :planned_end_date
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The suspension reason indicates why a suspension has been created.
+    # The reason why the subscription was suspended.
     attr_accessor :reason
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The subscription that this suspension belongs to.
     attr_accessor :subscription
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

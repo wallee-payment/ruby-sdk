@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class LineItemAttributeCreate
-    # 
+    # The label describing the line item attribute.
     attr_accessor :label
 
-    # 
+    # The value of the line item attribute.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.

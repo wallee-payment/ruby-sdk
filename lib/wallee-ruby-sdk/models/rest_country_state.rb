@@ -23,9 +23,6 @@ module Wallee
     # The state's code used within addresses.
     attr_accessor :code
 
-    # 
-    attr_accessor :country
-
     # The two-letter code of the state's country (ISO 3166-1 alpha-2 format).
     attr_accessor :country_code
 
@@ -39,7 +36,6 @@ module Wallee
     def self.attribute_map
       {
         :'code' => :'code',
-        :'country' => :'country',
         :'country_code' => :'countryCode',
         :'id' => :'id',
         :'name' => :'name'
@@ -50,7 +46,6 @@ module Wallee
     def self.swagger_types
       {
         :'code' => :'String',
-        :'country' => :'String',
         :'country_code' => :'String',
         :'id' => :'String',
         :'name' => :'String'
@@ -67,10 +62,6 @@ module Wallee
 
       if attributes.has_key?(:'code')
         self.code = attributes[:'code']
-      end
-
-      if attributes.has_key?(:'country')
-        self.country = attributes[:'country']
       end
 
       if attributes.has_key?(:'countryCode')
@@ -105,7 +96,6 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           code == o.code &&
-          country == o.country &&
           country_code == o.country_code &&
           id == o.id &&
           name == o.name
@@ -120,7 +110,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [code, country, country_code, id, name].hash
+      [code, country_code, id, name].hash
     end
 
     # Builds the object from hash

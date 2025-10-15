@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # The component reference configuration adjusts the product component for a particular subscription.
   class SubscriptionComponentReferenceConfiguration
-    # 
+    # The ID of the component reference that is being configured.
     attr_accessor :product_component_reference_id
 
-    # 
+    # The quantity that should be applied to the component.
     attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.

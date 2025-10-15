@@ -18,7 +18,7 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The debt collector connects to an external service to process the debt collection case and as such directs the debt collection process.
+  # The debt collector connects to an external service to process debt collection cases and directs the debt collection process.
   class DebtCollector
     # The localized description of the object.
     attr_accessor :description

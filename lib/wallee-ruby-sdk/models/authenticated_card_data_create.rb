@@ -18,33 +18,36 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # This model holds the card data and optional cardholder authentication details.
+  # 
   class AuthenticatedCardDataCreate
-    # The card holder name is the name printed onto the card. It identifies the person who owns the card.
+    # The name of the cardholder, as printed on the card, identifying the card owner.
     attr_accessor :card_holder_name
 
-    # The card verification code (CVC) is a 3 to 4 digit code typically printed on the back of the card. It helps to ensure that the card holder is authorizing the transaction. For card not-present transactions this field is optional.
+    # The security code used to validate the card during transactions.
     attr_accessor :card_verification_code
 
-    # The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+    # Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
     attr_accessor :cardholder_authentication
 
-    # The additional authentication value used to secure the tokenized card transactions.
+    # An additional authentication value that enhances the security of tokenized card transactions.
     attr_accessor :cryptogram
 
-    # The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
+    # The expiry date of the card, indicating its validity period in yyyy-mm format (e.g., 2023-09).
     attr_accessor :expiry_date
 
-    # The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
+    # The type of PAN or token, indicating the source or security method of the card information.
+    attr_accessor :pan_type
+
+    # The card's primary account number (PAN), the unique identifier of the card.
     attr_accessor :primary_account_number
 
-    # 
+    # The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
     attr_accessor :recurring_indicator
 
-    # 
+    # A reference specific to the card's transaction within its payment scheme.
     attr_accessor :scheme_transaction_reference
 
-    # 
+    # The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
     attr_accessor :token_requestor_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -55,6 +58,7 @@ module Wallee
         :'cardholder_authentication' => :'cardholderAuthentication',
         :'cryptogram' => :'cryptogram',
         :'expiry_date' => :'expiryDate',
+        :'pan_type' => :'panType',
         :'primary_account_number' => :'primaryAccountNumber',
         :'recurring_indicator' => :'recurringIndicator',
         :'scheme_transaction_reference' => :'schemeTransactionReference',
@@ -70,6 +74,7 @@ module Wallee
         :'cardholder_authentication' => :'CardholderAuthenticationCreate',
         :'cryptogram' => :'CardCryptogramCreate',
         :'expiry_date' => :'String',
+        :'pan_type' => :'PanType',
         :'primary_account_number' => :'String',
         :'recurring_indicator' => :'RecurringIndicator',
         :'scheme_transaction_reference' => :'String',
@@ -103,6 +108,10 @@ module Wallee
 
       if attributes.has_key?(:'expiryDate')
         self.expiry_date = attributes[:'expiryDate']
+      end
+
+      if attributes.has_key?(:'panType')
+        self.pan_type = attributes[:'panType']
       end
 
       if attributes.has_key?(:'primaryAccountNumber')
@@ -232,6 +241,7 @@ module Wallee
           cardholder_authentication == o.cardholder_authentication &&
           cryptogram == o.cryptogram &&
           expiry_date == o.expiry_date &&
+          pan_type == o.pan_type &&
           primary_account_number == o.primary_account_number &&
           recurring_indicator == o.recurring_indicator &&
           scheme_transaction_reference == o.scheme_transaction_reference &&
@@ -247,7 +257,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [card_holder_name, card_verification_code, cardholder_authentication, cryptogram, expiry_date, primary_account_number, recurring_indicator, scheme_transaction_reference, token_requestor_id].hash
+      [card_holder_name, card_verification_code, cardholder_authentication, cryptogram, expiry_date, pan_type, primary_account_number, recurring_indicator, scheme_transaction_reference, token_requestor_id].hash
     end
 
     # Builds the object from hash

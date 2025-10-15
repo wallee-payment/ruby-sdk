@@ -23,19 +23,19 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The path to the payment method brand's grayscale image.
     attr_accessor :gray_image_path
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The path to the payment method brand's image.
     attr_accessor :image_path
 
     # The localized name of the object.
     attr_accessor :name
 
-    # 
+    # The payment method that the brand belongs to.
     attr_accessor :payment_method
 
     # Attribute mapping from ruby-style variable name to JSON key.

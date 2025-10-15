@@ -19,31 +19,81 @@ require 'date'
 
 module Wallee
   # 
-  class TransactionAwareEntity
+  class DunningFlowLevel
+    # This text is put in the reminder document of this dunning flow level.
+    attr_accessor :document_text
+
+    # 
+    attr_accessor :flow
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
+    # The dunning flow level name is used internally to identify the dunning flow level. For example the name is used within search fields and hence it should be distinct and descriptive.
+    attr_accessor :name
+
+    # The duration of the level before switching to the next one.
+    attr_accessor :period
+
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # The priority indicates the sort order of the level. A low value indicates that the level is executed before any level with a higher value. Any change to this value affects future level selections. The value has to pe unique per dunning flow.
+    attr_accessor :priority
+
     # 
-    attr_accessor :linked_transaction
+    attr_accessor :processor
+
+    # 
+    attr_accessor :reminder_template
+
+    # The object's current state.
+    attr_accessor :state
+
+    # The title is used to communicate the dunning level to the customer within the reminder.
+    attr_accessor :title
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'document_text' => :'documentText',
+        :'flow' => :'flow',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction'
+        :'name' => :'name',
+        :'period' => :'period',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'priority' => :'priority',
+        :'processor' => :'processor',
+        :'reminder_template' => :'reminderTemplate',
+        :'state' => :'state',
+        :'title' => :'title',
+        :'version' => :'version'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'document_text' => :'Hash<String, String>',
+        :'flow' => :'DunningFlow',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer'
+        :'name' => :'String',
+        :'period' => :'String',
+        :'planned_purge_date' => :'DateTime',
+        :'priority' => :'Integer',
+        :'processor' => :'Integer',
+        :'reminder_template' => :'DocumentTemplate',
+        :'state' => :'CreationEntityState',
+        :'title' => :'Hash<String, String>',
+        :'version' => :'Integer'
       }
     end
 
@@ -55,6 +105,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'documentText')
+        if (value = attributes[:'documentText']).is_a?(Hash)
+          self.document_text = value
+        end
+      end
+
+      if attributes.has_key?(:'flow')
+        self.flow = attributes[:'flow']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
@@ -63,8 +123,42 @@ module Wallee
         self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'period')
+        self.period = attributes[:'period']
+      end
+
+      if attributes.has_key?(:'plannedPurgeDate')
+        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'priority')
+        self.priority = attributes[:'priority']
+      end
+
+      if attributes.has_key?(:'processor')
+        self.processor = attributes[:'processor']
+      end
+
+      if attributes.has_key?(:'reminderTemplate')
+        self.reminder_template = attributes[:'reminderTemplate']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'title')
+        if (value = attributes[:'title']).is_a?(Hash)
+          self.title = value
+        end
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -72,13 +166,28 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@name.nil? && @name.to_s.length > 100
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@name.nil? && @name.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if !name.nil? && name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -86,9 +195,19 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          document_text == o.document_text &&
+          flow == o.flow &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction
+          name == o.name &&
+          period == o.period &&
+          planned_purge_date == o.planned_purge_date &&
+          priority == o.priority &&
+          processor == o.processor &&
+          reminder_template == o.reminder_template &&
+          state == o.state &&
+          title == o.title &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -100,7 +219,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction].hash
+      [document_text, flow, id, linked_space_id, name, period, planned_purge_date, priority, processor, reminder_template, state, title, version].hash
     end
 
     # Builds the object from hash

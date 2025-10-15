@@ -16,5 +16,5 @@ limitations under the License.
 =end
 
 module Wallee
-  VERSION = '4.5.0'
+  VERSION = '5.2.0'
 end

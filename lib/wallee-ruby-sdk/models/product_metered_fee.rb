@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # 
   class ProductMeteredFee
-    # 
+    # The product component that the fee belongs to.
     attr_accessor :component
 
-    # The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+    # The localized description of the fee that is displayed to the customer.
     attr_accessor :description
 
     # A unique identifier for the object.
@@ -32,16 +32,16 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The metric used to determine the resource consumption billed to the customer.
     attr_accessor :metric
 
-    # The name of the fee should describe for the subscriber in few words for what the fee is for.
+    # The localized name of the fee that is displayed to the customer.
     attr_accessor :name
 
-    # The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+    # The method used to calculate the tier price.
     attr_accessor :tier_pricing
 
-    # 
+    # The type of the fee.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

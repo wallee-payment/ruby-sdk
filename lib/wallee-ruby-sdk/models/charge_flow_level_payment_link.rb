@@ -20,28 +20,24 @@ require 'date'
 module Wallee
   # 
   class ChargeFlowLevelPaymentLink
+    # The charge flow level that the payment link belongs to.
+    attr_accessor :charge_flow_level
+
     # A unique identifier for the object.
     attr_accessor :id
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
-    attr_accessor :linked_transaction
-
-    # 
-    attr_accessor :charge_flow_level
-
-    # 
+    # The URL provided to the customer for entering their payment details and completing the transaction.
     attr_accessor :payment_link
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'charge_flow_level' => :'chargeFlowLevel',
         :'id' => :'id',
         :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
-        :'charge_flow_level' => :'chargeFlowLevel',
         :'payment_link' => :'paymentLink'
       }
     end
@@ -49,10 +45,9 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'charge_flow_level' => :'ChargeFlowLevel',
         :'id' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
-        :'charge_flow_level' => :'ChargeFlowLevel',
         :'payment_link' => :'String'
       }
     end
@@ -65,20 +60,16 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
+      if attributes.has_key?(:'chargeFlowLevel')
+        self.charge_flow_level = attributes[:'chargeFlowLevel']
+      end
+
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'linkedSpaceId')
         self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
-      if attributes.has_key?(:'chargeFlowLevel')
-        self.charge_flow_level = attributes[:'chargeFlowLevel']
       end
 
       if attributes.has_key?(:'paymentLink')
@@ -104,10 +95,9 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          charge_flow_level == o.charge_flow_level &&
           id == o.id &&
           linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
-          charge_flow_level == o.charge_flow_level &&
           payment_link == o.payment_link
     end
 
@@ -120,7 +110,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, charge_flow_level, payment_link].hash
+      [charge_flow_level, id, linked_space_id, payment_link].hash
     end
 
     # Builds the object from hash

@@ -96,7 +96,7 @@ module Wallee
     # Create
     # Creates the comment with the given properties.
     # @param space_id 
-    # @param entity 
+    # @param entity The comment object which should be created.
     # @param [Hash] opts the optional parameters
     # @return [TransactionInvoiceComment]
     def create(space_id, entity, opts = {})
@@ -108,7 +108,7 @@ module Wallee
     # Creates the comment with the given properties.
 
     # @param space_id 
-    # @param entity 
+    # @param entity The comment object which should be created.
     # @param [Hash] opts the optional parameters
     # @return [Array<(TransactionInvoiceComment, Fixnum, Hash)>] TransactionInvoiceComment data, response status code and response headers
     def create_with_http_info(space_id, entity, opts = {})
@@ -192,7 +192,6 @@ module Wallee
       # query parameters
       query_params = {}
       query_params[:'spaceId'] = space_id
-      query_params[:'id'] = id
 
       # header parameters
       header_params = {}
@@ -212,7 +211,7 @@ module Wallee
       timeout = @api_client.get_connection_timeout()
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(id)
       auth_names = []
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -230,7 +229,7 @@ module Wallee
     # Pin
     # Pins the comment to the top.
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment to pin to the top.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def pin(space_id, id, opts = {})
@@ -242,7 +241,7 @@ module Wallee
     # Pins the comment to the top.
 
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment to pin to the top.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def pin_with_http_info(space_id, id, opts = {})
@@ -297,7 +296,7 @@ module Wallee
     # Read
     # Reads the comment with the given 'id' and returns it.
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [TransactionInvoiceComment]
     def read(space_id, id, opts = {})
@@ -309,7 +308,7 @@ module Wallee
     # Reads the comment with the given &#39;id&#39; and returns it.
 
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment which should be returned.
     # @param [Hash] opts the optional parameters
     # @return [Array<(TransactionInvoiceComment, Fixnum, Hash)>] TransactionInvoiceComment data, response status code and response headers
     def read_with_http_info(space_id, id, opts = {})
@@ -365,7 +364,7 @@ module Wallee
     # Unpin
     # Unpins the comment from the top.
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment to unpin.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def unpin(space_id, id, opts = {})
@@ -377,7 +376,7 @@ module Wallee
     # Unpins the comment from the top.
 
     # @param space_id 
-    # @param id 
+    # @param id The id of the comment to unpin.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def unpin_with_http_info(space_id, id, opts = {})
@@ -432,7 +431,7 @@ module Wallee
     # Update
     # This updates the comment with the given properties. Only those properties which should be updated can be provided. The 'id' and 'version' are required to identify the comment.
     # @param space_id 
-    # @param entity 
+    # @param entity The comment object with the properties which should be updated.
     # @param [Hash] opts the optional parameters
     # @return [TransactionInvoiceComment]
     def update(space_id, entity, opts = {})
@@ -444,7 +443,7 @@ module Wallee
     # This updates the comment with the given properties. Only those properties which should be updated can be provided. The &#39;id&#39; and &#39;version&#39; are required to identify the comment.
 
     # @param space_id 
-    # @param entity 
+    # @param entity The comment object with the properties which should be updated.
     # @param [Hash] opts the optional parameters
     # @return [Array<(TransactionInvoiceComment, Fixnum, Hash)>] TransactionInvoiceComment data, response status code and response headers
     def update_with_http_info(space_id, entity, opts = {})

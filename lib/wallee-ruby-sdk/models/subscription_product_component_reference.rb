@@ -18,7 +18,7 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The product component reference binds components from different product versions together. By binding them together the product version migration can be realized.
+  # The product component reference links components from different product versions, which makes it possible to carry out migrations.
   class SubscriptionProductComponentReference
     # A unique identifier for the object.
     attr_accessor :id
@@ -26,14 +26,14 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The component reference name is used internally to identify the reference. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the component reference.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
-    attr_accessor :space_id
+    # The component reference sku as a unique identifier.
+    attr_accessor :sku
 
     # The object's current state.
     attr_accessor :state
@@ -48,7 +48,7 @@ module Wallee
         :'linked_space_id' => :'linkedSpaceId',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'space_id' => :'spaceId',
+        :'sku' => :'sku',
         :'state' => :'state',
         :'version' => :'version'
       }
@@ -61,7 +61,7 @@ module Wallee
         :'linked_space_id' => :'Integer',
         :'name' => :'String',
         :'planned_purge_date' => :'DateTime',
-        :'space_id' => :'Integer',
+        :'sku' => :'String',
         :'state' => :'SubscriptionProductComponentReferenceState',
         :'version' => :'Integer'
       }
@@ -91,8 +91,8 @@ module Wallee
         self.planned_purge_date = attributes[:'plannedPurgeDate']
       end
 
-      if attributes.has_key?(:'spaceId')
-        self.space_id = attributes[:'spaceId']
+      if attributes.has_key?(:'sku')
+        self.sku = attributes[:'sku']
       end
 
       if attributes.has_key?(:'state')
@@ -112,6 +112,10 @@ module Wallee
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
       end
 
+      if !@sku.nil? && @sku.to_s.length > 100
+        invalid_properties.push('invalid value for "sku", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -119,6 +123,7 @@ module Wallee
     # @return true if the model is valid
     def valid?
       return false if !@name.nil? && @name.to_s.length > 100
+      return false if !@sku.nil? && @sku.to_s.length > 100
       true
     end
 
@@ -132,6 +137,16 @@ module Wallee
       @name = name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] sku Value to be assigned
+    def sku=(sku)
+      if !sku.nil? && sku.to_s.length > 100
+        fail ArgumentError, 'invalid value for "sku", the character length must be smaller than or equal to 100.'
+      end
+
+      @sku = sku
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -141,7 +156,7 @@ module Wallee
           linked_space_id == o.linked_space_id &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
-          space_id == o.space_id &&
+          sku == o.sku &&
           state == o.state &&
           version == o.version
     end
@@ -155,7 +170,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, name, planned_purge_date, space_id, state, version].hash
+      [id, linked_space_id, name, planned_purge_date, sku, state, version].hash
     end
 
     # Builds the object from hash

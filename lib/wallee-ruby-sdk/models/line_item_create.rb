@@ -20,34 +20,34 @@ require 'date'
 module Wallee
   # 
   class LineItemCreate
-    # 
+    # The line item price with discounts applied, including taxes.
     attr_accessor :amount_including_tax
 
-    # 
+    # A map of custom information for the item.
     attr_accessor :attributes
 
-    # 
+    # The discount allocated to the item, including taxes.
     attr_accessor :discount_including_tax
 
-    # 
+    # The name of the product, ideally in the customer's language.
     attr_accessor :name
 
-    # 
+    # The number of items that were purchased.
     attr_accessor :quantity
 
-    # 
+    # Whether the item required shipping.
     attr_accessor :shipping_required
 
-    # 
+    # The SKU (stock-keeping unit) of the product.
     attr_accessor :sku
 
-    # 
+    # A set of tax lines, each of which specifies a tax applied to the item.
     attr_accessor :taxes
 
-    # 
+    # The type of the line item.
     attr_accessor :type
 
-    # The unique id identifies the line item within the set of line items associated with the transaction.
+    # The unique identifier of the line item within the set of line items.
     attr_accessor :unique_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

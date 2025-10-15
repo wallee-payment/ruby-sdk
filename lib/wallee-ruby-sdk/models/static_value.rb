@@ -23,7 +23,7 @@ module Wallee
     # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # The features that this static value belongs to.
     attr_accessor :features
 
     # A unique identifier for the object.

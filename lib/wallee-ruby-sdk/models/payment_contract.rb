@@ -20,25 +20,25 @@ require 'date'
 module Wallee
   # 
   class PaymentContract
-    # 
+    # This account that the contract belongs to.
     attr_accessor :account
 
-    # 
+    # The date and time when the contract was activated.
     attr_accessor :activated_on
 
-    # 
+    # The identifier of the contract.
     attr_accessor :contract_identifier
 
-    # 
+    # The type of the contract.
     attr_accessor :contract_type
 
-    # 
+    # The ID of the user the contract was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
     # A unique identifier for the object.
@@ -47,22 +47,22 @@ module Wallee
     # The date and time when the object was last modified.
     attr_accessor :last_modified_date
 
-    # 
+    # The date and time when the contract was rejected.
     attr_accessor :rejected_on
 
-    # 
+    # The reason for rejecting the contract.
     attr_accessor :rejection_reason
 
-    # 
+    # The date and time when the termination process of the contract was started.
     attr_accessor :start_terminating_on
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The ID of the user the contract was terminated by.
     attr_accessor :terminated_by
 
-    # 
+    # The date and time when the contract was terminated.
     attr_accessor :terminated_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -93,11 +93,11 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'account' => :'Account',
+        :'account' => :'Integer',
         :'activated_on' => :'DateTime',
         :'contract_identifier' => :'String',
         :'contract_type' => :'PaymentContractType',
-        :'created_by' => :'User',
+        :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
         :'external_id' => :'String',
         :'id' => :'Integer',
@@ -106,7 +106,7 @@ module Wallee
         :'rejection_reason' => :'FailureReason',
         :'start_terminating_on' => :'DateTime',
         :'state' => :'PaymentContractState',
-        :'terminated_by' => :'User',
+        :'terminated_by' => :'Integer',
         :'terminated_on' => :'DateTime',
         :'version' => :'Integer'
       }

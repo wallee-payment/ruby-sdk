@@ -20,22 +20,22 @@ require 'date'
 module Wallee
   # 
   class TransactionInvoiceReplacement
-    # 
+    # The address associated with the invoice, used for billing purposes.
     attr_accessor :billing_address
 
-    # The date on which the invoice should be paid on.
+    # The due date for payment of the invoice.
     attr_accessor :due_on
 
-    # The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The invoiced line items that will appear on the invoice document.
     attr_accessor :line_items
 
-    # 
+    # The merchant's reference used to identify the invoice.
     attr_accessor :merchant_reference
 
-    # When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
+    # Whether the invoice will be sent to the customer via email.
     attr_accessor :sent_to_customer
 
     # Attribute mapping from ruby-style variable name to JSON key.

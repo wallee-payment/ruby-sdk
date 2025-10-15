@@ -19,61 +19,46 @@ require 'date'
 
 module Wallee
   # 
-  class ShopifySubscriptionModelBillingConfiguration
-    # Define the day of the month on which the recurring orders should be created.
-    attr_accessor :billing_day_of_month
+  class BillingCycleModel
+    # 
+    attr_accessor :billing_cycle_type
 
     # 
-    attr_accessor :billing_interval_amount
+    attr_accessor :customization
 
-    # Define how frequently recurring orders should be created.
-    attr_accessor :billing_interval_unit
+    # 
+    attr_accessor :day_of_month
 
-    # This date will be used as basis to calculate the dates of recurring orders.
-    attr_accessor :billing_reference_date
+    # 
+    attr_accessor :month
 
-    # Define the weekday on which the recurring orders should be created.
-    attr_accessor :billing_weekday
+    # Billing Cycle type multiplied by Number of Periods defines billing cycle duration, e.g. 3 months. Monthly types require 1-12; weekly and yearly types require 1-9 periods; and daily types require 1-30.
+    attr_accessor :number_of_periods
 
-    # Define the maximum number of orders the subscription will run for.
-    attr_accessor :maximal_billing_cycles
-
-    # Define the maximum number of orders the subscription can be suspended for at a time.
-    attr_accessor :maximal_suspendable_cycles
-
-    # Define the minimal number of orders the subscription will run for.
-    attr_accessor :minimal_billing_cycles
-
-    # Define the number of orders the subscription will keep running for after its termination has been requested.
-    attr_accessor :termination_billing_cycles
+    # 
+    attr_accessor :weekly_day
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'billing_day_of_month' => :'billingDayOfMonth',
-        :'billing_interval_amount' => :'billingIntervalAmount',
-        :'billing_interval_unit' => :'billingIntervalUnit',
-        :'billing_reference_date' => :'billingReferenceDate',
-        :'billing_weekday' => :'billingWeekday',
-        :'maximal_billing_cycles' => :'maximalBillingCycles',
-        :'maximal_suspendable_cycles' => :'maximalSuspendableCycles',
-        :'minimal_billing_cycles' => :'minimalBillingCycles',
-        :'termination_billing_cycles' => :'terminationBillingCycles'
+        :'billing_cycle_type' => :'billingCycleType',
+        :'customization' => :'customization',
+        :'day_of_month' => :'dayOfMonth',
+        :'month' => :'month',
+        :'number_of_periods' => :'numberOfPeriods',
+        :'weekly_day' => :'weeklyDay'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'billing_day_of_month' => :'Integer',
-        :'billing_interval_amount' => :'Integer',
-        :'billing_interval_unit' => :'ShopifySubscriptionBillingIntervalUnit',
-        :'billing_reference_date' => :'DateTime',
-        :'billing_weekday' => :'ShopifySubscriptionWeekday',
-        :'maximal_billing_cycles' => :'Integer',
-        :'maximal_suspendable_cycles' => :'Integer',
-        :'minimal_billing_cycles' => :'Integer',
-        :'termination_billing_cycles' => :'Integer'
+        :'billing_cycle_type' => :'BillingCycleType',
+        :'customization' => :'BillingDayCustomization',
+        :'day_of_month' => :'Integer',
+        :'month' => :'DisplayableMonth',
+        :'number_of_periods' => :'Integer',
+        :'weekly_day' => :'DisplayableDayOfWeek'
       }
     end
 
@@ -85,40 +70,28 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'billingDayOfMonth')
-        self.billing_day_of_month = attributes[:'billingDayOfMonth']
+      if attributes.has_key?(:'billingCycleType')
+        self.billing_cycle_type = attributes[:'billingCycleType']
       end
 
-      if attributes.has_key?(:'billingIntervalAmount')
-        self.billing_interval_amount = attributes[:'billingIntervalAmount']
+      if attributes.has_key?(:'customization')
+        self.customization = attributes[:'customization']
       end
 
-      if attributes.has_key?(:'billingIntervalUnit')
-        self.billing_interval_unit = attributes[:'billingIntervalUnit']
+      if attributes.has_key?(:'dayOfMonth')
+        self.day_of_month = attributes[:'dayOfMonth']
       end
 
-      if attributes.has_key?(:'billingReferenceDate')
-        self.billing_reference_date = attributes[:'billingReferenceDate']
+      if attributes.has_key?(:'month')
+        self.month = attributes[:'month']
       end
 
-      if attributes.has_key?(:'billingWeekday')
-        self.billing_weekday = attributes[:'billingWeekday']
+      if attributes.has_key?(:'numberOfPeriods')
+        self.number_of_periods = attributes[:'numberOfPeriods']
       end
 
-      if attributes.has_key?(:'maximalBillingCycles')
-        self.maximal_billing_cycles = attributes[:'maximalBillingCycles']
-      end
-
-      if attributes.has_key?(:'maximalSuspendableCycles')
-        self.maximal_suspendable_cycles = attributes[:'maximalSuspendableCycles']
-      end
-
-      if attributes.has_key?(:'minimalBillingCycles')
-        self.minimal_billing_cycles = attributes[:'minimalBillingCycles']
-      end
-
-      if attributes.has_key?(:'terminationBillingCycles')
-        self.termination_billing_cycles = attributes[:'terminationBillingCycles']
+      if attributes.has_key?(:'weeklyDay')
+        self.weekly_day = attributes[:'weeklyDay']
       end
     end
 
@@ -126,12 +99,22 @@ module Wallee
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @billing_cycle_type.nil?
+        invalid_properties.push('invalid value for "billing_cycle_type", billing_cycle_type cannot be nil.')
+      end
+
+      if @number_of_periods.nil?
+        invalid_properties.push('invalid value for "number_of_periods", number_of_periods cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @billing_cycle_type.nil?
+      return false if @number_of_periods.nil?
       true
     end
 
@@ -140,15 +123,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          billing_day_of_month == o.billing_day_of_month &&
-          billing_interval_amount == o.billing_interval_amount &&
-          billing_interval_unit == o.billing_interval_unit &&
-          billing_reference_date == o.billing_reference_date &&
-          billing_weekday == o.billing_weekday &&
-          maximal_billing_cycles == o.maximal_billing_cycles &&
-          maximal_suspendable_cycles == o.maximal_suspendable_cycles &&
-          minimal_billing_cycles == o.minimal_billing_cycles &&
-          termination_billing_cycles == o.termination_billing_cycles
+          billing_cycle_type == o.billing_cycle_type &&
+          customization == o.customization &&
+          day_of_month == o.day_of_month &&
+          month == o.month &&
+          number_of_periods == o.number_of_periods &&
+          weekly_day == o.weekly_day
     end
 
     # @see the `==` method
@@ -160,7 +140,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [billing_day_of_month, billing_interval_amount, billing_interval_unit, billing_reference_date, billing_weekday, maximal_billing_cycles, maximal_suspendable_cycles, minimal_billing_cycles, termination_billing_cycles].hash
+      [billing_cycle_type, customization, day_of_month, month, number_of_periods, weekly_day].hash
     end
 
     # Builds the object from hash

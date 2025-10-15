@@ -20,10 +20,10 @@ require 'date'
 module Wallee
   # A document template contains the customizations for a particular document template type.
   class DocumentTemplate
-    # The default document template is used whenever no specific template is specified for a particular template type.
+    # Whether this is the default document template which is used whenever no specific template is specified for the same template type.
     attr_accessor :default_template
 
-    # 
+    # Whether documents of this template should be delivered.
     attr_accessor :delivery_enabled
 
     # A unique identifier for the object.
@@ -32,22 +32,22 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The name used to identify the document template.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The ID of the space this object belongs to.
     attr_accessor :space_id
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The resource path to a custom template to be used to generate PDF documents.
     attr_accessor :template_resource
 
-    # 
+    # The document template's type.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

@@ -20,15 +20,6 @@ require 'date'
 module Wallee
   # 
   class ShopifyRecurringOrder
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
     # 
     attr_accessor :billed_on
 
@@ -39,10 +30,25 @@ module Wallee
     attr_accessor :created_on
 
     # 
+    attr_accessor :draft_order_id
+
+    # 
     attr_accessor :failure_reason
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
 
     # 
     attr_accessor :order_id
+
+    # 
+    attr_accessor :order_legacy_id
 
     # 
     attr_accessor :order_name
@@ -74,14 +80,16 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'billed_on' => :'billedOn',
         :'checkout_token' => :'checkoutToken',
         :'created_on' => :'createdOn',
+        :'draft_order_id' => :'draftOrderId',
         :'failure_reason' => :'failureReason',
+        :'id' => :'id',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'order_id' => :'orderId',
+        :'order_legacy_id' => :'orderLegacyId',
         :'order_name' => :'orderName',
         :'planned_execution_date' => :'plannedExecutionDate',
         :'planned_purge_date' => :'plannedPurgeDate',
@@ -97,14 +105,16 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'billed_on' => :'DateTime',
         :'checkout_token' => :'String',
         :'created_on' => :'DateTime',
+        :'draft_order_id' => :'String',
         :'failure_reason' => :'FailureReason',
+        :'id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'order_id' => :'String',
+        :'order_legacy_id' => :'String',
         :'order_name' => :'String',
         :'planned_execution_date' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
@@ -125,18 +135,6 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
       if attributes.has_key?(:'billedOn')
         self.billed_on = attributes[:'billedOn']
       end
@@ -149,12 +147,32 @@ module Wallee
         self.created_on = attributes[:'createdOn']
       end
 
+      if attributes.has_key?(:'draftOrderId')
+        self.draft_order_id = attributes[:'draftOrderId']
+      end
+
       if attributes.has_key?(:'failureReason')
         self.failure_reason = attributes[:'failureReason']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
+      end
+
       if attributes.has_key?(:'orderId')
         self.order_id = attributes[:'orderId']
+      end
+
+      if attributes.has_key?(:'orderLegacyId')
+        self.order_legacy_id = attributes[:'orderLegacyId']
       end
 
       if attributes.has_key?(:'orderName')
@@ -212,14 +230,16 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           billed_on == o.billed_on &&
           checkout_token == o.checkout_token &&
           created_on == o.created_on &&
+          draft_order_id == o.draft_order_id &&
           failure_reason == o.failure_reason &&
+          id == o.id &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           order_id == o.order_id &&
+          order_legacy_id == o.order_legacy_id &&
           order_name == o.order_name &&
           planned_execution_date == o.planned_execution_date &&
           planned_purge_date == o.planned_purge_date &&
@@ -240,7 +260,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, billed_on, checkout_token, created_on, failure_reason, order_id, order_name, planned_execution_date, planned_purge_date, recurrence_number, shop, started_processing_on, state, subscription_version, transaction].hash
+      [billed_on, checkout_token, created_on, draft_order_id, failure_reason, id, linked_space_id, linked_transaction, order_id, order_legacy_id, order_name, planned_execution_date, planned_purge_date, recurrence_number, shop, started_processing_on, state, subscription_version, transaction].hash
     end
 
     # Builds the object from hash

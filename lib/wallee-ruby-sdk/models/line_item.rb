@@ -20,67 +20,67 @@ require 'date'
 module Wallee
   # 
   class LineItem
-    # The aggregated tax rate is the sum of all tax rates of the line item.
+    # The total tax rate applied to the item, calculated from the rates of all tax lines.
     attr_accessor :aggregated_tax_rate
 
-    # 
+    # The line item price with discounts applied, excluding taxes.
     attr_accessor :amount_excluding_tax
 
-    # 
+    # The line item price with discounts applied, including taxes.
     attr_accessor :amount_including_tax
 
-    # 
+    # A map of custom information for the item.
     attr_accessor :attributes
 
-    # 
+    # The discount allocated to the item, excluding taxes.
     attr_accessor :discount_excluding_tax
 
-    # 
+    # The discount allocated to the item, including taxes.
     attr_accessor :discount_including_tax
 
-    # 
+    # The name of the product, ideally in the customer's language.
     attr_accessor :name
 
-    # 
+    # The number of items that were purchased.
     attr_accessor :quantity
 
-    # 
+    # Whether the item required shipping.
     attr_accessor :shipping_required
 
-    # 
+    # The SKU (stock-keeping unit) of the product.
     attr_accessor :sku
 
-    # 
+    # The sum of all taxes applied to the item.
     attr_accessor :tax_amount
 
-    # 
+    # The calculated tax amount per unit.
     attr_accessor :tax_amount_per_unit
 
-    # 
+    # A set of tax lines, each of which specifies a tax applied to the item.
     attr_accessor :taxes
 
-    # 
+    # The type of the line item.
     attr_accessor :type
 
-    # 
+    # The line item price with discounts not applied, excluding taxes.
     attr_accessor :undiscounted_amount_excluding_tax
 
-    # 
+    # The line item price with discounts not applied, including taxes.
     attr_accessor :undiscounted_amount_including_tax
 
-    # 
+    # The calculated price per unit with discounts not applied, excluding taxes.
     attr_accessor :undiscounted_unit_price_excluding_tax
 
-    # 
+    # The calculated price per unit with discounts not applied, including taxes.
     attr_accessor :undiscounted_unit_price_including_tax
 
-    # The unique id identifies the line item within the set of line items associated with the transaction.
+    # The unique identifier of the line item within the set of line items.
     attr_accessor :unique_id
 
-    # 
+    # The calculated price per unit with discounts applied, excluding taxes.
     attr_accessor :unit_price_excluding_tax
 
-    # 
+    # The calculated price per unit with discounts applied, including taxes.
     attr_accessor :unit_price_including_tax
 
     # Attribute mapping from ruby-style variable name to JSON key.

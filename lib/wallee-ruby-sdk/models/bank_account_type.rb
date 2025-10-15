@@ -26,7 +26,7 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The identifier name specifies how the bank account type's identifier is called.
     attr_accessor :identifier_name
 
     # The localized name of the object.

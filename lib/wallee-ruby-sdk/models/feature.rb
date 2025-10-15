@@ -44,7 +44,7 @@ module Wallee
     # When listing features, they can be sorted by this number.
     attr_accessor :sort_order
 
-    # 
+    # Whether the feature is visible to the user.
     attr_accessor :visible
 
     # Attribute mapping from ruby-style variable name to JSON key.

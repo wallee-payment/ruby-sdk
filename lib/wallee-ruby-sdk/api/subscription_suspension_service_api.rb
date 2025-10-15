@@ -92,28 +92,24 @@ module Wallee
 
     # Create
     # The create operation creates a new subscription suspension.
-    # @param space_id 
     # @param suspension 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionSuspension]
-    def create(space_id, suspension, opts = {})
-      data, _status_code, _headers = create_with_http_info(space_id, suspension, opts)
+    def create(suspension, opts = {})
+      data, _status_code, _headers = create_with_http_info(suspension, opts)
       return data
     end
 
     # Create
     # The create operation creates a new subscription suspension.
 
-    # @param space_id 
     # @param suspension 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionSuspension, Fixnum, Hash)>] SubscriptionSuspension data, response status code and response headers
-    def create_with_http_info(space_id, suspension, opts = {})
+    def create_with_http_info(suspension, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.create ..."
       end
-      # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.create" if space_id.nil?
       # verify the required parameter 'suspension' is set
       fail ArgumentError, "Missing the required parameter 'suspension' when calling SubscriptionSuspensionService.create" if suspension.nil?
       # resource path
@@ -121,7 +117,6 @@ module Wallee
 
       # query parameters
       query_params = {}
-      query_params[:'spaceId'] = space_id
 
       # header parameters
       header_params = {}
@@ -293,29 +288,25 @@ module Wallee
     end
 
     # terminate
-    # The create operation creates a new subscription suspension.
-    # @param space_id 
+    # Terminates an existing subscription suspension.
     # @param suspension_id 
     # @param [Hash] opts the optional parameters
     # @return [SubscriptionSuspension]
-    def terminate(space_id, suspension_id, opts = {})
-      data, _status_code, _headers = terminate_with_http_info(space_id, suspension_id, opts)
+    def terminate(suspension_id, opts = {})
+      data, _status_code, _headers = terminate_with_http_info(suspension_id, opts)
       return data
     end
 
     # terminate
-    # The create operation creates a new subscription suspension.
+    # Terminates an existing subscription suspension.
 
-    # @param space_id 
     # @param suspension_id 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubscriptionSuspension, Fixnum, Hash)>] SubscriptionSuspension data, response status code and response headers
-    def terminate_with_http_info(space_id, suspension_id, opts = {})
+    def terminate_with_http_info(suspension_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: SubscriptionSuspensionService.terminate ..."
       end
-      # verify the required parameter 'space_id' is set
-      fail ArgumentError, "Missing the required parameter 'space_id' when calling SubscriptionSuspensionService.terminate" if space_id.nil?
       # verify the required parameter 'suspension_id' is set
       fail ArgumentError, "Missing the required parameter 'suspension_id' when calling SubscriptionSuspensionService.terminate" if suspension_id.nil?
       # resource path
@@ -323,7 +314,6 @@ module Wallee
 
       # query parameters
       query_params = {}
-      query_params[:'spaceId'] = space_id
       query_params[:'suspensionId'] = suspension_id
 
       # header parameters

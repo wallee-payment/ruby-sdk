@@ -226,7 +226,7 @@ module Wallee
     end
 
     # Create Token
-    # This operation creates a token for the given transaction.
+    # This operation creates a token for the given transaction. The transaction payment information will be populated asynchronously as soon as all data becomes available.
     # @param space_id 
     # @param transaction_id The id of the transaction for which we want to create the token.
     # @param [Hash] opts the optional parameters
@@ -237,7 +237,7 @@ module Wallee
     end
 
     # Create Token
-    # This operation creates a token for the given transaction.
+    # This operation creates a token for the given transaction. The transaction payment information will be populated asynchronously as soon as all data becomes available.
 
     # @param space_id 
     # @param transaction_id The id of the transaction for which we want to create the token.
@@ -293,8 +293,8 @@ module Wallee
       return data, status_code, headers
     end
 
-    # Create Token Based On Transaction
-    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction.
+    # Create Token Based On Transaction And Fill It With Stored Payment Information
+    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction. The payment information for the transaction will be filled in immediately, if payment information is missing, an exception will be thrown.
     # @param space_id 
     # @param transaction_id The id of the transaction for which we want to create the token.
     # @param [Hash] opts the optional parameters
@@ -304,8 +304,8 @@ module Wallee
       return data
     end
 
-    # Create Token Based On Transaction
-    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction.
+    # Create Token Based On Transaction And Fill It With Stored Payment Information
+    # This operation creates a token for the given transaction and fills it with the stored payment information of the transaction. The payment information for the transaction will be filled in immediately, if payment information is missing, an exception will be thrown.
 
     # @param space_id 
     # @param transaction_id The id of the transaction for which we want to create the token.

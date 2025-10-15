@@ -18,7 +18,7 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The debt collection condition type controls how a condition is applied to a case.
+  # 
   class DebtCollectorConditionType
     # The localized description of the object.
     attr_accessor :description

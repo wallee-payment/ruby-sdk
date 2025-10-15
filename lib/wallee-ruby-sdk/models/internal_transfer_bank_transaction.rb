@@ -26,10 +26,10 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The bank transaction from which funds are being transferred out.
     attr_accessor :source_bank_transaction
 
-    # 
+    # The bank transaction to which funds are being transferred in.
     attr_accessor :target_bank_transaction
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

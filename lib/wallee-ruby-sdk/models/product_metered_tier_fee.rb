@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # 
   class ProductMeteredTierFee
-    # The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+    # The amount charged to the customer for each consumed unit at the end of a billing cycle.
     attr_accessor :fee
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The metered fee that this tier belongs to.
     attr_accessor :metered_fee
 
-    # The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
+    # Starting from and including this quantity is contained in the tier.
     attr_accessor :start_range
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

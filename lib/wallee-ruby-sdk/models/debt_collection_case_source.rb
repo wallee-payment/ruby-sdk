@@ -18,12 +18,12 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # The debt collection case source represents the origin of the case. It allows to understand from where the amount receivable is coming from.
+  # The debt collection case source represents the origin of the case. It allows to understand where the amount receivable is coming from.
   class DebtCollectionCaseSource
     # The localized description of the object.
     attr_accessor :description
 
-    # 
+    # Whether debt collection cases created from this source will skip review and directly enter preparing state.
     attr_accessor :forced_preparing_state
 
     # A unique identifier for the object.

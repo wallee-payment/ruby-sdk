@@ -26,16 +26,16 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # The component group name will be shown when the components are selected. This can be visible to the subscriber.
+    # The localized name of the component group that is displayed to the customer.
     attr_accessor :name
 
-    # The component group can be optional. This means no component has to be selected by the subscriber.
+    # Whether the component group is optional, i.e. the customer does not have to select any component.
     attr_accessor :optional
 
-    # 
+    # The product version that the component group belongs to.
     attr_accessor :product_version
 
-    # The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
+    # When listing component groups, they can be sorted by this number.
     attr_accessor :sort_order
 
     # Attribute mapping from ruby-style variable name to JSON key.

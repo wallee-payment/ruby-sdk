@@ -18,57 +18,102 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # Meta information about a column within a table.
-  class AnalyticsSchemaColumn
-    # The name of the alias defined for the column in the query or null if none is defined.
-    attr_accessor :alias_name
+  # 
+  class DunningCaseLevel
+    # 
+    attr_accessor :canceled_on
 
-    # The name of the column in the table or null if this is a synthetic column which is the result of some SQL expression.
-    attr_accessor :column_name
+    # The date and time when the object was created.
+    attr_accessor :created_on
 
-    # A human readable description of the property contained in this column or null if this is a synthetic column which is the result of some SQL expression.
-    attr_accessor :description
+    # 
+    attr_accessor :dunning_case
 
-    # The precision (maximal number of digits) for decimal data types, otherwise 0.
-    attr_accessor :precision
+    # The environment used when rendering resources.
+    attr_accessor :environment
 
-    # The name of the referenced table if this column represents a foreign-key relation to the IDs of another table, otherwise null.
-    attr_accessor :referenced_table
+    # 
+    attr_accessor :failed_on
 
-    # The scale (maximal number number of digits in the fractional part) in case of a decimal data type, otherwise 0.
-    attr_accessor :scale
+    # 
+    attr_accessor :flow_level
 
-    # The name of the table which defines this column.
-    attr_accessor :table_name
+    # A unique identifier for the object.
+    attr_accessor :id
 
-    # The ORC data type of the column value.
-    attr_accessor :type
+    # 
+    attr_accessor :invoice
+
+    # The language that is linked to the object.
+    attr_accessor :language
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # 
+    attr_accessor :most_recent_level
+
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # The object's current state.
+    attr_accessor :state
+
+    # 
+    attr_accessor :succeeded_on
+
+    # 
+    attr_accessor :timeout_on
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'alias_name' => :'aliasName',
-        :'column_name' => :'columnName',
-        :'description' => :'description',
-        :'precision' => :'precision',
-        :'referenced_table' => :'referencedTable',
-        :'scale' => :'scale',
-        :'table_name' => :'tableName',
-        :'type' => :'type'
+        :'canceled_on' => :'canceledOn',
+        :'created_on' => :'createdOn',
+        :'dunning_case' => :'dunningCase',
+        :'environment' => :'environment',
+        :'failed_on' => :'failedOn',
+        :'flow_level' => :'flowLevel',
+        :'id' => :'id',
+        :'invoice' => :'invoice',
+        :'language' => :'language',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
+        :'most_recent_level' => :'mostRecentLevel',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'state' => :'state',
+        :'succeeded_on' => :'succeededOn',
+        :'timeout_on' => :'timeoutOn',
+        :'version' => :'version'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'alias_name' => :'String',
-        :'column_name' => :'String',
-        :'description' => :'Hash<String, String>',
-        :'precision' => :'Integer',
-        :'referenced_table' => :'String',
-        :'scale' => :'Integer',
-        :'table_name' => :'String',
-        :'type' => :'String'
+        :'canceled_on' => :'DateTime',
+        :'created_on' => :'DateTime',
+        :'dunning_case' => :'DunningCase',
+        :'environment' => :'Environment',
+        :'failed_on' => :'DateTime',
+        :'flow_level' => :'Integer',
+        :'id' => :'Integer',
+        :'invoice' => :'Integer',
+        :'language' => :'String',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
+        :'most_recent_level' => :'BOOLEAN',
+        :'planned_purge_date' => :'DateTime',
+        :'state' => :'DunningCaseLevelState',
+        :'succeeded_on' => :'DateTime',
+        :'timeout_on' => :'DateTime',
+        :'version' => :'Integer'
       }
     end
 
@@ -80,38 +125,72 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'aliasName')
-        self.alias_name = attributes[:'aliasName']
+      if attributes.has_key?(:'canceledOn')
+        self.canceled_on = attributes[:'canceledOn']
       end
 
-      if attributes.has_key?(:'columnName')
-        self.column_name = attributes[:'columnName']
+      if attributes.has_key?(:'createdOn')
+        self.created_on = attributes[:'createdOn']
       end
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
-        end
+      if attributes.has_key?(:'dunningCase')
+        self.dunning_case = attributes[:'dunningCase']
       end
 
-      if attributes.has_key?(:'precision')
-        self.precision = attributes[:'precision']
+      if attributes.has_key?(:'environment')
+        self.environment = attributes[:'environment']
       end
 
-      if attributes.has_key?(:'referencedTable')
-        self.referenced_table = attributes[:'referencedTable']
+      if attributes.has_key?(:'failedOn')
+        self.failed_on = attributes[:'failedOn']
       end
 
-      if attributes.has_key?(:'scale')
-        self.scale = attributes[:'scale']
+      if attributes.has_key?(:'flowLevel')
+        self.flow_level = attributes[:'flowLevel']
       end
 
-      if attributes.has_key?(:'tableName')
-        self.table_name = attributes[:'tableName']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'invoice')
+        self.invoice = attributes[:'invoice']
+      end
+
+      if attributes.has_key?(:'language')
+        self.language = attributes[:'language']
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
+      end
+
+      if attributes.has_key?(:'mostRecentLevel')
+        self.most_recent_level = attributes[:'mostRecentLevel']
+      end
+
+      if attributes.has_key?(:'plannedPurgeDate')
+        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'succeededOn')
+        self.succeeded_on = attributes[:'succeededOn']
+      end
+
+      if attributes.has_key?(:'timeoutOn')
+        self.timeout_on = attributes[:'timeoutOn']
+      end
+
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
       end
     end
 
@@ -133,14 +212,23 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          alias_name == o.alias_name &&
-          column_name == o.column_name &&
-          description == o.description &&
-          precision == o.precision &&
-          referenced_table == o.referenced_table &&
-          scale == o.scale &&
-          table_name == o.table_name &&
-          type == o.type
+          canceled_on == o.canceled_on &&
+          created_on == o.created_on &&
+          dunning_case == o.dunning_case &&
+          environment == o.environment &&
+          failed_on == o.failed_on &&
+          flow_level == o.flow_level &&
+          id == o.id &&
+          invoice == o.invoice &&
+          language == o.language &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
+          most_recent_level == o.most_recent_level &&
+          planned_purge_date == o.planned_purge_date &&
+          state == o.state &&
+          succeeded_on == o.succeeded_on &&
+          timeout_on == o.timeout_on &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -152,7 +240,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [alias_name, column_name, description, precision, referenced_table, scale, table_name, type].hash
+      [canceled_on, created_on, dunning_case, environment, failed_on, flow_level, id, invoice, language, linked_space_id, linked_transaction, most_recent_level, planned_purge_date, state, succeeded_on, timeout_on, version].hash
     end
 
     # Builds the object from hash

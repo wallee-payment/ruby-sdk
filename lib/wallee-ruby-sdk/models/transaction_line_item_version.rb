@@ -20,67 +20,67 @@ require 'date'
 module Wallee
   # 
   class TransactionLineItemVersion
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # 
-    attr_accessor :linked_transaction
-
-    # 
+    # The total amount of the updated line items, including taxes.
     attr_accessor :amount
 
-    # 
+    # The ID of the user the line item version was created by.
     attr_accessor :created_by
 
     # The date and time when the object was created.
     attr_accessor :created_on
 
-    # A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # 
+    # The date and time when the processing of the line item version failed.
     attr_accessor :failed_on
 
     # 
     attr_accessor :failure_reason
 
-    # 
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The labels providing additional information about the object.
     attr_accessor :labels
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # 
+    # The line items that replace the original line items in the transaction.
     attr_accessor :line_items
 
-    # 
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    # The date and time when the next update of the line item version's state is planned.
     attr_accessor :next_update_on
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # 
+    # The date and time when the processing of the line item version was started.
     attr_accessor :processing_on
 
-    # 
+    # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
 
     # The object's current state.
     attr_accessor :state
 
-    # 
+    # The date and time when the line item version was processed successfully.
     attr_accessor :succeeded_on
 
-    # 
+    # The portion of the total amount that corresponds to taxes.
     attr_accessor :tax_amount
 
-    # 
+    # The date and time by when the line item version is expected to be processed.
     attr_accessor :timeout_on
 
-    # 
+    # The transaction that the line item version belongs to.
     attr_accessor :transaction
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
@@ -89,18 +89,18 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'amount' => :'amount',
         :'created_by' => :'createdBy',
         :'created_on' => :'createdOn',
         :'external_id' => :'externalId',
         :'failed_on' => :'failedOn',
         :'failure_reason' => :'failureReason',
+        :'id' => :'id',
         :'labels' => :'labels',
         :'language' => :'language',
         :'line_items' => :'lineItems',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'linked_transaction' => :'linkedTransaction',
         :'next_update_on' => :'nextUpdateOn',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'processing_on' => :'processingOn',
@@ -117,18 +117,18 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
         :'amount' => :'Float',
         :'created_by' => :'Integer',
         :'created_on' => :'DateTime',
         :'external_id' => :'String',
         :'failed_on' => :'DateTime',
         :'failure_reason' => :'FailureReason',
+        :'id' => :'Integer',
         :'labels' => :'Array<Label>',
         :'language' => :'String',
         :'line_items' => :'Array<LineItem>',
+        :'linked_space_id' => :'Integer',
+        :'linked_transaction' => :'Integer',
         :'next_update_on' => :'DateTime',
         :'planned_purge_date' => :'DateTime',
         :'processing_on' => :'DateTime',
@@ -149,18 +149,6 @@ module Wallee
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
 
       if attributes.has_key?(:'amount')
         self.amount = attributes[:'amount']
@@ -186,6 +174,10 @@ module Wallee
         self.failure_reason = attributes[:'failureReason']
       end
 
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.has_key?(:'labels')
         if (value = attributes[:'labels']).is_a?(Array)
           self.labels = value
@@ -200,6 +192,14 @@ module Wallee
         if (value = attributes[:'lineItems']).is_a?(Array)
           self.line_items = value
         end
+      end
+
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
+      end
+
+      if attributes.has_key?(:'linkedTransaction')
+        self.linked_transaction = attributes[:'linkedTransaction']
       end
 
       if attributes.has_key?(:'nextUpdateOn')
@@ -261,18 +261,18 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           amount == o.amount &&
           created_by == o.created_by &&
           created_on == o.created_on &&
           external_id == o.external_id &&
           failed_on == o.failed_on &&
           failure_reason == o.failure_reason &&
+          id == o.id &&
           labels == o.labels &&
           language == o.language &&
           line_items == o.line_items &&
+          linked_space_id == o.linked_space_id &&
+          linked_transaction == o.linked_transaction &&
           next_update_on == o.next_update_on &&
           planned_purge_date == o.planned_purge_date &&
           processing_on == o.processing_on &&
@@ -294,7 +294,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, linked_space_id, linked_transaction, amount, created_by, created_on, external_id, failed_on, failure_reason, labels, language, line_items, next_update_on, planned_purge_date, processing_on, space_view_id, state, succeeded_on, tax_amount, timeout_on, transaction, version].hash
+      [amount, created_by, created_on, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, linked_transaction, next_update_on, planned_purge_date, processing_on, space_view_id, state, succeeded_on, tax_amount, timeout_on, transaction, version].hash
     end
 
     # Builds the object from hash

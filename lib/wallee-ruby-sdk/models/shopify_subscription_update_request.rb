@@ -49,9 +49,9 @@ module Wallee
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'billing_configuration' => :'ShopifySubscriptionModelBillingConfiguration',
+        :'billing_configuration' => :'BillingConfiguration',
         :'id' => :'Integer',
-        :'items' => :'Array<ShopifySubscriptionModelItem>',
+        :'items' => :'Array<Item>',
         :'store_order_confirmation_email_enabled' => :'BOOLEAN',
         :'subscriber_suspension_allowed' => :'BOOLEAN'
       }

@@ -20,13 +20,13 @@ require 'date'
 module Wallee
   # 
   class PaymentAppRefundConfiguration
-    # This flag indicates whether the connector supports multiple refunds for a single transaction or not.
+    # Whether the payment connector can process multiple refunds for a single transaction.
     attr_accessor :multiple_refunds_supported
 
-    # The refund endpoint is invoked to request the payment service provider to execute a refund.
+    # The URL that the payment service provider will invoke to process a refund request. This endpoint handles communication with the provider for initiating and managing refunds.
     attr_accessor :refund_endpoint
 
-    # When the refund is triggered we expect a feedback about the state of it. This timeout defines after how long we consider the refund as failed without receiving a final state update.
+    # The maximum time (in minutes) to wait for a response from the payment service provider after a refund request is triggered. If no feedback or final status is received within this period, the refund is considered failed.
     attr_accessor :refund_timeout_in_minutes
 
     # Attribute mapping from ruby-style variable name to JSON key.

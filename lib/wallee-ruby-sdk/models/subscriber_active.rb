@@ -26,31 +26,31 @@ module Wallee
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
 
-    # Those payment methods which are allowed additionally will be available even when the product does not allow those methods.
+    # Allow the subscriber to use these payment methods even if subscription products do not accept them.
     attr_accessor :additional_allowed_payment_method_configurations
 
-    # 
+    # The address associated with the subscriber for invoicing and transaction processing purposes.
     attr_accessor :billing_address
 
-    # The subscriber description can be used to add a description to the subscriber. This is used in the back office to identify the subscriber.
+    # The description used to identify the subscriber.
     attr_accessor :description
 
-    # Those payment methods which are disallowed will not be available to the subscriber even if the product allows those methods.
+    # Prevent the subscriber from using these payment methods even if subscription products do accept them.
     attr_accessor :disallowed_payment_method_configurations
 
-    # The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
+    # The email address that is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
     attr_accessor :email_address
 
-    # The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
+    # The language that is used when communicating with the subscriber via emails and documents.
     attr_accessor :language
 
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
+    # The merchant's reference used to identify the subscriber.
     attr_accessor :reference
 
-    # 
+    # The address to where orders will be shipped.
     attr_accessor :shipping_address
 
     # The object's current state.

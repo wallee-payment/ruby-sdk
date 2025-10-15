@@ -20,16 +20,16 @@ require 'date'
 module Wallee
   # The metric usage provides details about the consumption of a particular metric.
   class MetricUsage
-    # The consumed units provide the value of how much has been consumed of the particular metric.
+    # The number of consumed units.
     attr_accessor :consumed_units
 
-    # The metric description describes the metric.
+    # The description of the consumed unit's metric.
     attr_accessor :metric_description
 
-    # The metric ID identifies the metric for consumed units.
+    # The ID of the consumed units' metric.
     attr_accessor :metric_id
 
-    # The metric name defines the name of the consumed units.
+    # The name of the consumed units' metric.
     attr_accessor :metric_name
 
     # Attribute mapping from ruby-style variable name to JSON key.

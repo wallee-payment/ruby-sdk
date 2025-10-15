@@ -18,77 +18,37 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # Represents the execution of a query which has been submitted to Analytics.
-  class AnalyticsQueryExecution
-    # The account in which the query has been executed.
-    attr_accessor :account
-
-    # The error message if and only if the query has failed, otherwise null.
-    attr_accessor :error_message
-
-    # The External ID of the query if one had been specified; otherwise null.
-    attr_accessor :external_id
-
-    # The reason of the failure if and only if the query has failed, otherwise null.
-    attr_accessor :failure_reason
-
+  # 
+  class PaymentTerminalTransactionSummaryReference
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The time at which processing of the query has finished (either successfully or by failure or by cancelation). Will be null if the query execution has not finished yet.
-    attr_accessor :processing_end_time
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
 
-    # The time at which processing of the query has started (never null).
-    attr_accessor :processing_start_time
+    # The unique identifier of the terminal.
+    attr_accessor :terminal_id
 
-    # The SQL statement which has been submitted for execution.
-    attr_accessor :query_string
-
-    # The amount of data scanned while processing the query (in GB). (Note that this amount may increase over time while the query is still being processed and not finished yet.)
-    attr_accessor :scanned_data_in_gb
-
-    # The maximal amount of scanned data that this query is allowed to scan. After this limit is reached query will be canceled by the system. 
-    attr_accessor :scanned_data_limit
-
-    # The spaces in which the query has been executed. May be empty if all spaces of the specified account have been queried.
-    attr_accessor :spaces
-
-    # The current state of the query execution.
-    attr_accessor :state
+    # The unique identifier of the terminal, that is displayed on the device.
+    attr_accessor :terminal_identifier
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account' => :'account',
-        :'error_message' => :'errorMessage',
-        :'external_id' => :'externalId',
-        :'failure_reason' => :'failureReason',
         :'id' => :'id',
-        :'processing_end_time' => :'processingEndTime',
-        :'processing_start_time' => :'processingStartTime',
-        :'query_string' => :'queryString',
-        :'scanned_data_in_gb' => :'scannedDataInGb',
-        :'scanned_data_limit' => :'scannedDataLimit',
-        :'spaces' => :'spaces',
-        :'state' => :'state'
+        :'linked_space_id' => :'linkedSpaceId',
+        :'terminal_id' => :'terminalId',
+        :'terminal_identifier' => :'terminalIdentifier'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'account' => :'Integer',
-        :'error_message' => :'String',
-        :'external_id' => :'String',
-        :'failure_reason' => :'FailureReason',
         :'id' => :'Integer',
-        :'processing_end_time' => :'DateTime',
-        :'processing_start_time' => :'DateTime',
-        :'query_string' => :'String',
-        :'scanned_data_in_gb' => :'Float',
-        :'scanned_data_limit' => :'Float',
-        :'spaces' => :'Array<Integer>',
-        :'state' => :'AnalyticsQueryExecutionState'
+        :'linked_space_id' => :'Integer',
+        :'terminal_id' => :'Integer',
+        :'terminal_identifier' => :'String'
       }
     end
 
@@ -100,54 +60,20 @@ module Wallee
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
-      end
-
-      if attributes.has_key?(:'errorMessage')
-        self.error_message = attributes[:'errorMessage']
-      end
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'failureReason')
-        self.failure_reason = attributes[:'failureReason']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'processingEndTime')
-        self.processing_end_time = attributes[:'processingEndTime']
+      if attributes.has_key?(:'linkedSpaceId')
+        self.linked_space_id = attributes[:'linkedSpaceId']
       end
 
-      if attributes.has_key?(:'processingStartTime')
-        self.processing_start_time = attributes[:'processingStartTime']
+      if attributes.has_key?(:'terminalId')
+        self.terminal_id = attributes[:'terminalId']
       end
 
-      if attributes.has_key?(:'queryString')
-        self.query_string = attributes[:'queryString']
-      end
-
-      if attributes.has_key?(:'scannedDataInGb')
-        self.scanned_data_in_gb = attributes[:'scannedDataInGb']
-      end
-
-      if attributes.has_key?(:'scannedDataLimit')
-        self.scanned_data_limit = attributes[:'scannedDataLimit']
-      end
-
-      if attributes.has_key?(:'spaces')
-        if (value = attributes[:'spaces']).is_a?(Array)
-          self.spaces = value
-        end
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.has_key?(:'terminalIdentifier')
+        self.terminal_identifier = attributes[:'terminalIdentifier']
       end
     end
 
@@ -169,18 +95,10 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account == o.account &&
-          error_message == o.error_message &&
-          external_id == o.external_id &&
-          failure_reason == o.failure_reason &&
           id == o.id &&
-          processing_end_time == o.processing_end_time &&
-          processing_start_time == o.processing_start_time &&
-          query_string == o.query_string &&
-          scanned_data_in_gb == o.scanned_data_in_gb &&
-          scanned_data_limit == o.scanned_data_limit &&
-          spaces == o.spaces &&
-          state == o.state
+          linked_space_id == o.linked_space_id &&
+          terminal_id == o.terminal_id &&
+          terminal_identifier == o.terminal_identifier
     end
 
     # @see the `==` method
@@ -192,7 +110,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [account, error_message, external_id, failure_reason, id, processing_end_time, processing_start_time, query_string, scanned_data_in_gb, scanned_data_limit, spaces, state].hash
+      [id, linked_space_id, terminal_id, terminal_identifier].hash
     end
 
     # Builds the object from hash

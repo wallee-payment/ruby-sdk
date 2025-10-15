@@ -18,15 +18,15 @@ limitations under the License.
 require 'date'
 
 module Wallee
-  # A payment information hash is calculated based on the information entered by the user. The same input leads to the same hash. The hash is collision free.
+  # A payment information hash is generated from user input, ensuring consistent and collision-free results for identical inputs.
   class PaymentInformationHash
     # A unique identifier for the object.
     attr_accessor :id
 
-    # 
+    # The type specifies the algorithm used for calculating the hash.
     attr_accessor :type
 
-    # 
+    # The hash value generated based on the specified type.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.

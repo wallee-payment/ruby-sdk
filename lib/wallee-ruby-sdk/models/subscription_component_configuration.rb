@@ -20,7 +20,7 @@ require 'date'
 module Wallee
   # 
   class SubscriptionComponentConfiguration
-    # 
+    # The component that is being configured.
     attr_accessor :component
 
     # A unique identifier for the object.
@@ -29,7 +29,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # 
+    # The quantity that should be applied to the component.
     attr_accessor :quantity
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

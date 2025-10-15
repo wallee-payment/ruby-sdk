@@ -26,7 +26,7 @@ module Wallee
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
-    # The condition name is used internally to identify the condition. For example the name is used within search fields and hence it should be distinct and descriptive.
+    # The name used to identify the condition.
     attr_accessor :name
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -35,7 +35,7 @@ module Wallee
     # The object's current state.
     attr_accessor :state
 
-    # The condition type determines the condition realization.
+    # The condition type determines the criteria that a debt collection case must fulfill in order for a debt collector configuration to be considered for handling the case.
     attr_accessor :type
 
     # The version is used for optimistic locking and incremented whenever the object is updated.

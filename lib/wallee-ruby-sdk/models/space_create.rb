@@ -47,6 +47,9 @@ module Wallee
     # The account that the space belongs to.
     attr_accessor :account
 
+    # The database the space is connected to and that holds the space's data.
+    attr_accessor :database
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -58,7 +61,8 @@ module Wallee
         :'state' => :'state',
         :'technical_contact_addresses' => :'technicalContactAddresses',
         :'time_zone' => :'timeZone',
-        :'account' => :'account'
+        :'account' => :'account',
+        :'database' => :'database'
       }
     end
 
@@ -73,7 +77,8 @@ module Wallee
         :'state' => :'CreationEntityState',
         :'technical_contact_addresses' => :'Array<String>',
         :'time_zone' => :'String',
-        :'account' => :'Integer'
+        :'account' => :'Integer',
+        :'database' => :'Integer'
       }
     end
 
@@ -121,6 +126,10 @@ module Wallee
 
       if attributes.has_key?(:'account')
         self.account = attributes[:'account']
+      end
+
+      if attributes.has_key?(:'database')
+        self.database = attributes[:'database']
       end
     end
 
@@ -179,7 +188,8 @@ module Wallee
           state == o.state &&
           technical_contact_addresses == o.technical_contact_addresses &&
           time_zone == o.time_zone &&
-          account == o.account
+          account == o.account &&
+          database == o.database
     end
 
     # @see the `==` method
@@ -191,7 +201,7 @@ module Wallee
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [last_modified_date, name, postal_address, primary_currency, request_limit, state, technical_contact_addresses, time_zone, account].hash
+      [last_modified_date, name, postal_address, primary_currency, request_limit, state, technical_contact_addresses, time_zone, account, database].hash
     end
 
     # Builds the object from hash
