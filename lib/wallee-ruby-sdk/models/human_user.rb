@@ -1,48 +1,42 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class HumanUser
+    # The user's mobile phone number.
+    attr_accessor :mobile_phone_number
+
+    # Whether two-factor authentication is enabled for this user.
+    attr_accessor :two_factor_enabled
+
     # The user's email address.
     attr_accessor :email_address
-
-    # Whether the user's email address has been verified.
-    attr_accessor :email_address_verified
 
     # The user's first name.
     attr_accessor :firstname
 
-    # The user's preferred language.
-    attr_accessor :language
-
-    # The user's last name.
-    attr_accessor :lastname
-
-    # The user's mobile phone number.
-    attr_accessor :mobile_phone_number
-
-    # Whether the user's mobile phone number has been verified.
-    attr_accessor :mobile_phone_verified
-
-    # The primary account that the user belongs to.
-    attr_accessor :primary_account
+    # Whether the user's email address has been verified.
+    attr_accessor :email_address_verified
 
     # The scope that the user belongs to.
     attr_accessor :scope
@@ -50,109 +44,140 @@ module Wallee
     # The user's time zone. If none is specified, the one provided by the browser will be used.
     attr_accessor :time_zone
 
-    # Whether two-factor authentication is enabled for this user.
-    attr_accessor :two_factor_enabled
+    # The user's preferred language.
+    attr_accessor :language
 
-    # The type of two-factor authentication that is enabled for the user.
     attr_accessor :two_factor_type
+
+    # Whether the user's mobile phone number has been verified.
+    attr_accessor :mobile_phone_verified
+
+    # The primary account that the user belongs to.
+    attr_accessor :primary_account
+
+    # The user's last name.
+    attr_accessor :lastname
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'email_address' => :'emailAddress',
-        :'email_address_verified' => :'emailAddressVerified',
-        :'firstname' => :'firstname',
-        :'language' => :'language',
-        :'lastname' => :'lastname',
         :'mobile_phone_number' => :'mobilePhoneNumber',
-        :'mobile_phone_verified' => :'mobilePhoneVerified',
-        :'primary_account' => :'primaryAccount',
+        :'two_factor_enabled' => :'twoFactorEnabled',
+        :'email_address' => :'emailAddress',
+        :'firstname' => :'firstname',
+        :'email_address_verified' => :'emailAddressVerified',
         :'scope' => :'scope',
         :'time_zone' => :'timeZone',
-        :'two_factor_enabled' => :'twoFactorEnabled',
-        :'two_factor_type' => :'twoFactorType'
+        :'language' => :'language',
+        :'two_factor_type' => :'twoFactorType',
+        :'mobile_phone_verified' => :'mobilePhoneVerified',
+        :'primary_account' => :'primaryAccount',
+        :'lastname' => :'lastname'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'email_address' => :'String',
-        :'email_address_verified' => :'BOOLEAN',
-        :'firstname' => :'String',
-        :'language' => :'String',
-        :'lastname' => :'String',
         :'mobile_phone_number' => :'String',
-        :'mobile_phone_verified' => :'BOOLEAN',
-        :'primary_account' => :'Integer',
+        :'two_factor_enabled' => :'Boolean',
+        :'email_address' => :'String',
+        :'firstname' => :'String',
+        :'email_address_verified' => :'Boolean',
         :'scope' => :'Integer',
         :'time_zone' => :'String',
-        :'two_factor_enabled' => :'BOOLEAN',
-        :'two_factor_type' => :'TwoFactorAuthenticationType'
+        :'language' => :'String',
+        :'two_factor_type' => :'TwoFactorAuthenticationType',
+        :'mobile_phone_verified' => :'Boolean',
+        :'primary_account' => :'Integer',
+        :'lastname' => :'String'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'emailAddress')
-        self.email_address = attributes[:'emailAddress']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::HumanUser` initialize method"
       end
 
-      if attributes.has_key?(:'emailAddressVerified')
-        self.email_address_verified = attributes[:'emailAddressVerified']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::HumanUser`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'mobile_phone_number')
+        self.mobile_phone_number = attributes[:'mobile_phone_number']
       end
 
-      if attributes.has_key?(:'firstname')
+      if attributes.key?(:'two_factor_enabled')
+        self.two_factor_enabled = attributes[:'two_factor_enabled']
+      end
+
+      if attributes.key?(:'email_address')
+        self.email_address = attributes[:'email_address']
+      end
+
+      if attributes.key?(:'firstname')
         self.firstname = attributes[:'firstname']
       end
 
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
+      if attributes.key?(:'email_address_verified')
+        self.email_address_verified = attributes[:'email_address_verified']
       end
 
-      if attributes.has_key?(:'lastname')
-        self.lastname = attributes[:'lastname']
-      end
-
-      if attributes.has_key?(:'mobilePhoneNumber')
-        self.mobile_phone_number = attributes[:'mobilePhoneNumber']
-      end
-
-      if attributes.has_key?(:'mobilePhoneVerified')
-        self.mobile_phone_verified = attributes[:'mobilePhoneVerified']
-      end
-
-      if attributes.has_key?(:'primaryAccount')
-        self.primary_account = attributes[:'primaryAccount']
-      end
-
-      if attributes.has_key?(:'scope')
+      if attributes.key?(:'scope')
         self.scope = attributes[:'scope']
       end
 
-      if attributes.has_key?(:'timeZone')
-        self.time_zone = attributes[:'timeZone']
+      if attributes.key?(:'time_zone')
+        self.time_zone = attributes[:'time_zone']
       end
 
-      if attributes.has_key?(:'twoFactorEnabled')
-        self.two_factor_enabled = attributes[:'twoFactorEnabled']
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'twoFactorType')
-        self.two_factor_type = attributes[:'twoFactorType']
+      if attributes.key?(:'two_factor_type')
+        self.two_factor_type = attributes[:'two_factor_type']
+      end
+
+      if attributes.key?(:'mobile_phone_verified')
+        self.mobile_phone_verified = attributes[:'mobile_phone_verified']
+      end
+
+      if attributes.key?(:'primary_account')
+        self.primary_account = attributes[:'primary_account']
+      end
+
+      if attributes.key?(:'lastname')
+        self.lastname = attributes[:'lastname']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
+        invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.')
+      end
+
       if !@email_address.nil? && @email_address.to_s.length > 128
         invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 128.')
       end
@@ -165,27 +190,42 @@ module Wallee
         invalid_properties.push('invalid value for "lastname", the character length must be smaller than or equal to 100.')
       end
 
-      if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
-        invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
       return false if !@email_address.nil? && @email_address.to_s.length > 128
       return false if !@firstname.nil? && @firstname.to_s.length > 100
       return false if !@lastname.nil? && @lastname.to_s.length > 100
-      return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 30
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] mobile_phone_number Value to be assigned
+    def mobile_phone_number=(mobile_phone_number)
+      if mobile_phone_number.nil?
+        fail ArgumentError, 'mobile_phone_number cannot be nil'
+      end
+
+      if mobile_phone_number.to_s.length > 30
+        fail ArgumentError, 'invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.'
+      end
+
+      @mobile_phone_number = mobile_phone_number
     end
 
     # Custom attribute writer method with validation
     # @param [Object] email_address Value to be assigned
     def email_address=(email_address)
-      if !email_address.nil? && email_address.to_s.length > 128
+      if email_address.nil?
+        fail ArgumentError, 'email_address cannot be nil'
+      end
+
+      if email_address.to_s.length > 128
         fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 128.'
       end
 
@@ -195,7 +235,11 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] firstname Value to be assigned
     def firstname=(firstname)
-      if !firstname.nil? && firstname.to_s.length > 100
+      if firstname.nil?
+        fail ArgumentError, 'firstname cannot be nil'
+      end
+
+      if firstname.to_s.length > 100
         fail ArgumentError, 'invalid value for "firstname", the character length must be smaller than or equal to 100.'
       end
 
@@ -205,21 +249,15 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] lastname Value to be assigned
     def lastname=(lastname)
-      if !lastname.nil? && lastname.to_s.length > 100
+      if lastname.nil?
+        fail ArgumentError, 'lastname cannot be nil'
+      end
+
+      if lastname.to_s.length > 100
         fail ArgumentError, 'invalid value for "lastname", the character length must be smaller than or equal to 100.'
       end
 
       @lastname = lastname
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] mobile_phone_number Value to be assigned
-    def mobile_phone_number=(mobile_phone_number)
-      if !mobile_phone_number.nil? && mobile_phone_number.to_s.length > 30
-        fail ArgumentError, 'invalid value for "mobile_phone_number", the character length must be smaller than or equal to 30.'
-      end
-
-      @mobile_phone_number = mobile_phone_number
     end
 
     # Checks equality by comparing each attribute.
@@ -227,18 +265,18 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          email_address == o.email_address &&
-          email_address_verified == o.email_address_verified &&
-          firstname == o.firstname &&
-          language == o.language &&
-          lastname == o.lastname &&
           mobile_phone_number == o.mobile_phone_number &&
-          mobile_phone_verified == o.mobile_phone_verified &&
-          primary_account == o.primary_account &&
+          two_factor_enabled == o.two_factor_enabled &&
+          email_address == o.email_address &&
+          firstname == o.firstname &&
+          email_address_verified == o.email_address_verified &&
           scope == o.scope &&
           time_zone == o.time_zone &&
-          two_factor_enabled == o.two_factor_enabled &&
-          two_factor_type == o.two_factor_type
+          language == o.language &&
+          two_factor_type == o.two_factor_type &&
+          mobile_phone_verified == o.mobile_phone_verified &&
+          primary_account == o.primary_account &&
+          lastname == o.lastname
     end
 
     # @see the `==` method
@@ -248,39 +286,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [email_address, email_address_verified, firstname, language, lastname, mobile_phone_number, mobile_phone_verified, primary_account, scope, time_zone, two_factor_enabled, two_factor_type].hash
-    end
-
-    # Builds the object from hash
+      [mobile_phone_number, two_factor_enabled, email_address, firstname, email_address_verified, scope, time_zone, language, two_factor_type, mobile_phone_verified, primary_account, lastname].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -289,7 +328,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -310,8 +349,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -333,7 +373,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -345,7 +389,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -356,6 +400,5 @@ module Wallee
         value
       end
     end
-
   end
 end

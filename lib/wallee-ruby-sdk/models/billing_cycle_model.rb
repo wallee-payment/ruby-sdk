@@ -1,110 +1,157 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class BillingCycleModel
-    # 
-    attr_accessor :billing_cycle_type
+    attr_accessor :month
 
-    # 
     attr_accessor :customization
 
-    # 
     attr_accessor :day_of_month
 
-    # 
-    attr_accessor :month
+    attr_accessor :weekly_day
 
     # Billing Cycle type multiplied by Number of Periods defines billing cycle duration, e.g. 3 months. Monthly types require 1-12; weekly and yearly types require 1-9 periods; and daily types require 1-30.
     attr_accessor :number_of_periods
 
-    # 
-    attr_accessor :weekly_day
+    attr_accessor :billing_cycle_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'billing_cycle_type' => :'billingCycleType',
+        :'month' => :'month',
         :'customization' => :'customization',
         :'day_of_month' => :'dayOfMonth',
-        :'month' => :'month',
+        :'weekly_day' => :'weeklyDay',
         :'number_of_periods' => :'numberOfPeriods',
-        :'weekly_day' => :'weeklyDay'
+        :'billing_cycle_type' => :'billingCycleType'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'billing_cycle_type' => :'BillingCycleType',
+        :'month' => :'DisplayableMonth',
         :'customization' => :'BillingDayCustomization',
         :'day_of_month' => :'Integer',
-        :'month' => :'DisplayableMonth',
+        :'weekly_day' => :'DisplayableDayOfWeek',
         :'number_of_periods' => :'Integer',
-        :'weekly_day' => :'DisplayableDayOfWeek'
+        :'billing_cycle_type' => :'BillingCycleType'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'billingCycleType')
-        self.billing_cycle_type = attributes[:'billingCycleType']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::BillingCycleModel` initialize method"
       end
 
-      if attributes.has_key?(:'customization')
-        self.customization = attributes[:'customization']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::BillingCycleModel`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'dayOfMonth')
-        self.day_of_month = attributes[:'dayOfMonth']
-      end
-
-      if attributes.has_key?(:'month')
+      if attributes.key?(:'month')
         self.month = attributes[:'month']
       end
 
-      if attributes.has_key?(:'numberOfPeriods')
-        self.number_of_periods = attributes[:'numberOfPeriods']
+      if attributes.key?(:'customization')
+        self.customization = attributes[:'customization']
       end
 
-      if attributes.has_key?(:'weeklyDay')
-        self.weekly_day = attributes[:'weeklyDay']
+      if attributes.key?(:'day_of_month')
+        self.day_of_month = attributes[:'day_of_month']
+      end
+
+      if attributes.key?(:'weekly_day')
+        self.weekly_day = attributes[:'weekly_day']
+      end
+
+      if attributes.key?(:'number_of_periods')
+        self.number_of_periods = attributes[:'number_of_periods']
+      else
+        self.number_of_periods = nil
+      end
+
+      if attributes.key?(:'billing_cycle_type')
+        self.billing_cycle_type = attributes[:'billing_cycle_type']
+      else
+        self.billing_cycle_type = nil
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @billing_cycle_type.nil?
-        invalid_properties.push('invalid value for "billing_cycle_type", billing_cycle_type cannot be nil.')
-      end
-
       if @number_of_periods.nil?
         invalid_properties.push('invalid value for "number_of_periods", number_of_periods cannot be nil.')
+      end
+
+      if @number_of_periods < 1
+        invalid_properties.push('invalid value for "number_of_periods", must be greater than or equal to 1.')
+      end
+
+      if @billing_cycle_type.nil?
+        invalid_properties.push('invalid value for "billing_cycle_type", billing_cycle_type cannot be nil.')
       end
 
       invalid_properties
@@ -113,9 +160,25 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @billing_cycle_type.nil?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @number_of_periods.nil?
+      return false if @number_of_periods < 1
+      return false if @billing_cycle_type.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] number_of_periods Value to be assigned
+    def number_of_periods=(number_of_periods)
+      if number_of_periods.nil?
+        fail ArgumentError, 'number_of_periods cannot be nil'
+      end
+
+      if number_of_periods < 1
+        fail ArgumentError, 'invalid value for "number_of_periods", must be greater than or equal to 1.'
+      end
+
+      @number_of_periods = number_of_periods
     end
 
     # Checks equality by comparing each attribute.
@@ -123,12 +186,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          billing_cycle_type == o.billing_cycle_type &&
+          month == o.month &&
           customization == o.customization &&
           day_of_month == o.day_of_month &&
-          month == o.month &&
+          weekly_day == o.weekly_day &&
           number_of_periods == o.number_of_periods &&
-          weekly_day == o.weekly_day
+          billing_cycle_type == o.billing_cycle_type
     end
 
     # @see the `==` method
@@ -138,39 +201,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [billing_cycle_type, customization, day_of_month, month, number_of_periods, weekly_day].hash
-    end
-
-    # Builds the object from hash
+      [month, customization, day_of_month, weekly_day, number_of_periods, billing_cycle_type].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -179,7 +243,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -200,8 +264,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -223,7 +288,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -235,7 +304,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -246,6 +315,5 @@ module Wallee
         value
       end
     end
-
   end
 end

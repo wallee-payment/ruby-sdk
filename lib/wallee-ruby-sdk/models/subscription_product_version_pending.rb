@@ -1,166 +1,197 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class SubscriptionProductVersionPending
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
-
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
-
-    # The recurring period of time, typically monthly or annually, for which a subscriber is charged.
-    attr_accessor :billing_cycle
-
-    # A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
-    attr_accessor :comment
-
-    # The three-letter code (ISO 4217 format) of the product version's default currency.
-    attr_accessor :default_currency
-
     # The three-letter codes (ISO 4217 format) of the currencies that the product version supports.
     attr_accessor :enabled_currencies
-
-    # The minimum number of periods the subscription will run before it can be terminated.
-    attr_accessor :minimal_number_of_periods
-
-    # The localized name of the product that is displayed to the customer.
-    attr_accessor :name
-
-    # The number of periods the subscription will keep running after its termination was requested.
-    attr_accessor :number_of_notice_periods
 
     # The product that the version belongs to.
     attr_accessor :product
 
-    # The object's current state.
+    attr_accessor :tax_calculation
+
+    # The recurring period of time, typically monthly or annually, for which a subscriber is charged.
+    attr_accessor :billing_cycle
+
+    # The three-letter code (ISO 4217 format) of the product version's default currency.
+    attr_accessor :default_currency
+
+    # The localized name of the product that is displayed to the customer.
+    attr_accessor :name
+
+    # The minimum number of periods the subscription will run before it can be terminated.
+    attr_accessor :minimal_number_of_periods
+
+    # A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
+    attr_accessor :comment
+
     attr_accessor :state
 
-    # The way taxes are calculated for fees.
-    attr_accessor :tax_calculation
+    # The number of periods the subscription will keep running after its termination was requested.
+    attr_accessor :number_of_notice_periods
+
+    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+    attr_accessor :version
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'version' => :'version',
-        :'billing_cycle' => :'billingCycle',
-        :'comment' => :'comment',
-        :'default_currency' => :'defaultCurrency',
         :'enabled_currencies' => :'enabledCurrencies',
-        :'minimal_number_of_periods' => :'minimalNumberOfPeriods',
-        :'name' => :'name',
-        :'number_of_notice_periods' => :'numberOfNoticePeriods',
         :'product' => :'product',
+        :'tax_calculation' => :'taxCalculation',
+        :'billing_cycle' => :'billingCycle',
+        :'default_currency' => :'defaultCurrency',
+        :'name' => :'name',
+        :'minimal_number_of_periods' => :'minimalNumberOfPeriods',
+        :'comment' => :'comment',
         :'state' => :'state',
-        :'tax_calculation' => :'taxCalculation'
+        :'number_of_notice_periods' => :'numberOfNoticePeriods',
+        :'version' => :'version'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'id' => :'Integer',
-        :'version' => :'Integer',
-        :'billing_cycle' => :'String',
-        :'comment' => :'String',
-        :'default_currency' => :'String',
         :'enabled_currencies' => :'Array<String>',
-        :'minimal_number_of_periods' => :'Integer',
-        :'name' => :'Hash<String, String>',
-        :'number_of_notice_periods' => :'Integer',
         :'product' => :'Integer',
+        :'tax_calculation' => :'TaxCalculation',
+        :'billing_cycle' => :'String',
+        :'default_currency' => :'String',
+        :'name' => :'Hash<String, String>',
+        :'minimal_number_of_periods' => :'Integer',
+        :'comment' => :'String',
         :'state' => :'SubscriptionProductVersionState',
-        :'tax_calculation' => :'TaxCalculation'
+        :'number_of_notice_periods' => :'Integer',
+        :'version' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionProductVersionPending` initialize method"
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionProductVersionPending`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'billingCycle')
-        self.billing_cycle = attributes[:'billingCycle']
-      end
-
-      if attributes.has_key?(:'comment')
-        self.comment = attributes[:'comment']
-      end
-
-      if attributes.has_key?(:'defaultCurrency')
-        self.default_currency = attributes[:'defaultCurrency']
-      end
-
-      if attributes.has_key?(:'enabledCurrencies')
-        if (value = attributes[:'enabledCurrencies']).is_a?(Array)
+      if attributes.key?(:'enabled_currencies')
+        if (value = attributes[:'enabled_currencies']).is_a?(Array)
           self.enabled_currencies = value
         end
       end
 
-      if attributes.has_key?(:'minimalNumberOfPeriods')
-        self.minimal_number_of_periods = attributes[:'minimalNumberOfPeriods']
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'tax_calculation')
+        self.tax_calculation = attributes[:'tax_calculation']
+      end
+
+      if attributes.key?(:'billing_cycle')
+        self.billing_cycle = attributes[:'billing_cycle']
+      end
+
+      if attributes.key?(:'default_currency')
+        self.default_currency = attributes[:'default_currency']
+      end
+
+      if attributes.key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
       end
 
-      if attributes.has_key?(:'numberOfNoticePeriods')
-        self.number_of_notice_periods = attributes[:'numberOfNoticePeriods']
+      if attributes.key?(:'minimal_number_of_periods')
+        self.minimal_number_of_periods = attributes[:'minimal_number_of_periods']
       end
 
-      if attributes.has_key?(:'product')
-        self.product = attributes[:'product']
+      if attributes.key?(:'comment')
+        self.comment = attributes[:'comment']
       end
 
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'taxCalculation')
-        self.tax_calculation = attributes[:'taxCalculation']
+      if attributes.key?(:'number_of_notice_periods')
+        self.number_of_notice_periods = attributes[:'number_of_notice_periods']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      else
+        self.version = nil
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
       if @version.nil?
         invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
@@ -171,9 +202,19 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @version.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] enabled_currencies Value to be assigned
+    def enabled_currencies=(enabled_currencies)
+      if enabled_currencies.nil?
+        fail ArgumentError, 'enabled_currencies cannot be nil'
+      end
+
+      @enabled_currencies = enabled_currencies
     end
 
     # Checks equality by comparing each attribute.
@@ -181,18 +222,17 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          version == o.version &&
-          billing_cycle == o.billing_cycle &&
-          comment == o.comment &&
-          default_currency == o.default_currency &&
           enabled_currencies == o.enabled_currencies &&
-          minimal_number_of_periods == o.minimal_number_of_periods &&
-          name == o.name &&
-          number_of_notice_periods == o.number_of_notice_periods &&
           product == o.product &&
+          tax_calculation == o.tax_calculation &&
+          billing_cycle == o.billing_cycle &&
+          default_currency == o.default_currency &&
+          name == o.name &&
+          minimal_number_of_periods == o.minimal_number_of_periods &&
+          comment == o.comment &&
           state == o.state &&
-          tax_calculation == o.tax_calculation
+          number_of_notice_periods == o.number_of_notice_periods &&
+          version == o.version
     end
 
     # @see the `==` method
@@ -202,39 +242,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [id, version, billing_cycle, comment, default_currency, enabled_currencies, minimal_number_of_periods, name, number_of_notice_periods, product, state, tax_calculation].hash
-    end
-
-    # Builds the object from hash
+      [enabled_currencies, product, tax_calculation, billing_cycle, default_currency, name, minimal_number_of_periods, comment, state, number_of_notice_periods, version].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -243,7 +284,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -264,8 +305,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -287,7 +329,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -299,7 +345,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -310,6 +356,5 @@ module Wallee
         value
       end
     end
-
   end
 end

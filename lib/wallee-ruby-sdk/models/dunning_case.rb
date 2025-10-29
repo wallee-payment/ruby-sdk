@@ -1,166 +1,203 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class DunningCase
-    # 
     attr_accessor :canceled_on
 
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # 
     attr_accessor :derecognized_on
-
-    # 
-    attr_accessor :failed_on
-
-    # 
-    attr_accessor :flow
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # 
-    attr_accessor :initial_invoice
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # The payment transaction this object is linked to.
-    attr_accessor :linked_transaction
 
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The object's current state.
-    attr_accessor :state
-
-    # 
-    attr_accessor :succeeded_on
+    # The date and time when the object was created.
+    attr_accessor :created_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    attr_accessor :initial_invoice
+
+    attr_accessor :succeeded_on
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    attr_accessor :failed_on
+
+    attr_accessor :flow
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'canceled_on' => :'canceledOn',
-        :'created_on' => :'createdOn',
         :'derecognized_on' => :'derecognizedOn',
-        :'failed_on' => :'failedOn',
-        :'flow' => :'flow',
-        :'id' => :'id',
-        :'initial_invoice' => :'initialInvoice',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'state' => :'state',
+        :'created_on' => :'createdOn',
+        :'version' => :'version',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'initial_invoice' => :'initialInvoice',
         :'succeeded_on' => :'succeededOn',
-        :'version' => :'version'
+        :'id' => :'id',
+        :'state' => :'state',
+        :'linked_transaction' => :'linkedTransaction',
+        :'failed_on' => :'failedOn',
+        :'flow' => :'flow'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'canceled_on' => :'DateTime',
-        :'created_on' => :'DateTime',
-        :'derecognized_on' => :'DateTime',
-        :'failed_on' => :'DateTime',
-        :'flow' => :'DunningFlow',
-        :'id' => :'Integer',
-        :'initial_invoice' => :'TransactionInvoice',
+        :'canceled_on' => :'Time',
+        :'derecognized_on' => :'Time',
+        :'planned_purge_date' => :'Time',
+        :'created_on' => :'Time',
+        :'version' => :'Integer',
         :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
+        :'initial_invoice' => :'TransactionInvoice',
+        :'succeeded_on' => :'Time',
+        :'id' => :'Integer',
         :'state' => :'DunningCaseState',
-        :'succeeded_on' => :'DateTime',
-        :'version' => :'Integer'
+        :'linked_transaction' => :'Integer',
+        :'failed_on' => :'Time',
+        :'flow' => :'DunningFlow'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'canceledOn')
-        self.canceled_on = attributes[:'canceledOn']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::DunningCase` initialize method"
       end
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::DunningCase`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'canceled_on')
+        self.canceled_on = attributes[:'canceled_on']
       end
 
-      if attributes.has_key?(:'derecognizedOn')
-        self.derecognized_on = attributes[:'derecognizedOn']
+      if attributes.key?(:'derecognized_on')
+        self.derecognized_on = attributes[:'derecognized_on']
       end
 
-      if attributes.has_key?(:'failedOn')
-        self.failed_on = attributes[:'failedOn']
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
       end
 
-      if attributes.has_key?(:'flow')
-        self.flow = attributes[:'flow']
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
       end
 
-      if attributes.has_key?(:'id')
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'initial_invoice')
+        self.initial_invoice = attributes[:'initial_invoice']
+      end
+
+      if attributes.key?(:'succeeded_on')
+        self.succeeded_on = attributes[:'succeeded_on']
+      end
+
+      if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'initialInvoice')
-        self.initial_invoice = attributes[:'initialInvoice']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'succeededOn')
-        self.succeeded_on = attributes[:'succeededOn']
+      if attributes.key?(:'linked_transaction')
+        self.linked_transaction = attributes[:'linked_transaction']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'failed_on')
+        self.failed_on = attributes[:'failed_on']
+      end
+
+      if attributes.key?(:'flow')
+        self.flow = attributes[:'flow']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -168,6 +205,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
     end
 
@@ -177,18 +215,18 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           canceled_on == o.canceled_on &&
-          created_on == o.created_on &&
           derecognized_on == o.derecognized_on &&
-          failed_on == o.failed_on &&
-          flow == o.flow &&
-          id == o.id &&
-          initial_invoice == o.initial_invoice &&
-          linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
           planned_purge_date == o.planned_purge_date &&
-          state == o.state &&
+          created_on == o.created_on &&
+          version == o.version &&
+          linked_space_id == o.linked_space_id &&
+          initial_invoice == o.initial_invoice &&
           succeeded_on == o.succeeded_on &&
-          version == o.version
+          id == o.id &&
+          state == o.state &&
+          linked_transaction == o.linked_transaction &&
+          failed_on == o.failed_on &&
+          flow == o.flow
     end
 
     # @see the `==` method
@@ -198,39 +236,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [canceled_on, created_on, derecognized_on, failed_on, flow, id, initial_invoice, linked_space_id, linked_transaction, planned_purge_date, state, succeeded_on, version].hash
-    end
-
-    # Builds the object from hash
+      [canceled_on, derecognized_on, planned_purge_date, created_on, version, linked_space_id, initial_invoice, succeeded_on, id, state, linked_transaction, failed_on, flow].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -239,7 +278,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -260,8 +299,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -283,7 +323,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -295,7 +339,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -306,6 +350,5 @@ module Wallee
         value
       end
     end
-
   end
 end

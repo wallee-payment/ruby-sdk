@@ -1,193 +1,225 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class PaymentContract
-    # This account that the contract belongs to.
-    attr_accessor :account
-
-    # The date and time when the contract was activated.
-    attr_accessor :activated_on
-
-    # The identifier of the contract.
-    attr_accessor :contract_identifier
-
-    # The type of the contract.
     attr_accessor :contract_type
-
-    # The ID of the user the contract was created by.
-    attr_accessor :created_by
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-    attr_accessor :external_id
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The date and time when the object was last modified.
-    attr_accessor :last_modified_date
-
-    # The date and time when the contract was rejected.
-    attr_accessor :rejected_on
-
-    # The reason for rejecting the contract.
-    attr_accessor :rejection_reason
-
-    # The date and time when the termination process of the contract was started.
-    attr_accessor :start_terminating_on
-
-    # The object's current state.
-    attr_accessor :state
 
     # The ID of the user the contract was terminated by.
     attr_accessor :terminated_by
 
-    # The date and time when the contract was terminated.
-    attr_accessor :terminated_on
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+    attr_accessor :external_id
+
+    # The date and time when the object was created.
+    attr_accessor :created_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    # The date and time when the contract was terminated.
+    attr_accessor :terminated_on
+
+    # The date and time when the contract was activated.
+    attr_accessor :activated_on
+
+    # The date and time when the termination process of the contract was started.
+    attr_accessor :start_terminating_on
+
+    # The ID of the user the contract was created by.
+    attr_accessor :created_by
+
+    # The identifier of the contract.
+    attr_accessor :contract_identifier
+
+    # The date and time when the contract was rejected.
+    attr_accessor :rejected_on
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    attr_accessor :rejection_reason
+
+    # This account that the contract belongs to.
+    attr_accessor :account
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account' => :'account',
-        :'activated_on' => :'activatedOn',
-        :'contract_identifier' => :'contractIdentifier',
         :'contract_type' => :'contractType',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'external_id' => :'externalId',
-        :'id' => :'id',
-        :'last_modified_date' => :'lastModifiedDate',
-        :'rejected_on' => :'rejectedOn',
-        :'rejection_reason' => :'rejectionReason',
-        :'start_terminating_on' => :'startTerminatingOn',
-        :'state' => :'state',
         :'terminated_by' => :'terminatedBy',
+        :'external_id' => :'externalId',
+        :'created_on' => :'createdOn',
+        :'version' => :'version',
         :'terminated_on' => :'terminatedOn',
-        :'version' => :'version'
+        :'activated_on' => :'activatedOn',
+        :'start_terminating_on' => :'startTerminatingOn',
+        :'created_by' => :'createdBy',
+        :'contract_identifier' => :'contractIdentifier',
+        :'rejected_on' => :'rejectedOn',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'rejection_reason' => :'rejectionReason',
+        :'account' => :'account'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'account' => :'Integer',
-        :'activated_on' => :'DateTime',
-        :'contract_identifier' => :'String',
         :'contract_type' => :'PaymentContractType',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'external_id' => :'String',
-        :'id' => :'Integer',
-        :'last_modified_date' => :'DateTime',
-        :'rejected_on' => :'DateTime',
-        :'rejection_reason' => :'FailureReason',
-        :'start_terminating_on' => :'DateTime',
-        :'state' => :'PaymentContractState',
         :'terminated_by' => :'Integer',
-        :'terminated_on' => :'DateTime',
-        :'version' => :'Integer'
+        :'external_id' => :'String',
+        :'created_on' => :'Time',
+        :'version' => :'Integer',
+        :'terminated_on' => :'Time',
+        :'activated_on' => :'Time',
+        :'start_terminating_on' => :'Time',
+        :'created_by' => :'Integer',
+        :'contract_identifier' => :'String',
+        :'rejected_on' => :'Time',
+        :'id' => :'Integer',
+        :'state' => :'PaymentContractState',
+        :'rejection_reason' => :'FailureReason',
+        :'account' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentContract` initialize method"
       end
 
-      if attributes.has_key?(:'activatedOn')
-        self.activated_on = attributes[:'activatedOn']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentContract`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'contract_type')
+        self.contract_type = attributes[:'contract_type']
       end
 
-      if attributes.has_key?(:'contractIdentifier')
-        self.contract_identifier = attributes[:'contractIdentifier']
+      if attributes.key?(:'terminated_by')
+        self.terminated_by = attributes[:'terminated_by']
       end
 
-      if attributes.has_key?(:'contractType')
-        self.contract_type = attributes[:'contractType']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
       end
 
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
       end
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
+      if attributes.key?(:'terminated_on')
+        self.terminated_on = attributes[:'terminated_on']
       end
 
-      if attributes.has_key?(:'id')
+      if attributes.key?(:'activated_on')
+        self.activated_on = attributes[:'activated_on']
+      end
+
+      if attributes.key?(:'start_terminating_on')
+        self.start_terminating_on = attributes[:'start_terminating_on']
+      end
+
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
+      end
+
+      if attributes.key?(:'contract_identifier')
+        self.contract_identifier = attributes[:'contract_identifier']
+      end
+
+      if attributes.key?(:'rejected_on')
+        self.rejected_on = attributes[:'rejected_on']
+      end
+
+      if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'lastModifiedDate')
-        self.last_modified_date = attributes[:'lastModifiedDate']
-      end
-
-      if attributes.has_key?(:'rejectedOn')
-        self.rejected_on = attributes[:'rejectedOn']
-      end
-
-      if attributes.has_key?(:'rejectionReason')
-        self.rejection_reason = attributes[:'rejectionReason']
-      end
-
-      if attributes.has_key?(:'startTerminatingOn')
-        self.start_terminating_on = attributes[:'startTerminatingOn']
-      end
-
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'terminatedBy')
-        self.terminated_by = attributes[:'terminatedBy']
+      if attributes.key?(:'rejection_reason')
+        self.rejection_reason = attributes[:'rejection_reason']
       end
 
-      if attributes.has_key?(:'terminatedOn')
-        self.terminated_on = attributes[:'terminatedOn']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'account')
+        self.account = attributes[:'account']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -195,6 +227,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
     end
 
@@ -203,22 +236,21 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account == o.account &&
-          activated_on == o.activated_on &&
-          contract_identifier == o.contract_identifier &&
           contract_type == o.contract_type &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          external_id == o.external_id &&
-          id == o.id &&
-          last_modified_date == o.last_modified_date &&
-          rejected_on == o.rejected_on &&
-          rejection_reason == o.rejection_reason &&
-          start_terminating_on == o.start_terminating_on &&
-          state == o.state &&
           terminated_by == o.terminated_by &&
+          external_id == o.external_id &&
+          created_on == o.created_on &&
+          version == o.version &&
           terminated_on == o.terminated_on &&
-          version == o.version
+          activated_on == o.activated_on &&
+          start_terminating_on == o.start_terminating_on &&
+          created_by == o.created_by &&
+          contract_identifier == o.contract_identifier &&
+          rejected_on == o.rejected_on &&
+          id == o.id &&
+          state == o.state &&
+          rejection_reason == o.rejection_reason &&
+          account == o.account
     end
 
     # @see the `==` method
@@ -228,39 +260,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [account, activated_on, contract_identifier, contract_type, created_by, created_on, external_id, id, last_modified_date, rejected_on, rejection_reason, start_terminating_on, state, terminated_by, terminated_on, version].hash
-    end
-
-    # Builds the object from hash
+      [contract_type, terminated_by, external_id, created_on, version, terminated_on, activated_on, start_terminating_on, created_by, contract_identifier, rejected_on, id, state, rejection_reason, account].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -269,7 +302,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -290,8 +323,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -313,7 +347,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -325,7 +363,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -336,6 +374,5 @@ module Wallee
         value
       end
     end
-
   end
 end

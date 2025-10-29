@@ -1,27 +1,30 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class CustomerCreate
-    # The customer's ID in the merchant's system.
-    attr_accessor :customer_id
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
 
     # The customer's email address.
     attr_accessor :email_address
@@ -32,88 +35,110 @@ module Wallee
     # The customer's given or first name.
     attr_accessor :given_name
 
-    # The language that is linked to the object.
-    attr_accessor :language
-
-    # Allow to store additional information about the object.
-    attr_accessor :meta_data
-
     # The customer's preferred currency.
     attr_accessor :preferred_currency
+
+    # The customer's ID in the merchant's system.
+    attr_accessor :customer_id
+
+    # The language that is linked to the object.
+    attr_accessor :language
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_id' => :'customerId',
+        :'meta_data' => :'metaData',
         :'email_address' => :'emailAddress',
         :'family_name' => :'familyName',
         :'given_name' => :'givenName',
-        :'language' => :'language',
-        :'meta_data' => :'metaData',
-        :'preferred_currency' => :'preferredCurrency'
+        :'preferred_currency' => :'preferredCurrency',
+        :'customer_id' => :'customerId',
+        :'language' => :'language'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'customer_id' => :'String',
+        :'meta_data' => :'Hash<String, String>',
         :'email_address' => :'String',
         :'family_name' => :'String',
         :'given_name' => :'String',
-        :'language' => :'String',
-        :'meta_data' => :'Hash<String, String>',
-        :'preferred_currency' => :'String'
+        :'preferred_currency' => :'String',
+        :'customer_id' => :'String',
+        :'language' => :'String'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'AbstractCustomerActive'
+      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'customerId')
-        self.customer_id = attributes[:'customerId']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::CustomerCreate` initialize method"
       end
 
-      if attributes.has_key?(:'emailAddress')
-        self.email_address = attributes[:'emailAddress']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::CustomerCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'familyName')
-        self.family_name = attributes[:'familyName']
-      end
-
-      if attributes.has_key?(:'givenName')
-        self.given_name = attributes[:'givenName']
-      end
-
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Hash)
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
           self.meta_data = value
         end
       end
 
-      if attributes.has_key?(:'preferredCurrency')
-        self.preferred_currency = attributes[:'preferredCurrency']
+      if attributes.key?(:'email_address')
+        self.email_address = attributes[:'email_address']
+      end
+
+      if attributes.key?(:'family_name')
+        self.family_name = attributes[:'family_name']
+      end
+
+      if attributes.key?(:'given_name')
+        self.given_name = attributes[:'given_name']
+      end
+
+      if attributes.key?(:'preferred_currency')
+        self.preferred_currency = attributes[:'preferred_currency']
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@customer_id.nil? && @customer_id.to_s.length > 100
-        invalid_properties.push('invalid value for "customer_id", the character length must be smaller than or equal to 100.')
-      end
-
       if !@email_address.nil? && @email_address.to_s.length > 254
         invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
       end
@@ -126,33 +151,39 @@ module Wallee
         invalid_properties.push('invalid value for "given_name", the character length must be smaller than or equal to 100.')
       end
 
+      if !@customer_id.nil? && @customer_id.to_s.length > 100
+        invalid_properties.push('invalid value for "customer_id", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@customer_id.nil? && @customer_id !~ pattern
+        invalid_properties.push("invalid value for \"customer_id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@customer_id.nil? && @customer_id.to_s.length > 100
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@email_address.nil? && @email_address.to_s.length > 254
       return false if !@family_name.nil? && @family_name.to_s.length > 100
       return false if !@given_name.nil? && @given_name.to_s.length > 100
+      return false if !@customer_id.nil? && @customer_id.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@customer_id.nil? && @customer_id !~ pattern
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer_id Value to be assigned
-    def customer_id=(customer_id)
-      if !customer_id.nil? && customer_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "customer_id", the character length must be smaller than or equal to 100.'
-      end
-
-      @customer_id = customer_id
     end
 
     # Custom attribute writer method with validation
     # @param [Object] email_address Value to be assigned
     def email_address=(email_address)
-      if !email_address.nil? && email_address.to_s.length > 254
+      if email_address.nil?
+        fail ArgumentError, 'email_address cannot be nil'
+      end
+
+      if email_address.to_s.length > 254
         fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 254.'
       end
 
@@ -162,7 +193,11 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] family_name Value to be assigned
     def family_name=(family_name)
-      if !family_name.nil? && family_name.to_s.length > 100
+      if family_name.nil?
+        fail ArgumentError, 'family_name cannot be nil'
+      end
+
+      if family_name.to_s.length > 100
         fail ArgumentError, 'invalid value for "family_name", the character length must be smaller than or equal to 100.'
       end
 
@@ -172,11 +207,34 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] given_name Value to be assigned
     def given_name=(given_name)
-      if !given_name.nil? && given_name.to_s.length > 100
+      if given_name.nil?
+        fail ArgumentError, 'given_name cannot be nil'
+      end
+
+      if given_name.to_s.length > 100
         fail ArgumentError, 'invalid value for "given_name", the character length must be smaller than or equal to 100.'
       end
 
       @given_name = given_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_id Value to be assigned
+    def customer_id=(customer_id)
+      if customer_id.nil?
+        fail ArgumentError, 'customer_id cannot be nil'
+      end
+
+      if customer_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "customer_id", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if customer_id !~ pattern
+        fail ArgumentError, "invalid value for \"customer_id\", must conform to the pattern #{pattern}."
+      end
+
+      @customer_id = customer_id
     end
 
     # Checks equality by comparing each attribute.
@@ -184,13 +242,13 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_id == o.customer_id &&
+          meta_data == o.meta_data &&
           email_address == o.email_address &&
           family_name == o.family_name &&
           given_name == o.given_name &&
-          language == o.language &&
-          meta_data == o.meta_data &&
-          preferred_currency == o.preferred_currency
+          preferred_currency == o.preferred_currency &&
+          customer_id == o.customer_id &&
+          language == o.language
     end
 
     # @see the `==` method
@@ -200,39 +258,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [customer_id, email_address, family_name, given_name, language, meta_data, preferred_currency].hash
-    end
-
-    # Builds the object from hash
+      [meta_data, email_address, family_name, given_name, preferred_currency, customer_id, language].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -241,7 +300,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -262,8 +321,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -285,7 +345,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -297,7 +361,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -308,6 +372,5 @@ module Wallee
         value
       end
     end
-
   end
 end

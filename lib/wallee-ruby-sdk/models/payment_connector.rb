@@ -1,178 +1,217 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class PaymentConnector
-    # The data collection type specifies how the payment information is collected.
+    # The features that are supported by the connector.
+    attr_accessor :supported_features
+
+    # The types of customer's presence that are supported by the connector.
+    attr_accessor :supported_customers_presences
+
     attr_accessor :data_collection_type
 
     # Whether the object was deprecated.
     attr_accessor :deprecated
 
-    # The deprecation reason describes why the object was deprecated.
-    attr_accessor :deprecation_reason
+    attr_accessor :primary_risk_taker
 
     # The localized description of the object.
     attr_accessor :description
 
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The localized name of the object.
-    attr_accessor :name
-
-    # The payment method that the connector supports.
-    attr_accessor :payment_method
-
-    # The specific brand that this payment connector supports.
     attr_accessor :payment_method_brand
 
-    # The entity that bears the main risk in the event that a contracting party fails to meet its obligations.
-    attr_accessor :primary_risk_taker
-
-    # The processor that the connector belongs to.
     attr_accessor :processor
+
+    # The deprecation reason describes why the object was deprecated.
+    attr_accessor :deprecation_reason
 
     # The currencies that are supported by the connector.
     attr_accessor :supported_currencies
 
-    # The types of customer's presence that are supported by the connector.
-    attr_accessor :supported_customers_presences
+    # The localized name of the object.
+    attr_accessor :name
 
-    # The features that are supported by the connector.
-    attr_accessor :supported_features
+    attr_accessor :payment_method
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'supported_features' => :'supportedFeatures',
+        :'supported_customers_presences' => :'supportedCustomersPresences',
         :'data_collection_type' => :'dataCollectionType',
         :'deprecated' => :'deprecated',
-        :'deprecation_reason' => :'deprecationReason',
+        :'primary_risk_taker' => :'primaryRiskTaker',
         :'description' => :'description',
-        :'id' => :'id',
+        :'payment_method_brand' => :'paymentMethodBrand',
+        :'processor' => :'processor',
+        :'deprecation_reason' => :'deprecationReason',
+        :'supported_currencies' => :'supportedCurrencies',
         :'name' => :'name',
         :'payment_method' => :'paymentMethod',
-        :'payment_method_brand' => :'paymentMethodBrand',
-        :'primary_risk_taker' => :'primaryRiskTaker',
-        :'processor' => :'processor',
-        :'supported_currencies' => :'supportedCurrencies',
-        :'supported_customers_presences' => :'supportedCustomersPresences',
-        :'supported_features' => :'supportedFeatures'
+        :'id' => :'id'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'data_collection_type' => :'DataCollectionType',
-        :'deprecated' => :'BOOLEAN',
-        :'deprecation_reason' => :'Hash<String, String>',
-        :'description' => :'Hash<String, String>',
-        :'id' => :'Integer',
-        :'name' => :'Hash<String, String>',
-        :'payment_method' => :'Integer',
-        :'payment_method_brand' => :'PaymentMethodBrand',
-        :'primary_risk_taker' => :'PaymentPrimaryRiskTaker',
-        :'processor' => :'Integer',
-        :'supported_currencies' => :'Array<String>',
+        :'supported_features' => :'Array<PaymentConnectorFeature>',
         :'supported_customers_presences' => :'Array<CustomersPresence>',
-        :'supported_features' => :'Array<Integer>'
+        :'data_collection_type' => :'DataCollectionType',
+        :'deprecated' => :'Boolean',
+        :'primary_risk_taker' => :'PaymentPrimaryRiskTaker',
+        :'description' => :'Hash<String, String>',
+        :'payment_method_brand' => :'PaymentMethodBrand',
+        :'processor' => :'PaymentProcessor',
+        :'deprecation_reason' => :'Hash<String, String>',
+        :'supported_currencies' => :'Array<String>',
+        :'name' => :'Hash<String, String>',
+        :'payment_method' => :'PaymentMethod',
+        :'id' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'dataCollectionType')
-        self.data_collection_type = attributes[:'dataCollectionType']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentConnector` initialize method"
       end
 
-      if attributes.has_key?(:'deprecated')
-        self.deprecated = attributes[:'deprecated']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentConnector`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'deprecationReason')
-        if (value = attributes[:'deprecationReason']).is_a?(Hash)
-          self.deprecation_reason = value
+      if attributes.key?(:'supported_features')
+        if (value = attributes[:'supported_features']).is_a?(Array)
+          self.supported_features = value
         end
       end
 
-      if attributes.has_key?(:'description')
+      if attributes.key?(:'supported_customers_presences')
+        if (value = attributes[:'supported_customers_presences']).is_a?(Array)
+          self.supported_customers_presences = value
+        end
+      end
+
+      if attributes.key?(:'data_collection_type')
+        self.data_collection_type = attributes[:'data_collection_type']
+      end
+
+      if attributes.key?(:'deprecated')
+        self.deprecated = attributes[:'deprecated']
+      end
+
+      if attributes.key?(:'primary_risk_taker')
+        self.primary_risk_taker = attributes[:'primary_risk_taker']
+      end
+
+      if attributes.key?(:'description')
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'payment_method_brand')
+        self.payment_method_brand = attributes[:'payment_method_brand']
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'processor')
+        self.processor = attributes[:'processor']
+      end
+
+      if attributes.key?(:'deprecation_reason')
+        if (value = attributes[:'deprecation_reason']).is_a?(Hash)
+          self.deprecation_reason = value
+        end
+      end
+
+      if attributes.key?(:'supported_currencies')
+        if (value = attributes[:'supported_currencies']).is_a?(Array)
+          self.supported_currencies = value
+        end
+      end
+
+      if attributes.key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
       end
 
-      if attributes.has_key?(:'paymentMethod')
-        self.payment_method = attributes[:'paymentMethod']
+      if attributes.key?(:'payment_method')
+        self.payment_method = attributes[:'payment_method']
       end
 
-      if attributes.has_key?(:'paymentMethodBrand')
-        self.payment_method_brand = attributes[:'paymentMethodBrand']
-      end
-
-      if attributes.has_key?(:'primaryRiskTaker')
-        self.primary_risk_taker = attributes[:'primaryRiskTaker']
-      end
-
-      if attributes.has_key?(:'processor')
-        self.processor = attributes[:'processor']
-      end
-
-      if attributes.has_key?(:'supportedCurrencies')
-        if (value = attributes[:'supportedCurrencies']).is_a?(Array)
-          self.supported_currencies = value
-        end
-      end
-
-      if attributes.has_key?(:'supportedCustomersPresences')
-        if (value = attributes[:'supportedCustomersPresences']).is_a?(Array)
-          self.supported_customers_presences = value
-        end
-      end
-
-      if attributes.has_key?(:'supportedFeatures')
-        if (value = attributes[:'supportedFeatures']).is_a?(Array)
-          self.supported_features = value
-        end
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -180,7 +219,38 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] supported_features Value to be assigned
+    def supported_features=(supported_features)
+      if supported_features.nil?
+        fail ArgumentError, 'supported_features cannot be nil'
+      end
+
+      @supported_features = supported_features
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] supported_customers_presences Value to be assigned
+    def supported_customers_presences=(supported_customers_presences)
+      if supported_customers_presences.nil?
+        fail ArgumentError, 'supported_customers_presences cannot be nil'
+      end
+
+      @supported_customers_presences = supported_customers_presences
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] supported_currencies Value to be assigned
+    def supported_currencies=(supported_currencies)
+      if supported_currencies.nil?
+        fail ArgumentError, 'supported_currencies cannot be nil'
+      end
+
+      @supported_currencies = supported_currencies
     end
 
     # Checks equality by comparing each attribute.
@@ -188,19 +258,19 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          supported_features == o.supported_features &&
+          supported_customers_presences == o.supported_customers_presences &&
           data_collection_type == o.data_collection_type &&
           deprecated == o.deprecated &&
-          deprecation_reason == o.deprecation_reason &&
+          primary_risk_taker == o.primary_risk_taker &&
           description == o.description &&
-          id == o.id &&
+          payment_method_brand == o.payment_method_brand &&
+          processor == o.processor &&
+          deprecation_reason == o.deprecation_reason &&
+          supported_currencies == o.supported_currencies &&
           name == o.name &&
           payment_method == o.payment_method &&
-          payment_method_brand == o.payment_method_brand &&
-          primary_risk_taker == o.primary_risk_taker &&
-          processor == o.processor &&
-          supported_currencies == o.supported_currencies &&
-          supported_customers_presences == o.supported_customers_presences &&
-          supported_features == o.supported_features
+          id == o.id
     end
 
     # @see the `==` method
@@ -210,39 +280,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [data_collection_type, deprecated, deprecation_reason, description, id, name, payment_method, payment_method_brand, primary_risk_taker, processor, supported_currencies, supported_customers_presences, supported_features].hash
-    end
-
-    # Builds the object from hash
+      [supported_features, supported_customers_presences, data_collection_type, deprecated, primary_risk_taker, description, payment_method_brand, processor, deprecation_reason, supported_currencies, name, payment_method, id].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -251,7 +322,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -272,8 +343,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -295,7 +367,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -307,7 +383,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -318,6 +394,5 @@ module Wallee
         value
       end
     end
-
   end
 end

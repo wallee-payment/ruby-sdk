@@ -1,33 +1,30 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class SubscriptionAffiliateDeleted
-    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-    attr_accessor :external_id
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The language that is linked to the object.
-    attr_accessor :language
+    # The reference used to identify the affiliate.
+    attr_accessor :reference
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
@@ -41,94 +38,146 @@ module Wallee
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The reference used to identify the affiliate.
-    attr_accessor :reference
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+    attr_accessor :external_id
 
-    # The object's current state.
+    # The language that is linked to the object.
+    attr_accessor :language
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
     attr_accessor :state
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'external_id' => :'externalId',
-        :'id' => :'id',
-        :'language' => :'language',
+        :'reference' => :'reference',
         :'linked_space_id' => :'linkedSpaceId',
         :'meta_data' => :'metaData',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'reference' => :'reference',
+        :'external_id' => :'externalId',
+        :'language' => :'language',
+        :'id' => :'id',
         :'state' => :'state',
         :'version' => :'version'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'external_id' => :'String',
-        :'id' => :'Integer',
-        :'language' => :'String',
+        :'reference' => :'String',
         :'linked_space_id' => :'Integer',
         :'meta_data' => :'Hash<String, String>',
         :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'reference' => :'String',
+        :'planned_purge_date' => :'Time',
+        :'external_id' => :'String',
+        :'language' => :'String',
+        :'id' => :'Integer',
         :'state' => :'CreationEntityState',
         :'version' => :'Integer'
       }
     end
 
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'SubscriptionAffiliate'
+      ]
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionAffiliateDeleted` initialize method"
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionAffiliateDeleted`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'reference')
+        self.reference = attributes[:'reference']
       end
 
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Hash)
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
           self.meta_data = value
         end
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
       end
 
-      if attributes.has_key?(:'reference')
-        self.reference = attributes[:'reference']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
       end
 
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'version')
+      if attributes.key?(:'version')
         self.version = attributes[:'version']
       end
     end
@@ -136,21 +185,22 @@ module Wallee
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 255
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
-      end
-
-      if !@name.nil? && @name.to_s.length < 3
-        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 3.')
-      end
-
       if !@reference.nil? && @reference.to_s.length > 100
         invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
       end
 
       if !@reference.nil? && @reference.to_s.length < 3
-        invalid_properties.push('invalid value for "reference", the character length must be great than or equal to 3.')
+        invalid_properties.push('invalid value for "reference", the character length must be greater than or equal to 3.')
+      end
+
+      if !@name.nil? && @name.to_s.length > 255
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
+      end
+
+      if !@name.nil? && @name.to_s.length < 3
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 3.')
       end
 
       invalid_properties
@@ -159,39 +209,48 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@name.nil? && @name.to_s.length > 255
-      return false if !@name.nil? && @name.to_s.length < 3
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@reference.nil? && @reference.to_s.length > 100
       return false if !@reference.nil? && @reference.to_s.length < 3
+      return false if !@name.nil? && @name.to_s.length > 255
+      return false if !@name.nil? && @name.to_s.length < 3
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.length > 255
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
-      end
-
-      if !name.nil? && name.to_s.length < 3
-        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 3.'
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method with validation
     # @param [Object] reference Value to be assigned
     def reference=(reference)
-      if !reference.nil? && reference.to_s.length > 100
+      if reference.nil?
+        fail ArgumentError, 'reference cannot be nil'
+      end
+
+      if reference.to_s.length > 100
         fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
       end
 
-      if !reference.nil? && reference.to_s.length < 3
-        fail ArgumentError, 'invalid value for "reference", the character length must be great than or equal to 3.'
+      if reference.to_s.length < 3
+        fail ArgumentError, 'invalid value for "reference", the character length must be greater than or equal to 3.'
       end
 
       @reference = reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 255
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
+      end
+
+      if name.to_s.length < 3
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 3.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -199,14 +258,14 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          external_id == o.external_id &&
-          id == o.id &&
-          language == o.language &&
+          reference == o.reference &&
           linked_space_id == o.linked_space_id &&
           meta_data == o.meta_data &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
-          reference == o.reference &&
+          external_id == o.external_id &&
+          language == o.language &&
+          id == o.id &&
           state == o.state &&
           version == o.version
     end
@@ -218,39 +277,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [external_id, id, language, linked_space_id, meta_data, name, planned_purge_date, reference, state, version].hash
-    end
-
-    # Builds the object from hash
+      [reference, linked_space_id, meta_data, name, planned_purge_date, external_id, language, id, state, version].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -259,7 +319,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -280,8 +340,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -303,7 +364,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -315,7 +380,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -326,6 +391,5 @@ module Wallee
         value
       end
     end
-
   end
 end

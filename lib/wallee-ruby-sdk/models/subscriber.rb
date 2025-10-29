@@ -1,48 +1,49 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
+module WalleeRubySdk
   # A subscriber represents everyone who is subscribed to a product.
   class Subscriber
-    # Allow the subscriber to use these payment methods even if subscription products do not accept them.
-    attr_accessor :additional_allowed_payment_method_configurations
-
-    # The address associated with the subscriber for invoicing and transaction processing purposes.
-    attr_accessor :billing_address
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
 
     # The description used to identify the subscriber.
     attr_accessor :description
 
-    # Prevent the subscriber from using these payment methods even if subscription products do accept them.
-    attr_accessor :disallowed_payment_method_configurations
-
-    # The email address that is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
-    attr_accessor :email_address
-
     # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
 
-    # A unique identifier for the object.
-    attr_accessor :id
-
     # The language that is used when communicating with the subscriber via emails and documents.
     attr_accessor :language
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
+
+    # The merchant's reference used to identify the subscriber.
+    attr_accessor :reference
+
+    # Allow the subscriber to use these payment methods even if subscription products do not accept them.
+    attr_accessor :additional_allowed_payment_method_configurations
 
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
@@ -50,152 +51,198 @@ module Wallee
     # Allow to store additional information about the object.
     attr_accessor :meta_data
 
-    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-    attr_accessor :planned_purge_date
+    # The email address that is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
+    attr_accessor :email_address
 
-    # The merchant's reference used to identify the subscriber.
-    attr_accessor :reference
+    # Prevent the subscriber from using these payment methods even if subscription products do accept them.
+    attr_accessor :disallowed_payment_method_configurations
 
-    # The address to where orders will be shipped.
     attr_accessor :shipping_address
 
-    # The object's current state.
+    attr_accessor :billing_address
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
     attr_accessor :state
 
-    # The version is used for optimistic locking and incremented whenever the object is updated.
-    attr_accessor :version
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'additional_allowed_payment_method_configurations' => :'additionalAllowedPaymentMethodConfigurations',
-        :'billing_address' => :'billingAddress',
+        :'planned_purge_date' => :'plannedPurgeDate',
         :'description' => :'description',
-        :'disallowed_payment_method_configurations' => :'disallowedPaymentMethodConfigurations',
-        :'email_address' => :'emailAddress',
         :'external_id' => :'externalId',
-        :'id' => :'id',
         :'language' => :'language',
+        :'version' => :'version',
+        :'reference' => :'reference',
+        :'additional_allowed_payment_method_configurations' => :'additionalAllowedPaymentMethodConfigurations',
         :'linked_space_id' => :'linkedSpaceId',
         :'meta_data' => :'metaData',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'reference' => :'reference',
+        :'email_address' => :'emailAddress',
+        :'disallowed_payment_method_configurations' => :'disallowedPaymentMethodConfigurations',
         :'shipping_address' => :'shippingAddress',
-        :'state' => :'state',
-        :'version' => :'version'
+        :'billing_address' => :'billingAddress',
+        :'id' => :'id',
+        :'state' => :'state'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'additional_allowed_payment_method_configurations' => :'Array<Integer>',
-        :'billing_address' => :'Address',
+        :'planned_purge_date' => :'Time',
         :'description' => :'String',
-        :'disallowed_payment_method_configurations' => :'Array<Integer>',
-        :'email_address' => :'String',
         :'external_id' => :'String',
-        :'id' => :'Integer',
         :'language' => :'String',
+        :'version' => :'Integer',
+        :'reference' => :'String',
+        :'additional_allowed_payment_method_configurations' => :'Array<Integer>',
         :'linked_space_id' => :'Integer',
         :'meta_data' => :'Hash<String, String>',
-        :'planned_purge_date' => :'DateTime',
-        :'reference' => :'String',
+        :'email_address' => :'String',
+        :'disallowed_payment_method_configurations' => :'Array<Integer>',
         :'shipping_address' => :'Address',
-        :'state' => :'CreationEntityState',
-        :'version' => :'Integer'
+        :'billing_address' => :'Address',
+        :'id' => :'Integer',
+        :'state' => :'CreationEntityState'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Subscriber` initialize method"
+      end
 
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Subscriber`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'additionalAllowedPaymentMethodConfigurations')
-        if (value = attributes[:'additionalAllowedPaymentMethodConfigurations']).is_a?(Array)
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
+      end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'reference')
+        self.reference = attributes[:'reference']
+      end
+
+      if attributes.key?(:'additional_allowed_payment_method_configurations')
+        if (value = attributes[:'additional_allowed_payment_method_configurations']).is_a?(Array)
           self.additional_allowed_payment_method_configurations = value
         end
       end
 
-      if attributes.has_key?(:'billingAddress')
-        self.billing_address = attributes[:'billingAddress']
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.has_key?(:'disallowedPaymentMethodConfigurations')
-        if (value = attributes[:'disallowedPaymentMethodConfigurations']).is_a?(Array)
-          self.disallowed_payment_method_configurations = value
-        end
-      end
-
-      if attributes.has_key?(:'emailAddress')
-        self.email_address = attributes[:'emailAddress']
-      end
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Hash)
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
           self.meta_data = value
         end
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.key?(:'email_address')
+        self.email_address = attributes[:'email_address']
       end
 
-      if attributes.has_key?(:'reference')
-        self.reference = attributes[:'reference']
+      if attributes.key?(:'disallowed_payment_method_configurations')
+        if (value = attributes[:'disallowed_payment_method_configurations']).is_a?(Array)
+          self.disallowed_payment_method_configurations = value
+        end
       end
 
-      if attributes.has_key?(:'shippingAddress')
-        self.shipping_address = attributes[:'shippingAddress']
+      if attributes.key?(:'shipping_address')
+        self.shipping_address = attributes[:'shipping_address']
       end
 
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'billing_address')
+        self.billing_address = attributes[:'billing_address']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       if !@description.nil? && @description.to_s.length > 200
         invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 200.')
       end
 
-      if !@email_address.nil? && @email_address.to_s.length > 254
-        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
-      end
-
       if !@reference.nil? && @reference.to_s.length > 100
         invalid_properties.push('invalid value for "reference", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@reference.nil? && @reference !~ pattern
+        invalid_properties.push("invalid value for \"reference\", must conform to the pattern #{pattern}.")
+      end
+
+      if !@email_address.nil? && @email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
       end
 
       invalid_properties
@@ -204,16 +251,23 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@description.nil? && @description.to_s.length > 200
-      return false if !@email_address.nil? && @email_address.to_s.length > 254
       return false if !@reference.nil? && @reference.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@reference.nil? && @reference !~ pattern
+      return false if !@email_address.nil? && @email_address.to_s.length > 254
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
-      if !description.nil? && description.to_s.length > 200
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 200
         fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 200.'
       end
 
@@ -221,23 +275,36 @@ module Wallee
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] reference Value to be assigned
+    def reference=(reference)
+      if reference.nil?
+        fail ArgumentError, 'reference cannot be nil'
+      end
+
+      if reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if reference !~ pattern
+        fail ArgumentError, "invalid value for \"reference\", must conform to the pattern #{pattern}."
+      end
+
+      @reference = reference
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] email_address Value to be assigned
     def email_address=(email_address)
-      if !email_address.nil? && email_address.to_s.length > 254
+      if email_address.nil?
+        fail ArgumentError, 'email_address cannot be nil'
+      end
+
+      if email_address.to_s.length > 254
         fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 254.'
       end
 
       @email_address = email_address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] reference Value to be assigned
-    def reference=(reference)
-      if !reference.nil? && reference.to_s.length > 100
-        fail ArgumentError, 'invalid value for "reference", the character length must be smaller than or equal to 100.'
-      end
-
-      @reference = reference
     end
 
     # Checks equality by comparing each attribute.
@@ -245,21 +312,21 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          additional_allowed_payment_method_configurations == o.additional_allowed_payment_method_configurations &&
-          billing_address == o.billing_address &&
+          planned_purge_date == o.planned_purge_date &&
           description == o.description &&
-          disallowed_payment_method_configurations == o.disallowed_payment_method_configurations &&
-          email_address == o.email_address &&
           external_id == o.external_id &&
-          id == o.id &&
           language == o.language &&
+          version == o.version &&
+          reference == o.reference &&
+          additional_allowed_payment_method_configurations == o.additional_allowed_payment_method_configurations &&
           linked_space_id == o.linked_space_id &&
           meta_data == o.meta_data &&
-          planned_purge_date == o.planned_purge_date &&
-          reference == o.reference &&
+          email_address == o.email_address &&
+          disallowed_payment_method_configurations == o.disallowed_payment_method_configurations &&
           shipping_address == o.shipping_address &&
-          state == o.state &&
-          version == o.version
+          billing_address == o.billing_address &&
+          id == o.id &&
+          state == o.state
     end
 
     # @see the `==` method
@@ -269,39 +336,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [additional_allowed_payment_method_configurations, billing_address, description, disallowed_payment_method_configurations, email_address, external_id, id, language, linked_space_id, meta_data, planned_purge_date, reference, shipping_address, state, version].hash
-    end
-
-    # Builds the object from hash
+      [planned_purge_date, description, external_id, language, version, reference, additional_allowed_payment_method_configurations, linked_space_id, meta_data, email_address, disallowed_payment_method_configurations, shipping_address, billing_address, id, state].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -310,7 +378,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -331,8 +399,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -354,7 +423,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -366,7 +439,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -377,6 +450,5 @@ module Wallee
         value
       end
     end
-
   end
 end

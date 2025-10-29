@@ -1,360 +1,410 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
+module WalleeRubySdk
   # A refund is a credit issued to the customer, which can be initiated either by the merchant or by the customer as a reversal.
   class Refund
-    # The total monetary amount of the refund, representing the exact credit issued to the customer.
-    attr_accessor :amount
-
-    # The original base line items from the transaction prior to the refund, serving as a reference for the refunded amounts.
-    attr_accessor :base_line_items
-
-    # The transaction completion that the refund belongs to.
-    attr_accessor :completion
-
-    # The ID of the user the refund was created by.
-    attr_accessor :created_by
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # The environment used when rendering resources.
-    attr_accessor :environment
-
-    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-    attr_accessor :external_id
-
-    # The date and time when the refund failed.
-    attr_accessor :failed_on
-
-    # The reason for the failure of the refund.
-    attr_accessor :failure_reason
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The labels providing additional information about the object.
-    attr_accessor :labels
-
-    # The language that is linked to the object.
-    attr_accessor :language
-
-    # The line items included in the refund, representing the reductions.
-    attr_accessor :line_items
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # The merchant's reference used to identify the refund.
-    attr_accessor :merchant_reference
-
-    # The date and time when the next update of the object's state is planned.
-    attr_accessor :next_update_on
-
-    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-    attr_accessor :planned_purge_date
-
-    # The date and time when the processing of the refund was started.
-    attr_accessor :processing_on
-
-    # The reference ID provided by the payment processor, used to trace the refund through the external payment system.
-    attr_accessor :processor_reference
-
-    # The line items from the original transaction, adjusted to reflect any reductions applied during the refund process.
-    attr_accessor :reduced_line_items
+    # The total amount settled for the refund, factoring in reductions, taxes, and any additional applied fees.
+    attr_accessor :total_settled_amount
 
     # The reductions applied on the original transaction items, detailing specific adjustments associated with the refund.
     attr_accessor :reductions
 
-    # The object's current state.
-    attr_accessor :state
+    # The original base line items from the transaction prior to the refund, serving as a reference for the refunded amounts.
+    attr_accessor :base_line_items
 
-    # The date and time when the refund succeeded.
-    attr_accessor :succeeded_on
+    # The date and time when the processing of the refund was started.
+    attr_accessor :processing_on
 
     # The tax breakdown applied to the refund amount, helping with tax calculations or reporting.
     attr_accessor :taxes
 
-    # The time zone that this object is associated with.
-    attr_accessor :time_zone
+    # The language that is linked to the object.
+    attr_accessor :language
 
-    # The date and time when the object will expire.
-    attr_accessor :timeout_on
-
-    # The sum of fees applied to the refund transaction, such as processing or service charges.
-    attr_accessor :total_applied_fees
-
-    # The total amount settled for the refund, factoring in reductions, taxes, and any additional applied fees.
-    attr_accessor :total_settled_amount
-
-    # The transaction that the refund belongs to.
-    attr_accessor :transaction
-
-    # The type specifying the method and origin of the refund (e.g., initiated by the customer or merchant).
     attr_accessor :type
 
-    # An updated invoice reflecting adjustments made by the refund.
-    attr_accessor :updated_invoice
+    # The date and time when the object was created.
+    attr_accessor :created_on
+
+    # The line items included in the refund, representing the reductions.
+    attr_accessor :line_items
+
+    # The date and time when the refund succeeded.
+    attr_accessor :succeeded_on
+
+    # The line items from the original transaction, adjusted to reflect any reductions applied during the refund process.
+    attr_accessor :reduced_line_items
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    # The merchant's reference used to identify the refund.
+    attr_accessor :merchant_reference
+
+    # The transaction completion that the refund belongs to.
+    attr_accessor :completion
+
+    # The total monetary amount of the refund, representing the exact credit issued to the customer.
+    attr_accessor :amount
+
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+    attr_accessor :external_id
+
+    # The time zone that this object is associated with.
+    attr_accessor :time_zone
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    # The labels providing additional information about the object.
+    attr_accessor :labels
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The date and time when the object will expire.
+    attr_accessor :timeout_on
+
+    attr_accessor :environment
+
+    # The ID of the user the refund was created by.
+    attr_accessor :created_by
+
+    # The date and time when the next update of the object's state is planned.
+    attr_accessor :next_update_on
+
+    # An updated invoice reflecting adjustments made by the refund.
+    attr_accessor :updated_invoice
+
+    attr_accessor :failure_reason
+
+    # The sum of fees applied to the refund transaction, such as processing or service charges.
+    attr_accessor :total_applied_fees
+
+    # The date and time when the refund failed.
+    attr_accessor :failed_on
+
+    attr_accessor :transaction
+
+    # The reference ID provided by the payment processor, used to trace the refund through the external payment system.
+    attr_accessor :processor_reference
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount' => :'amount',
-        :'base_line_items' => :'baseLineItems',
-        :'completion' => :'completion',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'environment' => :'environment',
-        :'external_id' => :'externalId',
-        :'failed_on' => :'failedOn',
-        :'failure_reason' => :'failureReason',
-        :'id' => :'id',
-        :'labels' => :'labels',
-        :'language' => :'language',
-        :'line_items' => :'lineItems',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'merchant_reference' => :'merchantReference',
-        :'next_update_on' => :'nextUpdateOn',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'processing_on' => :'processingOn',
-        :'processor_reference' => :'processorReference',
-        :'reduced_line_items' => :'reducedLineItems',
-        :'reductions' => :'reductions',
-        :'state' => :'state',
-        :'succeeded_on' => :'succeededOn',
-        :'taxes' => :'taxes',
-        :'time_zone' => :'timeZone',
-        :'timeout_on' => :'timeoutOn',
-        :'total_applied_fees' => :'totalAppliedFees',
         :'total_settled_amount' => :'totalSettledAmount',
-        :'transaction' => :'transaction',
+        :'reductions' => :'reductions',
+        :'base_line_items' => :'baseLineItems',
+        :'processing_on' => :'processingOn',
+        :'taxes' => :'taxes',
+        :'language' => :'language',
         :'type' => :'type',
+        :'created_on' => :'createdOn',
+        :'line_items' => :'lineItems',
+        :'succeeded_on' => :'succeededOn',
+        :'reduced_line_items' => :'reducedLineItems',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'merchant_reference' => :'merchantReference',
+        :'completion' => :'completion',
+        :'amount' => :'amount',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'external_id' => :'externalId',
+        :'time_zone' => :'timeZone',
+        :'version' => :'version',
+        :'labels' => :'labels',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'timeout_on' => :'timeoutOn',
+        :'environment' => :'environment',
+        :'created_by' => :'createdBy',
+        :'next_update_on' => :'nextUpdateOn',
         :'updated_invoice' => :'updatedInvoice',
-        :'version' => :'version'
+        :'failure_reason' => :'failureReason',
+        :'total_applied_fees' => :'totalAppliedFees',
+        :'failed_on' => :'failedOn',
+        :'transaction' => :'transaction',
+        :'processor_reference' => :'processorReference'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'amount' => :'Float',
-        :'base_line_items' => :'Array<LineItem>',
-        :'completion' => :'Integer',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'environment' => :'Environment',
-        :'external_id' => :'String',
-        :'failed_on' => :'DateTime',
-        :'failure_reason' => :'FailureReason',
-        :'id' => :'Integer',
-        :'labels' => :'Array<Label>',
-        :'language' => :'String',
-        :'line_items' => :'Array<LineItem>',
-        :'linked_space_id' => :'Integer',
-        :'merchant_reference' => :'String',
-        :'next_update_on' => :'DateTime',
-        :'planned_purge_date' => :'DateTime',
-        :'processing_on' => :'DateTime',
-        :'processor_reference' => :'String',
-        :'reduced_line_items' => :'Array<LineItem>',
-        :'reductions' => :'Array<LineItemReduction>',
-        :'state' => :'RefundState',
-        :'succeeded_on' => :'DateTime',
-        :'taxes' => :'Array<Tax>',
-        :'time_zone' => :'String',
-        :'timeout_on' => :'DateTime',
-        :'total_applied_fees' => :'Float',
         :'total_settled_amount' => :'Float',
-        :'transaction' => :'Transaction',
+        :'reductions' => :'Array<LineItemReduction>',
+        :'base_line_items' => :'Array<LineItem>',
+        :'processing_on' => :'Time',
+        :'taxes' => :'Array<Tax>',
+        :'language' => :'String',
         :'type' => :'RefundType',
+        :'created_on' => :'Time',
+        :'line_items' => :'Array<LineItem>',
+        :'succeeded_on' => :'Time',
+        :'reduced_line_items' => :'Array<LineItem>',
+        :'id' => :'Integer',
+        :'state' => :'RefundState',
+        :'merchant_reference' => :'String',
+        :'completion' => :'Integer',
+        :'amount' => :'Float',
+        :'planned_purge_date' => :'Time',
+        :'external_id' => :'String',
+        :'time_zone' => :'String',
+        :'version' => :'Integer',
+        :'labels' => :'Array<Label>',
+        :'linked_space_id' => :'Integer',
+        :'timeout_on' => :'Time',
+        :'environment' => :'Environment',
+        :'created_by' => :'Integer',
+        :'next_update_on' => :'Time',
         :'updated_invoice' => :'Integer',
-        :'version' => :'Integer'
+        :'failure_reason' => :'FailureReason',
+        :'total_applied_fees' => :'Float',
+        :'failed_on' => :'Time',
+        :'transaction' => :'Transaction',
+        :'processor_reference' => :'String'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'amount')
-        self.amount = attributes[:'amount']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Refund` initialize method"
       end
 
-      if attributes.has_key?(:'baseLineItems')
-        if (value = attributes[:'baseLineItems']).is_a?(Array)
-          self.base_line_items = value
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Refund`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'total_settled_amount')
+        self.total_settled_amount = attributes[:'total_settled_amount']
       end
 
-      if attributes.has_key?(:'completion')
-        self.completion = attributes[:'completion']
-      end
-
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'environment')
-        self.environment = attributes[:'environment']
-      end
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'failedOn')
-        self.failed_on = attributes[:'failedOn']
-      end
-
-      if attributes.has_key?(:'failureReason')
-        self.failure_reason = attributes[:'failureReason']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'labels')
-        if (value = attributes[:'labels']).is_a?(Array)
-          self.labels = value
-        end
-      end
-
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'lineItems')
-        if (value = attributes[:'lineItems']).is_a?(Array)
-          self.line_items = value
-        end
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'merchantReference')
-        self.merchant_reference = attributes[:'merchantReference']
-      end
-
-      if attributes.has_key?(:'nextUpdateOn')
-        self.next_update_on = attributes[:'nextUpdateOn']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'processingOn')
-        self.processing_on = attributes[:'processingOn']
-      end
-
-      if attributes.has_key?(:'processorReference')
-        self.processor_reference = attributes[:'processorReference']
-      end
-
-      if attributes.has_key?(:'reducedLineItems')
-        if (value = attributes[:'reducedLineItems']).is_a?(Array)
-          self.reduced_line_items = value
-        end
-      end
-
-      if attributes.has_key?(:'reductions')
+      if attributes.key?(:'reductions')
         if (value = attributes[:'reductions']).is_a?(Array)
           self.reductions = value
         end
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.key?(:'base_line_items')
+        if (value = attributes[:'base_line_items']).is_a?(Array)
+          self.base_line_items = value
+        end
       end
 
-      if attributes.has_key?(:'succeededOn')
-        self.succeeded_on = attributes[:'succeededOn']
+      if attributes.key?(:'processing_on')
+        self.processing_on = attributes[:'processing_on']
       end
 
-      if attributes.has_key?(:'taxes')
+      if attributes.key?(:'taxes')
         if (value = attributes[:'taxes']).is_a?(Array)
           self.taxes = value
         end
       end
 
-      if attributes.has_key?(:'timeZone')
-        self.time_zone = attributes[:'timeZone']
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'timeoutOn')
-        self.timeout_on = attributes[:'timeoutOn']
-      end
-
-      if attributes.has_key?(:'totalAppliedFees')
-        self.total_applied_fees = attributes[:'totalAppliedFees']
-      end
-
-      if attributes.has_key?(:'totalSettledAmount')
-        self.total_settled_amount = attributes[:'totalSettledAmount']
-      end
-
-      if attributes.has_key?(:'transaction')
-        self.transaction = attributes[:'transaction']
-      end
-
-      if attributes.has_key?(:'type')
+      if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
 
-      if attributes.has_key?(:'updatedInvoice')
-        self.updated_invoice = attributes[:'updatedInvoice']
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
       end
 
-      if attributes.has_key?(:'version')
+      if attributes.key?(:'line_items')
+        if (value = attributes[:'line_items']).is_a?(Array)
+          self.line_items = value
+        end
+      end
+
+      if attributes.key?(:'succeeded_on')
+        self.succeeded_on = attributes[:'succeeded_on']
+      end
+
+      if attributes.key?(:'reduced_line_items')
+        if (value = attributes[:'reduced_line_items']).is_a?(Array)
+          self.reduced_line_items = value
+        end
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'merchant_reference')
+        self.merchant_reference = attributes[:'merchant_reference']
+      end
+
+      if attributes.key?(:'completion')
+        self.completion = attributes[:'completion']
+      end
+
+      if attributes.key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
+      end
+
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
+      end
+
+      if attributes.key?(:'time_zone')
+        self.time_zone = attributes[:'time_zone']
+      end
+
+      if attributes.key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'labels')
+        if (value = attributes[:'labels']).is_a?(Array)
+          self.labels = value
+        end
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'timeout_on')
+        self.timeout_on = attributes[:'timeout_on']
+      end
+
+      if attributes.key?(:'environment')
+        self.environment = attributes[:'environment']
+      end
+
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
+      end
+
+      if attributes.key?(:'next_update_on')
+        self.next_update_on = attributes[:'next_update_on']
+      end
+
+      if attributes.key?(:'updated_invoice')
+        self.updated_invoice = attributes[:'updated_invoice']
+      end
+
+      if attributes.key?(:'failure_reason')
+        self.failure_reason = attributes[:'failure_reason']
+      end
+
+      if attributes.key?(:'total_applied_fees')
+        self.total_applied_fees = attributes[:'total_applied_fees']
+      end
+
+      if attributes.key?(:'failed_on')
+        self.failed_on = attributes[:'failed_on']
+      end
+
+      if attributes.key?(:'transaction')
+        self.transaction = attributes[:'transaction']
+      end
+
+      if attributes.key?(:'processor_reference')
+        self.processor_reference = attributes[:'processor_reference']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@merchant_reference.nil? && @merchant_reference !~ pattern
+        invalid_properties.push("invalid value for \"merchant_reference\", must conform to the pattern #{pattern}.")
+      end
+
       if !@external_id.nil? && @external_id.to_s.length > 100
         invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 100.')
       end
 
       if !@external_id.nil? && @external_id.to_s.length < 1
-        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
+        invalid_properties.push('invalid value for "external_id", the character length must be greater than or equal to 1.')
       end
 
-      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
-        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@external_id.nil? && @external_id !~ pattern
+        invalid_properties.push("invalid value for \"external_id\", must conform to the pattern #{pattern}.")
       end
 
       if !@processor_reference.nil? && @processor_reference.to_s.length > 150
@@ -367,41 +417,88 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@merchant_reference.nil? && @merchant_reference !~ pattern
       return false if !@external_id.nil? && @external_id.to_s.length > 100
       return false if !@external_id.nil? && @external_id.to_s.length < 1
-      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@external_id.nil? && @external_id !~ pattern
       return false if !@processor_reference.nil? && @processor_reference.to_s.length > 150
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] external_id Value to be assigned
-    def external_id=(external_id)
-      if !external_id.nil? && external_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
+    # @param [Object] taxes Value to be assigned
+    def taxes=(taxes)
+      if taxes.nil?
+        fail ArgumentError, 'taxes cannot be nil'
       end
 
-      if !external_id.nil? && external_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
-      end
-
-      @external_id = external_id
+      @taxes = taxes
     end
 
     # Custom attribute writer method with validation
     # @param [Object] merchant_reference Value to be assigned
     def merchant_reference=(merchant_reference)
-      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
+      if merchant_reference.nil?
+        fail ArgumentError, 'merchant_reference cannot be nil'
+      end
+
+      if merchant_reference.to_s.length > 100
         fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if merchant_reference !~ pattern
+        fail ArgumentError, "invalid value for \"merchant_reference\", must conform to the pattern #{pattern}."
       end
 
       @merchant_reference = merchant_reference
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if external_id.nil?
+        fail ArgumentError, 'external_id cannot be nil'
+      end
+
+      if external_id.to_s.length > 100
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 100.'
+      end
+
+      if external_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "external_id", the character length must be greater than or equal to 1.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if external_id !~ pattern
+        fail ArgumentError, "invalid value for \"external_id\", must conform to the pattern #{pattern}."
+      end
+
+      @external_id = external_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] labels Value to be assigned
+    def labels=(labels)
+      if labels.nil?
+        fail ArgumentError, 'labels cannot be nil'
+      end
+
+      @labels = labels
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] processor_reference Value to be assigned
     def processor_reference=(processor_reference)
-      if !processor_reference.nil? && processor_reference.to_s.length > 150
+      if processor_reference.nil?
+        fail ArgumentError, 'processor_reference cannot be nil'
+      end
+
+      if processor_reference.to_s.length > 150
         fail ArgumentError, 'invalid value for "processor_reference", the character length must be smaller than or equal to 150.'
       end
 
@@ -413,38 +510,38 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount == o.amount &&
-          base_line_items == o.base_line_items &&
-          completion == o.completion &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          environment == o.environment &&
-          external_id == o.external_id &&
-          failed_on == o.failed_on &&
-          failure_reason == o.failure_reason &&
-          id == o.id &&
-          labels == o.labels &&
-          language == o.language &&
-          line_items == o.line_items &&
-          linked_space_id == o.linked_space_id &&
-          merchant_reference == o.merchant_reference &&
-          next_update_on == o.next_update_on &&
-          planned_purge_date == o.planned_purge_date &&
-          processing_on == o.processing_on &&
-          processor_reference == o.processor_reference &&
-          reduced_line_items == o.reduced_line_items &&
-          reductions == o.reductions &&
-          state == o.state &&
-          succeeded_on == o.succeeded_on &&
-          taxes == o.taxes &&
-          time_zone == o.time_zone &&
-          timeout_on == o.timeout_on &&
-          total_applied_fees == o.total_applied_fees &&
           total_settled_amount == o.total_settled_amount &&
-          transaction == o.transaction &&
+          reductions == o.reductions &&
+          base_line_items == o.base_line_items &&
+          processing_on == o.processing_on &&
+          taxes == o.taxes &&
+          language == o.language &&
           type == o.type &&
+          created_on == o.created_on &&
+          line_items == o.line_items &&
+          succeeded_on == o.succeeded_on &&
+          reduced_line_items == o.reduced_line_items &&
+          id == o.id &&
+          state == o.state &&
+          merchant_reference == o.merchant_reference &&
+          completion == o.completion &&
+          amount == o.amount &&
+          planned_purge_date == o.planned_purge_date &&
+          external_id == o.external_id &&
+          time_zone == o.time_zone &&
+          version == o.version &&
+          labels == o.labels &&
+          linked_space_id == o.linked_space_id &&
+          timeout_on == o.timeout_on &&
+          environment == o.environment &&
+          created_by == o.created_by &&
+          next_update_on == o.next_update_on &&
           updated_invoice == o.updated_invoice &&
-          version == o.version
+          failure_reason == o.failure_reason &&
+          total_applied_fees == o.total_applied_fees &&
+          failed_on == o.failed_on &&
+          transaction == o.transaction &&
+          processor_reference == o.processor_reference
     end
 
     # @see the `==` method
@@ -454,39 +551,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [amount, base_line_items, completion, created_by, created_on, environment, external_id, failed_on, failure_reason, id, labels, language, line_items, linked_space_id, merchant_reference, next_update_on, planned_purge_date, processing_on, processor_reference, reduced_line_items, reductions, state, succeeded_on, taxes, time_zone, timeout_on, total_applied_fees, total_settled_amount, transaction, type, updated_invoice, version].hash
-    end
-
-    # Builds the object from hash
+      [total_settled_amount, reductions, base_line_items, processing_on, taxes, language, type, created_on, line_items, succeeded_on, reduced_line_items, id, state, merchant_reference, completion, amount, planned_purge_date, external_id, time_zone, version, labels, linked_space_id, timeout_on, environment, created_by, next_update_on, updated_invoice, failure_reason, total_applied_fees, failed_on, transaction, processor_reference].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -495,7 +593,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -516,8 +614,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -539,7 +638,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -551,7 +654,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -562,6 +665,5 @@ module Wallee
         value
       end
     end
-
   end
 end

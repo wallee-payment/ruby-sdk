@@ -1,179 +1,198 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class SubscriptionProductComponent
-    # If switching from a component with a lower tier to a component with a higher one, this is considered an upgrade and a fee may be applied.
-    attr_accessor :component_change_weight
-
-    # The group that the component belongs to.
-    attr_accessor :component_group
-
-    # Whether this is the default component in its group and preselected.
-    attr_accessor :default_component
+    attr_accessor :tax_class
 
     # The localized description of the component that is displayed to the customer.
     attr_accessor :description
 
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
+    # If switching from a component with a lower tier to a component with a higher one, this is considered an upgrade and a fee may be applied.
+    attr_accessor :component_change_weight
 
     # A maximum of the defined quantity can be selected for this component.
     attr_accessor :maximal_quantity
 
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
+
     # A minimum of the defined quantity must be selected for this component.
     attr_accessor :minimal_quantity
 
-    # The localized name of the component that is displayed to the customer.
-    attr_accessor :name
+    attr_accessor :reference
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
 
     # The quantity step determines the interval in which the quantity can be increased.
     attr_accessor :quantity_step
 
-    # The reference is used to link components across different product versions.
-    attr_accessor :reference
-
     # When listing components, they can be sorted by this number.
     attr_accessor :sort_order
 
-    # The tax class to be applied to fees.
-    attr_accessor :tax_class
+    attr_accessor :component_group
 
-    # The version is used for optimistic locking and incremented whenever the object is updated.
-    attr_accessor :version
+    # The localized name of the component that is displayed to the customer.
+    attr_accessor :name
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # Whether this is the default component in its group and preselected.
+    attr_accessor :default_component
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'component_change_weight' => :'componentChangeWeight',
-        :'component_group' => :'componentGroup',
-        :'default_component' => :'defaultComponent',
-        :'description' => :'description',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'maximal_quantity' => :'maximalQuantity',
-        :'minimal_quantity' => :'minimalQuantity',
-        :'name' => :'name',
-        :'quantity_step' => :'quantityStep',
-        :'reference' => :'reference',
-        :'sort_order' => :'sortOrder',
         :'tax_class' => :'taxClass',
-        :'version' => :'version'
+        :'description' => :'description',
+        :'component_change_weight' => :'componentChangeWeight',
+        :'maximal_quantity' => :'maximalQuantity',
+        :'version' => :'version',
+        :'minimal_quantity' => :'minimalQuantity',
+        :'reference' => :'reference',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'quantity_step' => :'quantityStep',
+        :'sort_order' => :'sortOrder',
+        :'component_group' => :'componentGroup',
+        :'name' => :'name',
+        :'id' => :'id',
+        :'default_component' => :'defaultComponent'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'component_change_weight' => :'Integer',
-        :'component_group' => :'SubscriptionProductComponentGroup',
-        :'default_component' => :'BOOLEAN',
-        :'description' => :'Hash<String, String>',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'maximal_quantity' => :'Float',
-        :'minimal_quantity' => :'Float',
-        :'name' => :'Hash<String, String>',
-        :'quantity_step' => :'Float',
-        :'reference' => :'SubscriptionProductComponentReference',
-        :'sort_order' => :'Integer',
         :'tax_class' => :'TaxClass',
-        :'version' => :'Integer'
+        :'description' => :'Hash<String, String>',
+        :'component_change_weight' => :'Integer',
+        :'maximal_quantity' => :'Float',
+        :'version' => :'Integer',
+        :'minimal_quantity' => :'Float',
+        :'reference' => :'SubscriptionProductComponentReference',
+        :'linked_space_id' => :'Integer',
+        :'quantity_step' => :'Float',
+        :'sort_order' => :'Integer',
+        :'component_group' => :'SubscriptionProductComponentGroup',
+        :'name' => :'Hash<String, String>',
+        :'id' => :'Integer',
+        :'default_component' => :'Boolean'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'componentChangeWeight')
-        self.component_change_weight = attributes[:'componentChangeWeight']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionProductComponent` initialize method"
       end
 
-      if attributes.has_key?(:'componentGroup')
-        self.component_group = attributes[:'componentGroup']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionProductComponent`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'tax_class')
+        self.tax_class = attributes[:'tax_class']
       end
 
-      if attributes.has_key?(:'defaultComponent')
-        self.default_component = attributes[:'defaultComponent']
-      end
-
-      if attributes.has_key?(:'description')
+      if attributes.key?(:'description')
         if (value = attributes[:'description']).is_a?(Hash)
           self.description = value
         end
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'component_change_weight')
+        self.component_change_weight = attributes[:'component_change_weight']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.key?(:'maximal_quantity')
+        self.maximal_quantity = attributes[:'maximal_quantity']
       end
 
-      if attributes.has_key?(:'maximalQuantity')
-        self.maximal_quantity = attributes[:'maximalQuantity']
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'minimalQuantity')
-        self.minimal_quantity = attributes[:'minimalQuantity']
+      if attributes.key?(:'minimal_quantity')
+        self.minimal_quantity = attributes[:'minimal_quantity']
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'reference')
+        self.reference = attributes[:'reference']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'quantity_step')
+        self.quantity_step = attributes[:'quantity_step']
+      end
+
+      if attributes.key?(:'sort_order')
+        self.sort_order = attributes[:'sort_order']
+      end
+
+      if attributes.key?(:'component_group')
+        self.component_group = attributes[:'component_group']
+      end
+
+      if attributes.key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
       end
 
-      if attributes.has_key?(:'quantityStep')
-        self.quantity_step = attributes[:'quantityStep']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'reference')
-        self.reference = attributes[:'reference']
-      end
-
-      if attributes.has_key?(:'sortOrder')
-        self.sort_order = attributes[:'sortOrder']
-      end
-
-      if attributes.has_key?(:'taxClass')
-        self.tax_class = attributes[:'taxClass']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'default_component')
+        self.default_component = attributes[:'default_component']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -181,6 +200,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
     end
 
@@ -189,20 +209,20 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          component_change_weight == o.component_change_weight &&
-          component_group == o.component_group &&
-          default_component == o.default_component &&
-          description == o.description &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          maximal_quantity == o.maximal_quantity &&
-          minimal_quantity == o.minimal_quantity &&
-          name == o.name &&
-          quantity_step == o.quantity_step &&
-          reference == o.reference &&
-          sort_order == o.sort_order &&
           tax_class == o.tax_class &&
-          version == o.version
+          description == o.description &&
+          component_change_weight == o.component_change_weight &&
+          maximal_quantity == o.maximal_quantity &&
+          version == o.version &&
+          minimal_quantity == o.minimal_quantity &&
+          reference == o.reference &&
+          linked_space_id == o.linked_space_id &&
+          quantity_step == o.quantity_step &&
+          sort_order == o.sort_order &&
+          component_group == o.component_group &&
+          name == o.name &&
+          id == o.id &&
+          default_component == o.default_component
     end
 
     # @see the `==` method
@@ -212,39 +232,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [component_change_weight, component_group, default_component, description, id, linked_space_id, maximal_quantity, minimal_quantity, name, quantity_step, reference, sort_order, tax_class, version].hash
-    end
-
-    # Builds the object from hash
+      [tax_class, description, component_change_weight, maximal_quantity, version, minimal_quantity, reference, linked_space_id, quantity_step, sort_order, component_group, name, id, default_component].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -253,7 +274,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -274,8 +295,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -297,7 +319,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -309,7 +335,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -320,6 +346,5 @@ module Wallee
         value
       end
     end
-
   end
 end

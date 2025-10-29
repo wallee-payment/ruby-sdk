@@ -1,45 +1,45 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class TokenUpdate
-    # The customer's email address.
-    attr_accessor :customer_email_address
-
-    # The unique identifier of the customer in the external system.
-    attr_accessor :customer_id
-
     # Whether the token is enabled for one-click payments, which simplify the payment process for the customer. One-click tokens are linked to customers via the customer ID.
     attr_accessor :enabled_for_one_click_payment
 
-    # The language that is linked to the object.
-    attr_accessor :language
-
-    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
-    attr_accessor :time_zone
+    # The customer's email address.
+    attr_accessor :customer_email_address
 
     # The reference used to identify the payment token (e.g. the customer's ID or email address).
     attr_accessor :token_reference
 
-    # The ID is the primary key of the entity. The ID identifies the entity uniquely.
-    attr_accessor :id
+    # The unique identifier of the customer in the external system.
+    attr_accessor :customer_id
+
+    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
+    attr_accessor :time_zone
+
+    # The language that is linked to the object.
+    attr_accessor :language
 
     # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
     attr_accessor :version
@@ -47,75 +47,97 @@ module Wallee
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_email_address' => :'customerEmailAddress',
-        :'customer_id' => :'customerId',
         :'enabled_for_one_click_payment' => :'enabledForOneClickPayment',
-        :'language' => :'language',
-        :'time_zone' => :'timeZone',
+        :'customer_email_address' => :'customerEmailAddress',
         :'token_reference' => :'tokenReference',
-        :'id' => :'id',
+        :'customer_id' => :'customerId',
+        :'time_zone' => :'timeZone',
+        :'language' => :'language',
         :'version' => :'version'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
+        :'enabled_for_one_click_payment' => :'Boolean',
         :'customer_email_address' => :'String',
-        :'customer_id' => :'String',
-        :'enabled_for_one_click_payment' => :'BOOLEAN',
-        :'language' => :'String',
-        :'time_zone' => :'String',
         :'token_reference' => :'String',
-        :'id' => :'Integer',
+        :'customer_id' => :'String',
+        :'time_zone' => :'String',
+        :'language' => :'String',
         :'version' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'AbstractTokenUpdate'
+      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'customerEmailAddress')
-        self.customer_email_address = attributes[:'customerEmailAddress']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::TokenUpdate` initialize method"
       end
 
-      if attributes.has_key?(:'customerId')
-        self.customer_id = attributes[:'customerId']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::TokenUpdate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'enabled_for_one_click_payment')
+        self.enabled_for_one_click_payment = attributes[:'enabled_for_one_click_payment']
       end
 
-      if attributes.has_key?(:'enabledForOneClickPayment')
-        self.enabled_for_one_click_payment = attributes[:'enabledForOneClickPayment']
+      if attributes.key?(:'customer_email_address')
+        self.customer_email_address = attributes[:'customer_email_address']
       end
 
-      if attributes.has_key?(:'language')
+      if attributes.key?(:'token_reference')
+        self.token_reference = attributes[:'token_reference']
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'time_zone')
+        self.time_zone = attributes[:'time_zone']
+      end
+
+      if attributes.key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'timeZone')
-        self.time_zone = attributes[:'timeZone']
-      end
-
-      if attributes.has_key?(:'tokenReference')
-        self.token_reference = attributes[:'tokenReference']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'version')
+      if attributes.key?(:'version')
         self.version = attributes[:'version']
+      else
+        self.version = nil
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
         invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 150.')
@@ -125,8 +147,9 @@ module Wallee
         invalid_properties.push('invalid value for "token_reference", the character length must be smaller than or equal to 100.')
       end
 
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@token_reference.nil? && @token_reference !~ pattern
+        invalid_properties.push("invalid value for \"token_reference\", must conform to the pattern #{pattern}.")
       end
 
       if @version.nil?
@@ -139,9 +162,11 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 150
       return false if !@token_reference.nil? && @token_reference.to_s.length > 100
-      return false if @id.nil?
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@token_reference.nil? && @token_reference !~ pattern
       return false if @version.nil?
       true
     end
@@ -149,7 +174,11 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] customer_email_address Value to be assigned
     def customer_email_address=(customer_email_address)
-      if !customer_email_address.nil? && customer_email_address.to_s.length > 150
+      if customer_email_address.nil?
+        fail ArgumentError, 'customer_email_address cannot be nil'
+      end
+
+      if customer_email_address.to_s.length > 150
         fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 150.'
       end
 
@@ -159,8 +188,17 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] token_reference Value to be assigned
     def token_reference=(token_reference)
-      if !token_reference.nil? && token_reference.to_s.length > 100
+      if token_reference.nil?
+        fail ArgumentError, 'token_reference cannot be nil'
+      end
+
+      if token_reference.to_s.length > 100
         fail ArgumentError, 'invalid value for "token_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if token_reference !~ pattern
+        fail ArgumentError, "invalid value for \"token_reference\", must conform to the pattern #{pattern}."
       end
 
       @token_reference = token_reference
@@ -171,13 +209,12 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_email_address == o.customer_email_address &&
-          customer_id == o.customer_id &&
           enabled_for_one_click_payment == o.enabled_for_one_click_payment &&
-          language == o.language &&
-          time_zone == o.time_zone &&
+          customer_email_address == o.customer_email_address &&
           token_reference == o.token_reference &&
-          id == o.id &&
+          customer_id == o.customer_id &&
+          time_zone == o.time_zone &&
+          language == o.language &&
           version == o.version
     end
 
@@ -188,39 +225,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [customer_email_address, customer_id, enabled_for_one_click_payment, language, time_zone, token_reference, id, version].hash
-    end
-
-    # Builds the object from hash
+      [enabled_for_one_click_payment, customer_email_address, token_reference, customer_id, time_zone, language, version].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -229,7 +267,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -250,8 +288,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -273,7 +312,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -285,7 +328,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -296,6 +339,5 @@ module Wallee
         value
       end
     end
-
   end
 end

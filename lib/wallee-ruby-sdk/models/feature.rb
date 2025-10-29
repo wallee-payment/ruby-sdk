@@ -1,30 +1,42 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class Feature
-    # Whether the feature is in beta stage and there may still be some issues.
-    attr_accessor :beta
+    # The features that must be enabled for this feature to work properly.
+    attr_accessor :required_features
 
-    # The category that the feature belongs to.
-    attr_accessor :category
+    # Whether the feature is visible to the user.
+    attr_accessor :visible
+
+    # The path to the feature's logo image.
+    attr_accessor :logo_path
+
+    # When listing features, they can be sorted by this number.
+    attr_accessor :sort_order
+
+    # The localized name of the object.
+    attr_accessor :name
 
     # The localized description of the object.
     attr_accessor :description
@@ -32,105 +44,114 @@ module Wallee
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The path to the feature's logo image.
-    attr_accessor :logo_path
+    attr_accessor :category
 
-    # The localized name of the object.
-    attr_accessor :name
-
-    # The features that must be enabled for this feature to work properly.
-    attr_accessor :required_features
-
-    # When listing features, they can be sorted by this number.
-    attr_accessor :sort_order
-
-    # Whether the feature is visible to the user.
-    attr_accessor :visible
+    # Whether the feature is in beta stage and there may still be some issues.
+    attr_accessor :beta
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'beta' => :'beta',
-        :'category' => :'category',
+        :'required_features' => :'requiredFeatures',
+        :'visible' => :'visible',
+        :'logo_path' => :'logoPath',
+        :'sort_order' => :'sortOrder',
+        :'name' => :'name',
         :'description' => :'description',
         :'id' => :'id',
-        :'logo_path' => :'logoPath',
-        :'name' => :'name',
-        :'required_features' => :'requiredFeatures',
-        :'sort_order' => :'sortOrder',
-        :'visible' => :'visible'
+        :'category' => :'category',
+        :'beta' => :'beta'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'beta' => :'BOOLEAN',
-        :'category' => :'FeatureCategory',
+        :'required_features' => :'Array<Integer>',
+        :'visible' => :'Boolean',
+        :'logo_path' => :'String',
+        :'sort_order' => :'Integer',
+        :'name' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
-        :'logo_path' => :'String',
-        :'name' => :'Hash<String, String>',
-        :'required_features' => :'Array<Integer>',
-        :'sort_order' => :'Integer',
-        :'visible' => :'BOOLEAN'
+        :'category' => :'FeatureCategory',
+        :'beta' => :'Boolean'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'beta')
-        self.beta = attributes[:'beta']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Feature` initialize method"
       end
 
-      if attributes.has_key?(:'category')
-        self.category = attributes[:'category']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Feature`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'description')
-        if (value = attributes[:'description']).is_a?(Hash)
-          self.description = value
+      if attributes.key?(:'required_features')
+        if (value = attributes[:'required_features']).is_a?(Array)
+          self.required_features = value
         end
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'visible')
+        self.visible = attributes[:'visible']
       end
 
-      if attributes.has_key?(:'logoPath')
-        self.logo_path = attributes[:'logoPath']
+      if attributes.key?(:'logo_path')
+        self.logo_path = attributes[:'logo_path']
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'sort_order')
+        self.sort_order = attributes[:'sort_order']
+      end
+
+      if attributes.key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
         end
       end
 
-      if attributes.has_key?(:'requiredFeatures')
-        if (value = attributes[:'requiredFeatures']).is_a?(Array)
-          self.required_features = value
+      if attributes.key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
         end
       end
 
-      if attributes.has_key?(:'sortOrder')
-        self.sort_order = attributes[:'sortOrder']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'visible')
-        self.visible = attributes[:'visible']
+      if attributes.key?(:'category')
+        self.category = attributes[:'category']
+      end
+
+      if attributes.key?(:'beta')
+        self.beta = attributes[:'beta']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -138,6 +159,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
     end
 
@@ -146,15 +168,15 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          beta == o.beta &&
-          category == o.category &&
+          required_features == o.required_features &&
+          visible == o.visible &&
+          logo_path == o.logo_path &&
+          sort_order == o.sort_order &&
+          name == o.name &&
           description == o.description &&
           id == o.id &&
-          logo_path == o.logo_path &&
-          name == o.name &&
-          required_features == o.required_features &&
-          sort_order == o.sort_order &&
-          visible == o.visible
+          category == o.category &&
+          beta == o.beta
     end
 
     # @see the `==` method
@@ -164,39 +186,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [beta, category, description, id, logo_path, name, required_features, sort_order, visible].hash
-    end
-
-    # Builds the object from hash
+      [required_features, visible, logo_path, sort_order, name, description, id, category, beta].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -205,7 +228,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -226,8 +249,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -249,7 +273,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -261,7 +289,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -272,6 +300,5 @@ module Wallee
         value
       end
     end
-
   end
 end

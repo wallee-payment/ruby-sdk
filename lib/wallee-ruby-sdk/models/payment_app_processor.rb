@@ -1,57 +1,35 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class PaymentAppProcessor
-    # The environment (e.g., test or production) currently configured for the processor.
-    attr_accessor :configured_environment
-
-    # The date and time when the processor was created.
-    attr_accessor :created_on
-
     # A URL pointing to the documentation that explains how to configure and use the processor.
     attr_accessor :documentation_url
 
+    attr_accessor :configured_environment
+
     # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
     attr_accessor :external_id
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The installation ID identifies the Web App installation.
-    attr_accessor :installation_id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # The name used to identify the processor.
-    attr_accessor :name
-
-    # The processor configuration created alongside the process within its designated space. This configuration is used in transactions created using this processor.
-    attr_accessor :processor_configuration
-
-    # A URL pointing to the site where merchants can set up production mode for the processor.
-    attr_accessor :production_mode_url
-
-    # The object's current state.
-    attr_accessor :state
 
     # An SVG icon representing the processor, displayed to the user in the interface.
     attr_accessor :svg_icon
@@ -62,143 +40,206 @@ module Wallee
     # Whether the processor is fully prepared and available for handling transactions in a production environment.
     attr_accessor :usable_in_production
 
-    # the date and time when the processor became fully usable and available for handling transactions in a production environment.
-    attr_accessor :usable_in_production_since
+    # The date and time when the processor was created.
+    attr_accessor :created_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    attr_accessor :processor_configuration
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # the date and time when the processor became fully usable and available for handling transactions in a production environment.
+    attr_accessor :usable_in_production_since
+
+    # The name used to identify the processor.
+    attr_accessor :name
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The installation ID identifies the Web App installation.
+    attr_accessor :installation_id
+
+    # A URL pointing to the site where merchants can set up production mode for the processor.
+    attr_accessor :production_mode_url
+
+    attr_accessor :state
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'configured_environment' => :'configuredEnvironment',
-        :'created_on' => :'createdOn',
         :'documentation_url' => :'documentationUrl',
+        :'configured_environment' => :'configuredEnvironment',
         :'external_id' => :'externalId',
-        :'id' => :'id',
-        :'installation_id' => :'installationId',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'name' => :'name',
-        :'processor_configuration' => :'processorConfiguration',
-        :'production_mode_url' => :'productionModeUrl',
-        :'state' => :'state',
         :'svg_icon' => :'svgIcon',
         :'updated_on' => :'updatedOn',
         :'usable_in_production' => :'usableInProduction',
+        :'created_on' => :'createdOn',
+        :'version' => :'version',
+        :'processor_configuration' => :'processorConfiguration',
+        :'linked_space_id' => :'linkedSpaceId',
         :'usable_in_production_since' => :'usableInProductionSince',
-        :'version' => :'version'
+        :'name' => :'name',
+        :'id' => :'id',
+        :'installation_id' => :'installationId',
+        :'production_mode_url' => :'productionModeUrl',
+        :'state' => :'state'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'configured_environment' => :'ChargeAttemptEnvironment',
-        :'created_on' => :'DateTime',
         :'documentation_url' => :'String',
+        :'configured_environment' => :'ChargeAttemptEnvironment',
         :'external_id' => :'String',
+        :'svg_icon' => :'String',
+        :'updated_on' => :'Time',
+        :'usable_in_production' => :'Boolean',
+        :'created_on' => :'Time',
+        :'version' => :'Integer',
+        :'processor_configuration' => :'PaymentProcessorConfiguration',
+        :'linked_space_id' => :'Integer',
+        :'usable_in_production_since' => :'Time',
+        :'name' => :'String',
         :'id' => :'Integer',
         :'installation_id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'name' => :'String',
-        :'processor_configuration' => :'PaymentProcessorConfiguration',
         :'production_mode_url' => :'String',
-        :'state' => :'PaymentAppProcessorState',
-        :'svg_icon' => :'String',
-        :'updated_on' => :'DateTime',
-        :'usable_in_production' => :'BOOLEAN',
-        :'usable_in_production_since' => :'DateTime',
-        :'version' => :'Integer'
+        :'state' => :'PaymentAppProcessorState'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'configuredEnvironment')
-        self.configured_environment = attributes[:'configuredEnvironment']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentAppProcessor` initialize method"
       end
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentAppProcessor`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'documentation_url')
+        self.documentation_url = attributes[:'documentation_url']
       end
 
-      if attributes.has_key?(:'documentationUrl')
-        self.documentation_url = attributes[:'documentationUrl']
+      if attributes.key?(:'configured_environment')
+        self.configured_environment = attributes[:'configured_environment']
       end
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'svg_icon')
+        self.svg_icon = attributes[:'svg_icon']
       end
 
-      if attributes.has_key?(:'installationId')
-        self.installation_id = attributes[:'installationId']
+      if attributes.key?(:'updated_on')
+        self.updated_on = attributes[:'updated_on']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.key?(:'usable_in_production')
+        self.usable_in_production = attributes[:'usable_in_production']
       end
 
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'processor_configuration')
+        self.processor_configuration = attributes[:'processor_configuration']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'usable_in_production_since')
+        self.usable_in_production_since = attributes[:'usable_in_production_since']
+      end
+
+      if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'processorConfiguration')
-        self.processor_configuration = attributes[:'processorConfiguration']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'productionModeUrl')
-        self.production_mode_url = attributes[:'productionModeUrl']
+      if attributes.key?(:'installation_id')
+        self.installation_id = attributes[:'installation_id']
       end
 
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'production_mode_url')
+        self.production_mode_url = attributes[:'production_mode_url']
+      end
+
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'svgIcon')
-        self.svg_icon = attributes[:'svgIcon']
-      end
-
-      if attributes.has_key?(:'updatedOn')
-        self.updated_on = attributes[:'updatedOn']
-      end
-
-      if attributes.has_key?(:'usableInProduction')
-        self.usable_in_production = attributes[:'usableInProduction']
-      end
-
-      if attributes.has_key?(:'usableInProductionSince')
-        self.usable_in_production_since = attributes[:'usableInProductionSince']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       if !@external_id.nil? && @external_id.to_s.length > 40
         invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 40.')
       end
 
-      if !@name.nil? && @name.to_s.length > 100
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
-      end
-
       if !@svg_icon.nil? && @svg_icon.to_s.length > 10000
         invalid_properties.push('invalid value for "svg_icon", the character length must be smaller than or equal to 10000.')
+      end
+
+      if !@name.nil? && @name.to_s.length > 100
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
       end
 
       invalid_properties
@@ -207,16 +248,21 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@external_id.nil? && @external_id.to_s.length > 40
-      return false if !@name.nil? && @name.to_s.length > 100
       return false if !@svg_icon.nil? && @svg_icon.to_s.length > 10000
+      return false if !@name.nil? && @name.to_s.length > 100
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] external_id Value to be assigned
     def external_id=(external_id)
-      if !external_id.nil? && external_id.to_s.length > 40
+      if external_id.nil?
+        fail ArgumentError, 'external_id cannot be nil'
+      end
+
+      if external_id.to_s.length > 40
         fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 40.'
       end
 
@@ -224,23 +270,31 @@ module Wallee
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] svg_icon Value to be assigned
     def svg_icon=(svg_icon)
-      if !svg_icon.nil? && svg_icon.to_s.length > 10000
+      if svg_icon.nil?
+        fail ArgumentError, 'svg_icon cannot be nil'
+      end
+
+      if svg_icon.to_s.length > 10000
         fail ArgumentError, 'invalid value for "svg_icon", the character length must be smaller than or equal to 10000.'
       end
 
       @svg_icon = svg_icon
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -248,22 +302,22 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          configured_environment == o.configured_environment &&
-          created_on == o.created_on &&
           documentation_url == o.documentation_url &&
+          configured_environment == o.configured_environment &&
           external_id == o.external_id &&
-          id == o.id &&
-          installation_id == o.installation_id &&
-          linked_space_id == o.linked_space_id &&
-          name == o.name &&
-          processor_configuration == o.processor_configuration &&
-          production_mode_url == o.production_mode_url &&
-          state == o.state &&
           svg_icon == o.svg_icon &&
           updated_on == o.updated_on &&
           usable_in_production == o.usable_in_production &&
+          created_on == o.created_on &&
+          version == o.version &&
+          processor_configuration == o.processor_configuration &&
+          linked_space_id == o.linked_space_id &&
           usable_in_production_since == o.usable_in_production_since &&
-          version == o.version
+          name == o.name &&
+          id == o.id &&
+          installation_id == o.installation_id &&
+          production_mode_url == o.production_mode_url &&
+          state == o.state
     end
 
     # @see the `==` method
@@ -273,39 +327,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [configured_environment, created_on, documentation_url, external_id, id, installation_id, linked_space_id, name, processor_configuration, production_mode_url, state, svg_icon, updated_on, usable_in_production, usable_in_production_since, version].hash
-    end
-
-    # Builds the object from hash
+      [documentation_url, configured_environment, external_id, svg_icon, updated_on, usable_in_production, created_on, version, processor_configuration, linked_space_id, usable_in_production_since, name, id, installation_id, production_mode_url, state].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -314,7 +369,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -335,8 +390,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -358,7 +414,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -370,7 +430,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -381,6 +441,5 @@ module Wallee
         value
       end
     end
-
   end
 end

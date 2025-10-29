@@ -1,146 +1,199 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class LineItemCreate
-    # The line item price with discounts applied, including taxes.
-    attr_accessor :amount_including_tax
-
-    # A map of custom information for the item.
-    attr_accessor :attributes
-
-    # The discount allocated to the item, including taxes.
-    attr_accessor :discount_including_tax
-
-    # The name of the product, ideally in the customer's language.
-    attr_accessor :name
+    # Whether the item required shipping.
+    attr_accessor :shipping_required
 
     # The number of items that were purchased.
     attr_accessor :quantity
 
-    # Whether the item required shipping.
-    attr_accessor :shipping_required
-
-    # The SKU (stock-keeping unit) of the product.
-    attr_accessor :sku
+    # The name of the product, ideally in the customer's language.
+    attr_accessor :name
 
     # A set of tax lines, each of which specifies a tax applied to the item.
     attr_accessor :taxes
 
-    # The type of the line item.
+    # A map of custom information for the item.
+    attr_accessor :attributes
+
+    # The line item price with discounts applied, including taxes.
+    attr_accessor :amount_including_tax
+
+    # The discount allocated to the item, including taxes.
+    attr_accessor :discount_including_tax
+
+    # The SKU (stock-keeping unit) of the product.
+    attr_accessor :sku
+
     attr_accessor :type
 
     # The unique identifier of the line item within the set of line items.
     attr_accessor :unique_id
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount_including_tax' => :'amountIncludingTax',
-        :'attributes' => :'attributes',
-        :'discount_including_tax' => :'discountIncludingTax',
-        :'name' => :'name',
-        :'quantity' => :'quantity',
         :'shipping_required' => :'shippingRequired',
-        :'sku' => :'sku',
+        :'quantity' => :'quantity',
+        :'name' => :'name',
         :'taxes' => :'taxes',
+        :'attributes' => :'attributes',
+        :'amount_including_tax' => :'amountIncludingTax',
+        :'discount_including_tax' => :'discountIncludingTax',
+        :'sku' => :'sku',
         :'type' => :'type',
         :'unique_id' => :'uniqueId'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'amount_including_tax' => :'Float',
-        :'attributes' => :'Hash<String, LineItemAttributeCreate>',
-        :'discount_including_tax' => :'Float',
-        :'name' => :'String',
+        :'shipping_required' => :'Boolean',
         :'quantity' => :'Float',
-        :'shipping_required' => :'BOOLEAN',
-        :'sku' => :'String',
+        :'name' => :'String',
         :'taxes' => :'Array<TaxCreate>',
+        :'attributes' => :'Hash<String, LineItemAttributeCreate>',
+        :'amount_including_tax' => :'Float',
+        :'discount_including_tax' => :'Float',
+        :'sku' => :'String',
         :'type' => :'LineItemType',
         :'unique_id' => :'String'
       }
     end
 
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::LineItemCreate` initialize method"
       end
 
-      if attributes.has_key?(:'attributes')
-        if (value = attributes[:'attributes']).is_a?(Hash)
-          self.attributes = value
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::LineItemCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'shipping_required')
+        self.shipping_required = attributes[:'shipping_required']
       end
 
-      if attributes.has_key?(:'discountIncludingTax')
-        self.discount_including_tax = attributes[:'discountIncludingTax']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'quantity')
+      if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
+      else
+        self.quantity = nil
       end
 
-      if attributes.has_key?(:'shippingRequired')
-        self.shipping_required = attributes[:'shippingRequired']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
-      if attributes.has_key?(:'sku')
-        self.sku = attributes[:'sku']
-      end
-
-      if attributes.has_key?(:'taxes')
+      if attributes.key?(:'taxes')
         if (value = attributes[:'taxes']).is_a?(Array)
           self.taxes = value
         end
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'attributes')
+        if (value = attributes[:'attributes']).is_a?(Hash)
+          self.attributes = value
+        end
       end
 
-      if attributes.has_key?(:'uniqueId')
-        self.unique_id = attributes[:'uniqueId']
+      if attributes.key?(:'amount_including_tax')
+        self.amount_including_tax = attributes[:'amount_including_tax']
+      else
+        self.amount_including_tax = nil
+      end
+
+      if attributes.key?(:'discount_including_tax')
+        self.discount_including_tax = attributes[:'discount_including_tax']
+      end
+
+      if attributes.key?(:'sku')
+        self.sku = attributes[:'sku']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = nil
+      end
+
+      if attributes.key?(:'unique_id')
+        self.unique_id = attributes[:'unique_id']
+      else
+        self.unique_id = nil
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @amount_including_tax.nil?
-        invalid_properties.push('invalid value for "amount_including_tax", amount_including_tax cannot be nil.')
+      if @quantity.nil?
+        invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
       if @name.nil?
@@ -152,11 +205,11 @@ module Wallee
       end
 
       if @name.to_s.length < 1
-        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
       end
 
-      if @quantity.nil?
-        invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
+      if @amount_including_tax.nil?
+        invalid_properties.push('invalid value for "amount_including_tax", amount_including_tax cannot be nil.')
       end
 
       if !@sku.nil? && @sku.to_s.length > 200
@@ -181,11 +234,12 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @amount_including_tax.nil?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @quantity.nil?
       return false if @name.nil?
       return false if @name.to_s.length > 150
       return false if @name.to_s.length < 1
-      return false if @quantity.nil?
+      return false if @amount_including_tax.nil?
       return false if !@sku.nil? && @sku.to_s.length > 200
       return false if @type.nil?
       return false if @unique_id.nil?
@@ -205,16 +259,30 @@ module Wallee
       end
 
       if name.to_s.length < 1
-        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 1.'
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
       end
 
       @name = name
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] taxes Value to be assigned
+    def taxes=(taxes)
+      if taxes.nil?
+        fail ArgumentError, 'taxes cannot be nil'
+      end
+
+      @taxes = taxes
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] sku Value to be assigned
     def sku=(sku)
-      if !sku.nil? && sku.to_s.length > 200
+      if sku.nil?
+        fail ArgumentError, 'sku cannot be nil'
+      end
+
+      if sku.to_s.length > 200
         fail ArgumentError, 'invalid value for "sku", the character length must be smaller than or equal to 200.'
       end
 
@@ -240,14 +308,14 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount_including_tax == o.amount_including_tax &&
-          attributes == o.attributes &&
-          discount_including_tax == o.discount_including_tax &&
-          name == o.name &&
-          quantity == o.quantity &&
           shipping_required == o.shipping_required &&
-          sku == o.sku &&
+          quantity == o.quantity &&
+          name == o.name &&
           taxes == o.taxes &&
+          attributes == o.attributes &&
+          amount_including_tax == o.amount_including_tax &&
+          discount_including_tax == o.discount_including_tax &&
+          sku == o.sku &&
           type == o.type &&
           unique_id == o.unique_id
     end
@@ -259,39 +327,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [amount_including_tax, attributes, discount_including_tax, name, quantity, shipping_required, sku, taxes, type, unique_id].hash
-    end
-
-    # Builds the object from hash
+      [shipping_required, quantity, name, taxes, attributes, amount_including_tax, discount_including_tax, sku, type, unique_id].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -300,7 +369,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -321,8 +390,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -344,7 +414,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -356,7 +430,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -367,6 +441,5 @@ module Wallee
         value
       end
     end
-
   end
 end

@@ -1,138 +1,169 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
+module WalleeRubySdk
   # The subscription ledger entry represents a single change on the subscription balance.
   class SubscriptionLedgerEntryCreate
-    # The leger entry's amount with discounts applied, including taxes.
-    attr_accessor :amount_including_tax
-
-    # 
-    attr_accessor :component_reference_name
-
-    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-    attr_accessor :external_id
-
     # The number of items that were consumed.
     attr_accessor :quantity
-
-    # 
-    attr_accessor :subscription_metric_id
 
     # The subscription version that the ledger entry belongs to.
     attr_accessor :subscription_version
 
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+    attr_accessor :external_id
+
     # A set of tax lines, each of which specifies a tax applied to the ledger entry.
     attr_accessor :taxes
+
+    # The leger entry's amount with discounts applied, including taxes.
+    attr_accessor :amount_including_tax
 
     # The title that indicates what the ledger entry is about.
     attr_accessor :title
 
+    attr_accessor :component_reference_name
+
+    attr_accessor :subscription_metric_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount_including_tax' => :'amountIncludingTax',
-        :'component_reference_name' => :'componentReferenceName',
-        :'external_id' => :'externalId',
         :'quantity' => :'quantity',
-        :'subscription_metric_id' => :'subscriptionMetricId',
         :'subscription_version' => :'subscriptionVersion',
+        :'external_id' => :'externalId',
         :'taxes' => :'taxes',
-        :'title' => :'title'
+        :'amount_including_tax' => :'amountIncludingTax',
+        :'title' => :'title',
+        :'component_reference_name' => :'componentReferenceName',
+        :'subscription_metric_id' => :'subscriptionMetricId'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'amount_including_tax' => :'Float',
-        :'component_reference_name' => :'String',
-        :'external_id' => :'String',
         :'quantity' => :'Float',
-        :'subscription_metric_id' => :'Integer',
         :'subscription_version' => :'Integer',
+        :'external_id' => :'String',
         :'taxes' => :'Array<TaxCreate>',
-        :'title' => :'String'
+        :'amount_including_tax' => :'Float',
+        :'title' => :'String',
+        :'component_reference_name' => :'String',
+        :'subscription_metric_id' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionLedgerEntryCreate` initialize method"
       end
 
-      if attributes.has_key?(:'componentReferenceName')
-        self.component_reference_name = attributes[:'componentReferenceName']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionLedgerEntryCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'quantity')
+      if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
+      else
+        self.quantity = nil
       end
 
-      if attributes.has_key?(:'subscriptionMetricId')
-        self.subscription_metric_id = attributes[:'subscriptionMetricId']
+      if attributes.key?(:'subscription_version')
+        self.subscription_version = attributes[:'subscription_version']
+      else
+        self.subscription_version = nil
       end
 
-      if attributes.has_key?(:'subscriptionVersion')
-        self.subscription_version = attributes[:'subscriptionVersion']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
+      else
+        self.external_id = nil
       end
 
-      if attributes.has_key?(:'taxes')
+      if attributes.key?(:'taxes')
         if (value = attributes[:'taxes']).is_a?(Array)
           self.taxes = value
         end
       end
 
-      if attributes.has_key?(:'title')
+      if attributes.key?(:'amount_including_tax')
+        self.amount_including_tax = attributes[:'amount_including_tax']
+      else
+        self.amount_including_tax = nil
+      end
+
+      if attributes.key?(:'title')
         self.title = attributes[:'title']
+      else
+        self.title = nil
+      end
+
+      if attributes.key?(:'component_reference_name')
+        self.component_reference_name = attributes[:'component_reference_name']
+      end
+
+      if attributes.key?(:'subscription_metric_id')
+        self.subscription_metric_id = attributes[:'subscription_metric_id']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @amount_including_tax.nil?
-        invalid_properties.push('invalid value for "amount_including_tax", amount_including_tax cannot be nil.')
-      end
-
-      if @external_id.nil?
-        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
-      end
-
       if @quantity.nil?
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
       if @subscription_version.nil?
         invalid_properties.push('invalid value for "subscription_version", subscription_version cannot be nil.')
+      end
+
+      if @external_id.nil?
+        invalid_properties.push('invalid value for "external_id", external_id cannot be nil.')
+      end
+
+      if @amount_including_tax.nil?
+        invalid_properties.push('invalid value for "amount_including_tax", amount_including_tax cannot be nil.')
       end
 
       if @title.nil?
@@ -144,7 +175,7 @@ module Wallee
       end
 
       if @title.to_s.length < 1
-        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
+        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -153,14 +184,25 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @amount_including_tax.nil?
-      return false if @external_id.nil?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @quantity.nil?
       return false if @subscription_version.nil?
+      return false if @external_id.nil?
+      return false if @amount_including_tax.nil?
       return false if @title.nil?
       return false if @title.to_s.length > 150
       return false if @title.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] taxes Value to be assigned
+    def taxes=(taxes)
+      if taxes.nil?
+        fail ArgumentError, 'taxes cannot be nil'
+      end
+
+      @taxes = taxes
     end
 
     # Custom attribute writer method with validation
@@ -175,7 +217,7 @@ module Wallee
       end
 
       if title.to_s.length < 1
-        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
+        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 1.'
       end
 
       @title = title
@@ -186,14 +228,14 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount_including_tax == o.amount_including_tax &&
-          component_reference_name == o.component_reference_name &&
-          external_id == o.external_id &&
           quantity == o.quantity &&
-          subscription_metric_id == o.subscription_metric_id &&
           subscription_version == o.subscription_version &&
+          external_id == o.external_id &&
           taxes == o.taxes &&
-          title == o.title
+          amount_including_tax == o.amount_including_tax &&
+          title == o.title &&
+          component_reference_name == o.component_reference_name &&
+          subscription_metric_id == o.subscription_metric_id
     end
 
     # @see the `==` method
@@ -203,39 +245,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [amount_including_tax, component_reference_name, external_id, quantity, subscription_metric_id, subscription_version, taxes, title].hash
-    end
-
-    # Builds the object from hash
+      [quantity, subscription_version, external_id, taxes, amount_including_tax, title, component_reference_name, subscription_metric_id].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -244,7 +287,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -265,8 +308,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -288,7 +332,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -300,7 +348,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -311,6 +359,5 @@ module Wallee
         value
       end
     end
-
   end
 end

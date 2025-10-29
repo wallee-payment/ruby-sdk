@@ -1,238 +1,269 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class Space
-    # The account that the space belongs to.
-    attr_accessor :account
-
-    # Whether this space and all its parent accounts are active.
-    attr_accessor :active
-
     # Whether this space and all its parent accounts are active or restricted active.
     attr_accessor :active_or_restricted_active
-
-    # The ID of the user the space was created by.
-    attr_accessor :created_by
-
-    # The date and time when the space was created.
-    attr_accessor :created_on
-
-    # The database the space is connected to and that holds the space's data.
-    attr_accessor :database
-
-    # The ID of the user the space was deleted by.
-    attr_accessor :deleted_by
 
     # The date and time when the space was deleted.
     attr_accessor :deleted_on
 
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The date and time when the object was last modified.
-    attr_accessor :last_modified_date
-
-    # The name used to identify the space.
-    attr_accessor :name
-
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
-    # The address that is used in communication with clients for example in emails, documents, etc.
-    attr_accessor :postal_address
-
-    # The currency that is used to display aggregated amounts in the space.
-    attr_accessor :primary_currency
-
-    # The maximum number of API requests that are accepted within two minutes. This limit can only be changed with special privileges.
-    attr_accessor :request_limit
-
-    # Whether this space and all its parent accounts are active or restricted active. There is least one parent account that is restricted active.
-    attr_accessor :restricted_active
-
-    # The object's current state.
-    attr_accessor :state
-
-    # The email address that will receive messages about technical issues and errors that occur in the space.
-    attr_accessor :technical_contact_addresses
+    # Whether this space and all its parent accounts are active.
+    attr_accessor :active
 
     # The time zone that is used to schedule and run background processes. This does not affect the formatting of dates in the user interface.
     attr_accessor :time_zone
 
+    # The date and time when the space was created.
+    attr_accessor :created_on
+
+    # The currency that is used to display aggregated amounts in the space.
+    attr_accessor :primary_currency
+
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
+
+    # The ID of the user the space was deleted by.
+    attr_accessor :deleted_by
+
+    # The maximum number of API requests that are accepted within two minutes. This limit can only be changed with special privileges.
+    attr_accessor :request_limit
+
+    attr_accessor :database
+
+    attr_accessor :postal_address
+
+    # Whether this space and all its parent accounts are active or restricted active. There is least one parent account that is restricted active.
+    attr_accessor :restricted_active
+
+    # The ID of the user the space was created by.
+    attr_accessor :created_by
+
+    # The name used to identify the space.
+    attr_accessor :name
+
+    # The email address that will receive messages about technical issues and errors that occur in the space.
+    attr_accessor :technical_contact_addresses
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    attr_accessor :account
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account' => :'account',
-        :'active' => :'active',
         :'active_or_restricted_active' => :'activeOrRestrictedActive',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'database' => :'database',
-        :'deleted_by' => :'deletedBy',
         :'deleted_on' => :'deletedOn',
-        :'id' => :'id',
-        :'last_modified_date' => :'lastModifiedDate',
-        :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'postal_address' => :'postalAddress',
-        :'primary_currency' => :'primaryCurrency',
-        :'request_limit' => :'requestLimit',
-        :'restricted_active' => :'restrictedActive',
-        :'state' => :'state',
-        :'technical_contact_addresses' => :'technicalContactAddresses',
+        :'active' => :'active',
         :'time_zone' => :'timeZone',
-        :'version' => :'version'
+        :'created_on' => :'createdOn',
+        :'primary_currency' => :'primaryCurrency',
+        :'version' => :'version',
+        :'deleted_by' => :'deletedBy',
+        :'request_limit' => :'requestLimit',
+        :'database' => :'database',
+        :'postal_address' => :'postalAddress',
+        :'restricted_active' => :'restrictedActive',
+        :'created_by' => :'createdBy',
+        :'name' => :'name',
+        :'technical_contact_addresses' => :'technicalContactAddresses',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'account' => :'account'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'account' => :'Account',
-        :'active' => :'BOOLEAN',
-        :'active_or_restricted_active' => :'BOOLEAN',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'database' => :'TenantDatabase',
-        :'deleted_by' => :'Integer',
-        :'deleted_on' => :'DateTime',
-        :'id' => :'Integer',
-        :'last_modified_date' => :'DateTime',
-        :'name' => :'String',
-        :'planned_purge_date' => :'DateTime',
-        :'postal_address' => :'SpaceAddress',
-        :'primary_currency' => :'String',
-        :'request_limit' => :'Integer',
-        :'restricted_active' => :'BOOLEAN',
-        :'state' => :'CreationEntityState',
-        :'technical_contact_addresses' => :'Array<String>',
+        :'active_or_restricted_active' => :'Boolean',
+        :'deleted_on' => :'Time',
+        :'planned_purge_date' => :'Time',
+        :'active' => :'Boolean',
         :'time_zone' => :'String',
-        :'version' => :'Integer'
+        :'created_on' => :'Time',
+        :'primary_currency' => :'String',
+        :'version' => :'Integer',
+        :'deleted_by' => :'Integer',
+        :'request_limit' => :'Integer',
+        :'database' => :'TenantDatabase',
+        :'postal_address' => :'SpaceAddress',
+        :'restricted_active' => :'Boolean',
+        :'created_by' => :'Integer',
+        :'name' => :'String',
+        :'technical_contact_addresses' => :'Array<String>',
+        :'id' => :'Integer',
+        :'state' => :'CreationEntityState',
+        :'account' => :'Account'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'account')
-        self.account = attributes[:'account']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Space` initialize method"
       end
 
-      if attributes.has_key?(:'active')
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Space`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'active_or_restricted_active')
+        self.active_or_restricted_active = attributes[:'active_or_restricted_active']
+      end
+
+      if attributes.key?(:'deleted_on')
+        self.deleted_on = attributes[:'deleted_on']
+      end
+
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
+      end
+
+      if attributes.key?(:'active')
         self.active = attributes[:'active']
       end
 
-      if attributes.has_key?(:'activeOrRestrictedActive')
-        self.active_or_restricted_active = attributes[:'activeOrRestrictedActive']
+      if attributes.key?(:'time_zone')
+        self.time_zone = attributes[:'time_zone']
       end
 
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
       end
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      if attributes.key?(:'primary_currency')
+        self.primary_currency = attributes[:'primary_currency']
       end
 
-      if attributes.has_key?(:'database')
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'deleted_by')
+        self.deleted_by = attributes[:'deleted_by']
+      end
+
+      if attributes.key?(:'request_limit')
+        self.request_limit = attributes[:'request_limit']
+      end
+
+      if attributes.key?(:'database')
         self.database = attributes[:'database']
       end
 
-      if attributes.has_key?(:'deletedBy')
-        self.deleted_by = attributes[:'deletedBy']
+      if attributes.key?(:'postal_address')
+        self.postal_address = attributes[:'postal_address']
       end
 
-      if attributes.has_key?(:'deletedOn')
-        self.deleted_on = attributes[:'deletedOn']
+      if attributes.key?(:'restricted_active')
+        self.restricted_active = attributes[:'restricted_active']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
       end
 
-      if attributes.has_key?(:'lastModifiedDate')
-        self.last_modified_date = attributes[:'lastModifiedDate']
-      end
-
-      if attributes.has_key?(:'name')
+      if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'postalAddress')
-        self.postal_address = attributes[:'postalAddress']
-      end
-
-      if attributes.has_key?(:'primaryCurrency')
-        self.primary_currency = attributes[:'primaryCurrency']
-      end
-
-      if attributes.has_key?(:'requestLimit')
-        self.request_limit = attributes[:'requestLimit']
-      end
-
-      if attributes.has_key?(:'restrictedActive')
-        self.restricted_active = attributes[:'restrictedActive']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'technicalContactAddresses')
-        if (value = attributes[:'technicalContactAddresses']).is_a?(Array)
+      if attributes.key?(:'technical_contact_addresses')
+        if (value = attributes[:'technical_contact_addresses']).is_a?(Array)
           self.technical_contact_addresses = value
         end
       end
 
-      if attributes.has_key?(:'timeZone')
-        self.time_zone = attributes[:'timeZone']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'account')
+        self.account = attributes[:'account']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       if !@name.nil? && @name.to_s.length > 200
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 200.')
       end
 
       if !@name.nil? && @name.to_s.length < 3
-        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 3.')
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 3.')
       end
 
       invalid_properties
@@ -241,6 +272,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@name.nil? && @name.to_s.length > 200
       return false if !@name.nil? && @name.to_s.length < 3
       true
@@ -249,15 +281,29 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] name Value to be assigned
     def name=(name)
-      if !name.nil? && name.to_s.length > 200
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 200
         fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 200.'
       end
 
-      if !name.nil? && name.to_s.length < 3
-        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 3.'
+      if name.to_s.length < 3
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 3.'
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] technical_contact_addresses Value to be assigned
+    def technical_contact_addresses=(technical_contact_addresses)
+      if technical_contact_addresses.nil?
+        fail ArgumentError, 'technical_contact_addresses cannot be nil'
+      end
+
+      @technical_contact_addresses = technical_contact_addresses
     end
 
     # Checks equality by comparing each attribute.
@@ -265,26 +311,25 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account == o.account &&
-          active == o.active &&
           active_or_restricted_active == o.active_or_restricted_active &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          database == o.database &&
-          deleted_by == o.deleted_by &&
           deleted_on == o.deleted_on &&
-          id == o.id &&
-          last_modified_date == o.last_modified_date &&
-          name == o.name &&
           planned_purge_date == o.planned_purge_date &&
-          postal_address == o.postal_address &&
-          primary_currency == o.primary_currency &&
-          request_limit == o.request_limit &&
-          restricted_active == o.restricted_active &&
-          state == o.state &&
-          technical_contact_addresses == o.technical_contact_addresses &&
+          active == o.active &&
           time_zone == o.time_zone &&
-          version == o.version
+          created_on == o.created_on &&
+          primary_currency == o.primary_currency &&
+          version == o.version &&
+          deleted_by == o.deleted_by &&
+          request_limit == o.request_limit &&
+          database == o.database &&
+          postal_address == o.postal_address &&
+          restricted_active == o.restricted_active &&
+          created_by == o.created_by &&
+          name == o.name &&
+          technical_contact_addresses == o.technical_contact_addresses &&
+          id == o.id &&
+          state == o.state &&
+          account == o.account
     end
 
     # @see the `==` method
@@ -294,39 +339,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [account, active, active_or_restricted_active, created_by, created_on, database, deleted_by, deleted_on, id, last_modified_date, name, planned_purge_date, postal_address, primary_currency, request_limit, restricted_active, state, technical_contact_addresses, time_zone, version].hash
-    end
-
-    # Builds the object from hash
+      [active_or_restricted_active, deleted_on, planned_purge_date, active, time_zone, created_on, primary_currency, version, deleted_by, request_limit, database, postal_address, restricted_active, created_by, name, technical_contact_addresses, id, state, account].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -335,7 +381,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -356,8 +402,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -379,7 +426,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -391,7 +442,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -402,6 +453,5 @@ module Wallee
         value
       end
     end
-
   end
 end

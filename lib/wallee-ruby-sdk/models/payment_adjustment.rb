@@ -1,39 +1,41 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class PaymentAdjustment
     # The adjustment's amount, excluding taxes.
     attr_accessor :amount_excluding_tax
 
-    # The adjustment's amount, including taxes.
-    attr_accessor :amount_including_tax
+    # The percentage rate used to calculate the adjustment amount.
+    attr_accessor :rate_in_percentage
+
+    attr_accessor :tax
 
     # A unique identifier for the object.
     attr_accessor :id
 
-    # The percentage rate used to calculate the adjustment amount.
-    attr_accessor :rate_in_percentage
-
-    # The tax applied to the adjustment.
-    attr_accessor :tax
+    # The adjustment's amount, including taxes.
+    attr_accessor :amount_including_tax
 
     # The type of the adjustment.
     attr_accessor :type
@@ -42,55 +44,73 @@ module Wallee
     def self.attribute_map
       {
         :'amount_excluding_tax' => :'amountExcludingTax',
-        :'amount_including_tax' => :'amountIncludingTax',
-        :'id' => :'id',
         :'rate_in_percentage' => :'rateInPercentage',
         :'tax' => :'tax',
+        :'id' => :'id',
+        :'amount_including_tax' => :'amountIncludingTax',
         :'type' => :'type'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
         :'amount_excluding_tax' => :'Float',
-        :'amount_including_tax' => :'Float',
-        :'id' => :'Integer',
         :'rate_in_percentage' => :'Float',
         :'tax' => :'Tax',
+        :'id' => :'Integer',
+        :'amount_including_tax' => :'Float',
         :'type' => :'Integer'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'amountExcludingTax')
-        self.amount_excluding_tax = attributes[:'amountExcludingTax']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentAdjustment` initialize method"
       end
 
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentAdjustment`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'amount_excluding_tax')
+        self.amount_excluding_tax = attributes[:'amount_excluding_tax']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'rate_in_percentage')
+        self.rate_in_percentage = attributes[:'rate_in_percentage']
       end
 
-      if attributes.has_key?(:'rateInPercentage')
-        self.rate_in_percentage = attributes[:'rateInPercentage']
-      end
-
-      if attributes.has_key?(:'tax')
+      if attributes.key?(:'tax')
         self.tax = attributes[:'tax']
       end
 
-      if attributes.has_key?(:'type')
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'amount_including_tax')
+        self.amount_including_tax = attributes[:'amount_including_tax']
+      end
+
+      if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
     end
@@ -98,14 +118,35 @@ module Wallee
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@rate_in_percentage.nil? && @rate_in_percentage > 100
+        invalid_properties.push('invalid value for "rate_in_percentage", must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@rate_in_percentage.nil? && @rate_in_percentage > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] rate_in_percentage Value to be assigned
+    def rate_in_percentage=(rate_in_percentage)
+      if rate_in_percentage.nil?
+        fail ArgumentError, 'rate_in_percentage cannot be nil'
+      end
+
+      if rate_in_percentage > 100
+        fail ArgumentError, 'invalid value for "rate_in_percentage", must be smaller than or equal to 100.'
+      end
+
+      @rate_in_percentage = rate_in_percentage
     end
 
     # Checks equality by comparing each attribute.
@@ -114,10 +155,10 @@ module Wallee
       return true if self.equal?(o)
       self.class == o.class &&
           amount_excluding_tax == o.amount_excluding_tax &&
-          amount_including_tax == o.amount_including_tax &&
-          id == o.id &&
           rate_in_percentage == o.rate_in_percentage &&
           tax == o.tax &&
+          id == o.id &&
+          amount_including_tax == o.amount_including_tax &&
           type == o.type
     end
 
@@ -128,39 +169,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [amount_excluding_tax, amount_including_tax, id, rate_in_percentage, tax, type].hash
-    end
-
-    # Builds the object from hash
+      [amount_excluding_tax, rate_in_percentage, tax, id, amount_including_tax, type].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -169,7 +211,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -190,8 +232,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -213,7 +256,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -225,7 +272,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -236,6 +283,5 @@ module Wallee
         value
       end
     end
-
   end
 end

@@ -1,260 +1,304 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
+module WalleeRubySdk
   # The subscription ledger entry represents a single change on the subscription balance.
   class SubscriptionLedgerEntry
-    # The total tax rate applied to the ledger entry, calculated from the rates of all tax lines.
-    attr_accessor :aggregated_tax_rate
+    # The number of items that were consumed.
+    attr_accessor :quantity
 
     # The leger entry's amount with discounts applied, excluding taxes.
     attr_accessor :amount_excluding_tax
 
-    # The leger entry's amount with discounts applied, including taxes.
-    attr_accessor :amount_including_tax
-
-    # 
-    attr_accessor :component_reference_name
-
-    # 
-    attr_accessor :component_reference_sku
-
-    # The ID of the user the ledger entry was created by.
-    attr_accessor :created_by
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # The discount allocated to the ledger entry, including taxes.
-    attr_accessor :discount_including_tax
-
-    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-    attr_accessor :external_id
-
-    # 
-    attr_accessor :fee_type
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
-
-    # 
-    attr_accessor :pro_rata_calculated
-
-    # The number of items that were consumed.
-    attr_accessor :quantity
-
-    # The object's current state.
-    attr_accessor :state
-
-    # 
-    attr_accessor :subscription_metric_id
 
     # The subscription version that the ledger entry belongs to.
     attr_accessor :subscription_version
 
-    # The sum of all taxes applied to the ledger entry.
-    attr_accessor :tax_amount
+    # A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+    attr_accessor :external_id
 
     # A set of tax lines, each of which specifies a tax applied to the ledger entry.
     attr_accessor :taxes
 
+    attr_accessor :fee_type
+
     # The title that indicates what the ledger entry is about.
     attr_accessor :title
+
+    # The date and time when the object was created.
+    attr_accessor :created_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    attr_accessor :component_reference_name
+
+    attr_accessor :subscription_metric_id
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    attr_accessor :pro_rata_calculated
+
+    # The ID of the user the ledger entry was created by.
+    attr_accessor :created_by
+
+    attr_accessor :component_reference_sku
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    # The leger entry's amount with discounts applied, including taxes.
+    attr_accessor :amount_including_tax
+
+    # The discount allocated to the ledger entry, including taxes.
+    attr_accessor :discount_including_tax
+
+    # The sum of all taxes applied to the ledger entry.
+    attr_accessor :tax_amount
+
+    # The total tax rate applied to the ledger entry, calculated from the rates of all tax lines.
+    attr_accessor :aggregated_tax_rate
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregated_tax_rate' => :'aggregatedTaxRate',
-        :'amount_excluding_tax' => :'amountExcludingTax',
-        :'amount_including_tax' => :'amountIncludingTax',
-        :'component_reference_name' => :'componentReferenceName',
-        :'component_reference_sku' => :'componentReferenceSku',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'discount_including_tax' => :'discountIncludingTax',
-        :'external_id' => :'externalId',
-        :'fee_type' => :'feeType',
-        :'id' => :'id',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'pro_rata_calculated' => :'proRataCalculated',
         :'quantity' => :'quantity',
-        :'state' => :'state',
-        :'subscription_metric_id' => :'subscriptionMetricId',
+        :'amount_excluding_tax' => :'amountExcludingTax',
+        :'planned_purge_date' => :'plannedPurgeDate',
         :'subscription_version' => :'subscriptionVersion',
-        :'tax_amount' => :'taxAmount',
+        :'external_id' => :'externalId',
         :'taxes' => :'taxes',
+        :'fee_type' => :'feeType',
         :'title' => :'title',
-        :'version' => :'version'
+        :'created_on' => :'createdOn',
+        :'version' => :'version',
+        :'component_reference_name' => :'componentReferenceName',
+        :'subscription_metric_id' => :'subscriptionMetricId',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'pro_rata_calculated' => :'proRataCalculated',
+        :'created_by' => :'createdBy',
+        :'component_reference_sku' => :'componentReferenceSku',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'amount_including_tax' => :'amountIncludingTax',
+        :'discount_including_tax' => :'discountIncludingTax',
+        :'tax_amount' => :'taxAmount',
+        :'aggregated_tax_rate' => :'aggregatedTaxRate'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'aggregated_tax_rate' => :'Float',
-        :'amount_excluding_tax' => :'Float',
-        :'amount_including_tax' => :'Float',
-        :'component_reference_name' => :'String',
-        :'component_reference_sku' => :'String',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'discount_including_tax' => :'Float',
-        :'external_id' => :'String',
-        :'fee_type' => :'ProductFeeType',
-        :'id' => :'Integer',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'pro_rata_calculated' => :'BOOLEAN',
         :'quantity' => :'Float',
-        :'state' => :'SubscriptionLedgerEntryState',
-        :'subscription_metric_id' => :'Integer',
+        :'amount_excluding_tax' => :'Float',
+        :'planned_purge_date' => :'Time',
         :'subscription_version' => :'Integer',
-        :'tax_amount' => :'Float',
+        :'external_id' => :'String',
         :'taxes' => :'Array<Tax>',
+        :'fee_type' => :'ProductFeeType',
         :'title' => :'String',
-        :'version' => :'Integer'
+        :'created_on' => :'Time',
+        :'version' => :'Integer',
+        :'component_reference_name' => :'String',
+        :'subscription_metric_id' => :'Integer',
+        :'linked_space_id' => :'Integer',
+        :'pro_rata_calculated' => :'Boolean',
+        :'created_by' => :'Integer',
+        :'component_reference_sku' => :'String',
+        :'id' => :'Integer',
+        :'state' => :'SubscriptionLedgerEntryState',
+        :'amount_including_tax' => :'Float',
+        :'discount_including_tax' => :'Float',
+        :'tax_amount' => :'Float',
+        :'aggregated_tax_rate' => :'Float'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'aggregatedTaxRate')
-        self.aggregated_tax_rate = attributes[:'aggregatedTaxRate']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionLedgerEntry` initialize method"
       end
 
-      if attributes.has_key?(:'amountExcludingTax')
-        self.amount_excluding_tax = attributes[:'amountExcludingTax']
-      end
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionLedgerEntry`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
 
-      if attributes.has_key?(:'amountIncludingTax')
-        self.amount_including_tax = attributes[:'amountIncludingTax']
-      end
-
-      if attributes.has_key?(:'componentReferenceName')
-        self.component_reference_name = attributes[:'componentReferenceName']
-      end
-
-      if attributes.has_key?(:'componentReferenceSku')
-        self.component_reference_sku = attributes[:'componentReferenceSku']
-      end
-
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'discountIncludingTax')
-        self.discount_including_tax = attributes[:'discountIncludingTax']
-      end
-
-      if attributes.has_key?(:'externalId')
-        self.external_id = attributes[:'externalId']
-      end
-
-      if attributes.has_key?(:'feeType')
-        self.fee_type = attributes[:'feeType']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'proRataCalculated')
-        self.pro_rata_calculated = attributes[:'proRataCalculated']
-      end
-
-      if attributes.has_key?(:'quantity')
+      if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
+      if attributes.key?(:'amount_excluding_tax')
+        self.amount_excluding_tax = attributes[:'amount_excluding_tax']
       end
 
-      if attributes.has_key?(:'subscriptionMetricId')
-        self.subscription_metric_id = attributes[:'subscriptionMetricId']
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
       end
 
-      if attributes.has_key?(:'subscriptionVersion')
-        self.subscription_version = attributes[:'subscriptionVersion']
+      if attributes.key?(:'subscription_version')
+        self.subscription_version = attributes[:'subscription_version']
       end
 
-      if attributes.has_key?(:'taxAmount')
-        self.tax_amount = attributes[:'taxAmount']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
       end
 
-      if attributes.has_key?(:'taxes')
+      if attributes.key?(:'taxes')
         if (value = attributes[:'taxes']).is_a?(Array)
           self.taxes = value
         end
       end
 
-      if attributes.has_key?(:'title')
+      if attributes.key?(:'fee_type')
+        self.fee_type = attributes[:'fee_type']
+      end
+
+      if attributes.key?(:'title')
         self.title = attributes[:'title']
       end
 
-      if attributes.has_key?(:'version')
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
+      end
+
+      if attributes.key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'component_reference_name')
+        self.component_reference_name = attributes[:'component_reference_name']
+      end
+
+      if attributes.key?(:'subscription_metric_id')
+        self.subscription_metric_id = attributes[:'subscription_metric_id']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'pro_rata_calculated')
+        self.pro_rata_calculated = attributes[:'pro_rata_calculated']
+      end
+
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
+      end
+
+      if attributes.key?(:'component_reference_sku')
+        self.component_reference_sku = attributes[:'component_reference_sku']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'amount_including_tax')
+        self.amount_including_tax = attributes[:'amount_including_tax']
+      end
+
+      if attributes.key?(:'discount_including_tax')
+        self.discount_including_tax = attributes[:'discount_including_tax']
+      end
+
+      if attributes.key?(:'tax_amount')
+        self.tax_amount = attributes[:'tax_amount']
+      end
+
+      if attributes.key?(:'aggregated_tax_rate')
+        self.aggregated_tax_rate = attributes[:'aggregated_tax_rate']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
-        invalid_properties.push('invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.')
-      end
-
       if !@title.nil? && @title.to_s.length > 150
         invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 150.')
       end
 
       if !@title.nil? && @title.to_s.length < 1
-        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
+        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 1.')
+      end
+
+      if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
+        invalid_properties.push('invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/([0-9a-zA-Z\-_]+)/)
+      if !@component_reference_sku.nil? && @component_reference_sku !~ pattern
+        invalid_properties.push("invalid value for \"component_reference_sku\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -263,34 +307,60 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@title.nil? && @title.to_s.length > 150
       return false if !@title.nil? && @title.to_s.length < 1
+      return false if !@component_reference_sku.nil? && @component_reference_sku.to_s.length > 100
+      pattern = Regexp.new(/([0-9a-zA-Z\-_]+)/)
+      return false if !@component_reference_sku.nil? && @component_reference_sku !~ pattern
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] component_reference_sku Value to be assigned
-    def component_reference_sku=(component_reference_sku)
-      if !component_reference_sku.nil? && component_reference_sku.to_s.length > 100
-        fail ArgumentError, 'invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.'
+    # @param [Object] taxes Value to be assigned
+    def taxes=(taxes)
+      if taxes.nil?
+        fail ArgumentError, 'taxes cannot be nil'
       end
 
-      @component_reference_sku = component_reference_sku
+      @taxes = taxes
     end
 
     # Custom attribute writer method with validation
     # @param [Object] title Value to be assigned
     def title=(title)
-      if !title.nil? && title.to_s.length > 150
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
+      end
+
+      if title.to_s.length > 150
         fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 150.'
       end
 
-      if !title.nil? && title.to_s.length < 1
-        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
+      if title.to_s.length < 1
+        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 1.'
       end
 
       @title = title
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] component_reference_sku Value to be assigned
+    def component_reference_sku=(component_reference_sku)
+      if component_reference_sku.nil?
+        fail ArgumentError, 'component_reference_sku cannot be nil'
+      end
+
+      if component_reference_sku.to_s.length > 100
+        fail ArgumentError, 'invalid value for "component_reference_sku", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/([0-9a-zA-Z\-_]+)/)
+      if component_reference_sku !~ pattern
+        fail ArgumentError, "invalid value for \"component_reference_sku\", must conform to the pattern #{pattern}."
+      end
+
+      @component_reference_sku = component_reference_sku
     end
 
     # Checks equality by comparing each attribute.
@@ -298,28 +368,28 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregated_tax_rate == o.aggregated_tax_rate &&
-          amount_excluding_tax == o.amount_excluding_tax &&
-          amount_including_tax == o.amount_including_tax &&
-          component_reference_name == o.component_reference_name &&
-          component_reference_sku == o.component_reference_sku &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          discount_including_tax == o.discount_including_tax &&
-          external_id == o.external_id &&
-          fee_type == o.fee_type &&
-          id == o.id &&
-          linked_space_id == o.linked_space_id &&
-          planned_purge_date == o.planned_purge_date &&
-          pro_rata_calculated == o.pro_rata_calculated &&
           quantity == o.quantity &&
-          state == o.state &&
-          subscription_metric_id == o.subscription_metric_id &&
+          amount_excluding_tax == o.amount_excluding_tax &&
+          planned_purge_date == o.planned_purge_date &&
           subscription_version == o.subscription_version &&
-          tax_amount == o.tax_amount &&
+          external_id == o.external_id &&
           taxes == o.taxes &&
+          fee_type == o.fee_type &&
           title == o.title &&
-          version == o.version
+          created_on == o.created_on &&
+          version == o.version &&
+          component_reference_name == o.component_reference_name &&
+          subscription_metric_id == o.subscription_metric_id &&
+          linked_space_id == o.linked_space_id &&
+          pro_rata_calculated == o.pro_rata_calculated &&
+          created_by == o.created_by &&
+          component_reference_sku == o.component_reference_sku &&
+          id == o.id &&
+          state == o.state &&
+          amount_including_tax == o.amount_including_tax &&
+          discount_including_tax == o.discount_including_tax &&
+          tax_amount == o.tax_amount &&
+          aggregated_tax_rate == o.aggregated_tax_rate
     end
 
     # @see the `==` method
@@ -329,39 +399,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [aggregated_tax_rate, amount_excluding_tax, amount_including_tax, component_reference_name, component_reference_sku, created_by, created_on, discount_including_tax, external_id, fee_type, id, linked_space_id, planned_purge_date, pro_rata_calculated, quantity, state, subscription_metric_id, subscription_version, tax_amount, taxes, title, version].hash
-    end
-
-    # Builds the object from hash
+      [quantity, amount_excluding_tax, planned_purge_date, subscription_version, external_id, taxes, fee_type, title, created_on, version, component_reference_name, subscription_metric_id, linked_space_id, pro_rata_calculated, created_by, component_reference_sku, id, state, amount_including_tax, discount_including_tax, tax_amount, aggregated_tax_rate].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -370,7 +441,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -391,8 +462,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -414,7 +486,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -426,7 +502,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -437,6 +513,5 @@ module Wallee
         value
       end
     end
-
   end
 end

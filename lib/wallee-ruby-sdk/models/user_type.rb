@@ -1,38 +1,51 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
+module WalleeRubySdk
   class UserType
-    
-    HUMAN_USER = 'HUMAN_USER'.freeze
-    SINGLE_SIGNON_USER = 'SINGLE_SIGNON_USER'.freeze
-    APPLICATION_USER = 'APPLICATION_USER'.freeze
-    ANONYMOUS_USER = 'ANONYMOUS_USER'.freeze
-    SERVER_USER = 'SERVER_USER'.freeze
+    HUMAN_USER = "HUMAN_USER".freeze
+    SINGLE_SIGNON_USER = "SINGLE_SIGNON_USER".freeze
+    APPLICATION_USER = "APPLICATION_USER".freeze
+    ANONYMOUS_USER = "ANONYMOUS_USER".freeze
+    SERVER_USER = "SERVER_USER".freeze
+
+    def self.all_vars
+      @all_vars ||= [HUMAN_USER, SINGLE_SIGNON_USER, APPLICATION_USER, ANONYMOUS_USER, SERVER_USER].freeze
+    end
+
+    # Builds the enum from string
+    # @param [String] The enum value in the form of the string
+    # @return [String] The enum value
+    def self.build_from_hash(value)
+      new.build_from_hash(value)
+    end
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      constantValues = UserType.constants.select { |c| UserType::const_get(c) == value }
-      raise "Invalid ENUM value #{value} for class #UserType" if constantValues.empty?
-      value
+      return value if UserType.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #UserType"
     end
   end
 end

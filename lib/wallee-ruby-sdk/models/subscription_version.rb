@@ -1,222 +1,262 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class SubscriptionVersion
-    # The date and time when the subscription version was activated.
-    attr_accessor :activated_on
-
-    # The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
-    attr_accessor :billing_currency
-
-    # 
-    attr_accessor :billing_cycle_model
-
-    # The configurations of the subscription's components.
-    attr_accessor :component_configurations
-
-    # The date and time when the subscription version was created.
-    attr_accessor :created_on
-
-    # The date and time when the last period is expected to end.
-    attr_accessor :expected_last_period_end
-
-    # The date and time when the subscription version failed.
-    attr_accessor :failed_on
-
-    # A unique identifier for the object.
-    attr_accessor :id
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
 
     # The language that is linked to the object.
     attr_accessor :language
 
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-    attr_accessor :planned_purge_date
-
-    # The date and time when the termination of the subscription version is planned.
-    attr_accessor :planned_termination_date
-
-    # The product version that is subscribed to.
-    attr_accessor :product_version
-
-    # The object's current state.
-    attr_accessor :state
-
-    # The subscription that this version belongs to.
     attr_accessor :subscription
 
-    # The date and time when the subscription version was terminated.
-    attr_accessor :terminated_on
-
-    # The date and time when the termination of the subscription version started.
-    attr_accessor :terminating_on
-
-    # The date and time when the termination of the subscription version was issued.
-    attr_accessor :termination_issued_on
+    # The date and time when the subscription version was created.
+    attr_accessor :created_on
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    # The date and time when the subscription version was terminated.
+    attr_accessor :terminated_on
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # The date and time when the termination of the subscription version was issued.
+    attr_accessor :termination_issued_on
+
+    # The configurations of the subscription's components.
+    attr_accessor :component_configurations
+
+    attr_accessor :product_version
+
+    # The date and time when the subscription version was activated.
+    attr_accessor :activated_on
+
+    # The date and time when the termination of the subscription version started.
+    attr_accessor :terminating_on
+
+    # The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
+    attr_accessor :billing_currency
+
+    # The date and time when the last period is expected to end.
+    attr_accessor :expected_last_period_end
+
+    attr_accessor :billing_cycle_model
+
+    # The date and time when the termination of the subscription version is planned.
+    attr_accessor :planned_termination_date
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
+
+    # The date and time when the subscription version failed.
+    attr_accessor :failed_on
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'activated_on' => :'activatedOn',
-        :'billing_currency' => :'billingCurrency',
-        :'billing_cycle_model' => :'billingCycleModel',
-        :'component_configurations' => :'componentConfigurations',
-        :'created_on' => :'createdOn',
-        :'expected_last_period_end' => :'expectedLastPeriodEnd',
-        :'failed_on' => :'failedOn',
-        :'id' => :'id',
-        :'language' => :'language',
-        :'linked_space_id' => :'linkedSpaceId',
         :'planned_purge_date' => :'plannedPurgeDate',
-        :'planned_termination_date' => :'plannedTerminationDate',
-        :'product_version' => :'productVersion',
-        :'state' => :'state',
+        :'language' => :'language',
         :'subscription' => :'subscription',
+        :'created_on' => :'createdOn',
+        :'version' => :'version',
         :'terminated_on' => :'terminatedOn',
-        :'terminating_on' => :'terminatingOn',
+        :'linked_space_id' => :'linkedSpaceId',
         :'termination_issued_on' => :'terminationIssuedOn',
-        :'version' => :'version'
+        :'component_configurations' => :'componentConfigurations',
+        :'product_version' => :'productVersion',
+        :'activated_on' => :'activatedOn',
+        :'terminating_on' => :'terminatingOn',
+        :'billing_currency' => :'billingCurrency',
+        :'expected_last_period_end' => :'expectedLastPeriodEnd',
+        :'billing_cycle_model' => :'billingCycleModel',
+        :'planned_termination_date' => :'plannedTerminationDate',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'failed_on' => :'failedOn'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'activated_on' => :'DateTime',
-        :'billing_currency' => :'String',
-        :'billing_cycle_model' => :'BillingCycleModel',
-        :'component_configurations' => :'Array<SubscriptionComponentConfiguration>',
-        :'created_on' => :'DateTime',
-        :'expected_last_period_end' => :'DateTime',
-        :'failed_on' => :'DateTime',
-        :'id' => :'Integer',
+        :'planned_purge_date' => :'Time',
         :'language' => :'String',
-        :'linked_space_id' => :'Integer',
-        :'planned_purge_date' => :'DateTime',
-        :'planned_termination_date' => :'DateTime',
-        :'product_version' => :'SubscriptionProductVersion',
-        :'state' => :'SubscriptionVersionState',
         :'subscription' => :'Subscription',
-        :'terminated_on' => :'DateTime',
-        :'terminating_on' => :'DateTime',
-        :'termination_issued_on' => :'DateTime',
-        :'version' => :'Integer'
+        :'created_on' => :'Time',
+        :'version' => :'Integer',
+        :'terminated_on' => :'Time',
+        :'linked_space_id' => :'Integer',
+        :'termination_issued_on' => :'Time',
+        :'component_configurations' => :'Array<SubscriptionComponentConfiguration>',
+        :'product_version' => :'SubscriptionProductVersion',
+        :'activated_on' => :'Time',
+        :'terminating_on' => :'Time',
+        :'billing_currency' => :'String',
+        :'expected_last_period_end' => :'Time',
+        :'billing_cycle_model' => :'BillingCycleModel',
+        :'planned_termination_date' => :'Time',
+        :'id' => :'Integer',
+        :'state' => :'SubscriptionVersionState',
+        :'failed_on' => :'Time'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'activatedOn')
-        self.activated_on = attributes[:'activatedOn']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionVersion` initialize method"
       end
 
-      if attributes.has_key?(:'billingCurrency')
-        self.billing_currency = attributes[:'billingCurrency']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionVersion`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
       end
 
-      if attributes.has_key?(:'billingCycleModel')
-        self.billing_cycle_model = attributes[:'billingCycleModel']
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'componentConfigurations')
-        if (value = attributes[:'componentConfigurations']).is_a?(Array)
+      if attributes.key?(:'subscription')
+        self.subscription = attributes[:'subscription']
+      end
+
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'terminated_on')
+        self.terminated_on = attributes[:'terminated_on']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'termination_issued_on')
+        self.termination_issued_on = attributes[:'termination_issued_on']
+      end
+
+      if attributes.key?(:'component_configurations')
+        if (value = attributes[:'component_configurations']).is_a?(Array)
           self.component_configurations = value
         end
       end
 
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
+      if attributes.key?(:'product_version')
+        self.product_version = attributes[:'product_version']
       end
 
-      if attributes.has_key?(:'expectedLastPeriodEnd')
-        self.expected_last_period_end = attributes[:'expectedLastPeriodEnd']
+      if attributes.key?(:'activated_on')
+        self.activated_on = attributes[:'activated_on']
       end
 
-      if attributes.has_key?(:'failedOn')
-        self.failed_on = attributes[:'failedOn']
+      if attributes.key?(:'terminating_on')
+        self.terminating_on = attributes[:'terminating_on']
       end
 
-      if attributes.has_key?(:'id')
+      if attributes.key?(:'billing_currency')
+        self.billing_currency = attributes[:'billing_currency']
+      end
+
+      if attributes.key?(:'expected_last_period_end')
+        self.expected_last_period_end = attributes[:'expected_last_period_end']
+      end
+
+      if attributes.key?(:'billing_cycle_model')
+        self.billing_cycle_model = attributes[:'billing_cycle_model']
+      end
+
+      if attributes.key?(:'planned_termination_date')
+        self.planned_termination_date = attributes[:'planned_termination_date']
+      end
+
+      if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
-      end
-
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
-      end
-
-      if attributes.has_key?(:'plannedTerminationDate')
-        self.planned_termination_date = attributes[:'plannedTerminationDate']
-      end
-
-      if attributes.has_key?(:'productVersion')
-        self.product_version = attributes[:'productVersion']
-      end
-
-      if attributes.has_key?(:'state')
+      if attributes.key?(:'state')
         self.state = attributes[:'state']
       end
 
-      if attributes.has_key?(:'subscription')
-        self.subscription = attributes[:'subscription']
-      end
-
-      if attributes.has_key?(:'terminatedOn')
-        self.terminated_on = attributes[:'terminatedOn']
-      end
-
-      if attributes.has_key?(:'terminatingOn')
-        self.terminating_on = attributes[:'terminatingOn']
-      end
-
-      if attributes.has_key?(:'terminationIssuedOn')
-        self.termination_issued_on = attributes[:'terminationIssuedOn']
-      end
-
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'failed_on')
+        self.failed_on = attributes[:'failed_on']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -224,7 +264,18 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] component_configurations Value to be assigned
+    def component_configurations=(component_configurations)
+      if component_configurations.nil?
+        fail ArgumentError, 'component_configurations cannot be nil'
+      end
+
+      @component_configurations = component_configurations
     end
 
     # Checks equality by comparing each attribute.
@@ -232,25 +283,25 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          activated_on == o.activated_on &&
-          billing_currency == o.billing_currency &&
-          billing_cycle_model == o.billing_cycle_model &&
-          component_configurations == o.component_configurations &&
-          created_on == o.created_on &&
-          expected_last_period_end == o.expected_last_period_end &&
-          failed_on == o.failed_on &&
-          id == o.id &&
-          language == o.language &&
-          linked_space_id == o.linked_space_id &&
           planned_purge_date == o.planned_purge_date &&
-          planned_termination_date == o.planned_termination_date &&
-          product_version == o.product_version &&
-          state == o.state &&
+          language == o.language &&
           subscription == o.subscription &&
+          created_on == o.created_on &&
+          version == o.version &&
           terminated_on == o.terminated_on &&
-          terminating_on == o.terminating_on &&
+          linked_space_id == o.linked_space_id &&
           termination_issued_on == o.termination_issued_on &&
-          version == o.version
+          component_configurations == o.component_configurations &&
+          product_version == o.product_version &&
+          activated_on == o.activated_on &&
+          terminating_on == o.terminating_on &&
+          billing_currency == o.billing_currency &&
+          expected_last_period_end == o.expected_last_period_end &&
+          billing_cycle_model == o.billing_cycle_model &&
+          planned_termination_date == o.planned_termination_date &&
+          id == o.id &&
+          state == o.state &&
+          failed_on == o.failed_on
     end
 
     # @see the `==` method
@@ -260,39 +311,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [activated_on, billing_currency, billing_cycle_model, component_configurations, created_on, expected_last_period_end, failed_on, id, language, linked_space_id, planned_purge_date, planned_termination_date, product_version, state, subscription, terminated_on, terminating_on, termination_issued_on, version].hash
-    end
-
-    # Builds the object from hash
+      [planned_purge_date, language, subscription, created_on, version, terminated_on, linked_space_id, termination_issued_on, component_configurations, product_version, activated_on, terminating_on, billing_currency, expected_last_period_end, billing_cycle_model, planned_termination_date, id, state, failed_on].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -301,7 +353,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -322,8 +374,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -345,7 +398,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -357,7 +414,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -368,6 +425,5 @@ module Wallee
         value
       end
     end
-
   end
 end

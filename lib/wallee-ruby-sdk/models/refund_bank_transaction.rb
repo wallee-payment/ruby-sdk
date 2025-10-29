@@ -1,139 +1,159 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class RefundBankTransaction
-    # Provides general information about the bank transaction.
-    attr_accessor :bank_transaction
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The language that is linked to the object.
-    attr_accessor :language
-
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
-
-    # The payment transaction this object is linked to.
-    attr_accessor :linked_transaction
-
-    # The refund this bank transaction belongs to.
-    attr_accessor :refund
-
-    # The posting amount represents the monetary value of the bank transaction, recorded in the refund's currency, before applying any adjustments.
-    attr_accessor :refund_currency_amount
 
     # The value amount represents the net monetary value of the bank transaction, recorded in the refund's currency, after applicable deductions.
     attr_accessor :refund_currency_value_amount
 
+    # The posting amount represents the monetary value of the bank transaction, recorded in the refund's currency, before applying any adjustments.
+    attr_accessor :refund_currency_amount
+
+    # The language that is linked to the object.
+    attr_accessor :language
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
     # The ID of the space view this object is linked to.
     attr_accessor :space_view_id
+
+    # The payment transaction this object is linked to.
+    attr_accessor :linked_transaction
+
+    attr_accessor :bank_transaction
 
     # The version is used for optimistic locking and incremented whenever the object is updated.
     attr_accessor :version
 
+    attr_accessor :refund
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'bank_transaction' => :'bankTransaction',
-        :'id' => :'id',
-        :'language' => :'language',
         :'linked_space_id' => :'linkedSpaceId',
-        :'linked_transaction' => :'linkedTransaction',
-        :'refund' => :'refund',
-        :'refund_currency_amount' => :'refundCurrencyAmount',
         :'refund_currency_value_amount' => :'refundCurrencyValueAmount',
+        :'refund_currency_amount' => :'refundCurrencyAmount',
+        :'language' => :'language',
+        :'id' => :'id',
         :'space_view_id' => :'spaceViewId',
-        :'version' => :'version'
+        :'linked_transaction' => :'linkedTransaction',
+        :'bank_transaction' => :'bankTransaction',
+        :'version' => :'version',
+        :'refund' => :'refund'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'bank_transaction' => :'BankTransaction',
-        :'id' => :'Integer',
-        :'language' => :'String',
         :'linked_space_id' => :'Integer',
-        :'linked_transaction' => :'Integer',
-        :'refund' => :'Refund',
-        :'refund_currency_amount' => :'Float',
         :'refund_currency_value_amount' => :'Float',
+        :'refund_currency_amount' => :'Float',
+        :'language' => :'String',
+        :'id' => :'Integer',
         :'space_view_id' => :'Integer',
-        :'version' => :'Integer'
+        :'linked_transaction' => :'Integer',
+        :'bank_transaction' => :'BankTransaction',
+        :'version' => :'Integer',
+        :'refund' => :'Refund'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'bankTransaction')
-        self.bank_transaction = attributes[:'bankTransaction']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::RefundBankTransaction` initialize method"
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::RefundBankTransaction`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
       end
 
-      if attributes.has_key?(:'language')
+      if attributes.key?(:'refund_currency_value_amount')
+        self.refund_currency_value_amount = attributes[:'refund_currency_value_amount']
+      end
+
+      if attributes.key?(:'refund_currency_amount')
+        self.refund_currency_amount = attributes[:'refund_currency_amount']
+      end
+
+      if attributes.key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'linkedTransaction')
-        self.linked_transaction = attributes[:'linkedTransaction']
+      if attributes.key?(:'space_view_id')
+        self.space_view_id = attributes[:'space_view_id']
       end
 
-      if attributes.has_key?(:'refund')
-        self.refund = attributes[:'refund']
+      if attributes.key?(:'linked_transaction')
+        self.linked_transaction = attributes[:'linked_transaction']
       end
 
-      if attributes.has_key?(:'refundCurrencyAmount')
-        self.refund_currency_amount = attributes[:'refundCurrencyAmount']
+      if attributes.key?(:'bank_transaction')
+        self.bank_transaction = attributes[:'bank_transaction']
       end
 
-      if attributes.has_key?(:'refundCurrencyValueAmount')
-        self.refund_currency_value_amount = attributes[:'refundCurrencyValueAmount']
-      end
-
-      if attributes.has_key?(:'spaceViewId')
-        self.space_view_id = attributes[:'spaceViewId']
-      end
-
-      if attributes.has_key?(:'version')
+      if attributes.key?(:'version')
         self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'refund')
+        self.refund = attributes[:'refund']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
       invalid_properties
     end
@@ -141,6 +161,7 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       true
     end
 
@@ -149,16 +170,16 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          bank_transaction == o.bank_transaction &&
-          id == o.id &&
-          language == o.language &&
           linked_space_id == o.linked_space_id &&
-          linked_transaction == o.linked_transaction &&
-          refund == o.refund &&
-          refund_currency_amount == o.refund_currency_amount &&
           refund_currency_value_amount == o.refund_currency_value_amount &&
+          refund_currency_amount == o.refund_currency_amount &&
+          language == o.language &&
+          id == o.id &&
           space_view_id == o.space_view_id &&
-          version == o.version
+          linked_transaction == o.linked_transaction &&
+          bank_transaction == o.bank_transaction &&
+          version == o.version &&
+          refund == o.refund
     end
 
     # @see the `==` method
@@ -168,39 +189,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [bank_transaction, id, language, linked_space_id, linked_transaction, refund, refund_currency_amount, refund_currency_value_amount, space_view_id, version].hash
-    end
-
-    # Builds the object from hash
+      [linked_space_id, refund_currency_value_amount, refund_currency_amount, language, id, space_view_id, linked_transaction, bank_transaction, version, refund].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -209,7 +231,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -230,8 +252,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -253,7 +276,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -265,7 +292,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -276,6 +303,5 @@ module Wallee
         value
       end
     end
-
   end
 end

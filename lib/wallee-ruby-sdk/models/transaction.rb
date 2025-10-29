@@ -1,714 +1,736 @@
-=begin
-The wallee API allows an easy interaction with the wallee web service.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-=end
+# Wallee AG Ruby SDK
+#
+# This library allows to interact with the Wallee AG payment service.
+#
+# Copyright owner: Wallee AG
+# Website: https://en.wallee.com
+# Developer email: ecosystem-team@wallee.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'date'
+require 'time'
 
-module Wallee
-  # 
+module WalleeRubySdk
   class Transaction
-    # The 'Accept' header of the customer's web browser.
-    attr_accessor :accept_header
-
-    # The 'Accept Language' header of the customer's web browser.
-    attr_accessor :accept_language_header
-
-    # The payment method brands that can be used to authorize the transaction.
-    attr_accessor :allowed_payment_method_brands
-
-    # The payment method configurations that can be used to authorize the transaction.
-    attr_accessor :allowed_payment_method_configurations
-
-    # The sum of all line item prices including taxes in the transaction's currency.
-    attr_accessor :authorization_amount
-
-    # The environment in which the transaction was authorized.
-    attr_accessor :authorization_environment
-
-    # The sales channel through which the transaction was placed.
-    attr_accessor :authorization_sales_channel
-
-    # The date and time when the transaction must be authorized, otherwise it will canceled.
-    attr_accessor :authorization_timeout_on
-
-    # The date and time when the transaction was authorized.
-    attr_accessor :authorized_on
-
-    # Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
-    attr_accessor :auto_confirmation_enabled
-
-    # The address associated with the payment method for invoicing and transaction processing purposes.
-    attr_accessor :billing_address
-
-    # Whether the customer can make further payment attempts if the first one has failed. Default is true.
-    attr_accessor :charge_retry_enabled
-
-    # The total amount that was completed, in the transaction's currency.
-    attr_accessor :completed_amount
-
-    # The date and time when the transaction was completed.
-    attr_accessor :completed_on
-
-    # The behavior that controls when the transaction is completed.
-    attr_accessor :completion_behavior
-
-    # The date and time when the transaction is completed automatically.
-    attr_accessor :completion_timeout_on
-
-    # The ID of the user the transaction was confirmed by.
-    attr_accessor :confirmed_by
-
-    # The date and time when the transaction was created.
-    attr_accessor :confirmed_on
-
-    # The ID of the user the transaction was created by.
-    attr_accessor :created_by
-
-    # The date and time when the object was created.
-    attr_accessor :created_on
-
-    # The three-letter code (ISO 4217 format) of the transaction's currency.
-    attr_accessor :currency
-
-    # The customer's email address.
-    attr_accessor :customer_email_address
-
-    # The unique identifier of the customer in the external system.
-    attr_accessor :customer_id
-
-    # The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
-    attr_accessor :customers_presence
-
-    # This date and time when the decision was made as to whether the order should be shipped.
-    attr_accessor :delivery_decision_made_on
-
-    # Allows to link the transaction to the data collected from the customer's device.
-    attr_accessor :device_session_identifier
-
-    # Whether email sending is deactivated for the transaction. Default is false.
-    attr_accessor :emails_disabled
-
-    # The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
-    attr_accessor :end_of_life
-
-    # The environment used when rendering resources.
-    attr_accessor :environment
-
-    # The strategy for determining whether the transaction is to be processed in the test or production environment.
-    attr_accessor :environment_selection_strategy
-
-    # The date and time when the transaction failed.
-    attr_accessor :failed_on
-
-    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
-    attr_accessor :failed_url
-
-    # The reason for the failure of the transaction.
-    attr_accessor :failure_reason
-
-    # The group that the transaction belongs to.
-    attr_accessor :group
-
-    # A unique identifier for the object.
-    attr_accessor :id
-
-    # The IP address of the customer's device.
-    attr_accessor :internet_protocol_address
-
-    # The country determined from the IP address of the customer's device.
-    attr_accessor :internet_protocol_address_country
-
-    # The merchant's reference used to identify the invoice.
-    attr_accessor :invoice_merchant_reference
-
-    # Whether Java is enabled on the customer's web browser.
-    attr_accessor :java_enabled
-
-    # The language that is linked to the object.
-    attr_accessor :language
-
-    # The line items purchased by the customer.
-    attr_accessor :line_items
-
-    # The ID of the space this object belongs to.
-    attr_accessor :linked_space_id
-
-    # The merchant's reference used to identify the transaction.
-    attr_accessor :merchant_reference
-
-    # Allow to store additional information about the object.
-    attr_accessor :meta_data
-
-    # The parent transaction which was (partially) replaced by this transaction.
     attr_accessor :parent
-
-    # The payment connector configuration that was used to authorize the transaction.
-    attr_accessor :payment_connector_configuration
-
-    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-    attr_accessor :planned_purge_date
-
-    # The date and time when the processing of the transaction was started.
-    attr_accessor :processing_on
-
-    # The total amount that was refunded, in the transaction's currency.
-    attr_accessor :refunded_amount
-
-    # The screen color depth of the customer's web browser.
-    attr_accessor :screen_color_depth
-
-    # The screen height of the customer's web browser.
-    attr_accessor :screen_height
-
-    # The screen width of the customer's web browser.
-    attr_accessor :screen_width
-
-    # The address to where the order will be shipped.
-    attr_accessor :shipping_address
-
-    # The name of the shipping method used to ship the products.
-    attr_accessor :shipping_method
-
-    # The ID of the space view this object is linked to.
-    attr_accessor :space_view_id
-
-    # The object's current state.
-    attr_accessor :state
-
-    # The URL to redirect the customer back to after they successfully authenticated their payment.
-    attr_accessor :success_url
-
-    # The payment terminal through which the payment was processed.
-    attr_accessor :terminal
-
-    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
-    attr_accessor :time_zone
-
-    # The payment token that should be used to charge the customer.
-    attr_accessor :token
-
-    # The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
-    attr_accessor :tokenization_mode
-
-    # The total of all fees charged, in the transaction's currency.
-    attr_accessor :total_applied_fees
 
     # The total amount that was settled, in the transaction's currency.
     attr_accessor :total_settled_amount
 
-    # The 'User Agent' header of the customer's web browser.
-    attr_accessor :user_agent_header
+    # Allows to link the transaction to the data collected from the customer's device.
+    attr_accessor :device_session_identifier
 
-    # The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
-    attr_accessor :user_failure_message
+    # The date and time when the processing of the transaction was started.
+    attr_accessor :processing_on
 
-    # The type of user interface the customer used to provide the payment information.
-    attr_accessor :user_interface_type
+    # The merchant's reference used to identify the invoice.
+    attr_accessor :invoice_merchant_reference
 
-    # The version is used for optimistic locking and incremented whenever the object is updated.
-    attr_accessor :version
+    # The language that is linked to the object.
+    attr_accessor :language
 
-    # The window height of the customer's web browser.
-    attr_accessor :window_height
+    # The date and time when the transaction was created.
+    attr_accessor :confirmed_on
+
+    # The line items purchased by the customer.
+    attr_accessor :line_items
+
+    # The 'Accept Language' header of the customer's web browser.
+    attr_accessor :accept_language_header
+
+    # Whether Java is enabled on the customer's web browser.
+    attr_accessor :java_enabled
+
+    # The ID of the user the transaction was confirmed by.
+    attr_accessor :confirmed_by
+
+    attr_accessor :payment_connector_configuration
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    attr_accessor :state
 
     # The window width of the customer's web browser.
     attr_accessor :window_width
 
+    # The payment method configurations that can be used to authorize the transaction.
+    attr_accessor :allowed_payment_method_configurations
+
+    attr_accessor :group
+
+    # Whether the customer can make further payment attempts if the first one has failed. Default is true.
+    attr_accessor :charge_retry_enabled
+
+    # The 'Accept' header of the customer's web browser.
+    attr_accessor :accept_header
+
+    # The 'User Agent' header of the customer's web browser.
+    attr_accessor :user_agent_header
+
+    # The name of the shipping method used to ship the products.
+    attr_accessor :shipping_method
+
+    # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+    attr_accessor :planned_purge_date
+
+    # The URL to redirect the customer back to after they successfully authenticated their payment.
+    attr_accessor :success_url
+
+    # The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
+    attr_accessor :time_zone
+
+    # The ID of the space view this object is linked to.
+    attr_accessor :space_view_id
+
+    # The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
+    attr_accessor :user_failure_message
+
+    attr_accessor :completion_behavior
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
+
+    # The country determined from the IP address of the customer's device.
+    attr_accessor :internet_protocol_address_country
+
+    # The ID of the space this object belongs to.
+    attr_accessor :linked_space_id
+
+    # This date and time when the decision was made as to whether the order should be shipped.
+    attr_accessor :delivery_decision_made_on
+
+    attr_accessor :authorization_environment
+
+    # Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
+    attr_accessor :auto_confirmation_enabled
+
+    attr_accessor :failure_reason
+
+    # The total of all fees charged, in the transaction's currency.
+    attr_accessor :total_applied_fees
+
+    attr_accessor :customers_presence
+
+    # The date and time when the transaction failed.
+    attr_accessor :failed_on
+
+    # The total amount that was refunded, in the transaction's currency.
+    attr_accessor :refunded_amount
+
+    # The sum of all line item prices including taxes in the transaction's currency.
+    attr_accessor :authorization_amount
+
+    # The screen width of the customer's web browser.
+    attr_accessor :screen_width
+
+    attr_accessor :environment_selection_strategy
+
+    # The customer's email address.
+    attr_accessor :customer_email_address
+
+    # The window height of the customer's web browser.
+    attr_accessor :window_height
+
+    attr_accessor :tokenization_mode
+
+    # The date and time when the transaction must be authorized, otherwise it will canceled.
+    attr_accessor :authorization_timeout_on
+
+    # The payment method brands that can be used to authorize the transaction.
+    attr_accessor :allowed_payment_method_brands
+
+    # The date and time when the object was created.
+    attr_accessor :created_on
+
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
+
+    # Whether email sending is deactivated for the transaction. Default is false.
+    attr_accessor :emails_disabled
+
+    attr_accessor :user_interface_type
+
+    # The unique identifier of the customer in the external system.
+    attr_accessor :customer_id
+
+    # The three-letter code (ISO 4217 format) of the transaction's currency.
+    attr_accessor :currency
+
+    # The merchant's reference used to identify the transaction.
+    attr_accessor :merchant_reference
+
+    # The sales channel through which the transaction was placed.
+    attr_accessor :authorization_sales_channel
+
     # The number of years the transaction is kept after its authorization.
     attr_accessor :years_to_keep
+
+    # The total amount that was completed, in the transaction's currency.
+    attr_accessor :completed_amount
+
+    # The screen height of the customer's web browser.
+    attr_accessor :screen_height
+
+    # The IP address of the customer's device.
+    attr_accessor :internet_protocol_address
+
+    attr_accessor :terminal
+
+    # The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
+    attr_accessor :end_of_life
+
+    attr_accessor :token
+
+    attr_accessor :environment
+
+    # The screen color depth of the customer's web browser.
+    attr_accessor :screen_color_depth
+
+    # The ID of the user the transaction was created by.
+    attr_accessor :created_by
+
+    # The date and time when the transaction was completed.
+    attr_accessor :completed_on
+
+    # The date and time when the transaction is completed automatically.
+    attr_accessor :completion_timeout_on
+
+    attr_accessor :shipping_address
+
+    attr_accessor :billing_address
+
+    # The date and time when the transaction was authorized.
+    attr_accessor :authorized_on
+
+    # The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
+    attr_accessor :failed_url
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'accept_header' => :'acceptHeader',
-        :'accept_language_header' => :'acceptLanguageHeader',
-        :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
-        :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
-        :'authorization_amount' => :'authorizationAmount',
-        :'authorization_environment' => :'authorizationEnvironment',
-        :'authorization_sales_channel' => :'authorizationSalesChannel',
-        :'authorization_timeout_on' => :'authorizationTimeoutOn',
-        :'authorized_on' => :'authorizedOn',
-        :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
-        :'billing_address' => :'billingAddress',
-        :'charge_retry_enabled' => :'chargeRetryEnabled',
-        :'completed_amount' => :'completedAmount',
-        :'completed_on' => :'completedOn',
-        :'completion_behavior' => :'completionBehavior',
-        :'completion_timeout_on' => :'completionTimeoutOn',
-        :'confirmed_by' => :'confirmedBy',
-        :'confirmed_on' => :'confirmedOn',
-        :'created_by' => :'createdBy',
-        :'created_on' => :'createdOn',
-        :'currency' => :'currency',
-        :'customer_email_address' => :'customerEmailAddress',
-        :'customer_id' => :'customerId',
-        :'customers_presence' => :'customersPresence',
-        :'delivery_decision_made_on' => :'deliveryDecisionMadeOn',
-        :'device_session_identifier' => :'deviceSessionIdentifier',
-        :'emails_disabled' => :'emailsDisabled',
-        :'end_of_life' => :'endOfLife',
-        :'environment' => :'environment',
-        :'environment_selection_strategy' => :'environmentSelectionStrategy',
-        :'failed_on' => :'failedOn',
-        :'failed_url' => :'failedUrl',
-        :'failure_reason' => :'failureReason',
-        :'group' => :'group',
-        :'id' => :'id',
-        :'internet_protocol_address' => :'internetProtocolAddress',
-        :'internet_protocol_address_country' => :'internetProtocolAddressCountry',
-        :'invoice_merchant_reference' => :'invoiceMerchantReference',
-        :'java_enabled' => :'javaEnabled',
-        :'language' => :'language',
-        :'line_items' => :'lineItems',
-        :'linked_space_id' => :'linkedSpaceId',
-        :'merchant_reference' => :'merchantReference',
-        :'meta_data' => :'metaData',
         :'parent' => :'parent',
-        :'payment_connector_configuration' => :'paymentConnectorConfiguration',
-        :'planned_purge_date' => :'plannedPurgeDate',
-        :'processing_on' => :'processingOn',
-        :'refunded_amount' => :'refundedAmount',
-        :'screen_color_depth' => :'screenColorDepth',
-        :'screen_height' => :'screenHeight',
-        :'screen_width' => :'screenWidth',
-        :'shipping_address' => :'shippingAddress',
-        :'shipping_method' => :'shippingMethod',
-        :'space_view_id' => :'spaceViewId',
-        :'state' => :'state',
-        :'success_url' => :'successUrl',
-        :'terminal' => :'terminal',
-        :'time_zone' => :'timeZone',
-        :'token' => :'token',
-        :'tokenization_mode' => :'tokenizationMode',
-        :'total_applied_fees' => :'totalAppliedFees',
         :'total_settled_amount' => :'totalSettledAmount',
-        :'user_agent_header' => :'userAgentHeader',
-        :'user_failure_message' => :'userFailureMessage',
-        :'user_interface_type' => :'userInterfaceType',
-        :'version' => :'version',
-        :'window_height' => :'windowHeight',
+        :'device_session_identifier' => :'deviceSessionIdentifier',
+        :'processing_on' => :'processingOn',
+        :'invoice_merchant_reference' => :'invoiceMerchantReference',
+        :'language' => :'language',
+        :'confirmed_on' => :'confirmedOn',
+        :'line_items' => :'lineItems',
+        :'accept_language_header' => :'acceptLanguageHeader',
+        :'java_enabled' => :'javaEnabled',
+        :'confirmed_by' => :'confirmedBy',
+        :'payment_connector_configuration' => :'paymentConnectorConfiguration',
+        :'id' => :'id',
+        :'state' => :'state',
         :'window_width' => :'windowWidth',
-        :'years_to_keep' => :'yearsToKeep'
+        :'allowed_payment_method_configurations' => :'allowedPaymentMethodConfigurations',
+        :'group' => :'group',
+        :'charge_retry_enabled' => :'chargeRetryEnabled',
+        :'accept_header' => :'acceptHeader',
+        :'user_agent_header' => :'userAgentHeader',
+        :'shipping_method' => :'shippingMethod',
+        :'planned_purge_date' => :'plannedPurgeDate',
+        :'success_url' => :'successUrl',
+        :'time_zone' => :'timeZone',
+        :'space_view_id' => :'spaceViewId',
+        :'user_failure_message' => :'userFailureMessage',
+        :'completion_behavior' => :'completionBehavior',
+        :'version' => :'version',
+        :'internet_protocol_address_country' => :'internetProtocolAddressCountry',
+        :'linked_space_id' => :'linkedSpaceId',
+        :'delivery_decision_made_on' => :'deliveryDecisionMadeOn',
+        :'authorization_environment' => :'authorizationEnvironment',
+        :'auto_confirmation_enabled' => :'autoConfirmationEnabled',
+        :'failure_reason' => :'failureReason',
+        :'total_applied_fees' => :'totalAppliedFees',
+        :'customers_presence' => :'customersPresence',
+        :'failed_on' => :'failedOn',
+        :'refunded_amount' => :'refundedAmount',
+        :'authorization_amount' => :'authorizationAmount',
+        :'screen_width' => :'screenWidth',
+        :'environment_selection_strategy' => :'environmentSelectionStrategy',
+        :'customer_email_address' => :'customerEmailAddress',
+        :'window_height' => :'windowHeight',
+        :'tokenization_mode' => :'tokenizationMode',
+        :'authorization_timeout_on' => :'authorizationTimeoutOn',
+        :'allowed_payment_method_brands' => :'allowedPaymentMethodBrands',
+        :'created_on' => :'createdOn',
+        :'meta_data' => :'metaData',
+        :'emails_disabled' => :'emailsDisabled',
+        :'user_interface_type' => :'userInterfaceType',
+        :'customer_id' => :'customerId',
+        :'currency' => :'currency',
+        :'merchant_reference' => :'merchantReference',
+        :'authorization_sales_channel' => :'authorizationSalesChannel',
+        :'years_to_keep' => :'yearsToKeep',
+        :'completed_amount' => :'completedAmount',
+        :'screen_height' => :'screenHeight',
+        :'internet_protocol_address' => :'internetProtocolAddress',
+        :'terminal' => :'terminal',
+        :'end_of_life' => :'endOfLife',
+        :'token' => :'token',
+        :'environment' => :'environment',
+        :'screen_color_depth' => :'screenColorDepth',
+        :'created_by' => :'createdBy',
+        :'completed_on' => :'completedOn',
+        :'completion_timeout_on' => :'completionTimeoutOn',
+        :'shipping_address' => :'shippingAddress',
+        :'billing_address' => :'billingAddress',
+        :'authorized_on' => :'authorizedOn',
+        :'failed_url' => :'failedUrl'
       }
     end
 
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
     # Attribute type mapping.
-    def self.swagger_types
+    def self.openapi_types
       {
-        :'accept_header' => :'String',
-        :'accept_language_header' => :'String',
-        :'allowed_payment_method_brands' => :'Array<Integer>',
-        :'allowed_payment_method_configurations' => :'Array<Integer>',
-        :'authorization_amount' => :'Float',
-        :'authorization_environment' => :'ChargeAttemptEnvironment',
-        :'authorization_sales_channel' => :'Integer',
-        :'authorization_timeout_on' => :'DateTime',
-        :'authorized_on' => :'DateTime',
-        :'auto_confirmation_enabled' => :'BOOLEAN',
-        :'billing_address' => :'Address',
-        :'charge_retry_enabled' => :'BOOLEAN',
-        :'completed_amount' => :'Float',
-        :'completed_on' => :'DateTime',
-        :'completion_behavior' => :'TransactionCompletionBehavior',
-        :'completion_timeout_on' => :'DateTime',
-        :'confirmed_by' => :'Integer',
-        :'confirmed_on' => :'DateTime',
-        :'created_by' => :'Integer',
-        :'created_on' => :'DateTime',
-        :'currency' => :'String',
-        :'customer_email_address' => :'String',
-        :'customer_id' => :'String',
-        :'customers_presence' => :'CustomersPresence',
-        :'delivery_decision_made_on' => :'DateTime',
-        :'device_session_identifier' => :'String',
-        :'emails_disabled' => :'BOOLEAN',
-        :'end_of_life' => :'DateTime',
-        :'environment' => :'Environment',
-        :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
-        :'failed_on' => :'DateTime',
-        :'failed_url' => :'String',
-        :'failure_reason' => :'FailureReason',
-        :'group' => :'TransactionGroup',
-        :'id' => :'Integer',
-        :'internet_protocol_address' => :'String',
-        :'internet_protocol_address_country' => :'String',
-        :'invoice_merchant_reference' => :'String',
-        :'java_enabled' => :'BOOLEAN',
-        :'language' => :'String',
-        :'line_items' => :'Array<LineItem>',
-        :'linked_space_id' => :'Integer',
-        :'merchant_reference' => :'String',
-        :'meta_data' => :'Hash<String, String>',
-        :'parent' => :'Integer',
-        :'payment_connector_configuration' => :'PaymentConnectorConfiguration',
-        :'planned_purge_date' => :'DateTime',
-        :'processing_on' => :'DateTime',
-        :'refunded_amount' => :'Float',
-        :'screen_color_depth' => :'String',
-        :'screen_height' => :'String',
-        :'screen_width' => :'String',
-        :'shipping_address' => :'Address',
-        :'shipping_method' => :'String',
-        :'space_view_id' => :'Integer',
-        :'state' => :'TransactionState',
-        :'success_url' => :'String',
-        :'terminal' => :'PaymentTerminal',
-        :'time_zone' => :'String',
-        :'token' => :'Token',
-        :'tokenization_mode' => :'TokenizationMode',
-        :'total_applied_fees' => :'Float',
+        :'parent' => :'Transaction',
         :'total_settled_amount' => :'Float',
-        :'user_agent_header' => :'String',
-        :'user_failure_message' => :'String',
-        :'user_interface_type' => :'TransactionUserInterfaceType',
-        :'version' => :'Integer',
-        :'window_height' => :'String',
+        :'device_session_identifier' => :'String',
+        :'processing_on' => :'Time',
+        :'invoice_merchant_reference' => :'String',
+        :'language' => :'String',
+        :'confirmed_on' => :'Time',
+        :'line_items' => :'Array<LineItem>',
+        :'accept_language_header' => :'String',
+        :'java_enabled' => :'Boolean',
+        :'confirmed_by' => :'Integer',
+        :'payment_connector_configuration' => :'PaymentConnectorConfiguration',
+        :'id' => :'Integer',
+        :'state' => :'TransactionState',
         :'window_width' => :'String',
-        :'years_to_keep' => :'Integer'
+        :'allowed_payment_method_configurations' => :'Array<Integer>',
+        :'group' => :'TransactionGroup',
+        :'charge_retry_enabled' => :'Boolean',
+        :'accept_header' => :'String',
+        :'user_agent_header' => :'String',
+        :'shipping_method' => :'String',
+        :'planned_purge_date' => :'Time',
+        :'success_url' => :'String',
+        :'time_zone' => :'String',
+        :'space_view_id' => :'Integer',
+        :'user_failure_message' => :'String',
+        :'completion_behavior' => :'TransactionCompletionBehavior',
+        :'version' => :'Integer',
+        :'internet_protocol_address_country' => :'String',
+        :'linked_space_id' => :'Integer',
+        :'delivery_decision_made_on' => :'Time',
+        :'authorization_environment' => :'ChargeAttemptEnvironment',
+        :'auto_confirmation_enabled' => :'Boolean',
+        :'failure_reason' => :'FailureReason',
+        :'total_applied_fees' => :'Float',
+        :'customers_presence' => :'CustomersPresence',
+        :'failed_on' => :'Time',
+        :'refunded_amount' => :'Float',
+        :'authorization_amount' => :'Float',
+        :'screen_width' => :'String',
+        :'environment_selection_strategy' => :'TransactionEnvironmentSelectionStrategy',
+        :'customer_email_address' => :'String',
+        :'window_height' => :'String',
+        :'tokenization_mode' => :'TokenizationMode',
+        :'authorization_timeout_on' => :'Time',
+        :'allowed_payment_method_brands' => :'Array<Integer>',
+        :'created_on' => :'Time',
+        :'meta_data' => :'Hash<String, String>',
+        :'emails_disabled' => :'Boolean',
+        :'user_interface_type' => :'TransactionUserInterfaceType',
+        :'customer_id' => :'String',
+        :'currency' => :'String',
+        :'merchant_reference' => :'String',
+        :'authorization_sales_channel' => :'Integer',
+        :'years_to_keep' => :'Integer',
+        :'completed_amount' => :'Float',
+        :'screen_height' => :'String',
+        :'internet_protocol_address' => :'String',
+        :'terminal' => :'PaymentTerminal',
+        :'end_of_life' => :'Time',
+        :'token' => :'Token',
+        :'environment' => :'Environment',
+        :'screen_color_depth' => :'String',
+        :'created_by' => :'Integer',
+        :'completed_on' => :'Time',
+        :'completion_timeout_on' => :'Time',
+        :'shipping_address' => :'Address',
+        :'billing_address' => :'Address',
+        :'authorized_on' => :'Time',
+        :'failed_url' => :'String'
       }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+      ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return unless attributes.is_a?(Hash)
-
-      # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.has_key?(:'acceptHeader')
-        self.accept_header = attributes[:'acceptHeader']
+      unless attributes.is_a?(Hash)
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Transaction` initialize method"
       end
 
-      if attributes.has_key?(:'acceptLanguageHeader')
-        self.accept_language_header = attributes[:'acceptLanguageHeader']
-      end
-
-      if attributes.has_key?(:'allowedPaymentMethodBrands')
-        if (value = attributes[:'allowedPaymentMethodBrands']).is_a?(Array)
-          self.allowed_payment_method_brands = value
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        unless self.class.attribute_map.key?(k.to_sym)
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Transaction`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'parent')
+        self.parent = attributes[:'parent']
       end
 
-      if attributes.has_key?(:'allowedPaymentMethodConfigurations')
-        if (value = attributes[:'allowedPaymentMethodConfigurations']).is_a?(Array)
-          self.allowed_payment_method_configurations = value
-        end
+      if attributes.key?(:'total_settled_amount')
+        self.total_settled_amount = attributes[:'total_settled_amount']
       end
 
-      if attributes.has_key?(:'authorizationAmount')
-        self.authorization_amount = attributes[:'authorizationAmount']
+      if attributes.key?(:'device_session_identifier')
+        self.device_session_identifier = attributes[:'device_session_identifier']
       end
 
-      if attributes.has_key?(:'authorizationEnvironment')
-        self.authorization_environment = attributes[:'authorizationEnvironment']
+      if attributes.key?(:'processing_on')
+        self.processing_on = attributes[:'processing_on']
       end
 
-      if attributes.has_key?(:'authorizationSalesChannel')
-        self.authorization_sales_channel = attributes[:'authorizationSalesChannel']
+      if attributes.key?(:'invoice_merchant_reference')
+        self.invoice_merchant_reference = attributes[:'invoice_merchant_reference']
       end
 
-      if attributes.has_key?(:'authorizationTimeoutOn')
-        self.authorization_timeout_on = attributes[:'authorizationTimeoutOn']
-      end
-
-      if attributes.has_key?(:'authorizedOn')
-        self.authorized_on = attributes[:'authorizedOn']
-      end
-
-      if attributes.has_key?(:'autoConfirmationEnabled')
-        self.auto_confirmation_enabled = attributes[:'autoConfirmationEnabled']
-      end
-
-      if attributes.has_key?(:'billingAddress')
-        self.billing_address = attributes[:'billingAddress']
-      end
-
-      if attributes.has_key?(:'chargeRetryEnabled')
-        self.charge_retry_enabled = attributes[:'chargeRetryEnabled']
-      end
-
-      if attributes.has_key?(:'completedAmount')
-        self.completed_amount = attributes[:'completedAmount']
-      end
-
-      if attributes.has_key?(:'completedOn')
-        self.completed_on = attributes[:'completedOn']
-      end
-
-      if attributes.has_key?(:'completionBehavior')
-        self.completion_behavior = attributes[:'completionBehavior']
-      end
-
-      if attributes.has_key?(:'completionTimeoutOn')
-        self.completion_timeout_on = attributes[:'completionTimeoutOn']
-      end
-
-      if attributes.has_key?(:'confirmedBy')
-        self.confirmed_by = attributes[:'confirmedBy']
-      end
-
-      if attributes.has_key?(:'confirmedOn')
-        self.confirmed_on = attributes[:'confirmedOn']
-      end
-
-      if attributes.has_key?(:'createdBy')
-        self.created_by = attributes[:'createdBy']
-      end
-
-      if attributes.has_key?(:'createdOn')
-        self.created_on = attributes[:'createdOn']
-      end
-
-      if attributes.has_key?(:'currency')
-        self.currency = attributes[:'currency']
-      end
-
-      if attributes.has_key?(:'customerEmailAddress')
-        self.customer_email_address = attributes[:'customerEmailAddress']
-      end
-
-      if attributes.has_key?(:'customerId')
-        self.customer_id = attributes[:'customerId']
-      end
-
-      if attributes.has_key?(:'customersPresence')
-        self.customers_presence = attributes[:'customersPresence']
-      end
-
-      if attributes.has_key?(:'deliveryDecisionMadeOn')
-        self.delivery_decision_made_on = attributes[:'deliveryDecisionMadeOn']
-      end
-
-      if attributes.has_key?(:'deviceSessionIdentifier')
-        self.device_session_identifier = attributes[:'deviceSessionIdentifier']
-      end
-
-      if attributes.has_key?(:'emailsDisabled')
-        self.emails_disabled = attributes[:'emailsDisabled']
-      end
-
-      if attributes.has_key?(:'endOfLife')
-        self.end_of_life = attributes[:'endOfLife']
-      end
-
-      if attributes.has_key?(:'environment')
-        self.environment = attributes[:'environment']
-      end
-
-      if attributes.has_key?(:'environmentSelectionStrategy')
-        self.environment_selection_strategy = attributes[:'environmentSelectionStrategy']
-      end
-
-      if attributes.has_key?(:'failedOn')
-        self.failed_on = attributes[:'failedOn']
-      end
-
-      if attributes.has_key?(:'failedUrl')
-        self.failed_url = attributes[:'failedUrl']
-      end
-
-      if attributes.has_key?(:'failureReason')
-        self.failure_reason = attributes[:'failureReason']
-      end
-
-      if attributes.has_key?(:'group')
-        self.group = attributes[:'group']
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'internetProtocolAddress')
-        self.internet_protocol_address = attributes[:'internetProtocolAddress']
-      end
-
-      if attributes.has_key?(:'internetProtocolAddressCountry')
-        self.internet_protocol_address_country = attributes[:'internetProtocolAddressCountry']
-      end
-
-      if attributes.has_key?(:'invoiceMerchantReference')
-        self.invoice_merchant_reference = attributes[:'invoiceMerchantReference']
-      end
-
-      if attributes.has_key?(:'javaEnabled')
-        self.java_enabled = attributes[:'javaEnabled']
-      end
-
-      if attributes.has_key?(:'language')
+      if attributes.key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.has_key?(:'lineItems')
-        if (value = attributes[:'lineItems']).is_a?(Array)
+      if attributes.key?(:'confirmed_on')
+        self.confirmed_on = attributes[:'confirmed_on']
+      end
+
+      if attributes.key?(:'line_items')
+        if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
         end
       end
 
-      if attributes.has_key?(:'linkedSpaceId')
-        self.linked_space_id = attributes[:'linkedSpaceId']
+      if attributes.key?(:'accept_language_header')
+        self.accept_language_header = attributes[:'accept_language_header']
       end
 
-      if attributes.has_key?(:'merchantReference')
-        self.merchant_reference = attributes[:'merchantReference']
+      if attributes.key?(:'java_enabled')
+        self.java_enabled = attributes[:'java_enabled']
       end
 
-      if attributes.has_key?(:'metaData')
-        if (value = attributes[:'metaData']).is_a?(Hash)
+      if attributes.key?(:'confirmed_by')
+        self.confirmed_by = attributes[:'confirmed_by']
+      end
+
+      if attributes.key?(:'payment_connector_configuration')
+        self.payment_connector_configuration = attributes[:'payment_connector_configuration']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'window_width')
+        self.window_width = attributes[:'window_width']
+      end
+
+      if attributes.key?(:'allowed_payment_method_configurations')
+        if (value = attributes[:'allowed_payment_method_configurations']).is_a?(Array)
+          self.allowed_payment_method_configurations = value
+        end
+      end
+
+      if attributes.key?(:'group')
+        self.group = attributes[:'group']
+      end
+
+      if attributes.key?(:'charge_retry_enabled')
+        self.charge_retry_enabled = attributes[:'charge_retry_enabled']
+      end
+
+      if attributes.key?(:'accept_header')
+        self.accept_header = attributes[:'accept_header']
+      end
+
+      if attributes.key?(:'user_agent_header')
+        self.user_agent_header = attributes[:'user_agent_header']
+      end
+
+      if attributes.key?(:'shipping_method')
+        self.shipping_method = attributes[:'shipping_method']
+      end
+
+      if attributes.key?(:'planned_purge_date')
+        self.planned_purge_date = attributes[:'planned_purge_date']
+      end
+
+      if attributes.key?(:'success_url')
+        self.success_url = attributes[:'success_url']
+      end
+
+      if attributes.key?(:'time_zone')
+        self.time_zone = attributes[:'time_zone']
+      end
+
+      if attributes.key?(:'space_view_id')
+        self.space_view_id = attributes[:'space_view_id']
+      end
+
+      if attributes.key?(:'user_failure_message')
+        self.user_failure_message = attributes[:'user_failure_message']
+      end
+
+      if attributes.key?(:'completion_behavior')
+        self.completion_behavior = attributes[:'completion_behavior']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'internet_protocol_address_country')
+        self.internet_protocol_address_country = attributes[:'internet_protocol_address_country']
+      end
+
+      if attributes.key?(:'linked_space_id')
+        self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'delivery_decision_made_on')
+        self.delivery_decision_made_on = attributes[:'delivery_decision_made_on']
+      end
+
+      if attributes.key?(:'authorization_environment')
+        self.authorization_environment = attributes[:'authorization_environment']
+      end
+
+      if attributes.key?(:'auto_confirmation_enabled')
+        self.auto_confirmation_enabled = attributes[:'auto_confirmation_enabled']
+      end
+
+      if attributes.key?(:'failure_reason')
+        self.failure_reason = attributes[:'failure_reason']
+      end
+
+      if attributes.key?(:'total_applied_fees')
+        self.total_applied_fees = attributes[:'total_applied_fees']
+      end
+
+      if attributes.key?(:'customers_presence')
+        self.customers_presence = attributes[:'customers_presence']
+      end
+
+      if attributes.key?(:'failed_on')
+        self.failed_on = attributes[:'failed_on']
+      end
+
+      if attributes.key?(:'refunded_amount')
+        self.refunded_amount = attributes[:'refunded_amount']
+      end
+
+      if attributes.key?(:'authorization_amount')
+        self.authorization_amount = attributes[:'authorization_amount']
+      end
+
+      if attributes.key?(:'screen_width')
+        self.screen_width = attributes[:'screen_width']
+      end
+
+      if attributes.key?(:'environment_selection_strategy')
+        self.environment_selection_strategy = attributes[:'environment_selection_strategy']
+      end
+
+      if attributes.key?(:'customer_email_address')
+        self.customer_email_address = attributes[:'customer_email_address']
+      end
+
+      if attributes.key?(:'window_height')
+        self.window_height = attributes[:'window_height']
+      end
+
+      if attributes.key?(:'tokenization_mode')
+        self.tokenization_mode = attributes[:'tokenization_mode']
+      end
+
+      if attributes.key?(:'authorization_timeout_on')
+        self.authorization_timeout_on = attributes[:'authorization_timeout_on']
+      end
+
+      if attributes.key?(:'allowed_payment_method_brands')
+        if (value = attributes[:'allowed_payment_method_brands']).is_a?(Array)
+          self.allowed_payment_method_brands = value
+        end
+      end
+
+      if attributes.key?(:'created_on')
+        self.created_on = attributes[:'created_on']
+      end
+
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
           self.meta_data = value
         end
       end
 
-      if attributes.has_key?(:'parent')
-        self.parent = attributes[:'parent']
+      if attributes.key?(:'emails_disabled')
+        self.emails_disabled = attributes[:'emails_disabled']
       end
 
-      if attributes.has_key?(:'paymentConnectorConfiguration')
-        self.payment_connector_configuration = attributes[:'paymentConnectorConfiguration']
+      if attributes.key?(:'user_interface_type')
+        self.user_interface_type = attributes[:'user_interface_type']
       end
 
-      if attributes.has_key?(:'plannedPurgeDate')
-        self.planned_purge_date = attributes[:'plannedPurgeDate']
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
-      if attributes.has_key?(:'processingOn')
-        self.processing_on = attributes[:'processingOn']
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
-      if attributes.has_key?(:'refundedAmount')
-        self.refunded_amount = attributes[:'refundedAmount']
+      if attributes.key?(:'merchant_reference')
+        self.merchant_reference = attributes[:'merchant_reference']
       end
 
-      if attributes.has_key?(:'screenColorDepth')
-        self.screen_color_depth = attributes[:'screenColorDepth']
+      if attributes.key?(:'authorization_sales_channel')
+        self.authorization_sales_channel = attributes[:'authorization_sales_channel']
       end
 
-      if attributes.has_key?(:'screenHeight')
-        self.screen_height = attributes[:'screenHeight']
+      if attributes.key?(:'years_to_keep')
+        self.years_to_keep = attributes[:'years_to_keep']
       end
 
-      if attributes.has_key?(:'screenWidth')
-        self.screen_width = attributes[:'screenWidth']
+      if attributes.key?(:'completed_amount')
+        self.completed_amount = attributes[:'completed_amount']
       end
 
-      if attributes.has_key?(:'shippingAddress')
-        self.shipping_address = attributes[:'shippingAddress']
+      if attributes.key?(:'screen_height')
+        self.screen_height = attributes[:'screen_height']
       end
 
-      if attributes.has_key?(:'shippingMethod')
-        self.shipping_method = attributes[:'shippingMethod']
+      if attributes.key?(:'internet_protocol_address')
+        self.internet_protocol_address = attributes[:'internet_protocol_address']
       end
 
-      if attributes.has_key?(:'spaceViewId')
-        self.space_view_id = attributes[:'spaceViewId']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'successUrl')
-        self.success_url = attributes[:'successUrl']
-      end
-
-      if attributes.has_key?(:'terminal')
+      if attributes.key?(:'terminal')
         self.terminal = attributes[:'terminal']
       end
 
-      if attributes.has_key?(:'timeZone')
-        self.time_zone = attributes[:'timeZone']
+      if attributes.key?(:'end_of_life')
+        self.end_of_life = attributes[:'end_of_life']
       end
 
-      if attributes.has_key?(:'token')
+      if attributes.key?(:'token')
         self.token = attributes[:'token']
       end
 
-      if attributes.has_key?(:'tokenizationMode')
-        self.tokenization_mode = attributes[:'tokenizationMode']
+      if attributes.key?(:'environment')
+        self.environment = attributes[:'environment']
       end
 
-      if attributes.has_key?(:'totalAppliedFees')
-        self.total_applied_fees = attributes[:'totalAppliedFees']
+      if attributes.key?(:'screen_color_depth')
+        self.screen_color_depth = attributes[:'screen_color_depth']
       end
 
-      if attributes.has_key?(:'totalSettledAmount')
-        self.total_settled_amount = attributes[:'totalSettledAmount']
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
       end
 
-      if attributes.has_key?(:'userAgentHeader')
-        self.user_agent_header = attributes[:'userAgentHeader']
+      if attributes.key?(:'completed_on')
+        self.completed_on = attributes[:'completed_on']
       end
 
-      if attributes.has_key?(:'userFailureMessage')
-        self.user_failure_message = attributes[:'userFailureMessage']
+      if attributes.key?(:'completion_timeout_on')
+        self.completion_timeout_on = attributes[:'completion_timeout_on']
       end
 
-      if attributes.has_key?(:'userInterfaceType')
-        self.user_interface_type = attributes[:'userInterfaceType']
+      if attributes.key?(:'shipping_address')
+        self.shipping_address = attributes[:'shipping_address']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'billing_address')
+        self.billing_address = attributes[:'billing_address']
       end
 
-      if attributes.has_key?(:'windowHeight')
-        self.window_height = attributes[:'windowHeight']
+      if attributes.key?(:'authorized_on')
+        self.authorized_on = attributes[:'authorized_on']
       end
 
-      if attributes.has_key?(:'windowWidth')
-        self.window_width = attributes[:'windowWidth']
-      end
-
-      if attributes.has_key?(:'yearsToKeep')
-        self.years_to_keep = attributes[:'yearsToKeep']
+      if attributes.key?(:'failed_url')
+        self.failed_url = attributes[:'failed_url']
       end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
-        invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
-      end
-
       if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
         invalid_properties.push('invalid value for "device_session_identifier", the character length must be smaller than or equal to 40.')
       end
 
       if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
-        invalid_properties.push('invalid value for "device_session_identifier", the character length must be great than or equal to 10.')
+        invalid_properties.push('invalid value for "device_session_identifier", the character length must be greater than or equal to 10.')
       end
 
-      if !@failed_url.nil? && @failed_url.to_s.length > 2000
-        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 2000.')
-      end
-
-      if !@failed_url.nil? && @failed_url.to_s.length < 9
-        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
+      pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
+      if !@device_session_identifier.nil? && @device_session_identifier !~ pattern
+        invalid_properties.push("invalid value for \"device_session_identifier\", must conform to the pattern #{pattern}.")
       end
 
       if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
         invalid_properties.push('invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.')
       end
 
-      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
-        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@invoice_merchant_reference.nil? && @invoice_merchant_reference !~ pattern
+        invalid_properties.push("invalid value for \"invoice_merchant_reference\", must conform to the pattern #{pattern}.")
       end
 
       if !@shipping_method.nil? && @shipping_method.to_s.length > 200
@@ -720,7 +742,28 @@ module Wallee
       end
 
       if !@success_url.nil? && @success_url.to_s.length < 9
-        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
+        invalid_properties.push('invalid value for "success_url", the character length must be greater than or equal to 9.')
+      end
+
+      if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+        invalid_properties.push('invalid value for "customer_email_address", the character length must be smaller than or equal to 254.')
+      end
+
+      if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+        invalid_properties.push('invalid value for "merchant_reference", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if !@merchant_reference.nil? && @merchant_reference !~ pattern
+        invalid_properties.push("invalid value for \"merchant_reference\", must conform to the pattern #{pattern}.")
+      end
+
+      if !@failed_url.nil? && @failed_url.to_s.length > 2000
+        invalid_properties.push('invalid value for "failed_url", the character length must be smaller than or equal to 2000.')
+      end
+
+      if !@failed_url.nil? && @failed_url.to_s.length < 9
+        invalid_properties.push('invalid value for "failed_url", the character length must be greater than or equal to 9.')
       end
 
       invalid_properties
@@ -729,81 +772,76 @@ module Wallee
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+      warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
-      return false if !@failed_url.nil? && @failed_url.to_s.length > 2000
-      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
+      pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
+      return false if !@device_session_identifier.nil? && @device_session_identifier !~ pattern
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
-      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference !~ pattern
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
       return false if !@success_url.nil? && @success_url.to_s.length > 2000
       return false if !@success_url.nil? && @success_url.to_s.length < 9
+      return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
+      return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      return false if !@merchant_reference.nil? && @merchant_reference !~ pattern
+      return false if !@failed_url.nil? && @failed_url.to_s.length > 2000
+      return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] customer_email_address Value to be assigned
-    def customer_email_address=(customer_email_address)
-      if !customer_email_address.nil? && customer_email_address.to_s.length > 254
-        fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 254.'
-      end
-
-      @customer_email_address = customer_email_address
     end
 
     # Custom attribute writer method with validation
     # @param [Object] device_session_identifier Value to be assigned
     def device_session_identifier=(device_session_identifier)
-      if !device_session_identifier.nil? && device_session_identifier.to_s.length > 40
+      if device_session_identifier.nil?
+        fail ArgumentError, 'device_session_identifier cannot be nil'
+      end
+
+      if device_session_identifier.to_s.length > 40
         fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be smaller than or equal to 40.'
       end
 
-      if !device_session_identifier.nil? && device_session_identifier.to_s.length < 10
-        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be great than or equal to 10.'
+      if device_session_identifier.to_s.length < 10
+        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be greater than or equal to 10.'
+      end
+
+      pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
+      if device_session_identifier !~ pattern
+        fail ArgumentError, "invalid value for \"device_session_identifier\", must conform to the pattern #{pattern}."
       end
 
       @device_session_identifier = device_session_identifier
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] failed_url Value to be assigned
-    def failed_url=(failed_url)
-      if !failed_url.nil? && failed_url.to_s.length > 2000
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 2000.'
-      end
-
-      if !failed_url.nil? && failed_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
-      end
-
-      @failed_url = failed_url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] invoice_merchant_reference Value to be assigned
     def invoice_merchant_reference=(invoice_merchant_reference)
-      if !invoice_merchant_reference.nil? && invoice_merchant_reference.to_s.length > 100
+      if invoice_merchant_reference.nil?
+        fail ArgumentError, 'invoice_merchant_reference cannot be nil'
+      end
+
+      if invoice_merchant_reference.to_s.length > 100
         fail ArgumentError, 'invalid value for "invoice_merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if invoice_merchant_reference !~ pattern
+        fail ArgumentError, "invalid value for \"invoice_merchant_reference\", must conform to the pattern #{pattern}."
       end
 
       @invoice_merchant_reference = invoice_merchant_reference
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] merchant_reference Value to be assigned
-    def merchant_reference=(merchant_reference)
-      if !merchant_reference.nil? && merchant_reference.to_s.length > 100
-        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
-      end
-
-      @merchant_reference = merchant_reference
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] shipping_method Value to be assigned
     def shipping_method=(shipping_method)
-      if !shipping_method.nil? && shipping_method.to_s.length > 200
+      if shipping_method.nil?
+        fail ArgumentError, 'shipping_method cannot be nil'
+      end
+
+      if shipping_method.to_s.length > 200
         fail ArgumentError, 'invalid value for "shipping_method", the character length must be smaller than or equal to 200.'
       end
 
@@ -813,15 +851,70 @@ module Wallee
     # Custom attribute writer method with validation
     # @param [Object] success_url Value to be assigned
     def success_url=(success_url)
-      if !success_url.nil? && success_url.to_s.length > 2000
+      if success_url.nil?
+        fail ArgumentError, 'success_url cannot be nil'
+      end
+
+      if success_url.to_s.length > 2000
         fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 2000.'
       end
 
-      if !success_url.nil? && success_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
+      if success_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "success_url", the character length must be greater than or equal to 9.'
       end
 
       @success_url = success_url
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_email_address Value to be assigned
+    def customer_email_address=(customer_email_address)
+      if customer_email_address.nil?
+        fail ArgumentError, 'customer_email_address cannot be nil'
+      end
+
+      if customer_email_address.to_s.length > 254
+        fail ArgumentError, 'invalid value for "customer_email_address", the character length must be smaller than or equal to 254.'
+      end
+
+      @customer_email_address = customer_email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if merchant_reference.nil?
+        fail ArgumentError, 'merchant_reference cannot be nil'
+      end
+
+      if merchant_reference.to_s.length > 100
+        fail ArgumentError, 'invalid value for "merchant_reference", the character length must be smaller than or equal to 100.'
+      end
+
+      pattern = Regexp.new(/[	\x20-\x7e]*/)
+      if merchant_reference !~ pattern
+        fail ArgumentError, "invalid value for \"merchant_reference\", must conform to the pattern #{pattern}."
+      end
+
+      @merchant_reference = merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failed_url Value to be assigned
+    def failed_url=(failed_url)
+      if failed_url.nil?
+        fail ArgumentError, 'failed_url cannot be nil'
+      end
+
+      if failed_url.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be smaller than or equal to 2000.'
+      end
+
+      if failed_url.to_s.length < 9
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be greater than or equal to 9.'
+      end
+
+      @failed_url = failed_url
     end
 
     # Checks equality by comparing each attribute.
@@ -829,76 +922,76 @@ module Wallee
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          accept_header == o.accept_header &&
-          accept_language_header == o.accept_language_header &&
-          allowed_payment_method_brands == o.allowed_payment_method_brands &&
-          allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
-          authorization_amount == o.authorization_amount &&
-          authorization_environment == o.authorization_environment &&
-          authorization_sales_channel == o.authorization_sales_channel &&
-          authorization_timeout_on == o.authorization_timeout_on &&
-          authorized_on == o.authorized_on &&
-          auto_confirmation_enabled == o.auto_confirmation_enabled &&
-          billing_address == o.billing_address &&
-          charge_retry_enabled == o.charge_retry_enabled &&
-          completed_amount == o.completed_amount &&
-          completed_on == o.completed_on &&
-          completion_behavior == o.completion_behavior &&
-          completion_timeout_on == o.completion_timeout_on &&
-          confirmed_by == o.confirmed_by &&
-          confirmed_on == o.confirmed_on &&
-          created_by == o.created_by &&
-          created_on == o.created_on &&
-          currency == o.currency &&
-          customer_email_address == o.customer_email_address &&
-          customer_id == o.customer_id &&
-          customers_presence == o.customers_presence &&
-          delivery_decision_made_on == o.delivery_decision_made_on &&
-          device_session_identifier == o.device_session_identifier &&
-          emails_disabled == o.emails_disabled &&
-          end_of_life == o.end_of_life &&
-          environment == o.environment &&
-          environment_selection_strategy == o.environment_selection_strategy &&
-          failed_on == o.failed_on &&
-          failed_url == o.failed_url &&
-          failure_reason == o.failure_reason &&
-          group == o.group &&
-          id == o.id &&
-          internet_protocol_address == o.internet_protocol_address &&
-          internet_protocol_address_country == o.internet_protocol_address_country &&
-          invoice_merchant_reference == o.invoice_merchant_reference &&
-          java_enabled == o.java_enabled &&
-          language == o.language &&
-          line_items == o.line_items &&
-          linked_space_id == o.linked_space_id &&
-          merchant_reference == o.merchant_reference &&
-          meta_data == o.meta_data &&
           parent == o.parent &&
-          payment_connector_configuration == o.payment_connector_configuration &&
-          planned_purge_date == o.planned_purge_date &&
-          processing_on == o.processing_on &&
-          refunded_amount == o.refunded_amount &&
-          screen_color_depth == o.screen_color_depth &&
-          screen_height == o.screen_height &&
-          screen_width == o.screen_width &&
-          shipping_address == o.shipping_address &&
-          shipping_method == o.shipping_method &&
-          space_view_id == o.space_view_id &&
-          state == o.state &&
-          success_url == o.success_url &&
-          terminal == o.terminal &&
-          time_zone == o.time_zone &&
-          token == o.token &&
-          tokenization_mode == o.tokenization_mode &&
-          total_applied_fees == o.total_applied_fees &&
           total_settled_amount == o.total_settled_amount &&
-          user_agent_header == o.user_agent_header &&
-          user_failure_message == o.user_failure_message &&
-          user_interface_type == o.user_interface_type &&
-          version == o.version &&
-          window_height == o.window_height &&
+          device_session_identifier == o.device_session_identifier &&
+          processing_on == o.processing_on &&
+          invoice_merchant_reference == o.invoice_merchant_reference &&
+          language == o.language &&
+          confirmed_on == o.confirmed_on &&
+          line_items == o.line_items &&
+          accept_language_header == o.accept_language_header &&
+          java_enabled == o.java_enabled &&
+          confirmed_by == o.confirmed_by &&
+          payment_connector_configuration == o.payment_connector_configuration &&
+          id == o.id &&
+          state == o.state &&
           window_width == o.window_width &&
-          years_to_keep == o.years_to_keep
+          allowed_payment_method_configurations == o.allowed_payment_method_configurations &&
+          group == o.group &&
+          charge_retry_enabled == o.charge_retry_enabled &&
+          accept_header == o.accept_header &&
+          user_agent_header == o.user_agent_header &&
+          shipping_method == o.shipping_method &&
+          planned_purge_date == o.planned_purge_date &&
+          success_url == o.success_url &&
+          time_zone == o.time_zone &&
+          space_view_id == o.space_view_id &&
+          user_failure_message == o.user_failure_message &&
+          completion_behavior == o.completion_behavior &&
+          version == o.version &&
+          internet_protocol_address_country == o.internet_protocol_address_country &&
+          linked_space_id == o.linked_space_id &&
+          delivery_decision_made_on == o.delivery_decision_made_on &&
+          authorization_environment == o.authorization_environment &&
+          auto_confirmation_enabled == o.auto_confirmation_enabled &&
+          failure_reason == o.failure_reason &&
+          total_applied_fees == o.total_applied_fees &&
+          customers_presence == o.customers_presence &&
+          failed_on == o.failed_on &&
+          refunded_amount == o.refunded_amount &&
+          authorization_amount == o.authorization_amount &&
+          screen_width == o.screen_width &&
+          environment_selection_strategy == o.environment_selection_strategy &&
+          customer_email_address == o.customer_email_address &&
+          window_height == o.window_height &&
+          tokenization_mode == o.tokenization_mode &&
+          authorization_timeout_on == o.authorization_timeout_on &&
+          allowed_payment_method_brands == o.allowed_payment_method_brands &&
+          created_on == o.created_on &&
+          meta_data == o.meta_data &&
+          emails_disabled == o.emails_disabled &&
+          user_interface_type == o.user_interface_type &&
+          customer_id == o.customer_id &&
+          currency == o.currency &&
+          merchant_reference == o.merchant_reference &&
+          authorization_sales_channel == o.authorization_sales_channel &&
+          years_to_keep == o.years_to_keep &&
+          completed_amount == o.completed_amount &&
+          screen_height == o.screen_height &&
+          internet_protocol_address == o.internet_protocol_address &&
+          terminal == o.terminal &&
+          end_of_life == o.end_of_life &&
+          token == o.token &&
+          environment == o.environment &&
+          screen_color_depth == o.screen_color_depth &&
+          created_by == o.created_by &&
+          completed_on == o.completed_on &&
+          completion_timeout_on == o.completion_timeout_on &&
+          shipping_address == o.shipping_address &&
+          billing_address == o.billing_address &&
+          authorized_on == o.authorized_on &&
+          failed_url == o.failed_url
     end
 
     # @see the `==` method
@@ -908,39 +1001,40 @@ module Wallee
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
-      [accept_header, accept_language_header, allowed_payment_method_brands, allowed_payment_method_configurations, authorization_amount, authorization_environment, authorization_sales_channel, authorization_timeout_on, authorized_on, auto_confirmation_enabled, billing_address, charge_retry_enabled, completed_amount, completed_on, completion_behavior, completion_timeout_on, confirmed_by, confirmed_on, created_by, created_on, currency, customer_email_address, customer_id, customers_presence, delivery_decision_made_on, device_session_identifier, emails_disabled, end_of_life, environment, environment_selection_strategy, failed_on, failed_url, failure_reason, group, id, internet_protocol_address, internet_protocol_address_country, invoice_merchant_reference, java_enabled, language, line_items, linked_space_id, merchant_reference, meta_data, parent, payment_connector_configuration, planned_purge_date, processing_on, refunded_amount, screen_color_depth, screen_height, screen_width, shipping_address, shipping_method, space_view_id, state, success_url, terminal, time_zone, token, tokenization_mode, total_applied_fees, total_settled_amount, user_agent_header, user_failure_message, user_interface_type, version, window_height, window_width, years_to_keep].hash
-    end
-
-    # Builds the object from hash
+      [parent, total_settled_amount, device_session_identifier, processing_on, invoice_merchant_reference, language, confirmed_on, line_items, accept_language_header, java_enabled, confirmed_by, payment_connector_configuration, id, state, window_width, allowed_payment_method_configurations, group, charge_retry_enabled, accept_header, user_agent_header, shipping_method, planned_purge_date, success_url, time_zone, space_view_id, user_failure_message, completion_behavior, version, internet_protocol_address_country, linked_space_id, delivery_decision_made_on, authorization_environment, auto_confirmation_enabled, failure_reason, total_applied_fees, customers_presence, failed_on, refunded_amount, authorization_amount, screen_width, environment_selection_strategy, customer_email_address, window_height, tokenization_mode, authorization_timeout_on, allowed_payment_method_brands, created_on, meta_data, emails_disabled, user_interface_type, customer_id, currency, merchant_reference, authorization_sales_channel, years_to_keep, completed_amount, screen_height, internet_protocol_address, terminal, end_of_life, token, environment, screen_color_depth, created_by, completed_on, completion_timeout_on, shipping_address, billing_address, authorized_on, failed_url].hash
+    end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
-    def build_from_hash(attributes)
+    def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      self.class.swagger_types.each_pair do |key, type|
-        if type =~ /\AArray<(.*)>/i
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the attribute
           # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
-        end # or else data not found in attributes(hash), not an issue as the data can be optional
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
       end
-
-      self
+      new(transformed_hash)
     end
 
     # Deserializes the data based on type
     # @param string type Data type
     # @param string value Value to be deserialized
     # @return [Object] Deserialized data
-    def _deserialize(type, value)
+    def self._deserialize(type, value)
       case type.to_sym
-      when :DateTime
-        DateTime.parse(value)
+      when :Time
+        Time.parse(value)
       when :Date
         Date.parse(value)
       when :String
@@ -949,7 +1043,7 @@ module Wallee
         value.to_i
       when :Float
         value.to_f
-      when :BOOLEAN
+      when :Boolean
         if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
@@ -970,8 +1064,9 @@ module Wallee
           end
         end
       else # model
-        temp_model = Wallee.const_get(type).new
-        temp_model.build_from_hash(value)
+        # models (e.g. Pet) or oneOf
+        klass = WalleeRubySdk.const_get(type)
+        klass.respond_to?(:openapi_any_of) || klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
       end
     end
 
@@ -993,7 +1088,11 @@ module Wallee
       hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
-        next if value.nil?
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
         hash[param] = _to_hash(value)
       end
       hash
@@ -1005,7 +1104,7 @@ module Wallee
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -1016,6 +1115,5 @@ module Wallee
         value
       end
     end
-
   end
 end
