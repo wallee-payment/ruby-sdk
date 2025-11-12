@@ -28,36 +28,36 @@ module WalleeRubySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Cancel a query execution
-    # @param query_token [String] Identifies the query execution.
+    # Cancel a query execution, identifying it by its external id.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def delete_analytics_queries_query_token(query_token, account, opts = {})
-      delete_analytics_queries_query_token_with_http_info(query_token, account, opts)
+    def delete_analytics_queries_query_external_id_query_external_id(query_external_id, account, opts = {})
+      delete_analytics_queries_query_external_id_query_external_id_with_http_info(query_external_id, account, opts)
       nil
     end
 
-    # Cancel a query execution
+    # Cancel a query execution, identifying it by its external id.
 
-    # @param query_token [String] Identifies the query execution.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_analytics_queries_query_token_with_http_info(query_token, account, opts = {})
+    def delete_analytics_queries_query_external_id_query_external_id_with_http_info(query_external_id, account, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.delete_analytics_queries_query_token ...'
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.delete_analytics_queries_query_external_id_query_external_id ...'
       end
-      # verify the required parameter 'query_token' is set
-      if @api_client.config.client_side_validation && query_token.nil?
-        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.delete_analytics_queries_query_token"
+      # verify the required parameter 'query_external_id' is set
+      if @api_client.config.client_side_validation && query_external_id.nil?
+        fail ArgumentError, "Missing the required parameter 'query_external_id' when calling AnalyticsQueriesService.delete_analytics_queries_query_external_id_query_external_id"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
-        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.delete_analytics_queries_query_token"
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.delete_analytics_queries_query_external_id_query_external_id"
       end
       # resource path
-      local_var_path = '/analytics/queries/{queryToken}'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+      local_var_path = '/analytics/queries/queryExternalId/{queryExternalId}'.sub('{' + 'queryExternalId' + '}', CGI.escape(query_external_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -81,7 +81,7 @@ module WalleeRubySdk
       return_type = opts[:debug_return_type]
 
       new_options = opts.merge(
-        :operation => :"AnalyticsQueriesService.delete_analytics_queries_query_token",
+        :operation => :"AnalyticsQueriesService.delete_analytics_queries_query_external_id_query_external_id",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -91,7 +91,76 @@ module WalleeRubySdk
 
       data, status_code, headers = @api_client.call_api(:DELETE.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AnalyticsQueriesService#delete_analytics_queries_query_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#delete_analytics_queries_query_external_id_query_external_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Cancel a query execution, identifying it by its query token.
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_analytics_queries_query_token_query_token(query_token, account, opts = {})
+      delete_analytics_queries_query_token_query_token_with_http_info(query_token, account, opts)
+      nil
+    end
+
+    # Cancel a query execution, identifying it by its query token.
+
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_analytics_queries_query_token_query_token_with_http_info(query_token, account, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.delete_analytics_queries_query_token_query_token ...'
+      end
+      # verify the required parameter 'query_token' is set
+      if @api_client.config.client_side_validation && query_token.nil?
+        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.delete_analytics_queries_query_token_query_token"
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.delete_analytics_queries_query_token_query_token"
+      end
+      # resource path
+      local_var_path = '/analytics/queries/queryToken/{queryToken}'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'Account'] = account
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsQueriesService.delete_analytics_queries_query_token_query_token",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#delete_analytics_queries_query_token_query_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
@@ -174,38 +243,38 @@ module WalleeRubySdk
     end
 
 
-    # Retrieve a query execution information
+    # Retrieve a query execution information by its external id
     # Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
-    # @param query_token [String] Identifies the query execution.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [SubmittedAnalyticsQueryExecution]
-    def get_analytics_queries_query_token(query_token, account, opts = {})
-      data, _status_code, _headers = get_analytics_queries_query_token_with_http_info(query_token, account, opts)
+    def get_analytics_queries_query_external_id_query_external_id(query_external_id, account, opts = {})
+      data, _status_code, _headers = get_analytics_queries_query_external_id_query_external_id_with_http_info(query_external_id, account, opts)
       data
     end
 
-    # Retrieve a query execution information
+    # Retrieve a query execution information by its external id
     # Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
     # Timeout for this request is: 97 seconds.
-    # @param query_token [String] Identifies the query execution.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubmittedAnalyticsQueryExecution, Integer, Hash)>] SubmittedAnalyticsQueryExecution data, response status code and response headers
-    def get_analytics_queries_query_token_with_http_info(query_token, account, opts = {})
+    def get_analytics_queries_query_external_id_query_external_id_with_http_info(query_external_id, account, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_token ...'
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id ...'
       end
-      # verify the required parameter 'query_token' is set
-      if @api_client.config.client_side_validation && query_token.nil?
-        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.get_analytics_queries_query_token"
+      # verify the required parameter 'query_external_id' is set
+      if @api_client.config.client_side_validation && query_external_id.nil?
+        fail ArgumentError, "Missing the required parameter 'query_external_id' when calling AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
-        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_token"
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id"
       end
       # resource path
-      local_var_path = '/analytics/queries/{queryToken}'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+      local_var_path = '/analytics/queries/queryExternalId/{queryExternalId}'.sub('{' + 'queryExternalId' + '}', CGI.escape(query_external_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -229,7 +298,7 @@ module WalleeRubySdk
       return_type = opts[:debug_return_type] || 'SubmittedAnalyticsQueryExecution'
 
       new_options = opts.merge(
-        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_token",
+        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -239,44 +308,44 @@ module WalleeRubySdk
 
       data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_external_id_query_external_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
 
 
-    # Generate a temporary URL to download the query result
+    # Generate a temporary URL to download the query result. It retrieves the query by its external id
     # Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the 'Retrieve a query execution' endpoint for status checks.
-    # @param query_token [String] Identifies the query execution.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [String]
-    def get_analytics_queries_query_token_result(query_token, account, opts = {})
-      data, _status_code, _headers = get_analytics_queries_query_token_result_with_http_info(query_token, account, opts)
+    def get_analytics_queries_query_external_id_query_external_id_result(query_external_id, account, opts = {})
+      data, _status_code, _headers = get_analytics_queries_query_external_id_query_external_id_result_with_http_info(query_external_id, account, opts)
       data
     end
 
-    # Generate a temporary URL to download the query result
+    # Generate a temporary URL to download the query result. It retrieves the query by its external id
     # Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the &#39;Retrieve a query execution&#39; endpoint for status checks.
 
-    # @param query_token [String] Identifies the query execution.
+    # @param query_external_id [String] Identifies the query execution.
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
-    def get_analytics_queries_query_token_result_with_http_info(query_token, account, opts = {})
+    def get_analytics_queries_query_external_id_query_external_id_result_with_http_info(query_external_id, account, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_token_result ...'
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id_result ...'
       end
-      # verify the required parameter 'query_token' is set
-      if @api_client.config.client_side_validation && query_token.nil?
-        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.get_analytics_queries_query_token_result"
+      # verify the required parameter 'query_external_id' is set
+      if @api_client.config.client_side_validation && query_external_id.nil?
+        fail ArgumentError, "Missing the required parameter 'query_external_id' when calling AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id_result"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
-        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_token_result"
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id_result"
       end
       # resource path
-      local_var_path = '/analytics/queries/{queryToken}/result'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+      local_var_path = '/analytics/queries/queryExternalId/{queryExternalId}/result'.sub('{' + 'queryExternalId' + '}', CGI.escape(query_external_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -300,7 +369,7 @@ module WalleeRubySdk
       return_type = opts[:debug_return_type] || 'String'
 
       new_options = opts.merge(
-        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_token_result",
+        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_external_id_query_external_id_result",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -310,31 +379,179 @@ module WalleeRubySdk
 
       data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_token_result\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_external_id_query_external_id_result\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Retrieve a query execution information by its query token
+    # Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [SubmittedAnalyticsQueryExecution]
+    def get_analytics_queries_query_token_query_token(query_token, account, opts = {})
+      data, _status_code, _headers = get_analytics_queries_query_token_query_token_with_http_info(query_token, account, opts)
+      data
+    end
+
+    # Retrieve a query execution information by its query token
+    # Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
+    # Timeout for this request is: 97 seconds.
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SubmittedAnalyticsQueryExecution, Integer, Hash)>] SubmittedAnalyticsQueryExecution data, response status code and response headers
+    def get_analytics_queries_query_token_query_token_with_http_info(query_token, account, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_token_query_token ...'
+      end
+      # verify the required parameter 'query_token' is set
+      if @api_client.config.client_side_validation && query_token.nil?
+        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.get_analytics_queries_query_token_query_token"
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_token_query_token"
+      end
+      # resource path
+      local_var_path = '/analytics/queries/queryToken/{queryToken}'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'Account'] = account
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = 97
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SubmittedAnalyticsQueryExecution'
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_token_query_token",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_token_query_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Generate a temporary URL to download the query result. It retrieves the query by its query token
+    # Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the 'Retrieve a query execution' endpoint for status checks.
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [String]
+    def get_analytics_queries_query_token_query_token_result(query_token, account, opts = {})
+      data, _status_code, _headers = get_analytics_queries_query_token_query_token_result_with_http_info(query_token, account, opts)
+      data
+    end
+
+    # Generate a temporary URL to download the query result. It retrieves the query by its query token
+    # Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the &#39;Retrieve a query execution&#39; endpoint for status checks.
+
+    # @param query_token [String] Identifies the query execution.
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+    def get_analytics_queries_query_token_query_token_result_with_http_info(query_token, account, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.get_analytics_queries_query_token_query_token_result ...'
+      end
+      # verify the required parameter 'query_token' is set
+      if @api_client.config.client_side_validation && query_token.nil?
+        fail ArgumentError, "Missing the required parameter 'query_token' when calling AnalyticsQueriesService.get_analytics_queries_query_token_query_token_result"
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling AnalyticsQueriesService.get_analytics_queries_query_token_query_token_result"
+      end
+      # resource path
+      local_var_path = '/analytics/queries/queryToken/{queryToken}/result'.sub('{' + 'queryToken' + '}', CGI.escape(query_token.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json']) unless header_params['Accept']
+      header_params[:'Account'] = account
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'String'
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsQueriesService.get_analytics_queries_query_token_query_token_result",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsQueriesService#get_analytics_queries_query_token_query_token_result\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
 
 
     # Submit a query execution
+    # @param query_external_id [String] A unique id to be provided for each query. The same id for different queries will be only executed the first time
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param analytics_query_execution_request [AnalyticsQueryExecutionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AnalyticsQueryExecutionResponse]
-    def post_analytics_queries_submit(account, analytics_query_execution_request, opts = {})
-      data, _status_code, _headers = post_analytics_queries_submit_with_http_info(account, analytics_query_execution_request, opts)
+    def post_analytics_queries_submit(query_external_id, account, analytics_query_execution_request, opts = {})
+      data, _status_code, _headers = post_analytics_queries_submit_with_http_info(query_external_id, account, analytics_query_execution_request, opts)
       data
     end
 
     # Submit a query execution
 
+    # @param query_external_id [String] A unique id to be provided for each query. The same id for different queries will be only executed the first time
     # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param analytics_query_execution_request [AnalyticsQueryExecutionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AnalyticsQueryExecutionResponse, Integer, Hash)>] AnalyticsQueryExecutionResponse data, response status code and response headers
-    def post_analytics_queries_submit_with_http_info(account, analytics_query_execution_request, opts = {})
+    def post_analytics_queries_submit_with_http_info(query_external_id, account, analytics_query_execution_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AnalyticsQueriesService.post_analytics_queries_submit ...'
+      end
+      # verify the required parameter 'query_external_id' is set
+      if @api_client.config.client_side_validation && query_external_id.nil?
+        fail ArgumentError, "Missing the required parameter 'query_external_id' when calling AnalyticsQueriesService.post_analytics_queries_submit"
       end
       # verify the required parameter 'account' is set
       if @api_client.config.client_side_validation && account.nil?
@@ -349,6 +566,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'queryExternalId'] = query_external_id
 
       # header parameters
       header_params = opts[:header_params] || {}

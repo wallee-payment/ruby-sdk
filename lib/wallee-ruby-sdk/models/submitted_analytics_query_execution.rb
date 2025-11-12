@@ -23,6 +23,9 @@ require 'time'
 
 module WalleeRubySdk
   class SubmittedAnalyticsQueryExecution
+    # The external id associated with this query, if any.
+    attr_accessor :query_external_id
+
     # The ID of the target account for which the analytics query will be executed, determining the data scope for the request.
     attr_accessor :account_id
 
@@ -74,6 +77,7 @@ module WalleeRubySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'query_external_id' => :'queryExternalId',
         :'account_id' => :'accountId',
         :'total_billed_execution_time_ms' => :'totalBilledExecutionTimeMs',
         :'created_timestamp' => :'createdTimestamp',
@@ -94,6 +98,7 @@ module WalleeRubySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'query_external_id' => :'String',
         :'account_id' => :'Integer',
         :'total_billed_execution_time_ms' => :'Integer',
         :'created_timestamp' => :'Time',
@@ -126,6 +131,10 @@ module WalleeRubySdk
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'query_external_id')
+        self.query_external_id = attributes[:'query_external_id']
+      end
 
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
@@ -184,6 +193,7 @@ module WalleeRubySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          query_external_id == o.query_external_id &&
           account_id == o.account_id &&
           total_billed_execution_time_ms == o.total_billed_execution_time_ms &&
           created_timestamp == o.created_timestamp &&
@@ -204,7 +214,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, total_billed_execution_time_ms, created_timestamp, download_requests, original_query, scanned_bytes, portal_query_token, result_file_bytes, status].hash
+      [query_external_id, account_id, total_billed_execution_time_ms, created_timestamp, download_requests, original_query, scanned_bytes, portal_query_token, result_file_bytes, status].hash
     end    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
