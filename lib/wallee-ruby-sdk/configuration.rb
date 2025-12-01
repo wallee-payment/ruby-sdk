@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,17 +18,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 module WalleeRubySdk
   class Configuration
     # Defines url scheme
-    attr_reader :scheme
+    attr_accessor :scheme
 
     # Defines url host
-    attr_reader :host
+    attr_accessor :host
 
     # Defines url base path
-    attr_reader :base_path
+    attr_accessor :base_path
 
     # Define server configuration index
     attr_accessor :server_index
@@ -134,6 +136,7 @@ module WalleeRubySdk
     # https://github.com/lostisland/faraday/tree/main/lib/faraday/encoders
     attr_accessor :params_encoder
 
+
     attr_accessor :inject_format
 
     attr_accessor :force_ending_format
@@ -219,8 +222,7 @@ module WalleeRubySdk
     end
 
     def operation_server_settings
-      { # generates the operation server settings by iterating over a nested API structure,
-        # such as API info, operations, servers, and variables
+      {
       }
     end
 

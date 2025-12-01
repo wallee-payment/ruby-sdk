@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -25,6 +27,8 @@ module WalleeRubySdk
   class PaymentTerminalLocation
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
+
+    attr_accessor :production_merchant_id
 
     # The name used to identify the payment terminal location.
     attr_accessor :name
@@ -69,6 +73,7 @@ module WalleeRubySdk
     def self.attribute_map
       {
         :'linked_space_id' => :'linkedSpaceId',
+        :'production_merchant_id' => :'productionMerchantId',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'external_id' => :'externalId',
@@ -78,15 +83,21 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
         :'linked_space_id' => :'Integer',
+        :'production_merchant_id' => :'String',
         :'name' => :'String',
         :'planned_purge_date' => :'Time',
         :'external_id' => :'String',
@@ -105,20 +116,25 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentTerminalLocation` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentTerminalLocation`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentTerminalLocation`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'linked_space_id')
         self.linked_space_id = attributes[:'linked_space_id']
+      end
+
+      if attributes.key?(:'production_merchant_id')
+        self.production_merchant_id = attributes[:'production_merchant_id']
       end
 
       if attributes.key?(:'name')
@@ -151,6 +167,19 @@ module WalleeRubySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@production_merchant_id.nil? && @production_merchant_id.to_s.length > 15
+        invalid_properties.push('invalid value for "production_merchant_id", the character length must be smaller than or equal to 15.')
+      end
+
+      if !@production_merchant_id.nil? && @production_merchant_id.to_s.length < 15
+        invalid_properties.push('invalid value for "production_merchant_id", the character length must be great than or equal to 15.')
+      end
+
+      pattern = Regexp.new(/([0-9a-zA-Z])+/)
+      if !@production_merchant_id.nil? && @production_merchant_id !~ pattern
+        invalid_properties.push("invalid value for \"production_merchant_id\", must conform to the pattern #{pattern}.")
+      end
+
       if !@name.nil? && @name.to_s.length > 100
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
       end
@@ -162,8 +191,34 @@ module WalleeRubySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@production_merchant_id.nil? && @production_merchant_id.to_s.length > 15
+      return false if !@production_merchant_id.nil? && @production_merchant_id.to_s.length < 15
+      return false if !@production_merchant_id.nil? && @production_merchant_id !~ Regexp.new(/([0-9a-zA-Z])+/)
       return false if !@name.nil? && @name.to_s.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] production_merchant_id Value to be assigned
+    def production_merchant_id=(production_merchant_id)
+      if production_merchant_id.nil?
+        fail ArgumentError, 'production_merchant_id cannot be nil'
+      end
+
+      if production_merchant_id.to_s.length > 15
+        fail ArgumentError, 'invalid value for "production_merchant_id", the character length must be smaller than or equal to 15.'
+      end
+
+      if production_merchant_id.to_s.length < 15
+        fail ArgumentError, 'invalid value for "production_merchant_id", the character length must be great than or equal to 15.'
+      end
+
+      pattern = Regexp.new(/([0-9a-zA-Z])+/)
+      if production_merchant_id !~ pattern
+        fail ArgumentError, "invalid value for \"production_merchant_id\", must conform to the pattern #{pattern}."
+      end
+
+      @production_merchant_id = production_merchant_id
     end
 
     # Custom attribute writer method with validation
@@ -186,6 +241,7 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           linked_space_id == o.linked_space_id &&
+          production_merchant_id == o.production_merchant_id &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
           external_id == o.external_id &&
@@ -203,8 +259,10 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [linked_space_id, name, planned_purge_date, external_id, id, state, version].hash
-    end    # Builds the object from hash
+      [linked_space_id, production_merchant_id, name, planned_purge_date, external_id, id, state, version].hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -315,5 +373,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

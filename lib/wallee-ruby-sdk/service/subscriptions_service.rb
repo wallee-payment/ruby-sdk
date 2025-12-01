@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'cgi'
 
@@ -81,11 +83,11 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'after'] = opts[:'after'] unless opts[:'after'].nil?
-      query_params[:'before'] = opts[:'before'] unless opts[:'before'].nil?
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
-      query_params[:'limit'] = opts[:'limit'] unless opts[:'limit'].nil?
-      query_params[:'order'] = opts[:'order'] unless opts[:'order'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+      query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -157,7 +159,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -249,11 +251,11 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
-      query_params[:'limit'] = opts[:'limit'] unless opts[:'limit'].nil?
-      query_params[:'offset'] = opts[:'offset'] unless opts[:'offset'].nil?
-      query_params[:'order'] = opts[:'order'] unless opts[:'order'].nil?
-      query_params[:'query'] = opts[:'query'] unless opts[:'query'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -339,11 +341,11 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
-      query_params[:'limit'] = opts[:'limit'] unless opts[:'limit'].nil?
-      query_params[:'offset'] = opts[:'offset'] unless opts[:'offset'].nil?
-      query_params[:'order'] = opts[:'order'] unless opts[:'order'].nil?
-      query_params[:'query'] = opts[:'query'] unless opts[:'query'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -421,7 +423,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -429,8 +431,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
@@ -498,7 +500,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -506,8 +508,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
@@ -581,7 +583,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -589,8 +591,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
@@ -658,7 +660,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -736,7 +738,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -744,8 +746,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
@@ -888,7 +890,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -896,8 +898,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
@@ -1048,7 +1050,7 @@ module WalleeRubySdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'respectTerminationPeriod'] = respect_termination_period
-      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) unless opts[:'expand'].nil?
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'json'
@@ -116,7 +118,7 @@ module WalleeRubySdk
       http_method = http_method.to_sym.downcase
 
       default_headers = {
-        'x-meta-sdk-version': "6.1.0",
+        'x-meta-sdk-version': "6.2.0",
         'x-meta-sdk-language': "ruby",
         'x-meta-sdk-provider': "wallee",
         'x-meta-sdk-language-version': RUBY_VERSION
@@ -124,7 +126,7 @@ module WalleeRubySdk
 
       header_params = @default_headers.merge(opts[:header_params] || {})
       header_params = header_params.merge(default_headers)
-      
+
       query_params = opts[:query_params] || {}
       form_params = opts[:form_params] || {}
 

@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'cgi'
 
@@ -360,7 +362,7 @@ module WalleeRubySdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'roleId'] = role_id
-      query_params[:'appliesOnSubAccount'] = opts[:'applies_on_sub_account'] unless opts[:'applies_on_sub_account'].nil?
+      query_params[:'appliesOnSubAccount'] = opts[:'applies_on_sub_account'] if !opts[:'applies_on_sub_account'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

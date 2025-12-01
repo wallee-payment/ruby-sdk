@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -315,9 +317,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -405,14 +412,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Transaction` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Transaction`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Transaction`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -716,7 +724,7 @@ module WalleeRubySdk
       end
 
       if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
-        invalid_properties.push('invalid value for "device_session_identifier", the character length must be greater than or equal to 10.')
+        invalid_properties.push('invalid value for "device_session_identifier", the character length must be great than or equal to 10.')
       end
 
       pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
@@ -742,7 +750,7 @@ module WalleeRubySdk
       end
 
       if !@success_url.nil? && @success_url.to_s.length < 9
-        invalid_properties.push('invalid value for "success_url", the character length must be greater than or equal to 9.')
+        invalid_properties.push('invalid value for "success_url", the character length must be great than or equal to 9.')
       end
 
       if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
@@ -763,7 +771,7 @@ module WalleeRubySdk
       end
 
       if !@failed_url.nil? && @failed_url.to_s.length < 9
-        invalid_properties.push('invalid value for "failed_url", the character length must be greater than or equal to 9.')
+        invalid_properties.push('invalid value for "failed_url", the character length must be great than or equal to 9.')
       end
 
       invalid_properties
@@ -775,18 +783,15 @@ module WalleeRubySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length > 40
       return false if !@device_session_identifier.nil? && @device_session_identifier.to_s.length < 10
-      pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
-      return false if !@device_session_identifier.nil? && @device_session_identifier !~ pattern
+      return false if !@device_session_identifier.nil? && @device_session_identifier !~ Regexp.new(/([a-zA-Z0-9_-])*/)
       return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference.to_s.length > 100
-      pattern = Regexp.new(/[	\x20-\x7e]*/)
-      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference !~ pattern
+      return false if !@invoice_merchant_reference.nil? && @invoice_merchant_reference !~ Regexp.new(/[	\x20-\x7e]*/)
       return false if !@shipping_method.nil? && @shipping_method.to_s.length > 200
       return false if !@success_url.nil? && @success_url.to_s.length > 2000
       return false if !@success_url.nil? && @success_url.to_s.length < 9
       return false if !@customer_email_address.nil? && @customer_email_address.to_s.length > 254
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
-      pattern = Regexp.new(/[	\x20-\x7e]*/)
-      return false if !@merchant_reference.nil? && @merchant_reference !~ pattern
+      return false if !@merchant_reference.nil? && @merchant_reference !~ Regexp.new(/[	\x20-\x7e]*/)
       return false if !@failed_url.nil? && @failed_url.to_s.length > 2000
       return false if !@failed_url.nil? && @failed_url.to_s.length < 9
       true
@@ -804,7 +809,7 @@ module WalleeRubySdk
       end
 
       if device_session_identifier.to_s.length < 10
-        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be greater than or equal to 10.'
+        fail ArgumentError, 'invalid value for "device_session_identifier", the character length must be great than or equal to 10.'
       end
 
       pattern = Regexp.new(/([a-zA-Z0-9_-])*/)
@@ -860,7 +865,7 @@ module WalleeRubySdk
       end
 
       if success_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "success_url", the character length must be greater than or equal to 9.'
+        fail ArgumentError, 'invalid value for "success_url", the character length must be great than or equal to 9.'
       end
 
       @success_url = success_url
@@ -911,7 +916,7 @@ module WalleeRubySdk
       end
 
       if failed_url.to_s.length < 9
-        fail ArgumentError, 'invalid value for "failed_url", the character length must be greater than or equal to 9.'
+        fail ArgumentError, 'invalid value for "failed_url", the character length must be great than or equal to 9.'
       end
 
       @failed_url = failed_url
@@ -1004,7 +1009,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [parent, total_settled_amount, device_session_identifier, processing_on, invoice_merchant_reference, language, confirmed_on, line_items, accept_language_header, java_enabled, confirmed_by, payment_connector_configuration, id, state, window_width, allowed_payment_method_configurations, group, charge_retry_enabled, accept_header, user_agent_header, shipping_method, planned_purge_date, success_url, time_zone, space_view_id, user_failure_message, completion_behavior, version, internet_protocol_address_country, linked_space_id, delivery_decision_made_on, authorization_environment, auto_confirmation_enabled, failure_reason, total_applied_fees, customers_presence, failed_on, refunded_amount, authorization_amount, screen_width, environment_selection_strategy, customer_email_address, window_height, tokenization_mode, authorization_timeout_on, allowed_payment_method_brands, created_on, meta_data, emails_disabled, user_interface_type, customer_id, currency, merchant_reference, authorization_sales_channel, years_to_keep, completed_amount, screen_height, internet_protocol_address, terminal, end_of_life, token, environment, screen_color_depth, created_by, completed_on, completion_timeout_on, shipping_address, billing_address, authorized_on, failed_url].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -1115,5 +1122,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

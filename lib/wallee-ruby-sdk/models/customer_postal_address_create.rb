@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -130,9 +132,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -170,14 +177,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::CustomerPostalAddressCreate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::CustomerPostalAddressCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::CustomerPostalAddressCreate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -600,7 +608,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [country, mobile_phone_number, gender, organization_name, city, commercial_register_number, social_security_number, given_name, postcode, legal_organization_form, sales_tax_number, date_of_birth, dependent_locality, email_address, phone_number, sorting_code, street, family_name, postal_state, salutation].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -711,5 +721,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

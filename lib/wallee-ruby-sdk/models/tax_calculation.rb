@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,17 +18,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
 
 module WalleeRubySdk
   class TaxCalculation
-    INCLUDED = "TAX_INCLUDED".freeze
-    NOT_INCLUDED = "TAX_NOT_INCLUDED".freeze
+    TAX_INCLUDED = "TAX_INCLUDED".freeze
+    TAX_NOT_INCLUDED = "TAX_NOT_INCLUDED".freeze
 
     def self.all_vars
-      @all_vars ||= [INCLUDED, NOT_INCLUDED].freeze
+      @all_vars ||= [TAX_INCLUDED, TAX_NOT_INCLUDED].freeze
     end
 
     # Builds the enum from string

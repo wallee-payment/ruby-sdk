@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -78,9 +80,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -112,14 +119,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::WebhookListenerCreate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::WebhookListenerCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::WebhookListenerCreate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -213,6 +221,26 @@ module WalleeRubySdk
       @name = name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] entity Value to be assigned
+    def entity=(entity)
+      if entity.nil?
+        fail ArgumentError, 'entity cannot be nil'
+      end
+
+      @entity = entity
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] url Value to be assigned
+    def url=(url)
+      if url.nil?
+        fail ArgumentError, 'url cannot be nil'
+      end
+
+      @url = url
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -237,7 +265,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [entity_states, name, state, notify_every_change, identity, entity, url].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -348,5 +378,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

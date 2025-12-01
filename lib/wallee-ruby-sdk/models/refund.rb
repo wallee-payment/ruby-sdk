@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -175,9 +177,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -227,14 +234,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::Refund` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Refund`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::Refund`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -399,7 +407,7 @@ module WalleeRubySdk
       end
 
       if !@external_id.nil? && @external_id.to_s.length < 1
-        invalid_properties.push('invalid value for "external_id", the character length must be greater than or equal to 1.')
+        invalid_properties.push('invalid value for "external_id", the character length must be great than or equal to 1.')
       end
 
       pattern = Regexp.new(/[	\x20-\x7e]*/)
@@ -419,12 +427,10 @@ module WalleeRubySdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@merchant_reference.nil? && @merchant_reference.to_s.length > 100
-      pattern = Regexp.new(/[	\x20-\x7e]*/)
-      return false if !@merchant_reference.nil? && @merchant_reference !~ pattern
+      return false if !@merchant_reference.nil? && @merchant_reference !~ Regexp.new(/[	\x20-\x7e]*/)
       return false if !@external_id.nil? && @external_id.to_s.length > 100
       return false if !@external_id.nil? && @external_id.to_s.length < 1
-      pattern = Regexp.new(/[	\x20-\x7e]*/)
-      return false if !@external_id.nil? && @external_id !~ pattern
+      return false if !@external_id.nil? && @external_id !~ Regexp.new(/[	\x20-\x7e]*/)
       return false if !@processor_reference.nil? && @processor_reference.to_s.length > 150
       true
     end
@@ -470,7 +476,7 @@ module WalleeRubySdk
       end
 
       if external_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "external_id", the character length must be greater than or equal to 1.'
+        fail ArgumentError, 'invalid value for "external_id", the character length must be great than or equal to 1.'
       end
 
       pattern = Regexp.new(/[	\x20-\x7e]*/)
@@ -554,7 +560,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [total_settled_amount, reductions, base_line_items, processing_on, taxes, language, type, created_on, line_items, succeeded_on, reduced_line_items, id, state, merchant_reference, completion, amount, planned_purge_date, external_id, time_zone, version, labels, linked_space_id, timeout_on, environment, created_by, next_update_on, updated_invoice, failure_reason, total_applied_fees, failed_on, transaction, processor_reference].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -665,5 +673,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

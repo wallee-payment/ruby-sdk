@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -19,6 +20,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'test/unit'
 require 'wallee-ruby-sdk'
@@ -50,7 +52,7 @@ class TransactionCompletionsServiceTest < Test::Unit::TestCase
       'State must be FULFILL'
     )
 
-    transaction_completion = @transactions_service.post_payment_transactions_id_complete_offline(
+    transaction_completion = @transactions_service.post_payment_transactions_id_complete_online(
       transaction.id, SPACE_ID
     )
 

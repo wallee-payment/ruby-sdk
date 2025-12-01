@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -60,9 +62,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -88,14 +95,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionLedgerEntryCreate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionLedgerEntryCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionLedgerEntryCreate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -175,7 +183,7 @@ module WalleeRubySdk
       end
 
       if @title.to_s.length < 1
-        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 1.')
+        invalid_properties.push('invalid value for "title", the character length must be great than or equal to 1.')
       end
 
       invalid_properties
@@ -196,6 +204,36 @@ module WalleeRubySdk
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] quantity Value to be assigned
+    def quantity=(quantity)
+      if quantity.nil?
+        fail ArgumentError, 'quantity cannot be nil'
+      end
+
+      @quantity = quantity
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] subscription_version Value to be assigned
+    def subscription_version=(subscription_version)
+      if subscription_version.nil?
+        fail ArgumentError, 'subscription_version cannot be nil'
+      end
+
+      @subscription_version = subscription_version
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if external_id.nil?
+        fail ArgumentError, 'external_id cannot be nil'
+      end
+
+      @external_id = external_id
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] taxes Value to be assigned
     def taxes=(taxes)
       if taxes.nil?
@@ -203,6 +241,16 @@ module WalleeRubySdk
       end
 
       @taxes = taxes
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] amount_including_tax Value to be assigned
+    def amount_including_tax=(amount_including_tax)
+      if amount_including_tax.nil?
+        fail ArgumentError, 'amount_including_tax cannot be nil'
+      end
+
+      @amount_including_tax = amount_including_tax
     end
 
     # Custom attribute writer method with validation
@@ -217,7 +265,7 @@ module WalleeRubySdk
       end
 
       if title.to_s.length < 1
-        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 1.'
+        fail ArgumentError, 'invalid value for "title", the character length must be great than or equal to 1.'
       end
 
       @title = title
@@ -248,7 +296,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [quantity, subscription_version, external_id, taxes, amount_including_tax, title, component_reference_name, subscription_metric_id].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -359,5 +409,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'date'
 require 'time'
@@ -50,9 +52,14 @@ module WalleeRubySdk
       }
     end
 
+    # Returns attribute mapping this model knows about
+    def self.acceptable_attribute_map
+      attribute_map
+    end
+
     # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values
+      acceptable_attribute_map.values
     end
 
     # Attribute type mapping.
@@ -75,14 +82,15 @@ module WalleeRubySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      unless attributes.is_a?(Hash)
+      if (!attributes.is_a?(Hash))
         fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionMetricUsageReportCreate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
+      acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        unless self.class.attribute_map.key?(k.to_sym)
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionMetricUsageReportCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        if (!acceptable_attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionMetricUsageReportCreate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -157,6 +165,26 @@ module WalleeRubySdk
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] consumed_units Value to be assigned
+    def consumed_units=(consumed_units)
+      if consumed_units.nil?
+        fail ArgumentError, 'consumed_units cannot be nil'
+      end
+
+      @consumed_units = consumed_units
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] metric Value to be assigned
+    def metric=(metric)
+      if metric.nil?
+        fail ArgumentError, 'metric cannot be nil'
+      end
+
+      @metric = metric
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] description Value to be assigned
     def description=(description)
       if description.nil?
@@ -168,6 +196,26 @@ module WalleeRubySdk
       end
 
       @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if external_id.nil?
+        fail ArgumentError, 'external_id cannot be nil'
+      end
+
+      @external_id = external_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] subscription Value to be assigned
+    def subscription=(subscription)
+      if subscription.nil?
+        fail ArgumentError, 'subscription cannot be nil'
+      end
+
+      @subscription = subscription
     end
 
     # Checks equality by comparing each attribute.
@@ -192,7 +240,9 @@ module WalleeRubySdk
     # @return [Integer] Hash code
     def hash
       [consumed_units, metric, description, external_id, subscription].hash
-    end    # Builds the object from hash
+    end
+
+    # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
@@ -303,5 +353,7 @@ module WalleeRubySdk
         value
       end
     end
+
   end
+
 end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -19,6 +20,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'test/unit'
 require 'wallee-ruby-sdk'
@@ -293,81 +295,7 @@ class TransactionsServiceTest < Test::Unit::TestCase
     )
   end
 
-  # Authorizes and completes a transaction offline using card details.
-  #
-  # Verifies that:
-  # - Transaction completion state is SUCCESSFUL
-  # - Transaction state is FULFILL
-  #
-  def test_complete_offline_should_make_transaction_completion_state_successful
-    transaction_create = TestUtils.get_transaction_create_payload
-    transaction_create.tokenization_mode = WalleeRubySdk::TokenizationMode::FORCE_CREATION
-    transaction_create.customers_presence = WalleeRubySdk::CustomersPresence::NOT_PRESENT
-    transaction_create.completion_behavior = WalleeRubySdk::TransactionCompletionBehavior::COMPLETE_IMMEDIATELY
 
-    transaction = create_transaction(transaction_create)
-
-    authorized_transaction = @transactions_service.post_payment_transactions_id_process_card_details(
-      transaction.id, SPACE_ID, MOCK_CARD_DATA
-    )
-
-    processed_transaction = @transactions_service.post_payment_transactions_id_complete_offline(
-      authorized_transaction.id, SPACE_ID
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionCompletionState::SUCCESSFUL,
-      processed_transaction.state,
-      'Transaction completion state must be SUCCESSFUL'
-    )
-
-    completed_transaction = @transactions_service.get_payment_transactions_id(
-      transaction.id, SPACE_ID
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionState::FULFILL,
-      completed_transaction.state,
-      'Transaction state must be FULFILLED'
-    )
-  end
-
-  # Authorizes and completes a transaction offline partially using card details.
-  #
-  # Verifies that:
-  # - Transaction completion state is SUCCESSFUL
-  # - Transaction state is FULFILL
-  #
-  def test_complete_offline_partially_should_make_transaction_completion_state_successful
-    transaction = create_transaction(TestUtils.get_transaction_create_payload)
-
-    authorized_transaction = @transactions_service.post_payment_transactions_id_process_card_details(
-      transaction.id, SPACE_ID, MOCK_CARD_DATA
-    )
-
-    tcd = WalleeRubySdk::TransactionCompletion.new
-    tcd.external_id = SecureRandom.uuid
-
-    processed_transaction = @transactions_service.post_payment_transactions_id_complete_partially_offline(
-      authorized_transaction.id, SPACE_ID, tcd
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionCompletionState::SUCCESSFUL,
-      processed_transaction.state,
-      'Transaction completion state must be SUCCESSFUL'
-    )
-
-    completed_transaction = @transactions_service.get_payment_transactions_id(
-      transaction.id, SPACE_ID
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionState::FULFILL,
-      completed_transaction.state,
-      'Transaction state must be FULFILLED'
-    )
-  end
 
   # Authorizes and voids a transaction online.
   #
@@ -414,50 +342,6 @@ class TransactionsServiceTest < Test::Unit::TestCase
     )
   end
 
-  # Authorizes and voids a transaction offline.
-  #
-  # Verifies that:
-  # - Transaction void state is SUCCESSFUL
-  # - Transaction state is VOIDED
-  #
-  def test_void_transaction_offline_should_return_voided_transaction
-    transaction_create = TestUtils.get_transaction_create_payload
-    transaction_create.tokenization_mode = WalleeRubySdk::TokenizationMode::FORCE_CREATION
-    transaction_create.customers_presence = WalleeRubySdk::CustomersPresence::NOT_PRESENT
-    transaction_create.completion_behavior = WalleeRubySdk::TransactionCompletionBehavior::COMPLETE_DEFERRED
-
-    transaction = create_transaction(transaction_create)
-
-    authorized_transaction = @transactions_service.post_payment_transactions_id_process_card_details(
-      transaction.id, SPACE_ID, MOCK_CARD_DATA
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionState::AUTHORIZED,
-      authorized_transaction.state,
-      "Transaction state should be AUTHORIZED"
-    )
-
-    expand = ['transaction']
-
-    transaction_void = @transactions_service.post_payment_transactions_id_void_offline(
-      authorized_transaction.id, SPACE_ID, { expand: expand }
-    )
-
-    assert_equal(
-      WalleeRubySdk::TransactionVoidState::SUCCESSFUL,
-      transaction_void.state,
-      "Transaction void state should be SUCCESSFUL"
-    )
-
-    assert_not_nil(transaction_void.transaction)
-
-    assert_equal(
-      WalleeRubySdk::TransactionState::VOIDED,
-      transaction_void.transaction.state,
-      "Transaction state should be VOIDED"
-    )
-  end
 
   # Creates, authorizes and completes a transaction.
   #

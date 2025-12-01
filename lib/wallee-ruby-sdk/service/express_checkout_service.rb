@@ -1,3 +1,4 @@
+=begin
 # Wallee AG Ruby SDK
 #
 # This library allows to interact with the Wallee AG payment service.
@@ -17,6 +18,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+=end
 
 require 'cgi'
 
@@ -68,8 +70,8 @@ module WalleeRubySdk
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
-      unless content_type.nil?
-        header_params['Content-Type'] = content_type
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
       end
       header_params[:'Space'] = space
 
