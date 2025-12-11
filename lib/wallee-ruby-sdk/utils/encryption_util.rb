@@ -29,14 +29,14 @@ module WalleeRubySdk
 
       if encryption_algorithm.nil? || encryption_algorithm.empty?
         raise WalleeSdkException.new(
-          ErrorCode::MISSING_WEBHOOK_ENCRYPTION_ALGORYTHM,
+          SdkExceptionErrorCodes::MISSING_WEBHOOK_ENCRYPTION_ALGORYTHM,
           "Webhook signature algorithm was not provided"
         )
       end
 
       algorithm_class = get_algorithm_class(encryption_algorithm)
       if algorithm_class.nil?
-        raise WalleeSdkException.new(ErrorCode::UNSUPPORTED_WEBHOOK_ENCRYPTION_ALGORYTHM,
+        raise WalleeSdkException.new(SdkExceptionErrorCodes::UNSUPPORTED_WEBHOOK_ENCRYPTION_ALGORYTHM,
           "Unsupported webhook signature algorithm: '#{encryption_algorithm}'. " \
           "This may indicate that the REST API is using a new encryption algorithm for webhooks. " \
           "Please check whether a newer version of the SDK is available.")
@@ -45,20 +45,20 @@ module WalleeRubySdk
       begin
         signature = Base64.decode64(signature)
       rescue ArgumentError
-        raise WalleeSdkException.new(ErrorCode::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE, 'Invalid signature value format')
+        raise WalleeSdkException.new(SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE, 'Invalid signature value format')
       end
 
       begin
         public_key_bytes = Base64.decode64(public_key)
       rescue ArgumentError
-        raise WalleeSdkException.new(ErrorCode::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY, 'Invalid public key value format')
+        raise WalleeSdkException.new(SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY, 'Invalid public key value format')
       end
 
       begin
         public_key = OpenSSL::PKey.read(public_key_bytes)
       rescue OpenSSL::PKey::PKeyError
         raise WalleeSdkException.new(
-            ErrorCode::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
+            SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
             'Invalid public key: unsupported or unparseable format'
             )
       end

@@ -24,26 +24,55 @@ require 'date'
 require 'time'
 
 module WalleeRubySdk
-  class SubscriptionUpdateRequest
-    # The configurations of the subscription's components.
-    attr_accessor :component_configurations
+  # Represents the aggregated transaction data for a specific brand and currency, including regular and DCC (Dynamic Currency Conversion) transactions.
+  class PaymentTerminalTransactionSum
+    # The total amount of tips from regular (non-DCC) transactions in the transaction currency.
+    attr_accessor :transaction_tip_amount
 
-    # The product to subscribe to.
+    # The product within the brand for which transactions are summarized.
     attr_accessor :product
 
-    # The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
-    attr_accessor :currency
+    # The base currency in which the transactions were processed and settled, excluding any DCC conversions.
+    attr_accessor :transaction_currency
 
-    # Whether the subscriptions' termination periods should be respected.
-    attr_accessor :respect_termination_period
+    # The total monetary value of all transactions in the transaction currency, excluding DCC transactions.
+    attr_accessor :transaction_amount
+
+    # The total amount of tips from DCC transactions, converted and presented in the transaction currency.
+    attr_accessor :dcc_tip_amount
+
+    # A unique identifier for the object.
+    attr_accessor :id
+
+    # The total count of regular (non-DCC) transactions processed within this summary period.
+    attr_accessor :transaction_count
+
+    # The payment brand for which the transactions are summarized.
+    attr_accessor :brand
+
+    # The number of transactions where Dynamic Currency Conversion (DCC) was applied, allowing customers to pay in their home currency.
+    attr_accessor :dcc_transaction_count
+
+    # The version is used for optimistic locking and incremented whenever the object is updated.
+    attr_accessor :version
+
+    # The total monetary value of DCC transactions, converted and presented in the transaction currency.
+    attr_accessor :dcc_transaction_amount
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'component_configurations' => :'componentConfigurations',
+        :'transaction_tip_amount' => :'transactionTipAmount',
         :'product' => :'product',
-        :'currency' => :'currency',
-        :'respect_termination_period' => :'respectTerminationPeriod'
+        :'transaction_currency' => :'transactionCurrency',
+        :'transaction_amount' => :'transactionAmount',
+        :'dcc_tip_amount' => :'dccTipAmount',
+        :'id' => :'id',
+        :'transaction_count' => :'transactionCount',
+        :'brand' => :'brand',
+        :'dcc_transaction_count' => :'dccTransactionCount',
+        :'version' => :'version',
+        :'dcc_transaction_amount' => :'dccTransactionAmount'
       }
     end
 
@@ -60,10 +89,17 @@ module WalleeRubySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'component_configurations' => :'Array<SubscriptionComponentReferenceConfiguration>',
-        :'product' => :'Integer',
-        :'currency' => :'String',
-        :'respect_termination_period' => :'Boolean'
+        :'transaction_tip_amount' => :'Float',
+        :'product' => :'String',
+        :'transaction_currency' => :'String',
+        :'transaction_amount' => :'Float',
+        :'dcc_tip_amount' => :'Float',
+        :'id' => :'Integer',
+        :'transaction_count' => :'Integer',
+        :'brand' => :'String',
+        :'dcc_transaction_count' => :'Integer',
+        :'version' => :'Integer',
+        :'dcc_transaction_amount' => :'Float'
       }
     end
 
@@ -77,34 +113,60 @@ module WalleeRubySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::SubscriptionUpdateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentTerminalTransactionSum` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::SubscriptionUpdateRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentTerminalTransactionSum`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'component_configurations')
-        if (value = attributes[:'component_configurations']).is_a?(Array)
-          self.component_configurations = value
-        end
+      if attributes.key?(:'transaction_tip_amount')
+        self.transaction_tip_amount = attributes[:'transaction_tip_amount']
       end
 
       if attributes.key?(:'product')
         self.product = attributes[:'product']
       end
 
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'transaction_currency')
+        self.transaction_currency = attributes[:'transaction_currency']
       end
 
-      if attributes.key?(:'respect_termination_period')
-        self.respect_termination_period = attributes[:'respect_termination_period']
+      if attributes.key?(:'transaction_amount')
+        self.transaction_amount = attributes[:'transaction_amount']
+      end
+
+      if attributes.key?(:'dcc_tip_amount')
+        self.dcc_tip_amount = attributes[:'dcc_tip_amount']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'transaction_count')
+        self.transaction_count = attributes[:'transaction_count']
+      end
+
+      if attributes.key?(:'brand')
+        self.brand = attributes[:'brand']
+      end
+
+      if attributes.key?(:'dcc_transaction_count')
+        self.dcc_transaction_count = attributes[:'dcc_transaction_count']
+      end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'dcc_transaction_amount')
+        self.dcc_transaction_amount = attributes[:'dcc_transaction_amount']
       end
     end
 
@@ -123,25 +185,22 @@ module WalleeRubySdk
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] component_configurations Value to be assigned
-    def component_configurations=(component_configurations)
-      if component_configurations.nil?
-        fail ArgumentError, 'component_configurations cannot be nil'
-      end
-
-      @component_configurations = component_configurations
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          component_configurations == o.component_configurations &&
+          transaction_tip_amount == o.transaction_tip_amount &&
           product == o.product &&
-          currency == o.currency &&
-          respect_termination_period == o.respect_termination_period
+          transaction_currency == o.transaction_currency &&
+          transaction_amount == o.transaction_amount &&
+          dcc_tip_amount == o.dcc_tip_amount &&
+          id == o.id &&
+          transaction_count == o.transaction_count &&
+          brand == o.brand &&
+          dcc_transaction_count == o.dcc_transaction_count &&
+          version == o.version &&
+          dcc_transaction_amount == o.dcc_transaction_amount
     end
 
     # @see the `==` method
@@ -153,7 +212,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [component_configurations, product, currency, respect_termination_period].hash
+      [transaction_tip_amount, product, transaction_currency, transaction_amount, dcc_tip_amount, id, transaction_count, brand, dcc_transaction_count, version, dcc_transaction_amount].hash
     end
 
     # Builds the object from hash

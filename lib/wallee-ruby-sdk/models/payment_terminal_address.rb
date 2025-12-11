@@ -205,12 +205,20 @@ module WalleeRubySdk
         invalid_properties.push('invalid value for "mobile_phone_number", the character length must be smaller than or equal to 100.')
       end
 
+      if !@postcode.nil? && @postcode.to_s.length > 12
+        invalid_properties.push('invalid value for "postcode", the character length must be smaller than or equal to 12.')
+      end
+
       if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
         invalid_properties.push('invalid value for "dependent_locality", the character length must be smaller than or equal to 100.')
       end
 
-      if !@email_address.nil? && @email_address.to_s.length > 254
-        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 254.')
+      if !@email_address.nil? && @email_address.to_s.length > 80
+        invalid_properties.push('invalid value for "email_address", the character length must be smaller than or equal to 80.')
+      end
+
+      if !@phone_number.nil? && @phone_number.to_s.length > 20
+        invalid_properties.push('invalid value for "phone_number", the character length must be smaller than or equal to 20.')
       end
 
       if !@sorting_code.nil? && @sorting_code.to_s.length > 100
@@ -229,8 +237,10 @@ module WalleeRubySdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@mobile_phone_number.nil? && @mobile_phone_number.to_s.length > 100
+      return false if !@postcode.nil? && @postcode.to_s.length > 12
       return false if !@dependent_locality.nil? && @dependent_locality.to_s.length > 100
-      return false if !@email_address.nil? && @email_address.to_s.length > 254
+      return false if !@email_address.nil? && @email_address.to_s.length > 80
+      return false if !@phone_number.nil? && @phone_number.to_s.length > 20
       return false if !@sorting_code.nil? && @sorting_code.to_s.length > 100
       return false if !@salutation.nil? && @salutation.to_s.length > 20
       true
@@ -248,6 +258,20 @@ module WalleeRubySdk
       end
 
       @mobile_phone_number = mobile_phone_number
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] postcode Value to be assigned
+    def postcode=(postcode)
+      if postcode.nil?
+        fail ArgumentError, 'postcode cannot be nil'
+      end
+
+      if postcode.to_s.length > 12
+        fail ArgumentError, 'invalid value for "postcode", the character length must be smaller than or equal to 12.'
+      end
+
+      @postcode = postcode
     end
 
     # Custom attribute writer method with validation
@@ -271,11 +295,25 @@ module WalleeRubySdk
         fail ArgumentError, 'email_address cannot be nil'
       end
 
-      if email_address.to_s.length > 254
-        fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 254.'
+      if email_address.to_s.length > 80
+        fail ArgumentError, 'invalid value for "email_address", the character length must be smaller than or equal to 80.'
       end
 
       @email_address = email_address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if phone_number.nil?
+        fail ArgumentError, 'phone_number cannot be nil'
+      end
+
+      if phone_number.to_s.length > 20
+        fail ArgumentError, 'invalid value for "phone_number", the character length must be smaller than or equal to 20.'
+      end
+
+      @phone_number = phone_number
     end
 
     # Custom attribute writer method with validation
