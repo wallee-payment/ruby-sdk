@@ -241,4 +241,15 @@ class QueryingTest < Test::Unit::TestCase
     assert_not_nil(response.payment_connector_configuration.processor_configuration)
     assert_not_nil(response.payment_connector_configuration.processor_configuration.linked_space_id, 'Items in nested response should be present')
   end
+
+  # Querying with single quote sign.
+  def test_search_with_quote_sign_should_return_correct_amount_of_items
+    response = @transactions_service.get_payment_transactions_search(
+      SPACE_ID,
+      { expand: [], limit: 2, offset: 0, order: '', query: "completedOn:<'2026-01-15'"  }
+    )
+
+    assert_not_nil(response.data, 'Response should not be nil')
+    assert_not_equal(0, response.data.length, 'Response should contain items')
+  end
 end

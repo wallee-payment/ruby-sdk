@@ -28,6 +28,9 @@ module WalleeRubySdk
     # The line items to be captured in the transaction completion.
     attr_accessor :line_items
 
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
+
     # Whether this is the final completion for the transaction, meaning no further completions can occur, and the transaction will move to its completed state upon success.
     attr_accessor :last_completion
 
@@ -40,14 +43,19 @@ module WalleeRubySdk
     # The merchant's reference used to identify the invoice.
     attr_accessor :invoice_merchant_reference
 
+    # A unique identifier for the object.
+    attr_accessor :id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'line_items' => :'lineItems',
+        :'meta_data' => :'metaData',
         :'last_completion' => :'lastCompletion',
         :'statement_descriptor' => :'statementDescriptor',
         :'external_id' => :'externalId',
-        :'invoice_merchant_reference' => :'invoiceMerchantReference'
+        :'invoice_merchant_reference' => :'invoiceMerchantReference',
+        :'id' => :'id'
       }
     end
 
@@ -65,10 +73,12 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'line_items' => :'Array<CompletionLineItemCreate>',
+        :'meta_data' => :'Hash<String, String>',
         :'last_completion' => :'Boolean',
         :'statement_descriptor' => :'String',
         :'external_id' => :'String',
-        :'invoice_merchant_reference' => :'String'
+        :'invoice_merchant_reference' => :'String',
+        :'id' => :'Integer'
       }
     end
 
@@ -100,6 +110,12 @@ module WalleeRubySdk
         end
       end
 
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
+          self.meta_data = value
+        end
+      end
+
       if attributes.key?(:'last_completion')
         self.last_completion = attributes[:'last_completion']
       end
@@ -114,6 +130,10 @@ module WalleeRubySdk
 
       if attributes.key?(:'invoice_merchant_reference')
         self.invoice_merchant_reference = attributes[:'invoice_merchant_reference']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
     end
 
@@ -237,10 +257,12 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           line_items == o.line_items &&
+          meta_data == o.meta_data &&
           last_completion == o.last_completion &&
           statement_descriptor == o.statement_descriptor &&
           external_id == o.external_id &&
-          invoice_merchant_reference == o.invoice_merchant_reference
+          invoice_merchant_reference == o.invoice_merchant_reference &&
+          id == o.id
     end
 
     # @see the `==` method
@@ -252,7 +274,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [line_items, last_completion, statement_descriptor, external_id, invoice_merchant_reference].hash
+      [line_items, meta_data, last_completion, statement_descriptor, external_id, invoice_merchant_reference, id].hash
     end
 
     # Builds the object from hash

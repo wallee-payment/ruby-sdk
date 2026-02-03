@@ -29,6 +29,9 @@ module WalleeRubySdk
     # The transaction completion that the refund belongs to.
     attr_accessor :completion
 
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
+
     # The total monetary amount of the refund, representing the exact credit issued to the customer.
     attr_accessor :amount
 
@@ -72,6 +75,7 @@ module WalleeRubySdk
     def self.attribute_map
       {
         :'completion' => :'completion',
+        :'meta_data' => :'metaData',
         :'amount' => :'amount',
         :'reductions' => :'reductions',
         :'external_id' => :'externalId',
@@ -95,6 +99,7 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'completion' => :'Integer',
+        :'meta_data' => :'Hash<String, String>',
         :'amount' => :'Float',
         :'reductions' => :'Array<LineItemReductionCreate>',
         :'external_id' => :'String',
@@ -128,6 +133,12 @@ module WalleeRubySdk
 
       if attributes.key?(:'completion')
         self.completion = attributes[:'completion']
+      end
+
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
+          self.meta_data = value
+        end
       end
 
       if attributes.key?(:'amount')
@@ -271,6 +282,7 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           completion == o.completion &&
+          meta_data == o.meta_data &&
           amount == o.amount &&
           reductions == o.reductions &&
           external_id == o.external_id &&
@@ -288,7 +300,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [completion, amount, reductions, external_id, type, merchant_reference, transaction].hash
+      [completion, meta_data, amount, reductions, external_id, type, merchant_reference, transaction].hash
     end
 
     # Builds the object from hash

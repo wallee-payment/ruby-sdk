@@ -30,10 +30,11 @@ module WalleeRubySdk
     PAYMENT_PAGE = "PAYMENT_PAGE".freeze
     MOBILE_SDK = "MOBILE_SDK".freeze
     TERMINAL = "TERMINAL".freeze
+    CLOUD_TILL_INTERFACE = "CLOUD_TILL_INTERFACE".freeze
     EXPRESS_CHECKOUT = "EXPRESS_CHECKOUT".freeze
 
     def self.all_vars
-      @all_vars ||= [IFRAME, LIGHTBOX, PAYMENT_PAGE, MOBILE_SDK, TERMINAL, EXPRESS_CHECKOUT].freeze
+      @all_vars ||= [IFRAME, LIGHTBOX, PAYMENT_PAGE, MOBILE_SDK, TERMINAL, CLOUD_TILL_INTERFACE, EXPRESS_CHECKOUT].freeze
     end
 
     # Builds the enum from string

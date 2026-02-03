@@ -29,11 +29,14 @@ module WalleeRubySdk
 
     attr_accessor :session
 
+    attr_accessor :session_token
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'iframe_src' => :'iframeSrc',
-        :'session' => :'session'
+        :'session' => :'session',
+        :'session_token' => :'sessionToken'
       }
     end
 
@@ -51,7 +54,8 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'iframe_src' => :'String',
-        :'session' => :'Integer'
+        :'session' => :'Integer',
+        :'session_token' => :'String'
       }
     end
 
@@ -84,6 +88,10 @@ module WalleeRubySdk
       if attributes.key?(:'session')
         self.session = attributes[:'session']
       end
+
+      if attributes.key?(:'session_token')
+        self.session_token = attributes[:'session_token']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +115,8 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           iframe_src == o.iframe_src &&
-          session == o.session
+          session == o.session &&
+          session_token == o.session_token
     end
 
     # @see the `==` method
@@ -119,7 +128,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [iframe_src, session].hash
+      [iframe_src, session, session_token].hash
     end
 
     # Builds the object from hash

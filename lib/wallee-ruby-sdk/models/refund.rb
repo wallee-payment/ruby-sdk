@@ -52,6 +52,9 @@ module WalleeRubySdk
     # The line items included in the refund, representing the reductions.
     attr_accessor :line_items
 
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
+
     # The date and time when the refund succeeded.
     attr_accessor :succeeded_on
 
@@ -151,6 +154,7 @@ module WalleeRubySdk
         :'type' => :'type',
         :'created_on' => :'createdOn',
         :'line_items' => :'lineItems',
+        :'meta_data' => :'metaData',
         :'succeeded_on' => :'succeededOn',
         :'reduced_line_items' => :'reducedLineItems',
         :'id' => :'id',
@@ -199,6 +203,7 @@ module WalleeRubySdk
         :'type' => :'RefundType',
         :'created_on' => :'Time',
         :'line_items' => :'Array<LineItem>',
+        :'meta_data' => :'Hash<String, String>',
         :'succeeded_on' => :'Time',
         :'reduced_line_items' => :'Array<LineItem>',
         :'id' => :'Integer',
@@ -288,6 +293,12 @@ module WalleeRubySdk
       if attributes.key?(:'line_items')
         if (value = attributes[:'line_items']).is_a?(Array)
           self.line_items = value
+        end
+      end
+
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
+          self.meta_data = value
         end
       end
 
@@ -525,6 +536,7 @@ module WalleeRubySdk
           type == o.type &&
           created_on == o.created_on &&
           line_items == o.line_items &&
+          meta_data == o.meta_data &&
           succeeded_on == o.succeeded_on &&
           reduced_line_items == o.reduced_line_items &&
           id == o.id &&
@@ -559,7 +571,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_settled_amount, reductions, base_line_items, processing_on, taxes, language, type, created_on, line_items, succeeded_on, reduced_line_items, id, state, merchant_reference, completion, amount, planned_purge_date, external_id, time_zone, version, labels, linked_space_id, timeout_on, environment, created_by, next_update_on, updated_invoice, failure_reason, total_applied_fees, failed_on, transaction, processor_reference].hash
+      [total_settled_amount, reductions, base_line_items, processing_on, taxes, language, type, created_on, line_items, meta_data, succeeded_on, reduced_line_items, id, state, merchant_reference, completion, amount, planned_purge_date, external_id, time_zone, version, labels, linked_space_id, timeout_on, environment, created_by, next_update_on, updated_invoice, failure_reason, total_applied_fees, failed_on, transaction, processor_reference].hash
     end
 
     # Builds the object from hash

@@ -31,7 +31,7 @@ module WalleeRubySdk
     # Description of the option
     attr_accessor :description
 
-    # Currency of the option
+    # Currency code (ISO-4217) of this shipping option.
     attr_accessor :currency
 
     # Identifier of the option.

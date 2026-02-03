@@ -53,6 +53,9 @@ module WalleeRubySdk
 
     attr_accessor :mode
 
+    # Allow to store additional information about the object.
+    attr_accessor :meta_data
+
     # The date and time when the transaction completion succeeded.
     attr_accessor :succeeded_on
 
@@ -149,6 +152,7 @@ module WalleeRubySdk
         :'created_on' => :'createdOn',
         :'line_items' => :'lineItems',
         :'mode' => :'mode',
+        :'meta_data' => :'metaData',
         :'succeeded_on' => :'succeededOn',
         :'id' => :'id',
         :'state' => :'state',
@@ -196,6 +200,7 @@ module WalleeRubySdk
         :'created_on' => :'Time',
         :'line_items' => :'Array<LineItem>',
         :'mode' => :'TransactionCompletionMode',
+        :'meta_data' => :'Hash<String, String>',
         :'succeeded_on' => :'Time',
         :'id' => :'Integer',
         :'state' => :'TransactionCompletionState',
@@ -286,6 +291,12 @@ module WalleeRubySdk
 
       if attributes.key?(:'mode')
         self.mode = attributes[:'mode']
+      end
+
+      if attributes.key?(:'meta_data')
+        if (value = attributes[:'meta_data']).is_a?(Hash)
+          self.meta_data = value
+        end
       end
 
       if attributes.key?(:'succeeded_on')
@@ -514,6 +525,7 @@ module WalleeRubySdk
           created_on == o.created_on &&
           line_items == o.line_items &&
           mode == o.mode &&
+          meta_data == o.meta_data &&
           succeeded_on == o.succeeded_on &&
           id == o.id &&
           state == o.state &&
@@ -546,7 +558,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [line_item_version, statement_descriptor, base_line_items, processing_on, invoice_merchant_reference, language, remaining_line_items, created_on, line_items, mode, succeeded_on, id, state, linked_transaction, payment_information, amount, last_completion, planned_purge_date, external_id, time_zone, space_view_id, version, labels, linked_space_id, timeout_on, created_by, next_update_on, failure_reason, tax_amount, failed_on, processor_reference].hash
+      [line_item_version, statement_descriptor, base_line_items, processing_on, invoice_merchant_reference, language, remaining_line_items, created_on, line_items, mode, meta_data, succeeded_on, id, state, linked_transaction, payment_information, amount, last_completion, planned_purge_date, external_id, time_zone, space_view_id, version, labels, linked_space_id, timeout_on, created_by, next_update_on, failure_reason, tax_amount, failed_on, processor_reference].hash
     end
 
     # Builds the object from hash

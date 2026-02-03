@@ -239,20 +239,20 @@ module WalleeRubySdk
         invalid_properties.push('invalid value for "port", must be greater than or equal to 1.')
       end
 
-      if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 40
-        invalid_properties.push('invalid value for "preprod_domain_name", the character length must be smaller than or equal to 40.')
+      if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 100
+        invalid_properties.push('invalid value for "preprod_domain_name", the character length must be smaller than or equal to 100.')
       end
 
-      if !@domain_name.nil? && @domain_name.to_s.length > 40
-        invalid_properties.push('invalid value for "domain_name", the character length must be smaller than or equal to 40.')
+      if !@domain_name.nil? && @domain_name.to_s.length > 100
+        invalid_properties.push('invalid value for "domain_name", the character length must be smaller than or equal to 100.')
       end
 
       if !@name.nil? && @name.to_s.length > 50
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
       end
 
-      if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 40
-        invalid_properties.push('invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 40.')
+      if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 100
+        invalid_properties.push('invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 100.')
       end
 
       invalid_properties
@@ -265,10 +265,10 @@ module WalleeRubySdk
       return false if !@machine_name.nil? && @machine_name.to_s.length > 50
       return false if !@machine_name.nil? && @machine_name !~ Regexp.new(/([A-Z][A-Za-z0-9]+)(_([A-Z][A-Za-z0-9]+))*/)
       return false if !@port.nil? && @port < 1
-      return false if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 40
-      return false if !@domain_name.nil? && @domain_name.to_s.length > 40
+      return false if !@preprod_domain_name.nil? && @preprod_domain_name.to_s.length > 100
+      return false if !@domain_name.nil? && @domain_name.to_s.length > 100
       return false if !@name.nil? && @name.to_s.length > 50
-      return false if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 40
+      return false if !@sandbox_domain_name.nil? && @sandbox_domain_name.to_s.length > 100
       true
     end
 
@@ -322,8 +322,8 @@ module WalleeRubySdk
         fail ArgumentError, 'preprod_domain_name cannot be nil'
       end
 
-      if preprod_domain_name.to_s.length > 40
-        fail ArgumentError, 'invalid value for "preprod_domain_name", the character length must be smaller than or equal to 40.'
+      if preprod_domain_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "preprod_domain_name", the character length must be smaller than or equal to 100.'
       end
 
       @preprod_domain_name = preprod_domain_name
@@ -336,8 +336,8 @@ module WalleeRubySdk
         fail ArgumentError, 'domain_name cannot be nil'
       end
 
-      if domain_name.to_s.length > 40
-        fail ArgumentError, 'invalid value for "domain_name", the character length must be smaller than or equal to 40.'
+      if domain_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "domain_name", the character length must be smaller than or equal to 100.'
       end
 
       @domain_name = domain_name
@@ -364,8 +364,8 @@ module WalleeRubySdk
         fail ArgumentError, 'sandbox_domain_name cannot be nil'
       end
 
-      if sandbox_domain_name.to_s.length > 40
-        fail ArgumentError, 'invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 40.'
+      if sandbox_domain_name.to_s.length > 100
+        fail ArgumentError, 'invalid value for "sandbox_domain_name", the character length must be smaller than or equal to 100.'
       end
 
       @sandbox_domain_name = sandbox_domain_name

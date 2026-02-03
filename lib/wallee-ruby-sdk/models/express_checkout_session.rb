@@ -27,12 +27,22 @@ module WalleeRubySdk
   class ExpressCheckoutSession
     attr_accessor :line_items
 
+    # The URL to fetch the shipping options from.
+    attr_accessor :merchant_shipping_callback_url
+
     # The spaceId linked to the entity.
     attr_accessor :linked_space_id
 
     attr_accessor :meta_data
 
     attr_accessor :wallet_type
+
+    attr_accessor :shipping_address
+
+    # The currency of the session.
+    attr_accessor :currency
+
+    attr_accessor :billing_address
 
     # Id of the entity.
     attr_accessor :id
@@ -67,9 +77,13 @@ module WalleeRubySdk
     def self.attribute_map
       {
         :'line_items' => :'lineItems',
+        :'merchant_shipping_callback_url' => :'merchantShippingCallbackUrl',
         :'linked_space_id' => :'linkedSpaceId',
         :'meta_data' => :'metaData',
         :'wallet_type' => :'walletType',
+        :'shipping_address' => :'shippingAddress',
+        :'currency' => :'currency',
+        :'billing_address' => :'billingAddress',
         :'id' => :'id',
         :'state' => :'state',
         :'shipping_options' => :'shippingOptions'
@@ -90,9 +104,13 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'line_items' => :'Array<LineItem>',
+        :'merchant_shipping_callback_url' => :'String',
         :'linked_space_id' => :'Integer',
         :'meta_data' => :'Hash<String, String>',
         :'wallet_type' => :'ExpressCheckoutWalletType',
+        :'shipping_address' => :'Address',
+        :'currency' => :'String',
+        :'billing_address' => :'Address',
         :'id' => :'Integer',
         :'state' => :'ExpressCheckoutSessionState',
         :'shipping_options' => :'Array<ExpressCheckoutShippingOption>'
@@ -127,6 +145,10 @@ module WalleeRubySdk
         end
       end
 
+      if attributes.key?(:'merchant_shipping_callback_url')
+        self.merchant_shipping_callback_url = attributes[:'merchant_shipping_callback_url']
+      end
+
       if attributes.key?(:'linked_space_id')
         self.linked_space_id = attributes[:'linked_space_id']
       end
@@ -139,6 +161,18 @@ module WalleeRubySdk
 
       if attributes.key?(:'wallet_type')
         self.wallet_type = attributes[:'wallet_type']
+      end
+
+      if attributes.key?(:'shipping_address')
+        self.shipping_address = attributes[:'shipping_address']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'billing_address')
+        self.billing_address = attributes[:'billing_address']
       end
 
       if attributes.key?(:'id')
@@ -177,9 +211,13 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           line_items == o.line_items &&
+          merchant_shipping_callback_url == o.merchant_shipping_callback_url &&
           linked_space_id == o.linked_space_id &&
           meta_data == o.meta_data &&
           wallet_type == o.wallet_type &&
+          shipping_address == o.shipping_address &&
+          currency == o.currency &&
+          billing_address == o.billing_address &&
           id == o.id &&
           state == o.state &&
           shipping_options == o.shipping_options
@@ -194,7 +232,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [line_items, linked_space_id, meta_data, wallet_type, id, state, shipping_options].hash
+      [line_items, merchant_shipping_callback_url, linked_space_id, meta_data, wallet_type, shipping_address, currency, billing_address, id, state, shipping_options].hash
     end
 
     # Builds the object from hash

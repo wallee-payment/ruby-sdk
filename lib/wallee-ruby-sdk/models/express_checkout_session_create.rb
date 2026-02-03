@@ -27,12 +27,20 @@ module WalleeRubySdk
   class ExpressCheckoutSessionCreate
     attr_accessor :line_items
 
+    # The URL to fetch the shipping options from.
+    attr_accessor :merchant_shipping_callback_url
+
+    # The currency of the session.
+    attr_accessor :currency
+
     attr_accessor :shipping_options
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'line_items' => :'lineItems',
+        :'merchant_shipping_callback_url' => :'merchantShippingCallbackUrl',
+        :'currency' => :'currency',
         :'shipping_options' => :'shippingOptions'
       }
     end
@@ -51,6 +59,8 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'line_items' => :'Array<LineItem>',
+        :'merchant_shipping_callback_url' => :'String',
+        :'currency' => :'String',
         :'shipping_options' => :'Array<ExpressCheckoutShippingOption>'
       }
     end
@@ -83,6 +93,14 @@ module WalleeRubySdk
         end
       end
 
+      if attributes.key?(:'merchant_shipping_callback_url')
+        self.merchant_shipping_callback_url = attributes[:'merchant_shipping_callback_url']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
       if attributes.key?(:'shipping_options')
         if (value = attributes[:'shipping_options']).is_a?(Array)
           self.shipping_options = value
@@ -111,6 +129,8 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           line_items == o.line_items &&
+          merchant_shipping_callback_url == o.merchant_shipping_callback_url &&
+          currency == o.currency &&
           shipping_options == o.shipping_options
     end
 
@@ -123,7 +143,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [line_items, shipping_options].hash
+      [line_items, merchant_shipping_callback_url, currency, shipping_options].hash
     end
 
     # Builds the object from hash
