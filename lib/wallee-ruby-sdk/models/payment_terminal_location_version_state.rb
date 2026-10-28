@@ -28,11 +28,12 @@ module WalleeRubySdk
     PENDING = "PENDING".freeze
     SCHEDULING = "SCHEDULING".freeze
     ACTIVE = "ACTIVE".freeze
+    OBSOLETE = "OBSOLETE".freeze
     DELETING = "DELETING".freeze
     DELETED = "DELETED".freeze
 
     def self.all_vars
-      @all_vars ||= [PENDING, SCHEDULING, ACTIVE, DELETING, DELETED].freeze
+      @all_vars ||= [PENDING, SCHEDULING, ACTIVE, OBSOLETE, DELETING, DELETED].freeze
     end
 
     # Builds the enum from string

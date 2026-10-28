@@ -25,13 +25,25 @@ require 'time'
 
 module WalleeRubySdk
   class SubscriptionUpdateRequest
-    # A description used to identify the subscription.
-    attr_accessor :description
+    # The configurations of the subscription's components.
+    attr_accessor :component_configurations
+
+    # The product to subscribe to.
+    attr_accessor :product
+
+    # The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
+    attr_accessor :currency
+
+    # Whether the subscriptions' termination periods should be respected.
+    attr_accessor :respect_termination_period
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'description' => :'description'
+        :'component_configurations' => :'componentConfigurations',
+        :'product' => :'product',
+        :'currency' => :'currency',
+        :'respect_termination_period' => :'respectTerminationPeriod'
       }
     end
 
@@ -48,7 +60,10 @@ module WalleeRubySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'description' => :'String'
+        :'component_configurations' => :'Array<SubscriptionComponentReferenceConfiguration>',
+        :'product' => :'Integer',
+        :'currency' => :'String',
+        :'respect_termination_period' => :'Boolean'
       }
     end
 
@@ -74,8 +89,22 @@ module WalleeRubySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.key?(:'component_configurations')
+        if (value = attributes[:'component_configurations']).is_a?(Array)
+          self.component_configurations = value
+        end
+      end
+
+      if attributes.key?(:'product')
+        self.product = attributes[:'product']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'respect_termination_period')
+        self.respect_termination_period = attributes[:'respect_termination_period']
       end
     end
 
@@ -84,10 +113,6 @@ module WalleeRubySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@description.nil? && @description.to_s.length > 200
-        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 200.')
-      end
-
       invalid_properties
     end
 
@@ -95,22 +120,17 @@ module WalleeRubySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@description.nil? && @description.to_s.length > 200
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] description Value to be assigned
-    def description=(description)
-      if description.nil?
-        fail ArgumentError, 'description cannot be nil'
+    # @param [Object] component_configurations Value to be assigned
+    def component_configurations=(component_configurations)
+      if component_configurations.nil?
+        fail ArgumentError, 'component_configurations cannot be nil'
       end
 
-      if description.to_s.length > 200
-        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 200.'
-      end
-
-      @description = description
+      @component_configurations = component_configurations
     end
 
     # Checks equality by comparing each attribute.
@@ -118,7 +138,10 @@ module WalleeRubySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          description == o.description
+          component_configurations == o.component_configurations &&
+          product == o.product &&
+          currency == o.currency &&
+          respect_termination_period == o.respect_termination_period
     end
 
     # @see the `==` method
@@ -130,7 +153,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [description].hash
+      [component_configurations, product, currency, respect_termination_period].hash
     end
 
     # Builds the object from hash

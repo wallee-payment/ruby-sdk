@@ -28,6 +28,7 @@ module WalleeRubySdk
     # The ID of the space this object belongs to.
     attr_accessor :linked_space_id
 
+    # The production merchant identifier assigned to the location.
     attr_accessor :production_merchant_id
 
     # The name used to identify the payment terminal location.

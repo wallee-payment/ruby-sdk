@@ -34,6 +34,9 @@ module WalleeRubySdk
 
     attr_accessor :metric
 
+    # The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
+    attr_accessor :number_of_free_trial_periods
+
     # The localized name of the fee that is displayed to the customer.
     attr_accessor :name
 
@@ -77,6 +80,7 @@ module WalleeRubySdk
         :'component' => :'component',
         :'tier_pricing' => :'tierPricing',
         :'metric' => :'metric',
+        :'number_of_free_trial_periods' => :'numberOfFreeTrialPeriods',
         :'name' => :'name',
         :'description' => :'description',
         :'id' => :'id',
@@ -102,6 +106,7 @@ module WalleeRubySdk
         :'component' => :'SubscriptionProductComponent',
         :'tier_pricing' => :'ProductMeteredTierPricing',
         :'metric' => :'SubscriptionMetric',
+        :'number_of_free_trial_periods' => :'Integer',
         :'name' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
@@ -146,6 +151,10 @@ module WalleeRubySdk
 
       if attributes.key?(:'metric')
         self.metric = attributes[:'metric']
+      end
+
+      if attributes.key?(:'number_of_free_trial_periods')
+        self.number_of_free_trial_periods = attributes[:'number_of_free_trial_periods']
       end
 
       if attributes.key?(:'name')
@@ -197,6 +206,7 @@ module WalleeRubySdk
           component == o.component &&
           tier_pricing == o.tier_pricing &&
           metric == o.metric &&
+          number_of_free_trial_periods == o.number_of_free_trial_periods &&
           name == o.name &&
           description == o.description &&
           id == o.id &&
@@ -213,7 +223,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [linked_space_id, component, tier_pricing, metric, name, description, id, type, version].hash
+      [linked_space_id, component, tier_pricing, metric, number_of_free_trial_periods, name, description, id, type, version].hash
     end
 
     # Builds the object from hash

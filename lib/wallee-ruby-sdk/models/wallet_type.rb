@@ -25,9 +25,15 @@ require 'time'
 
 module WalleeRubySdk
   class WalletType
+    attr_accessor :required_features
+
     attr_accessor :feature
 
+    attr_accessor :standard_checkout_supported
+
     attr_accessor :sort_order
+
+    attr_accessor :express_checkout_supported
 
     # The localized name of the object.
     attr_accessor :name
@@ -43,8 +49,11 @@ module WalleeRubySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'required_features' => :'requiredFeatures',
         :'feature' => :'feature',
+        :'standard_checkout_supported' => :'standardCheckoutSupported',
         :'sort_order' => :'sortOrder',
+        :'express_checkout_supported' => :'expressCheckoutSupported',
         :'name' => :'name',
         :'description' => :'description',
         :'navigation_path' => :'navigationPath',
@@ -65,8 +74,11 @@ module WalleeRubySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'required_features' => :'Array<Feature>',
         :'feature' => :'Feature',
+        :'standard_checkout_supported' => :'Boolean',
         :'sort_order' => :'Integer',
+        :'express_checkout_supported' => :'Boolean',
         :'name' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
         :'navigation_path' => :'String',
@@ -96,12 +108,26 @@ module WalleeRubySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'required_features')
+        if (value = attributes[:'required_features']).is_a?(Array)
+          self.required_features = value
+        end
+      end
+
       if attributes.key?(:'feature')
         self.feature = attributes[:'feature']
       end
 
+      if attributes.key?(:'standard_checkout_supported')
+        self.standard_checkout_supported = attributes[:'standard_checkout_supported']
+      end
+
       if attributes.key?(:'sort_order')
         self.sort_order = attributes[:'sort_order']
+      end
+
+      if attributes.key?(:'express_checkout_supported')
+        self.express_checkout_supported = attributes[:'express_checkout_supported']
       end
 
       if attributes.key?(:'name')
@@ -140,13 +166,26 @@ module WalleeRubySdk
       true
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] required_features Value to be assigned
+    def required_features=(required_features)
+      if required_features.nil?
+        fail ArgumentError, 'required_features cannot be nil'
+      end
+
+      @required_features = required_features
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          required_features == o.required_features &&
           feature == o.feature &&
+          standard_checkout_supported == o.standard_checkout_supported &&
           sort_order == o.sort_order &&
+          express_checkout_supported == o.express_checkout_supported &&
           name == o.name &&
           description == o.description &&
           navigation_path == o.navigation_path &&
@@ -162,7 +201,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [feature, sort_order, name, description, navigation_path, id].hash
+      [required_features, feature, standard_checkout_supported, sort_order, express_checkout_supported, name, description, navigation_path, id].hash
     end
 
     # Builds the object from hash

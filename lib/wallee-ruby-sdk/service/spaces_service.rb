@@ -406,24 +406,30 @@ module WalleeRubySdk
 
 
     # Create a space
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param space_create [SpaceCreate] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Space]
-    def post_spaces(space_create, opts = {})
-      data, _status_code, _headers = post_spaces_with_http_info(space_create, opts)
+    def post_spaces(account, space_create, opts = {})
+      data, _status_code, _headers = post_spaces_with_http_info(account, space_create, opts)
       data
     end
 
     # Create a space
 
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
     # @param space_create [SpaceCreate] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Array<(Space, Integer, Hash)>] Space data, response status code and response headers
-    def post_spaces_with_http_info(space_create, opts = {})
+    def post_spaces_with_http_info(account, space_create, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SpacesService.post_spaces ...'
+      end
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling SpacesService.post_spaces"
       end
       # verify the required parameter 'space_create' is set
       if @api_client.config.client_side_validation && space_create.nil?
@@ -445,6 +451,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'account'] = account
 
       # form parameters
       form_params = opts[:form_params] || {}

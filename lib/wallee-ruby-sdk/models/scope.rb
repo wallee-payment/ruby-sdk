@@ -46,6 +46,9 @@ module WalleeRubySdk
     # The themes that determine the look and feel of the scope's user interface. A fall-through strategy is applied when building the actual theme.
     attr_accessor :themes
 
+    # Trusted external origins (e.g. merchant shops) for browser API access (CORS on /api/) and absolute target redirect URLs.
+    attr_accessor :trusted_external_origins
+
     # The port where the scope can be accessed.
     attr_accessor :port
 
@@ -98,6 +101,7 @@ module WalleeRubySdk
         :'url' => :'url',
         :'features' => :'features',
         :'themes' => :'themes',
+        :'trusted_external_origins' => :'trustedExternalOrigins',
         :'port' => :'port',
         :'preprod_domain_name' => :'preprodDomainName',
         :'domain_name' => :'domainName',
@@ -128,6 +132,7 @@ module WalleeRubySdk
         :'url' => :'String',
         :'features' => :'Array<Feature>',
         :'themes' => :'Array<String>',
+        :'trusted_external_origins' => :'Array<String>',
         :'port' => :'Integer',
         :'preprod_domain_name' => :'String',
         :'domain_name' => :'String',
@@ -189,6 +194,12 @@ module WalleeRubySdk
       if attributes.key?(:'themes')
         if (value = attributes[:'themes']).is_a?(Array)
           self.themes = value
+        end
+      end
+
+      if attributes.key?(:'trusted_external_origins')
+        if (value = attributes[:'trusted_external_origins']).is_a?(Array)
+          self.trusted_external_origins = value
         end
       end
 
@@ -383,6 +394,7 @@ module WalleeRubySdk
           url == o.url &&
           features == o.features &&
           themes == o.themes &&
+          trusted_external_origins == o.trusted_external_origins &&
           port == o.port &&
           preprod_domain_name == o.preprod_domain_name &&
           domain_name == o.domain_name &&
@@ -401,7 +413,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [planned_purge_date, ssl_active, version, machine_name, url, features, themes, port, preprod_domain_name, domain_name, name, id, state, sandbox_domain_name].hash
+      [planned_purge_date, ssl_active, version, machine_name, url, features, themes, trusted_external_origins, port, preprod_domain_name, domain_name, name, id, state, sandbox_domain_name].hash
     end
 
     # Builds the object from hash

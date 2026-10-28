@@ -93,7 +93,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -165,7 +165,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -234,7 +234,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -303,7 +303,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -393,7 +393,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -465,7 +465,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -491,6 +491,84 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TransactionInvoicesService#post_payment_transactions_invoices_id_derecognize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Create an instant invoice payment URL
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :success_url 
+    # @option opts [String] :failure_url 
+    # @option opts [Integer] :ttl_in_minutes Optional TTL in minutes relative to now. Allowed range is 1 to 561600 (13 months in minutes). If omitted, 30 minutes is used.
+    # @return [String]
+    def post_payment_transactions_invoices_id_instant_payment_url(id, space, opts = {})
+      data, _status_code, _headers = post_payment_transactions_invoices_id_instant_payment_url_with_http_info(id, space, opts)
+      data
+    end
+
+    # Create an instant invoice payment URL
+
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :success_url 
+    # @option opts [String] :failure_url 
+    # @option opts [Integer] :ttl_in_minutes Optional TTL in minutes relative to now. Allowed range is 1 to 561600 (13 months in minutes). If omitted, 30 minutes is used.
+    # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+    def post_payment_transactions_invoices_id_instant_payment_url_with_http_info(id, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TransactionInvoicesService.post_payment_transactions_invoices_id_instant_payment_url ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling TransactionInvoicesService.post_payment_transactions_invoices_id_instant_payment_url"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling TransactionInvoicesService.post_payment_transactions_invoices_id_instant_payment_url"
+      end
+      # resource path
+      local_var_path = '/payment/transactions/invoices/{id}/instant-payment-url'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'successUrl'] = opts[:'success_url'] if !opts[:'success_url'].nil?
+      query_params[:'failureUrl'] = opts[:'failure_url'] if !opts[:'failure_url'].nil?
+      query_params[:'ttlInMinutes'] = opts[:'ttl_in_minutes'] if !opts[:'ttl_in_minutes'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'String'
+
+      new_options = opts.merge(
+        :operation => :"TransactionInvoicesService.post_payment_transactions_invoices_id_instant_payment_url",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TransactionInvoicesService#post_payment_transactions_invoices_id_instant_payment_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
@@ -537,7 +615,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -620,7 +698,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}

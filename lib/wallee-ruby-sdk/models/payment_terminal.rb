@@ -28,6 +28,8 @@ module WalleeRubySdk
     # The unique identifier of the terminal, that is displayed on the device.
     attr_accessor :identifier
 
+    attr_accessor :deactivated_on
+
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
@@ -52,11 +54,17 @@ module WalleeRubySdk
 
     attr_accessor :location_version
 
+    attr_accessor :activated_on
+
+    attr_accessor :decommissioned_on
+
     # The default currency of the terminal.
     attr_accessor :default_currency
 
     # The name used to identify the payment terminal.
     attr_accessor :name
+
+    attr_accessor :activation_code
 
     # A unique identifier for the object.
     attr_accessor :id
@@ -89,6 +97,7 @@ module WalleeRubySdk
     def self.attribute_map
       {
         :'identifier' => :'identifier',
+        :'deactivated_on' => :'deactivatedOn',
         :'planned_purge_date' => :'plannedPurgeDate',
         :'external_id' => :'externalId',
         :'type' => :'type',
@@ -98,8 +107,11 @@ module WalleeRubySdk
         :'linked_space_id' => :'linkedSpaceId',
         :'configuration_version' => :'configurationVersion',
         :'location_version' => :'locationVersion',
+        :'activated_on' => :'activatedOn',
+        :'decommissioned_on' => :'decommissionedOn',
         :'default_currency' => :'defaultCurrency',
         :'name' => :'name',
+        :'activation_code' => :'activationCode',
         :'id' => :'id',
         :'state' => :'state'
       }
@@ -119,6 +131,7 @@ module WalleeRubySdk
     def self.openapi_types
       {
         :'identifier' => :'String',
+        :'deactivated_on' => :'Time',
         :'planned_purge_date' => :'Time',
         :'external_id' => :'String',
         :'type' => :'PaymentTerminalType',
@@ -128,8 +141,11 @@ module WalleeRubySdk
         :'linked_space_id' => :'Integer',
         :'configuration_version' => :'PaymentTerminalConfigurationVersion',
         :'location_version' => :'PaymentTerminalLocationVersion',
+        :'activated_on' => :'Time',
+        :'decommissioned_on' => :'Time',
         :'default_currency' => :'String',
         :'name' => :'String',
+        :'activation_code' => :'String',
         :'id' => :'Integer',
         :'state' => :'PaymentTerminalState'
       }
@@ -159,6 +175,10 @@ module WalleeRubySdk
 
       if attributes.key?(:'identifier')
         self.identifier = attributes[:'identifier']
+      end
+
+      if attributes.key?(:'deactivated_on')
+        self.deactivated_on = attributes[:'deactivated_on']
       end
 
       if attributes.key?(:'planned_purge_date')
@@ -197,12 +217,24 @@ module WalleeRubySdk
         self.location_version = attributes[:'location_version']
       end
 
+      if attributes.key?(:'activated_on')
+        self.activated_on = attributes[:'activated_on']
+      end
+
+      if attributes.key?(:'decommissioned_on')
+        self.decommissioned_on = attributes[:'decommissioned_on']
+      end
+
       if attributes.key?(:'default_currency')
         self.default_currency = attributes[:'default_currency']
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'activation_code')
+        self.activation_code = attributes[:'activation_code']
       end
 
       if attributes.key?(:'id')
@@ -254,6 +286,7 @@ module WalleeRubySdk
       return true if self.equal?(o)
       self.class == o.class &&
           identifier == o.identifier &&
+          deactivated_on == o.deactivated_on &&
           planned_purge_date == o.planned_purge_date &&
           external_id == o.external_id &&
           type == o.type &&
@@ -263,8 +296,11 @@ module WalleeRubySdk
           linked_space_id == o.linked_space_id &&
           configuration_version == o.configuration_version &&
           location_version == o.location_version &&
+          activated_on == o.activated_on &&
+          decommissioned_on == o.decommissioned_on &&
           default_currency == o.default_currency &&
           name == o.name &&
+          activation_code == o.activation_code &&
           id == o.id &&
           state == o.state
     end
@@ -278,7 +314,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [identifier, planned_purge_date, external_id, type, device_name, version, device_serial_number, linked_space_id, configuration_version, location_version, default_currency, name, id, state].hash
+      [identifier, deactivated_on, planned_purge_date, external_id, type, device_name, version, device_serial_number, linked_space_id, configuration_version, location_version, activated_on, decommissioned_on, default_currency, name, activation_code, id, state].hash
     end
 
     # Builds the object from hash

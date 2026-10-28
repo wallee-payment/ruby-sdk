@@ -70,7 +70,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -164,7 +164,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -236,7 +236,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -326,7 +326,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -409,7 +409,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -486,7 +486,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -512,6 +512,85 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentProcessorConfigurationsService#post_payment_processor_configurations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Link a contract with a payment processor configuration
+    # @param id [Integer] 
+    # @param contract_id [Integer] The contract to link with the payment processor configuration.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [PaymentProcessorConfiguration]
+    def post_payment_processor_configurations_id_link_contract(id, contract_id, space, opts = {})
+      data, _status_code, _headers = post_payment_processor_configurations_id_link_contract_with_http_info(id, contract_id, space, opts)
+      data
+    end
+
+    # Link a contract with a payment processor configuration
+
+    # @param id [Integer] 
+    # @param contract_id [Integer] The contract to link with the payment processor configuration.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(PaymentProcessorConfiguration, Integer, Hash)>] PaymentProcessorConfiguration data, response status code and response headers
+    def post_payment_processor_configurations_id_link_contract_with_http_info(id, contract_id, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentProcessorConfigurationsService.post_payment_processor_configurations_id_link_contract ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PaymentProcessorConfigurationsService.post_payment_processor_configurations_id_link_contract"
+      end
+      # verify the required parameter 'contract_id' is set
+      if @api_client.config.client_side_validation && contract_id.nil?
+        fail ArgumentError, "Missing the required parameter 'contract_id' when calling PaymentProcessorConfigurationsService.post_payment_processor_configurations_id_link_contract"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentProcessorConfigurationsService.post_payment_processor_configurations_id_link_contract"
+      end
+      # resource path
+      local_var_path = '/payment/processor-configurations/{id}/link-contract'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'contractId'] = contract_id
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PaymentProcessorConfiguration'
+
+      new_options = opts.merge(
+        :operation => :"PaymentProcessorConfigurationsService.post_payment_processor_configurations_id_link_contract",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentProcessorConfigurationsService#post_payment_processor_configurations_id_link_contract\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end

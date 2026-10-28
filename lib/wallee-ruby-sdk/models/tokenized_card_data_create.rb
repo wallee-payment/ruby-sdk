@@ -41,6 +41,9 @@ module WalleeRubySdk
 
     attr_accessor :recurring_indicator
 
+    # A reference specific to linking card transaction lifecycle events within the payment scheme.
+    attr_accessor :transaction_link_identifier
+
     # A reference specific to the card's transaction within its payment scheme.
     attr_accessor :scheme_transaction_reference
 
@@ -80,6 +83,7 @@ module WalleeRubySdk
         :'card_verification_code' => :'cardVerificationCode',
         :'primary_account_number' => :'primaryAccountNumber',
         :'recurring_indicator' => :'recurringIndicator',
+        :'transaction_link_identifier' => :'transactionLinkIdentifier',
         :'scheme_transaction_reference' => :'schemeTransactionReference',
         :'token_requestor_id' => :'tokenRequestorId',
         :'cryptogram' => :'cryptogram'
@@ -105,6 +109,7 @@ module WalleeRubySdk
         :'card_verification_code' => :'String',
         :'primary_account_number' => :'String',
         :'recurring_indicator' => :'RecurringIndicator',
+        :'transaction_link_identifier' => :'String',
         :'scheme_transaction_reference' => :'String',
         :'token_requestor_id' => :'String',
         :'cryptogram' => :'CardCryptogramCreate'
@@ -157,6 +162,10 @@ module WalleeRubySdk
 
       if attributes.key?(:'recurring_indicator')
         self.recurring_indicator = attributes[:'recurring_indicator']
+      end
+
+      if attributes.key?(:'transaction_link_identifier')
+        self.transaction_link_identifier = attributes[:'transaction_link_identifier']
       end
 
       if attributes.key?(:'scheme_transaction_reference')
@@ -216,6 +225,10 @@ module WalleeRubySdk
         invalid_properties.push("invalid value for \"primary_account_number\", must conform to the pattern #{pattern}.")
       end
 
+      if !@transaction_link_identifier.nil? && @transaction_link_identifier.to_s.length > 100
+        invalid_properties.push('invalid value for "transaction_link_identifier", the character length must be smaller than or equal to 100.')
+      end
+
       if !@scheme_transaction_reference.nil? && @scheme_transaction_reference.to_s.length > 100
         invalid_properties.push('invalid value for "scheme_transaction_reference", the character length must be smaller than or equal to 100.')
       end
@@ -236,6 +249,7 @@ module WalleeRubySdk
       return false if @primary_account_number.to_s.length > 30
       return false if @primary_account_number.to_s.length < 10
       return false if @primary_account_number !~ Regexp.new(/([0-9 ]+)/)
+      return false if !@transaction_link_identifier.nil? && @transaction_link_identifier.to_s.length > 100
       return false if !@scheme_transaction_reference.nil? && @scheme_transaction_reference.to_s.length > 100
       true
     end
@@ -316,6 +330,20 @@ module WalleeRubySdk
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] transaction_link_identifier Value to be assigned
+    def transaction_link_identifier=(transaction_link_identifier)
+      if transaction_link_identifier.nil?
+        fail ArgumentError, 'transaction_link_identifier cannot be nil'
+      end
+
+      if transaction_link_identifier.to_s.length > 100
+        fail ArgumentError, 'invalid value for "transaction_link_identifier", the character length must be smaller than or equal to 100.'
+      end
+
+      @transaction_link_identifier = transaction_link_identifier
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] scheme_transaction_reference Value to be assigned
     def scheme_transaction_reference=(scheme_transaction_reference)
       if scheme_transaction_reference.nil?
@@ -340,6 +368,7 @@ module WalleeRubySdk
           card_verification_code == o.card_verification_code &&
           primary_account_number == o.primary_account_number &&
           recurring_indicator == o.recurring_indicator &&
+          transaction_link_identifier == o.transaction_link_identifier &&
           scheme_transaction_reference == o.scheme_transaction_reference &&
           token_requestor_id == o.token_requestor_id &&
           cryptogram == o.cryptogram
@@ -354,7 +383,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [expiry_date, pan_type, card_holder_name, card_verification_code, primary_account_number, recurring_indicator, scheme_transaction_reference, token_requestor_id, cryptogram].hash
+      [expiry_date, pan_type, card_holder_name, card_verification_code, primary_account_number, recurring_indicator, transaction_link_identifier, scheme_transaction_reference, token_requestor_id, cryptogram].hash
     end
 
     # Builds the object from hash

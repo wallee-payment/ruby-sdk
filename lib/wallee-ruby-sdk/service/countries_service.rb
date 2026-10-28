@@ -157,7 +157,8 @@ module WalleeRubySdk
     # List all states for a country
     # @param country_code [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<RestCountryState>]
+    # @option opts [Array<String>] :expand 
+    # @return [StateListResponse]
     def get_countries_country_code_states(country_code, opts = {})
       data, _status_code, _headers = get_countries_country_code_states_with_http_info(country_code, opts)
       data
@@ -167,7 +168,8 @@ module WalleeRubySdk
 
     # @param country_code [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<RestCountryState>, Integer, Hash)>] Array<RestCountryState> data, response status code and response headers
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(StateListResponse, Integer, Hash)>] StateListResponse data, response status code and response headers
     def get_countries_country_code_states_with_http_info(country_code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CountriesService.get_countries_country_code_states ...'
@@ -181,6 +183,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -197,7 +200,7 @@ module WalleeRubySdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<RestCountryState>'
+      return_type = opts[:debug_return_type] || 'StateListResponse'
 
       new_options = opts.merge(
         :operation => :"CountriesService.get_countries_country_code_states",
@@ -301,7 +304,8 @@ module WalleeRubySdk
 
     # List all country states
     # @param [Hash] opts the optional parameters
-    # @return [Array<RestCountryState>]
+    # @option opts [Array<String>] :expand 
+    # @return [StateListResponse]
     def get_countries_states(opts = {})
       data, _status_code, _headers = get_countries_states_with_http_info(opts)
       data
@@ -310,7 +314,8 @@ module WalleeRubySdk
     # List all country states
 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<RestCountryState>, Integer, Hash)>] Array<RestCountryState> data, response status code and response headers
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(StateListResponse, Integer, Hash)>] StateListResponse data, response status code and response headers
     def get_countries_states_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CountriesService.get_countries_states ...'
@@ -320,6 +325,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -336,7 +342,7 @@ module WalleeRubySdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<RestCountryState>'
+      return_type = opts[:debug_return_type] || 'StateListResponse'
 
       new_options = opts.merge(
         :operation => :"CountriesService.get_countries_states",
@@ -358,6 +364,7 @@ module WalleeRubySdk
     # Retrieve a country state
     # @param id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
     # @return [RestCountryState]
     def get_countries_states_id(id, opts = {})
       data, _status_code, _headers = get_countries_states_id_with_http_info(id, opts)
@@ -368,6 +375,7 @@ module WalleeRubySdk
 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
     # @return [Array<(RestCountryState, Integer, Hash)>] RestCountryState data, response status code and response headers
     def get_countries_states_id_with_http_info(id, opts = {})
       if @api_client.config.debugging
@@ -382,6 +390,7 @@ module WalleeRubySdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

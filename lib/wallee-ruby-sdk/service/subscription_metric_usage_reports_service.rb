@@ -93,7 +93,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -165,7 +165,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -255,7 +255,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -332,7 +332,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}

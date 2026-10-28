@@ -33,6 +33,9 @@ module WalleeRubySdk
     # The metric used to determine the resource consumption billed to the customer.
     attr_accessor :metric
 
+    # The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
+    attr_accessor :number_of_free_trial_periods
+
     # The localized name of the fee that is displayed to the customer.
     attr_accessor :name
 
@@ -70,6 +73,7 @@ module WalleeRubySdk
         :'component' => :'component',
         :'tier_pricing' => :'tierPricing',
         :'metric' => :'metric',
+        :'number_of_free_trial_periods' => :'numberOfFreeTrialPeriods',
         :'name' => :'name',
         :'description' => :'description',
         :'version' => :'version'
@@ -92,6 +96,7 @@ module WalleeRubySdk
         :'component' => :'Integer',
         :'tier_pricing' => :'ProductMeteredTierPricing',
         :'metric' => :'Integer',
+        :'number_of_free_trial_periods' => :'Integer',
         :'name' => :'Hash<String, String>',
         :'description' => :'Hash<String, String>',
         :'version' => :'Integer'
@@ -130,6 +135,10 @@ module WalleeRubySdk
 
       if attributes.key?(:'metric')
         self.metric = attributes[:'metric']
+      end
+
+      if attributes.key?(:'number_of_free_trial_periods')
+        self.number_of_free_trial_periods = attributes[:'number_of_free_trial_periods']
       end
 
       if attributes.key?(:'name')
@@ -189,6 +198,7 @@ module WalleeRubySdk
           component == o.component &&
           tier_pricing == o.tier_pricing &&
           metric == o.metric &&
+          number_of_free_trial_periods == o.number_of_free_trial_periods &&
           name == o.name &&
           description == o.description &&
           version == o.version
@@ -203,7 +213,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [component, tier_pricing, metric, name, description, version].hash
+      [component, tier_pricing, metric, number_of_free_trial_periods, name, description, version].hash
     end
 
     # Builds the object from hash

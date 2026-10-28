@@ -34,6 +34,9 @@ module WalleeRubySdk
     # The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
     attr_accessor :planned_purge_date
 
+    # Additional information that describes the role.
+    attr_accessor :description
+
     # A unique identifier for the object.
     attr_accessor :id
 
@@ -75,6 +78,7 @@ module WalleeRubySdk
         :'permissions' => :'permissions',
         :'name' => :'name',
         :'planned_purge_date' => :'plannedPurgeDate',
+        :'description' => :'description',
         :'id' => :'id',
         :'state' => :'state',
         :'version' => :'version',
@@ -99,6 +103,7 @@ module WalleeRubySdk
         :'permissions' => :'Array<Permission>',
         :'name' => :'Hash<String, String>',
         :'planned_purge_date' => :'Time',
+        :'description' => :'Hash<String, String>',
         :'id' => :'Integer',
         :'state' => :'RoleState',
         :'version' => :'Integer',
@@ -143,6 +148,12 @@ module WalleeRubySdk
 
       if attributes.key?(:'planned_purge_date')
         self.planned_purge_date = attributes[:'planned_purge_date']
+      end
+
+      if attributes.key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
+        end
       end
 
       if attributes.key?(:'id')
@@ -199,6 +210,7 @@ module WalleeRubySdk
           permissions == o.permissions &&
           name == o.name &&
           planned_purge_date == o.planned_purge_date &&
+          description == o.description &&
           id == o.id &&
           state == o.state &&
           version == o.version &&
@@ -215,7 +227,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [permissions, name, planned_purge_date, id, state, version, account, two_factor_required].hash
+      [permissions, name, planned_purge_date, description, id, state, version, account, two_factor_required].hash
     end
 
     # Builds the object from hash

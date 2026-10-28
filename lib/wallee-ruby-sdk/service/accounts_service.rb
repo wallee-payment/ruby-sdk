@@ -406,28 +406,34 @@ module WalleeRubySdk
 
 
     # Create an account
-    # @param account_create [AccountCreate] 
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param account_create_with_owner [AccountCreateWithOwner] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Account]
-    def post_accounts(account_create, opts = {})
-      data, _status_code, _headers = post_accounts_with_http_info(account_create, opts)
+    def post_accounts(account, account_create_with_owner, opts = {})
+      data, _status_code, _headers = post_accounts_with_http_info(account, account_create_with_owner, opts)
       data
     end
 
     # Create an account
 
-    # @param account_create [AccountCreate] 
+    # @param account [Integer] Specifies the ID of the account the operation should be executed in.
+    # @param account_create_with_owner [AccountCreateWithOwner] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
-    def post_accounts_with_http_info(account_create, opts = {})
+    def post_accounts_with_http_info(account, account_create_with_owner, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsService.post_accounts ...'
       end
-      # verify the required parameter 'account_create' is set
-      if @api_client.config.client_side_validation && account_create.nil?
-        fail ArgumentError, "Missing the required parameter 'account_create' when calling AccountsService.post_accounts"
+      # verify the required parameter 'account' is set
+      if @api_client.config.client_side_validation && account.nil?
+        fail ArgumentError, "Missing the required parameter 'account' when calling AccountsService.post_accounts"
+      end
+      # verify the required parameter 'account_create_with_owner' is set
+      if @api_client.config.client_side_validation && account_create_with_owner.nil?
+        fail ArgumentError, "Missing the required parameter 'account_create_with_owner' when calling AccountsService.post_accounts"
       end
       # resource path
       local_var_path = '/accounts'
@@ -445,6 +451,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'account'] = account
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -453,7 +460,7 @@ module WalleeRubySdk
       connection_timeout = @api_client.config.timeout
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(account_create)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(account_create_with_owner)
 
       # return_type
       return_type = opts[:debug_return_type] || 'Account'

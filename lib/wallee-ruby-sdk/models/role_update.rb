@@ -31,6 +31,9 @@ module WalleeRubySdk
     # The name used to identify the role.
     attr_accessor :name
 
+    # Additional information that describes the role.
+    attr_accessor :description
+
     # Whether users with this role are required to use two-factor authentication.
     attr_accessor :two_factor_required
 
@@ -42,6 +45,7 @@ module WalleeRubySdk
       {
         :'permissions' => :'permissions',
         :'name' => :'name',
+        :'description' => :'description',
         :'two_factor_required' => :'twoFactorRequired',
         :'version' => :'version'
       }
@@ -62,6 +66,7 @@ module WalleeRubySdk
       {
         :'permissions' => :'Array<Permission>',
         :'name' => :'Hash<String, String>',
+        :'description' => :'Hash<String, String>',
         :'two_factor_required' => :'Boolean',
         :'version' => :'Integer'
       }
@@ -105,6 +110,12 @@ module WalleeRubySdk
       if attributes.key?(:'name')
         if (value = attributes[:'name']).is_a?(Hash)
           self.name = value
+        end
+      end
+
+      if attributes.key?(:'description')
+        if (value = attributes[:'description']).is_a?(Hash)
+          self.description = value
         end
       end
 
@@ -166,6 +177,7 @@ module WalleeRubySdk
       self.class == o.class &&
           permissions == o.permissions &&
           name == o.name &&
+          description == o.description &&
           two_factor_required == o.two_factor_required &&
           version == o.version
     end
@@ -179,7 +191,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [permissions, name, two_factor_required, version].hash
+      [permissions, name, description, two_factor_required, version].hash
     end
 
     # Builds the object from hash

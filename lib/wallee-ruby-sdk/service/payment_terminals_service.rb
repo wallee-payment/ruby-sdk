@@ -70,7 +70,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -164,7 +164,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -190,6 +190,102 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalsService#get_payment_terminals\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Search payment terminal activation status
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :activation_code_active Filters payment terminals that have an active activation code
+    # @option opts [Integer] :configuration_id Filters payment terminals by their configuration ID
+    # @option opts [String] :environment Filters payment terminals by their environment (TEST/PRODUCTION)
+    # @option opts [Boolean] :has_activation_code Filters payment terminals that have an activation code
+    # @option opts [Integer] :limit A limit on the number of objects to be returned, between 1 and 100. Default is 10.
+    # @option opts [Integer] :location_id Filters payment terminals by their location ID
+    # @option opts [Integer] :offset A cursor for pagination, specifies the number of objects to skip.
+    # @return [PaymentTerminalActivationStatusDetailSearchResponse]
+    def get_payment_terminals_activation_status(space, opts = {})
+      data, _status_code, _headers = get_payment_terminals_activation_status_with_http_info(space, opts)
+      data
+    end
+
+    # Search payment terminal activation status
+
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :activation_code_active Filters payment terminals that have an active activation code
+    # @option opts [Integer] :configuration_id Filters payment terminals by their configuration ID
+    # @option opts [String] :environment Filters payment terminals by their environment (TEST/PRODUCTION)
+    # @option opts [Boolean] :has_activation_code Filters payment terminals that have an activation code
+    # @option opts [Integer] :limit A limit on the number of objects to be returned, between 1 and 100. Default is 10.
+    # @option opts [Integer] :location_id Filters payment terminals by their location ID
+    # @option opts [Integer] :offset A cursor for pagination, specifies the number of objects to skip.
+    # @return [Array<(PaymentTerminalActivationStatusDetailSearchResponse, Integer, Hash)>] PaymentTerminalActivationStatusDetailSearchResponse data, response status code and response headers
+    def get_payment_terminals_activation_status_with_http_info(space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.get_payment_terminals_activation_status ...'
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.get_payment_terminals_activation_status"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PaymentTerminalsService.get_payment_terminals_activation_status, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PaymentTerminalsService.get_payment_terminals_activation_status, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] > 10000
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling PaymentTerminalsService.get_payment_terminals_activation_status, must be smaller than or equal to 10000.'
+      end
+
+      # resource path
+      local_var_path = '/payment/terminals/activation-status'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'activationCodeActive'] = opts[:'activation_code_active'] if !opts[:'activation_code_active'].nil?
+      query_params[:'configurationId'] = opts[:'configuration_id'] if !opts[:'configuration_id'].nil?
+      query_params[:'environment'] = opts[:'environment'] if !opts[:'environment'].nil?
+      query_params[:'hasActivationCode'] = opts[:'has_activation_code'] if !opts[:'has_activation_code'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PaymentTerminalActivationStatusDetailSearchResponse'
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.get_payment_terminals_activation_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#get_payment_terminals_activation_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
@@ -236,7 +332,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -315,7 +411,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -405,7 +501,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -488,7 +584,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -521,23 +617,23 @@ module WalleeRubySdk
 
     # Create a payment terminal
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param payment_terminal_create [PaymentTerminalCreate] 
+    # @param payment_terminal_creation_request [PaymentTerminalCreationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [PaymentTerminal]
-    def post_payment_terminals(space, payment_terminal_create, opts = {})
-      data, _status_code, _headers = post_payment_terminals_with_http_info(space, payment_terminal_create, opts)
+    def post_payment_terminals(space, payment_terminal_creation_request, opts = {})
+      data, _status_code, _headers = post_payment_terminals_with_http_info(space, payment_terminal_creation_request, opts)
       data
     end
 
     # Create a payment terminal
 
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param payment_terminal_create [PaymentTerminalCreate] 
+    # @param payment_terminal_creation_request [PaymentTerminalCreationRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Array<(PaymentTerminal, Integer, Hash)>] PaymentTerminal data, response status code and response headers
-    def post_payment_terminals_with_http_info(space, payment_terminal_create, opts = {})
+    def post_payment_terminals_with_http_info(space, payment_terminal_creation_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals ...'
       end
@@ -545,9 +641,9 @@ module WalleeRubySdk
       if @api_client.config.client_side_validation && space.nil?
         fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals"
       end
-      # verify the required parameter 'payment_terminal_create' is set
-      if @api_client.config.client_side_validation && payment_terminal_create.nil?
-        fail ArgumentError, "Missing the required parameter 'payment_terminal_create' when calling PaymentTerminalsService.post_payment_terminals"
+      # verify the required parameter 'payment_terminal_creation_request' is set
+      if @api_client.config.client_side_validation && payment_terminal_creation_request.nil?
+        fail ArgumentError, "Missing the required parameter 'payment_terminal_creation_request' when calling PaymentTerminalsService.post_payment_terminals"
       end
       # resource path
       local_var_path = '/payment/terminals'
@@ -565,7 +661,7 @@ module WalleeRubySdk
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -574,7 +670,7 @@ module WalleeRubySdk
       connection_timeout = @api_client.config.timeout
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(payment_terminal_create)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(payment_terminal_creation_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'PaymentTerminal'
@@ -649,7 +745,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -675,6 +771,147 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_by_identifier_identifier_perform_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Refresh a physical terminal state by identifier
+    # @param identifier [String] The unique identifier of the terminal.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [PaymentTerminal]
+    def post_payment_terminals_by_identifier_identifier_refresh(identifier, space, opts = {})
+      data, _status_code, _headers = post_payment_terminals_by_identifier_identifier_refresh_with_http_info(identifier, space, opts)
+      data
+    end
+
+    # Refresh a physical terminal state by identifier
+    # Timeout for this request is: 30 seconds.
+    # @param identifier [String] The unique identifier of the terminal.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(PaymentTerminal, Integer, Hash)>] PaymentTerminal data, response status code and response headers
+    def post_payment_terminals_by_identifier_identifier_refresh_with_http_info(identifier, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_refresh ...'
+      end
+      # verify the required parameter 'identifier' is set
+      if @api_client.config.client_side_validation && identifier.nil?
+        fail ArgumentError, "Missing the required parameter 'identifier' when calling PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_refresh"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_refresh"
+      end
+      # resource path
+      local_var_path = '/payment/terminals/by-identifier/{identifier}/refresh'.sub('{' + 'identifier' + '}', CGI.escape(identifier.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = 30
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PaymentTerminal'
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_refresh",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_by_identifier_identifier_refresh\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Remotely trigger the configuration by identifier
+    # @param identifier [String] The unique identifier of the terminal.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def post_payment_terminals_by_identifier_identifier_trigger_configuration(identifier, space, opts = {})
+      post_payment_terminals_by_identifier_identifier_trigger_configuration_with_http_info(identifier, space, opts)
+      nil
+    end
+
+    # Remotely trigger the configuration by identifier
+
+    # @param identifier [String] The unique identifier of the terminal.
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def post_payment_terminals_by_identifier_identifier_trigger_configuration_with_http_info(identifier, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_trigger_configuration ...'
+      end
+      # verify the required parameter 'identifier' is set
+      if @api_client.config.client_side_validation && identifier.nil?
+        fail ArgumentError, "Missing the required parameter 'identifier' when calling PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_trigger_configuration"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_trigger_configuration"
+      end
+      # resource path
+      local_var_path = '/payment/terminals/by-identifier/{identifier}/trigger-configuration'.sub('{' + 'identifier' + '}', CGI.escape(identifier.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.post_payment_terminals_by_identifier_identifier_trigger_configuration",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_by_identifier_identifier_trigger_configuration\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
@@ -718,7 +955,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -794,7 +1031,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -878,7 +1115,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -904,6 +1141,147 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_id_perform_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Refresh a physical terminal state
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [PaymentTerminal]
+    def post_payment_terminals_id_refresh(id, space, opts = {})
+      data, _status_code, _headers = post_payment_terminals_id_refresh_with_http_info(id, space, opts)
+      data
+    end
+
+    # Refresh a physical terminal state
+    # Timeout for this request is: 30 seconds.
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(PaymentTerminal, Integer, Hash)>] PaymentTerminal data, response status code and response headers
+    def post_payment_terminals_id_refresh_with_http_info(id, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals_id_refresh ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PaymentTerminalsService.post_payment_terminals_id_refresh"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals_id_refresh"
+      end
+      # resource path
+      local_var_path = '/payment/terminals/{id}/refresh'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = 30
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PaymentTerminal'
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.post_payment_terminals_id_refresh",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_id_refresh\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Remotely trigger the configuration
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def post_payment_terminals_id_trigger_configuration(id, space, opts = {})
+      post_payment_terminals_id_trigger_configuration_with_http_info(id, space, opts)
+      nil
+    end
+
+    # Remotely trigger the configuration
+
+    # @param id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def post_payment_terminals_id_trigger_configuration_with_http_info(id, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals_id_trigger_configuration ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PaymentTerminalsService.post_payment_terminals_id_trigger_configuration"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals_id_trigger_configuration"
+      end
+      # resource path
+      local_var_path = '/payment/terminals/{id}/trigger-configuration'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = @api_client.config.timeout
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.post_payment_terminals_id_trigger_configuration",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_id_trigger_configuration\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
@@ -947,7 +1325,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -1016,7 +1394,7 @@ module WalleeRubySdk
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      header_params[:'Space'] = space
+      header_params[:'space'] = space
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -1042,6 +1420,81 @@ module WalleeRubySdk
       data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_id_unlink\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
+      end
+      return data, status_code, headers
+    end
+
+
+    # Revert terminal transaction
+    # This function communicates with the payment terminal to cancel the authorization hold and remove the transaction from the current open batch. It must be executed before the settlement (Submission) occurs.
+    # @param transaction_id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [TransactionVoid]
+    def post_payment_terminals_trigger_reversal(transaction_id, space, opts = {})
+      data, _status_code, _headers = post_payment_terminals_trigger_reversal_with_http_info(transaction_id, space, opts)
+      data
+    end
+
+    # Revert terminal transaction
+    # This function communicates with the payment terminal to cancel the authorization hold and remove the transaction from the current open batch. It must be executed before the settlement (Submission) occurs.
+    # Timeout for this request is: 90 seconds.
+    # @param transaction_id [Integer] 
+    # @param space [Integer] Specifies the ID of the space the operation should be executed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<String>] :expand 
+    # @return [Array<(TransactionVoid, Integer, Hash)>] TransactionVoid data, response status code and response headers
+    def post_payment_terminals_trigger_reversal_with_http_info(transaction_id, space, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.post_payment_terminals_trigger_reversal ...'
+      end
+      # verify the required parameter 'transaction_id' is set
+      if @api_client.config.client_side_validation && transaction_id.nil?
+        fail ArgumentError, "Missing the required parameter 'transaction_id' when calling PaymentTerminalsService.post_payment_terminals_trigger_reversal"
+      end
+      # verify the required parameter 'space' is set
+      if @api_client.config.client_side_validation && space.nil?
+        fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.post_payment_terminals_trigger_reversal"
+      end
+      # resource path
+      local_var_path = '/payment/terminals/trigger-reversal'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'transactionId'] = transaction_id
+      query_params[:'expand'] = @api_client.build_collection_param(opts[:'expand'], :multi) if !opts[:'expand'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'space'] = space
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # connection timeout
+      connection_timeout = 90
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'TransactionVoid'
+
+      new_options = opts.merge(
+        :operation => :"PaymentTerminalsService.post_payment_terminals_trigger_reversal",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST.to_sym.downcase, local_var_path, new_options, connection_timeout)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentTerminalsService#post_payment_terminals_trigger_reversal\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}\nConnection Timeout: #{connection_timeout}"
       end
       return data, status_code, headers
     end
