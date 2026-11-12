@@ -40,11 +40,11 @@ Gem::Specification.new do |s|
   }
   s.required_ruby_version = ">= 3.2.0"
 
-  s.add_runtime_dependency 'faraday', '~> 2.13.1', '< 3.0'
-  s.add_runtime_dependency 'faraday-multipart', '~> 1.1.0'
-  s.add_runtime_dependency 'jwt', '~> 2.10.1'
-  s.add_runtime_dependency 'marcel', '~> 1.0.4'
-  s.add_runtime_dependency 'concurrent-ruby', '~> 1.3.5'
+  s.add_runtime_dependency 'faraday', '>= 2.13.1', '< 3.0'
+  s.add_runtime_dependency 'faraday-multipart', '~> 1.1'
+  s.add_runtime_dependency 'jwt', '>= 2.10.1', '< 4.0'
+  s.add_runtime_dependency 'marcel', '>= 1.0.4', '< 3.0'
+  s.add_runtime_dependency 'concurrent-ruby', '~> 1.3', '>= 1.3.5'
 
   s.add_development_dependency 'rake', '~> 13.0'
   s.add_development_dependency 'test-unit', '~> 3.6.7'
