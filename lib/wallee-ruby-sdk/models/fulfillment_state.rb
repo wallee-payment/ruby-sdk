@@ -29,9 +29,10 @@ module WalleeRubySdk
     TRACKING = "TRACKING".freeze
     FULFILLED = "FULFILLED".freeze
     FAILED = "FAILED".freeze
+    CANCELED = "CANCELED".freeze
 
     def self.all_vars
-      @all_vars ||= [CREATING, TRACKING, FULFILLED, FAILED].freeze
+      @all_vars ||= [CREATING, TRACKING, FULFILLED, FAILED, CANCELED].freeze
     end
 
     # Builds the enum from string

@@ -101,6 +101,8 @@ module WalleeRubySdk
     # The date and time when the charge attempt failed.
     attr_accessor :failed_on
 
+    attr_accessor :transaction_amounts
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -154,7 +156,8 @@ module WalleeRubySdk
         :'next_update_on' => :'nextUpdateOn',
         :'failure_reason' => :'failureReason',
         :'customers_presence' => :'customersPresence',
-        :'failed_on' => :'failedOn'
+        :'failed_on' => :'failedOn',
+        :'transaction_amounts' => :'transactionAmounts'
       }
     end
 
@@ -199,7 +202,8 @@ module WalleeRubySdk
         :'next_update_on' => :'Time',
         :'failure_reason' => :'FailureReason',
         :'customers_presence' => :'CustomersPresence',
-        :'failed_on' => :'Time'
+        :'failed_on' => :'Time',
+        :'transaction_amounts' => :'TransactionAmounts'
       }
     end
 
@@ -349,6 +353,10 @@ module WalleeRubySdk
       if attributes.key?(:'failed_on')
         self.failed_on = attributes[:'failed_on']
       end
+
+      if attributes.key?(:'transaction_amounts')
+        self.transaction_amounts = attributes[:'transaction_amounts']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -428,7 +436,8 @@ module WalleeRubySdk
           next_update_on == o.next_update_on &&
           failure_reason == o.failure_reason &&
           customers_presence == o.customers_presence &&
-          failed_on == o.failed_on
+          failed_on == o.failed_on &&
+          transaction_amounts == o.transaction_amounts
     end
 
     # @see the `==` method
@@ -440,7 +449,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [language, sales_channel, created_on, initializing_token_version, token_version, succeeded_on, id, state, linked_transaction, redirection_url, charge, wallet, planned_purge_date, time_zone, space_view_id, terminal, user_failure_message, completion_behavior, version, labels, linked_space_id, timeout_on, environment, invocation, connector_configuration, next_update_on, failure_reason, customers_presence, failed_on].hash
+      [language, sales_channel, created_on, initializing_token_version, token_version, succeeded_on, id, state, linked_transaction, redirection_url, charge, wallet, planned_purge_date, time_zone, space_view_id, terminal, user_failure_message, completion_behavior, version, labels, linked_space_id, timeout_on, environment, invocation, connector_configuration, next_update_on, failure_reason, customers_presence, failed_on, transaction_amounts].hash
     end
 
     # Builds the object from hash

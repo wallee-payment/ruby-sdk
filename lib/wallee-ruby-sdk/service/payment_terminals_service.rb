@@ -535,12 +535,12 @@ module WalleeRubySdk
     # Update a payment terminal
     # @param id [Integer] 
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param payment_terminal_update [PaymentTerminalUpdate] 
+    # @param payment_terminal_update_request [PaymentTerminalUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [PaymentTerminal]
-    def patch_payment_terminals_id(id, space, payment_terminal_update, opts = {})
-      data, _status_code, _headers = patch_payment_terminals_id_with_http_info(id, space, payment_terminal_update, opts)
+    def patch_payment_terminals_id(id, space, payment_terminal_update_request, opts = {})
+      data, _status_code, _headers = patch_payment_terminals_id_with_http_info(id, space, payment_terminal_update_request, opts)
       data
     end
 
@@ -548,11 +548,11 @@ module WalleeRubySdk
 
     # @param id [Integer] 
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param payment_terminal_update [PaymentTerminalUpdate] 
+    # @param payment_terminal_update_request [PaymentTerminalUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Array<(PaymentTerminal, Integer, Hash)>] PaymentTerminal data, response status code and response headers
-    def patch_payment_terminals_id_with_http_info(id, space, payment_terminal_update, opts = {})
+    def patch_payment_terminals_id_with_http_info(id, space, payment_terminal_update_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PaymentTerminalsService.patch_payment_terminals_id ...'
       end
@@ -564,9 +564,9 @@ module WalleeRubySdk
       if @api_client.config.client_side_validation && space.nil?
         fail ArgumentError, "Missing the required parameter 'space' when calling PaymentTerminalsService.patch_payment_terminals_id"
       end
-      # verify the required parameter 'payment_terminal_update' is set
-      if @api_client.config.client_side_validation && payment_terminal_update.nil?
-        fail ArgumentError, "Missing the required parameter 'payment_terminal_update' when calling PaymentTerminalsService.patch_payment_terminals_id"
+      # verify the required parameter 'payment_terminal_update_request' is set
+      if @api_client.config.client_side_validation && payment_terminal_update_request.nil?
+        fail ArgumentError, "Missing the required parameter 'payment_terminal_update_request' when calling PaymentTerminalsService.patch_payment_terminals_id"
       end
       # resource path
       local_var_path = '/payment/terminals/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -593,7 +593,7 @@ module WalleeRubySdk
       connection_timeout = @api_client.config.timeout
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(payment_terminal_update)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(payment_terminal_update_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'PaymentTerminal'

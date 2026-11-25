@@ -29,6 +29,11 @@ module WalleeRubySdk
 
     attr_accessor :partner_account_id
 
+    # The name of the subaccount created for the merchant. Only used for ISV partnerships when a merchant email address is provided. If empty, a generated name is used.
+    attr_accessor :merchant_account_name
+
+    attr_accessor :merchant_address
+
     attr_accessor :pricing_profile_sell_rate_id
 
     attr_accessor :subscription_product_id
@@ -40,6 +45,8 @@ module WalleeRubySdk
       {
         :'email_message' => :'emailMessage',
         :'partner_account_id' => :'partnerAccountId',
+        :'merchant_account_name' => :'merchantAccountName',
+        :'merchant_address' => :'merchantAddress',
         :'pricing_profile_sell_rate_id' => :'pricingProfileSellRateId',
         :'subscription_product_id' => :'subscriptionProductId',
         :'merchant_email_address' => :'merchantEmailAddress'
@@ -61,6 +68,8 @@ module WalleeRubySdk
       {
         :'email_message' => :'String',
         :'partner_account_id' => :'Integer',
+        :'merchant_account_name' => :'String',
+        :'merchant_address' => :'SpaceAddressCreate',
         :'pricing_profile_sell_rate_id' => :'Integer',
         :'subscription_product_id' => :'Integer',
         :'merchant_email_address' => :'String'
@@ -95,6 +104,14 @@ module WalleeRubySdk
 
       if attributes.key?(:'partner_account_id')
         self.partner_account_id = attributes[:'partner_account_id']
+      end
+
+      if attributes.key?(:'merchant_account_name')
+        self.merchant_account_name = attributes[:'merchant_account_name']
+      end
+
+      if attributes.key?(:'merchant_address')
+        self.merchant_address = attributes[:'merchant_address']
       end
 
       if attributes.key?(:'pricing_profile_sell_rate_id')
@@ -132,6 +149,8 @@ module WalleeRubySdk
       self.class == o.class &&
           email_message == o.email_message &&
           partner_account_id == o.partner_account_id &&
+          merchant_account_name == o.merchant_account_name &&
+          merchant_address == o.merchant_address &&
           pricing_profile_sell_rate_id == o.pricing_profile_sell_rate_id &&
           subscription_product_id == o.subscription_product_id &&
           merchant_email_address == o.merchant_email_address
@@ -146,7 +165,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [email_message, partner_account_id, pricing_profile_sell_rate_id, subscription_product_id, merchant_email_address].hash
+      [email_message, partner_account_id, merchant_account_name, merchant_address, pricing_profile_sell_rate_id, subscription_product_id, merchant_email_address].hash
     end
 
     # Builds the object from hash

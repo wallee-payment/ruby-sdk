@@ -24,18 +24,26 @@ require 'date'
 require 'time'
 
 module WalleeRubySdk
-  class PaymentTerminalUpdate
-    # The name used to identify the payment terminal.
-    attr_accessor :name
+  class ExpressCheckoutSessionProcessRequest
+    # Mandatory URL to redirect the customer to after a successful payment for Express Checkout.
+    attr_accessor :success_url
 
-    # The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-    attr_accessor :version
+    # The Express Checkout session identifier returned by create-session.
+    attr_accessor :session_id
+
+    # Mandatory merchant order identifier used as merchantReference on the created transaction.
+    attr_accessor :merchant_reference
+
+    # Mandatory URL to redirect the customer to after a failed payment for Express Checkout.
+    attr_accessor :failure_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'version' => :'version'
+        :'success_url' => :'successUrl',
+        :'session_id' => :'sessionId',
+        :'merchant_reference' => :'merchantReference',
+        :'failure_url' => :'failureUrl'
       }
     end
 
@@ -52,8 +60,10 @@ module WalleeRubySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'version' => :'Integer'
+        :'success_url' => :'String',
+        :'session_id' => :'Integer',
+        :'merchant_reference' => :'String',
+        :'failure_url' => :'String'
       }
     end
 
@@ -67,26 +77,40 @@ module WalleeRubySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::PaymentTerminalUpdate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `WalleeRubySdk::ExpressCheckoutSessionProcessRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::PaymentTerminalUpdate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `WalleeRubySdk::ExpressCheckoutSessionProcessRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'success_url')
+        self.success_url = attributes[:'success_url']
+      else
+        self.success_url = nil
       end
 
-      if attributes.key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.key?(:'session_id')
+        self.session_id = attributes[:'session_id']
       else
-        self.version = nil
+        self.session_id = nil
+      end
+
+      if attributes.key?(:'merchant_reference')
+        self.merchant_reference = attributes[:'merchant_reference']
+      else
+        self.merchant_reference = nil
+      end
+
+      if attributes.key?(:'failure_url')
+        self.failure_url = attributes[:'failure_url']
+      else
+        self.failure_url = nil
       end
     end
 
@@ -95,12 +119,20 @@ module WalleeRubySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 100
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 100.')
+      if @success_url.nil?
+        invalid_properties.push('invalid value for "success_url", success_url cannot be nil.')
       end
 
-      if @version.nil?
-        invalid_properties.push('invalid value for "version", version cannot be nil.')
+      if @session_id.nil?
+        invalid_properties.push('invalid value for "session_id", session_id cannot be nil.')
+      end
+
+      if @merchant_reference.nil?
+        invalid_properties.push('invalid value for "merchant_reference", merchant_reference cannot be nil.')
+      end
+
+      if @failure_url.nil?
+        invalid_properties.push('invalid value for "failure_url", failure_url cannot be nil.')
       end
 
       invalid_properties
@@ -110,33 +142,51 @@ module WalleeRubySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@name.nil? && @name.to_s.length > 100
-      return false if @version.nil?
+      return false if @success_url.nil?
+      return false if @session_id.nil?
+      return false if @merchant_reference.nil?
+      return false if @failure_url.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if success_url.nil?
+        fail ArgumentError, 'success_url cannot be nil'
       end
 
-      if name.to_s.length > 100
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 100.'
-      end
-
-      @name = name
+      @success_url = success_url
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] version Value to be assigned
-    def version=(version)
-      if version.nil?
-        fail ArgumentError, 'version cannot be nil'
+    # @param [Object] session_id Value to be assigned
+    def session_id=(session_id)
+      if session_id.nil?
+        fail ArgumentError, 'session_id cannot be nil'
       end
 
-      @version = version
+      @session_id = session_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] merchant_reference Value to be assigned
+    def merchant_reference=(merchant_reference)
+      if merchant_reference.nil?
+        fail ArgumentError, 'merchant_reference cannot be nil'
+      end
+
+      @merchant_reference = merchant_reference
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] failure_url Value to be assigned
+    def failure_url=(failure_url)
+      if failure_url.nil?
+        fail ArgumentError, 'failure_url cannot be nil'
+      end
+
+      @failure_url = failure_url
     end
 
     # Checks equality by comparing each attribute.
@@ -144,8 +194,10 @@ module WalleeRubySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          version == o.version
+          success_url == o.success_url &&
+          session_id == o.session_id &&
+          merchant_reference == o.merchant_reference &&
+          failure_url == o.failure_url
     end
 
     # @see the `==` method
@@ -157,7 +209,7 @@ module WalleeRubySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, version].hash
+      [success_url, session_id, merchant_reference, failure_url].hash
     end
 
     # Builds the object from hash

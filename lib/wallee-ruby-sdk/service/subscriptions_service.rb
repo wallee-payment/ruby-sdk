@@ -385,12 +385,12 @@ module WalleeRubySdk
     # Update a subscription
     # @param id [Integer] 
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param subscription_update_request [SubscriptionUpdateRequest] 
+    # @param subscription_partial_update_request [SubscriptionPartialUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Subscription]
-    def patch_subscriptions_id(id, space, subscription_update_request, opts = {})
-      data, _status_code, _headers = patch_subscriptions_id_with_http_info(id, space, subscription_update_request, opts)
+    def patch_subscriptions_id(id, space, subscription_partial_update_request, opts = {})
+      data, _status_code, _headers = patch_subscriptions_id_with_http_info(id, space, subscription_partial_update_request, opts)
       data
     end
 
@@ -398,11 +398,11 @@ module WalleeRubySdk
 
     # @param id [Integer] 
     # @param space [Integer] Specifies the ID of the space the operation should be executed in.
-    # @param subscription_update_request [SubscriptionUpdateRequest] 
+    # @param subscription_partial_update_request [SubscriptionPartialUpdateRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :expand 
     # @return [Array<(Subscription, Integer, Hash)>] Subscription data, response status code and response headers
-    def patch_subscriptions_id_with_http_info(id, space, subscription_update_request, opts = {})
+    def patch_subscriptions_id_with_http_info(id, space, subscription_partial_update_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SubscriptionsService.patch_subscriptions_id ...'
       end
@@ -414,9 +414,9 @@ module WalleeRubySdk
       if @api_client.config.client_side_validation && space.nil?
         fail ArgumentError, "Missing the required parameter 'space' when calling SubscriptionsService.patch_subscriptions_id"
       end
-      # verify the required parameter 'subscription_update_request' is set
-      if @api_client.config.client_side_validation && subscription_update_request.nil?
-        fail ArgumentError, "Missing the required parameter 'subscription_update_request' when calling SubscriptionsService.patch_subscriptions_id"
+      # verify the required parameter 'subscription_partial_update_request' is set
+      if @api_client.config.client_side_validation && subscription_partial_update_request.nil?
+        fail ArgumentError, "Missing the required parameter 'subscription_partial_update_request' when calling SubscriptionsService.patch_subscriptions_id"
       end
       # resource path
       local_var_path = '/subscriptions/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -443,7 +443,7 @@ module WalleeRubySdk
       connection_timeout = @api_client.config.timeout
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(subscription_update_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(subscription_partial_update_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'Subscription'
